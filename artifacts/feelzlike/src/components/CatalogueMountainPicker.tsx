@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { useLanguage } from "@workspace/feelzlike-shell";
-import { publishedRecords } from "@workspace/ski-catalogue/public-runtime";
+import { alertCatalogueMountains } from "@/lib/alertCatalogueMountains";
 
-const alertEligibleRecords = publishedRecords.filter((record) => record.alertEligible);
-const MOUNTAINS_BY_STATE = [...alertEligibleRecords.reduce(
+const MOUNTAINS_BY_STATE = [...alertCatalogueMountains.reduce(
   (groups, record) => {
     const records = groups.get(record.stateOrProvince) ?? [];
     records.push(record);
     groups.set(record.stateOrProvince, records);
     return groups;
   },
-  new Map<string, typeof publishedRecords>(),
+  new Map<string, typeof alertCatalogueMountains[number][]>(),
 )].sort(([a], [b]) => a.localeCompare(b));
 
 interface Props {
@@ -39,10 +38,10 @@ export function CatalogueMountainPicker({ selected, onToggle, variant = "light" 
       >
         <span>
           <span className="block text-sm font-bold text-foreground">
-            {t("eastern & midwestern usa mountains", "アメリカ東部・中西部のスキー場")}
+            {t("usa mountains", "アメリカのスキー場")}
           </span>
           <span className="block text-[10px] uppercase tracking-wider text-muted-foreground mt-0.5">
-             {alertEligibleRecords.length} {t("alert-ready mountains", "アラート対応スキー場")}
+            {alertCatalogueMountains.length} {t("alert-ready mountains", "アラート対応スキー場")}
           </span>
         </span>
         <span className="text-xs font-bold text-primary">

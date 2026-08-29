@@ -154,30 +154,61 @@ export interface CatalogueAlertTarget {
   modelRegion: "OTHER";
 }
 
+type AlertCatalogueRecord = {
+  publicId: string;
+  aliases: string[];
+  name: string;
+  coordinates: { lat: number; lng: number };
+  forecastElevationM: number;
+  timezone: string;
+  route: string;
+  regionId: string;
+};
+
 /**
  * Alertable catalogue mountains come from the generated public runtime only.
  * The generation pipeline has already excluded private, uncertain, closed,
  * and duplicate-only source records.
  */
-export const CATALOGUE_ALERT_TARGETS: ReadonlyMap<string, CatalogueAlertTarget> = new Map(
-  publishedSkiCatalogueRecords.filter((record) => record.alertEligible).map((record) => [
-    record.publicId,
-    {
-      id: record.publicId,
-      name: record.name,
-      latitude: record.coordinates.lat,
-      longitude: record.coordinates.lng,
-      elevation: record.forecastElevationM,
-      timezone: record.timezone,
-      route: record.route,
-      regionId: record.regionId,
-      modelRegion: "OTHER",
-    },
-  ]),
-);
+const ALERT_CATALOGUE_RECORDS: AlertCatalogueRecord[] = [
+  ...publishedSkiCatalogueRecords.filter((record) => record.alertEligible),
+  ...publishedWesternUsCatalogueRecords,
+];
+const catalogueAlertTargets = new Map<string, CatalogueAlertTarget>();
+const catalogueAlertTargetByIdentifier = new Map<string, CatalogueAlertTarget>();
+
+for (const record of ALERT_CATALOGUE_RECORDS) {
+  if (catalogueAlertTargets.has(record.publicId)) {
+    throw new Error(`[catalogue-alerts] duplicate public id: "${record.publicId}"`);
+  }
+  const target: CatalogueAlertTarget = {
+    id: record.publicId,
+    name: record.name,
+    latitude: record.coordinates.lat,
+    longitude: record.coordinates.lng,
+    elevation: record.forecastElevationM,
+    timezone: record.timezone,
+    route: record.route,
+    regionId: record.regionId,
+    modelRegion: "OTHER",
+  };
+  catalogueAlertTargets.set(record.publicId, target);
+
+  for (const identifier of [record.publicId, ...record.aliases]) {
+    const existing = catalogueAlertTargetByIdentifier.get(identifier);
+    if (existing) {
+      throw new Error(
+        `[catalogue-alerts] id/alias collision: "${identifier}" belongs to both "${existing.id}" and "${record.publicId}"`,
+      );
+    }
+    catalogueAlertTargetByIdentifier.set(identifier, target);
+  }
+}
+
+export const CATALOGUE_ALERT_TARGETS: ReadonlyMap<string, CatalogueAlertTarget> = catalogueAlertTargets;
 
 export function resolveCatalogueAlertTarget(mountainId: string): CatalogueAlertTarget | undefined {
-  return CATALOGUE_ALERT_TARGETS.get(mountainId);
+  return catalogueAlertTargetByIdentifier.get(mountainId);
 }
 
 export function normaliseAlertDestinations(
@@ -192,7 +223,7 @@ export function normaliseAlertDestinations(
   const mountains = Array.isArray(mountainValues)
     ? [...new Set(mountainValues.filter(
       (value): value is string => typeof value === "string" && resolveCatalogueAlertTarget(value) !== undefined,
-    ))]
+    ).map((value) => resolveCatalogueAlertTarget(value)!.id))]
     : [];
   return { regions, mountains };
 }

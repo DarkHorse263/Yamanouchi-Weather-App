@@ -24,6 +24,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 import { publishedRecords } from "@workspace/ski-catalogue/public-runtime";
+import { publishedCatalogueRecords as publishedWesternUsRecords } from "@workspace/western-us-ski-catalogue/public-runtime";
 import {
   CATALOGUE_ALERT_TARGETS,
   REGION_IDS,
@@ -115,7 +116,10 @@ test("weather-served location ids are unique", () => {
 });
 
 test("catalogue alert targets exactly match alert-eligible published mountains", () => {
-  const eligible = publishedRecords.filter((record) => record.alertEligible);
+  const eligible = [
+    ...publishedRecords.filter((record) => record.alertEligible),
+    ...publishedWesternUsRecords,
+  ];
   assert.equal(CATALOGUE_ALERT_TARGETS.size, eligible.length);
   assert.deepEqual(
     new Set(CATALOGUE_ALERT_TARGETS.keys()),
@@ -124,7 +128,11 @@ test("catalogue alert targets exactly match alert-eligible published mountains",
 });
 
 test("catalogue alerts use the same runtime metadata and route as weather pages", () => {
-  for (const record of publishedRecords.filter((candidate) => candidate.alertEligible)) {
+  const eligible = [
+    ...publishedRecords.filter((record) => record.alertEligible),
+    ...publishedWesternUsRecords,
+  ];
+  for (const record of eligible) {
     const target = resolveCatalogueAlertTarget(record.publicId);
     const weather = resolveWeatherLocation(record.publicId);
     assert.ok(target, `missing alert target for "${record.publicId}"`);
@@ -147,6 +155,34 @@ test("catalogue alerts use the same runtime metadata and route as weather pages"
     assert.equal(target.route, `/${record.regionId}/mountain/${record.publicId}`);
   }
   assert.equal(resolveCatalogueAlertTarget("private-or-unknown-mountain"), undefined);
+});
+
+test("western US catalogue alert aliases resolve to their canonical published mountain", () => {
+  const record = publishedWesternUsRecords.find((candidate) => candidate.publicId === "arctic-valley-ski-area");
+  assert.ok(record, "representative western US mountain is not published");
+  const alias = record.aliases[0];
+  assert.ok(alias, "representative western US mountain needs an alias for this check");
+  assert.equal(resolveCatalogueAlertTarget(alias)?.id, record.publicId);
+  assert.deepEqual(
+    normaliseAlertDestinations([], [alias, record.publicId]),
+    { regions: [], mountains: [record.publicId] },
+  );
+});
+
+test("draft, private, duplicate, and closed western US candidates stay excluded from alerts", () => {
+  const unpublishedIds = [
+    "loup-loup-ski-bowl",
+    "tahoe-donner-downhill-ski-resort",
+    "palisades-tahoe-alpine",
+    "sleeping-giant-ski-area",
+  ];
+  for (const id of unpublishedIds) {
+    assert.equal(resolveCatalogueAlertTarget(id), undefined, `"${id}" leaked into alert targets`);
+  }
+  assert.deepEqual(
+    normaliseAlertDestinations([], unpublishedIds),
+    { regions: [], mountains: [] },
+  );
 });
 
 test("indoor catalogue facilities have neither weather nor powder-alert targets", () => {

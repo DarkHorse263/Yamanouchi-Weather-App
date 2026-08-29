@@ -5,8 +5,8 @@ import { BellRing, Mail, Snowflake, Loader2, CheckCircle2, Sparkles } from "luci
 import { RegionCountryPicker } from "@/components/RegionCountryPicker";
 import { track } from "@/lib/analytics";
 import { classifyGateError, extractErrorMessage } from "@/lib/gateErrors";
-import { publishedRecords as alertCatalogueMountains } from "@workspace/ski-catalogue/public-runtime";
 import { CatalogueMountainPicker } from "@/components/CatalogueMountainPicker";
+import { isAlertCatalogueMountain } from "@/lib/alertCatalogueMountains";
 
 /**
  * Powder-alert subscription form. Mounts inside any region's Alerts page.
@@ -176,7 +176,7 @@ export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
     defaultRegion && ALERT_REGIONS.some((region) => region.id === defaultRegion) ? [defaultRegion] : [],
   );
   const [mountains, setMountains] = useState<string[]>(
-    defaultMountain && alertCatalogueMountains.some((record) => record.publicId === defaultMountain && record.alertEligible)
+    defaultMountain && isAlertCatalogueMountain(defaultMountain)
       ? [defaultMountain]
       : [],
   );
