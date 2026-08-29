@@ -91,20 +91,31 @@ test("published Western US catalogue mountains are represented by the public reg
 });
 
 test("catalogue-only ski regions use deterministic representative headlines with valid query parameters", () => {
-  const authoredIds = new Set(API_REGION_CONFIGS
-    .filter((region) => region.sourceLabel !== "Open-Meteo · Published ski catalogue")
-    .map((region) => region.id));
-  const catalogueOnly = publishedSkiCatalogueRegions
-    .filter((region) => !authoredIds.has(region.regionId));
+  const catalogueOnly = publishedSkiCatalogueRegions.filter((metadata) =>
+    API_REGION_CONFIGS.some(
+      (region) => region.id === metadata.regionId && region.sourceLabel?.includes("Published"),
+    ),
+  );
   assert.ok(catalogueOnly.length > 0, "expected published catalogue-only regions");
 
   for (const metadata of catalogueOnly) {
     const region = API_REGION_CONFIGS.find((candidate) => candidate.id === metadata.regionId);
     assert.ok(region, `${metadata.regionId} is missing from the API projection`);
-    const representative = publishedSkiCatalogueRecords
+    const firstRecord = publishedSkiCatalogueRecords
       .filter((record) => record.regionId === metadata.regionId)
       .sort((left, right) => left.publicId.localeCompare(right.publicId))[0];
-    assert.ok(representative, `${metadata.regionId} has no representative record`);
+    assert.ok(firstRecord, `${metadata.regionId} has no representative record`);
+    const representative = publishedSkiCatalogueRecords
+      .filter((record) => record.regionId === metadata.regionId && record.weatherEligible)
+      .sort((left, right) => left.publicId.localeCompare(right.publicId))[0];
+    if (!representative) {
+      assert.equal(region.headlineLabel, firstRecord.name);
+      assert.equal(region.sourceLabel, "Published indoor facility directory");
+      assert.equal(region.lat, undefined);
+      assert.equal(region.lon, undefined);
+      assert.equal(region.elevation, undefined);
+      continue;
+    }
     assert.equal(region.headlineLabel, representative.name);
     assert.equal(region.lat, representative.coordinates.lat);
     assert.equal(region.lon, representative.coordinates.lng);
@@ -112,7 +123,9 @@ test("catalogue-only ski regions use deterministic representative headlines with
     assert.equal(region.timezone, representative.timezone);
   }
 
-  for (const region of API_REGION_CONFIGS.filter((candidate) => candidate.status === "live")) {
+  for (const region of API_REGION_CONFIGS.filter(
+    (candidate) => candidate.status === "live" && candidate.sourceLabel !== "Published indoor facility directory",
+  )) {
     assert.ok(Number.isFinite(region.lat), `${region.id} has invalid headline latitude`);
     assert.ok(Number.isFinite(region.lon), `${region.id} has invalid headline longitude`);
     const params = buildHeadlineQueryParams(region);

@@ -23,6 +23,11 @@ export interface PublicCatalogueRecord {
   country: string;
   countryCode: string;
   timezone: string;
+  facilityType: "alpine" | "club_field" | "hike_in_club_field" | "nordic" | "indoor";
+  accessModel: string;
+  publicCopy: string;
+  weatherEligible: boolean;
+  alertEligible: boolean;
 }
 export interface CataloguePublicRuntime {
   schemaVersion: 1;

@@ -5,7 +5,9 @@ import {
   type PublicCatalogueRecord,
 } from "@workspace/ski-catalogue/public-runtime";
 
-function mountainFor(record: PublicCatalogueRecord): MountainLink {
+export type CatalogueMountainLink = MountainLink & Pick<PublicCatalogueRecord, "facilityType" | "weatherEligible">;
+
+function mountainFor(record: PublicCatalogueRecord): CatalogueMountainLink {
   return {
     id: record.publicId,
     name: record.name,
@@ -13,6 +15,9 @@ function mountainFor(record: PublicCatalogueRecord): MountainLink {
     lat: record.coordinates.lat,
     lng: record.coordinates.lng,
     websiteUrl: record.officialUrl,
+    blurb: record.publicCopy,
+    facilityType: record.facilityType,
+    weatherEligible: record.weatherEligible,
   };
 }
 
@@ -24,7 +29,9 @@ function townFor(record: PublicCatalogueRecord, records: PublicCatalogueRecord[]
     lat: points.reduce((sum, point) => sum + point.lat, 0) / points.length,
     lng: points.reduce((sum, point) => sum + point.lng, 0) / points.length,
     nearbyMountainIds: records.map((item) => item.publicId),
-    blurb: "Choose a nearby published mountain for its weather and forecast.",
+    blurb: records.every((item) => item.facilityType === "indoor")
+      ? "Indoor snow facility directory. No outdoor mountain weather or snow forecast is shown."
+      : "Choose a nearby published mountain for its weather and forecast.",
     catalogueContentMode: "mountain-links",
   } as BaseTown & { catalogueContentMode: "mountain-links" };
 }
@@ -91,12 +98,16 @@ export function mergeSkiCatalogueRegions(existingRegions: RegionConfig[]): Regio
         subtitle: `${metadata.stateOrProvince} · ${metadata.country}`,
         shortTag: metadata.stateOrProvince,
         brand,
-        seasons: true,
-        hemisphere: "north",
+        seasons: !regionRecords.every((record) => record.facilityType === "indoor"),
+        hemisphere: metadata.countryCode === "NZ" ? "south" : "north",
         resorts: [],
         mountains: regionRecords.map(mountainFor),
         baseTowns: towns,
-        weatherSource: { label: "Open-Meteo" },
+        weatherSource: {
+          label: regionRecords.every((record) => record.facilityType === "indoor")
+            ? "Indoor facility information"
+            : "Open-Meteo",
+        },
       });
     }
   }

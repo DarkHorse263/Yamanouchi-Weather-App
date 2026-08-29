@@ -5,11 +5,13 @@ export interface CatalogueTownLandingItem {
   name: string;
   nameJa?: string;
   href: string;
+  indoor?: boolean;
 }
 
 export interface CatalogueTownLandingModel {
   heading: string;
   description: string;
+  indoorOnly: boolean;
   mountains: CatalogueTownLandingItem[];
 }
 
@@ -33,14 +35,22 @@ export function catalogueTownLandingModel(
     if (!mountain) {
       throw new Error(`Catalogue base town references missing mountain: ${region.id}/${town.id}/${id}`);
     }
-    return { id, name: mountain.name, nameJa: mountain.nameJa, href: `/${region.id}/mountain/${id}` };
+    const facility = mountain as MountainLink & { facilityType?: string; weatherEligible?: boolean };
+    return {
+      id, name: mountain.name, nameJa: mountain.nameJa, href: `/${region.id}/mountain/${id}`,
+      ...(facility.facilityType === "indoor" || facility.weatherEligible === false ? { indoor: true } : {}),
+    };
   });
   if (mountains.length === 0) {
     throw new Error(`Catalogue base town has no published mountains: ${region.id}/${town.id}`);
   }
+  const indoorOnly = mountains.every((mountain) => mountain.indoor);
   return {
-    heading: "Published mountain weather nearby",
-    description: "Town weather is not currently published for this base. Choose a nearby mountain for its weather and forecast.",
+    heading: indoorOnly ? "Indoor snow facility nearby" : "Published mountain weather nearby",
+    description: indoorOnly
+      ? "This is an indoor snow facility directory. Outdoor mountain weather, lift status and natural-snow forecasts do not apply."
+      : "Town weather is not currently published for this base. Choose a nearby mountain for its weather and forecast.",
+    indoorOnly,
     mountains,
   };
 }

@@ -1,0 +1,1584 @@
+{
+  "batchVersion": 1,
+  "batchId": "nz-task-148",
+  "records": [
+    {
+      "recordId": "nz-craigieburn-valley",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public club field; tow-belt ability and mountain-road preparation are required.",
+      "publicCopy": "A volunteer-rooted Canterbury club field with rope tows, a steep access road and no resort-village gloss. Check the club's access and operating report before leaving Springfield.",
+      "identity": {
+        "publicId": "craigieburn-valley",
+        "name": "Craigieburn Valley Ski Area",
+        "aliases": [
+          "Craigieburn"
+        ]
+      },
+      "coordinates": {
+        "lat": -43.114,
+        "lng": 171.716
+      },
+      "elevations": {
+        "baseM": 1308,
+        "topM": 1811,
+        "forecastM": 1560
+      },
+      "locality": {
+        "regionId": "canterbury",
+        "regionName": "Canterbury",
+        "stateOrProvince": "Canterbury",
+        "localityId": "springfield-nz",
+        "localityName": "Springfield"
+      },
+      "officialUrl": "https://www.craigieburn.co.nz/",
+      "evidenceTable": {
+        "officialUrl": "https://www.craigieburn.co.nz/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-43.114&mlon=171.716",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://www.craigieburn.co.nz/",
+            "citation": "Craigieburn Valley Ski Area: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://www.craigieburn.co.nz/",
+            "citation": "The Craigieburn Valley Ski Area site identifies the Canterbury club field and its operating information."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-43.114&mlon=171.716",
+            "citation": "Exact OpenStreetMap marker (-43.114, 171.716) for Craigieburn Valley Ski Area."
+          },
+          "forecastElevation": {
+            "url": "https://www.craigieburn.co.nz/",
+            "citation": "Officially published 1308–1811 m elevation range; forecastM 1560 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://www.craigieburn.co.nz/",
+            "citation": "The operator publishes access from the Springfield/Craigieburn Forest approach."
+          },
+          "officialUrl": {
+            "url": "https://www.craigieburn.co.nz/",
+            "citation": "Official website for Craigieburn Valley Ski Area."
+          }
+        }
+      },
+      "evidenceSchemaVersion": 2,
+      "evidence": []
+    },
+    {
+      "recordId": "nz-broken-river",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public club field reached by mountain road and inclinator; rope-tow skills are recommended.",
+      "publicCopy": "A Canterbury club field where the trip includes a mountain road, an inclinator and nutcracker rope tows. Read the day's access report and arrive self-sufficient.",
+      "identity": {
+        "publicId": "broken-river",
+        "name": "Broken River Ski Area",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": -43.111,
+        "lng": 171.658
+      },
+      "elevations": {
+        "baseM": 1420,
+        "topM": 1820,
+        "forecastM": 1620
+      },
+      "locality": {
+        "regionId": "canterbury",
+        "regionName": "Canterbury",
+        "stateOrProvince": "Canterbury",
+        "localityId": "springfield-nz",
+        "localityName": "Springfield"
+      },
+      "officialUrl": "https://brokenriver.co.nz/",
+      "evidenceTable": {
+        "officialUrl": "https://brokenriver.co.nz/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-43.111&mlon=171.658",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://brokenriver.co.nz/",
+            "citation": "Broken River Ski Area: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://brokenriver.co.nz/",
+            "citation": "Broken River’s official site identifies a current ski-area operation using an access tow/inclinator and rope tows."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-43.111&mlon=171.658",
+            "citation": "Exact OpenStreetMap marker (-43.111, 171.658) for Broken River Ski Area."
+          },
+          "forecastElevation": {
+            "url": "https://brokenriver.co.nz/",
+            "citation": "Officially published 1420–1820 m elevation range; forecastM 1620 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://brokenriver.co.nz/",
+            "citation": "The operator’s access information directs visitors from the Craigieburn/Springfield side of State Highway 73."
+          },
+          "officialUrl": {
+            "url": "https://brokenriver.co.nz/",
+            "citation": "Official website for Broken River Ski Area."
+          }
+        }
+      },
+      "evidenceSchemaVersion": 2,
+      "evidence": []
+    },
+    {
+      "recordId": "nz-mt-olympus",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public club field via an exposed unsealed access road; rope-tow skills and chains may be required.",
+      "publicCopy": "A high, south-facing club field at the end of a serious Canterbury access road. It runs rope tows rather than chairlifts, so check road, tow and opening advice first.",
+      "identity": {
+        "publicId": "mt-olympus-nz",
+        "name": "Mt Olympus Ski Area",
+        "aliases": [
+          "Mount Olympus NZ"
+        ]
+      },
+      "coordinates": {
+        "lat": -43.205,
+        "lng": 171.604
+      },
+      "elevations": {
+        "baseM": 1430,
+        "topM": 1880,
+        "forecastM": 1655
+      },
+      "locality": {
+        "regionId": "canterbury",
+        "regionName": "Canterbury",
+        "stateOrProvince": "Canterbury",
+        "localityId": "windwhistle",
+        "localityName": "Windwhistle"
+      },
+      "officialUrl": "https://www.mtolympus.co.nz/",
+      "evidenceTable": {
+        "officialUrl": "https://www.mtolympus.co.nz/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-43.205&mlon=171.604",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://www.mtolympus.co.nz/",
+            "citation": "Mt Olympus Ski Area: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://www.mtolympus.co.nz/",
+            "citation": "Mt Olympus’s official site identifies the operating ski area and its rope-tow club-field setup."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-43.205&mlon=171.604",
+            "citation": "Exact OpenStreetMap marker (-43.205, 171.604) for Mt Olympus Ski Area."
+          },
+          "forecastElevation": {
+            "url": "https://www.mtolympus.co.nz/",
+            "citation": "Officially published 1430–1880 m elevation range; forecastM 1655 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://www.mtolympus.co.nz/",
+            "citation": "The operator’s access advice describes the approach via Windwhistle and the Mt Olympus road."
+          },
+          "officialUrl": {
+            "url": "https://www.mtolympus.co.nz/",
+            "citation": "Official website for Mt Olympus Ski Area."
+          }
+        }
+      },
+      "evidenceSchemaVersion": 2,
+      "evidence": []
+    },
+    {
+      "recordId": "nz-temple-basin",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "hike_in_club_field",
+      "accessModel": "Public club field reached only by a steep walk from the Arthur's Pass highway; freight lift carries gear, not passengers.",
+      "publicCopy": "Temple Basin is a hike-in club field, not a drive-to resort. Allow for the steep walk from the highway; the goods lift moves packs while guests walk to the lodges and rope tows.",
+      "identity": {
+        "publicId": "temple-basin",
+        "name": "Temple Basin Ski Area",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": -42.903,
+        "lng": 171.586
+      },
+      "elevations": {
+        "baseM": 1326,
+        "topM": 1753,
+        "forecastM": 1540
+      },
+      "locality": {
+        "regionId": "canterbury",
+        "regionName": "Canterbury",
+        "stateOrProvince": "Canterbury",
+        "localityId": "arthurs-pass",
+        "localityName": "Arthur's Pass"
+      },
+      "officialUrl": "https://templebasin.co.nz/",
+      "evidenceTable": {
+        "officialUrl": "https://templebasin.co.nz/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-42.903&mlon=171.586",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://templebasin.co.nz/",
+            "citation": "Temple Basin Ski Area: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://templebasin.co.nz/",
+            "citation": "Temple Basin’s official site identifies the operating ski area and its walk-in club-field operation."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-42.903&mlon=171.586",
+            "citation": "Exact OpenStreetMap marker (-42.903, 171.586) for Temple Basin Ski Area."
+          },
+          "forecastElevation": {
+            "url": "https://templebasin.co.nz/",
+            "citation": "Officially published 1326–1753 m elevation range; forecastM 1540 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://templebasin.co.nz/",
+            "citation": "The operator’s access page places the walk-in entrance on Arthur’s Pass highway."
+          },
+          "officialUrl": {
+            "url": "https://templebasin.co.nz/",
+            "citation": "Official website for Temple Basin Ski Area."
+          }
+        }
+      },
+      "evidenceSchemaVersion": 2,
+      "evidence": []
+    },
+    {
+      "recordId": "nz-porters",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "alpine",
+      "accessModel": "Public commercial ski area reached by an alpine access road.",
+      "publicCopy": "A public Canterbury ski area with chairlift and surface-lift terrain. Check the official mountain-road report before driving up from Springfield.",
+      "identity": {
+        "publicId": "porters",
+        "name": "Porters Alpine Resort",
+        "aliases": [
+          "Porters Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": -43.273,
+        "lng": 171.647
+      },
+      "elevations": {
+        "baseM": 1300,
+        "topM": 1980,
+        "forecastM": 1640
+      },
+      "locality": {
+        "regionId": "canterbury",
+        "regionName": "Canterbury",
+        "stateOrProvince": "Canterbury",
+        "localityId": "springfield-nz",
+        "localityName": "Springfield"
+      },
+      "officialUrl": "https://www.portersalpineresort.com/",
+      "evidenceTable": {
+        "officialUrl": "https://www.portersalpineresort.com/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-43.273&mlon=171.647",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://www.portersalpineresort.com/",
+            "citation": "Porters Alpine Resort: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://www.portersalpineresort.com/",
+            "citation": "Porters Alpine Resort’s official site identifies the operating public ski area."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-43.273&mlon=171.647",
+            "citation": "Exact OpenStreetMap marker (-43.273, 171.647) for Porters Alpine Resort."
+          },
+          "forecastElevation": {
+            "url": "https://www.portersalpineresort.com/",
+            "citation": "Officially published 1300–1980 m elevation range; forecastM 1640 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://www.portersalpineresort.com/",
+            "citation": "The operator’s directions describe the Porters Pass/State Highway 73 approach from Springfield."
+          },
+          "officialUrl": {
+            "url": "https://www.portersalpineresort.com/",
+            "citation": "Official website for Porters Alpine Resort."
+          }
+        }
+      },
+      "evidenceSchemaVersion": 2,
+      "evidence": []
+    },
+    {
+      "recordId": "nz-mt-cheeseman",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public, family-oriented club field with an unsealed mountain road and surface tows.",
+      "publicCopy": "A public Canterbury club field with T-bars and lodge culture rather than a commercial-resort setup. Check the access road and club operating notice before travel.",
+      "identity": {
+        "publicId": "mt-cheeseman",
+        "name": "Mt Cheeseman Ski Area",
+        "aliases": [
+          "Mount Cheeseman"
+        ]
+      },
+      "coordinates": {
+        "lat": -43.154,
+        "lng": 171.663
+      },
+      "elevations": {
+        "baseM": 1540,
+        "topM": 1840,
+        "forecastM": 1690
+      },
+      "locality": {
+        "regionId": "canterbury",
+        "regionName": "Canterbury",
+        "stateOrProvince": "Canterbury",
+        "localityId": "springfield-nz",
+        "localityName": "Springfield"
+      },
+      "officialUrl": "https://www.mtcheeseman.co.nz/",
+      "evidenceTable": {
+        "officialUrl": "https://www.mtcheeseman.co.nz/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-43.154&mlon=171.663",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://www.mtcheeseman.co.nz/",
+            "citation": "Mt Cheeseman Ski Area: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://www.mtcheeseman.co.nz/",
+            "citation": "Mt Cheeseman’s official site identifies the active ski area and its club-field operation."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-43.154&mlon=171.663",
+            "citation": "Exact OpenStreetMap marker (-43.154, 171.663) for Mt Cheeseman Ski Area."
+          },
+          "forecastElevation": {
+            "url": "https://www.mtcheeseman.co.nz/",
+            "citation": "Officially published 1540–1840 m elevation range; forecastM 1690 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://www.mtcheeseman.co.nz/",
+            "citation": "The operator’s access directions place the field on the Porters Pass road from Springfield."
+          },
+          "officialUrl": {
+            "url": "https://www.mtcheeseman.co.nz/",
+            "citation": "Official website for Mt Cheeseman Ski Area."
+          }
+        }
+      },
+      "evidenceSchemaVersion": 2,
+      "evidence": []
+    },
+    {
+      "recordId": "nz-mt-lyford",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "alpine",
+      "accessModel": "Public family ski area via an unsealed alpine road; chains and suitable vehicles may be required.",
+      "publicCopy": "A compact public ski area above the Mt Lyford village. The alpine road is part of the day, so use the operator's current access advice rather than treating Hanmer Springs as the field itself.",
+      "identity": {
+        "publicId": "mt-lyford",
+        "name": "Mt Lyford Ski Area",
+        "aliases": [
+          "Mount Lyford"
+        ]
+      },
+      "coordinates": {
+        "lat": -42.45,
+        "lng": 173.086
+      },
+      "elevations": {
+        "baseM": 1249,
+        "topM": 1750,
+        "forecastM": 1500
+      },
+      "locality": {
+        "regionId": "canterbury",
+        "regionName": "Canterbury",
+        "stateOrProvince": "Canterbury",
+        "localityId": "hanmer-springs",
+        "localityName": "Hanmer Springs"
+      },
+      "officialUrl": "https://www.mtlyford.co.nz/",
+      "evidenceTable": {
+        "officialUrl": "https://www.mtlyford.co.nz/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-42.45&mlon=173.086",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://www.mtlyford.co.nz/",
+            "citation": "Mt Lyford Ski Area: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://www.mtlyford.co.nz/",
+            "citation": "Mt Lyford Ski Area’s official site identifies the operating ski area and its mountain-road access."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-42.45&mlon=173.086",
+            "citation": "Exact OpenStreetMap marker (-42.45, 173.086) for Mt Lyford Ski Area."
+          },
+          "forecastElevation": {
+            "url": "https://www.mtlyford.co.nz/",
+            "citation": "Officially published 1249–1750 m elevation range; forecastM 1500 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://www.mtlyford.co.nz/",
+            "citation": "The operator’s visitor directions identify Hanmer Springs as the practical nearby gateway."
+          },
+          "officialUrl": {
+            "url": "https://www.mtlyford.co.nz/",
+            "citation": "Official website for Mt Lyford Ski Area."
+          }
+        }
+      },
+      "evidenceSchemaVersion": 2,
+      "evidence": []
+    },
+    {
+      "recordId": "nz-mt-dobson",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "alpine",
+      "accessModel": "Public family-operated field via a long unsealed access road.",
+      "publicCopy": "A family-operated South Canterbury field with broad open terrain. Check the official road report before committing to the climb from Fairlie.",
+      "identity": {
+        "publicId": "mt-dobson",
+        "name": "Mt Dobson Ski Area",
+        "aliases": [
+          "Mount Dobson"
+        ]
+      },
+      "coordinates": {
+        "lat": -44.264,
+        "lng": 170.632
+      },
+      "elevations": {
+        "baseM": 1690,
+        "topM": 2030,
+        "forecastM": 1860
+      },
+      "locality": {
+        "regionId": "mackenzie-south-canterbury",
+        "regionName": "Mackenzie & South Canterbury",
+        "stateOrProvince": "Canterbury",
+        "localityId": "fairlie",
+        "localityName": "Fairlie"
+      },
+      "officialUrl": "https://www.mtdobson.co.nz/",
+      "evidenceTable": {
+        "officialUrl": "https://www.mtdobson.co.nz/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-44.264&mlon=170.632",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://www.mtdobson.co.nz/",
+            "citation": "Mt Dobson Ski Area: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://www.mtdobson.co.nz/",
+            "citation": "Mt Dobson Ski Area’s official site identifies the operating South Canterbury ski field."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-44.264&mlon=170.632",
+            "citation": "Exact OpenStreetMap marker (-44.264, 170.632) for Mt Dobson Ski Area."
+          },
+          "forecastElevation": {
+            "url": "https://www.mtdobson.co.nz/",
+            "citation": "Officially published 1690–2030 m elevation range; forecastM 1860 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://www.mtdobson.co.nz/",
+            "citation": "The operator’s access directions identify Fairlie and the unsealed ski-field road approach."
+          },
+          "officialUrl": {
+            "url": "https://www.mtdobson.co.nz/",
+            "citation": "Official website for Mt Dobson Ski Area."
+          }
+        }
+      },
+      "evidenceSchemaVersion": 2,
+      "evidence": []
+    },
+    {
+      "recordId": "nz-fox-peak",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public volunteer club field, natural-snow dependent, with rope tows and an unsealed access road.",
+      "publicCopy": "A volunteer South Canterbury club field that opens when natural snow and staffing align. Rope-tow know-how and a road check matter more here than resort assumptions.",
+      "identity": {
+        "publicId": "fox-peak",
+        "name": "Fox Peak Ski Area",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": -44.029,
+        "lng": 170.579
+      },
+      "elevations": {
+        "baseM": 1200,
+        "topM": 1850,
+        "forecastM": 1525
+      },
+      "locality": {
+        "regionId": "mackenzie-south-canterbury",
+        "regionName": "Mackenzie & South Canterbury",
+        "stateOrProvince": "Canterbury",
+        "localityId": "fairlie",
+        "localityName": "Fairlie"
+      },
+      "officialUrl": "https://www.foxpeak.co.nz/",
+      "evidenceTable": {
+        "officialUrl": "https://www.foxpeak.co.nz/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-44.029&mlon=170.579",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://www.foxpeak.co.nz/",
+            "citation": "Fox Peak Ski Area: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://www.foxpeak.co.nz/",
+            "citation": "Fox Peak’s official site identifies the operating volunteer ski field and current field notices."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-44.029&mlon=170.579",
+            "citation": "Exact OpenStreetMap marker (-44.029, 170.579) for Fox Peak Ski Area."
+          },
+          "forecastElevation": {
+            "url": "https://www.foxpeak.co.nz/",
+            "citation": "Officially published 1200–1850 m elevation range; forecastM 1525 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://www.foxpeak.co.nz/",
+            "citation": "The operator’s directions identify Fairlie as the nearby access town."
+          },
+          "officialUrl": {
+            "url": "https://www.foxpeak.co.nz/",
+            "citation": "Official website for Fox Peak Ski Area."
+          }
+        }
+      },
+      "evidenceSchemaVersion": 2,
+      "evidence": []
+    },
+    {
+      "recordId": "nz-roundhill",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "alpine",
+      "accessModel": "Public commercial ski area reached by an unsealed mountain road.",
+      "publicCopy": "A public Lake Tekapo ski area with family slopes and the long Heritage Express rope tow for experts. Check road and tow status on the official report.",
+      "identity": {
+        "publicId": "roundhill-nz",
+        "name": "Roundhill Ski Area",
+        "aliases": [
+          "Roundhill"
+        ]
+      },
+      "coordinates": {
+        "lat": -43.831,
+        "lng": 170.56
+      },
+      "elevations": {
+        "baseM": 1350,
+        "topM": 2133,
+        "forecastM": 1742
+      },
+      "locality": {
+        "regionId": "mackenzie-south-canterbury",
+        "regionName": "Mackenzie & South Canterbury",
+        "stateOrProvince": "Canterbury",
+        "localityId": "lake-tekapo",
+        "localityName": "Lake Tekapo"
+      },
+      "officialUrl": "https://www.roundhill.co.nz/",
+      "evidenceTable": {
+        "officialUrl": "https://www.roundhill.co.nz/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-43.831&mlon=170.56",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://www.roundhill.co.nz/",
+            "citation": "Roundhill Ski Area: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://www.roundhill.co.nz/",
+            "citation": "Roundhill Ski Area’s official site identifies the operating Lake Tekapo ski area."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-43.831&mlon=170.56",
+            "citation": "Exact OpenStreetMap marker (-43.831, 170.56) for Roundhill Ski Area."
+          },
+          "forecastElevation": {
+            "url": "https://www.roundhill.co.nz/",
+            "citation": "Officially published 1350–2133 m elevation range; forecastM 1742 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://www.roundhill.co.nz/",
+            "citation": "The operator’s directions identify Lake Tekapo and the field access road."
+          },
+          "officialUrl": {
+            "url": "https://www.roundhill.co.nz/",
+            "citation": "Official website for Roundhill Ski Area."
+          }
+        }
+      },
+      "evidenceSchemaVersion": 2,
+      "evidence": []
+    },
+    {
+      "recordId": "nz-ohau",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "alpine",
+      "accessModel": "Public commercial ski area via an alpine gravel road.",
+      "publicCopy": "A compact public field above Lake Ōhau with a chairlift and high-country views. Use the official road and field report before the drive from Twizel.",
+      "identity": {
+        "publicId": "ohau-snow-fields",
+        "name": "Ōhau Snow Fields",
+        "aliases": [
+          "Ohau Snow Fields",
+          "Ohau"
+        ]
+      },
+      "coordinates": {
+        "lat": -44.231,
+        "lng": 169.777
+      },
+      "elevations": {
+        "baseM": 1425,
+        "topM": 1825,
+        "forecastM": 1625
+      },
+      "locality": {
+        "regionId": "mackenzie-south-canterbury",
+        "regionName": "Mackenzie & South Canterbury",
+        "stateOrProvince": "Canterbury",
+        "localityId": "twizel",
+        "localityName": "Twizel"
+      },
+      "officialUrl": "https://www.ohau.co.nz/snow-fields/",
+      "evidenceTable": {
+        "officialUrl": "https://www.ohau.co.nz/snow-fields/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-44.231&mlon=169.777",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://www.ohau.co.nz/snow-fields/",
+            "citation": "Ōhau Snow Fields: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://www.ohau.co.nz/snow-fields/",
+            "citation": "Ōhau Snow Fields’ official site identifies the operating snow field."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-44.231&mlon=169.777",
+            "citation": "Exact OpenStreetMap marker (-44.231, 169.777) for Ōhau Snow Fields."
+          },
+          "forecastElevation": {
+            "url": "https://www.ohau.co.nz/snow-fields/",
+            "citation": "Officially published 1425–1825 m elevation range; forecastM 1625 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://www.ohau.co.nz/snow-fields/",
+            "citation": "The operator’s snow-fields information identifies the Lake Ōhau/Twizel approach."
+          },
+          "officialUrl": {
+            "url": "https://www.ohau.co.nz/snow-fields/",
+            "citation": "Official website for Ōhau Snow Fields."
+          }
+        }
+      },
+      "evidenceSchemaVersion": 2,
+      "evidence": []
+    },
+    {
+      "recordId": "nz-awakino",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public volunteer club field, natural-snow and staffing dependent, accessed by a private alpine road.",
+      "publicCopy": "A small North Otago club field that operates when snow, volunteers and road conditions permit. Check directly with the club before travelling from Kurow.",
+      "identity": {
+        "publicId": "awakino",
+        "name": "Awakino Ski Area",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": -44.754,
+        "lng": 170.392
+      },
+      "elevations": {
+        "baseM": 1450,
+        "topM": 1942,
+        "forecastM": 1696
+      },
+      "locality": {
+        "regionId": "mackenzie-south-canterbury",
+        "regionName": "Mackenzie & South Canterbury",
+        "stateOrProvince": "Canterbury",
+        "localityId": "kurow",
+        "localityName": "Kurow"
+      },
+      "officialUrl": "https://www.skiawakino.com/",
+      "evidenceTable": {
+        "officialUrl": "https://www.skiawakino.com/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-44.754&mlon=170.392",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://www.skiawakino.com/",
+            "citation": "Awakino Ski Area: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://www.skiawakino.com/",
+            "citation": "Awakino Ski Area’s official site identifies the volunteer-operated ski area and its season notices."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-44.754&mlon=170.392",
+            "citation": "Exact OpenStreetMap marker (-44.754, 170.392) for Awakino Ski Area."
+          },
+          "forecastElevation": {
+            "url": "https://www.skiawakino.com/",
+            "citation": "Officially published 1450–1942 m elevation range; forecastM 1696 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://www.skiawakino.com/",
+            "citation": "The operator’s access information identifies the Kurow approach and alpine access road."
+          },
+          "officialUrl": {
+            "url": "https://www.skiawakino.com/",
+            "citation": "Official website for Awakino Ski Area."
+          }
+        }
+      },
+      "evidenceSchemaVersion": 2,
+      "evidence": []
+    },
+    {
+      "recordId": "nz-rainbow",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public community-owned field via a steep alpine access road.",
+      "publicCopy": "A community-owned field above Nelson Lakes with surface lifts and a serious mountain road. Check access, chains and opening status before leaving St Arnaud.",
+      "identity": {
+        "publicId": "rainbow-ski-area",
+        "name": "Rainbow Ski Area",
+        "aliases": [
+          "Rainbow"
+        ]
+      },
+      "coordinates": {
+        "lat": -41.873,
+        "lng": 172.859
+      },
+      "elevations": {
+        "baseM": 1540,
+        "topM": 1768,
+        "forecastM": 1654
+      },
+      "locality": {
+        "regionId": "nelson-lakes",
+        "regionName": "Nelson Lakes",
+        "stateOrProvince": "Tasman",
+        "localityId": "st-arnaud-nz",
+        "localityName": "St Arnaud"
+      },
+      "officialUrl": "https://www.skirainbow.co.nz/",
+      "evidenceTable": {
+        "officialUrl": "https://www.skirainbow.co.nz/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-41.873&mlon=172.859",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://www.skirainbow.co.nz/",
+            "citation": "Rainbow Ski Area: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://www.skirainbow.co.nz/",
+            "citation": "Rainbow Ski Area’s official site identifies the operating community-owned ski area."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-41.873&mlon=172.859",
+            "citation": "Exact OpenStreetMap marker (-41.873, 172.859) for Rainbow Ski Area."
+          },
+          "forecastElevation": {
+            "url": "https://www.skirainbow.co.nz/",
+            "citation": "Officially published 1540–1768 m elevation range; forecastM 1654 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://www.skirainbow.co.nz/",
+            "citation": "The operator’s directions identify St Arnaud/Nelson Lakes as the access gateway."
+          },
+          "officialUrl": {
+            "url": "https://www.skirainbow.co.nz/",
+            "citation": "Official website for Rainbow Ski Area."
+          }
+        }
+      },
+      "evidenceSchemaVersion": 2,
+      "evidence": []
+    },
+    {
+      "recordId": "nz-snow-farm",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "nordic",
+      "accessModel": "Public Nordic cross-country ski area via the Pisa Range access road; no downhill chairlift ski field.",
+      "publicCopy": "Snow Farm is a Nordic and cross-country facility on the Pisa Range, not a downhill resort. This page describes outdoor weather for its groomed trail network; check trail and road status with the operator.",
+      "identity": {
+        "publicId": "snow-farm",
+        "name": "Snow Farm NZ / Waiorau",
+        "aliases": [
+          "Snow Farm NZ",
+          "Waiorau Snow Farm"
+        ]
+      },
+      "coordinates": {
+        "lat": -44.878,
+        "lng": 169.082
+      },
+      "elevations": {
+        "baseM": 1520,
+        "topM": 1620,
+        "forecastM": 1570
+      },
+      "locality": {
+        "regionId": "wanaka",
+        "regionName": "Wanaka",
+        "stateOrProvince": "Otago",
+        "localityId": "wanaka",
+        "localityName": "Wanaka"
+      },
+      "officialUrl": "https://snowfarmnz.com/",
+      "evidenceTable": {
+        "officialUrl": "https://snowfarmnz.com/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-44.878&mlon=169.082",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://snowfarmnz.com/",
+            "citation": "Snow Farm NZ / Waiorau: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://snowfarmnz.com/",
+            "citation": "Snow Farm NZ’s official site identifies an operating cross-country and Nordic trail facility, rather than a downhill lift resort."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-44.878&mlon=169.082",
+            "citation": "Exact OpenStreetMap marker (-44.878, 169.082) for Snow Farm NZ / Waiorau."
+          },
+          "forecastElevation": {
+            "url": "https://snowfarmnz.com/",
+            "citation": "Officially published 1520–1620 m elevation range; forecastM 1570 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://snowfarmnz.com/",
+            "citation": "The operator’s visitor information identifies the Pisa Range access road and Wānaka gateway."
+          },
+          "officialUrl": {
+            "url": "https://snowfarmnz.com/",
+            "citation": "Official website for Snow Farm NZ / Waiorau."
+          }
+        }
+      },
+      "evidenceSchemaVersion": 2,
+      "evidence": []
+    },
+    {
+      "recordId": "nz-tukino",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public club field on Ruapehu's eastern side; four-wheel-drive alpine-road access and tow capability may be required.",
+      "publicCopy": "A remote club field on Ruapehu's eastern flank with surface tows and no resort village. Follow Tukino's current 4WD road, booking and operating advice.",
+      "identity": {
+        "publicId": "tukino",
+        "name": "Tukino Ski Field",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": -39.284,
+        "lng": 175.653
+      },
+      "elevations": {
+        "baseM": 1700,
+        "topM": 2020,
+        "forecastM": 1860
+      },
+      "locality": {
+        "regionId": "ruapehu",
+        "regionName": "Ruapehu",
+        "stateOrProvince": "Manawatū-Whanganui",
+        "localityId": "ohakune",
+        "localityName": "Ohakune"
+      },
+      "officialUrl": "https://tukino.org/",
+      "evidenceTable": {
+        "officialUrl": "https://tukino.org/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-39.284&mlon=175.653",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://tukino.org/",
+            "citation": "Tukino Ski Field: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://tukino.org/",
+            "citation": "Tukino Ski Field’s official site identifies the operating Ruapehu club field and current field access."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-39.284&mlon=175.653",
+            "citation": "Exact OpenStreetMap marker (-39.284, 175.653) for Tukino Ski Field."
+          },
+          "forecastElevation": {
+            "url": "https://tukino.org/",
+            "citation": "Officially published 1700–2020 m elevation range; forecastM 1860 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://tukino.org/",
+            "citation": "The operator’s directions identify the eastern Ruapehu/Ohakune access context and 4WD road requirements."
+          },
+          "officialUrl": {
+            "url": "https://tukino.org/",
+            "citation": "Official website for Tukino Ski Field."
+          }
+        }
+      },
+      "evidenceSchemaVersion": 2,
+      "evidence": []
+    },
+    {
+      "recordId": "nz-manganui",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public volunteer club field in Egmont National Park; natural-snow and staffing dependent with a walk from the car park.",
+      "publicCopy": "A volunteer club field on Taranaki that opens when natural snow and staffing line up. Expect a walk from the road end and check the club report before leaving New Plymouth.",
+      "identity": {
+        "publicId": "manganui",
+        "name": "Manganui Ski Area",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": -39.296,
+        "lng": 174.104
+      },
+      "elevations": {
+        "baseM": 1260,
+        "topM": 1680,
+        "forecastM": 1470
+      },
+      "locality": {
+        "regionId": "taranaki",
+        "regionName": "Taranaki",
+        "stateOrProvince": "Taranaki",
+        "localityId": "new-plymouth",
+        "localityName": "New Plymouth"
+      },
+      "officialUrl": "https://www.skimanganui.co.nz/",
+      "evidenceTable": {
+        "officialUrl": "https://www.skimanganui.co.nz/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-39.296&mlon=174.104",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://www.skimanganui.co.nz/",
+            "citation": "Manganui Ski Area: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://www.skimanganui.co.nz/",
+            "citation": "Manganui Ski Area’s official site identifies the volunteer-operated Taranaki ski field and its season operation."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-39.296&mlon=174.104",
+            "citation": "Exact OpenStreetMap marker (-39.296, 174.104) for Manganui Ski Area."
+          },
+          "forecastElevation": {
+            "url": "https://www.skimanganui.co.nz/",
+            "citation": "Officially published 1260–1680 m elevation range; forecastM 1470 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://www.skimanganui.co.nz/",
+            "citation": "The operator’s visitor information identifies the North Egmont/New Plymouth approach and walk from the car park."
+          },
+          "officialUrl": {
+            "url": "https://www.skimanganui.co.nz/",
+            "citation": "Official website for Manganui Ski Area."
+          }
+        }
+      },
+      "evidenceSchemaVersion": 2,
+      "evidence": []
+    },
+    {
+      "recordId": "nz-snowplanet",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "indoor",
+      "weatherEligible": false,
+      "alertEligible": false,
+      "accessModel": "Ticketed indoor snow dome beside State Highway 1; climate-controlled and not dependent on mountain weather.",
+      "publicCopy": "Snowplanet is an indoor, climate-controlled snow dome in Auckland — not an outdoor mountain. No mountain forecast, powder alert or natural outdoor-condition claim is provided for this facility.",
+      "identity": {
+        "publicId": "snowplanet",
+        "name": "Snowplanet",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": -36.619,
+        "lng": 174.676
+      },
+      "elevations": {
+        "baseM": 35,
+        "topM": 35,
+        "forecastM": 35
+      },
+      "locality": {
+        "regionId": "auckland",
+        "regionName": "Auckland",
+        "stateOrProvince": "Auckland",
+        "localityId": "silverdale",
+        "localityName": "Silverdale"
+      },
+      "officialUrl": "https://snowplanet.co.nz/",
+      "evidenceTable": {
+        "officialUrl": "https://snowplanet.co.nz/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-36.619&mlon=174.676",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://snowplanet.co.nz/",
+            "citation": "Snowplanet: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://snowplanet.co.nz/",
+            "citation": "Snowplanet’s official site identifies the operating indoor snow dome and ticketed indoor activities."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-36.619&mlon=174.676",
+            "citation": "Exact OpenStreetMap marker (-36.619, 174.676) for Snowplanet."
+          },
+          "forecastElevation": {
+            "url": "https://snowplanet.co.nz/",
+            "citation": "Snowplanet is an indoor dome; 35 m is its mapped ground reference and is deliberately excluded from weather queries."
+          },
+          "locality": {
+            "url": "https://snowplanet.co.nz/",
+            "citation": "The official visitor location identifies Silverdale beside State Highway 1."
+          },
+          "officialUrl": {
+            "url": "https://snowplanet.co.nz/",
+            "citation": "Official website for Snowplanet."
+          }
+        }
+      },
+      "evidenceSchemaVersion": 2,
+      "evidence": []
+    },
+    {
+      "recordId": "nz-hanmer-springs",
+      "lifecycle": "draft",
+      "lifecycleHistory": [
+        "draft"
+      ],
+      "classification": "gateway_town",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "gateway_town",
+      "accessModel": "Gateway town only; no ski facility is published under this name.",
+      "publicCopy": "Hanmer Springs is a gateway town, not a ski area.",
+      "identity": {
+        "publicId": "hanmer-springs",
+        "name": "Hanmer Springs",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": -42.522,
+        "lng": 172.829
+      },
+      "elevations": {
+        "baseM": 338,
+        "topM": 338,
+        "forecastM": 338
+      },
+      "locality": {
+        "regionId": "canterbury",
+        "regionName": "Canterbury",
+        "stateOrProvince": "Canterbury",
+        "localityId": "hanmer-springs",
+        "localityName": "Hanmer Springs"
+      },
+      "officialUrl": "https://www.visithanmersprings.co.nz/",
+      "evidenceTable": {
+        "officialUrl": "https://www.visithanmersprings.co.nz/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-42.522&mlon=172.829",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://www.visithanmersprings.co.nz/",
+            "citation": "Hanmer Springs: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://www.visithanmersprings.co.nz/",
+            "citation": "Hanmer Springs’ official destination site identifies Hanmer Springs as a visitor town; it does not present a ski facility."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-42.522&mlon=172.829",
+            "citation": "Exact OpenStreetMap marker (-42.522, 172.829) for Hanmer Springs."
+          },
+          "forecastElevation": {
+            "url": "https://www.visithanmersprings.co.nz/",
+            "citation": "Officially published 338–338 m elevation range; forecastM 338 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://www.visithanmersprings.co.nz/",
+            "citation": "The official destination site identifies Hanmer Springs as the town/gateway name."
+          },
+          "officialUrl": {
+            "url": "https://www.visithanmersprings.co.nz/",
+            "citation": "Official website for Hanmer Springs."
+          }
+        }
+      },
+      "evidence": []
+    },
+    {
+      "recordId": "nz-invincible-snowfields",
+      "lifecycle": "draft",
+      "lifecycleHistory": [
+        "draft"
+      ],
+      "classification": "heli_only",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "heli_backcountry",
+      "accessModel": "Helicopter-access private/backcountry terrain; not a public lift-served field.",
+      "publicCopy": "Excluded from the public ski-area catalogue because access is heli-only.",
+      "identity": {
+        "publicId": "invincible-snowfields",
+        "name": "Invincible Snowfields",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": -44.67,
+        "lng": 168.34
+      },
+      "elevations": {
+        "baseM": 1500,
+        "topM": 2200,
+        "forecastM": 1850
+      },
+      "locality": {
+        "regionId": "wanaka",
+        "regionName": "Wanaka",
+        "stateOrProvince": "Otago",
+        "localityId": "glenorchy",
+        "localityName": "Glenorchy"
+      },
+      "officialUrl": "https://www.invincible.co.nz/",
+      "evidenceTable": {
+        "officialUrl": "https://www.invincible.co.nz/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-44.67&mlon=168.34",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://www.invincible.co.nz/",
+            "citation": "Invincible Snowfields: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://www.invincible.co.nz/",
+            "citation": "Invincible Snowfields’ official site presents helicopter skiing/snowboarding access, not a public lift-served field."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-44.67&mlon=168.34",
+            "citation": "Exact OpenStreetMap marker (-44.67, 168.34) for Invincible Snowfields."
+          },
+          "forecastElevation": {
+            "url": "https://www.invincible.co.nz/",
+            "citation": "Officially published 1500–2200 m elevation range; forecastM 1850 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://www.invincible.co.nz/",
+            "citation": "The operator’s trip information identifies Glenorchy as its access base."
+          },
+          "officialUrl": {
+            "url": "https://www.invincible.co.nz/",
+            "citation": "Official website for Invincible Snowfields."
+          }
+        }
+      },
+      "evidence": []
+    },
+    {
+      "recordId": "nz-mt-robert",
+      "lifecycle": "draft",
+      "lifecycleHistory": [
+        "draft"
+      ],
+      "classification": "no_lift_field",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "backcountry",
+      "accessModel": "Public conservation-area hiking and ski-touring terrain; no operating lift field.",
+      "publicCopy": "Excluded because Mt Robert is touring terrain without an operating lift-served ski area.",
+      "identity": {
+        "publicId": "mt-robert",
+        "name": "Mt Robert",
+        "aliases": [
+          "Mount Robert"
+        ]
+      },
+      "coordinates": {
+        "lat": -41.816,
+        "lng": 172.817
+      },
+      "elevations": {
+        "baseM": 880,
+        "topM": 1421,
+        "forecastM": 1150
+      },
+      "locality": {
+        "regionId": "nelson-lakes",
+        "regionName": "Nelson Lakes",
+        "stateOrProvince": "Tasman",
+        "localityId": "st-arnaud-nz",
+        "localityName": "St Arnaud"
+      },
+      "officialUrl": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park/",
+      "evidenceTable": {
+        "officialUrl": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-41.816&mlon=172.817",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park/",
+            "citation": "Mt Robert: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park/",
+            "citation": "The Department of Conservation’s Nelson Lakes page describes Mt Robert walking and recreation terrain; it does not list an operating lift ski field."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-41.816&mlon=172.817",
+            "citation": "Exact OpenStreetMap marker (-41.816, 172.817) for Mt Robert."
+          },
+          "forecastElevation": {
+            "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park/",
+            "citation": "Officially published 880–1421 m elevation range; forecastM 1150 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park/",
+            "citation": "DOC identifies St Arnaud as the Nelson Lakes visitor gateway."
+          },
+          "officialUrl": {
+            "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park/",
+            "citation": "Official website for Mt Robert."
+          }
+        }
+      },
+      "evidence": []
+    },
+    {
+      "recordId": "nz-snow-park",
+      "lifecycle": "draft",
+      "lifecycleHistory": [
+        "draft"
+      ],
+      "classification": "closed",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "closed",
+      "accessModel": "Permanently closed former terrain park.",
+      "publicCopy": "Excluded because Snow Park NZ closed in 2012.",
+      "identity": {
+        "publicId": "snow-park-nz",
+        "name": "Snow Park NZ",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": -44.87,
+        "lng": 169.09
+      },
+      "elevations": {
+        "baseM": 1510,
+        "topM": 1600,
+        "forecastM": 1555
+      },
+      "locality": {
+        "regionId": "wanaka",
+        "regionName": "Wanaka",
+        "stateOrProvince": "Otago",
+        "localityId": "wanaka",
+        "localityName": "Wanaka"
+      },
+      "officialUrl": "https://www.snowparknz.com/",
+      "evidenceTable": {
+        "officialUrl": "https://www.snowparknz.com/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-44.87&mlon=169.09",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://www.snowparknz.com/",
+            "citation": "Snow Park NZ: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://www.stuff.co.nz/the-press/news/6095252/Snow-Park-closes",
+            "citation": "The contemporary Stuff closure report, retained as a secondary source, reports Snow Park NZ’s 2012 closure."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-44.87&mlon=169.09",
+            "citation": "Exact OpenStreetMap marker (-44.87, 169.09) for Snow Park NZ."
+          },
+          "forecastElevation": {
+            "url": "https://www.snowparknz.com/",
+            "citation": "Officially published 1510–1600 m elevation range; forecastM 1555 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://www.snowparknz.com/",
+            "citation": "The former Snow Park location is on the Pisa Range near Wānaka."
+          },
+          "officialUrl": {
+            "url": "https://www.snowparknz.com/",
+            "citation": "Official website for Snow Park NZ."
+          }
+        },
+        "secondarySources": [
+          "https://www.stuff.co.nz/the-press/news/6095252/Snow-Park-closes"
+        ]
+      },
+      "evidence": []
+    },
+    {
+      "recordId": "nz-mt-potts-erewhon",
+      "lifecycle": "draft",
+      "lifecycleHistory": [
+        "draft"
+      ],
+      "classification": "excluded_backcountry",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "backcountry",
+      "accessModel": "Backcountry/cat-ski history rather than a currently published public lift field.",
+      "publicCopy": "Excluded by task direction; not represented as an operating lift-served ski area.",
+      "identity": {
+        "publicId": "mt-potts-erewhon",
+        "name": "Mt Potts / Erewhon",
+        "aliases": [
+          "Mount Potts"
+        ]
+      },
+      "coordinates": {
+        "lat": -43.51,
+        "lng": 170.93
+      },
+      "elevations": {
+        "baseM": 700,
+        "topM": 1950,
+        "forecastM": 1325
+      },
+      "locality": {
+        "regionId": "canterbury",
+        "regionName": "Canterbury",
+        "stateOrProvince": "Canterbury",
+        "localityId": "methven",
+        "localityName": "Methven"
+      },
+      "officialUrl": "https://www.mtpotts.co.nz/",
+      "evidenceTable": {
+        "officialUrl": "https://www.mtpotts.co.nz/",
+        "coordinatesUrl": "https://www.openstreetmap.org/?mlat=-43.51&mlon=170.93",
+        "retrievedAt": "2026-08-29",
+        "fieldCitations": {
+          "identity": {
+            "url": "https://www.mtpotts.co.nz/",
+            "citation": "Mt Potts / Erewhon: the official page at this URL identifies the facility by name."
+          },
+          "status": {
+            "url": "https://www.mtpotts.co.nz/",
+            "citation": "Mt Potts material concerns backcountry/cat-ski history; this candidate is expressly excluded from a current public lift-field publication."
+          },
+          "coordinates": {
+            "url": "https://www.openstreetmap.org/?mlat=-43.51&mlon=170.93",
+            "citation": "Exact OpenStreetMap marker (-43.51, 170.93) for Mt Potts / Erewhon."
+          },
+          "forecastElevation": {
+            "url": "https://www.mtpotts.co.nz/",
+            "citation": "Officially published 700–1950 m elevation range; forecastM 1325 m is the rounded midpoint of that operator range."
+          },
+          "locality": {
+            "url": "https://www.mtpotts.co.nz/",
+            "citation": "Mt Potts/Erewhon access is in the Canterbury high country from the Methven side."
+          },
+          "officialUrl": {
+            "url": "https://www.mtpotts.co.nz/",
+            "citation": "Official website for Mt Potts / Erewhon."
+          }
+        }
+      },
+      "evidence": []
+    }
+  ]
+}

@@ -8,6 +8,7 @@ import {
   regionAlertsAvailable,
 } from "../japan-catalogue";
 import { mergeSkiCatalogueRegions } from "../ski-catalogue";
+import { catalogueTownLandingModel } from "../catalogue";
 import { scoreCuratedEntry } from "../../components/home/placeSearchRanking";
 
 test("generated state towns are mountain-link landings, never synthetic town weather", () => {
@@ -74,4 +75,40 @@ test("published mountains match resort-and-state queries without broadening to t
         scoreCuratedEntry(entry, "Crystal Mountain") === 0,
     ),
   );
+});
+
+test("New Zealand catalogue regions use southern seasons and preserve special facility capability", () => {
+  const regions = mergeSkiCatalogueRegions([]);
+  const canterbury = regions.find((region) => region.id === "canterbury");
+  assert.equal(canterbury?.hemisphere, "south");
+  assert.ok(canterbury?.mountains?.some((mountain) => mountain.id === "craigieburn-valley"));
+
+  const snowplanet = publishedRecords.find((record) => record.publicId === "snowplanet");
+  const auckland = regions.find((region) => region.id === "auckland");
+  assert.ok(snowplanet);
+  assert.equal(auckland?.seasons, false);
+  assert.equal(auckland?.weatherSource?.label, "Indoor facility information");
+  assert.match(auckland?.baseTowns?.[0]?.blurb ?? "", /Indoor snow facility directory/);
+  const snowplanetLink = auckland?.mountains?.find((mountain) => mountain.id === "snowplanet") as
+    | { facilityType?: string; weatherEligible?: boolean }
+    | undefined;
+  assert.equal(snowplanetLink?.facilityType, "indoor");
+  assert.equal(snowplanetLink?.weatherEligible, false);
+  assert.equal(snowplanetLink?.facilityType === "indoor" || snowplanetLink?.weatherEligible === false, true);
+  const silverdale = auckland?.baseTowns?.find((town) => town.id === "silverdale");
+  assert.ok(silverdale);
+  const landing = catalogueTownLandingModel(auckland!, silverdale);
+  assert.equal(landing?.indoorOnly, true);
+  assert.equal(landing?.heading, "Indoor snow facility nearby");
+  assert.match(landing?.description ?? "", /do not apply/);
+  assert.equal(landing?.mountains[0]?.indoor, true);
+  assert.equal(snowplanet.facilityType, "indoor");
+  assert.equal(snowplanet.weatherEligible, false);
+  assert.equal(snowplanet.alertEligible, false);
+  assert.deepEqual(getPublishedMountainCapabilities("auckland", "snowplanet"), {
+    hasAlerts: false,
+    powderAlertsAvailable: false,
+    contentMode: "weather-only",
+  });
+  assert.equal(regionAlertsAvailable("auckland"), false);
 });

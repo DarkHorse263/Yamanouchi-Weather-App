@@ -35,6 +35,7 @@ import { FavouriteStar } from "@/components/FavouriteStar";
 import { TownPartnerCard } from "@/components/TownPartnerCard";
 import { TownPartnerAd } from "@/components/TownPartnerAd";
 import { TOWN_PARTNERS } from "@/data/townPartners";
+import { publishedRecords } from "@workspace/ski-catalogue/public-runtime";
 
 function haversineKm(a: { lat: number; lng: number }, b: { lat: number; lng: number }): number {
   const R = 6371;
@@ -702,6 +703,8 @@ function MountainResortRow({
   indent?: boolean;
 }) {
   const { entry, km, min } = row;
+  const catalogueRecord = publishedRecords.find((record) => record.publicId === entry.location.id);
+  const indoor = catalogueRecord?.facilityType === "indoor" || catalogueRecord?.weatherEligible === false;
   const temp = entry.current?.temperature;
   const desc = entry.current?.weatherDescription;
   // Indented child rows (inside an expanded parent group) keep the
@@ -726,11 +729,11 @@ function MountainResortRow({
             `${Math.round(km)} km · ~${min} min`,
             `約${Math.round(km)}km・約${min}分`,
           )}
-          {desc ? ` · ${desc.toLowerCase()}` : ""}
+          {indoor ? ` · ${t("indoor snow facility", "屋内スノー施設")}` : desc ? ` · ${desc.toLowerCase()}` : ""}
         </p>
       </div>
       <div className="flex items-center gap-4 shrink-0">
-        {temp !== undefined && temp !== null ? (
+        {!indoor && temp !== undefined && temp !== null ? (
           <p className={`font-display font-black tabular-nums transition-colors duration-300 ${tint ? "text-[#0F172A] group-hover:text-white" : "text-[#0F172A]"} ${indent ? "text-2xl" : "text-3xl"}`}>
             {Math.round(temp)}°
           </p>

@@ -37,6 +37,11 @@ export function RegionHome() {
 
   const towns = region.baseTowns ?? [];
   const hasGeneratedCatalogueTowns = towns.some(isCatalogueMountainLinkTown);
+  const indoorOnlyCatalogue = hasGeneratedCatalogueTowns && (region.mountains ?? []).length > 0 &&
+    (region.mountains ?? []).every((mountain) => {
+      const facility = mountain as typeof mountain & { facilityType?: string; weatherEligible?: boolean };
+      return facility.facilityType === "indoor" || facility.weatherEligible === false;
+    });
   const mountainsById = new Map((region.mountains ?? []).map((m) => [m.id, m]));
   const country = REGION_COUNTRY[region.id];
   const countryMeta = country ? COUNTRY_META[country] : null;
@@ -46,7 +51,9 @@ export function RegionHome() {
       <PageMeta
         title={`${region.name} - pick a base town`}
         description={
-          hasGeneratedCatalogueTowns
+          indoorOnlyCatalogue
+            ? `Browse indoor snow facilities in ${region.name}. Outdoor mountain weather and natural-snow forecasts do not apply.`
+            : hasGeneratedCatalogueTowns
             ? `Choose a base in ${region.name} to open nearby published mountain weather.`
             : `Choose your base town in ${region.name}. Real-time weather, road conditions and live cams scoped to where you stay.`
         }
@@ -79,7 +86,12 @@ export function RegionHome() {
         byline={countryMeta ? `${countryMeta.flag} ${region.subtitle}` : region.subtitle}
         title={region.name}
         description={
-          hasGeneratedCatalogueTowns
+          indoorOnlyCatalogue
+            ? t(
+                "Browse the indoor snow facility directory. Outdoor mountain weather and natural-snow forecasts do not apply.",
+                "屋内スノー施設の案内です。屋外の山岳天気・自然降雪予報は対象外です。",
+              )
+            : hasGeneratedCatalogueTowns
             ? t(
                 "Pick a base to open nearby published mountain weather.",
                 "拠点を選んで、近隣の公開済み山岳天気をご覧ください。",

@@ -701,6 +701,7 @@
   <url><loc>https://feelzlike.com/wanaka/stay/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://feelzlike.com/wanaka/mountain/cardrona/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://feelzlike.com/wanaka/mountain/treble-cone/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/wanaka/mountain/snow-farm/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://feelzlike.com/wanaka/wanaka/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://feelzlike.com/wanaka/wanaka/weather/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://feelzlike.com/wanaka/wanaka/stay/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
@@ -726,6 +727,7 @@
   <url><loc>https://feelzlike.com/ruapehu/stay/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://feelzlike.com/ruapehu/mountain/whakapapa/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://feelzlike.com/ruapehu/mountain/turoa/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/ruapehu/mountain/tukino/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://feelzlike.com/ruapehu/ohakune/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://feelzlike.com/ruapehu/ohakune/weather/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://feelzlike.com/ruapehu/ohakune/stay/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
@@ -2450,6 +2452,47 @@
   <url><loc>https://feelzlike.com/us-vt/south-pomfret/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://feelzlike.com/us-vt/brownsville/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://feelzlike.com/us-vt/richmond/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/canterbury/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://feelzlike.com/canterbury/mountains/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/canterbury/stay/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/canterbury/mountain/craigieburn-valley/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/canterbury/mountain/broken-river/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/canterbury/mountain/mt-olympus-nz/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/canterbury/mountain/temple-basin/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/canterbury/mountain/porters/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/canterbury/mountain/mt-cheeseman/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/canterbury/mountain/mt-lyford/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/canterbury/springfield-nz/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/canterbury/windwhistle/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/canterbury/arthurs-pass/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/canterbury/hanmer-springs/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/mackenzie-south-canterbury/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://feelzlike.com/mackenzie-south-canterbury/mountains/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/mackenzie-south-canterbury/stay/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/mackenzie-south-canterbury/mountain/mt-dobson/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/mackenzie-south-canterbury/mountain/fox-peak/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/mackenzie-south-canterbury/mountain/roundhill-nz/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/mackenzie-south-canterbury/mountain/ohau-snow-fields/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/mackenzie-south-canterbury/mountain/awakino/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/mackenzie-south-canterbury/fairlie/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/mackenzie-south-canterbury/lake-tekapo/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/mackenzie-south-canterbury/twizel/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/mackenzie-south-canterbury/kurow/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/nelson-lakes/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://feelzlike.com/nelson-lakes/mountains/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/nelson-lakes/stay/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/nelson-lakes/mountain/rainbow-ski-area/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/nelson-lakes/st-arnaud-nz/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/taranaki/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://feelzlike.com/taranaki/mountains/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/taranaki/stay/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/taranaki/mountain/manganui/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/taranaki/new-plymouth/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/auckland/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://feelzlike.com/auckland/mountains/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/auckland/stay/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/auckland/mountain/snowplanet/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/auckland/silverdale/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://feelzlike.com/us-pa/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
   <url><loc>https://feelzlike.com/us-pa/mountains/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://feelzlike.com/us-pa/stay/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>

@@ -8,6 +8,7 @@ import {
   ExternalLink,
   ChevronDown,
   Layers,
+  Building2,
 } from "lucide-react";
 import { useRegion, useLanguage } from "@workspace/feelzlike-shell";
 import type { MountainLink } from "@workspace/feelzlike-shell";
@@ -57,14 +58,22 @@ export function MountainsList() {
   const { groups, standalone } = useMemo(() => groupMountains(mountains), [mountains]);
 
   const totalCount = mountains.length;
+  const indoorOnly = totalCount > 0 && mountains.every((mountain) => {
+    const facility = mountain as typeof mountain & { facilityType?: string; weatherEligible?: boolean };
+    return facility.facilityType === "indoor" || facility.weatherEligible === false;
+  });
 
   return (
     <div className="relative">
       <PageMeta
         title={t(`${region.name} mountains & ski resorts`, `${region.name}の山・スキー場一覧`)}
         description={t(
-          `All mountains and ski resorts in ${region.name}. Live conditions, lift status and snow forecasts for each resort.`,
-          `${region.name}の全山・スキー場一覧。各スキー場のライブ状況・リフト運行・降雪予報。`,
+          indoorOnly
+            ? `Indoor snow facilities in ${region.name}. Facility information only; no outdoor mountain weather or snow forecast.`
+            : `All mountains and ski resorts in ${region.name}. Live conditions, lift status and snow forecasts for each resort.`,
+          indoorOnly
+            ? `${region.name}の屋内スノー施設一覧。施設情報のみで、屋外の山岳天気・降雪予報は表示しません。`
+            : `${region.name}の全山・スキー場一覧。各スキー場のライブ状況・リフト運行・降雪予報。`,
         )}
         path={`/${region.id}/mountains`}
       />
@@ -82,27 +91,31 @@ export function MountainsList() {
             <span className="byline text-white/70">
               {region.name} · {region.subtitle}
             </span>
-            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-white/15 text-white border border-white/25">
+            {!indoorOnly && <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-white/15 text-white border border-white/25">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </span>
               {t("Live", "ライブ")}
-            </span>
+            </span>}
           </div>
 
           <h1
             className="font-display font-semibold text-5xl md:text-6xl tracking-tight text-white mt-3"
             style={{ letterSpacing: "-0.035em" }}
           >
-            {t("Mountains", "スキー場")}
+            {t(indoorOnly ? "Indoor snow facilities" : "Mountains", indoorOnly ? "屋内スノー施設" : "スキー場")}
           </h1>
 
           <div className="flex items-end justify-between gap-6 mt-4 max-w-3xl">
             <p className="text-white/70 max-w-xl">
               {t(
-                "Real-time conditions, lift status and live cams for every mountain in the region.",
-                "地域内すべてのスキー場のリアルタイム状況・リフト稼働・ライブカメラ。",
+                indoorOnly
+                  ? "Facility directory for indoor snow activities. Outdoor conditions, lifts, cams and natural-snow forecasts do not apply."
+                  : "Real-time conditions, lift status and live cams for every mountain in the region.",
+                indoorOnly
+                  ? "屋内スノー施設の案内です。屋外状況・リフト・ライブカメラ・自然降雪予報は対象外です。"
+                  : "地域内すべてのスキー場のリアルタイム状況・リフト稼働・ライブカメラ。",
               )}
             </p>
             <div className="text-right shrink-0">
@@ -110,7 +123,7 @@ export function MountainsList() {
                 {String(totalCount).padStart(2, "0")}
               </p>
               <p className="byline text-white/60 mt-1">
-                {t("Mountains tracked", "対象スキー場")}
+                {t(indoorOnly ? "Facilities listed" : "Mountains tracked", indoorOnly ? "掲載施設" : "対象スキー場")}
               </p>
             </div>
           </div>
@@ -276,9 +289,14 @@ function ParentGroupCard({
                       )}
                     </div>
                     <div className="flex items-center gap-3 shrink-0">
-                      {m.elevationM !== undefined && (
+                      {!isIndoorFacility(m) && m.elevationM !== undefined && (
                         <span className="text-xs tabular-nums text-muted-foreground">
                           {(u.elev(m.elevationM) ?? 0).toLocaleString()} {u.elevUnit}
+                        </span>
+                      )}
+                      {isIndoorFacility(m) && (
+                        <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                          <Building2 className="w-3 h-3" /> {t("Indoor facility", "屋内施設")}
                         </span>
                       )}
                       <ArrowUpRight className="w-4 h-4 text-blue-600" aria-hidden />
@@ -306,6 +324,7 @@ function MountainCard({
   t: (en: string, ja: string) => string;
 }) {
   const u = useUnits();
+  const indoor = isIndoorFacility(m);
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -322,14 +341,15 @@ function MountainCard({
             <span className="byline text-muted-foreground/80 tnum">{indexLabel}</span>
             <span className="byline text-muted-foreground/40">·</span>
             <span className="inline-flex items-center gap-1 byline text-foreground/80">
-              <MountainIcon className="w-3 h-3" /> {t("Mountain", "スキー場")}
+              {indoor ? <Building2 className="w-3 h-3" /> : <MountainIcon className="w-3 h-3" />}
+              {indoor ? t("Indoor facility", "屋内施設") : t("Mountain", "スキー場")}
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9px] font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-700 border border-emerald-500/20">
+            {!indoor && <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9px] font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-700 border border-emerald-500/20">
               <Activity className="w-2 h-2" />
               {t("Live", "ライブ")}
-            </span>
+            </span>}
             <ArrowUpRight className="w-4 h-4 text-muted-foreground/50 group-hover:text-blue-700 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
           </div>
         </div>
@@ -344,7 +364,7 @@ function MountainCard({
           </p>
         )}
 
-        {m.elevationM !== undefined && (
+        {!indoor && m.elevationM !== undefined && (
           <>
             <div className="rule mt-4 mb-4" />
             <div className="flex items-end justify-between">
@@ -359,6 +379,16 @@ function MountainCard({
               </div>
               <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-200">
                 {t("View live", "ライブ表示")}
+              </span>
+            </div>
+          </>
+        )}
+        {indoor && (
+          <>
+            <div className="rule mt-4 mb-4" />
+            <div className="flex justify-end">
+              <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-1 rounded-md bg-slate-50 text-slate-700 border border-slate-200">
+                {t("View facility", "施設を見る")}
               </span>
             </div>
           </>
@@ -392,4 +422,9 @@ function MountainCard({
       </Link>
     </motion.div>
   );
+}
+
+export function isIndoorFacility(mountain: MountainLink): boolean {
+  const facility = mountain as MountainLink & { facilityType?: string; weatherEligible?: boolean };
+  return facility.facilityType === "indoor" || facility.weatherEligible === false;
 }

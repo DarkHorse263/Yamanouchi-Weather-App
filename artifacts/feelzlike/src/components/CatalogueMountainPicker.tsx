@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useLanguage } from "@workspace/feelzlike-shell";
 import { publishedRecords } from "@workspace/ski-catalogue/public-runtime";
 
-const MOUNTAINS_BY_STATE = [...publishedRecords.reduce(
+const alertEligibleRecords = publishedRecords.filter((record) => record.alertEligible);
+const MOUNTAINS_BY_STATE = [...alertEligibleRecords.reduce(
   (groups, record) => {
     const records = groups.get(record.stateOrProvince) ?? [];
     records.push(record);
@@ -41,7 +42,7 @@ export function CatalogueMountainPicker({ selected, onToggle, variant = "light" 
             {t("eastern & midwestern usa mountains", "アメリカ東部・中西部のスキー場")}
           </span>
           <span className="block text-[10px] uppercase tracking-wider text-muted-foreground mt-0.5">
-            {publishedRecords.length} {t("published mountains", "公開中のスキー場")}
+             {alertEligibleRecords.length} {t("alert-ready mountains", "アラート対応スキー場")}
           </span>
         </span>
         <span className="text-xs font-bold text-primary">

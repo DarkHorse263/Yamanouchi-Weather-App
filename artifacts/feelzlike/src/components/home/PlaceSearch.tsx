@@ -102,13 +102,15 @@ const CURATED_ENTRIES: CuratedEntry[] = REGIONS.flatMap((r) => {
     // A mountain sharing its name with a base town (e.g. Nozawa Onsen) would
     // render a confusing duplicate row - the town page already leads there.
     if (townNames.has(normalizeName(m.name))) continue;
+    const facility = m as typeof m & { facilityType?: string; weatherEligible?: boolean };
+    const indoor = facility.facilityType === "indoor" || facility.weatherEligible === false;
     entries.push({
       kind: "mountain",
       regionId: r.id,
       id: m.id,
       name: m.name,
       href: `/${r.id}/mountain/${m.id}`,
-      subtitle: `${r.subtitle} · mountain forecast`,
+      subtitle: indoor ? `${r.subtitle} · indoor snow facility` : `${r.subtitle} · mountain forecast`,
       extraKeys: [normalizeName(r.name), ...prefectureEnglishKeys, ...stateKeys],
       jaKeys: [...(m.nameJa ? [m.nameJa] : []), ...prefectureJapaneseKeys],
       prefectureKeys: [...prefectures.map((p) => p.name), ...prefectureJapaneseKeys],
@@ -127,7 +129,9 @@ const CURATED_ENTRIES: CuratedEntry[] = REGIONS.flatMap((r) => {
     id: r.id,
     name: r.name,
     href: `/${r.id}/`,
-    subtitle: `${r.subtitle} · pick a town`,
+    subtitle: r.weatherSource?.label === "Indoor facility information"
+      ? `${r.subtitle} · indoor snow facility directory`
+      : `${r.subtitle} · pick a town`,
     extraKeys: [...prefectureEnglishKeys, ...stateKeys],
     jaKeys: prefectureJapaneseKeys,
     prefectureKeys: [...prefectures.map((p) => p.name), ...prefectureJapaneseKeys],

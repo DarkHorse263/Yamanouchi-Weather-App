@@ -1,22 +1,26 @@
 {
   "ledgerVersion": 1,
-  "description": "Complete candidate universe transcribed from the four task 140 source-PDF review batches. Each candidate must map to exactly one record or an explicit split.",
+  "description": "Complete candidate universe transcribed from the task 140 review batches and the independently classified New Zealand task 148 candidate set. Each candidate maps to exactly one record or an explicit split.",
   "expectedCounts": {
-    "candidates": 152,
-    "records": 154,
-    "oneToOne": 150,
+    "candidates": 174,
+    "records": 176,
+    "oneToOne": 172,
     "splits": 2,
     "byLifecycle": {
-      "draft": 8,
-      "published": 140,
+      "draft": 13,
+      "published": 157,
       "verified": 6
     },
     "byClassification": {
-      "closed": 4,
+      "closed": 5,
       "duplicate_renamed": 1,
+      "excluded_backcountry": 1,
+      "gateway_town": 1,
+      "heli_only": 1,
+      "no_lift_field": 1,
       "private_restricted": 4,
       "uncertain": 5,
-      "verified_operating": 140
+      "verified_operating": 157
     }
   },
   "candidates": [
@@ -1697,6 +1701,72 @@
       "handling": "one_to_one",
       "classification": "verified_operating",
       "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:craigieburn-valley", "sourceBatch": "nz-task-148", "sourceCandidateId": "craigieburn-valley", "recordIds": ["nz-craigieburn-valley"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:broken-river", "sourceBatch": "nz-task-148", "sourceCandidateId": "broken-river", "recordIds": ["nz-broken-river"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:mt-olympus", "sourceBatch": "nz-task-148", "sourceCandidateId": "mt-olympus", "recordIds": ["nz-mt-olympus"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:temple-basin", "sourceBatch": "nz-task-148", "sourceCandidateId": "temple-basin", "recordIds": ["nz-temple-basin"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:porters", "sourceBatch": "nz-task-148", "sourceCandidateId": "porters", "recordIds": ["nz-porters"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:mt-cheeseman", "sourceBatch": "nz-task-148", "sourceCandidateId": "mt-cheeseman", "recordIds": ["nz-mt-cheeseman"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:mt-lyford", "sourceBatch": "nz-task-148", "sourceCandidateId": "mt-lyford", "recordIds": ["nz-mt-lyford"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:mt-dobson", "sourceBatch": "nz-task-148", "sourceCandidateId": "mt-dobson", "recordIds": ["nz-mt-dobson"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:fox-peak", "sourceBatch": "nz-task-148", "sourceCandidateId": "fox-peak", "recordIds": ["nz-fox-peak"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:roundhill", "sourceBatch": "nz-task-148", "sourceCandidateId": "roundhill", "recordIds": ["nz-roundhill"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:ohau", "sourceBatch": "nz-task-148", "sourceCandidateId": "ohau", "recordIds": ["nz-ohau"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:awakino", "sourceBatch": "nz-task-148", "sourceCandidateId": "awakino", "recordIds": ["nz-awakino"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:rainbow", "sourceBatch": "nz-task-148", "sourceCandidateId": "rainbow", "recordIds": ["nz-rainbow"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:snow-farm", "sourceBatch": "nz-task-148", "sourceCandidateId": "snow-farm", "recordIds": ["nz-snow-farm"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:tukino", "sourceBatch": "nz-task-148", "sourceCandidateId": "tukino", "recordIds": ["nz-tukino"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:manganui", "sourceBatch": "nz-task-148", "sourceCandidateId": "manganui", "recordIds": ["nz-manganui"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:snowplanet", "sourceBatch": "nz-task-148", "sourceCandidateId": "snowplanet", "recordIds": ["nz-snowplanet"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:hanmer-springs", "sourceBatch": "nz-task-148", "sourceCandidateId": "hanmer-springs", "recordIds": ["nz-hanmer-springs"], "handling": "one_to_one", "classification": "gateway_town", "lifecycle": "draft"
+    },
+    {
+      "candidateId": "nz-task-148:invincible-snowfields", "sourceBatch": "nz-task-148", "sourceCandidateId": "invincible-snowfields", "recordIds": ["nz-invincible-snowfields"], "handling": "one_to_one", "classification": "heli_only", "lifecycle": "draft"
+    },
+    {
+      "candidateId": "nz-task-148:mt-robert", "sourceBatch": "nz-task-148", "sourceCandidateId": "mt-robert", "recordIds": ["nz-mt-robert"], "handling": "one_to_one", "classification": "no_lift_field", "lifecycle": "draft"
+    },
+    {
+      "candidateId": "nz-task-148:snow-park-nz", "sourceBatch": "nz-task-148", "sourceCandidateId": "snow-park-nz", "recordIds": ["nz-snow-park"], "handling": "one_to_one", "classification": "closed", "lifecycle": "draft"
+    },
+    {
+      "candidateId": "nz-task-148:mt-potts-erewhon", "sourceBatch": "nz-task-148", "sourceCandidateId": "mt-potts-erewhon", "recordIds": ["nz-mt-potts-erewhon"], "handling": "one_to_one", "classification": "excluded_backcountry", "lifecycle": "draft"
     }
   ]
 }

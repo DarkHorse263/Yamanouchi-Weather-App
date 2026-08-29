@@ -2197,8 +2197,9 @@ const GENERIC_CATALOGUE_REGIONS: RegionConfig[] = publishedSkiCatalogueRegions
     const records = publishedSkiCatalogueRecords
       .filter((record) => record.regionId === region.regionId)
       .sort((left, right) => left.publicId.localeCompare(right.publicId));
-    const headlineRecord = records[0];
-    if (!headlineRecord) {
+    const headlineRecord = records.find((record) => record.weatherEligible);
+    const directoryRecord = headlineRecord ?? records[0];
+    if (!directoryRecord) {
       throw new Error(`[catalogue] published region "${region.regionId}" has no published records`);
     }
     return {
@@ -2211,12 +2212,12 @@ const GENERIC_CATALOGUE_REGIONS: RegionConfig[] = publishedSkiCatalogueRegions
       href: `/${region.regionId}/`,
       baseTowns: region.localities.map((locality) => locality.name),
       mountains: records.map((record) => record.name),
-      headlineLabel: headlineRecord.name,
-      lat: headlineRecord.coordinates.lat,
-      lon: headlineRecord.coordinates.lng,
-      elevation: headlineRecord.forecastElevationM,
-      timezone: headlineRecord.timezone,
-      sourceLabel: "Open-Meteo · Published ski catalogue",
+      headlineLabel: directoryRecord.name,
+      lat: headlineRecord?.coordinates.lat,
+      lon: headlineRecord?.coordinates.lng,
+      elevation: headlineRecord?.forecastElevationM,
+      timezone: directoryRecord.timezone,
+      sourceLabel: headlineRecord ? "Open-Meteo · Published ski catalogue" : "Published indoor facility directory",
     };
   });
 

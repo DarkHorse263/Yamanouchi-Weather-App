@@ -176,7 +176,7 @@ export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
     defaultRegion && ALERT_REGIONS.some((region) => region.id === defaultRegion) ? [defaultRegion] : [],
   );
   const [mountains, setMountains] = useState<string[]>(
-    defaultMountain && alertCatalogueMountains.some((record) => record.publicId === defaultMountain)
+    defaultMountain && alertCatalogueMountains.some((record) => record.publicId === defaultMountain && record.alertEligible)
       ? [defaultMountain]
       : [],
   );

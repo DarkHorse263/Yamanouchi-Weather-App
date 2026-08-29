@@ -160,7 +160,7 @@ export interface CatalogueAlertTarget {
  * and duplicate-only source records.
  */
 export const CATALOGUE_ALERT_TARGETS: ReadonlyMap<string, CatalogueAlertTarget> = new Map(
-  publishedSkiCatalogueRecords.map((record) => [
+  publishedSkiCatalogueRecords.filter((record) => record.alertEligible).map((record) => [
     record.publicId,
     {
       id: record.publicId,

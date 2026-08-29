@@ -78,6 +78,7 @@ import {
   mountainWindSummary,
   mountainPageMetadata,
 } from "@/lib/mountainPageMetadata";
+import { publishedRecords as sharedCatalogueRecords } from "@workspace/ski-catalogue/public-runtime";
 
 /**
  * Region-agnostic mountain weather page.
@@ -117,6 +118,10 @@ export function MountainDetail() {
   // and so the HEADLINE snow can be derived on-mountain (mid-mountain) rather
   // than at the village. Temp/feels-like/current stay at the village.
   const mountainCfg = region.mountains?.find((m) => m.id === locationId);
+  const catalogueRecord = sharedCatalogueRecords.find(
+    (record) => record.regionId === region.id && record.publicId === locationId,
+  );
+  const isIndoorFacility = catalogueRecord?.facilityType === "indoor";
   const publicationCapabilities = getPublishedMountainCapabilities(region.id, locationId);
   const isWeatherOnly = publicationCapabilities?.contentMode === "weather-only";
   const mountainAlertsAvailable = publicationCapabilities?.powderAlertsAvailable ?? false;
@@ -135,7 +140,7 @@ export function MountainDetail() {
     snowElevationM != null ? { snowElevationM } : undefined,
     {
       query: {
-        enabled: !!locationId,
+        enabled: !!locationId && !isIndoorFacility,
         queryKey: getGetLocationWeatherQueryKey(
           locationId,
           snowElevationM != null ? { snowElevationM } : undefined,
@@ -160,7 +165,7 @@ export function MountainDetail() {
   // Always-200 endpoint - `report` stays null for resorts without a feed
   // adapter and the page keeps showing the model figure.
   const { data: snowReportData } = useGetResortSnowReport(locationId, {
-    query: { enabled: !!locationId && !isWeatherOnly } as never,
+    query: { enabled: !!locationId && !isWeatherOnly && !isIndoorFacility } as never,
   });
   const resortReport = isWeatherOnly ? null : snowReportData?.report ?? null;
   // "course" = official off-resort snow-course measurement (weekly, natural
@@ -249,6 +254,52 @@ export function MountainDetail() {
     (region.weatherSource
       ? t(region.weatherSource.label, region.weatherSource.labelJa ?? region.weatherSource.label)
       : "Open-Meteo");
+
+  if (isIndoorFacility && catalogueRecord) {
+    return (
+      <div className="min-h-[100dvh] bg-[#0055FF] px-5 py-10 md:px-10">
+        <PageMeta
+          title={`${catalogueRecord.name} · indoor snow facility`}
+          description={catalogueRecord.publicCopy}
+          path={catalogueRecord.route}
+          jsonLd={[
+            placeSchema({
+              name: catalogueRecord.name,
+              url: `https://feelzlike.com${catalogueRecord.route}`,
+              description: catalogueRecord.publicCopy,
+              latLng: catalogueRecord.coordinates,
+            }),
+          ]}
+        />
+        <main className="mx-auto max-w-3xl">
+          <Link href={backHref} className="inline-flex items-center gap-2 text-sm font-semibold text-white/75 hover:text-white">
+            <ArrowLeft className="h-4 w-4" /> {backLabel}
+          </Link>
+          <section className="mt-8 rounded-3xl border border-white/20 bg-white/10 p-7 text-white shadow-2xl md:p-10">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">Indoor snow facility</p>
+            <h1 className="mt-3 font-display text-5xl font-semibold tracking-tight">{catalogueRecord.name}</h1>
+            <p className="mt-5 text-lg leading-relaxed text-white/85">{catalogueRecord.publicCopy}</p>
+            <div className="mt-6 rounded-2xl border border-cyan-200/25 bg-black/15 p-5">
+              <h2 className="font-display text-xl font-semibold">Access</h2>
+              <p className="mt-2 leading-relaxed text-white/80">{catalogueRecord.accessModel}</p>
+            </div>
+            <p className="mt-6 text-sm leading-relaxed text-white/70">
+              Indoor slope conditions are controlled by the operator. feelzlike does not attach outdoor mountain
+              weather, natural-snow forecasts, powder alerts or outdoor-condition claims to this page.
+            </p>
+            <a
+              href={catalogueRecord.officialUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-7 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 font-bold text-[#0044cc]"
+            >
+              Official facility site <ExternalLink className="h-4 w-4" />
+            </a>
+          </section>
+        </main>
+      </div>
+    );
+  }
 
   // Snow next 24h: prefer the API-supplied value; otherwise sum the first
   // 24 hourly snowfall buckets so the tile is never empty when we have

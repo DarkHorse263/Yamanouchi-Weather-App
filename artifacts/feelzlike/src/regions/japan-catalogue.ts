@@ -200,8 +200,8 @@ const CATALOGUE_CAPABILITIES = new Map(
     [record.publicId, ...record.aliases].map((id) => [
       `${record.regionId}/${id}`,
       {
-        hasAlerts: publishedSkiCatalogueRecords.some((mountain) => mountain.publicId === record.publicId),
-        powderAlertsAvailable: publishedSkiCatalogueRecords.some((mountain) => mountain.publicId === record.publicId),
+        hasAlerts: publishedSkiCatalogueRecords.some((mountain) => mountain.publicId === record.publicId && mountain.alertEligible),
+        powderAlertsAvailable: publishedSkiCatalogueRecords.some((mountain) => mountain.publicId === record.publicId && mountain.alertEligible),
         contentMode: "weather-only",
       } satisfies PublishedMountainCapabilities,
     ] as const),
@@ -225,7 +225,9 @@ const CATALOGUE_REGION_CAPABILITIES = new Map(
   ].map((regionId) => [
     regionId,
     {
-      hasAlerts: publishedSkiCatalogueRegions.some((region) => region.regionId === regionId),
+      hasAlerts: publishedSkiCatalogueRecords.some(
+        (record) => record.regionId === regionId && record.alertEligible,
+      ),
     } satisfies PublishedRegionCapabilities,
   ]),
 );

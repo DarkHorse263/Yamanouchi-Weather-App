@@ -1544,7 +1544,17 @@ for (const record of publishedSkiCatalogueRecords) {
 }
 for (const region of publishedSkiCatalogueRegions) {
   if (legacyRegionSlugs.has(region.regionId)) {
-    throw new Error(`[seo-regions] generated/authored region collision: ${region.regionId}`);
+    const authored = REGIONS.find((candidate) => candidate.slug === region.regionId);
+    if (!authored) throw new Error(`[seo-regions] missing authored region collision target: ${region.regionId}`);
+    const townIds = new Set((authored.towns || []).map((town) => town.id));
+    authored.towns.push(...region.localities
+      .filter((town) => !townIds.has(town.localityId))
+      .map((town) => ({
+        id: town.localityId,
+        name: town.name,
+        blurb: "Choose a nearby published mountain for its weather and forecast.",
+      })));
+    continue;
   }
   REGIONS.push({
     slug: region.regionId,
@@ -1653,7 +1663,10 @@ export function groupJapanRegionsByPrefecture(regions = REGIONS.filter((r) => r.
 export function regionMountains(region) {
   if (region.catalogueOnly) return region.mountains;
   const file = _join(_here, "..", "src", "regions", `${region.slug}.ts`);
-  const catalogueMountains = catalogueMountainsByRegion.get(region.slug) || [];
+  const catalogueMountains = [
+    ...(catalogueMountainsByRegion.get(region.slug) || []),
+    ...(skiCatalogueMountainsByRegion.get(region.slug) || []),
+  ];
   if (!existsSync(file)) {
     if (catalogueMountains.length > 0) return [...catalogueMountains];
     throw new Error(`[seo-regions] missing region source and catalogue projection for ${region.slug}`);

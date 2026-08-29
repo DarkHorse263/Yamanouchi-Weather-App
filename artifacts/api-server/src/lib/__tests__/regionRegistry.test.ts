@@ -114,16 +114,17 @@ test("weather-served location ids are unique", () => {
   );
 });
 
-test("catalogue alert targets exactly match published eastern US mountains", () => {
-  assert.equal(CATALOGUE_ALERT_TARGETS.size, publishedRecords.length);
+test("catalogue alert targets exactly match alert-eligible published mountains", () => {
+  const eligible = publishedRecords.filter((record) => record.alertEligible);
+  assert.equal(CATALOGUE_ALERT_TARGETS.size, eligible.length);
   assert.deepEqual(
     new Set(CATALOGUE_ALERT_TARGETS.keys()),
-    new Set(publishedRecords.map((record) => record.publicId)),
+    new Set(eligible.map((record) => record.publicId)),
   );
 });
 
 test("catalogue alerts use the same runtime metadata and route as weather pages", () => {
-  for (const record of publishedRecords) {
+  for (const record of publishedRecords.filter((candidate) => candidate.alertEligible)) {
     const target = resolveCatalogueAlertTarget(record.publicId);
     const weather = resolveWeatherLocation(record.publicId);
     assert.ok(target, `missing alert target for "${record.publicId}"`);
@@ -146,6 +147,17 @@ test("catalogue alerts use the same runtime metadata and route as weather pages"
     assert.equal(target.route, `/${record.regionId}/mountain/${record.publicId}`);
   }
   assert.equal(resolveCatalogueAlertTarget("private-or-unknown-mountain"), undefined);
+});
+
+test("indoor catalogue facilities have neither weather nor powder-alert targets", () => {
+  const indoor = publishedRecords.filter((record) => record.facilityType === "indoor");
+  assert.ok(indoor.length > 0);
+  for (const record of indoor) {
+    assert.equal(record.weatherEligible, false);
+    assert.equal(record.alertEligible, false);
+    assert.equal(resolveWeatherLocation(record.publicId), undefined);
+    assert.equal(resolveCatalogueAlertTarget(record.publicId), undefined);
+  }
 });
 
 test("alert destination validation supports catalogue-mountain-only preferences", () => {

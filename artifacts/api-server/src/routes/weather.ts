@@ -861,7 +861,7 @@ const HARD_CODED_LOCATION_IDS = new Set(LOCATIONS.map((location) => location.id)
 const ALL_CATALOGUE_RECORDS = [...publishedCatalogueRecords, ...publishedCanadaCatalogueRecords];
 const CATALOGUE_LOCATIONS = [
   ...ALL_CATALOGUE_RECORDS.map(catalogueLocation),
-  ...publishedSkiCatalogueRecords.map(skiCatalogueLocation),
+  ...publishedSkiCatalogueRecords.filter((record) => record.weatherEligible).map(skiCatalogueLocation),
   ...publishedWesternUsCatalogueRecords.map(westernUsCatalogueLocation),
 ];
 const CATALOGUE_LOCATION_BY_ID = new Map<string, LocationConfig>();
@@ -870,7 +870,7 @@ const CATALOGUE_LOCATION_BY_ID = new Map<string, LocationConfig>();
  * Builds the public-id/alias index at module load so a catalogue collision
  * fails boot and tests rather than silently changing an existing location.
  */
-for (const record of [...ALL_CATALOGUE_RECORDS, ...publishedSkiCatalogueRecords, ...publishedWesternUsCatalogueRecords]) {
+for (const record of [...ALL_CATALOGUE_RECORDS, ...publishedSkiCatalogueRecords.filter((item) => item.weatherEligible), ...publishedWesternUsCatalogueRecords]) {
   for (const id of [record.publicId, ...record.aliases]) {
     if (HARD_CODED_LOCATION_IDS.has(id) || CATALOGUE_LOCATION_BY_ID.has(id)) {
       throw new Error(`[catalogue] location id/alias collision: "${id}"`);

@@ -2827,6 +2827,10 @@ from = "/wanaka/mountain/treble-cone/"
 to = "/wanaka/mountain/treble-cone/index.html"
 
 [[services.production.rewrites]]
+from = "/wanaka/mountain/snow-farm/"
+to = "/wanaka/mountain/snow-farm/index.html"
+
+[[services.production.rewrites]]
 from = "/wanaka/wanaka/"
 to = "/wanaka/wanaka/index.html"
 
@@ -2925,6 +2929,10 @@ to = "/ruapehu/mountain/whakapapa/index.html"
 [[services.production.rewrites]]
 from = "/ruapehu/mountain/turoa/"
 to = "/ruapehu/mountain/turoa/index.html"
+
+[[services.production.rewrites]]
+from = "/ruapehu/mountain/tukino/"
+to = "/ruapehu/mountain/tukino/index.html"
 
 [[services.production.rewrites]]
 from = "/ruapehu/ohakune/"
@@ -9821,6 +9829,170 @@ to = "/us-vt/brownsville/index.html"
 [[services.production.rewrites]]
 from = "/us-vt/richmond/"
 to = "/us-vt/richmond/index.html"
+
+[[services.production.rewrites]]
+from = "/canterbury/"
+to = "/canterbury/index.html"
+
+[[services.production.rewrites]]
+from = "/canterbury/mountains/"
+to = "/canterbury/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/canterbury/stay/"
+to = "/canterbury/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/canterbury/mountain/craigieburn-valley/"
+to = "/canterbury/mountain/craigieburn-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/canterbury/mountain/broken-river/"
+to = "/canterbury/mountain/broken-river/index.html"
+
+[[services.production.rewrites]]
+from = "/canterbury/mountain/mt-olympus-nz/"
+to = "/canterbury/mountain/mt-olympus-nz/index.html"
+
+[[services.production.rewrites]]
+from = "/canterbury/mountain/temple-basin/"
+to = "/canterbury/mountain/temple-basin/index.html"
+
+[[services.production.rewrites]]
+from = "/canterbury/mountain/porters/"
+to = "/canterbury/mountain/porters/index.html"
+
+[[services.production.rewrites]]
+from = "/canterbury/mountain/mt-cheeseman/"
+to = "/canterbury/mountain/mt-cheeseman/index.html"
+
+[[services.production.rewrites]]
+from = "/canterbury/mountain/mt-lyford/"
+to = "/canterbury/mountain/mt-lyford/index.html"
+
+[[services.production.rewrites]]
+from = "/canterbury/springfield-nz/"
+to = "/canterbury/springfield-nz/index.html"
+
+[[services.production.rewrites]]
+from = "/canterbury/windwhistle/"
+to = "/canterbury/windwhistle/index.html"
+
+[[services.production.rewrites]]
+from = "/canterbury/arthurs-pass/"
+to = "/canterbury/arthurs-pass/index.html"
+
+[[services.production.rewrites]]
+from = "/canterbury/hanmer-springs/"
+to = "/canterbury/hanmer-springs/index.html"
+
+[[services.production.rewrites]]
+from = "/mackenzie-south-canterbury/"
+to = "/mackenzie-south-canterbury/index.html"
+
+[[services.production.rewrites]]
+from = "/mackenzie-south-canterbury/mountains/"
+to = "/mackenzie-south-canterbury/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/mackenzie-south-canterbury/stay/"
+to = "/mackenzie-south-canterbury/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/mackenzie-south-canterbury/mountain/mt-dobson/"
+to = "/mackenzie-south-canterbury/mountain/mt-dobson/index.html"
+
+[[services.production.rewrites]]
+from = "/mackenzie-south-canterbury/mountain/fox-peak/"
+to = "/mackenzie-south-canterbury/mountain/fox-peak/index.html"
+
+[[services.production.rewrites]]
+from = "/mackenzie-south-canterbury/mountain/roundhill-nz/"
+to = "/mackenzie-south-canterbury/mountain/roundhill-nz/index.html"
+
+[[services.production.rewrites]]
+from = "/mackenzie-south-canterbury/mountain/ohau-snow-fields/"
+to = "/mackenzie-south-canterbury/mountain/ohau-snow-fields/index.html"
+
+[[services.production.rewrites]]
+from = "/mackenzie-south-canterbury/mountain/awakino/"
+to = "/mackenzie-south-canterbury/mountain/awakino/index.html"
+
+[[services.production.rewrites]]
+from = "/mackenzie-south-canterbury/fairlie/"
+to = "/mackenzie-south-canterbury/fairlie/index.html"
+
+[[services.production.rewrites]]
+from = "/mackenzie-south-canterbury/lake-tekapo/"
+to = "/mackenzie-south-canterbury/lake-tekapo/index.html"
+
+[[services.production.rewrites]]
+from = "/mackenzie-south-canterbury/twizel/"
+to = "/mackenzie-south-canterbury/twizel/index.html"
+
+[[services.production.rewrites]]
+from = "/mackenzie-south-canterbury/kurow/"
+to = "/mackenzie-south-canterbury/kurow/index.html"
+
+[[services.production.rewrites]]
+from = "/nelson-lakes/"
+to = "/nelson-lakes/index.html"
+
+[[services.production.rewrites]]
+from = "/nelson-lakes/mountains/"
+to = "/nelson-lakes/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/nelson-lakes/stay/"
+to = "/nelson-lakes/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/nelson-lakes/mountain/rainbow-ski-area/"
+to = "/nelson-lakes/mountain/rainbow-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/nelson-lakes/st-arnaud-nz/"
+to = "/nelson-lakes/st-arnaud-nz/index.html"
+
+[[services.production.rewrites]]
+from = "/taranaki/"
+to = "/taranaki/index.html"
+
+[[services.production.rewrites]]
+from = "/taranaki/mountains/"
+to = "/taranaki/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/taranaki/stay/"
+to = "/taranaki/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/taranaki/mountain/manganui/"
+to = "/taranaki/mountain/manganui/index.html"
+
+[[services.production.rewrites]]
+from = "/taranaki/new-plymouth/"
+to = "/taranaki/new-plymouth/index.html"
+
+[[services.production.rewrites]]
+from = "/auckland/"
+to = "/auckland/index.html"
+
+[[services.production.rewrites]]
+from = "/auckland/mountains/"
+to = "/auckland/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/auckland/stay/"
+to = "/auckland/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/auckland/mountain/snowplanet/"
+to = "/auckland/mountain/snowplanet/index.html"
+
+[[services.production.rewrites]]
+from = "/auckland/silverdale/"
+to = "/auckland/silverdale/index.html"
 
 [[services.production.rewrites]]
 from = "/us-pa/"
