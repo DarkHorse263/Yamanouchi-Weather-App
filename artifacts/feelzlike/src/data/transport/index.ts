@@ -165,8 +165,8 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   wanaka: WANAKA_TRANSPORT,
   "mt-hutt": MT_HUTT_TRANSPORT,
   ruapehu: RUAPEHU_TRANSPORT,
-  // CA · no operators curated to the AU/JP/NZ verification standard yet, so
-  // these are registered empty rather than filled with guessed timetables.
+  // CA · Kamloops/Sun Peaks has verified airport and mountain transfers.
+  // Other regions remain empty rather than being filled with guessed services.
   whistler: WHISTLER_TRANSPORT,
   "powder-highway": POWDER_HIGHWAY_TRANSPORT,
   okanagan: OKANAGAN_TRANSPORT,
