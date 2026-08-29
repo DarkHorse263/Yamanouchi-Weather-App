@@ -49,6 +49,8 @@ const paths = [
   "/legal/terms",
 ];
 
+const legacyRewrites = [];
+
 for (const r of REGIONS) {
   paths.push(`/${r.slug}`);
   for (const f of regionFeatures(r)) paths.push(`/${r.slug}/${f}`);
@@ -59,11 +61,35 @@ for (const r of REGIONS) {
   }
 }
 
+const okanagan = REGIONS.find((region) => region.slug === "okanagan");
+if (!okanagan) throw new Error("[rewrites] okanagan region is required for Sun Peaks legacy redirects");
+
+legacyRewrites.push({
+  from: "/powder-highway/mountain/sun-peaks-resort",
+  to: "/okanagan/mountain/sun-peaks-resort",
+});
+legacyRewrites.push({
+  from: "/powder-highway/sun-peaks",
+  to: "/okanagan/sun-peaks",
+});
+for (const feature of townFeatures(okanagan)) {
+  legacyRewrites.push({
+    from: `/powder-highway/sun-peaks/${feature}`,
+    to: `/okanagan/sun-peaks/${feature}`,
+  });
+}
+
 for (const { path } of publishedCatalogueMountainRoutes) {
   if (!paths.includes(path)) paths.push(path);
 }
 
 const lines = [];
+for (const { from, to } of legacyRewrites) {
+  lines.push("[[services.production.rewrites]]");
+  lines.push(`from = "${from}/"`);
+  lines.push(`to = "${to}/index.html"`);
+  lines.push("");
+}
 for (const p of paths) {
   lines.push("[[services.production.rewrites]]");
   lines.push(`from = "${p}/"`);
@@ -85,8 +111,8 @@ if (process.argv.includes("--write-artifact")) {
   const start = artifact.indexOf(marker);
   if (start === -1) throw new Error(`[rewrites] no production rewrite block found in ${artifactPath}`);
   writeFileSync(artifactPath, `${artifact.slice(0, start)}${output}`);
-  console.error(`[rewrites] wrote ${paths.length} prerendered routes + 1 catch-all to ${artifactPath}`);
+  console.error(`[rewrites] wrote ${legacyRewrites.length} legacy routes + ${paths.length} prerendered routes + 1 catch-all to ${artifactPath}`);
 } else {
   process.stdout.write(output);
-  console.error(`[rewrites] ${paths.length} prerendered routes + 1 catch-all`);
+  console.error(`[rewrites] ${legacyRewrites.length} legacy routes + ${paths.length} prerendered routes + 1 catch-all`);
 }

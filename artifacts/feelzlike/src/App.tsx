@@ -211,6 +211,16 @@ function MetaPixelTag() {
   return null;
 }
 
+function LegacySunPeaksRedirect({ from, to }: { from: string; to: string }) {
+  const [location] = useLocation();
+  const destinationPath = location.startsWith(from)
+    ? `${to}${location.slice(from.length)}`
+    : to;
+  const destination = `${destinationPath}${window.location.search}${window.location.hash}`;
+
+  return <Redirect to={destination} replace />;
+}
+
 function Router() {
   return (
     <Switch>
@@ -252,6 +262,20 @@ function Router() {
       <Route path="/us/"><CountryHome code="US" /></Route>
       <Route path="/ca/all-ski-areas" component={CanadaDirectory} />
       <Route path="/ca/all-ski-areas/" component={CanadaDirectory} />
+      {/* Sun Peaks moved from Powder Highway to Okanagan (Aug 2026).
+          Keep old bookmarks and search results working, including town subpages. */}
+      <Route path="/powder-highway/mountain/sun-peaks-resort/*?">
+        <LegacySunPeaksRedirect
+          from="/powder-highway/mountain/sun-peaks-resort"
+          to="/okanagan/mountain/sun-peaks-resort"
+        />
+      </Route>
+      <Route path="/powder-highway/sun-peaks/*?">
+        <LegacySunPeaksRedirect
+          from="/powder-highway/sun-peaks"
+          to="/okanagan/sun-peaks"
+        />
+      </Route>
       <Route path="/:region/*?">
         <RegionLayout />
       </Route>

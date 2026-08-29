@@ -27,6 +27,38 @@ publicDir = "artifacts/feelzlike/dist/public"
 serve = "static"
 
 [[services.production.rewrites]]
+from = "/powder-highway/mountain/sun-peaks-resort/"
+to = "/okanagan/mountain/sun-peaks-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/sun-peaks/"
+to = "/okanagan/sun-peaks/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/sun-peaks/weather/"
+to = "/okanagan/sun-peaks/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/sun-peaks/stay/"
+to = "/okanagan/sun-peaks/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/sun-peaks/eat/"
+to = "/okanagan/sun-peaks/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/sun-peaks/roads/"
+to = "/okanagan/sun-peaks/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/sun-peaks/transport/"
+to = "/okanagan/sun-peaks/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/sun-peaks/explore/"
+to = "/okanagan/sun-peaks/explore/index.html"
+
+[[services.production.rewrites]]
 from = "/countries/"
 to = "/countries/index.html"
 
