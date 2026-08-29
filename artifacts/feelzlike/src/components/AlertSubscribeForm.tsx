@@ -1,9 +1,12 @@
 import { useState, useId, useMemo } from "react";
 import { useSubscribeToAlerts } from "@workspace/api-client-react";
 import { useLanguage, usePremium, usePremiumAccess } from "@workspace/feelzlike-shell";
-import { BellRing, Mail, Snowflake, Loader2, CheckCircle2, Check, Sparkles } from "lucide-react";
+import { BellRing, Mail, Snowflake, Loader2, CheckCircle2, Sparkles } from "lucide-react";
+import { RegionCountryPicker } from "@/components/RegionCountryPicker";
 import { track } from "@/lib/analytics";
 import { classifyGateError, extractErrorMessage } from "@/lib/gateErrors";
+import { publishedRecords as alertCatalogueMountains } from "@workspace/ski-catalogue/public-runtime";
+import { CatalogueMountainPicker } from "@/components/CatalogueMountainPicker";
 
 /**
  * Powder-alert subscription form. Mounts inside any region's Alerts page.
@@ -22,6 +25,7 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "snowy-mountains", nameEn: "Snowy Mountains", nameJa: "スノーウィーマウンテンズ", country: "AU · NSW" },
   { id: "victorias-high-country", nameEn: "Victoria's High Country", nameJa: "ビクトリア高原地方", country: "AU · VIC" },
   { id: "tasmania", nameEn: "Tasmania", nameJa: "タスマニア", country: "AU · TAS" },
+  { id: "australian-capital-territory", nameEn: "Australian Capital Territory", nameJa: "オーストラリア首都特別地域", country: "AU · ACT" },
   // Japan
   { id: "yamanouchi", nameEn: "Yamanouchi", nameJa: "山ノ内町", country: "JP · Nagano" },
   { id: "nozawa-onsen", nameEn: "Nozawa Onsen", nameJa: "野沢温泉村", country: "JP · Nagano" },
@@ -155,9 +159,10 @@ const HORIZONS: Array<{ value: 24 | 48 | 72; label: string; labelJa: string }> =
 
 interface Props {
   defaultRegion?: string;
+  defaultMountain?: string;
 }
 
-export function AlertSubscribeForm({ defaultRegion }: Props) {
+export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
   const { t } = useLanguage();
   const { isPromoPeriod, promoEndsAt } = usePremium();
   const { promptSignUp } = usePremiumAccess();
@@ -167,7 +172,14 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
   }, []);
 
   const [email, setEmail] = useState("");
-  const [regions, setRegions] = useState<string[]>(defaultRegion ? [defaultRegion] : []);
+  const [regions, setRegions] = useState<string[]>(
+    defaultRegion && ALERT_REGIONS.some((region) => region.id === defaultRegion) ? [defaultRegion] : [],
+  );
+  const [mountains, setMountains] = useState<string[]>(
+    defaultMountain && alertCatalogueMountains.some((record) => record.publicId === defaultMountain && record.alertEligible)
+      ? [defaultMountain]
+      : [],
+  );
   const [threshold, setThreshold] = useState(15);
   const [horizon, setHorizon] = useState<24 | 48 | 72>(48);
   const [consent, setConsent] = useState(false);
@@ -178,16 +190,19 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
   const toggleRegion = (id: string) => {
     setRegions((prev) => prev.includes(id) ? prev.filter((r) => r !== id) : [...prev, id]);
   };
+  const toggleMountain = (id: string) => {
+    setMountains((prev) => prev.includes(id) ? prev.filter((mountain) => mountain !== id) : [...prev, id]);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || regions.length === 0 || !consent) return;
+    if (!email || (regions.length === 0 && mountains.length === 0) || !consent) return;
     try {
       const result = await mutation.mutateAsync({
         data: {
           email,
           regions,
-          mountains: [],
+          mountains,
           snowfallThresholdCm: threshold,
           horizonHours: horizon,
           delivery: "email",
@@ -206,6 +221,7 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
         data: {
           region_count: regions.length,
           regions: regions.join(","),
+          mountain_count: mountains.length,
           threshold_cm: threshold,
           horizon_hours: horizon,
         },
@@ -237,7 +253,7 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
   const authRequired = gateError === "auth";
   const paymentRequired = gateError === "payment";
   const errMessage = gateError === "other" ? extractErrorMessage(mutation.error) : null;
-  const canSubmit = !!email && regions.length > 0 && consent && !mutation.isPending;
+  const canSubmit = !!email && (regions.length > 0 || mountains.length > 0) && consent && !mutation.isPending;
 
   return (
     <form id={formId} onSubmit={handleSubmit} className="rounded-2xl glass border border-border p-6 space-y-4">
@@ -279,39 +295,11 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
         <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
           {t("Regions · tick the ones you want", "地域 · 必要なものにチェック")}
         </span>
-        <div className="mt-1.5 grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {ALERT_REGIONS.map((r) => {
-            const checked = regions.includes(r.id);
-            return (
-              <button
-                type="button"
-                key={r.id}
-                onClick={() => toggleRegion(r.id)}
-                className={`flex items-center gap-3 text-left rounded-lg px-3 py-2.5 border transition ${
-                  checked
-                    ? "bg-primary/15 border-primary/40 text-foreground"
-                    : "bg-black/15 border-white/10 text-muted-foreground hover:text-foreground hover:border-white/20"
-                }`}
-                role="checkbox"
-                aria-checked={checked}
-              >
-                <span
-                  className={`flex-none inline-flex items-center justify-center w-5 h-5 rounded-md border transition ${
-                    checked
-                      ? "bg-primary border-primary text-primary-foreground"
-                      : "bg-black/30 border-white/20"
-                  }`}
-                  aria-hidden="true"
-                >
-                  {checked && <Check className="w-3.5 h-3.5" strokeWidth={3} />}
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block text-sm font-bold leading-tight">{t(r.nameEn, r.nameJa)}</span>
-                  <span className="block text-[10px] uppercase tracking-wider opacity-70 mt-0.5">{r.country}</span>
-                </span>
-              </button>
-            );
-          })}
+        <div className="mt-1.5">
+          <RegionCountryPicker selected={regions} onToggle={toggleRegion} variant="glass" />
+        </div>
+        <div className="mt-2">
+          <CatalogueMountainPicker selected={mountains} onToggle={toggleMountain} variant="glass" />
         </div>
       </div>
 

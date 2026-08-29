@@ -14,6 +14,7 @@ import { DailyPick } from "@/components/DailyPick";
 import { REGION_PARTNERS } from "@/data/townPartners";
 import { TownPartnerAd } from "@/components/TownPartnerAd";
 import { TownPartnerCard } from "@/components/TownPartnerCard";
+import { isCatalogueMountainLinkTown } from "@/regions/catalogue";
 
 /**
  * Region landing - the second hop in the Country > Region > Town flow.
@@ -25,12 +26,22 @@ export function RegionHome() {
   const { region } = useRegion();
   const { t } = useLanguage();
   const seasonCtx = useOptionalSeason();
-  // Daily Pick is winter-only · in summer the "best resort to ride today"
-  // doesn't make sense (most are closed). Limit to regions that ship a
-  // mountains list with stable ids so the API has something to score.
-  const showDailyPick = seasonCtx?.season === "winter" && (region.mountains ?? []).length > 0;
+  // Daily Pick HIDDEN globally (owner request, Aug 2026): visitors mistook
+  // the single "pick of the day" callout for the region's ONLY weather and
+  // missed the per-town/mountain pages below. Component + API kept intact;
+  // flip DAILY_PICK_ENABLED to bring it back (winter-only, regions with a
+  // mountains list — the original gates still apply).
+  const DAILY_PICK_ENABLED = false;
+  const showDailyPick =
+    DAILY_PICK_ENABLED && seasonCtx?.season === "winter" && (region.mountains ?? []).length > 0;
 
   const towns = region.baseTowns ?? [];
+  const hasGeneratedCatalogueTowns = towns.some(isCatalogueMountainLinkTown);
+  const indoorOnlyCatalogue = hasGeneratedCatalogueTowns && (region.mountains ?? []).length > 0 &&
+    (region.mountains ?? []).every((mountain) => {
+      const facility = mountain as typeof mountain & { facilityType?: string; weatherEligible?: boolean };
+      return facility.facilityType === "indoor" || facility.weatherEligible === false;
+    });
   const mountainsById = new Map((region.mountains ?? []).map((m) => [m.id, m]));
   const country = REGION_COUNTRY[region.id];
   const countryMeta = country ? COUNTRY_META[country] : null;
@@ -39,7 +50,13 @@ export function RegionHome() {
     <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
       <PageMeta
         title={`${region.name} - pick a base town`}
-        description={`Choose your base town in ${region.name}. Real-time weather, road conditions and live cams scoped to where you stay.`}
+        description={
+          indoorOnlyCatalogue
+            ? `Browse indoor snow facilities in ${region.name}. Outdoor mountain weather and natural-snow forecasts do not apply.`
+            : hasGeneratedCatalogueTowns
+            ? `Choose a base in ${region.name} to open nearby published mountain weather.`
+            : `Choose your base town in ${region.name}. Real-time weather, road conditions and live cams scoped to where you stay.`
+        }
         path={`/${region.id}`}
         jsonLd={[
           breadcrumbSchema([
@@ -68,7 +85,22 @@ export function RegionHome() {
       <PageHeader
         byline={countryMeta ? `${countryMeta.flag} ${region.subtitle}` : region.subtitle}
         title={region.name}
-        description={t("Pick a base town to see weather, roads and cams scoped to where you stay.", "拠点の町を選んでください。天気・道路・カメラが滞在エリアに合わせて表示されます。")}
+        description={
+          indoorOnlyCatalogue
+            ? t(
+                "Browse the indoor snow facility directory. Outdoor mountain weather and natural-snow forecasts do not apply.",
+                "屋内スノー施設の案内です。屋外の山岳天気・自然降雪予報は対象外です。",
+              )
+            : hasGeneratedCatalogueTowns
+            ? t(
+                "Pick a base to open nearby published mountain weather.",
+                "拠点を選んで、近隣の公開済み山岳天気をご覧ください。",
+              )
+            : t(
+                "Pick a base town to see weather, roads and cams scoped to where you stay.",
+                "拠点の町を選んでください。天気・道路・カメラが滞在エリアに合わせて表示されます。",
+              )
+        }
       />
 
       {/* FEATURED PARTNER · paid, disclosed region-level placement directly

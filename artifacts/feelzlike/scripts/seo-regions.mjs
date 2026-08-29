@@ -18,6 +18,19 @@
  *    (explore requires tourismLinks, which all regions have).
  */
 
+import {
+  publishedCatalogueRecords,
+  travelRegions,
+} from "@workspace/japan-ski-catalogue/public-runtime";
+import {
+  publishedRecords as publishedSkiCatalogueRecords,
+  publishedRegions as publishedSkiCatalogueRegions,
+} from "@workspace/ski-catalogue/public-runtime";
+import {
+  publishedCatalogueRecords as publishedCanadaCatalogueRecords,
+  travelRegions as canadaTravelRegions,
+} from "@workspace/canada-ski-catalogue/public-runtime";
+
 export const REGIONS = [
   // ── Australia ───────────────────────────────────────────────────────────
   {
@@ -53,6 +66,7 @@ export const REGIONS = [
       { name: "Mt Stirling",     blurb: "VIC · cross-country & backcountry sister to Buller" },
       { name: "Lake Mountain",   blurb: "VIC · nordic & snow play · closest snow to Melbourne" },
       { name: "Mt Donna Buang",  blurb: "VIC · free snow play summit · 1.5 hrs from Melbourne" },
+      { name: "Mt Baw Baw",      blurb: "VIC · alpine village · 7 lifts · downhill, nordic & snow play" },
     ],
     towns: [
       { id: "mansfield",    name: "Mansfield",    blurb: "Cattle country gateway · 50 min to Buller & Stirling" },
@@ -63,6 +77,7 @@ export const REGIONS = [
       { id: "marysville",   name: "Marysville",   blurb: "Yarra Ranges gateway · 20 min to Lake Mountain" },
       { id: "warburton",    name: "Warburton",    blurb: "Yarra Valley town · closest base to Mt Donna Buang" },
       { id: "omeo",         name: "Omeo",         blurb: "Southern Great Alpine Road · gateway to Hotham from Gippsland" },
+      { id: "rawson",       name: "Rawson",       blurb: "Gippsland gateway · access town below Mt Baw Baw's alpine village" },
     ],
   },
   {
@@ -74,11 +89,27 @@ export const REGIONS = [
     hasRoads: false,
     mountains: [
       { name: "Ben Lomond", blurb: "Tasmania's only commercial chairlift · weather-dependent, short windows reward locals" },
+      { name: "Mount Mawson", blurb: "Volunteer club field · public access · natural-snow and conditions dependent" },
     ],
     towns: [
       { id: "ben-lomond-base", name: "Ben Lomond Base", blurb: "Tasmania's only chairlift operation · on-mountain village at the foot of the lifts" },
       { id: "launceston",      name: "Launceston",      blurb: "Closest city base for Ben Lomond · ~90 min drive via Jacobs Ladder" },
       { id: "hobart",          name: "Hobart",          blurb: "Tasmania's capital · long day-trips when conditions deliver" },
+      { id: "maydena",         name: "Maydena",         blurb: "Derwent Valley gateway · nearest town to Mt Field and Mount Mawson" },
+    ],
+  },
+  {
+    slug: "australian-capital-territory",
+    name: "Australian Capital Territory",
+    subtitle: "ACT · Australia",
+    country: "AU",
+    hasAlerts: false,
+    hasRoads: false,
+    mountains: [
+      { name: "Corin Forest", blurb: "Small snowmaking-led snow-play and learn-to-ski facility · natural snowfall is rare" },
+    ],
+    towns: [
+      { id: "canberra", name: "Canberra", blurb: "Capital-city base · about 45 min to Corin Forest" },
     ],
   },
 
@@ -86,6 +117,7 @@ export const REGIONS = [
   {
     slug: "yamanouchi",
     name: "Yamanouchi",
+    nameJa: "山ノ内",
     subtitle: "Nagano · Japan",
     country: "JP",
     hasAlerts: true,
@@ -104,6 +136,7 @@ export const REGIONS = [
   {
     slug: "nozawa-onsen",
     name: "Nozawa Onsen",
+    nameJa: "野沢温泉",
     subtitle: "Nagano · Japan",
     country: "JP",
     hasAlerts: false,
@@ -118,6 +151,7 @@ export const REGIONS = [
   {
     slug: "iiyama",
     name: "Iiyama",
+    nameJa: "飯山",
     subtitle: "Nagano · Japan",
     country: "JP",
     hasAlerts: false,
@@ -139,6 +173,7 @@ export const REGIONS = [
   {
     slug: "hakuba-valley",
     name: "Hakuba Valley",
+    nameJa: "白馬バレー",
     subtitle: "Nagano · Japan",
     country: "JP",
     hasAlerts: false,
@@ -164,6 +199,7 @@ export const REGIONS = [
   {
     slug: "myoko",
     name: "Myoko",
+    nameJa: "妙高",
     subtitle: "Niigata · Japan",
     country: "JP",
     hasAlerts: false,
@@ -186,6 +222,7 @@ export const REGIONS = [
   {
     slug: "niseko",
     name: "Niseko",
+    nameJa: "ニセコ",
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
@@ -206,6 +243,7 @@ export const REGIONS = [
   {
     slug: "furano",
     name: "Furano",
+    nameJa: "富良野",
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
@@ -223,6 +261,7 @@ export const REGIONS = [
   {
     slug: "sapporo",
     name: "Sapporo",
+    nameJa: "札幌",
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
@@ -240,6 +279,7 @@ export const REGIONS = [
   {
     slug: "tomamu-sahoro",
     name: "Tomamu & Sahoro",
+    nameJa: "トマム・佐幌",
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
@@ -256,6 +296,7 @@ export const REGIONS = [
   {
     slug: "asahikawa",
     name: "Asahikawa",
+    nameJa: "旭川",
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
@@ -272,6 +313,7 @@ export const REGIONS = [
   {
     slug: "rusutsu-kiroro",
     name: "Rusutsu & Kiroro",
+    nameJa: "ルスツ・キロロ",
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
@@ -288,6 +330,7 @@ export const REGIONS = [
   {
     slug: "minakami",
     name: "Minakami",
+    nameJa: "みなかみ",
     subtitle: "Gunma · Japan",
     country: "JP",
     hasAlerts: false,
@@ -304,6 +347,7 @@ export const REGIONS = [
   {
     slug: "kusatsu-manza",
     name: "Kusatsu & Manza",
+    nameJa: "草津・万座",
     subtitle: "Gunma · Japan",
     country: "JP",
     hasAlerts: false,
@@ -320,6 +364,7 @@ export const REGIONS = [
   {
     slug: "hachimantai",
     name: "Hachimantai",
+    nameJa: "八幡平",
     subtitle: "Iwate · Japan",
     country: "JP",
     hasAlerts: false,
@@ -335,6 +380,7 @@ export const REGIONS = [
   {
     slug: "yuzawa",
     name: "Yuzawa",
+    nameJa: "湯沢",
     subtitle: "Niigata · Japan",
     country: "JP",
     hasAlerts: false,
@@ -356,6 +402,7 @@ export const REGIONS = [
   {
     slug: "zao-onsen",
     name: "Zao Onsen",
+    nameJa: "蔵王温泉",
     subtitle: "Yamagata · Japan",
     country: "JP",
     hasAlerts: false,
@@ -370,6 +417,7 @@ export const REGIONS = [
   {
     slug: "hakkoda-aomori-spring",
     name: "Hakkoda & Aomori Spring",
+    nameJa: "八甲田・青森スプリング",
     subtitle: "Aomori · Japan",
     country: "JP",
     hasAlerts: false,
@@ -387,6 +435,7 @@ export const REGIONS = [
   {
     slug: "appi-shizukuishi",
     name: "Appi & Shizukuishi",
+    nameJa: "安比・雫石",
     subtitle: "Iwate · Japan",
     country: "JP",
     hasAlerts: false,
@@ -404,6 +453,7 @@ export const REGIONS = [
   {
     slug: "bandai",
     name: "Bandai",
+    nameJa: "磐梯",
     subtitle: "Fukushima · Japan",
     country: "JP",
     hasAlerts: false,
@@ -420,6 +470,7 @@ export const REGIONS = [
   {
     slug: "daisen",
     name: "Daisen",
+    nameJa: "大山",
     subtitle: "Tottori · Japan",
     country: "JP",
     hasAlerts: false,
@@ -1409,16 +1460,32 @@ export const REGIONS = [
 
 ];
 
+// Canada catalogue regions are data-owned province projections.  Their
+// mountain routes are appended below from the same published runtime.
+for (const region of canadaTravelRegions) {
+  REGIONS.push({
+    slug: region.travelRegionId,
+    name: region.name,
+    subtitle: `${region.province} · Canada`,
+    country: "CA",
+    hasAlerts: false,
+    hasRoads: false,
+    mountains: [],
+    towns: [],
+  });
+}
+
 /** Region sub-sections that actually render for this region (see gating notes above).
  * /alerts renders for EVERY region since Aug 2026: regions without a custom
  * Alerts page fall back to the generic RegionAlerts (RegionLayout), so the
  * hasAlerts flag no longer gates the route. */
 export function regionFeatures(region) {
-  return ["mountains", "alerts", "stay"];
+  return ["mountains", ...(region.catalogueOnly ? [] : ["alerts"]), "stay"];
 }
 
 /** Town sub-sections that actually render for this region's towns. */
 export function townFeatures(region) {
+  if (region.catalogueOnly) return [];
   return ["weather", "stay", "eat", ...(region.hasRoads ? ["roads"] : []), "transport", "explore"];
 }
 
@@ -1428,11 +1495,162 @@ export function townFeatures(region) {
 // ids here (they'd rot), extract them from the region source file at build
 // time so new mountains and new regions are picked up automatically.
 
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname as _dirname, join as _join } from "node:path";
 import { fileURLToPath as _fileURLToPath } from "node:url";
 
 const _here = _dirname(_fileURLToPath(import.meta.url));
+
+// The catalogue is the source of truth for newly published Japanese mountain
+// URLs.  Keep the projection here, rather than re-reading the frontend region
+// modules: the latter are presentation data and can legitimately lag a
+// catalogue publication.  Maps/Sets make the per-region lookups below cheap
+// even though sitemap, prerender and rewrite generation all use this module.
+const legacyRegionSlugs = new Set(REGIONS.map((region) => region.slug));
+const catalogueMountainByRoute = new Map();
+const catalogueMountainsByRegion = new Map();
+const catalogueTravelRegionsById = new Map(
+  [...travelRegions, ...canadaTravelRegions].map((region) => [region.travelRegionId, region]),
+);
+
+for (const record of [...publishedCatalogueRecords, ...publishedCanadaCatalogueRecords]) {
+  if (catalogueMountainByRoute.has(record.route)) {
+    throw new Error(`[seo-regions] duplicate published catalogue route: ${record.route}`);
+  }
+  catalogueMountainByRoute.set(record.route, record);
+  const mountains = catalogueMountainsByRegion.get(record.travelRegionId) || [];
+  mountains.push({
+    id: record.publicId,
+    name: record.name,
+    nameJa: record.nameJa,
+    route: record.route,
+    catalogueRecord: record,
+  });
+  catalogueMountainsByRegion.set(record.travelRegionId, mountains);
+}
+
+// State catalogue routes are data-owned and have no hand-authored region file.
+// Add their complete public route projection to the same manifest used by both
+// sitemap generation and prerendering.
+const skiCatalogueMountainsByRegion = new Map();
+for (const record of publishedSkiCatalogueRecords) {
+  if (catalogueMountainByRoute.has(record.route)) {
+    throw new Error(`[seo-regions] duplicate published catalogue route: ${record.route}`);
+  }
+  catalogueMountainByRoute.set(record.route, record);
+  const mountains = skiCatalogueMountainsByRegion.get(record.regionId) || [];
+  mountains.push({ id: record.publicId, name: record.name, route: record.route, catalogueRecord: record });
+  skiCatalogueMountainsByRegion.set(record.regionId, mountains);
+}
+for (const region of publishedSkiCatalogueRegions) {
+  if (legacyRegionSlugs.has(region.regionId)) {
+    const authored = REGIONS.find((candidate) => candidate.slug === region.regionId);
+    if (!authored) throw new Error(`[seo-regions] missing authored region collision target: ${region.regionId}`);
+    const townIds = new Set((authored.towns || []).map((town) => town.id));
+    authored.towns.push(...region.localities
+      .filter((town) => !townIds.has(town.localityId))
+      .map((town) => ({
+        id: town.localityId,
+        name: town.name,
+        blurb: "Choose a nearby published mountain for its weather and forecast.",
+      })));
+    continue;
+  }
+  REGIONS.push({
+    slug: region.regionId,
+    name: region.name,
+    subtitle: `${region.stateOrProvince} · ${region.country}`,
+    country: region.countryCode,
+    hasAlerts: false,
+    hasRoads: false,
+    catalogueOnly: true,
+    mountains: skiCatalogueMountainsByRegion.get(region.regionId) || [],
+    towns: region.localities.map((town) => ({
+      id: town.localityId,
+      name: town.name,
+      blurb: "Choose a nearby published mountain for its weather and forecast.",
+    })),
+  });
+}
+
+/**
+ * Shared published route projection for build scripts.  This intentionally
+ * includes every catalogue mountain route, including regions whose richer
+ * region/town frontend pages are not available yet.
+ */
+export const publishedCatalogueMountainRoutes = [...catalogueMountainByRoute.values()].map((record) => ({
+  path: record.route,
+  record,
+}));
+
+/**
+ * Region and base-town metadata is only exposed where feelzlike already has
+ * a supported region route.  Catalogue-only regions still receive their
+ * published mountain pages above; we do not invent unsupported landing pages.
+ */
+export const supportedCatalogueRouteMetadata = [...catalogueTravelRegionsById.values()]
+  .filter((region) => legacyRegionSlugs.has(region.travelRegionId))
+  .map((region) => ({
+    slug: region.travelRegionId,
+    name: region.name,
+    nameJa: region.nameJa,
+    baseTowns: region.baseTowns,
+  }));
+
+const PREFECTURE_ENGLISH = {
+  "北海道": "Hokkaido",
+  "青森県": "Aomori",
+  "岩手県": "Iwate",
+  "宮城県": "Miyagi",
+  "秋田県": "Akita",
+  "山形県": "Yamagata",
+  "福島県": "Fukushima",
+  "栃木県": "Tochigi",
+  "群馬県": "Gunma",
+  "新潟県": "Niigata",
+  "富山県": "Toyama",
+  "石川県": "Ishikawa",
+  "福井県": "Fukui",
+  "山梨県": "Yamanashi",
+  "長野県": "Nagano",
+  "岐阜県": "Gifu",
+  "静岡県": "Shizuoka",
+  "愛知県": "Aichi",
+  "滋賀県": "Shiga",
+  "兵庫県": "Hyogo",
+  "鳥取県": "Tottori",
+  "島根県": "Shimane",
+  "岡山県": "Okayama",
+  "広島県": "Hiroshima",
+  "徳島県": "Tokushima",
+  "愛媛県": "Ehime",
+  "宮崎県": "Miyazaki",
+};
+
+/**
+ * Mirrors the app's presentation-only grouping for the prerendered /jp body.
+ * The catalogue order supplies the reviewed lead prefecture; Daisen is the
+ * sole authored region that predates the catalogue projection.
+ */
+export function groupJapanRegionsByPrefecture(regions = REGIONS.filter((r) => r.country === "JP")) {
+  const groups = new Map();
+  for (const region of regions) {
+    const prefectureJa =
+      catalogueTravelRegionsById.get(region.slug)?.prefectures[0] ??
+      (region.slug === "daisen" ? "鳥取県" : null);
+    if (!prefectureJa) {
+      throw new Error(`[seo-regions] missing prefecture assignment for ${region.slug}`);
+    }
+    const prefecture = PREFECTURE_ENGLISH[prefectureJa];
+    if (!prefecture) {
+      throw new Error(`[seo-regions] missing English prefecture label for ${prefectureJa}`);
+    }
+    const group = groups.get(prefectureJa) ?? { name: prefecture, nameJa: prefectureJa, regions: [] };
+    group.regions.push(region);
+    groups.set(prefectureJa, group);
+  }
+  return [...groups.values()].sort((a, b) => a.name.localeCompare(b.name));
+}
 
 /**
  * Returns [{ id, name }] for every mountain defined in
@@ -1443,7 +1661,16 @@ const _here = _dirname(_fileURLToPath(import.meta.url));
  * @param {{ slug: string, mountains: Array<unknown> }} region
  */
 export function regionMountains(region) {
+  if (region.catalogueOnly) return region.mountains;
   const file = _join(_here, "..", "src", "regions", `${region.slug}.ts`);
+  const catalogueMountains = [
+    ...(catalogueMountainsByRegion.get(region.slug) || []),
+    ...(skiCatalogueMountainsByRegion.get(region.slug) || []),
+  ];
+  if (!existsSync(file)) {
+    if (catalogueMountains.length > 0) return [...catalogueMountains];
+    throw new Error(`[seo-regions] missing region source and catalogue projection for ${region.slug}`);
+  }
   const src = readFileSync(file, "utf8");
   const mountainsMatch = /mountains\s*:\s*\[/.exec(src);
   const start = mountainsMatch?.index ?? -1;
@@ -1472,5 +1699,59 @@ export function regionMountains(region) {
       `[seo-regions] extracted ${out.length} mountain ids from ${file} but ${region.mountains.length} mountains are listed for ${region.slug} — extraction drifted, fix before shipping the sitemap`,
     );
   }
+  // Preserve every hand-authored legacy route, then add catalogue records for
+  // this region.  Do not extract catalogue records from src/regions: published
+  // catalogue data above is the sole source for the new route projection.
+  const seen = new Set(out.map((mountain) => mountain.id));
+  for (const mountain of catalogueMountains) {
+    if (!seen.has(mountain.id)) out.push(mountain);
+  }
   return out;
+}
+
+// ── Japanese SEO copy extraction ─────────────────────────────────────────
+// Japan pages get Japanese meta descriptions in the prerendered snapshots so
+// Google Japan shows Japanese snippets. The app's region registry
+// (src/regions/<slug>.ts) already carries nameJa/blurbJa for JP mountains and
+// towns — extract them here rather than duplicating the copy. Missing fields
+// simply return undefined; prerender.mjs falls back to templated Japanese.
+
+/** Extract nameJa/blurbJa from the object literal containing `id: "<id>"`. */
+function extractJaById(src, id) {
+  const m = new RegExp(`id:\\s*"${id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`).exec(src);
+  if (!m) return {};
+  const start = src.lastIndexOf("{", m.index);
+  if (start === -1) return {};
+  let depth = 0;
+  let end = -1;
+  for (let i = start; i < src.length; i++) {
+    const ch = src[i];
+    if (ch === "{") depth++;
+    else if (ch === "}") {
+      depth--;
+      if (depth === 0) { end = i; break; }
+    }
+  }
+  if (end === -1) return {};
+  const block = src.slice(start, end);
+  return {
+    nameJa: /nameJa:\s*"([^"]+)"/.exec(block)?.[1],
+    blurbJa: /blurbJa:\s*"([^"]+)"/.exec(block)?.[1],
+  };
+}
+
+/**
+ * Returns { mountains: { [id]: {nameJa?, blurbJa?} }, towns: { [id]: ... } }
+ * for a JP region, or null for every other country (English SEO output for
+ * non-JP countries must stay unchanged).
+ */
+export function regionJapanese(region) {
+  if (region.country !== "JP") return null;
+  const file = _join(_here, "..", "src", "regions", `${region.slug}.ts`);
+  const src = readFileSync(file, "utf8");
+  const mountains = {};
+  for (const m of regionMountains(region)) mountains[m.id] = extractJaById(src, m.id);
+  const towns = {};
+  for (const t of region.towns) towns[t.id] = extractJaById(src, t.id);
+  return { mountains, towns };
 }

@@ -4,6 +4,12 @@ import { useLocation } from "wouter";
 import { Loader2, Map, MapPin, Mountain, Search, X } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { REGIONS } from "@/regions";
+import { prefecturesForJapanRegion } from "@/regions/japan-prefectures";
+import { usStateForRegion } from "@/regions/us-states";
+import {
+  normalizePlaceSearchText,
+  scoreCuratedEntry,
+} from "./placeSearchRanking";
 
 // ── server payloads ────────────────────────────────────────────────
 // GET /api/places/search returns locality predictions (no coordinates -
@@ -29,7 +35,7 @@ const MIN_CHARS = 3;
 const DEBOUNCE_MS = 350;
 
 function normalizeName(s: string): string {
-  return s.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "");
+  return normalizePlaceSearchText(s);
 }
 
 // Flattened curated index across every region: towns, mountains and the
@@ -54,6 +60,8 @@ interface CuratedEntry {
   extraKeys: string[];
   /** Raw japanese search keys (normalizeName strips non-latin chars). */
   jaKeys: string[];
+  /** English and Japanese prefecture aliases, kept separate for mixed result ranking. */
+  prefectureKeys: string[];
 }
 
 const CURATED_ENTRIES: CuratedEntry[] = REGIONS.flatMap((r) => {
@@ -61,6 +69,13 @@ const CURATED_ENTRIES: CuratedEntry[] = REGIONS.flatMap((r) => {
   const townNames = new Set(
     (r.baseTowns ?? []).map((t) => normalizeName(t.name)),
   );
+
+  const prefectures = r.shortTag === "JP"
+    ? prefecturesForJapanRegion(r.id)
+    : [];
+  const prefectureEnglishKeys = prefectures.map((p) => normalizeName(p.name));
+  const prefectureJapaneseKeys = prefectures.map((p) => p.nameJa);
+  const stateKeys = usStateForRegion(r) ? [normalizeName(usStateForRegion(r)!)] : [];
 
   for (const t of r.baseTowns ?? []) {
     const nearby = (r.mountains ?? []).filter((m) =>
@@ -75,10 +90,11 @@ const CURATED_ENTRIES: CuratedEntry[] = REGIONS.flatMap((r) => {
       subtitle: `${r.subtitle} · live conditions`,
       lat: t.lat,
       lng: t.lng,
-      extraKeys: [r.name, ...nearby.map((m) => m.name)].map(normalizeName),
-      jaKeys: [t.nameJa, ...nearby.map((m) => m.nameJa)].filter(
+      extraKeys: [r.name, ...nearby.map((m) => m.name)].map(normalizeName).concat(prefectureEnglishKeys, stateKeys),
+      jaKeys: [t.nameJa, ...nearby.map((m) => m.nameJa), ...prefectureJapaneseKeys].filter(
         (s): s is string => Boolean(s),
       ),
+      prefectureKeys: [...prefectures.map((p) => p.name), ...prefectureJapaneseKeys],
     });
   }
 
@@ -86,15 +102,18 @@ const CURATED_ENTRIES: CuratedEntry[] = REGIONS.flatMap((r) => {
     // A mountain sharing its name with a base town (e.g. Nozawa Onsen) would
     // render a confusing duplicate row - the town page already leads there.
     if (townNames.has(normalizeName(m.name))) continue;
+    const facility = m as typeof m & { facilityType?: string; weatherEligible?: boolean };
+    const indoor = facility.facilityType === "indoor" || facility.weatherEligible === false;
     entries.push({
       kind: "mountain",
       regionId: r.id,
       id: m.id,
       name: m.name,
       href: `/${r.id}/mountain/${m.id}`,
-      subtitle: `${r.subtitle} · mountain forecast`,
-      extraKeys: [r.name].map(normalizeName),
-      jaKeys: m.nameJa ? [m.nameJa] : [],
+      subtitle: indoor ? `${r.subtitle} · indoor snow facility` : `${r.subtitle} · mountain forecast`,
+      extraKeys: [normalizeName(r.name), ...prefectureEnglishKeys, ...stateKeys],
+      jaKeys: [...(m.nameJa ? [m.nameJa] : []), ...prefectureJapaneseKeys],
+      prefectureKeys: [...prefectures.map((p) => p.name), ...prefectureJapaneseKeys],
     });
   }
 
@@ -110,9 +129,12 @@ const CURATED_ENTRIES: CuratedEntry[] = REGIONS.flatMap((r) => {
     id: r.id,
     name: r.name,
     href: `/${r.id}/`,
-    subtitle: `${r.subtitle} · pick a town`,
-    extraKeys: [],
-    jaKeys: [],
+    subtitle: r.weatherSource?.label === "Indoor facility information"
+      ? `${r.subtitle} · indoor snow facility directory`
+      : `${r.subtitle} · pick a town`,
+    extraKeys: [...prefectureEnglishKeys, ...stateKeys],
+    jaKeys: prefectureJapaneseKeys,
+    prefectureKeys: [...prefectures.map((p) => p.name), ...prefectureJapaneseKeys],
   });
 
   return entries;
@@ -136,12 +158,7 @@ function curatedMatchesFor(q: string): CuratedEntry[] {
   const nq = normalizeName(raw);
   const scored: Array<{ t: CuratedEntry; score: number }> = [];
   for (const t of CURATED_ENTRIES) {
-    const nName = normalizeName(t.name);
-    let score: number | null = null;
-    if (nq && nName.startsWith(nq)) score = 0;
-    else if (nq && nName.includes(nq)) score = 1;
-    else if (nq && t.extraKeys.some((k) => k.includes(nq))) score = 2;
-    else if (raw && t.jaKeys.some((k) => k.includes(raw))) score = 0;
+    const score = scoreCuratedEntry(t, raw);
     if (score != null) scored.push({ t, score });
   }
   scored.sort(
@@ -150,7 +167,26 @@ function curatedMatchesFor(q: string): CuratedEntry[] {
       KIND_RANK[a.t.kind] - KIND_RANK[b.t.kind] ||
       a.t.name.localeCompare(b.t.name),
   );
-  return scored.slice(0, 4).map((s) => s.t);
+  const prefectureQuery = scored.some(({ t }) =>
+    t.prefectureKeys.some((key) => {
+      const normalizedKey = normalizeName(key);
+      return (nq && normalizedKey.startsWith(nq)) || (raw && key.includes(raw));
+    }),
+  );
+  if (!prefectureQuery) return scored.slice(0, 4).map((s) => s.t);
+
+  // Prefecture discovery should expose the existing hierarchy, not let a long
+  // town list crowd every other destination type out of the four visible rows.
+  const mixed: CuratedEntry[] = [];
+  for (const kind of ["region", "town", "mountain"] as const) {
+    const match = scored.find(({ t }) => t.kind === kind)?.t;
+    if (match) mixed.push(match);
+  }
+  for (const { t } of scored) {
+    if (mixed.length >= 4) break;
+    if (!mixed.includes(t)) mixed.push(t);
+  }
+  return mixed;
 }
 
 function distanceKm(aLat: number, aLng: number, bLat: number, bLng: number): number {

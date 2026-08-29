@@ -3,6 +3,20 @@ import { LruTtlCache } from "../lib/lru-cache.js";
 import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
 import { reconcileDryToWet } from "../lib/amedas.js";
 import { reconcileNzMetarDryToWet } from "../lib/metar-nz.js";
+import { publishedCatalogueRecords, travelRegions } from "@workspace/japan-ski-catalogue/public-runtime";
+import {
+  publishedRecords as publishedSkiCatalogueRecords,
+  publishedRegions as publishedSkiCatalogueRegions,
+} from "@workspace/ski-catalogue/public-runtime";
+import {
+  publishedCatalogueRecords as publishedCanadaCatalogueRecords,
+  travelRegions as canadaTravelRegions,
+} from "@workspace/canada-ski-catalogue/public-runtime";
+import {
+  publishedCatalogueRecords as publishedWesternUsCatalogueRecords,
+  regions as westernUsCatalogueRegions,
+  states as westernUsCatalogueStates,
+} from "@workspace/western-us-ski-catalogue/public-runtime";
 
 const router: IRouter = Router();
 
@@ -56,8 +70,8 @@ const REGIONS: RegionConfig[] = [
     region: "Victoria",
     status: "live",
     href: "/victorias-high-country/",
-    baseTowns: ["Mansfield", "Bright", "Mount Beauty", "Harrietville", "Dinner Plain", "Omeo", "Marysville", "Warburton"],
-    mountains: ["Mt Buller", "Falls Creek", "Mt Hotham", "Mt Stirling", "Lake Mountain", "Mt Donna Buang"],
+    baseTowns: ["Mansfield", "Bright", "Mount Beauty", "Harrietville", "Dinner Plain", "Omeo", "Marysville", "Warburton", "Rawson"],
+    mountains: ["Mt Buller", "Falls Creek", "Mt Hotham", "Mt Stirling", "Lake Mountain", "Mt Donna Buang", "Mt Baw Baw"],
     // Headline reading is for Mount Beauty (~357m) - closest sealed-road
     // town to Falls Creek and the most-stayed base for Victoria's High
     // Country off-mountain visitors. Per-mountain peak forecasts live on
@@ -76,8 +90,8 @@ const REGIONS: RegionConfig[] = [
     region: "Tasmania",
     status: "live",
     href: "/tasmania/",
-    baseTowns: ["Ben Lomond Base", "Launceston", "Hobart"],
-    mountains: ["Ben Lomond"],
+    baseTowns: ["Ben Lomond Base", "Launceston", "Maydena", "Hobart"],
+    mountains: ["Ben Lomond", "Mount Mawson"],
     // Headline reading from Launceston (~30m) · closest city base and
     // where most visiting skiers actually arrive. Ben Lomond summit
     // forecast lives on the dedicated mountain page.
@@ -85,6 +99,22 @@ const REGIONS: RegionConfig[] = [
     lat: -41.4332,
     lon: 147.1442,
     timezone: "Australia/Hobart",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "australian-capital-territory",
+    name: "Australian Capital Territory",
+    country: "Australia",
+    countryCode: "AU",
+    region: "Australian Capital Territory",
+    status: "live",
+    href: "/australian-capital-territory/",
+    baseTowns: ["Canberra"],
+    mountains: ["Corin Forest"],
+    headlineLabel: "Canberra",
+    lat: -35.2809,
+    lon: 149.1300,
+    timezone: "Australia/Sydney",
     sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
   },
   {
@@ -1072,7 +1102,1181 @@ const REGIONS: RegionConfig[] = [
     timezone: "America/Los_Angeles",
     sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
   },
+  // Vermont
+  {
+    id: "killington-pico",
+    name: "Killington/Pico",
+    country: "United States",
+    countryCode: "US",
+    region: "Vermont",
+    status: "live",
+    href: "/killington-pico/",
+    baseTowns: ["Killington"],
+    mountains: ["Killington", "Pico Mountain"],
+    headlineLabel: "Killington",
+    lat: 43.6045,
+    lon: -72.8201,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "stowe-smugglers-notch",
+    name: "Stowe/Smugglers' Notch",
+    country: "United States",
+    countryCode: "US",
+    region: "Vermont",
+    status: "live",
+    href: "/stowe-smugglers-notch/",
+    baseTowns: ["Stowe", "Jeffersonville"],
+    mountains: ["Stowe Mountain Resort", "Smugglers' Notch"],
+    headlineLabel: "Stowe",
+    lat: 44.4654,
+    lon: -72.6874,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "mad-river-valley",
+    name: "Mad River Valley",
+    country: "United States",
+    countryCode: "US",
+    region: "Vermont",
+    status: "live",
+    href: "/mad-river-valley/",
+    baseTowns: ["Warren", "Waitsfield"],
+    mountains: ["Sugarbush", "Mad River Glen"],
+    headlineLabel: "Waitsfield",
+    lat: 44.1975,
+    lon: -72.809,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "southern-vermont",
+    name: "Southern Vermont",
+    country: "United States",
+    countryCode: "US",
+    region: "Vermont",
+    status: "live",
+    href: "/southern-vermont/",
+    baseTowns: ["Stratton", "West Dover", "Peru", "Manchester"],
+    mountains: ["Stratton", "Mount Snow", "Bromley Mountain", "Magic Mountain"],
+    headlineLabel: "Manchester",
+    lat: 43.1642,
+    lon: -73.0729,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "okemo",
+    name: "Okemo",
+    country: "United States",
+    countryCode: "US",
+    region: "Vermont",
+    status: "live",
+    href: "/okemo/",
+    baseTowns: ["Ludlow"],
+    mountains: ["Okemo Mountain Resort"],
+    headlineLabel: "Ludlow",
+    lat: 43.3959,
+    lon: -72.7096,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "jay-peak-nek",
+    name: "Jay Peak/Northeast Kingdom",
+    country: "United States",
+    countryCode: "US",
+    region: "Vermont",
+    status: "live",
+    href: "/jay-peak-nek/",
+    baseTowns: ["Jay", "East Burke"],
+    mountains: ["Jay Peak", "Burke Mountain"],
+    headlineLabel: "Jay",
+    lat: 44.9417,
+    lon: -72.5083,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // Wyoming
+  {
+    id: "jackson-hole",
+    name: "Jackson Hole",
+    country: "United States",
+    countryCode: "US",
+    region: "Wyoming",
+    status: "live",
+    href: "/jackson-hole/",
+    baseTowns: ["Jackson", "Teton Village"],
+    mountains: ["Jackson Hole Mountain Resort", "Snow King Mountain"],
+    headlineLabel: "Jackson",
+    lat: 43.4799,
+    lon: -110.7624,
+    timezone: "America/Denver",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "grand-targhee",
+    name: "Grand Targhee",
+    country: "United States",
+    countryCode: "US",
+    region: "Wyoming",
+    status: "live",
+    href: "/grand-targhee/",
+    baseTowns: ["Alta"],
+    mountains: ["Grand Targhee Resort"],
+    headlineLabel: "Alta",
+    lat: 43.7897,
+    lon: -110.931,
+    timezone: "America/Denver",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // Montana
+  {
+    id: "big-sky",
+    name: "Big Sky",
+    country: "United States",
+    countryCode: "US",
+    region: "Montana",
+    status: "live",
+    href: "/big-sky/",
+    baseTowns: ["Big Sky"],
+    mountains: ["Big Sky Resort"],
+    headlineLabel: "Big Sky",
+    lat: 45.2849,
+    lon: -111.3806,
+    timezone: "America/Denver",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "bozeman-bridger-bowl",
+    name: "Bozeman",
+    country: "United States",
+    countryCode: "US",
+    region: "Montana",
+    status: "live",
+    href: "/bozeman-bridger-bowl/",
+    baseTowns: ["Bozeman"],
+    mountains: ["Bridger Bowl"],
+    headlineLabel: "Bozeman",
+    lat: 45.677,
+    lon: -111.0429,
+    timezone: "America/Denver",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "whitefish",
+    name: "Whitefish",
+    country: "United States",
+    countryCode: "US",
+    region: "Montana",
+    status: "live",
+    href: "/whitefish/",
+    baseTowns: ["Whitefish"],
+    mountains: ["Whitefish Mountain Resort"],
+    headlineLabel: "Whitefish",
+    lat: 48.4111,
+    lon: -114.3376,
+    timezone: "America/Denver",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "red-lodge",
+    name: "Red Lodge",
+    country: "United States",
+    countryCode: "US",
+    region: "Montana",
+    status: "live",
+    href: "/red-lodge/",
+    baseTowns: ["Red Lodge"],
+    mountains: ["Red Lodge Mountain"],
+    headlineLabel: "Red Lodge",
+    lat: 45.1863,
+    lon: -109.2468,
+    timezone: "America/Denver",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // New Mexico
+  {
+    id: "taos",
+    name: "Taos",
+    country: "United States",
+    countryCode: "US",
+    region: "New Mexico",
+    status: "live",
+    href: "/taos/",
+    baseTowns: ["Taos Ski Valley"],
+    mountains: ["Taos Ski Valley"],
+    headlineLabel: "Taos",
+    lat: 36.5946,
+    lon: -105.4497,
+    timezone: "America/Denver",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "angel-fire",
+    name: "Angel Fire",
+    country: "United States",
+    countryCode: "US",
+    region: "New Mexico",
+    status: "live",
+    href: "/angel-fire/",
+    baseTowns: ["Angel Fire"],
+    mountains: ["Angel Fire Resort"],
+    headlineLabel: "Angel Fire",
+    lat: 36.3762,
+    lon: -105.2894,
+    timezone: "America/Denver",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "santa-fe",
+    name: "Santa Fe",
+    country: "United States",
+    countryCode: "US",
+    region: "New Mexico",
+    status: "live",
+    href: "/santa-fe/",
+    baseTowns: ["Santa Fe"],
+    mountains: ["Ski Santa Fe"],
+    headlineLabel: "Santa Fe",
+    lat: 35.687,
+    lon: -105.9378,
+    timezone: "America/Denver",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "albuquerque-sandia",
+    name: "Albuquerque",
+    country: "United States",
+    countryCode: "US",
+    region: "New Mexico",
+    status: "live",
+    href: "/albuquerque-sandia/",
+    baseTowns: ["Albuquerque"],
+    mountains: ["Sandia Peak Ski Area"],
+    headlineLabel: "Albuquerque",
+    lat: 35.0844,
+    lon: -106.6504,
+    timezone: "America/Denver",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // Oregon
+  {
+    id: "mt-hood",
+    name: "Mt. Hood",
+    country: "United States",
+    countryCode: "US",
+    region: "Oregon",
+    status: "live",
+    href: "/mt-hood/",
+    baseTowns: ["Government Camp"],
+    mountains: ["Mt. Hood Meadows", "Timberline Lodge", "Mt. Hood Skibowl"],
+    headlineLabel: "Mt. Hood",
+    lat: 45.30222,
+    lon: -121.7525,
+    timezone: "America/Los_Angeles",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "bend",
+    name: "Bend",
+    country: "United States",
+    countryCode: "US",
+    region: "Oregon",
+    status: "live",
+    href: "/bend/",
+    baseTowns: ["Bend"],
+    mountains: ["Mt. Bachelor"],
+    headlineLabel: "Bend",
+    lat: 44.05806,
+    lon: -121.31528,
+    timezone: "America/Los_Angeles",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // Washington
+  {
+    id: "crystal-mountain",
+    name: "Crystal Mountain",
+    country: "United States",
+    countryCode: "US",
+    region: "Washington",
+    status: "live",
+    href: "/crystal-mountain/",
+    baseTowns: ["Enumclaw"],
+    mountains: ["Crystal Mountain Resort"],
+    headlineLabel: "Crystal Mountain",
+    lat: 47.20111,
+    lon: -121.99694,
+    timezone: "America/Los_Angeles",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "snoqualmie-pass",
+    name: "Snoqualmie Pass",
+    country: "United States",
+    countryCode: "US",
+    region: "Washington",
+    status: "live",
+    href: "/snoqualmie-pass/",
+    baseTowns: ["Snoqualmie Pass"],
+    mountains: ["The Summit at Snoqualmie"],
+    headlineLabel: "Snoqualmie Pass",
+    lat: 47.39222,
+    lon: -121.4,
+    timezone: "America/Los_Angeles",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "stevens-pass",
+    name: "Stevens Pass",
+    country: "United States",
+    countryCode: "US",
+    region: "Washington",
+    status: "live",
+    href: "/stevens-pass/",
+    baseTowns: ["Skykomish"],
+    mountains: ["Stevens Pass Ski Area"],
+    headlineLabel: "Stevens Pass",
+    lat: 47.71028,
+    lon: -121.35833,
+    timezone: "America/Los_Angeles",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "mt-baker",
+    name: "Mt. Baker",
+    country: "United States",
+    countryCode: "US",
+    region: "Washington",
+    status: "live",
+    href: "/mt-baker/",
+    baseTowns: ["Glacier"],
+    mountains: ["Mt. Baker Ski Area"],
+    headlineLabel: "Mt. Baker",
+    lat: 48.88833,
+    lon: -121.93389,
+    timezone: "America/Los_Angeles",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // Idaho
+  {
+    id: "sun-valley",
+    name: "Sun Valley",
+    country: "United States",
+    countryCode: "US",
+    region: "Idaho",
+    status: "live",
+    href: "/sun-valley/",
+    baseTowns: ["Ketchum"],
+    mountains: ["Bald Mountain", "Dollar Mountain"],
+    headlineLabel: "Sun Valley",
+    lat: 43.68074,
+    lon: -114.36366,
+    timezone: "America/Boise",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "sandpoint",
+    name: "Sandpoint",
+    country: "United States",
+    countryCode: "US",
+    region: "Idaho",
+    status: "live",
+    href: "/sandpoint/",
+    baseTowns: ["Sandpoint"],
+    mountains: ["Schweitzer Mountain Resort"],
+    headlineLabel: "Sandpoint",
+    lat: 48.28222,
+    lon: -116.56139,
+    timezone: "America/Los_Angeles",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "boise",
+    name: "Boise",
+    country: "United States",
+    countryCode: "US",
+    region: "Idaho",
+    status: "live",
+    href: "/boise/",
+    baseTowns: ["Boise"],
+    mountains: ["Bogus Basin"],
+    headlineLabel: "Boise",
+    lat: 43.61583,
+    lon: -116.20167,
+    timezone: "America/Boise",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "donnelly-mccall",
+    name: "Donnelly / McCall",
+    country: "United States",
+    countryCode: "US",
+    region: "Idaho",
+    status: "live",
+    href: "/donnelly-mccall/",
+    baseTowns: ["Donnelly"],
+    mountains: ["Tamarack Resort", "Brundage Mountain"],
+    headlineLabel: "Donnelly / McCall",
+    lat: 44.73028,
+    lon: -116.07444,
+    timezone: "America/Boise",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // New Hampshire
+  {
+    id: "white-mountains",
+    name: "White Mountains",
+    country: "United States",
+    countryCode: "US",
+    region: "New Hampshire",
+    status: "live",
+    href: "/white-mountains/",
+    baseTowns: ["North Conway"],
+    mountains: ["Cranmore Mountain", "Wildcat Mountain", "Attitash Mountain Resort"],
+    headlineLabel: "North Conway",
+    lat: 44.0537,
+    lon: -71.1289,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "franconia-notch",
+    name: "Franconia Notch",
+    country: "United States",
+    countryCode: "US",
+    region: "New Hampshire",
+    status: "live",
+    href: "/franconia-notch/",
+    baseTowns: ["Franconia", "Bretton Woods"],
+    mountains: ["Cannon Mountain", "Bretton Woods", "Loon Mountain"],
+    headlineLabel: "Franconia",
+    lat: 44.227,
+    lon: -71.747,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "waterville-valley",
+    name: "Waterville Valley",
+    country: "United States",
+    countryCode: "US",
+    region: "New Hampshire",
+    status: "live",
+    href: "/waterville-valley/",
+    baseTowns: ["Waterville Valley"],
+    mountains: ["Waterville Valley Resort"],
+    headlineLabel: "Waterville Valley",
+    lat: 43.95,
+    lon: -71.499,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "lakes-region",
+    name: "Lakes Region",
+    country: "United States",
+    countryCode: "US",
+    region: "New Hampshire",
+    status: "live",
+    href: "/lakes-region/",
+    baseTowns: ["Gilford"],
+    mountains: ["Gunstock Mountain Resort"],
+    headlineLabel: "Gilford",
+    lat: 43.548,
+    lon: -71.406,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // Maine
+  {
+    id: "carrabassett-valley",
+    name: "Carrabassett Valley",
+    country: "United States",
+    countryCode: "US",
+    region: "Maine",
+    status: "live",
+    href: "/carrabassett-valley/",
+    baseTowns: ["Carrabassett Valley"],
+    mountains: ["Sugarloaf"],
+    headlineLabel: "Carrabassett Valley",
+    lat: 45.085,
+    lon: -70.265,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "newry-bethel",
+    name: "Newry / Bethel",
+    country: "United States",
+    countryCode: "US",
+    region: "Maine",
+    status: "live",
+    href: "/newry-bethel/",
+    baseTowns: ["Newry"],
+    mountains: ["Sunday River"],
+    headlineLabel: "Newry / Bethel",
+    lat: 44.499,
+    lon: -70.8,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "rangeley",
+    name: "Rangeley",
+    country: "United States",
+    countryCode: "US",
+    region: "Maine",
+    status: "live",
+    href: "/rangeley/",
+    baseTowns: ["Rangeley"],
+    mountains: ["Saddleback Mountain"],
+    headlineLabel: "Rangeley",
+    lat: 44.966,
+    lon: -70.644,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // New York
+  {
+    id: "lake-placid",
+    name: "Lake Placid",
+    country: "United States",
+    countryCode: "US",
+    region: "New York",
+    status: "live",
+    href: "/lake-placid/",
+    baseTowns: ["Lake Placid", "Wilmington"],
+    mountains: ["Whiteface Mountain"],
+    headlineLabel: "Lake Placid",
+    lat: 44.279,
+    lon: -73.979,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "north-creek",
+    name: "North Creek",
+    country: "United States",
+    countryCode: "US",
+    region: "New York",
+    status: "live",
+    href: "/north-creek/",
+    baseTowns: ["North Creek"],
+    mountains: ["Gore Mountain"],
+    headlineLabel: "North Creek",
+    lat: 43.697,
+    lon: -73.985,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "hunter",
+    name: "Hunter",
+    country: "United States",
+    countryCode: "US",
+    region: "New York",
+    status: "live",
+    href: "/hunter/",
+    baseTowns: ["Hunter"],
+    mountains: ["Hunter Mountain"],
+    headlineLabel: "Hunter",
+    lat: 42.214,
+    lon: -74.213,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "windham",
+    name: "Windham",
+    country: "United States",
+    countryCode: "US",
+    region: "New York",
+    status: "live",
+    href: "/windham/",
+    baseTowns: ["Windham"],
+    mountains: ["Windham Mountain Club"],
+    headlineLabel: "Windham",
+    lat: 42.309,
+    lon: -74.251,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "highmount",
+    name: "Highmount",
+    country: "United States",
+    countryCode: "US",
+    region: "New York",
+    status: "live",
+    href: "/highmount/",
+    baseTowns: ["Highmount"],
+    mountains: ["Belleayre Mountain"],
+    headlineLabel: "Highmount",
+    lat: 42.147,
+    lon: -74.514,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // Michigan
+  {
+    id: "harbor-springs",
+    name: "Harbor Springs",
+    country: "United States",
+    countryCode: "US",
+    region: "Michigan",
+    status: "live",
+    href: "/harbor-springs/",
+    baseTowns: ["Harbor Springs"],
+    mountains: ["Boyne Mountain", "The Highlands", "Nub's Nob"],
+    headlineLabel: "Harbor Springs",
+    lat: 45.4317,
+    lon: -84.9889,
+    timezone: "America/Detroit",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "keweenaw-peninsula",
+    name: "Keweenaw Peninsula",
+    country: "United States",
+    countryCode: "US",
+    region: "Michigan",
+    status: "live",
+    href: "/keweenaw-peninsula/",
+    baseTowns: ["Mohawk"],
+    mountains: ["Mt. Bohemia"],
+    headlineLabel: "Mohawk",
+    lat: 47.3308,
+    lon: -88.3743,
+    timezone: "America/Detroit",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // Pennsylvania
+  {
+    id: "poconos",
+    name: "Poconos",
+    country: "United States",
+    countryCode: "US",
+    region: "Pennsylvania",
+    status: "live",
+    href: "/poconos/",
+    baseTowns: ["Tannersville", "Pocono Manor"],
+    mountains: ["Camelback Mountain Resort", "Blue Mountain Resort", "Shawnee Mountain Ski Area"],
+    headlineLabel: "Tannersville",
+    lat: 41.04,
+    lon: -75.305,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "laurel-highlands",
+    name: "Laurel Highlands",
+    country: "United States",
+    countryCode: "US",
+    region: "Pennsylvania",
+    status: "live",
+    href: "/laurel-highlands/",
+    baseTowns: ["Seven Springs"],
+    mountains: ["Seven Springs Mountain Resort", "Blue Knob All Seasons Resort"],
+    headlineLabel: "Seven Springs",
+    lat: 40.041,
+    lon: -79.467,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // Massachusetts
+  {
+    id: "berkshires",
+    name: "Berkshires",
+    country: "United States",
+    countryCode: "US",
+    region: "Massachusetts",
+    status: "live",
+    href: "/berkshires/",
+    baseTowns: ["Hancock", "Great Barrington"],
+    mountains: ["Jiminy Peak", "Ski Butternut", "Berkshire East"],
+    headlineLabel: "Hancock",
+    lat: 42.547,
+    lon: -73.323,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "central-massachusetts",
+    name: "Central Massachusetts",
+    country: "United States",
+    countryCode: "US",
+    region: "Massachusetts",
+    status: "live",
+    href: "/central-massachusetts/",
+    baseTowns: ["Princeton"],
+    mountains: ["Wachusett Mountain"],
+    headlineLabel: "Princeton",
+    lat: 42.473,
+    lon: -71.877,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // Minnesota
+  {
+    id: "lutsen-north-shore",
+    name: "Lutsen / North Shore",
+    country: "United States",
+    countryCode: "US",
+    region: "Minnesota",
+    status: "live",
+    href: "/lutsen-north-shore/",
+    baseTowns: ["Lutsen"],
+    mountains: ["Lutsen Mountains"],
+    headlineLabel: "Lutsen",
+    lat: 47.643,
+    lon: -90.714,
+    timezone: "America/Chicago",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // Wisconsin
+  {
+    id: "wausau",
+    name: "Wausau",
+    country: "United States",
+    countryCode: "US",
+    region: "Wisconsin",
+    status: "live",
+    href: "/wausau/",
+    baseTowns: ["Wausau"],
+    mountains: ["Granite Peak Ski Area"],
+    headlineLabel: "Wausau",
+    lat: 44.959,
+    lon: -89.63,
+    timezone: "America/Chicago",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "wisconsin-dells",
+    name: "Wisconsin Dells",
+    country: "United States",
+    countryCode: "US",
+    region: "Wisconsin",
+    status: "live",
+    href: "/wisconsin-dells/",
+    baseTowns: ["Portage"],
+    mountains: ["Cascade Mountain"],
+    headlineLabel: "Portage",
+    lat: 43.539,
+    lon: -89.462,
+    timezone: "America/Chicago",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // New Jersey
+  {
+    id: "vernon",
+    name: "Vernon",
+    country: "United States",
+    countryCode: "US",
+    region: "New Jersey",
+    status: "live",
+    href: "/vernon/",
+    baseTowns: ["Vernon"],
+    mountains: ["Mountain Creek Resort"],
+    headlineLabel: "Vernon",
+    lat: 41.2,
+    lon: -74.484,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // Connecticut
+  {
+    id: "litchfield-hills",
+    name: "Litchfield Hills",
+    country: "United States",
+    countryCode: "US",
+    region: "Connecticut",
+    status: "live",
+    href: "/litchfield-hills/",
+    baseTowns: ["Cornwall"],
+    mountains: ["Mohawk Mountain"],
+    headlineLabel: "Cornwall",
+    lat: 41.833,
+    lon: -73.328,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // Alaska
+  {
+    id: "juneau",
+    name: "Juneau",
+    country: "United States",
+    countryCode: "US",
+    region: "Alaska",
+    status: "live",
+    href: "/juneau/",
+    baseTowns: ["Juneau"],
+    mountains: ["Eaglecrest Ski Area"],
+    headlineLabel: "Juneau",
+    lat: 58.302,
+    lon: -134.42,
+    timezone: "America/Anchorage",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "girdwood",
+    name: "Girdwood",
+    country: "United States",
+    countryCode: "US",
+    region: "Alaska",
+    status: "live",
+    href: "/girdwood/",
+    baseTowns: ["Girdwood"],
+    mountains: ["Alyeska Resort"],
+    headlineLabel: "Girdwood",
+    lat: 60.942,
+    lon: -149.166,
+    timezone: "America/Anchorage",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // South Dakota
+  {
+    id: "black-hills",
+    name: "Black Hills",
+    country: "United States",
+    countryCode: "US",
+    region: "South Dakota",
+    status: "live",
+    href: "/black-hills/",
+    baseTowns: ["Lead / Deadwood"],
+    mountains: ["Terry Peak"],
+    headlineLabel: "Lead / Deadwood",
+    lat: 44.352,
+    lon: -103.765,
+    timezone: "America/Denver",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // Arizona
+  {
+    id: "white-mountains-az",
+    name: "White Mountains",
+    country: "United States",
+    countryCode: "US",
+    region: "Arizona",
+    status: "live",
+    href: "/white-mountains-az/",
+    baseTowns: ["Greer"],
+    mountains: ["Sunrise Park Resort"],
+    headlineLabel: "Greer",
+    lat: 34.01,
+    lon: -109.458,
+    timezone: "America/Phoenix",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "flagstaff",
+    name: "Flagstaff",
+    country: "United States",
+    countryCode: "US",
+    region: "Arizona",
+    status: "live",
+    href: "/flagstaff/",
+    baseTowns: ["Flagstaff"],
+    mountains: ["Arizona Snowbowl"],
+    headlineLabel: "Flagstaff",
+    lat: 35.198,
+    lon: -111.651,
+    timezone: "America/Phoenix",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // Nevada
+  {
+    id: "lake-tahoe-nevada",
+    name: "Lake Tahoe Nevada",
+    country: "United States",
+    countryCode: "US",
+    region: "Nevada",
+    status: "live",
+    href: "/lake-tahoe-nevada/",
+    baseTowns: ["Incline Village"],
+    mountains: ["Mt. Rose Ski Tahoe", "Diamond Peak"],
+    headlineLabel: "Incline Village",
+    lat: 39.251,
+    lon: -119.952,
+    timezone: "America/Los_Angeles",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // Virginia
+  {
+    id: "shenandoah-valley",
+    name: "Shenandoah Valley",
+    country: "United States",
+    countryCode: "US",
+    region: "Virginia",
+    status: "live",
+    href: "/shenandoah-valley/",
+    baseTowns: ["McGaheysville"],
+    mountains: ["Massanutten Resort"],
+    headlineLabel: "McGaheysville",
+    lat: 38.372,
+    lon: -78.73,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "blue-ridge",
+    name: "Blue Ridge",
+    country: "United States",
+    countryCode: "US",
+    region: "Virginia",
+    status: "live",
+    href: "/blue-ridge/",
+    baseTowns: ["Wintergreen"],
+    mountains: ["Wintergreen Resort"],
+    headlineLabel: "Wintergreen",
+    lat: 37.913,
+    lon: -78.945,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // North Carolina
+  {
+    id: "maggie-valley",
+    name: "Maggie Valley",
+    country: "United States",
+    countryCode: "US",
+    region: "North Carolina",
+    status: "live",
+    href: "/maggie-valley/",
+    baseTowns: ["Maggie Valley"],
+    mountains: ["Cataloochee Ski Area"],
+    headlineLabel: "Maggie Valley",
+    lat: 35.519,
+    lon: -83.084,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "high-country",
+    name: "High Country",
+    country: "United States",
+    countryCode: "US",
+    region: "North Carolina",
+    status: "live",
+    href: "/high-country/",
+    baseTowns: ["Banner Elk / Beech Mountain"],
+    mountains: ["Sugar Mountain", "Beech Mountain Resort"],
+    headlineLabel: "Banner Elk / Beech Mountain",
+    lat: 36.166,
+    lon: -81.872,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // West Virginia
+  {
+    id: "canaan-valley",
+    name: "Canaan Valley",
+    country: "United States",
+    countryCode: "US",
+    region: "West Virginia",
+    status: "live",
+    href: "/canaan-valley/",
+    baseTowns: ["Davis / Canaan Valley"],
+    mountains: ["Canaan Valley Resort", "Timberline Mountain"],
+    headlineLabel: "Davis / Canaan Valley",
+    lat: 39.105,
+    lon: -79.468,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "snowshoe",
+    name: "Snowshoe",
+    country: "United States",
+    countryCode: "US",
+    region: "West Virginia",
+    status: "live",
+    href: "/snowshoe/",
+    baseTowns: ["Snowshoe"],
+    mountains: ["Snowshoe Mountain"],
+    headlineLabel: "Snowshoe",
+    lat: 38.41,
+    lon: -79.995,
+    timezone: "America/New_York",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
 ];
+
+function canadaCatalogueTimezone(province: string): string {
+  const timezones: Record<string, string> = {
+    "British Columbia": "America/Vancouver",
+    Alberta: "America/Edmonton",
+    Saskatchewan: "America/Regina",
+    Manitoba: "America/Winnipeg",
+    Ontario: "America/Toronto",
+    Quebec: "America/Toronto",
+    "New Brunswick": "America/Halifax",
+    "Nova Scotia": "America/Halifax",
+    "Prince Edward Island": "America/Halifax",
+    "Newfoundland and Labrador": "America/St_Johns",
+  };
+  const timezone = timezones[province];
+  if (!timezone) throw new Error(`[canada-catalogue] unknown province timezone: "${province}"`);
+  return timezone;
+}
+
+/** Published Japan and Canada catalogue regions without a hand-curated headline. */
+const CATALOGUE_REGIONS: RegionConfig[] = [
+  ...travelRegions
+    .filter((region) => !REGIONS.some((existing) => existing.id === region.travelRegionId))
+    .flatMap((region) => {
+      const records = publishedCatalogueRecords
+        .filter((record) => record.travelRegionId === region.travelRegionId)
+        .sort((left, right) => left.publicId.localeCompare(right.publicId));
+      const headlineRecord = records[0];
+      if (!headlineRecord) return [];
+      return [{
+        id: region.travelRegionId,
+        name: region.name,
+        country: "Japan",
+        countryCode: "JP" as const,
+        region: region.prefectures.join(", "),
+        status: "live" as const,
+        href: `/${region.travelRegionId}/`,
+        baseTowns: region.baseTowns.map((town) => town.name),
+        mountains: records.map((record) => record.name),
+        headlineLabel: headlineRecord.name,
+        lat: headlineRecord.coordinates.lat,
+        lon: headlineRecord.coordinates.lng,
+        elevation: headlineRecord.forecastElevationM,
+        timezone: "Asia/Tokyo",
+        sourceLabel: "Open-Meteo · Published Japan ski catalogue",
+      }];
+    }),
+  ...canadaTravelRegions
+    .filter((region) => !REGIONS.some((existing) => existing.id === region.travelRegionId))
+    .flatMap((region) => {
+      const records = publishedCanadaCatalogueRecords
+        .filter((record) => record.travelRegionId === region.travelRegionId)
+        .sort((left, right) => left.publicId.localeCompare(right.publicId));
+      const headlineRecord = records[0];
+      if (!headlineRecord) return [];
+      return [{
+        id: region.travelRegionId,
+        name: region.name,
+        country: "Canada",
+        countryCode: "CA" as const,
+        region: region.province,
+        status: "live" as const,
+        href: `/${region.travelRegionId}/`,
+        baseTowns: [...new Set(records.map((record) => record.locality))],
+        mountains: records.map((record) => record.name),
+        headlineLabel: headlineRecord.name,
+        lat: headlineRecord.coordinates.lat,
+        lon: headlineRecord.coordinates.lng,
+        elevation: headlineRecord.forecastElevationM,
+        timezone: canadaCatalogueTimezone(region.province),
+        sourceLabel: "Open-Meteo · Published Canada ski catalogue",
+      }];
+    }),
+];
+
+const WESTERN_CATALOGUE_RECORDS_BY_REGION = new Map(
+  westernUsCatalogueRegions.map((region) => [
+    region.regionId,
+    publishedWesternUsCatalogueRecords
+      .filter((record) => record.regionId === region.regionId)
+      .sort((left, right) => left.publicId.localeCompare(right.publicId)),
+  ] as const),
+);
+const GENERIC_CATALOGUE_REGIONS: RegionConfig[] = publishedSkiCatalogueRegions
+  .filter((region) =>
+    !REGIONS.some((existing) => existing.id === region.regionId) &&
+    !CATALOGUE_REGIONS.some((existing) => existing.id === region.regionId),
+  )
+  .map((region) => {
+    // Stable public-id ordering makes the representative forecast
+    // deterministic while keeping it within the published region.
+    const records = publishedSkiCatalogueRecords
+      .filter((record) => record.regionId === region.regionId)
+      .sort((left, right) => left.publicId.localeCompare(right.publicId));
+    const headlineRecord = records.find((record) => record.weatherEligible);
+    const directoryRecord = headlineRecord ?? records[0];
+    if (!directoryRecord) {
+      throw new Error(`[catalogue] published region "${region.regionId}" has no published records`);
+    }
+    return {
+      id: region.regionId,
+      name: region.name,
+      country: region.country,
+      countryCode: region.countryCode as RegionConfig["countryCode"],
+      region: region.stateOrProvince,
+      status: "live",
+      href: `/${region.regionId}/`,
+      baseTowns: region.localities.map((locality) => locality.name),
+      mountains: records.map((record) => record.name),
+      headlineLabel: directoryRecord.name,
+      lat: headlineRecord?.coordinates.lat,
+      lon: headlineRecord?.coordinates.lng,
+      elevation: headlineRecord?.forecastElevationM,
+      timezone: directoryRecord.timezone,
+      sourceLabel: headlineRecord ? "Open-Meteo · Published ski catalogue" : "Published indoor facility directory",
+    };
+  });
+
+const REGIONS_WITH_WESTERN_CATALOGUE: readonly RegionConfig[] = REGIONS.map((region) => {
+  const records = WESTERN_CATALOGUE_RECORDS_BY_REGION.get(region.id);
+  return records?.length
+    ? { ...region, mountains: [...region.mountains, ...records.map((record) => record.name)] }
+    : region;
+});
+const WESTERN_CATALOGUE_REGIONS: RegionConfig[] = westernUsCatalogueRegions
+  .filter((region) => !REGIONS_WITH_WESTERN_CATALOGUE.some((existing) => existing.id === region.regionId))
+  .flatMap((region) => {
+    const records = WESTERN_CATALOGUE_RECORDS_BY_REGION.get(region.regionId) ?? [];
+    const headlineRecord = records[0];
+    if (!headlineRecord) return [];
+    return [{
+      id: region.regionId,
+      name: region.name,
+      country: "United States",
+      countryCode: "US" as const,
+      region: westernUsCatalogueStates.find((state) => state.stateCode === region.stateCode)?.name ?? region.stateCode,
+      status: "live" as const,
+      href: `/${region.regionId}/`,
+      baseTowns: region.baseTowns.map((town) => town.name),
+      mountains: records.map((record) => record.name),
+      headlineLabel: headlineRecord.name,
+      lat: headlineRecord.coordinates.lat,
+      lon: headlineRecord.coordinates.lng,
+      elevation: headlineRecord.forecastElevationM,
+      timezone: headlineRecord.timezone,
+      sourceLabel: "Open-Meteo · Published Western US ski catalogue",
+    }];
+  });
+
+const ALL_REGIONS: readonly RegionConfig[] = [
+  ...[...REGIONS_WITH_WESTERN_CATALOGUE, ...CATALOGUE_REGIONS].map((region) => {
+    const additions = publishedSkiCatalogueRecords
+      .filter((record) => record.regionId === region.id)
+      .map((record) => record.name)
+      .filter((name) => !region.mountains.includes(name));
+    return additions.length ? { ...region, mountains: [...region.mountains, ...additions] } : region;
+  }),
+  ...GENERIC_CATALOGUE_REGIONS,
+  ...WESTERN_CATALOGUE_REGIONS,
+];
+
+/** Public `/api/regions` projection. Catalogue intake and evidence never enter it. */
+export const API_REGION_CONFIGS: readonly RegionConfig[] = ALL_REGIONS;
+/** Published JP travel-region metadata, keyed by the catalogue's shared id. */
+export const CATALOGUE_REGION_METADATA = new Map(
+  [
+    ...travelRegions.map((region) => [region, "Japan" as const, "JP" as const] as const),
+    ...canadaTravelRegions.map((region) => [region, "Canada" as const, "CA" as const] as const),
+  ].map(([region, country, countryCode]) => [region.travelRegionId, {
+    ...region,
+    country,
+    countryCode,
+  }] as const),
+);
 
 const WEATHER_DESCRIPTIONS: Record<number, string> = {
   0: "Clear",
@@ -1153,7 +2357,7 @@ let cacheStats = { hits: 0, staleServed: 0, upstreamCalls: 0, upstreamFails: 0, 
 export function getCacheStats() { return { ...cacheStats, entries: cache.size, inFlight: inFlight.size }; }
 
 async function fetchHeadline(r: RegionConfig): Promise<HeadlineReading | null> {
-  if (r.status === "soon" || !r.lat || !r.lon) return null;
+  if (r.status === "soon" || !Number.isFinite(r.lat) || !Number.isFinite(r.lon)) return null;
 
   const cacheKey = r.id;
   const now = Date.now();
@@ -1214,11 +2418,28 @@ async function fetchHeadline(r: RegionConfig): Promise<HeadlineReading | null> {
   return refresh;
 }
 
-async function fetchHeadlineUpstream(r: RegionConfig): Promise<HeadlineReading | null> {
-  const params = new URLSearchParams({
+export function buildHeadlineQueryParams(
+  r: Pick<RegionConfig, "lat" | "lon" | "elevation" | "timezone" | "model"> & { id?: string },
+): URLSearchParams {
+  if (!Number.isFinite(r.lat) || !Number.isFinite(r.lon)) {
+    throw new Error(`[regions] headline region "${r.id ?? "unknown"}" coordinates must be finite`);
+  }
+  if (r.elevation !== undefined && (!Number.isFinite(r.elevation) || r.elevation <= 0)) {
+    throw new Error(`[regions] headline region "${r.id ?? "unknown"}" elevation must be a positive finite number`);
+  }
+  if (r.timezone !== undefined && r.timezone.length === 0) {
+    throw new Error(`[regions] headline region "${r.id ?? "unknown"}" timezone must not be empty`);
+  }
+  if (r.elevation !== undefined && (!Number.isFinite(r.elevation) || r.elevation <= 0)) {
+    throw new Error(`[regions] headline region "${r.id}" elevation must be a positive finite number`);
+  }
+  if (r.timezone !== undefined && r.timezone.length === 0) {
+    throw new Error(`[regions] headline region "${r.id}" timezone must not be empty`);
+  }
+  return new URLSearchParams({
     latitude: String(r.lat),
     longitude: String(r.lon),
-    elevation: String(r.elevation ?? ""),
+    ...(r.elevation !== undefined ? { elevation: String(r.elevation) } : {}),
     current: "temperature_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,weather_code,snowfall",
     daily: "temperature_2m_max,temperature_2m_min,precipitation_sum,snowfall_sum,weather_code",
     hourly: "snowfall",
@@ -1227,6 +2448,9 @@ async function fetchHeadlineUpstream(r: RegionConfig): Promise<HeadlineReading |
     timezone: r.timezone ?? "auto",
     ...(r.model ? { models: r.model } : {}),
   });
+}
+async function fetchHeadlineUpstream(r: RegionConfig): Promise<HeadlineReading | null> {
+  const params = buildHeadlineQueryParams(r);
 
   try {
     // Open-Meteo asks all integrators to identify themselves so they can reach
@@ -1343,9 +2567,9 @@ async function fetchHeadlineUpstream(r: RegionConfig): Promise<HeadlineReading |
 router.get("/regions", async (_req, res) => {
   try {
     const headlines = await Promise.all(
-      REGIONS.map((r) => fetchHeadline(r).catch(() => null)),
+      ALL_REGIONS.map((r) => fetchHeadline(r).catch(() => null)),
     );
-    const regions: RegionPayload[] = REGIONS.map((r, i) => {
+    const regions: RegionPayload[] = ALL_REGIONS.map((r, i) => {
       const { lat, lon, model, timezone, ...rest } = r;
       void lat; void lon; void model; void timezone;
       return { ...rest, headline: headlines[i] };
@@ -1377,7 +2601,7 @@ router.get("/regions/_stats", (_req, res) => {
     cache: getCacheStats(),
     fresh_ms: FRESH_MS,
     stale_ms: STALE_MS,
-    regions: REGIONS.map((r) => ({ id: r.id, status: r.status })),
+    regions: ALL_REGIONS.map((r) => ({ id: r.id, status: r.status })),
   });
 });
 
@@ -1443,7 +2667,7 @@ function findNearestRegion(
   lon: number,
 ): { r: RegionConfig; distanceKm: number } | null {
   let best: { r: RegionConfig; distanceKm: number } | null = null;
-  for (const r of REGIONS) {
+  for (const r of ALL_REGIONS) {
     if (r.status !== "live" || r.lat == null || r.lon == null) continue;
     const distanceKm = haversineKm(lat, lon, r.lat, r.lon);
     if (!best || distanceKm < best.distanceKm) best = { r, distanceKm };
@@ -1846,6 +3070,6 @@ router.get("/local-weather", async (req, res) => {
 
 // Region ids · used by routes/engagement.ts to whitelist page labels so
 // page_view_daily cardinality stays finite (unknown labels collapse to "other").
-export const REGION_IDS: ReadonlySet<string> = new Set(REGIONS.map((r) => r.id));
+export const REGION_IDS: ReadonlySet<string> = new Set(ALL_REGIONS.map((r) => r.id));
 
 export default router;
