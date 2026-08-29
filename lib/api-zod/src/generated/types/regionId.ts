@@ -16,6 +16,7 @@ export const RegionId = {
   "snowy-mountains": "snowy-mountains",
   "victorias-high-country": "victorias-high-country",
   tasmania: "tasmania",
+  "australian-capital-territory": "australian-capital-territory",
   yamanouchi: "yamanouchi",
   "nozawa-onsen": "nozawa-onsen",
   iiyama: "iiyama",

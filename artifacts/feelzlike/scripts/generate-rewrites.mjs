@@ -23,7 +23,16 @@
  * then update artifact.toml with the fresh block and re-publish.
  */
 
-import { REGIONS, regionFeatures, townFeatures, regionMountains } from "./seo-regions.mjs";
+import { readFileSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import {
+  REGIONS,
+  regionFeatures,
+  townFeatures,
+  regionMountains,
+  publishedCatalogueMountainRoutes,
+} from "./seo-regions.mjs";
 
 const paths = [
   "/countries",
@@ -33,7 +42,7 @@ const paths = [
   "/ca",
   "/ca/all-ski-areas",
   "/us",
-  "/plan",
+  "/compare",
   "/premium",
   "/near-you",
   "/legal/privacy",
@@ -50,6 +59,10 @@ for (const r of REGIONS) {
   }
 }
 
+for (const { path } of publishedCatalogueMountainRoutes) {
+  if (!paths.includes(path)) paths.push(path);
+}
+
 const lines = [];
 for (const p of paths) {
   lines.push("[[services.production.rewrites]]");
@@ -63,5 +76,17 @@ lines.push("[[services.production.rewrites]]");
 lines.push(`from = "/*"`);
 lines.push(`to = "/index.html"`);
 
-process.stdout.write(lines.join("\n") + "\n");
-console.error(`[rewrites] ${paths.length} prerendered routes + 1 catch-all`);
+const output = lines.join("\n") + "\n";
+if (process.argv.includes("--write-artifact")) {
+  const here = dirname(fileURLToPath(import.meta.url));
+  const artifactPath = join(here, "..", ".replit-artifact", "artifact.toml");
+  const artifact = readFileSync(artifactPath, "utf8");
+  const marker = "[[services.production.rewrites]]";
+  const start = artifact.indexOf(marker);
+  if (start === -1) throw new Error(`[rewrites] no production rewrite block found in ${artifactPath}`);
+  writeFileSync(artifactPath, `${artifact.slice(0, start)}${output}`);
+  console.error(`[rewrites] wrote ${paths.length} prerendered routes + 1 catch-all to ${artifactPath}`);
+} else {
+  process.stdout.write(output);
+  console.error(`[rewrites] ${paths.length} prerendered routes + 1 catch-all`);
+}

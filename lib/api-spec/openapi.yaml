@@ -1516,6 +1516,7 @@ components:
         - snowy-mountains
         - victorias-high-country
         - tasmania
+        - australian-capital-territory
         - yamanouchi
         - nozawa-onsen
         - iiyama
@@ -1902,7 +1903,6 @@ components:
           type: array
           items:
             type: string
-          minItems: 1
         mountains:
           type: array
           items:
@@ -1925,6 +1925,7 @@ components:
       required:
         - email
         - regions
+        - mountains
         - consent
 
     SubscribeResponse:
@@ -2019,7 +2020,6 @@ components:
           type: array
           items:
             type: string
-          minItems: 1
         mountains:
           type: array
           items:
@@ -2038,6 +2038,7 @@ components:
           type: string
       required:
         - regions
+        - mountains
 
     UnsubscribeBody:
       type: object
@@ -3309,6 +3310,13 @@ components:
           type: string
         liftStatusUrl:
           type: string
+        liveStatusVerified:
+          type: boolean
+          description: >
+            True ONLY when the lift rows come from the resort's own live
+            feed fetched fresh (e.g. Thredbo's official per-lift XML).
+            False/absent means the rows are a static reference catalogue -
+            clients must NOT render open/closed claims from them.
         lastUpdated:
           type: string
       required:

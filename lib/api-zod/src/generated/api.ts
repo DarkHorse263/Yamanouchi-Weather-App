@@ -160,6 +160,7 @@ export const GetPowderAlertsQueryParams = zod.object({
       "snowy-mountains",
       "victorias-high-country",
       "tasmania",
+      "australian-capital-territory",
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
@@ -315,14 +316,13 @@ export const GetPowderAlertsResponse = zod.object({
  * Creates (or updates) a powder-alert subscription for the given email and sends a verification email. Idempotent — re-submitting with the same email updates preferences.
  * @summary Subscribe to powder alerts
  */
-
 export const subscribeToAlertsBodySnowfallThresholdCmMin = 5;
 export const subscribeToAlertsBodySnowfallThresholdCmMax = 50;
 
 export const SubscribeToAlertsBody = zod.object({
   email: zod.string().email(),
-  regions: zod.array(zod.string()).min(1),
-  mountains: zod.array(zod.string()).optional(),
+  regions: zod.array(zod.string()),
+  mountains: zod.array(zod.string()),
   snowfallThresholdCm: zod
     .number()
     .min(subscribeToAlertsBodySnowfallThresholdCmMin)
@@ -400,8 +400,8 @@ export const updateAlertPreferencesBodySnowfallThresholdCmMin = 5;
 export const updateAlertPreferencesBodySnowfallThresholdCmMax = 50;
 
 export const UpdateAlertPreferencesBody = zod.object({
-  regions: zod.array(zod.string()).min(1),
-  mountains: zod.array(zod.string()).optional(),
+  regions: zod.array(zod.string()),
+  mountains: zod.array(zod.string()),
   snowfallThresholdCm: zod
     .number()
     .min(updateAlertPreferencesBodySnowfallThresholdCmMin)
@@ -526,13 +526,12 @@ token needed. 404 when the email has no subscription yet.
 
  * @summary Update the signed-in member's powder-alert subscription
  */
-
 export const updateAccountAlertsBodySnowfallThresholdCmMin = 5;
 export const updateAccountAlertsBodySnowfallThresholdCmMax = 50;
 
 export const UpdateAccountAlertsBody = zod.object({
-  regions: zod.array(zod.string()).min(1),
-  mountains: zod.array(zod.string()).optional(),
+  regions: zod.array(zod.string()),
+  mountains: zod.array(zod.string()),
   snowfallThresholdCm: zod
     .number()
     .min(updateAccountAlertsBodySnowfallThresholdCmMin)
@@ -1240,6 +1239,7 @@ export const GetWeatherQueryParams = zod.object({
       "snowy-mountains",
       "victorias-high-country",
       "tasmania",
+      "australian-capital-territory",
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
@@ -1743,6 +1743,7 @@ export const GetWebcamsQueryParams = zod.object({
       "snowy-mountains",
       "victorias-high-country",
       "tasmania",
+      "australian-capital-territory",
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
@@ -1948,6 +1949,7 @@ export const GetRoadConditionsQueryParams = zod.object({
       "snowy-mountains",
       "victorias-high-country",
       "tasmania",
+      "australian-capital-territory",
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
@@ -2208,6 +2210,7 @@ export const GetLiftStatusQueryParams = zod.object({
       "snowy-mountains",
       "victorias-high-country",
       "tasmania",
+      "australian-capital-territory",
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
@@ -2371,6 +2374,12 @@ export const GetLiftStatusResponse = zod.object({
       seasonStatus: zod.enum(["pre-season", "open", "late-season", "closed"]),
       operatingHours: zod.string().optional(),
       liftStatusUrl: zod.string().optional(),
+      liveStatusVerified: zod
+        .boolean()
+        .optional()
+        .describe(
+          "True ONLY when the lift rows come from the resort's own live feed fetched fresh (e.g. Thredbo's official per-lift XML). False\/absent means the rows are a static reference catalogue - clients must NOT render open\/closed claims from them.\n",
+        ),
       lastUpdated: zod.string(),
     }),
   ),
@@ -2418,6 +2427,12 @@ export const GetLocationLiftStatusResponse = zod.object({
   seasonStatus: zod.enum(["pre-season", "open", "late-season", "closed"]),
   operatingHours: zod.string().optional(),
   liftStatusUrl: zod.string().optional(),
+  liveStatusVerified: zod
+    .boolean()
+    .optional()
+    .describe(
+      "True ONLY when the lift rows come from the resort's own live feed fetched fresh (e.g. Thredbo's official per-lift XML). False\/absent means the rows are a static reference catalogue - clients must NOT render open\/closed claims from them.\n",
+    ),
   lastUpdated: zod.string(),
 });
 

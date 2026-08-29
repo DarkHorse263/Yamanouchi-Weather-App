@@ -8,10 +8,24 @@ import { dailyConditionLabel } from "../lib/dailyConditionLabel.js";
 import { reconcileBomCondition } from "../lib/bom-obs.js";
 import { reconcileNzMetarDryToWet } from "../lib/metar-nz.js";
 import { partitionHourlySnowfallCm, partitionPrecipByBand, hourCountsByDay } from "../lib/openMeteoElevation.js";
+import {
+  publishedCatalogueRecords,
+  type PublicRuntimeCatalogueRecord,
+} from "@workspace/japan-ski-catalogue/public-runtime";
+import {
+  publishedRecords as publishedSkiCatalogueRecords,
+  type PublicCatalogueRecord,
+} from "@workspace/ski-catalogue/public-runtime";
+import { publishedCatalogueRecords as publishedCanadaCatalogueRecords } from "@workspace/canada-ski-catalogue/public-runtime";
+import type { PublishedCanadaSkiRecord } from "@workspace/canada-ski-catalogue";
+import {
+  publishedCatalogueRecords as publishedWesternUsCatalogueRecords,
+  type WesternUsPublishedRecord,
+} from "@workspace/western-us-ski-catalogue/public-runtime";
 
 const router: IRouter = Router();
 
-interface LocationConfig {
+export interface LocationConfig {
   id: string;
   name: string;
   latitude: number;
@@ -111,7 +125,7 @@ const LOCATIONS: LocationConfig[] = [
   },
 
   // ─── Victoria's High Country (VIC, Australia) ────────────
-  // 6 mountains + 7 base towns. BOM AWS coverage in the VIC alpine
+  // 7 mountains + 9 base towns. BOM AWS coverage in the VIC alpine
   // is patchy and the verified station IDs aren't in this file's
   // canonical list yet, so every VHC entry uses Open-Meteo as the
   // truthful primary source (elevation-corrected) - same conservative
@@ -123,6 +137,7 @@ const LOCATIONS: LocationConfig[] = [
   { id: "mt-hotham",       name: "Mt Hotham",       latitude: -36.9779, longitude: 147.1361, elevation: 1862, description: "Highest VIC resort - the steep one. Hotham Airport for direct fly-in. Dinner Plain alpine village 10 min away.",                              bomStation: "Mount Hotham AWS", bomStationId: "", bomWmoId: 94906, bomProduct: "IDV60801", timezone: "Australia/Melbourne", region: "AU" },
   { id: "lake-mountain",   name: "Lake Mountain",   latitude: -37.5181, longitude: 145.8983, elevation: 1480, description: "Nordic and snow play only - no chairlift downhill. The closest snow to Melbourne (~2 hrs via Marysville).",                                    bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
   { id: "mt-donna-buang", name: "Mt Donna Buang",   latitude: -37.6961, longitude: 145.6989, elevation: 1250, description: "Free public snow play summit run by Parks Victoria / Yarra Ranges - no resort, no lifts, just toboggans on the day.",                          bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
+  { id: "mt-baw-baw",     name: "Mt Baw Baw",       latitude: -37.8383, longitude: 146.2747, elevation: 1567, description: "Compact public alpine resort with seven lifts, downhill and cross-country skiing, snow play and an on-mountain village.",                    bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
   { id: "mansfield",       name: "Mansfield",       latitude: -37.0539, longitude: 146.0894, elevation: 320,  description: "Cattle country gateway town - 50 min drive to Mt Buller and Mt Stirling.",                                                                     bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
   { id: "bright",          name: "Bright",          latitude: -36.7300, longitude: 146.9617, elevation: 309,  description: "Great Alpine Road hub - gateway to both Falls Creek and Mt Hotham.",                                                                            bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
   { id: "mount-beauty",    name: "Mount Beauty",    latitude: -36.7327, longitude: 147.1696, elevation: 357,  description: "Closest sealed-road town to Falls Creek - 30 min up the mountain road.",                                                                       bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
@@ -130,15 +145,24 @@ const LOCATIONS: LocationConfig[] = [
   { id: "dinner-plain",    name: "Dinner Plain",    latitude: -36.9276, longitude: 147.2400, elevation: 1550, description: "Alpine village 10 min from Mt Hotham - ski-in feel without the resort prices.",                                                                bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
   { id: "marysville",      name: "Marysville",      latitude: -37.5128, longitude: 145.7497, elevation: 320,  description: "Yarra Ranges gateway town - 20 min drive to Lake Mountain.",                                                                                   bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
   { id: "warburton",       name: "Warburton",       latitude: -37.7553, longitude: 145.6906, elevation: 175,  description: "Yarra Valley town - closest base to Mt Donna Buang.",                                                                                          bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
+  { id: "rawson",          name: "Rawson",          latitude: -37.9570, longitude: 146.3990, elevation: 470,  description: "Gippsland access town below Mt Baw Baw's on-mountain village.",                                                                               bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
 
   // ─── Tasmania (TAS, Australia) ───────────────────────────
-  // 1 mountain (Ben Lomond · the only commercial chairlift) across 3 base
-  // towns (on-mountain village + Launceston + Hobart). No BOM AWS at the
-  // resort · Open-Meteo elevation-corrected is the primary source.
+  // Two operating fields: commercial Ben Lomond and volunteer/public Mount
+  // Mawson, plus their honest gateway towns. No BOM AWS at either field;
+  // elevation-corrected Open-Meteo is the primary source.
   { id: "ben-lomond",      name: "Ben Lomond",      latitude: -41.5378, longitude: 147.6736, elevation: 1572, description: "Tasmania's only commercial chairlift operation · Legges Tor summit, weather-dependent and short windows reward locals.",                bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Hobart", region: "AU" },
+  { id: "mount-mawson",    name: "Mount Mawson",    latitude: -42.6830, longitude: 146.5860, elevation: 1250, description: "Volunteer-staffed public club field in Mt Field National Park · natural-snow and conditions dependent.",                              bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Hobart", region: "AU" },
+  { id: "maydena",         name: "Maydena",         latitude: -42.7573, longitude: 146.6262, elevation: 280,  description: "Derwent Valley gateway and nearest town to Mt Field National Park and Mount Mawson.",                                                    bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Hobart", region: "AU" },
   { id: "ben-lomond-base", name: "Ben Lomond Base", latitude: -41.5392, longitude: 147.6486, elevation: 1450, description: "On-mountain village at the foot of the lifts · Carr Villa / Creek Inn precinct.",                                                       bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Hobart", region: "AU" },
   { id: "launceston",      name: "Launceston",      latitude: -41.4332, longitude: 147.1442, elevation: 30,   description: "Closest city base for Ben Lomond · ~90 min drive via Jacobs Ladder.",                                                                    bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Hobart", region: "AU" },
   { id: "hobart",          name: "Hobart",          latitude: -42.8821, longitude: 147.3272, elevation: 19,   description: "Tasmania's capital · long day-trips (~3 hrs each way) to Ben Lomond when conditions deliver.",                                           bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Hobart", region: "AU" },
+
+  // ─── Australian Capital Territory ─────────────────────────
+  // Corin Forest is a small snowmaking-led snow-play and learner facility,
+  // not a conventional alpine resort. Natural snowfall is rare.
+  { id: "corin-forest", name: "Corin Forest", latitude: -35.5294, longitude: 148.9915, elevation: 1200, description: "Small snowmaking-led snow-play and learn-to-ski facility with a beginner slope and magic carpet; natural snowfall is rare.", bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Sydney", region: "AU" },
+  { id: "canberra", name: "Canberra", latitude: -35.2809, longitude: 149.1300, elevation: 578, description: "Capital-city base about 45 minutes from Corin Forest.", bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Sydney", region: "AU" },
 
   // ─── Yamanouchi (Nagano, Japan) ──────────────────────────
   // 22 individually-tracked mountains. Shiga Kogen is one Ikon-Pass connected
@@ -779,6 +803,89 @@ const LOCATIONS: LocationConfig[] = [
   { id: "highmount", name: "Highmount", latitude: 42.147, longitude: -74.514, elevation: 536, description: "Catskills base settlement for Belleayre Mountain.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
 ];
 
+/**
+ * Published catalogue entries use only model data: no unverified lift,
+ * base-depth, station, or alert-feed claims are implied by this adapter.
+ */
+export function canadaCatalogueTimezone(province: string): string {
+  const timezones: Record<string, string> = {
+    "British Columbia": "America/Vancouver",
+    Alberta: "America/Edmonton",
+    Saskatchewan: "America/Regina",
+    Manitoba: "America/Winnipeg",
+    Ontario: "America/Toronto",
+    Quebec: "America/Toronto",
+    "New Brunswick": "America/Halifax",
+    "Nova Scotia": "America/Halifax",
+    "Prince Edward Island": "America/Halifax",
+    "Newfoundland and Labrador": "America/St_Johns",
+  };
+  const timezone = timezones[province];
+  if (!timezone) throw new Error(`[canada-catalogue] unknown province timezone: "${province}"`);
+  return timezone;
+}
+
+function catalogueLocation(record: PublicRuntimeCatalogueRecord | PublishedCanadaSkiRecord): LocationConfig {
+  return {
+    id: record.publicId,
+    name: record.name,
+    latitude: record.coordinates.lat,
+    longitude: record.coordinates.lng,
+    elevation: record.forecastElevationM,
+    description: `${record.name} weather forecast.`,
+    bomStation: "Open-Meteo (catalogue forecast location)",
+    bomStationId: "",
+    bomWmoId: 0,
+    timezone: record.countryCode === "CA" ? canadaCatalogueTimezone(record.province) : "Asia/Tokyo",
+    region: record.countryCode,
+  };
+}
+
+function skiCatalogueLocation(record: PublicCatalogueRecord): LocationConfig {
+  return {
+    id: record.publicId,
+    name: record.name,
+    latitude: record.coordinates.lat,
+    longitude: record.coordinates.lng,
+    elevation: record.forecastElevationM,
+    description: `${record.name} weather forecast.`,
+    bomStation: "Open-Meteo (catalogue forecast location)",
+    bomStationId: "",
+    bomWmoId: 0,
+    timezone: record.timezone,
+    region: record.countryCode as LocationConfig["region"],
+  };
+}
+
+const HARD_CODED_LOCATION_IDS = new Set(LOCATIONS.map((location) => location.id));
+const ALL_CATALOGUE_RECORDS = [...publishedCatalogueRecords, ...publishedCanadaCatalogueRecords];
+const CATALOGUE_LOCATIONS = [
+  ...ALL_CATALOGUE_RECORDS.map(catalogueLocation),
+  ...publishedSkiCatalogueRecords.map(skiCatalogueLocation),
+  ...publishedWesternUsCatalogueRecords.map(westernUsCatalogueLocation),
+];
+const CATALOGUE_LOCATION_BY_ID = new Map<string, LocationConfig>();
+
+/**
+ * Builds the public-id/alias index at module load so a catalogue collision
+ * fails boot and tests rather than silently changing an existing location.
+ */
+for (const record of [...ALL_CATALOGUE_RECORDS, ...publishedSkiCatalogueRecords, ...publishedWesternUsCatalogueRecords]) {
+  for (const id of [record.publicId, ...record.aliases]) {
+    if (HARD_CODED_LOCATION_IDS.has(id) || CATALOGUE_LOCATION_BY_ID.has(id)) {
+      throw new Error(`[catalogue] location id/alias collision: "${id}"`);
+    }
+    const location = CATALOGUE_LOCATIONS.find((candidate) => candidate.id === record.publicId);
+    if (!location) throw new Error(`[catalogue] missing location for "${record.publicId}"`);
+    CATALOGUE_LOCATION_BY_ID.set(id, location);
+  }
+}
+const ALL_LOCATIONS: readonly LocationConfig[] = [...LOCATIONS, ...CATALOGUE_LOCATIONS];
+
+export function resolveWeatherLocation(locationId: string): LocationConfig | undefined {
+  return LOCATIONS.find((location) => location.id === locationId) ?? CATALOGUE_LOCATION_BY_ID.get(locationId);
+}
+
 const WEATHER_DESCRIPTIONS: Record<number, string> = {
   0: "Clear sky",
   1: "Mainly clear",
@@ -1387,26 +1494,13 @@ async function fetchOpenMeteo(location: LocationConfig) {
 router.get("/weather", async (req, res) => {
   try {
     const region = parseRegionParam(req.query["region"]);
+    // Region is optional in the published API contract. Global and filtered
+    // reads share the same per-location cache/coalescing path and bounded
+    // worker queue, so a global cache miss never becomes an unbounded fan-out.
     const sources = region
-      ? LOCATIONS.filter((loc) => locationMatchesRegion(loc.id, region))
-      : LOCATIONS;
-
-    // Use allSettled so a single Open-Meteo / BOM hiccup at one resort
-    // doesn't take down the entire /weather feed (which the AU dashboard
-    // depends on). Failed locations are dropped from the list and logged.
-    const settled = await Promise.all(
-      sources.map(async (loc) => {
-        try {
-          return await fetchLocationWeather(loc);
-        } catch (err) {
-          console.warn(
-            `[weather] dropping ${loc.id}: ${err instanceof Error ? err.message : String(err)}`,
-          );
-          return null;
-        }
-      }),
-    );
-    const locations = settled.filter((x): x is NonNullable<typeof x> => x !== null);
+      ? ALL_LOCATIONS.filter((loc) => locationMatchesRegion(loc.id, region))
+      : ALL_LOCATIONS;
+    const locations = await fetchBulkWeatherCached(sources);
 
     const result = GetWeatherResponse.parse({
       locations,
@@ -1440,6 +1534,51 @@ const WEATHER_FRESH_MS = 10 * 60 * 1000; // 10 minutes
 const WEATHER_STALE_MS = 6 * 60 * 60 * 1000; // 6 hours
 const weatherCache = new Map<string, WeatherCacheEntry>();
 const weatherInflight = new Map<string, Promise<unknown>>();
+let weatherFetcher: (location: LocationConfig, snowElevationM?: number) => Promise<unknown> =
+  fetchLocationWeather;
+
+// Four cache misses at once keeps region pages responsive without hammering
+// Open-Meteo/BOM. Cache hits and callers joining an in-flight key are cheap,
+// but use the same worker queue for deterministic pressure.
+export const BULK_WEATHER_CONCURRENCY = 4;
+
+async function fetchBulkWeatherCached(locations: readonly LocationConfig[]): Promise<unknown[]> {
+  const results: Array<unknown | null> = new Array(locations.length).fill(null);
+  let nextIndex = 0;
+  const worker = async (): Promise<void> => {
+    while (nextIndex < locations.length) {
+      const index = nextIndex++;
+      const location = locations[index]!;
+      try {
+        results[index] = await getLocationWeatherCached(location);
+      } catch (err) {
+        console.warn(
+          `[weather] dropping ${location.id}: ${err instanceof Error ? err.message : String(err)}`,
+        );
+      }
+    }
+  };
+  await Promise.all(
+    Array.from(
+      { length: Math.min(BULK_WEATHER_CONCURRENCY, locations.length) },
+      () => worker(),
+    ),
+  );
+  return results.filter((result): result is unknown => result !== null);
+}
+
+/** Test seam for cache/coalescing tests; production never replaces the fetcher. */
+export function setWeatherFetcherForTests(
+  fetcher: (location: LocationConfig, snowElevationM?: number) => Promise<unknown>,
+): void {
+  weatherFetcher = fetcher;
+}
+
+export function resetWeatherRuntimeForTests(): void {
+  weatherFetcher = fetchLocationWeather;
+  weatherCache.clear();
+  weatherInflight.clear();
+}
 
 /**
  * Optional on-mountain snow-outlook elevation, in metres. Lenient: an absent
@@ -1468,7 +1607,7 @@ async function getLocationWeatherCached(
   let inflight = weatherInflight.get(cacheKey);
   if (!inflight) {
     inflight = (async () => {
-      const weatherData = await fetchLocationWeather(location, snowElevationM);
+      const weatherData = await weatherFetcher(location, snowElevationM);
       const result = GetLocationWeatherResponse.parse(weatherData);
       weatherCache.set(cacheKey, {
         data: result,
@@ -1496,13 +1635,13 @@ router.get("/weather/:locationId", async (req, res) => {
     // Validate the path-param shape via the generated zod schema (regex
     // `^[a-z0-9-]+$`). The actual id->location resolution still happens
     // against LOCATIONS below, which is the source of truth.
-    const { locationId } = GetLocationWeatherParams.parse(req.params);
-    const location = LOCATIONS.find(l => l.id === locationId);
+    const { locationId } = GetResortSnowReportParams.parse(req.params);
+    const location = resolveWeatherLocation(locationId);
 
     if (!location) {
       res.status(404).json({
         error: "LOCATION_NOT_FOUND",
-        message: `Location '${locationId}' not found. Valid locations: ${LOCATIONS.map(l => l.id).join(", ")}`
+        message: `Location '${locationId}' not found.`
       });
       return;
     }
@@ -1532,7 +1671,7 @@ router.get("/weather/:locationId/snow-report", async (req, res) => {
   try {
     const { locationId } = GetResortSnowReportParams.parse(req.params);
     // Unknown ids also degrade to null (mirrors the always-200 contract).
-    const location = LOCATIONS.find((l) => l.id === locationId);
+    const location = resolveWeatherLocation(locationId);
     if (!location) {
       res.json({ locationId, report: null });
       return;
@@ -1552,7 +1691,7 @@ router.get("/weather/:locationId/snow-report", async (req, res) => {
 router.get("/forecast/:locationId", async (req, res) => {
   try {
     const locationId = String(req.params.locationId ?? "");
-    const location = LOCATIONS.find(l => l.id === locationId);
+    const location = resolveWeatherLocation(locationId);
     if (!location) {
       res.status(404).json({ error: "LOCATION_NOT_FOUND" });
       return;
@@ -1592,6 +1731,31 @@ router.get("/forecast/:locationId", async (req, res) => {
 
 /** All location ids served by `/weather/:locationId`. Source of truth used
  *  by the boot-time location-id contract validator (lib/validate-locations). */
-export const WEATHER_LOCATION_IDS = LOCATIONS.map((l) => l.id);
+export const WEATHER_LOCATION_IDS = ALL_LOCATIONS.map((l) => l.id);
+export const WEATHER_LOCATION_ALIASES = [...CATALOGUE_LOCATION_BY_ID.keys()].filter(
+  (id) => !CATALOGUE_LOCATIONS.some((location) => location.id === id),
+);
+
+// Catalogue records intentionally remain unavailable to the alert evaluator:
+// its region-anchor pipeline has no per-catalogue-location contract. The
+// catalogue honesty.runtimeIntegrated flag remains false until that pipeline
+// can consume these dynamic locations end-to-end.
+export const CATALOGUE_LOCATION_ALERTS_AVAILABLE = false;
 
 export default router;
+
+function westernUsCatalogueLocation(record: WesternUsPublishedRecord): LocationConfig {
+  return {
+    id: record.publicId,
+    name: record.name,
+    latitude: record.coordinates.lat,
+    longitude: record.coordinates.lng,
+    elevation: record.forecastElevationM,
+    description: `${record.name} weather forecast.`,
+    bomStation: "Open-Meteo (catalogue forecast location)",
+    bomStationId: "",
+    bomWmoId: 0,
+    timezone: record.timezone,
+    region: "US",
+  };
+}

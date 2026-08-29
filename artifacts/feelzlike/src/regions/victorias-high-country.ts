@@ -15,10 +15,11 @@ import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_1604
  *   Marysville     -> Lake Mountain (gateway town)
  *   Warburton      -> Mt Donna Buang (closest town to the snow gum summit)
  *
- * Six mountain entries, but Mt Stirling is presented as Buller's nordic
+ * Seven mountain entries, but Mt Stirling is presented as Buller's nordic
  * sister (separate access, shared Mansfield gateway). Lake Mountain and
  * Mt Donna Buang use the new `snow_play_only` tag - neither has chairlift
  * downhill skiing. Stirling and Lake Mountain also carry `nordic_focus`.
+ * Closed Mount Buffalo remains deliberately excluded.
  */
 export const victoriasHighCountryRegion: RegionConfig = {
   id: "victorias-high-country",
@@ -35,6 +36,7 @@ export const victoriasHighCountryRegion: RegionConfig = {
     { path: "/mountain/mt-stirling",     label: "Mt Stirling" },
     { path: "/mountain/lake-mountain",   label: "Lake Mountain" },
     { path: "/mountain/mt-donna-buang",  label: "Mt Donna Buang" },
+    { path: "/mountain/mt-baw-baw",      label: "Mt Baw Baw" },
   ],
   mountains: [
     // Mt Buller: VIC's biggest day-tripper. Full-service alpine village,
@@ -56,8 +58,20 @@ export const victoriasHighCountryRegion: RegionConfig = {
     // Mt Donna Buang: free public snow play summit run by Yarra Ranges
     // / Parks Victoria. No resort, no lifts - just toboggans on the day.
     { id: "mt-donna-buang", name: "Mt Donna Buang",   elevationM: 1250, lat: -37.6961, lng: 145.6989, blurb: "VIC · free snow play summit · 1.5 hrs from Melbourne", websiteUrl: "https://www.parks.vic.gov.au/places-to-see/parks/yarra-ranges-national-park", snow_play_only: true },
+    // Mt Baw Baw: seven public lifts, downhill, cross-country and snow play,
+    // with an on-mountain village. Rawson is the honest off-mountain gateway.
+    { id: "mt-baw-baw", name: "Mt Baw Baw", elevationM: 1567, lat: -37.8383, lng: 146.2747, blurb: "VIC · alpine village · 7 lifts · downhill, nordic & snow play", websiteUrl: "https://www.mountbawbaw.com.au/", beginner_friendly: true, kids_lessons: true },
   ],
   baseTowns: [
+    {
+      id: "rawson",
+      name: "Rawson",
+      lat: -37.9570,
+      lng: 146.3990,
+      radiusM: 3000,
+      blurb: "Gippsland gateway · access town below Mt Baw Baw's alpine village",
+      nearbyMountainIds: ["mt-baw-baw"],
+    },
     {
       id: "mansfield",
       name: "Mansfield",
@@ -144,6 +158,7 @@ export const victoriasHighCountryRegion: RegionConfig = {
     { category: "Resorts", label: "Falls Creek", url: "https://www.fallscreek.com.au" },
     { category: "Resorts", label: "Mt Hotham", url: "https://www.mthotham.com.au" },
     { category: "Resorts", label: "Lake Mountain Alpine Resort", url: "https://www.lakemountainresort.com.au" },
+    { category: "Resorts", label: "Mt Baw Baw Alpine Resort", url: "https://www.mountbawbaw.com.au/" },
   ],
   weatherSource: {
     label: "Open-Meteo + BOM",
