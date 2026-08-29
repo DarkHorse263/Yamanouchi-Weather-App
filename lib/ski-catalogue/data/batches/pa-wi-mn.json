@@ -1641,7 +1641,7 @@
       "evidence": [
         {
           "url": "https://www.pa.gov/agencies/dcnr/recreation/where-to-go/state-parks/find-a-park/denton-hill-state-park",
-          "retrievedAt": "2026-08-27",
+          "retrievedAt": "2026-08-29",
           "supports": [
             "identity",
             "status",
@@ -1654,7 +1654,7 @@
         },
         {
           "url": "https://www.dentongo.com/",
-          "retrievedAt": "2026-08-27",
+          "retrievedAt": "2026-08-29",
           "supports": [
             "identity",
             "status",
@@ -1670,16 +1670,17 @@
     },
     {
       "recordId": "mountain-view-at-edinboro-pa",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "lifecycleHistory": [
         "draft",
-        "verified"
+        "verified",
+        "published"
       ],
-      "classification": "duplicate_renamed",
+      "classification": "verified_operating",
       "country": "United States",
       "countryCode": "US",
       "identity": {
-        "publicId": "mountain-view-at-edinboro-pa",
+        "publicId": "mount-pleasant-of-edinboro",
         "name": "Mount Pleasant of Edinboro",
         "aliases": [
           "Mountain View at Edinboro",
@@ -1706,19 +1707,74 @@
       "evidence": [
         {
           "url": "https://www.skimountpleasant.com/",
-          "retrievedAt": "2026-08-27",
-          "supports": [
-            "identity",
-            "status",
-            "coordinates",
-            "elevations",
-            "locality",
-            "officialUrl"
-          ],
-          "claim": "The current operator uses the name Mount Pleasant of Edinboro and publishes active family snow-sports information; Mountain View at Edinboro is an obsolete name for this area."
+          "retrievedAt": "2026-08-29",
+          "claim": "The current operator uses the name Mount Pleasant of Edinboro and publishes current skiing, snowboarding, tubing, lessons, rentals, and season-pass information; Mountain View at Edinboro is a former name for the same facility.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "mount-pleasant-of-edinboro",
+                "name": "Mount Pleasant of Edinboro",
+                "aliases": [
+                  "Mountain View at Edinboro",
+                  "Mount Pleasant"
+                ]
+              },
+              "citation": "The current operator identifies the facility as Mount Pleasant of Edinboro; Mountain View at Edinboro is retained only as a former-name alias."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official site publishes current winter activities, lessons, rentals, and season-pass information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.skimountpleasant.com/",
+              "citation": "This is the current operator website."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-pa",
+                "regionName": "Pennsylvania",
+                "stateOrProvince": "Pennsylvania",
+                "localityId": "edinboro",
+                "localityName": "Edinboro"
+              },
+              "citation": "The operator identifies the ski area as Mount Pleasant of Edinboro."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=41.85105&mlon=-80.07435#map=16/41.85105/-80.07435",
+          "retrievedAt": "2026-08-29",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 41.85105,
+                "lng": -80.07435
+              },
+              "citation": "Map marker at 41.85105, -80.07435."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-80.07435&y=41.85105&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-29",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 427,
+              "citation": "EPQS elevation rounded to 427 metres."
+            }
+          ]
         }
       ],
-      "timezone": "America/New_York"
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
     },
     {
       "recordId": "whitecap-mountains-resort-wi",

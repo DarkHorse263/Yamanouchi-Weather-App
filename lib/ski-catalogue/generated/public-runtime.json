@@ -219,6 +219,10 @@
           "name": "Iron Mountain"
         },
         {
+          "localityId": "norway",
+          "name": "Norway"
+        },
+        {
           "localityId": "silver-city",
           "name": "Silver City"
         },
@@ -719,6 +723,10 @@
         {
           "localityId": "plum",
           "name": "Plum"
+        },
+        {
+          "localityId": "edinboro",
+          "name": "Edinboro"
         }
       ]
     },
@@ -1634,6 +1642,34 @@
       "facilityType": "alpine",
       "accessModel": "Public lift-served ski area.",
       "publicCopy": "Pine Mountain Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "norway-mountain",
+      "publicId": "norway-mountain",
+      "aliases": [
+        "Norway Mountain Ski and Snowboard Resort"
+      ],
+      "name": "Norway Mountain",
+      "coordinates": {
+        "lat": 45.7913534,
+        "lng": -87.8679665
+      },
+      "forecastElevationM": 364,
+      "officialUrl": "https://norwaymt.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "norway",
+      "localityName": "Norway",
+      "route": "/us-mi/mountain/norway-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Norway Mountain is an outdoor lift-served ski area.",
       "weatherEligible": true,
       "alertEligible": true
     },
@@ -4430,6 +4466,35 @@
       "facilityType": "alpine",
       "accessModel": "Public lift-served ski area.",
       "publicCopy": "Boyce Park Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mountain-view-at-edinboro-pa",
+      "publicId": "mount-pleasant-of-edinboro",
+      "aliases": [
+        "Mountain View at Edinboro",
+        "Mount Pleasant"
+      ],
+      "name": "Mount Pleasant of Edinboro",
+      "coordinates": {
+        "lat": 41.85105,
+        "lng": -80.07435
+      },
+      "forecastElevationM": 427,
+      "officialUrl": "https://www.skimountpleasant.com/",
+      "regionId": "us-pa",
+      "regionName": "Pennsylvania",
+      "stateOrProvince": "Pennsylvania",
+      "localityId": "edinboro",
+      "localityName": "Edinboro",
+      "route": "/us-pa/mountain/mount-pleasant-of-edinboro",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mount Pleasant of Edinboro is an outdoor lift-served ski area.",
       "weatherEligible": true,
       "alertEligible": true
     },
