@@ -185,6 +185,22 @@ router.post("/alerts/subscribe", requireEntitlement("alerts.snow"), async (req, 
     const tmpl = verificationEmail(verifyUrl);
     const send = await sendEmail({ to: email, subject: tmpl.subject, html: tmpl.html, text: tmpl.text, tag: "alert_verify" });
 
+    if (!send.delivered && send.provider === "resend") {
+      if (send.permanent) {
+        res.status(422).json({
+          error: "EMAIL_DELIVERY_BLOCKED",
+          message:
+            "We couldn't send to that address because an earlier email bounced or was reported as spam. Check the address or use another one.",
+        });
+      } else {
+        res.status(503).json({
+          error: "EMAIL_DELIVERY_FAILED",
+          message: "We couldn't send the confirmation email right now. Please try again shortly.",
+        });
+      }
+      return;
+    }
+
     res.json({
       ok: true,
       status: "verification_sent",

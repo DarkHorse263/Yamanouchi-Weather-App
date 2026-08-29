@@ -2003,6 +2003,10 @@ export type AuthorizationSessionHeaderParameter = string;
 
 export type RegionFilterParameter = RegionId;
 
+export type ReceiveResendWebhookBody = { [key: string]: unknown };
+
+export type ReceiveResendWebhook200 = { [key: string]: unknown };
+
 export type GetPowderAlertsParams = {
   /**
  * Canonical region identifier used across the FeelZlike platform.

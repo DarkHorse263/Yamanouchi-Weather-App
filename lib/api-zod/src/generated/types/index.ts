@@ -106,6 +106,8 @@ export * from "./mobileTokenExchangeSuccess";
 export * from "./powderAlert";
 export * from "./powderAlertAlertLevel";
 export * from "./priceBand";
+export * from "./receiveResendWebhook200";
+export * from "./receiveResendWebhookBody";
 export * from "./regionFilterParameter";
 export * from "./regionId";
 export * from "./regionOutlook";

@@ -1,3 +1,6 @@
+import { db, emailDeliveryIncidentsTable } from "@workspace/db";
+import { desc, eq } from "drizzle-orm";
+
 /**
  * Email sender. Uses Resend if `RESEND_API_KEY` is set; otherwise logs to
  * console (dev-mode fallback) so the rest of the alert flow is testable
@@ -80,6 +83,40 @@ export async function sendEmail(args: SendArgs): Promise<SendResult> {
   if (apiKey.length < 10 || apiKey === "placeholder") {
     console.warn("[emailSender] RESEND_API_KEY looks like a placeholder - skipping send");
     return { delivered: false, provider: "console", error: "placeholder_api_key" };
+  }
+
+  const normalizedTo = args.to.trim().toLowerCase();
+  try {
+    const [incident] = await db
+      .select({
+        type: emailDeliveryIncidentsTable.type,
+        createdAt: emailDeliveryIncidentsTable.createdAt,
+      })
+      .from(emailDeliveryIncidentsTable)
+      .where(eq(emailDeliveryIncidentsTable.email, normalizedTo))
+      .orderBy(desc(emailDeliveryIncidentsTable.createdAt))
+      .limit(1);
+    if (incident) {
+      const detail = `known ${incident.type} recipient (${incident.createdAt.toISOString()})`;
+      noteSendFailure(normalizedTo, detail);
+      return {
+        delivered: false,
+        provider: "resend",
+        error: `known_delivery_incident:${incident.type}`,
+        permanent: true,
+      };
+    }
+  } catch (err) {
+    // Do not bypass complaint/bounce suppression when its durable record is
+    // unavailable. Callers receive a transient failure and may retry once the
+    // database recovers.
+    console.error("[emailSender] could not check delivery incidents · send suppressed:", err);
+    return {
+      delivered: false,
+      provider: "resend",
+      error: "delivery_incident_check_failed",
+      permanent: false,
+    };
   }
 
   try {

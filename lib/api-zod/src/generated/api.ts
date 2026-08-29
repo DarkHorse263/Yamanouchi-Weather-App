@@ -16,6 +16,28 @@ export const HealthCheckResponse = zod.object({
 });
 
 /**
+ * Signature-verified Resend webhook. Records email.bounced and
+email.complained events so future sends to affected addresses can be
+suppressed. Other signed Resend events are acknowledged and ignored.
+The endpoint requires the svix-id, svix-timestamp, and svix-signature
+headers and the RESEND_WEBHOOK_SECRET environment secret.
+
+ * @summary Receive Resend email delivery events
+ */
+export const ReceiveResendWebhookHeader = zod.object({
+  "svix-id": zod.string(),
+  "svix-timestamp": zod.string(),
+  "svix-signature": zod.string(),
+});
+
+export const ReceiveResendWebhookBody = zod.record(zod.string(), zod.unknown());
+
+export const ReceiveResendWebhookResponse = zod.record(
+  zod.string(),
+  zod.unknown(),
+);
+
+/**
  * Returns aggregated conditions across all Yamanouchi ski areas
  * @summary Get home dashboard data
  */

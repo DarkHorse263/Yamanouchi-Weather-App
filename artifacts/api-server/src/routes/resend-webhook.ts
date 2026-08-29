@@ -22,7 +22,8 @@ import { db, emailDeliveryIncidentsTable } from "@workspace/db";
  *     route mounts its own express.raw parser BEFORE the app-wide
  *     express.json() ever touches it.
  *   - We deliberately do NOT auto-unsubscribe a matching alert/newsletter
- *     subscriber — a single bounce/complaint is recorded, not acted on.
+ *     subscriber — a single bounce/complaint suppresses future sends but does
+ *     not silently change the person's subscription preferences.
  */
 
 const router: IRouter = Router();
@@ -39,7 +40,7 @@ let warnedUnconfigured = false;
  * The `svix-signature` header is a space-delimited list of `v1,<sig>`
  * versioned signatures; a match on any one (constant-time) passes.
  */
-function verifySvixSignature(params: {
+export function verifySvixSignature(params: {
   secret: string;
   id: string;
   timestamp: string;
@@ -162,11 +163,21 @@ router.post(
       null;
 
     try {
-      await db.insert(emailDeliveryIncidentsTable).values({
-        email,
-        type: incidentType,
-        reason: reason || null,
-      });
+      const recorded = await db
+        .insert(emailDeliveryIncidentsTable)
+        .values({
+          providerEventId: svixId,
+          email,
+          type: incidentType,
+          reason: reason || null,
+        })
+        .onConflictDoNothing({ target: emailDeliveryIncidentsTable.providerEventId })
+        .returning({ id: emailDeliveryIncidentsTable.id });
+      if (recorded.length > 0) {
+        console.warn(
+          `[webhooks/resend] recorded ${incidentType} for ${email}${reason ? ` · ${reason}` : ""} (event ${svixId})`,
+        );
+      }
     } catch (err) {
       // A DB hiccup shouldn't make Resend retry forever, but we do want to
       // know · log and 500 so Resend redelivers a genuinely-lost event.

@@ -160,22 +160,24 @@ function SourcesCard({ sources }: { sources: Array<{ source: string; count: numb
  * EmailIncidentsCard · async Resend delivery failures.
  *
  * Resend can accept a send (HTTP 200) then hard-bounce or be marked as spam
- * minutes later — the synchronous send path never sees that, so a magic-link
- * visitor with a dead address just waits forever. POST /api/webhooks/resend
- * records those bounce/complaint events; this shows the latest 50 so the
- * owner can spot a bad sign-in address. We record only · we never auto-
- * unsubscribe a matching subscriber.
+ * minutes later. POST /api/webhooks/resend records those bounce/complaint
+ * events for email sent directly by this API; this shows the latest 50.
+ * Authentication email is delivered and suppressed independently by Clerk.
  */
 function EmailIncidentsCard({ incidents }: { incidents: EmailIncident[] }) {
   return (
     <div className="rounded-lg border bg-white p-5">
       <h3 className="text-sm font-semibold mb-1 lowercase">email delivery incidents</h3>
       <p className="text-xs text-muted-foreground mb-3">
-        bounces & spam complaints reported by resend after a send was accepted · latest 50 ·
-        recorded only, subscribers are never auto-removed
+        powder-alert & account-email bounces reported by resend · latest 50 ·
+        future sends are blocked, subscribers are never auto-removed
+      </p>
+      <p className="text-xs text-muted-foreground mb-3">
+        sign-in & sign-up mail is handled separately by clerk · check clerk email logs for
+        bounce, spam report and dropped events
       </p>
       {incidents.length === 0 ? (
-        <p className="text-sm text-muted-foreground">none · all mail is landing.</p>
+        <p className="text-sm text-muted-foreground">no app-sent email incidents recorded.</p>
       ) : (
         <ul className="divide-y text-sm">
           {incidents.map((i) => (

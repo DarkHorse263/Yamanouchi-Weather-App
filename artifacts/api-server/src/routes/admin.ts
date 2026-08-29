@@ -392,8 +392,8 @@ router.get("/recent-signups", async (_req: Request, res: Response) => {
 // ── Email deliverability incidents ────────────────────────────────────────
 // GET /api/admin/email-incidents · the latest 50 bounces/complaints recorded
 // by POST /api/webhooks/resend. Surfaces async Resend failures (accept-then-
-// bounce) that never show up in the synchronous send path, so the owner can
-// spot a dead sign-in address instead of leaving the visitor waiting.
+// bounce) for mail sent directly by this API. Clerk owns authentication email,
+// its bounce log, and its independent suppression list.
 router.get("/email-incidents", async (_req: Request, res: Response) => {
   try {
     const incidents = await db

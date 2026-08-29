@@ -63,6 +63,8 @@ import type {
   LocationWebcams,
   ManageResponse,
   MapMarker,
+  ReceiveResendWebhook200,
+  ReceiveResendWebhookBody,
   RegionOutlook,
   Resort,
   ResortLiftStatus,
@@ -170,6 +172,99 @@ export function useHealthCheck<
 
   return { ...query, queryKey: queryOptions.queryKey };
 }
+
+/**
+ * Signature-verified Resend webhook. Records email.bounced and
+email.complained events so future sends to affected addresses can be
+suppressed. Other signed Resend events are acknowledged and ignored.
+The endpoint requires the svix-id, svix-timestamp, and svix-signature
+headers and the RESEND_WEBHOOK_SECRET environment secret.
+
+ * @summary Receive Resend email delivery events
+ */
+export const getReceiveResendWebhookUrl = () => {
+  return `/api/webhooks/resend`;
+};
+
+export const receiveResendWebhook = async (
+  receiveResendWebhookBody: ReceiveResendWebhookBody,
+  options?: RequestInit,
+): Promise<ReceiveResendWebhook200> => {
+  return customFetch<ReceiveResendWebhook200>(getReceiveResendWebhookUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(receiveResendWebhookBody),
+  });
+};
+
+export const getReceiveResendWebhookMutationOptions = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof receiveResendWebhook>>,
+    TError,
+    { data: BodyType<ReceiveResendWebhookBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof receiveResendWebhook>>,
+  TError,
+  { data: BodyType<ReceiveResendWebhookBody> },
+  TContext
+> => {
+  const mutationKey = ["receiveResendWebhook"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof receiveResendWebhook>>,
+    { data: BodyType<ReceiveResendWebhookBody> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return receiveResendWebhook(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type ReceiveResendWebhookMutationResult = NonNullable<
+  Awaited<ReturnType<typeof receiveResendWebhook>>
+>;
+export type ReceiveResendWebhookMutationBody =
+  BodyType<ReceiveResendWebhookBody>;
+export type ReceiveResendWebhookMutationError = ErrorType<void>;
+
+/**
+ * @summary Receive Resend email delivery events
+ */
+export const useReceiveResendWebhook = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof receiveResendWebhook>>,
+    TError,
+    { data: BodyType<ReceiveResendWebhookBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof receiveResendWebhook>>,
+  TError,
+  { data: BodyType<ReceiveResendWebhookBody> },
+  TContext
+> => {
+  return useMutation(getReceiveResendWebhookMutationOptions(options));
+};
 
 /**
  * Returns aggregated conditions across all Yamanouchi ski areas
