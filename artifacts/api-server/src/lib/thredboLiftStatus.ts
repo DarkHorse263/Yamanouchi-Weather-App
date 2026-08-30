@@ -57,11 +57,14 @@ function mapLiftType(raw: string, name: string): LiveLift["type"] {
   if (t === "gondola") return "gondola";
   if (t === "tbar" || t === "t-bar") return "t-bar";
   if (t === "poma") return "poma";
-  if (["quad", "double", "triple", "six", "chairlift", "chair"].includes(t)) return "chairlift";
+  if (["quad", "double", "triple", "six", "chairlift", "chair"].includes(t))
+    return "chairlift";
   // Thredbo tags its beginner carpets liftType="surface"; call the ones that
   // are clearly carpets what they are.
-  if (t === "surface" && /carpet|snow runner|conveyor/i.test(name)) return "magic-carpet";
-  if (t === "surface" || t === "carpet") return t === "carpet" ? "magic-carpet" : "surface";
+  if (t === "surface" && /carpet|snow runner|conveyor/i.test(name))
+    return "magic-carpet";
+  if (t === "surface" || t === "carpet")
+    return t === "carpet" ? "magic-carpet" : "surface";
   // Blank liftType (e.g. "Merritts Gondola (Scenic)") - infer from the name.
   if (/gondola/i.test(name)) return "gondola";
   if (/t-bar|tbar/i.test(name)) return "t-bar";
@@ -81,7 +84,7 @@ function mapStatus(open: boolean, rawStatus: string): LiveLift["status"] {
   return "closed";
 }
 
-function slugify(name: string): string {
+export function thredboLiftIdForName(name: string): string {
   return (
     "thredbo-" +
     name
@@ -92,7 +95,10 @@ function slugify(name: string): string {
 }
 
 /** Strict parse of the feed XML. Returns null on any structural surprise. */
-export function parseThredboLiftXml(raw: string, nowMs = Date.now()): ThredboLiveLiftStatus | null {
+export function parseThredboLiftXml(
+  raw: string,
+  nowMs = Date.now(),
+): ThredboLiveLiftStatus | null {
   // htmlEntities: feed attribute values carry numeric entities (e.g.
   // name="Syd&#039;s Snow Runner") which would otherwise render literally.
   const parser = new XMLParser({
@@ -117,23 +123,35 @@ export function parseThredboLiftXml(raw: string, nowMs = Date.now()): ThredboLiv
   // open/closed picture as today's.
   if (nowMs - updatedMs > MAX_FEED_AGE_MS) return null;
 
-  const areas = Array.isArray(report.area) ? report.area : report.area ? [report.area] : [];
+  const areas = Array.isArray(report.area)
+    ? report.area
+    : report.area
+      ? [report.area]
+      : [];
   const lifts: LiveLift[] = [];
   const seen = new Set<string>();
   for (const area of areas) {
-    const rows = Array.isArray(area?.lift) ? area.lift : area?.lift ? [area.lift] : [];
+    const rows = Array.isArray(area?.lift)
+      ? area.lift
+      : area?.lift
+        ? [area.lift]
+        : [];
     for (const row of rows) {
       const name = String(row?.["@_name"] ?? "").trim();
-      const openRaw = String(row?.["@_open"] ?? "").trim().toLowerCase();
+      const openRaw = String(row?.["@_open"] ?? "")
+        .trim()
+        .toLowerCase();
       if (!name || (openRaw !== "true" && openRaw !== "false")) continue;
       const open = openRaw === "true";
-      let id = slugify(name);
+      let id = thredboLiftIdForName(name);
       // Feed can repeat names across areas (e.g. scenic vs winter gondola
       // rows are distinct names, but be safe about collisions).
       while (seen.has(id)) id = `${id}-2`;
       seen.add(id);
-      const openingTime = String(row?.["@_openingTime"] ?? "").trim() || undefined;
-      const closingTime = String(row?.["@_closingTime"] ?? "").trim() || undefined;
+      const openingTime =
+        String(row?.["@_openingTime"] ?? "").trim() || undefined;
+      const closingTime =
+        String(row?.["@_closingTime"] ?? "").trim() || undefined;
       lifts.push({
         id,
         name,
@@ -150,7 +168,8 @@ export function parseThredboLiftXml(raw: string, nowMs = Date.now()): ThredboLiv
   return { lifts, updatedAt };
 }
 
-let cache: { fetchedAt: number; value: ThredboLiveLiftStatus | null } | null = null;
+let cache: { fetchedAt: number; value: ThredboLiveLiftStatus | null } | null =
+  null;
 let inflight: Promise<ThredboLiveLiftStatus | null> | null = null;
 
 export async function fetchFreshThredboLiftStatus(): Promise<ThredboLiveLiftStatus | null> {
