@@ -1,11 +1,19 @@
 import type { TransportProviderList } from "@/types/transport";
 
-/**
- * Telluride (Colorado, USA) transport providers.
- *
- * Empty in this pass · no operator has been curated to the same standard as
- * the AU/JP/NZ entries (verified operator, route summary, and a schedule or
- * website that survives the daily link smoke test). The Transport page
- * renders its empty state rather than shipping guessed timetables.
- */
-export const TELLURIDE_TRANSPORT: TransportProviderList = [];
+/** Telluride operators verified against official sites (Aug 2026). */
+export const TELLURIDE_TRANSPORT: TransportProviderList = [
+  {
+    id: "us-telluride-galloping-goose",
+    name: "Galloping Goose",
+    type: "bus",
+    leg: "around_town",
+    operator: "Town of Telluride",
+    phone: null,
+    website: "https://telluride.gov/255/Public-Transit",
+    route_summary:
+      "Free town loop around Telluride, serving key stops for lodging, downtown and the gondola connection to Mountain Village.",
+    schedule_url: "https://telluride.gov/255/Public-Transit",
+    featured: true,
+    regions: ["telluride"],
+  },
+];

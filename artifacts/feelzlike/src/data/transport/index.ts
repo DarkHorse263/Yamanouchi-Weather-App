@@ -177,9 +177,8 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "quebec-laurentians": QUEBEC_LAURENTIANS_TRANSPORT,
   "quebec-charlevoix": QUEBEC_CHARLEVOIX_TRANSPORT,
   "quebec-eastern-townships": QUEBEC_EASTERN_TOWNSHIPS_TRANSPORT,
-  // US (Colorado) · no operators curated to the AU/JP/NZ verification
-  // standard yet, so these are registered empty rather than filled with
-  // guessed timetables.
+  // US (Colorado) · popular regions have verified public transport entries;
+  // the remaining regions stay empty rather than carrying guessed services.
   "summit-county": SUMMIT_COUNTY_TRANSPORT,
   "vail-valley": VAIL_VALLEY_TRANSPORT,
   "aspen-snowmass": ASPEN_SNOWMASS_TRANSPORT,
@@ -209,23 +208,17 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "southern-vermont": SOUTHERN_VERMONT_TRANSPORT,
   okemo: OKEMO_TRANSPORT,
   "jay-peak-nek": JAY_PEAK_NEK_TRANSPORT,
-  // US (Wyoming) · no operators curated to the AU/JP/NZ verification
-  // standard yet, so these are registered empty rather than filled with
-  // guessed timetables.
+  // US (Wyoming) · Jackson Hole is curated; Grand Targhee remains empty.
   "jackson-hole": JACKSON_HOLE_TRANSPORT,
   "grand-targhee": GRAND_TARGHEE_TRANSPORT,
 
-  // US (Montana) · no operators curated to the AU/JP/NZ verification
-  // standard yet, so these are registered empty rather than filled with
-  // guessed timetables.
+  // US (Montana) · Big Sky is curated; the remaining regions stay empty.
   "big-sky": BIG_SKY_TRANSPORT,
   "bozeman-bridger-bowl": BOZEMAN_BRIDGER_BOWL_TRANSPORT,
   "whitefish": WHITEFISH_TRANSPORT,
   "red-lodge": RED_LODGE_TRANSPORT,
 
-  // US (New Mexico) · no operators curated to the AU/JP/NZ verification
-  // standard yet, so these are registered empty rather than filled with
-  // guessed timetables.
+  // US (New Mexico) · Taos is curated; the remaining regions stay empty.
   "taos": TAOS_TRANSPORT,
   "angel-fire": ANGEL_FIRE_TRANSPORT,
   "santa-fe": SANTA_FE_TRANSPORT,
@@ -254,9 +247,7 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "juneau": JUNEAU_TRANSPORT,
   "litchfield-hills": LITCHFIELD_HILLS_TRANSPORT,
   "vernon": VERNON_TRANSPORT,
-  // US (Oregon) · no operators curated to the AU/JP/NZ verification
-  // standard yet, so these are registered empty rather than filled with
-  // guessed timetables.
+  // US (Pacific Northwest) · Mt. Hood is curated; the other regions stay empty.
   "mt-hood": MT_HOOD_TRANSPORT,
   "bend": BEND_TRANSPORT,
   "crystal-mountain": CRYSTAL_MOUNTAIN_TRANSPORT,
