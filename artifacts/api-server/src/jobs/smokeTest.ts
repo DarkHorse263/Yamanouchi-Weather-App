@@ -326,6 +326,7 @@ export function isThredboFeedSeason(now: Date = new Date()): boolean {
 const LIVE_LIFT_FEED_CANARIES = [
   { id: "thredbo", name: "Thredbo" },
   { id: "perisher", name: "Perisher" },
+  { id: "charlottes-pass", name: "Charlotte Pass" },
 ] as const;
 
 async function checkLiveLiftFeeds(failures: SmokeFailure[]): Promise<number> {

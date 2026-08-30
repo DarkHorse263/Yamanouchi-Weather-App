@@ -7,7 +7,7 @@ description: Why/how the "Will the lifts spin?" wind panel must gate on season +
 
 > CORRECTION (supersedes the original "no live AU feed" wording):
 > the static catalogue still hardcodes every lift closed, but verified adapters
-> now replace those rows for Thredbo and Perisher. Every other AU resort remains
+> now replace those rows for Thredbo, Perisher, and Charlotte Pass. Every other AU resort remains
 > reference-only. Never treat static `liftsOpen` as real open/closed truth.
 > The operation-gate code below is real; AU just has no verified source to feed it.
 >
@@ -113,16 +113,19 @@ RAW XML feed, and Perisher `/the-mountain/lift-status` 302'd to /file-not-found.
 browser UA + follow redirects, confirm 200 text/html and that the resort's OWN
 nav still links it). Prefer a stable anchor on a top-level page over a deep path.
 Re-verify periodically. Current good targets: Thredbo
-`/the-mountain/#lifts-trails`, Perisher `/reports-cams/reports/snow-report`.
-Charlotte Pass returns 000 from this datacenter (IP-blocked, unverifiable) so
-leave it unless owner-reported; Selwyn homepage is 200.
+`/the-mountain/#lifts-trails`, Perisher `/reports-cams/reports/snow-report`,
+Charlotte Pass `/on-mountain/`; Selwyn homepage is 200.
 
 **Phase 2 live sources:** Thredbo uses its official per-lift XML. Perisher's
 official lift page has rows and summary counts but no data-owned timestamp, so
 it is verified only when paired with the official snow report's own fresh
 `Report Updated` stamp and matching `Lifts Open` count. Perisher parsing must
 also require every expected resort area and reject unknown/malformed candidate
-rows; partial agreement is not enough.
+rows; partial agreement is not enough. Charlotte Pass uses one official rendered
+page containing five indexed lift tabs, `article:modified_time`, and an `As at`
+date. Keep status and freshness proof coupled to that single HTML revision;
+its WordPress REST body exposes unexpanded Divi markup and must not be paired
+separately with the rendered page.
 
 **Rule:** cache age can never extend source age. Every normal cache read and
 serve-stale fallback must re-check the source-owned timestamp and turn the

@@ -130,14 +130,14 @@ const AU_LIFT_HOURS: Record<string, { hours: string; note?: string }> = {
 };
 
 // Honest lift status: only resorts wired to a VERIFIED live source may render
-// open/closed claims. Phase 2 (Aug 2026): Thredbo and Perisher are live via
+// open/closed claims. Phase 2 (Aug 2026): Thredbo, Perisher and Charlotte Pass are live via
 // their official per-lift reports. Membership here is
 // necessary but NOT sufficient - the server must ALSO answer
 // liveStatusVerified:true for this response (feed fetched fresh); when the
 // feed is down/stale the flag is false and the page falls back to the honest
 // reference-only mode. Other resorts stay reference-only with a link to their
 // own official report until each gets a real feed.
-const LIVE_LIFT_STATUS_RESORTS = new Set<string>(["thredbo", "perisher"]);
+const LIVE_LIFT_STATUS_RESORTS = new Set<string>(["thredbo", "perisher", "charlottes-pass"]);
 
 export default function LocationDetail() {
   const [, mParams] = useRoute("/mountain/:id");
@@ -1007,7 +1007,7 @@ export default function LocationDetail() {
             <Cable className="w-4 h-4 text-sky-200 mt-0.5 shrink-0" />
             <div className="min-w-0">
               <p className="text-sm text-white">
-                we don't run a live lift feed for this resort yet · today's open lifts and runs are best checked on the official report.
+                verified live lift status is temporarily unavailable · today's open lifts and runs are best checked on the official report.
               </p>
               <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-white/90 underline underline-offset-2 group-hover:text-white">
                 open {liftData.locationName} lift report

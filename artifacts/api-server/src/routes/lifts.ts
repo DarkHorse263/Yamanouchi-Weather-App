@@ -3,6 +3,10 @@ import { GetLiftStatusResponse, GetLocationLiftStatusResponse, GetLocationLiftSt
 import { locationMatchesRegion, parseRegionParam, RegionParamError } from "../lib/regions.js";
 import { getThredboLiveLiftStatus } from "../lib/thredboLiftStatus.js";
 import { getPerisherLiveLiftStatus } from "../lib/perisherLiftStatus.js";
+import {
+  CHARLOTTE_PASS_LIFT_REPORT_URL,
+  getCharlottePassLiveLiftStatus,
+} from "../lib/charlottePassLiftStatus.js";
 
 const router: IRouter = Router();
 
@@ -373,7 +377,7 @@ const RESORT_LIFTS: ResortLiftData[] = [
     snowCondition: "Check charlottespass.com.au for latest snow report. Charlotte's Pass is Australia's highest resort and typically has the most natural snow.",
     seasonStatus: getSeasonStatus(),
     operatingHours: "Lifts operate 9:00 AM - 4:00 PM during ski season",
-    liftStatusUrl: "https://www.charlottespass.com.au/the-mountain/"
+    liftStatusUrl: CHARLOTTE_PASS_LIFT_REPORT_URL
   },
   {
     locationId: "selwyn",
@@ -452,9 +456,10 @@ function getResortData(): ResortLiftData[] {
  */
 async function getResortDataWithLive(): Promise<ResortLiftData[]> {
   const resorts = getResortData();
-  const [thredbo, perisher] = await Promise.all([
+  const [thredbo, perisher, charlottePass] = await Promise.all([
     getThredboLiveLiftStatus(),
     getPerisherLiveLiftStatus(),
+    getCharlottePassLiveLiftStatus(),
   ]);
   return resorts.map((resort) => {
     const live =
@@ -462,6 +467,8 @@ async function getResortDataWithLive(): Promise<ResortLiftData[]> {
         ? thredbo
         : resort.locationId === "perisher"
           ? perisher
+          : resort.locationId === "charlottes-pass"
+            ? charlottePass
           : null;
     if (!live) return resort;
     return {
