@@ -302,10 +302,10 @@ async function checkSnowConsistency(failures: SmokeFailure[]): Promise<number> {
 }
 
 // ---------------------------------------------------------------------------
-// Thredbo live lift feed canary
+// Live lift feed canaries
 // ---------------------------------------------------------------------------
 
-// The Thredbo live lift feed fails SOFT by design (feed down/stale -> the
+// Live lift feeds fail SOFT by design (feed down/stale -> the
 // page honestly drops to "no live status"), which makes an outage invisible:
 // nothing errors, the flagship live feature is just quietly off. In-season,
 // /api/lift-status/thredbo answering liveStatusVerified:false means the feed
@@ -315,7 +315,7 @@ async function checkSnowConsistency(failures: SmokeFailure[]): Promise<number> {
 // Out of season the resort legitimately stops updating the feed, so the
 // check only runs during the AU season months (June-September, AEST).
 
-/** AU season gate for the Thredbo live-feed canary (Jun-Sep, Sydney time). */
+/** AU season gate for the live-feed canaries (Jun-Sep, Sydney time). */
 export function isThredboFeedSeason(now: Date = new Date()): boolean {
   const month = Number(
     new Intl.DateTimeFormat("en-AU", { timeZone: "Australia/Sydney", month: "numeric" }).format(now),
@@ -323,36 +323,40 @@ export function isThredboFeedSeason(now: Date = new Date()): boolean {
   return month >= 6 && month <= 9;
 }
 
-async function checkThredboLiveFeed(failures: SmokeFailure[]): Promise<number> {
-  if (!isThredboFeedSeason()) return 1; // out of season: nothing to assert
-  const url = `${ORIGIN}/api/lift-status/thredbo`;
+const LIVE_LIFT_FEED_CANARIES = [
+  { id: "thredbo", name: "Thredbo" },
+  { id: "perisher", name: "Perisher" },
+] as const;
 
-  const probe = async (): Promise<{ ok: boolean; detail: string }> => {
-    const res = await fetchRaw(url, PAGE_TIMEOUT_MS);
-    if (!res.ok) return { ok: false, detail: `HTTP ${res.status}` };
-    const json = (await res.json().catch(() => ({}))) as { liveStatusVerified?: boolean; totalLifts?: number };
-    if (json.liveStatusVerified === true) return { ok: true, detail: "live" };
-    return {
-      ok: false,
-      detail: `liveStatusVerified=${String(json.liveStatusVerified)} in-season - Thredbo feed down/stale, page is silently in no-live mode`,
+async function checkLiveLiftFeeds(failures: SmokeFailure[]): Promise<number> {
+  if (!isThredboFeedSeason()) return LIVE_LIFT_FEED_CANARIES.length; // out of season: nothing to assert
+  let passed = 0;
+  for (const canary of LIVE_LIFT_FEED_CANARIES) {
+    const url = `${ORIGIN}/api/lift-status/${canary.id}`;
+    const probe = async (): Promise<{ ok: boolean; detail: string }> => {
+      const res = await fetchRaw(url, PAGE_TIMEOUT_MS);
+      if (!res.ok) return { ok: false, detail: `HTTP ${res.status}` };
+      const json = (await res.json().catch(() => ({}))) as { liveStatusVerified?: boolean; totalLifts?: number };
+      if (json.liveStatusVerified === true && Number(json.totalLifts) > 0) return { ok: true, detail: "live" };
+      return {
+        ok: false,
+        detail: `liveStatusVerified=${String(json.liveStatusVerified)}, totalLifts=${String(json.totalLifts)} in-season - ${canary.name} feed down/stale, page is silently in no-live mode`,
+      };
     };
-  };
 
-  try {
-    let result = await probe();
-    if (!result.ok) {
-      // One gentle retry filters a transient edge/network blip; a real feed
-      // outage answers false both times (server-side result is cached 5 min).
-      await new Promise((r) => setTimeout(r, 3000));
-      result = await probe();
+    try {
+      let result = await probe();
+      if (!result.ok) {
+        await new Promise((r) => setTimeout(r, 3000));
+        result = await probe();
+      }
+      if (result.ok) passed++;
+      else failures.push({ check: "live lift feed", url, detail: result.detail });
+    } catch (err) {
+      failures.push({ check: "live lift feed", url, detail: errMessage(err) });
     }
-    if (result.ok) return 1;
-    failures.push({ check: "live lift feed", url, detail: result.detail });
-    return 0;
-  } catch (err) {
-    failures.push({ check: "live lift feed", url, detail: errMessage(err) });
-    return 0;
   }
+  return passed;
 }
 
 // ---------------------------------------------------------------------------
@@ -521,7 +525,7 @@ export async function runSmokeTest(opts: { skipExternal?: boolean; noEmail?: boo
       checkSitemapPages(failures),
       checkApi(failures),
       checkSnowConsistency(failures),
-      checkThredboLiveFeed(failures),
+      checkLiveLiftFeeds(failures),
     ]);
     const apiChecksPassed = apiPassed + snowPassed + liftFeedPassed;
 
@@ -560,7 +564,7 @@ export async function runSmokeTest(opts: { skipExternal?: boolean; noEmail?: boo
 
     console.log(
       `[smokeTest] done in ${Math.round(report.durationMs / 1000)}s · ${report.ok ? "ALL CLEAR" : `${failures.length} FAILURES`} · ` +
-      `${report.pagesChecked} pages, ${report.apiChecksPassed}/9 api checks, ${report.linksChecked} links (${blocked} bot-gated)`,
+      `${report.pagesChecked} pages, ${report.apiChecksPassed}/10 api checks, ${report.linksChecked} links (${blocked} bot-gated)`,
     );
     lastReport = report;
     return report;

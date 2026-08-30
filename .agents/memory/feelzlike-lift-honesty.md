@@ -5,15 +5,15 @@ description: Why/how the "Will the lifts spin?" wind panel must gate on season +
 
 # feelzlike lift-panel honesty gate
 
-> CORRECTION (supersedes the "authoritative live lift feed (AU)" wording below):
-> there is currently NO live AU lift open/closed feed. `api-server/src/routes/lifts.ts`
-> HARDCODES every AU lift status:"closed" (so liftsOpen is always 0; totalLifts is
-> just a count). Never treat that endpoint's liftsOpen as real open/closed truth.
+> CORRECTION (supersedes the original "no live AU feed" wording):
+> the static catalogue still hardcodes every lift closed, but verified adapters
+> now replace those rows for Thredbo and Perisher. Every other AU resort remains
+> reference-only. Never treat static `liftsOpen` as real open/closed truth.
 > The operation-gate code below is real; AU just has no verified source to feed it.
 >
 > Phase 1 honesty (shipped): a per-resort "verified live status" flag gates ALL
 > open/closed UI.
-> - Frontend kill-switch: `LIVE_LIFT_STATUS_RESORTS` Set (empty today) +
+> - Frontend kill-switch: `LIVE_LIFT_STATUS_RESORTS` Set +
 >   `hasLiveLiftStatus` in snowy-mountains LocationDetail.tsx. Opt a resort in
 >   (Phase 2) only once a REAL per-resort live source exists; a server-driven flag
 >   would be sturdier long term.
@@ -117,22 +117,25 @@ Re-verify periodically. Current good targets: Thredbo
 Charlotte Pass returns 000 from this datacenter (IP-blocked, unverifiable) so
 leave it unless owner-reported; Selwyn homepage is 200.
 
-**Phase 2 SHIPPED (Aug 2026) — Thredbo live feed is wired in:** api-server
-fetches `https://www.thredbo.com.au/feeds/lift-status-report/` (per-lift
-open=true/false, status, openingTime) via a strict fail-soft adapter
-(5min TTL, 30min serve-stale, 24h feed-age guard, empty lift list = parse
-failure). Live rows REPLACE the static catalogue rows for Thredbo and the
-response gains `liveStatusVerified:true`; runsOpen/totalRuns are DROPPED for
-live Thredbo (feed has no runs data — never pair real lift counts with the
-fake 0/50). Feed down/stale → flag false → client falls back to the honest
-no-live mode automatically. Client gate is now two-factor: membership in
-LIVE_LIFT_STATUS_RESORTS (Thredbo only) AND `liftData.liveStatusVerified===true`
-— so the "On the snow" card can never render stale/fake open claims. Feed
-attr values carry numeric HTML entities (`&#039;`) — parser needs
-htmlEntities:true or names render literally. Feed statuses seen: open,
-closed, standby (→ mapped "scheduled"); unknown words map to "closed",
-never "open". /api/lift-status is network-first in sw.js (v23).
-Other resorts (Perisher etc.) stay reference-only until each gets a real feed.
+**Phase 2 live sources:** Thredbo uses its official per-lift XML. Perisher's
+official lift page has rows and summary counts but no data-owned timestamp, so
+it is verified only when paired with the official snow report's own fresh
+`Report Updated` stamp and matching `Lifts Open` count. Perisher parsing must
+also require every expected resort area and reject unknown/malformed candidate
+rows; partial agreement is not enough.
+
+**Rule:** cache age can never extend source age. Every normal cache read and
+serve-stale fallback must re-check the source-owned timestamp and turn the
+resort unverified as soon as it crosses the freshness limit.
+
+**Why:** transport headers only proved that Perisher served HTML now, not that
+the lift data was updated now; a cache fetched near the 24-hour boundary could
+otherwise keep stale claims verified for another 5-30 minutes.
+
+**How to apply:** live rows replace static catalogue rows only after strict
+validation. Feed down/stale/surprising means `liveStatusVerified:false`.
+Client gating remains two-factor: explicit resort membership plus a true
+response flag. `/api/lift-status` stays network-first in the service worker.
 
 **Aug 2026 merge:** the free reference-only "On the snow" lift card was merged into LiftWindHoldPanel (single lift surface per page). Panel's `liveStatusKnown` now defaults FALSE (safe-by-default); only callers with a real opted-in feed pass true. The official-report link renders in the panel's honest banner (`liftReportUrl`/`resortName` props) AND as a slim FREE link outside the PremiumGate on MountainDetail + Snowy LocationDetail — don't drop that free link, the panel itself is premium-gated. Snowy's "On the snow" card now renders only when `hasLiveLiftStatus` is true.
 

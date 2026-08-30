@@ -2,6 +2,7 @@ import { Router, type IRouter } from "express";
 import { GetLiftStatusResponse, GetLocationLiftStatusResponse, GetLocationLiftStatusParams } from "@workspace/api-zod";
 import { locationMatchesRegion, parseRegionParam, RegionParamError } from "../lib/regions.js";
 import { getThredboLiveLiftStatus } from "../lib/thredboLiftStatus.js";
+import { getPerisherLiveLiftStatus } from "../lib/perisherLiftStatus.js";
 
 const router: IRouter = Router();
 
@@ -442,7 +443,7 @@ function getResortData(): ResortLiftData[] {
 }
 
 /**
- * Overlay Thredbo's OFFICIAL live per-lift feed onto the static catalogue.
+ * Overlay resorts' OFFICIAL live per-lift feeds onto the static catalogue.
  * Live rows fully REPLACE the hardcoded reference rows (names/count come from
  * the resort, not our seed list) and flip `liveStatusVerified` true. Feed
  * down / stale / unparseable -> catalogue rows unchanged with the flag false,
@@ -451,10 +452,18 @@ function getResortData(): ResortLiftData[] {
  */
 async function getResortDataWithLive(): Promise<ResortLiftData[]> {
   const resorts = getResortData();
-  const live = await getThredboLiveLiftStatus();
-  if (!live) return resorts;
+  const [thredbo, perisher] = await Promise.all([
+    getThredboLiveLiftStatus(),
+    getPerisherLiveLiftStatus(),
+  ]);
   return resorts.map((resort) => {
-    if (resort.locationId !== "thredbo") return resort;
+    const live =
+      resort.locationId === "thredbo"
+        ? thredbo
+        : resort.locationId === "perisher"
+          ? perisher
+          : null;
+    if (!live) return resort;
     return {
       ...resort,
       lifts: live.lifts,

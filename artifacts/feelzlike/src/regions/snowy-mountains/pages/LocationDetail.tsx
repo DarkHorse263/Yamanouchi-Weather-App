@@ -130,14 +130,14 @@ const AU_LIFT_HOURS: Record<string, { hours: string; note?: string }> = {
 };
 
 // Honest lift status: only resorts wired to a VERIFIED live source may render
-// open/closed claims. Phase 2 (Aug 2026): Thredbo is live via its official
-// per-lift XML feed (api-server lib/thredboLiftStatus.ts). Membership here is
+// open/closed claims. Phase 2 (Aug 2026): Thredbo and Perisher are live via
+// their official per-lift reports. Membership here is
 // necessary but NOT sufficient - the server must ALSO answer
 // liveStatusVerified:true for this response (feed fetched fresh); when the
 // feed is down/stale the flag is false and the page falls back to the honest
 // reference-only mode. Other resorts stay reference-only with a link to their
 // own official report until each gets a real feed.
-const LIVE_LIFT_STATUS_RESORTS = new Set<string>(["thredbo"]);
+const LIVE_LIFT_STATUS_RESORTS = new Set<string>(["thredbo", "perisher"]);
 
 export default function LocationDetail() {
   const [, mParams] = useRoute("/mountain/:id");
