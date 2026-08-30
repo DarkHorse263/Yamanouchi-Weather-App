@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { findLiftTransitions, fiveMinuteRunKey, windColumns } from "../../jobs/thredboLiftHistory.js";
+import { classifyThredboHistoryFreshness } from "../../jobs/smokeTest.js";
 import { parseFreshWindReading } from "../thredboWindObservation.js";
 import type { ThredboLiveLiftStatus } from "../thredboLiftStatus.js";
 
@@ -65,4 +66,39 @@ test("wind evidence is stored only when it is concurrent with the lift feed", ()
   };
   assert.equal(windColumns({ village: concurrent, top: stale }, feedUpdatedAt).villageWindKmh, 48);
   assert.equal(windColumns({ village: concurrent, top: stale }, feedUpdatedAt).topWindKmh, null);
+});
+
+test("history freshness ignores expected off-season inactivity", () => {
+  assert.equal(
+    classifyThredboHistoryFreshness(new Date("2026-11-15T00:00:00Z"), null, null),
+    "off-season",
+  );
+});
+
+test("history freshness distinguishes a stopped scheduler from an unavailable feed", () => {
+  const now = new Date("2026-08-30T04:00:00Z");
+  assert.equal(
+    classifyThredboHistoryFreshness(
+      now,
+      new Date("2026-08-30T03:20:00Z"),
+      new Date("2026-08-30T03:55:00Z"),
+    ),
+    "scheduler-stopped",
+  );
+  assert.equal(
+    classifyThredboHistoryFreshness(
+      now,
+      new Date("2026-08-30T03:55:00Z"),
+      new Date("2026-08-30T03:20:00Z"),
+    ),
+    "feed-unavailable",
+  );
+  assert.equal(
+    classifyThredboHistoryFreshness(
+      now,
+      new Date("2026-08-30T03:55:00Z"),
+      new Date("2026-08-30T03:50:00Z"),
+    ),
+    "fresh",
+  );
 });

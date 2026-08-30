@@ -48,10 +48,10 @@ async function claimRun(runKey: string): Promise<boolean> {
   return rows.length > 0;
 }
 
-async function finishRun(runKey: string, summary: string): Promise<void> {
+async function finishRun(runKey: string, ok: boolean, summary: string): Promise<void> {
   await db
     .update(jobRunsTable)
-    .set({ finishedAt: sql`now()`, ok: true, summary })
+    .set({ finishedAt: sql`now()`, ok, summary })
     .where(and(eq(jobRunsTable.jobName, JOB_NAME), eq(jobRunsTable.runKey, runKey)));
 }
 
@@ -143,18 +143,18 @@ export async function sweepThredboLiftHistory(now: Date = new Date()): Promise<v
     if (!claimed) return;
     const live = await fetchFreshThredboLiftStatus();
     if (!live) {
-      await finishRun(runKey, "feed unavailable or stale; no transition recorded");
+      await finishRun(runKey, false, "feed unavailable or stale; no transition recorded");
       return;
     }
     const prior = await latestStatuses(live.lifts.map((lift) => lift.id));
     const changed = findLiftTransitions(live, prior);
     if (changed.length === 0) {
-      await finishRun(runKey, "no lift status changes");
+      await finishRun(runKey, true, "no lift status changes");
       return;
     }
     const wind = await fetchThredboWindSnapshot();
     const inserted = await recordThredboLiftTransitions(live, wind);
-    await finishRun(runKey, `${inserted} lift status transition${inserted === 1 ? "" : "s"} recorded`);
+    await finishRun(runKey, true, `${inserted} lift status transition${inserted === 1 ? "" : "s"} recorded`);
   } catch (error) {
     console.error("[thredboLiftHistory] claimed run failed:", error);
   } finally {

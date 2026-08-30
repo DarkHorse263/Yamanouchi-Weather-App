@@ -32,7 +32,7 @@
  */
 
 import cron, { type ScheduledTask } from "node-cron";
-import { and, eq, isNull, lt, sql } from "drizzle-orm";
+import { and, desc, eq, isNull, lt, sql } from "drizzle-orm";
 import { db, jobRunsTable } from "@workspace/db";
 import { sendEmail } from "../lib/emailSender.js";
 import { brandedEmail } from "../lib/emailTemplates.js";
@@ -329,6 +329,64 @@ const LIVE_LIFT_FEED_CANARIES = [
   { id: "charlottes-pass", name: "Charlotte Pass" },
 ] as const;
 
+const THREDBO_HISTORY_JOB_NAME = "thredbo-lift-history";
+const THREDBO_HISTORY_FRESH_MS = 30 * 60_000;
+
+type ThredboHistoryFreshness = "off-season" | "fresh" | "scheduler-stopped" | "feed-unavailable";
+
+export function classifyThredboHistoryFreshness(
+  now: Date,
+  latestAttemptAt: Date | null,
+  latestSuccessAt: Date | null,
+): ThredboHistoryFreshness {
+  if (!isThredboFeedSeason(now)) return "off-season";
+  const cutoff = now.getTime() - THREDBO_HISTORY_FRESH_MS;
+  if (!latestAttemptAt || latestAttemptAt.getTime() < cutoff) return "scheduler-stopped";
+  if (!latestSuccessAt || latestSuccessAt.getTime() < cutoff) return "feed-unavailable";
+  return "fresh";
+}
+
+async function checkThredboHistoryFreshness(
+  failures: SmokeFailure[],
+  now: Date = new Date(),
+): Promise<number> {
+  if (!isThredboFeedSeason(now)) return 1;
+  const [latestAttempt, latestSuccess] = await Promise.all([
+    db
+      .select({ startedAt: jobRunsTable.startedAt })
+      .from(jobRunsTable)
+      .where(eq(jobRunsTable.jobName, THREDBO_HISTORY_JOB_NAME))
+      .orderBy(desc(jobRunsTable.startedAt))
+      .limit(1),
+    db
+      .select({ finishedAt: jobRunsTable.finishedAt })
+      .from(jobRunsTable)
+      .where(and(eq(jobRunsTable.jobName, THREDBO_HISTORY_JOB_NAME), eq(jobRunsTable.ok, true)))
+      .orderBy(desc(jobRunsTable.finishedAt))
+      .limit(1),
+  ]);
+  const attemptAt = latestAttempt[0]?.startedAt ?? null;
+  const successAt = latestSuccess[0]?.finishedAt ?? null;
+  const verdict = classifyThredboHistoryFreshness(now, attemptAt, successAt);
+  if (verdict === "fresh") return 1;
+
+  const url = `${ORIGIN}/api/admin/thredbo-lift-history`;
+  if (verdict === "scheduler-stopped") {
+    failures.push({
+      check: "lift history collection",
+      url,
+      detail: `scheduler stopped: no Thredbo history poll claimed in the last 30 minutes (latest attempt ${attemptAt?.toISOString() ?? "never"})`,
+    });
+  } else {
+    failures.push({
+      check: "lift history collection",
+      url,
+      detail: `feed unavailable: scheduler is polling, but no successful Thredbo history poll completed in the last 30 minutes (latest success ${successAt?.toISOString() ?? "never"})`,
+    });
+  }
+  return 0;
+}
+
 async function checkLiveLiftFeeds(failures: SmokeFailure[]): Promise<number> {
   if (!isThredboFeedSeason()) return LIVE_LIFT_FEED_CANARIES.length; // out of season: nothing to assert
   let passed = 0;
@@ -471,6 +529,7 @@ function failureEmail(report: SmokeReport): { subject: string; html: string; tex
     api: "weather api problems",
     "snow consistency": "headline vs elevation snow disagreement",
     "live lift feed": "live lift feed silently off",
+    "lift history collection": "Thredbo lift history collection",
     "dead link": "dead outbound links",
     "unreachable link": "unreachable outbound links",
   };
@@ -522,13 +581,14 @@ export async function runSmokeTest(opts: { skipExternal?: boolean; noEmail?: boo
   try {
     console.log(`[smokeTest] starting against ${ORIGIN} (external links: ${opts.skipExternal ? "skipped" : "on"})`);
 
-    const [pagesChecked, apiPassed, snowPassed, liftFeedPassed] = await Promise.all([
+    const [pagesChecked, apiPassed, snowPassed, liftFeedPassed, liftHistoryPassed] = await Promise.all([
       checkSitemapPages(failures),
       checkApi(failures),
       checkSnowConsistency(failures),
       checkLiveLiftFeeds(failures),
+      checkThredboHistoryFreshness(failures),
     ]);
-    const apiChecksPassed = apiPassed + snowPassed + liftFeedPassed;
+    const apiChecksPassed = apiPassed + snowPassed + liftFeedPassed + liftHistoryPassed;
 
     let linksChecked = 0;
     let blocked = 0;
@@ -565,7 +625,7 @@ export async function runSmokeTest(opts: { skipExternal?: boolean; noEmail?: boo
 
     console.log(
       `[smokeTest] done in ${Math.round(report.durationMs / 1000)}s · ${report.ok ? "ALL CLEAR" : `${failures.length} FAILURES`} · ` +
-      `${report.pagesChecked} pages, ${report.apiChecksPassed}/10 api checks, ${report.linksChecked} links (${blocked} bot-gated)`,
+      `${report.pagesChecked} pages, ${report.apiChecksPassed}/11 api checks, ${report.linksChecked} links (${blocked} bot-gated)`,
     );
     lastReport = report;
     return report;
