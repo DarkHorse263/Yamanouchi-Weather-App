@@ -98,7 +98,7 @@ export default function Alerts() {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
+                transition={{ delay: Math.min(idx * 0.1, 0.35) }}
                 key={alert.id}
               >
                 <div className={`rounded-2xl p-5 border shadow-lg ${getAlertColor(alert.alertLevel)}`}>

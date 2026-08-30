@@ -169,7 +169,7 @@ function VenueGrid({ venues, t }: { venues: any[]; t: (en: string, ja: string | 
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
       {venues.map((venue, idx) => (
-        <motion.div key={venue.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.05 }}>
+        <motion.div key={venue.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(idx * 0.05, 0.35) }}>
           <Card className="h-full flex flex-col p-0 overflow-hidden group hover:shadow-xl transition-all duration-300">
             {/* Photo */}
             <div className="h-36 bg-secondary relative overflow-hidden">

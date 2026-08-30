@@ -497,7 +497,7 @@ function ProviderCard({
     <motion.article
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.04 }}
+      transition={{ delay: Math.min(index * 0.04, 0.35) }}
       className="rounded-2xl border border-border bg-white p-5 flex flex-col"
     >
       <div className="flex items-start gap-3">

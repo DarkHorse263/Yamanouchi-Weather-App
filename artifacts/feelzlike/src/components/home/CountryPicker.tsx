@@ -436,7 +436,7 @@ function CountryPickerEasternFallback() {
               key={country.code}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1 + idx * 0.08 }}
+              transition={{ duration: 0.4, delay: Math.min(0.1 + idx * 0.08, 0.35) }}
               className={`rounded-2xl bg-white shadow-[0_8px_30px_rgb(15,23,42,0.08)] ring-2 ${ring}`}
             >
               <h3 className="m-0">
@@ -637,7 +637,7 @@ export function CountryPicker() {
               key={country.code}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1 + idx * 0.08 }}
+              transition={{ duration: 0.4, delay: Math.min(0.1 + idx * 0.08, 0.35) }}
               className={`rounded-2xl bg-white shadow-[0_8px_30px_rgb(15,23,42,0.08)] ring-2 ${ring}`}
             >
               <h3 className="m-0">

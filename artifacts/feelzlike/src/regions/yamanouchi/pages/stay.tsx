@@ -354,7 +354,7 @@ function PlaceList({ places, t, isWinter = true }: { places: any[]; t: (en: stri
           key={place.id}
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: idx * 0.04 }}
+          transition={{ delay: Math.min(idx * 0.04, 0.35) }}
         >
           <a
             href={booking.searchUrl(place.name + " Yamanouchi Japan")}

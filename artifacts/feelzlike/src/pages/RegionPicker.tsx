@@ -35,7 +35,7 @@ export default function RegionPicker() {
               key={region.id}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.05 + i * 0.05 }}
+              transition={{ duration: 0.35, delay: Math.min(0.05 + i * 0.05, 0.35) }}
             >
               <Link
                 href={`/${region.id}`}

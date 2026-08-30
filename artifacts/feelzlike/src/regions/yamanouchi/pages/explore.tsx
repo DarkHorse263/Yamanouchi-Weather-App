@@ -143,7 +143,7 @@ export default function Explore({ embedded = false }: { embedded?: boolean }) {
                 key={item.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.05 }}
+                transition={{ delay: Math.min(idx * 0.05, 0.35) }}
               >
                 <Card className="h-full flex flex-col p-0 overflow-hidden group hover:shadow-xl transition-all duration-300">
                   <div className="h-40 bg-gradient-to-br from-primary/20 to-accent/20 relative flex items-center justify-center overflow-hidden">

@@ -129,7 +129,7 @@ export default function CanadaDirectory() {
                     rel="noopener noreferrer nofollow"
                     initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.02 * i }}
+                    transition={{ duration: 0.3, delay: Math.min(0.02 * i, 0.35) }}
                     className="group flex flex-col rounded-xl border border-slate-200 bg-white p-3.5 hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-[0_4px_8px_rgba(15,23,42,0.06),0_12px_28px_-12px_rgba(56,128,210,0.25)] shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-all duration-200"
                   >
                     <div className="flex items-start justify-between gap-2">

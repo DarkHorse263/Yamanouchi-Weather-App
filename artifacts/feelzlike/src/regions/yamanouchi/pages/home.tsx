@@ -213,7 +213,7 @@ function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
                 key={item.name}
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 + idx * 0.05 }}
+                transition={{ delay: Math.min(0.1 + idx * 0.05, 0.35) }}
               >
                 <Link href="/activities">
                   <div className="rounded-2xl border border-border bg-card p-4 hover:border-primary/30 hover:-translate-y-0.5 transition-all cursor-pointer h-full shadow-[0_1px_3px_rgba(15,23,42,0.04)]">

@@ -178,7 +178,7 @@ function AboutContent() {
               key={s.title}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.05 * i }}
+              transition={{ duration: 0.35, delay: Math.min(0.05 * i, 0.35) }}
               className={card}
             >
               <div className="flex items-start gap-4">

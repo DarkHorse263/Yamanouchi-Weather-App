@@ -103,7 +103,7 @@ export default function Resorts() {
                 key={poi.name}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.04 }}
+                transition={{ delay: Math.min(idx * 0.04, 0.35) }}
                 className="bg-white border border-slate-200 rounded-2xl p-4 flex items-start gap-3 hover:border-emerald-200 hover:shadow-sm transition-all duration-200"
               >
                 <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0">
@@ -161,7 +161,7 @@ export default function Resorts() {
                         key={resort.id}
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: (regionIdx * 0.06) + (idx * 0.04) }}
+                        transition={{ delay: Math.min((regionIdx * 0.06) + (idx * 0.04), 0.35) }}
                         className="bg-white border border-slate-200 rounded-2xl p-4 flex flex-col gap-3 hover:border-blue-200 hover:shadow-sm transition-all duration-200"
                       >
                         <div className="flex items-start justify-between gap-2">

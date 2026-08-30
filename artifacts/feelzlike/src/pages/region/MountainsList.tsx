@@ -211,7 +211,7 @@ function ParentGroupCard({
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, delay: index * 0.05 }}
+      transition={{ duration: 0.35, delay: Math.min(index * 0.05, 0.35) }}
       className="rounded-2xl border border-blue-200 bg-white shadow-[0_1px_3px_rgba(15,23,42,0.04)] overflow-hidden"
     >
       <button
@@ -329,7 +329,7 @@ function MountainCard({
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, delay: index * 0.05 }}
+      transition={{ duration: 0.35, delay: Math.min(index * 0.05, 0.35) }}
     >
       <Link
         href={`/mountain/${m.id}`}

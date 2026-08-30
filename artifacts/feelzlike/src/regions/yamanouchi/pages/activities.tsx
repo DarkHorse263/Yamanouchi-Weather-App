@@ -143,7 +143,7 @@ export default function Activities() {
               key={a.name}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.06 }}
+              transition={{ delay: Math.min(idx * 0.06, 0.35) }}
               className="bg-white rounded-2xl border border-border shadow-sm overflow-hidden"
             >
               <div className="p-4">

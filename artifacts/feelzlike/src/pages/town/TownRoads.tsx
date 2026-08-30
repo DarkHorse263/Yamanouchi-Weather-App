@@ -366,7 +366,7 @@ export function TownRoads() {
               key={road.id}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.05 }}
+              transition={{ delay: Math.min(idx * 0.05, 0.35) }}
               className="rounded-2xl border border-border bg-white p-5"
             >
               <div className="flex items-start justify-between gap-3 flex-wrap">
@@ -660,7 +660,7 @@ function VhcAlertsSection({
                 key={inc.id}
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.04 }}
+                transition={{ delay: Math.min(idx * 0.04, 0.35) }}
                 className={`rounded-2xl border p-4 ${tone}`}
               >
                 <div className="flex items-start gap-3">
@@ -802,7 +802,7 @@ function ChainStatusSection({ statuses, t }: { statuses: ChainStatus[]; t: (en: 
               key={cs.id}
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.04 }}
+              transition={{ delay: Math.min(idx * 0.04, 0.35) }}
               className="rounded-2xl border border-border bg-white p-4"
             >
               <header className="flex items-start justify-between gap-3 flex-wrap">

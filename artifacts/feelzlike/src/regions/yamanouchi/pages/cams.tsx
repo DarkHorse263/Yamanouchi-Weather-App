@@ -228,7 +228,7 @@ export default function Cams() {
               key={cam.id}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
+              transition={{ delay: Math.min(idx * 0.1, 0.35) }}
               className="bg-white rounded-2xl border border-border shadow-sm overflow-hidden"
             >
               <div className={`bg-gradient-to-r ${cam.color} px-4 py-3 flex items-center justify-between`}>
