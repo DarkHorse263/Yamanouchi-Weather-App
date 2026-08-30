@@ -33,6 +33,7 @@ import {
   regionMountains,
   publishedCatalogueMountainRoutes,
 } from "./seo-regions.mjs";
+import legacyRouteDeclarations from "../src/lib/legacyRoutes.json" with { type: "json" };
 
 const paths = [
   "/countries",
@@ -49,7 +50,12 @@ const paths = [
   "/legal/terms",
 ];
 
-const legacyRewrites = [];
+const legacyRewrites = legacyRouteDeclarations.flatMap(({ from, to, suffixes }) =>
+  suffixes.map((suffix) => ({
+    from: `${from}${suffix}`,
+    to: `${to}${suffix}`,
+  })),
+);
 
 for (const r of REGIONS) {
   paths.push(`/${r.slug}`);
@@ -59,24 +65,6 @@ for (const r of REGIONS) {
     paths.push(`/${r.slug}/${t.id}`);
     for (const f of townFeatures(r)) paths.push(`/${r.slug}/${t.id}/${f}`);
   }
-}
-
-const okanagan = REGIONS.find((region) => region.slug === "okanagan");
-if (!okanagan) throw new Error("[rewrites] okanagan region is required for Sun Peaks legacy redirects");
-
-legacyRewrites.push({
-  from: "/powder-highway/mountain/sun-peaks-resort",
-  to: "/okanagan/mountain/sun-peaks-resort",
-});
-legacyRewrites.push({
-  from: "/powder-highway/sun-peaks",
-  to: "/okanagan/sun-peaks",
-});
-for (const feature of townFeatures(okanagan)) {
-  legacyRewrites.push({
-    from: `/powder-highway/sun-peaks/${feature}`,
-    to: `/okanagan/sun-peaks/${feature}`,
-  });
 }
 
 for (const { path } of publishedCatalogueMountainRoutes) {

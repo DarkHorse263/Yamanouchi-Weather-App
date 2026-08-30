@@ -15,6 +15,7 @@ import {
   regionMountains,
   publishedCatalogueMountainRoutes,
 } from "./seo-regions.mjs";
+import legacyRouteDeclarations from "../src/lib/legacyRoutes.json" with { type: "json" };
 
 const here = dirname(fileURLToPath(import.meta.url));
 const node = process.execPath;
@@ -28,6 +29,11 @@ const staticPaths = [
   "/", "/countries", "/au", "/jp", "/nz", "/ca", "/ca/all-ski-areas", "/us",
   "/compare", "/premium", "/near-you", "/legal/privacy", "/legal/terms",
 ];
+const legacyPaths = new Set(
+  legacyRouteDeclarations.flatMap(({ from, suffixes }) =>
+    suffixes.map((suffix) => `${from}${suffix}`),
+  ),
+);
 
 function expectedBuildPaths() {
   const paths = [...staticPaths];
@@ -100,7 +106,8 @@ const rewriteOutput = execFileSync(node, [join(here, "generate-rewrites.mjs")], 
 const rewritePaths = [...rewriteOutput.matchAll(/^from = "([^"]+)"$/gm)]
   .map(([, path]) => path)
   .filter((path) => path !== "/*")
-  .map((path) => path.slice(0, -1));
+  .map((path) => path.slice(0, -1))
+  .filter((path) => !legacyPaths.has(path));
 assertExactManifest("rewrite output", rewritePaths, expectedBuild.filter((path) => path !== "/"));
 
 const checkedInSitemap = readFileSync(join(here, "..", "public", "sitemap.xml"), "utf8");
@@ -116,7 +123,8 @@ const checkedInArtifact = readFileSync(
 const checkedInRewritePaths = [...checkedInArtifact.matchAll(/^from = "([^"]+)"$/gm)]
   .map(([, path]) => path)
   .filter((path) => path !== "/*")
-  .map((path) => path.slice(0, -1));
+  .map((path) => path.slice(0, -1))
+  .filter((path) => !legacyPaths.has(path));
 assertExactManifest(
   "checked-in production rewrites",
   checkedInRewritePaths,

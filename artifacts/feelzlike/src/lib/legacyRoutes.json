@@ -1,0 +1,12 @@
+[
+  {
+    "from": "/powder-highway/mountain/sun-peaks-resort",
+    "to": "/okanagan/mountain/sun-peaks-resort",
+    "suffixes": [""]
+  },
+  {
+    "from": "/powder-highway/sun-peaks",
+    "to": "/okanagan/sun-peaks",
+    "suffixes": ["", "/weather", "/stay", "/eat", "/roads", "/transport", "/explore"]
+  }
+]

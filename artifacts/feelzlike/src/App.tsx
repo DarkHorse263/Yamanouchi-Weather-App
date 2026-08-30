@@ -40,6 +40,11 @@ import {
   useClerk,
 } from "@clerk/react";
 import { publishableKeyFromHost } from "@clerk/react/internal";
+import {
+  legacyRouteDestination,
+  legacyRoutes,
+  type LegacyRouteDeclaration,
+} from "@/lib/legacyRoutes";
 
 const queryClient = new QueryClient();
 
@@ -211,12 +216,12 @@ function MetaPixelTag() {
   return null;
 }
 
-function LegacySunPeaksRedirect({ from, to }: { from: string; to: string }) {
+function LegacyRouteRedirect({ route }: { route: LegacyRouteDeclaration }) {
   const [location] = useLocation();
-  const destinationPath = location.startsWith(from)
-    ? `${to}${location.slice(from.length)}`
-    : to;
-  const destination = `${destinationPath}${window.location.search}${window.location.hash}`;
+  const destination = legacyRouteDestination(
+    `${location}${window.location.search}${window.location.hash}`,
+    route,
+  );
 
   return <Redirect to={destination} replace />;
 }
@@ -262,20 +267,11 @@ function Router() {
       <Route path="/us/"><CountryHome code="US" /></Route>
       <Route path="/ca/all-ski-areas" component={CanadaDirectory} />
       <Route path="/ca/all-ski-areas/" component={CanadaDirectory} />
-      {/* Sun Peaks moved from Powder Highway to Okanagan (Aug 2026).
-          Keep old bookmarks and search results working, including town subpages. */}
-      <Route path="/powder-highway/mountain/sun-peaks-resort/*?">
-        <LegacySunPeaksRedirect
-          from="/powder-highway/mountain/sun-peaks-resort"
-          to="/okanagan/mountain/sun-peaks-resort"
-        />
-      </Route>
-      <Route path="/powder-highway/sun-peaks/*?">
-        <LegacySunPeaksRedirect
-          from="/powder-highway/sun-peaks"
-          to="/okanagan/sun-peaks"
-        />
-      </Route>
+      {legacyRoutes.map((route) => (
+        <Route key={route.from} path={`${route.from}/*?`}>
+          <LegacyRouteRedirect route={route} />
+        </Route>
+      ))}
       <Route path="/:region/*?">
         <RegionLayout />
       </Route>
