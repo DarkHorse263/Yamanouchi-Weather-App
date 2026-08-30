@@ -12,7 +12,7 @@ import {
   MountainSnow,
 } from "lucide-react";
 import { PlaceSearch } from "./PlaceSearch";
-import { useAuthAccount } from "@/components/auth/SignUpProvider";
+import { useAuthAccount } from "@/components/auth/AuthAccountContext";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
 import { track } from "@/lib/analytics";
 

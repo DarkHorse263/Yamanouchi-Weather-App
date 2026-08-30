@@ -20,6 +20,7 @@
     "test:regionProximity": "tsx --test src/lib/__tests__/regionProximity.test.ts",
     "test:precip": "tsx --test src/lib/__tests__/precip.test.ts",
     "test:nearYouRegionRow": "tsx --tsconfig tsconfig.test.json --test src/components/home/__tests__/NearYouRegionRow.test.tsx",
+    "test:homeRegionCard": "tsx --tsconfig tsconfig.test.json --test src/components/home/__tests__/HomeRegionCard.test.tsx",
     "test:japanCatalogue": "tsx --test src/regions/__tests__/japan-catalogue.test.ts",
     "test:canadaCatalogue": "tsx --test src/regions/__tests__/canada-catalogue.test.ts",
     "test:skiSeason": "tsx --test src/lib/__tests__/skiSeason.test.ts",
@@ -37,7 +38,7 @@
     "test:mountainSummary": "tsx --test src/lib/__tests__/mountainSummary.test.ts",
     "test:catalogueRouteParity": "node scripts/validate-catalogue-route-parity.mjs",
     "test:australianCoverage": "node --test scripts/australian-coverage.test.mjs",
-    "test:all": "tsx --test src/lib/__tests__/mountainScore.test.ts src/lib/__tests__/windHoldPrediction.test.ts src/lib/__tests__/powderFactor.test.ts src/lib/__tests__/tripPlanner.test.ts src/lib/__tests__/regionProximity.test.ts src/lib/__tests__/precip.test.ts src/lib/__tests__/skiSeason.test.ts src/lib/__tests__/cj.test.ts src/lib/__tests__/snowmaking.test.ts src/lib/__tests__/bomRadar.test.ts src/lib/__tests__/gateErrors.test.ts src/lib/__tests__/unitsFormat.test.ts src/lib/__tests__/promoImpression.test.ts src/lib/__tests__/mountainSummary.test.ts src/types/__tests__/weather.test.ts src/regions/__tests__/japan-catalogue.test.ts src/regions/__tests__/ski-catalogue.test.ts src/regions/__tests__/canada-catalogue.test.ts && tsx --tsconfig tsconfig.test.json --test src/components/home/__tests__/NearYouRegionRow.test.tsx src/components/auth/__tests__/UserPrefsProvider.test.tsx && node --test scripts/australian-coverage.test.mjs && node scripts/validate-catalogue-route-parity.mjs"
+    "test:all": "tsx --test src/lib/__tests__/mountainScore.test.ts src/lib/__tests__/windHoldPrediction.test.ts src/lib/__tests__/powderFactor.test.ts src/lib/__tests__/tripPlanner.test.ts src/lib/__tests__/regionProximity.test.ts src/lib/__tests__/precip.test.ts src/lib/__tests__/skiSeason.test.ts src/lib/__tests__/cj.test.ts src/lib/__tests__/snowmaking.test.ts src/lib/__tests__/bomRadar.test.ts src/lib/__tests__/gateErrors.test.ts src/lib/__tests__/unitsFormat.test.ts src/lib/__tests__/promoImpression.test.ts src/lib/__tests__/mountainSummary.test.ts src/types/__tests__/weather.test.ts src/regions/__tests__/japan-catalogue.test.ts src/regions/__tests__/ski-catalogue.test.ts src/regions/__tests__/canada-catalogue.test.ts && tsx --tsconfig tsconfig.test.json --test src/components/home/__tests__/NearYouRegionRow.test.tsx src/components/auth/__tests__/UserPrefsProvider.test.tsx src/components/home/__tests__/HomeRegionCard.test.tsx && node --test scripts/australian-coverage.test.mjs && node scripts/validate-catalogue-route-parity.mjs"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",

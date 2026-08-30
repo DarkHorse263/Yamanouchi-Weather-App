@@ -1,8 +1,12 @@
-import { createContext, useCallback, useContext, useMemo, type ReactNode } from "react";
+import { useCallback, useMemo, type ReactNode } from "react";
 import { useLocation } from "wouter";
 import { useUser, useClerk } from "@clerk/react";
 import { PremiumAccessProvider } from "@workspace/feelzlike-shell";
 import { track } from "@/lib/analytics";
+import {
+  AuthAccountProvider,
+  type AuthAccountState,
+} from "./AuthAccountContext";
 
 /**
  * Host-side wiring for the soft member gate:
@@ -14,22 +18,6 @@ import { track } from "@/lib/analytics";
  * Gentle by design: nothing here ever opens the prompt on its own · only an
  * explicit tap on a premium surface (or a sign-up button) does.
  */
-
-interface AuthAccountState {
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  email: string | null;
-  promptSignUp: (opts?: { email?: string; feature?: string }) => void;
-  refresh: () => void;
-}
-
-const AuthAccountContext = createContext<AuthAccountState | null>(null);
-
-export function useAuthAccount(): AuthAccountState {
-  const ctx = useContext(AuthAccountContext);
-  if (!ctx) throw new Error("useAuthAccount must be used inside SignUpProvider");
-  return ctx;
-}
 
 export function SignUpProvider({ children }: { children: ReactNode }) {
   const [, setLocation] = useLocation();
@@ -67,15 +55,17 @@ export function SignUpProvider({ children }: { children: ReactNode }) {
   );
 
   return (
-    <AuthAccountContext.Provider value={state}>
+    <AuthAccountProvider value={state}>
       <PremiumAccessProvider
         value={{ isAuthenticated: state.isAuthenticated, isLoading: state.isLoading, promptSignUp }}
       >
         {children}
       </PremiumAccessProvider>
-    </AuthAccountContext.Provider>
+    </AuthAccountProvider>
   );
 }
 
 // Export signOut helper for components that need it (e.g. Account, Premium pages).
 export { useClerk };
+export { AuthAccountProvider, useAuthAccount } from "./AuthAccountContext";
+export type { AuthAccountState } from "./AuthAccountContext";

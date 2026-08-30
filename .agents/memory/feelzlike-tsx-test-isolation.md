@@ -1,6 +1,6 @@
 ---
 name: feelzlike tsx test isolation
-description: why pure logic that needs unit tests under `tsx --test` must not transitively import the region registry
+description: asset-heavy page tests need Vite SSR; pure tsx tests must avoid the region registry
 ---
 
 # Pure logic under `tsx --test` must not pull in `@/regions`
@@ -20,3 +20,18 @@ assets. If a feature needs both the pure logic and the region catalog, split
 them: pure file (e.g. `tripDayScore.ts`) + catalog/persistence file (e.g.
 `tripPlanner.ts`) that re-exports the pure bits for app convenience. Point the
 test at the pure file directly.
+
+## Rendering real pages in component tests
+
+Use a middleware-mode Vite server and `ssrLoadModule()` when a regression test
+must render the real page rather than a pure child. This lets Vite resolve public
+images and aliases that plain `tsx --test` cannot load.
+
+**Why:** an isolated child fixture can keep passing after the child is removed
+or miswired on its actual page. Vite SSR preserves the real page composition
+without requiring a browser test.
+
+**How to apply:** keep auth context state in a neutral module so page tests do
+not initialize unrelated premium code. When stubbing an external package in a
+Vite test plugin, add that package to `ssr.noExternal`; otherwise Vite may
+externalize it before the stub's resolver runs.

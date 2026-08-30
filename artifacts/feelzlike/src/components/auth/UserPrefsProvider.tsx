@@ -7,7 +7,7 @@ import {
   type ReactNode,
 } from "react";
 import { useGetAccount } from "@workspace/api-client-react";
-import { useAuthAccount } from "./SignUpProvider";
+import { useAuthAccount } from "./AuthAccountContext";
 import {
   tempRounded,
   formatSnow,
