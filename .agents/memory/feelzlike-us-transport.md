@@ -9,3 +9,6 @@ description: How US town stay/eat/car-hire parity actually works and what remain
 - Rideshare banner: suppress the categorical "no rideshare" notice by default for every US and Canadian town; broad Uber/Lyft coverage makes town allowlists stale immediately. AU, JP and NZ retain the explicit allowlist behavior.
 - **Why:** a missing town entry previously produced a confident but often false claim, so adding any US/CA town silently created misinformation.
 - **How to apply:** pass region country context into the rideshare policy on generic transport surfaces; do not restore US/CA to opt-in town allowlists.
+- Crested Butte's Mountain Express site served injected replica-shopping spam in Aug 2026 despite its bus pages still loading. Treat it as compromised and use clean Gunnison Valley RTA links until the operator site is independently reverified.
+- **Why:** an HTTP 200 is not enough when a legitimate operator domain has been content-hijacked; linking it would expose visitors to unsafe material.
+- **How to apply:** keep Mountain Express out of public transport data and re-check page content, not just status, before restoring it.

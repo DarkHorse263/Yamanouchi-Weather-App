@@ -177,8 +177,7 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "quebec-laurentians": QUEBEC_LAURENTIANS_TRANSPORT,
   "quebec-charlevoix": QUEBEC_CHARLEVOIX_TRANSPORT,
   "quebec-eastern-townships": QUEBEC_EASTERN_TOWNSHIPS_TRANSPORT,
-  // US (Colorado) · popular regions have verified public transport entries;
-  // the remaining regions stay empty rather than carrying guessed services.
+  // US (Colorado) · popular regions have verified public transport entries.
   "summit-county": SUMMIT_COUNTY_TRANSPORT,
   "vail-valley": VAIL_VALLEY_TRANSPORT,
   "aspen-snowmass": ASPEN_SNOWMASS_TRANSPORT,
@@ -199,9 +198,8 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "big-bear": BIG_BEAR_TRANSPORT,
   "bear-valley": BEAR_VALLEY_TRANSPORT,
   "mt-shasta": MT_SHASTA_TRANSPORT,
-  // US (Vermont) · no operators curated to the AU/JP/NZ verification
-  // standard yet, so these are registered empty rather than filled with
-  // guessed timetables.
+  // US (Vermont) · Killington/Pico has verified public transport; the
+  // remaining regions stay empty rather than carrying guessed services.
   "killington-pico": KILLINGTON_PICO_TRANSPORT,
   "stowe-smugglers-notch": STOWE_SMUGGLERS_NOTCH_TRANSPORT,
   "mad-river-valley": MAD_RIVER_VALLEY_TRANSPORT,
@@ -212,7 +210,7 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "jackson-hole": JACKSON_HOLE_TRANSPORT,
   "grand-targhee": GRAND_TARGHEE_TRANSPORT,
 
-  // US (Montana) · Big Sky is curated; the remaining regions stay empty.
+  // US (Montana) · Big Sky and Whitefish have verified transport.
   "big-sky": BIG_SKY_TRANSPORT,
   "bozeman-bridger-bowl": BOZEMAN_BRIDGER_BOWL_TRANSPORT,
   "whitefish": WHITEFISH_TRANSPORT,
@@ -247,7 +245,7 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "juneau": JUNEAU_TRANSPORT,
   "litchfield-hills": LITCHFIELD_HILLS_TRANSPORT,
   "vernon": VERNON_TRANSPORT,
-  // US (Pacific Northwest) · Mt. Hood is curated; the other regions stay empty.
+  // US (Pacific Northwest) · Mt. Hood and Bend have verified transport.
   "mt-hood": MT_HOOD_TRANSPORT,
   "bend": BEND_TRANSPORT,
   "crystal-mountain": CRYSTAL_MOUNTAIN_TRANSPORT,

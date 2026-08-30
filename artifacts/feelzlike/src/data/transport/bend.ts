@@ -1,11 +1,22 @@
 import type { TransportProviderList } from "@/types/transport";
 
 /**
- * Bend (Oregon, USA) transport providers.
+ * Bend / Mt. Bachelor (Oregon, USA) transport providers.
  *
- * Empty in this pass · no operator has been curated to the same standard as
- * the AU/JP/NZ entries (verified operator, route summary, and a schedule or
- * website that survives the daily link smoke test). The Transport page
- * renders its empty state rather than shipping guessed timetables.
+ * Verified against the operator's official site (Aug 2026).
  */
-export const BEND_TRANSPORT: TransportProviderList = [];
+export const BEND_TRANSPORT: TransportProviderList = [
+  {
+    id: "us-cet-mt-bachelor-winter",
+    name: "Mt. Bachelor Ski Bus",
+    type: "bus",
+    leg: "to_mountain",
+    operator: "Cascades East Transit",
+    phone: null,
+    website: "https://cascadeseasttransit.com/",
+    route_summary:
+      "Paid seasonal winter bus from Bend's Hawthorne Station and Mt. Bachelor Park & Ride to West Village and Sunrise Lodge. Service and fares vary by season.",
+    schedule_url: "https://cascadeseasttransit.com/ride/mt-bachelor-winter/",
+    regions: ["bend"],
+  },
+];
