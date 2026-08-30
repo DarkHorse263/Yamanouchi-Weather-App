@@ -3,6 +3,7 @@ import { and, eq, gte, lte, desc, isNotNull, isNull, count, sql } from "drizzle-
 import { db, alertSubscribersTable, newsletterSubscribersTable, promoFunnelDailyTable, emailDeliveryIncidentsTable, pageViewDailyTable, visitorDailyTable, engagementEventDailyTable, usersTable, thredboLiftTransitionsTable } from "@workspace/db";
 import { getAuth, clerkClient } from "@clerk/express";
 import { requireAdminUser } from "../middlewares/requireAdminUser.js";
+import { loadPromoFunnel } from "../lib/adminPromoFunnel.js";
 
 /**
  * Admin router · mounted at /api/admin/*. Every route here goes through
@@ -217,30 +218,21 @@ router.get("/stats", async (_req: Request, res: Response) => {
     // Promo-funnel counters (first-party shown/clicked/dismissed tallies
     // recorded by POST /api/promo/event). Keep this query fail-soft: these
     // vanity counters must not take down the rest of the admin stats page.
-    const since7dDay = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
-      .toISOString()
-      .slice(0, 10);
-    const since30dDay = since30d.toISOString().slice(0, 10);
-    let promoFunnel: Record<string, { last30d: number; last7d: number }> | undefined;
-    try {
-      const promoRows = await db
-        .select({
-          event: promoFunnelDailyTable.event,
-          last30d: sql<number>`sum(${promoFunnelDailyTable.count}) filter (where ${promoFunnelDailyTable.day} >= ${since30dDay})`,
-          last7d: sql<number>`sum(${promoFunnelDailyTable.count}) filter (where ${promoFunnelDailyTable.day} >= ${since7dDay})`,
-        })
-        .from(promoFunnelDailyTable)
-        .groupBy(promoFunnelDailyTable.event);
-      promoFunnel = {};
-      for (const r of promoRows) {
-        promoFunnel[r.event] = {
-          last30d: Number(r.last30d ?? 0),
-          last7d: Number(r.last7d ?? 0),
-        };
-      }
-    } catch (err) {
-      console.error("[admin] failed to load promo funnel counters", err);
-    }
+    const promoFunnel = await loadPromoFunnel({
+      async loadRowsSince(sinceDay) {
+        return db
+          .select({
+            event: promoFunnelDailyTable.event,
+            day: promoFunnelDailyTable.day,
+            count: promoFunnelDailyTable.count,
+          })
+          .from(promoFunnelDailyTable)
+          .where(gte(promoFunnelDailyTable.day, sinceDay));
+      },
+      logError(err) {
+        console.error("[admin] failed to load promo funnel counters", err);
+      },
+    });
 
     res.json({
       promoFunnel,
