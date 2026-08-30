@@ -20,6 +20,7 @@ import {
   elevationRounded,
   type UnitsPref,
 } from "@/lib/unitsFormat";
+import { LOCAL_UNITS_KEY, readLocalUnits } from "./userPrefsStorage";
 
 /**
  * App-wide access to the signed-in member's saved preferences
@@ -46,33 +47,6 @@ const UserPrefsContext = createContext<UserPrefs>(DEFAULT_PREFS);
 
 export function useUserPrefs(): UserPrefs {
   return useContext(UserPrefsContext);
-}
-
-/** localStorage key for the anonymous-visitor units preference. */
-const LOCAL_UNITS_KEY = "feelzlike:units";
-
-/**
- * First-visit default: US-locale browsers get imperial, everyone else metric.
- * Only consulted when nothing is stored — an explicit choice always wins.
- */
-function localeDefaultUnits(): UnitsPref {
-  try {
-    const langs = navigator.languages?.length ? navigator.languages : [navigator.language];
-    return langs.some((l) => /[-_]US$/i.test(l ?? "")) ? "imperial" : "metric";
-  } catch {
-    return "metric";
-  }
-}
-
-function readLocalUnits(): UnitsPref {
-  try {
-    const stored = localStorage.getItem(LOCAL_UNITS_KEY);
-    if (stored === "imperial") return "imperial";
-    if (stored === "metric") return "metric";
-    return localeDefaultUnits();
-  } catch {
-    return "metric"; // private mode / SSR — fail-soft to metric
-  }
 }
 
 interface UnitsControl {
