@@ -41,8 +41,8 @@ export const NZ: LiftSeed[] = [
   { id: "ca-valley-view-quad",  mountainId: "cardrona",        name: "Valley View Quad",     baseElevation: 1560, topElevation: 1670, exposure: "moderate",       windHoldThresholdKmh: 75, type: "fixed_grip_chair", verifiedAt: V },
   // Willow Basin Quad = the relocated old McDougall's fixed quad (2021)
   { id: "ca-willows-quad",      mountainId: "cardrona",        name: "Willow Basin Quad",    baseElevation: 1700, topElevation: 1860, exposure: "exposed",        windHoldThresholdKmh: 70, type: "fixed_grip_chair", verifiedAt: V },
-  // Soho Express (new 2025) · 6-seat detachable into the Soho Basin expansion
-  { id: "ca-soho-express",      mountainId: "cardrona",        name: "Soho Express",         baseElevation: 1500, topElevation: 1860, exposure: "exposed",        windHoldThresholdKmh: 70, type: "detachable",       verifiedAt: V },
+  // Soho Express (new 2025) · official 2026 map + published 380 m vertical
+  { id: "ca-soho-express",      mountainId: "cardrona",        name: "Soho Express",         baseElevation: 1480, topElevation: 1860, exposure: "exposed",        windHoldThresholdKmh: 70, type: "detachable",       verifiedAt: "2026-08-29" },
 
   // ─── TREBLE CONE (Wanaka · RealNZ) ───
   { id: "tc-home-basin-express", mountainId: "treble-cone",    name: "Home Basin Express",   baseElevation: 1260, topElevation: 1660, exposure: "exposed",        windHoldThresholdKmh: 70, type: "detachable",       verifiedAt: V },
