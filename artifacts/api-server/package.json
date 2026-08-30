@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test:feelzlike-language": "node --test src/scripts/feelzlike-language.e2e.test.mjs",
     "dev": "NODE_ENV=development tsx --import ./src/instrument.ts ./src/index.ts",
     "build": "tsx ./build.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit",
