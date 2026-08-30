@@ -2,6 +2,11 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import type { Language } from "./types";
 
 export const LANGUAGE_STORAGE_KEY = "feelzlike:lang";
+export const LANGUAGE_CHANGE_EVENT = "feelzlike:languagechange";
+
+function notifyLanguageChange() {
+  window.dispatchEvent(new Event(LANGUAGE_CHANGE_EVENT));
+}
 
 interface LanguageContextValue {
   language: Language;
@@ -39,6 +44,7 @@ export function LanguageProvider({
         ) {
           saved = "ja";
           localStorage.setItem(LANGUAGE_STORAGE_KEY, saved);
+          notifyLanguageChange();
           break;
         }
       }
@@ -51,6 +57,7 @@ export function LanguageProvider({
     ) {
       saved = "ja";
       localStorage.setItem(LANGUAGE_STORAGE_KEY, saved);
+      notifyLanguageChange();
     }
 
     setLanguageState(saved && locales.includes(saved) ? saved : defaultLocale);
@@ -70,6 +77,7 @@ export function LanguageProvider({
     if (!locales.includes(lang)) return;
     setLanguageState(lang);
     localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
+    notifyLanguageChange();
   };
 
   const t = (en: string | null | undefined, ja?: string | null | undefined) => {

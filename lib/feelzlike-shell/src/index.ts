@@ -18,7 +18,12 @@ export {
 export { SECTION_ACCENTS, sectionAccentFor, mixSection } from "./sectionAccents";
 export { RegionProvider, useRegion } from "./RegionProvider";
 export { SeasonProvider, useSeason, useOptionalSeason } from "./SeasonProvider";
-export { LANGUAGE_STORAGE_KEY, LanguageProvider, useLanguage } from "./LanguageProvider";
+export {
+  LANGUAGE_CHANGE_EVENT,
+  LANGUAGE_STORAGE_KEY,
+  LanguageProvider,
+  useLanguage,
+} from "./LanguageProvider";
 export { BaseTownProvider, useBaseTown } from "./BaseTownProvider";
 export { AppShell } from "./AppShell";
 export { TownPicker } from "./TownPicker";

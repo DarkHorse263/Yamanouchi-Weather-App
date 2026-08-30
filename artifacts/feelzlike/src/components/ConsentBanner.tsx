@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useConsent } from "@/lib/consent";
+import { useJapaneseUi } from "@/hooks/useJapaneseUi";
 
 /**
  * Lightweight GDPR-style consent banner. Shown only until the user makes a
@@ -9,13 +10,14 @@ import { useConsent } from "@/lib/consent";
  *  - Bottom-anchored, full-width, doesn't trap focus or block page reading.
  *  - Honours the "ads" + "analytics" categories independently - required to
  *    pass IAB TCF / Google Funding Choices certification later.
- *  - All copy is plain English; replace with localised copy when i18n lands.
+ *  - Copy follows the region's app-wide Japanese UI preference.
  */
 export function ConsentBanner() {
   const { hasDecided, acceptAll, rejectAll, setChoices } = useConsent();
   const [open, setOpen] = useState(false);
   const [analytics, setAnalytics] = useState(true);
   const [ads, setAds] = useState(true);
+  const ja = useJapaneseUi();
 
   if (hasDecided) return null;
 
@@ -23,7 +25,7 @@ export function ConsentBanner() {
     <div
       role="dialog"
       aria-live="polite"
-      aria-label="Cookie and tracking consent"
+      aria-label={ja ? "クッキーとトラッキングの同意" : "Cookie and tracking consent"}
       // On phones the banner sits ABOVE the fixed bottom nav so navigation
       // stays reachable while consent is pending. AppShell publishes the nav
       // height as --mobile-bottom-nav; pages without the nav (e.g. home) and
@@ -32,14 +34,20 @@ export function ConsentBanner() {
     >
       <div className="mx-auto flex max-w-5xl flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
         <div className="text-slate-700">
-          <p className="text-[13px] font-semibold leading-snug text-slate-900 sm:text-sm">We use cookies for essential features and, with your permission, analytics + ads.</p>
+          <p className="text-[13px] font-semibold leading-snug text-slate-900 sm:text-sm">
+            {ja
+              ? "必須機能のためにクッキーを使用します。同意いただける場合は、アクセス解析と広告にも使用します。"
+              : "We use cookies for essential features and, with your permission, analytics + ads."}
+          </p>
           <p className="mt-0.5 text-[11px] leading-snug text-slate-500 sm:mt-1 sm:text-xs">
-            <span className="hidden sm:inline">You can change your choice any time from the footer. </span>
-            See our{" "}
+            <span className="hidden sm:inline">
+              {ja ? "選択内容はフッターからいつでも変更できます。 " : "You can change your choice any time from the footer. "}
+            </span>
+            {ja ? "詳しくは" : "See our"}{" "}
             <a href="/legal/privacy" className="underline underline-offset-2 hover:text-sky-700">
-              privacy policy
+              {ja ? "プライバシーポリシー" : "privacy policy"}
             </a>
-            .
+            {ja ? "をご覧ください。" : "."}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -49,7 +57,7 @@ export function ConsentBanner() {
             onClick={() => setOpen((v) => !v)}
             data-testid="consent-customise"
           >
-            Customise
+            {ja ? "カスタマイズ" : "Customise"}
           </button>
           <button
             type="button"
@@ -57,7 +65,7 @@ export function ConsentBanner() {
             onClick={rejectAll}
             data-testid="consent-reject"
           >
-            Reject non-essential
+            {ja ? "必須以外を拒否" : "Reject non-essential"}
           </button>
           <button
             type="button"
@@ -65,20 +73,24 @@ export function ConsentBanner() {
             onClick={acceptAll}
             data-testid="consent-accept"
           >
-            Accept all
+            {ja ? "すべて許可" : "Accept all"}
           </button>
         </div>
       </div>
 
       {open && (
         <div className="mx-auto mt-4 max-w-5xl rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm">
-          <p className="text-xs uppercase tracking-wide text-slate-500">Choose what we collect</p>
+          <p className="text-xs uppercase tracking-wide text-slate-500">
+            {ja ? "収集する項目を選択" : "Choose what we collect"}
+          </p>
           <div className="mt-3 grid gap-3 sm:grid-cols-3">
             <label className="flex cursor-not-allowed items-start gap-2 rounded-lg border border-slate-200 bg-white p-3 opacity-70">
               <input type="checkbox" checked readOnly className="mt-1" />
               <div>
-                <div className="text-sm font-semibold text-slate-800">Essential</div>
-                <div className="text-xs text-slate-500">Required for the site to function. Always on.</div>
+                <div className="text-sm font-semibold text-slate-800">{ja ? "必須" : "Essential"}</div>
+                <div className="text-xs text-slate-500">
+                  {ja ? "サイトの動作に必要なため、常に有効です。" : "Required for the site to function. Always on."}
+                </div>
               </div>
             </label>
             <label className="flex cursor-pointer items-start gap-2 rounded-lg border border-slate-200 bg-white p-3 hover:border-sky-300">
@@ -90,8 +102,10 @@ export function ConsentBanner() {
                 data-testid="consent-toggle-analytics"
               />
               <div>
-                <div className="text-sm font-semibold text-slate-800">Analytics</div>
-                <div className="text-xs text-slate-500">Helps us understand which forecasts and regions are useful.</div>
+                <div className="text-sm font-semibold text-slate-800">{ja ? "アクセス解析" : "Analytics"}</div>
+                <div className="text-xs text-slate-500">
+                  {ja ? "どの予報や地域が役立っているかを把握するために使用します。" : "Helps us understand which forecasts and regions are useful."}
+                </div>
               </div>
             </label>
             <label className="flex cursor-pointer items-start gap-2 rounded-lg border border-slate-200 bg-white p-3 hover:border-sky-300">
@@ -103,8 +117,12 @@ export function ConsentBanner() {
                 data-testid="consent-toggle-ads"
               />
               <div>
-                <div className="text-sm font-semibold text-slate-800">Advertising</div>
-                <div className="text-xs text-slate-500">Affiliate booking cookies + measuring the ads we run on Facebook and Instagram.</div>
+                <div className="text-sm font-semibold text-slate-800">{ja ? "広告" : "Advertising"}</div>
+                <div className="text-xs text-slate-500">
+                  {ja
+                    ? "予約アフィリエイトのクッキーと、フェイスブック・インスタグラム広告の効果測定に使用します。"
+                    : "Affiliate booking cookies + measuring the ads we run on Facebook and Instagram."}
+                </div>
               </div>
             </label>
           </div>
@@ -118,7 +136,7 @@ export function ConsentBanner() {
               }}
               data-testid="consent-save"
             >
-              Save preferences
+              {ja ? "設定を保存" : "Save preferences"}
             </button>
           </div>
         </div>

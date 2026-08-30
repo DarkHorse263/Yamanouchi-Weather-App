@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { Download, Share, X, Smartphone } from "lucide-react";
 import { isStandaloneMode, isIOSSafari } from "@/lib/registerSW";
 import { track } from "@/lib/analytics";
 import { useConsent } from "@/lib/consent";
-import { getRegion } from "@/regions";
-import { LANGUAGE_STORAGE_KEY } from "@workspace/feelzlike-shell";
+import { useJapaneseUi } from "@/hooks/useJapaneseUi";
 
 /**
  * PWA install prompt.
@@ -37,26 +35,6 @@ function isDismissalActive(): boolean {
   const ageMs = Date.now() - dismissedAt;
   return ageMs >= 0 && ageMs < DISMISS_COOLDOWN_DAYS * 24 * 60 * 60 * 1000;
 }
-
-/**
- * Detect whether the visitor is currently on a Japan region with 日本語
- * selected. The prompt mounts outside LanguageProvider, so it reads the
- * app-wide preference directly while still checking that the current region
- * supports Japanese.
- * English everywhere else.
- */
-function useJapaneseUi(): boolean {
-  const [location] = useLocation();
-  const seg = location.split("/").filter(Boolean)[0] ?? "";
-  const region = getRegion(seg);
-  if (!region?.language?.locales.includes("ja")) return false;
-  try {
-    return window.localStorage.getItem(LANGUAGE_STORAGE_KEY) === "ja";
-  } catch {
-    return false;
-  }
-}
-
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
