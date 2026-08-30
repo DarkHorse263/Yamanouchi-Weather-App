@@ -163,7 +163,7 @@ export function RegionLayout() {
   );
 
   const withLang = region.language ? (
-    <LanguageProvider regionId={region.id} locales={region.language.locales}>
+    <LanguageProvider locales={region.language.locales}>
       {inner}
     </LanguageProvider>
   ) : (

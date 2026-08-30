@@ -23,40 +23,7 @@ const card =
 const eyebrow =
   "text-[11px] font-bold lowercase tracking-wider text-white/70";
 
-const ABOUT_LANG_KEY = "feelzlike:about:lang";
 const LOCALES: Language[] = ["en", "ja"];
-
-// /about renders OUTSIDE any RegionLayout, so it carries its own
-// LanguageProvider (storage key feelzlike:about:lang). On first visit we
-// seed that key so Japan visitors land in Japanese automatically: any Japan
-// region page where they already picked 日本語, or a Japanese browser locale.
-function seedAboutLanguage() {
-  if (typeof window === "undefined") return;
-  try {
-    if (localStorage.getItem(ABOUT_LANG_KEY)) return;
-    let ja = false;
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (
-        key &&
-        key.startsWith("feelzlike:") &&
-        key.endsWith(":lang") &&
-        key !== ABOUT_LANG_KEY &&
-        localStorage.getItem(key) === "ja"
-      ) {
-        ja = true;
-        break;
-      }
-    }
-    if (!ja && (navigator.language || "").toLowerCase().startsWith("ja")) {
-      ja = true;
-    }
-    if (ja) localStorage.setItem(ABOUT_LANG_KEY, "ja");
-  } catch {
-    // localStorage unavailable (private mode etc.) · stay English
-  }
-}
-seedAboutLanguage();
 
 interface HowToStep {
   icon: typeof MapPin;
@@ -296,7 +263,7 @@ function AboutContent() {
 
 export default function About() {
   return (
-    <LanguageProvider regionId="about" locales={LOCALES}>
+    <LanguageProvider locales={LOCALES}>
       <AboutContent />
     </LanguageProvider>
   );

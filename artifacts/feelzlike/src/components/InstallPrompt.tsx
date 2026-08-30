@@ -6,6 +6,7 @@ import { isStandaloneMode, isIOSSafari } from "@/lib/registerSW";
 import { track } from "@/lib/analytics";
 import { useConsent } from "@/lib/consent";
 import { getRegion } from "@/regions";
+import { LANGUAGE_STORAGE_KEY } from "@workspace/feelzlike-shell";
 
 /**
  * PWA install prompt.
@@ -39,9 +40,9 @@ function isDismissalActive(): boolean {
 
 /**
  * Detect whether the visitor is currently on a Japan region with 日本語
- * selected. The prompt mounts OUTSIDE the region-scoped LanguageProvider,
- * so we read the same localStorage key the provider persists to
- * (`feelzlike:<regionId>:lang`), keyed off the region in the current URL.
+ * selected. The prompt mounts outside LanguageProvider, so it reads the
+ * app-wide preference directly while still checking that the current region
+ * supports Japanese.
  * English everywhere else.
  */
 function useJapaneseUi(): boolean {
@@ -50,7 +51,7 @@ function useJapaneseUi(): boolean {
   const region = getRegion(seg);
   if (!region?.language?.locales.includes("ja")) return false;
   try {
-    return window.localStorage.getItem(`feelzlike:${region.id}:lang`) === "ja";
+    return window.localStorage.getItem(LANGUAGE_STORAGE_KEY) === "ja";
   } catch {
     return false;
   }
