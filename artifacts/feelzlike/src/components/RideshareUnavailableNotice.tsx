@@ -11,8 +11,7 @@ import { Smartphone, ArrowDown } from "lucide-react";
  *
  * Universal across regions: the wording stays neutral ("apps like Uber,
  * DiDi or Ola") so it works in AU and JP. The Transport page chooses
- * whether to render this based on a town allowlist (currently empty -
- * none of our base towns have rideshare).
+ * whether to render this using the country-aware policy below.
  */
 export function RideshareUnavailableNotice({
   townName,
@@ -56,10 +55,8 @@ export function RideshareUnavailableNotice({
 }
 
 /**
- * Town ids where rideshare apps are usefully available. None of our AU or
- * JP base towns qualify, but the flagship US resort towns do - Uber and
- * Lyft genuinely operate in the Colorado, Utah, Tahoe and Stowe markets,
- * so showing the "no rideshare" banner there would be factually wrong.
+ * Town ids with confirmed useful rideshare coverage. This remains a fallback
+ * for callers that do not have region country context.
  */
 export const RIDESHARE_AVAILABLE_TOWNS: ReadonlySet<string> = new Set<string>([
   "breckenridge",
@@ -71,7 +68,18 @@ export const RIDESHARE_AVAILABLE_TOWNS: ReadonlySet<string> = new Set<string>([
   "stowe",
 ]);
 
-export function townHasRideshare(townId: string | undefined): boolean {
+/**
+ * US and Canadian towns default to not showing a categorical "no rideshare"
+ * claim. Both countries have broad Uber/Lyft coverage and the town catalogue
+ * grows faster than a hand-maintained allowlist can be audited.
+ *
+ * AU, JP and NZ retain the previous allowlist behaviour.
+ */
+export function townHasRideshare(
+  townId: string | undefined,
+  countryCode?: string,
+): boolean {
   if (!townId) return false;
+  if (countryCode === "US" || countryCode === "CA") return true;
   return RIDESHARE_AVAILABLE_TOWNS.has(townId);
 }

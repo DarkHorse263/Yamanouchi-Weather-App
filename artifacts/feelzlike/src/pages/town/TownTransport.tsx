@@ -34,6 +34,7 @@ import {
 import type { TransportLeg } from "@/types/transport";
 import { assertProvidersForRegion } from "@/lib/regionGuard";
 import { EmptyStateCard } from "@/components/EmptyStateCard";
+import { REGION_COUNTRY } from "@/regions";
 import {
   RideshareUnavailableNotice,
   townHasRideshare,
@@ -165,7 +166,7 @@ export function TownTransport() {
       />
       <div className="mb-5" />
 
-      {town && !townHasRideshare(town.id) && (
+      {town && !townHasRideshare(town.id, REGION_COUNTRY[region.id]) && (
         <RideshareUnavailableNotice townName={t(town.name, town.nameJa)} t={t} />
       )}
 
