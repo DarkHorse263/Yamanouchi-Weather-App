@@ -1,6 +1,6 @@
 import { AdminLayout, AdminForbidden } from "./AdminLayout";
 import { adminFetch, useAdminQuery } from "./useAdminFetch";
-import { ExternalLink, X } from "lucide-react";
+import { Check, ExternalLink, X } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface SubsBucket {
@@ -41,6 +41,8 @@ interface EmailIncident {
   email: string;
   type: "bounced" | "complained";
   reason: string | null;
+  resolvedAt: string | null;
+  resolvedByEmail: string | null;
   createdAt: string;
 }
 interface EmailIncidentsPayload {
@@ -165,12 +167,34 @@ function SourcesCard({ sources }: { sources: Array<{ source: string; count: numb
  * Authentication email is delivered and suppressed independently by Clerk.
  */
 function EmailIncidentsCard({ incidents }: { incidents: EmailIncident[] }) {
+  const queryClient = useQueryClient();
+  const resolve = useMutation({
+    mutationFn: ({ incident, confirmComplaint }: { incident: EmailIncident; confirmComplaint: boolean }) =>
+      adminFetch<{ incident: Pick<EmailIncident, "id" | "resolvedAt" | "resolvedByEmail"> }>(
+        `/email-incidents/${incident.id}/resolve`,
+        { method: "PATCH", body: JSON.stringify({ confirmComplaint }) },
+      ),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["admin", "email-incidents"] });
+    },
+  });
+
+  const resolveIncident = (incident: EmailIncident) => {
+    const complaint = incident.type === "complained";
+    const message = complaint
+      ? `This address reported the email as spam. Only unblock ${incident.email} if the owner has confirmed the complaint is resolved. Continue?`
+      : `Mark the delivery issue for ${incident.email} as resolved and allow future sends?`;
+    if (window.confirm(message)) {
+      resolve.mutate({ incident, confirmComplaint: complaint });
+    }
+  };
+
   return (
     <div className="rounded-lg border bg-white p-5">
       <h3 className="text-sm font-semibold mb-1 lowercase">email delivery incidents</h3>
       <p className="text-xs text-muted-foreground mb-3">
         powder-alert & account-email bounces reported by resend · latest 50 ·
-        future sends are blocked, subscribers are never auto-removed
+        unresolved incidents block future sends · subscribers are never auto-removed
       </p>
       <p className="text-xs text-muted-foreground mb-3">
         sign-in & sign-up mail is handled separately by clerk · check clerk email logs for
@@ -203,11 +227,33 @@ function EmailIncidentsCard({ incidents }: { incidents: EmailIncident[] }) {
                 <span className="text-xs text-muted-foreground">
                   {new Date(i.createdAt).toLocaleDateString()}
                 </span>
+                {i.resolvedAt ? (
+                  <span
+                    className="rounded bg-emerald-100 px-1.5 py-0.5 text-[11px] font-medium text-emerald-800"
+                    title={`resolved ${new Date(i.resolvedAt).toLocaleString()} by ${i.resolvedByEmail ?? "an admin"}`}
+                  >
+                    resolved
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => resolveIncident(i)}
+                    disabled={resolve.isPending}
+                    title={`mark ${i.email} as resolved`}
+                    aria-label={`mark delivery incident for ${i.email} as resolved`}
+                    className="rounded p-1 text-slate-500 transition-colors hover:bg-emerald-50 hover:text-emerald-700 disabled:opacity-50"
+                  >
+                    <Check className="h-3.5 w-3.5" />
+                  </button>
+                )}
               </div>
             </li>
           ))}
         </ul>
       )}
+      {resolve.isError ? (
+        <p className="mt-2 text-xs text-rose-700">couldn't resolve · {(resolve.error as Error).message}</p>
+      ) : null}
     </div>
   );
 }

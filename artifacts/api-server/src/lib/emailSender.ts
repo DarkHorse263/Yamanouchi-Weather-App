@@ -91,12 +91,13 @@ export async function sendEmail(args: SendArgs): Promise<SendResult> {
       .select({
         type: emailDeliveryIncidentsTable.type,
         createdAt: emailDeliveryIncidentsTable.createdAt,
+        resolvedAt: emailDeliveryIncidentsTable.resolvedAt,
       })
       .from(emailDeliveryIncidentsTable)
       .where(eq(emailDeliveryIncidentsTable.email, normalizedTo))
-      .orderBy(desc(emailDeliveryIncidentsTable.createdAt))
+      .orderBy(desc(emailDeliveryIncidentsTable.createdAt), desc(emailDeliveryIncidentsTable.id))
       .limit(1);
-    if (incident) {
+    if (incident && !incident.resolvedAt) {
       const detail = `known ${incident.type} recipient (${incident.createdAt.toISOString()})`;
       noteSendFailure(normalizedTo, detail);
       return {

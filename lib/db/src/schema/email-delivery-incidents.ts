@@ -9,7 +9,9 @@ import { sql } from "drizzle-orm";
  * forever. We record every bounce/complaint here so the owner can see them
  * on the admin dashboard.
  *
- * This is an append-only ledger: repeat sends are suppressed, but we
+ * Incident facts are append-only: repeat sends are suppressed until an admin
+ * records a resolution on the latest incident for the address. Resolution
+ * metadata preserves who removed the block and when. We
  * deliberately do NOT auto-unsubscribe a matching alert/newsletter subscriber
  * (a delivery incident should not silently change someone's saved opt-in).
  * Cleanup is a human decision made from the admin surface.
@@ -29,6 +31,9 @@ export const emailDeliveryIncidentsTable = pgTable(
     // Human-readable reason from the webhook payload (bounce sub-type,
     // diagnostic text, etc). Nullable because complaints often carry none.
     reason: text("reason"),
+    resolvedAt: timestamp("resolved_at", { withTimezone: true }),
+    resolvedByUserId: text("resolved_by_user_id"),
+    resolvedByEmail: text("resolved_by_email"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [

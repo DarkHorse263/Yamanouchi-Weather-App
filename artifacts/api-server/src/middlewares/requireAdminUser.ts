@@ -54,6 +54,7 @@ export async function requireAdminUser(
       return;
     }
 
+    res.locals.adminUser = { userId: clerkUserId, email };
     next();
   } catch (err) {
     console.error("[requireAdminUser] Clerk API error:", err);

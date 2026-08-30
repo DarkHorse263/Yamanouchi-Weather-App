@@ -433,15 +433,126 @@ router.get("/email-incidents", async (_req: Request, res: Response) => {
         email: emailDeliveryIncidentsTable.email,
         type: emailDeliveryIncidentsTable.type,
         reason: emailDeliveryIncidentsTable.reason,
+        resolvedAt: emailDeliveryIncidentsTable.resolvedAt,
+        resolvedByEmail: emailDeliveryIncidentsTable.resolvedByEmail,
         createdAt: emailDeliveryIncidentsTable.createdAt,
       })
       .from(emailDeliveryIncidentsTable)
-      .orderBy(desc(emailDeliveryIncidentsTable.createdAt))
+      .orderBy(desc(emailDeliveryIncidentsTable.createdAt), desc(emailDeliveryIncidentsTable.id))
       .limit(50);
     res.json({ incidents });
   } catch (err) {
     console.error("[admin/email-incidents] failed", err);
     res.status(500).json({ error: "EMAIL_INCIDENTS_FAILED" });
+  }
+});
+
+// PATCH /api/admin/email-incidents/:id/resolve · remove the send block while
+// retaining the original incident and a server-authoritative admin audit trail.
+// Only the latest incident for an address can be resolved; a newer provider
+// event must remain authoritative. Complaints require an explicit extra flag.
+router.patch("/email-incidents/:id/resolve", async (req: Request, res: Response): Promise<void> => {
+  try {
+    const rawId = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+    const id = typeof rawId === "string" ? rawId.trim() : "";
+    if (!id) {
+      res.status(400).json({ error: "INVALID_ID" });
+      return;
+    }
+
+    const [target] = await db
+      .select({
+        id: emailDeliveryIncidentsTable.id,
+        email: emailDeliveryIncidentsTable.email,
+      })
+      .from(emailDeliveryIncidentsTable)
+      .where(eq(emailDeliveryIncidentsTable.id, id))
+      .limit(1);
+
+    if (!target) {
+      res.status(404).json({ error: "EMAIL_INCIDENT_NOT_FOUND" });
+      return;
+    }
+
+    const admin = res.locals.adminUser as { userId?: string; email?: string } | undefined;
+    if (!admin?.userId || !admin.email) {
+      res.status(500).json({ error: "ADMIN_IDENTITY_MISSING" });
+      return;
+    }
+
+    const outcome = await db.transaction(async (tx) => {
+      // The webhook takes this same transaction-scoped lock before inserting.
+      // Once acquired, "latest incident" remains stable until this transaction
+      // commits, so a stale incident can never be recorded as resolved.
+      await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${target.email}, 0))`);
+
+      const [incident] = await tx
+        .select({
+          id: emailDeliveryIncidentsTable.id,
+          type: emailDeliveryIncidentsTable.type,
+          resolvedAt: emailDeliveryIncidentsTable.resolvedAt,
+        })
+        .from(emailDeliveryIncidentsTable)
+        .where(eq(emailDeliveryIncidentsTable.id, id))
+        .limit(1);
+      if (!incident) return { kind: "not_found" } as const;
+      if (incident.resolvedAt) return { kind: "already_resolved" } as const;
+      if (incident.type === "complained" && req.body?.confirmComplaint !== true) {
+        return { kind: "confirmation_required" } as const;
+      }
+
+      const [latest] = await tx
+        .select({ id: emailDeliveryIncidentsTable.id })
+        .from(emailDeliveryIncidentsTable)
+        .where(eq(emailDeliveryIncidentsTable.email, target.email))
+        .orderBy(desc(emailDeliveryIncidentsTable.createdAt), desc(emailDeliveryIncidentsTable.id))
+        .limit(1);
+      if (latest?.id !== id) return { kind: "newer_exists" } as const;
+
+      const [resolved] = await tx
+        .update(emailDeliveryIncidentsTable)
+        .set({
+          resolvedAt: new Date(),
+          resolvedByUserId: admin.userId,
+          resolvedByEmail: admin.email,
+        })
+        .where(and(eq(emailDeliveryIncidentsTable.id, id), isNull(emailDeliveryIncidentsTable.resolvedAt)))
+        .returning({
+          id: emailDeliveryIncidentsTable.id,
+          resolvedAt: emailDeliveryIncidentsTable.resolvedAt,
+          resolvedByEmail: emailDeliveryIncidentsTable.resolvedByEmail,
+        });
+      return resolved
+        ? ({ kind: "resolved", incidentType: incident.type, incident: resolved } as const)
+        : ({ kind: "already_resolved" } as const);
+    });
+
+    if (outcome.kind === "not_found") {
+      res.status(404).json({ error: "EMAIL_INCIDENT_NOT_FOUND" });
+      return;
+    }
+    if (outcome.kind === "already_resolved") {
+      res.status(409).json({ error: "EMAIL_INCIDENT_ALREADY_RESOLVED" });
+      return;
+    }
+    if (outcome.kind === "confirmation_required") {
+      res.status(400).json({ error: "COMPLAINT_CONFIRMATION_REQUIRED" });
+      return;
+    }
+    if (outcome.kind === "newer_exists") {
+      res.status(409).json({ error: "NEWER_EMAIL_INCIDENT_EXISTS" });
+      return;
+    }
+
+    console.info("[admin/email-incidents] resolved", {
+      incidentId: id,
+      incidentType: outcome.incidentType,
+      resolvedByUserId: admin.userId,
+    });
+    res.json({ incident: outcome.incident });
+  } catch (err) {
+    console.error("[admin/email-incidents] resolve failed", err);
+    res.status(500).json({ error: "EMAIL_INCIDENT_RESOLVE_FAILED" });
   }
 });
 
