@@ -1,8 +1,7 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import express from "express";
 import crypto from "crypto";
-import { sql } from "drizzle-orm";
-import { db, emailDeliveryIncidentsTable } from "@workspace/db";
+import { recordEmailDeliveryIncident } from "../lib/emailDeliveryIncidents.js";
 
 /**
  * Resend delivery webhook · POST /api/webhooks/resend.
@@ -164,21 +163,11 @@ router.post(
       null;
 
     try {
-      const recorded = await db.transaction(async (tx) => {
-        // Serialize incident insertion with admin resolution for this address.
-        // This prevents a resolution from being committed against a stale
-        // "latest" row while a newer provider event is arriving.
-        await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${email}, 0))`);
-        return tx
-          .insert(emailDeliveryIncidentsTable)
-          .values({
-            providerEventId: svixId,
-            email,
-            type: incidentType,
-            reason: reason || null,
-          })
-          .onConflictDoNothing({ target: emailDeliveryIncidentsTable.providerEventId })
-          .returning({ id: emailDeliveryIncidentsTable.id });
+      const recorded = await recordEmailDeliveryIncident({
+        providerEventId: svixId,
+        email,
+        type: incidentType,
+        reason: reason || null,
       });
       if (recorded.length > 0) {
         console.warn(

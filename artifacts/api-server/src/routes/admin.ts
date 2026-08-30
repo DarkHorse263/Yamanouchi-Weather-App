@@ -4,6 +4,7 @@ import { db, alertSubscribersTable, newsletterSubscribersTable, promoFunnelDaily
 import { getAuth, clerkClient } from "@clerk/express";
 import { requireAdminUser } from "../middlewares/requireAdminUser.js";
 import { loadPromoFunnel } from "../lib/adminPromoFunnel.js";
+import { resolveEmailDeliveryIncident } from "../lib/emailDeliveryIncidents.js";
 
 /**
  * Admin router · mounted at /api/admin/*. Every route here goes through
@@ -472,51 +473,12 @@ router.patch("/email-incidents/:id/resolve", async (req: Request, res: Response)
       return;
     }
 
-    const outcome = await db.transaction(async (tx) => {
-      // The webhook takes this same transaction-scoped lock before inserting.
-      // Once acquired, "latest incident" remains stable until this transaction
-      // commits, so a stale incident can never be recorded as resolved.
-      await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${target.email}, 0))`);
-
-      const [incident] = await tx
-        .select({
-          id: emailDeliveryIncidentsTable.id,
-          type: emailDeliveryIncidentsTable.type,
-          resolvedAt: emailDeliveryIncidentsTable.resolvedAt,
-        })
-        .from(emailDeliveryIncidentsTable)
-        .where(eq(emailDeliveryIncidentsTable.id, id))
-        .limit(1);
-      if (!incident) return { kind: "not_found" } as const;
-      if (incident.resolvedAt) return { kind: "already_resolved" } as const;
-      if (incident.type === "complained" && req.body?.confirmComplaint !== true) {
-        return { kind: "confirmation_required" } as const;
-      }
-
-      const [latest] = await tx
-        .select({ id: emailDeliveryIncidentsTable.id })
-        .from(emailDeliveryIncidentsTable)
-        .where(eq(emailDeliveryIncidentsTable.email, target.email))
-        .orderBy(desc(emailDeliveryIncidentsTable.createdAt), desc(emailDeliveryIncidentsTable.id))
-        .limit(1);
-      if (latest?.id !== id) return { kind: "newer_exists" } as const;
-
-      const [resolved] = await tx
-        .update(emailDeliveryIncidentsTable)
-        .set({
-          resolvedAt: new Date(),
-          resolvedByUserId: admin.userId,
-          resolvedByEmail: admin.email,
-        })
-        .where(and(eq(emailDeliveryIncidentsTable.id, id), isNull(emailDeliveryIncidentsTable.resolvedAt)))
-        .returning({
-          id: emailDeliveryIncidentsTable.id,
-          resolvedAt: emailDeliveryIncidentsTable.resolvedAt,
-          resolvedByEmail: emailDeliveryIncidentsTable.resolvedByEmail,
-        });
-      return resolved
-        ? ({ kind: "resolved", incidentType: incident.type, incident: resolved } as const)
-        : ({ kind: "already_resolved" } as const);
+    const outcome = await resolveEmailDeliveryIncident({
+      id,
+      email: target.email,
+      adminUserId: admin.userId,
+      adminEmail: admin.email,
+      confirmComplaint: req.body?.confirmComplaint === true,
     });
 
     if (outcome.kind === "not_found") {
