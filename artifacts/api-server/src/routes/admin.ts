@@ -1,6 +1,6 @@
 import { Router, type IRouter, type Request, type Response } from "express";
-import { and, eq, gte, desc, isNotNull, isNull, count, sql } from "drizzle-orm";
-import { db, alertSubscribersTable, newsletterSubscribersTable, promoFunnelDailyTable, emailDeliveryIncidentsTable, pageViewDailyTable, visitorDailyTable, engagementEventDailyTable, usersTable } from "@workspace/db";
+import { and, eq, gte, lte, desc, isNotNull, isNull, count, sql } from "drizzle-orm";
+import { db, alertSubscribersTable, newsletterSubscribersTable, promoFunnelDailyTable, emailDeliveryIncidentsTable, pageViewDailyTable, visitorDailyTable, engagementEventDailyTable, usersTable, thredboLiftTransitionsTable } from "@workspace/db";
 import { getAuth, clerkClient } from "@clerk/express";
 import { requireAdminUser } from "../middlewares/requireAdminUser.js";
 
@@ -88,6 +88,37 @@ router.get("/me", async (req: Request, res: Response) => {
   } catch (err) {
     console.error("[/admin/me] Clerk API error:", err);
     res.status(500).json({ error: "ADMIN_ME_FAILED" });
+  }
+});
+
+router.get("/thredbo-lift-history", async (req: Request, res: Response) => {
+  const liftId = typeof req.query.liftId === "string" ? req.query.liftId.trim() : "";
+  const from = typeof req.query.from === "string" ? new Date(req.query.from) : null;
+  const to = typeof req.query.to === "string" ? new Date(req.query.to) : null;
+  const requestedLimit = Number(req.query.limit ?? 200);
+  if ((from && Number.isNaN(from.getTime())) || (to && Number.isNaN(to.getTime()))) {
+    res.status(400).json({ error: "INVALID_DATE" });
+    return;
+  }
+  const limit = Number.isFinite(requestedLimit)
+    ? Math.min(1_000, Math.max(1, Math.trunc(requestedLimit)))
+    : 200;
+  const filters = [
+    liftId ? eq(thredboLiftTransitionsTable.liftId, liftId) : undefined,
+    from ? gte(thredboLiftTransitionsTable.observedAt, from) : undefined,
+    to ? lte(thredboLiftTransitionsTable.observedAt, to) : undefined,
+  ].filter((filter): filter is NonNullable<typeof filter> => Boolean(filter));
+  try {
+    const transitions = await db
+      .select()
+      .from(thredboLiftTransitionsTable)
+      .where(filters.length ? and(...filters) : undefined)
+      .orderBy(desc(thredboLiftTransitionsTable.observedAt))
+      .limit(limit);
+    res.json({ transitions, limit });
+  } catch (error) {
+    console.error("[admin/thredbo-lift-history] failed", error);
+    res.status(500).json({ error: "LIFT_HISTORY_FAILED" });
   }
 });
 

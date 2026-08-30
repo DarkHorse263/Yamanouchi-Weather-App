@@ -13,3 +13,4 @@ export * from "./jobs";
 export * from "./promo-funnel";
 export * from "./engagement";
 export * from "./email-delivery-incidents";
+export * from "./lift-history";

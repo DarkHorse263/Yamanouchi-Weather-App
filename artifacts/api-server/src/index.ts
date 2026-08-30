@@ -38,4 +38,7 @@ app.listen(port, () => {
   import("./jobs/smokeTest.js")
     .then((m) => m.startSmokeCron())
     .catch((err) => console.error("[boot] failed to start smoke cron:", err));
+  import("./jobs/thredboLiftHistory.js")
+    .then((m) => m.startThredboLiftHistoryCron())
+    .catch((err) => console.error("[boot] failed to start Thredbo lift history cron:", err));
 });

@@ -153,7 +153,7 @@ export function parseThredboLiftXml(raw: string, nowMs = Date.now()): ThredboLiv
 let cache: { fetchedAt: number; value: ThredboLiveLiftStatus | null } | null = null;
 let inflight: Promise<ThredboLiveLiftStatus | null> | null = null;
 
-async function fetchFeed(): Promise<ThredboLiveLiftStatus | null> {
+export async function fetchFreshThredboLiftStatus(): Promise<ThredboLiveLiftStatus | null> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
   try {
@@ -181,7 +181,7 @@ export async function getThredboLiveLiftStatus(): Promise<ThredboLiveLiftStatus 
   if (inflight) return inflight;
 
   inflight = (async () => {
-    const fresh = await fetchFeed();
+    const fresh = await fetchFreshThredboLiftStatus();
     if (fresh) {
       cache = { fetchedAt: Date.now(), value: fresh };
       return fresh;
