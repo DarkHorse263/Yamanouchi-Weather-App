@@ -7,6 +7,7 @@
  * is an anonymous tally and, like the promo counter, NOT consent-gated.
  * Fire-and-forget: failures are irrelevant to the visitor.
  */
+import { track } from "./analytics";
 
 function ping(body: Record<string, string>): void {
   try {
@@ -62,7 +63,9 @@ export type AlertFunnelStage =
   | "submit_attempted"
   | "validation_failed"
   | "api_failed"
-  | "accepted";
+  | "verification_pending"
+  | "already_verified"
+  | "verification_email_sent";
 
 export type AlertFunnelSurface = "banner" | "alert_form" | "premium_subscribe" | "verification";
 
@@ -75,6 +78,10 @@ export function pingAlertFunnel(
   surface: AlertFunnelSurface,
 ): void {
   ping({ kind: `alert_${stage}`, surface });
+  track("alert_funnel", {
+    category: "alert",
+    data: { stage, surface },
+  });
 }
 
 /**

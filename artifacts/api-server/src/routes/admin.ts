@@ -445,12 +445,17 @@ router.get("/engagement", async (_req: Request, res: Response) => {
         event: engagementEventDailyTable.event,
         total: sql<number>`sum(${engagementEventDailyTable.count})`,
         last7d: sql<number>`sum(${engagementEventDailyTable.count}) filter (where ${engagementEventDailyTable.day} >= ${since7d})`,
+        last30d: sql<number>`sum(${engagementEventDailyTable.count}) filter (where ${engagementEventDailyTable.day} >= ${since30d})`,
       })
       .from(engagementEventDailyTable)
       .groupBy(engagementEventDailyTable.event);
-    const events: Record<string, { total: number; last7d: number }> = {};
+    const events: Record<string, { total: number; last7d: number; last30d: number }> = {};
     for (const r of evRows) {
-      events[r.event] = { total: Number(r.total ?? 0), last7d: Number(r.last7d ?? 0) };
+      events[r.event] = {
+        total: Number(r.total ?? 0),
+        last7d: Number(r.last7d ?? 0),
+        last30d: Number(r.last30d ?? 0),
+      };
     }
 
     res.json({

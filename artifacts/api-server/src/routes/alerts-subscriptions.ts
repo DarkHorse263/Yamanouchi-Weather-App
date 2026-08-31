@@ -48,6 +48,21 @@ function normaliseEmail(s: string): string {
   return s.trim().toLowerCase();
 }
 
+async function recordAlertMetric(event: string): Promise<void> {
+  const day = new Date().toISOString().slice(0, 10);
+  try {
+    await db
+      .insert(engagementEventDailyTable)
+      .values({ day, event, count: 1 })
+      .onConflictDoUpdate({
+        target: [engagementEventDailyTable.day, engagementEventDailyTable.event],
+        set: { count: sql`${engagementEventDailyTable.count} + 1` },
+      });
+  } catch (err) {
+    console.warn("[alerts] funnel metric failed:", err);
+  }
+}
+
 // Defence-in-depth body schemas. The existing as*() helpers still coerce
 // each field to a safe default; these schemas reject totally malformed
 // envelopes (non-objects, wrong-typed top-level fields) before anything else.
@@ -198,6 +213,10 @@ router.post("/alerts/subscribe", async (req, res): Promise<void> => {
       return;
     }
 
+    if (send.delivered) {
+      void recordAlertMetric("alert_verification_email_sent:verification");
+    }
+
     res.json({
       ok: true,
       status: "verification_sent",
@@ -236,18 +255,7 @@ router.get("/alerts/verify", async (req, res): Promise<void> => {
         .where(and(eq(alertSubscribersTable.id, row.id), isNull(alertSubscribersTable.verifiedAt)))
         .returning({ id: alertSubscribersTable.id });
       if (verified.length > 0) {
-        const day = new Date().toISOString().slice(0, 10);
-        try {
-          await db
-            .insert(engagementEventDailyTable)
-            .values({ day, event: "alert_verification_completed:verification", count: 1 })
-            .onConflictDoUpdate({
-              target: [engagementEventDailyTable.day, engagementEventDailyTable.event],
-              set: { count: sql`${engagementEventDailyTable.count} + 1` },
-            });
-        } catch (engagementErr) {
-          console.warn("[/alerts/verify] completion metric failed:", engagementErr);
-        }
+        void recordAlertMetric("alert_verification_completed:verification");
       }
     }
     const manageToken = issueToken(row.id, "manage");

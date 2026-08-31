@@ -33,7 +33,7 @@ interface EngagementPayload {
   pageViews: { last7d: number; last30d: number };
   topPages: Array<{ page: string; count: number }>;
   dailyVisitors: Array<{ day: string; visitors: number }>;
-  events: Record<string, { total: number; last7d: number }>;
+  events: Record<string, { total: number; last7d: number; last30d?: number }>;
 }
 
 interface EmailIncident {
@@ -621,27 +621,85 @@ function AlertFunnelCard({ e }: { e: EngagementPayload }) {
     Object.entries(e.events)
       .filter(([key]) => key.startsWith(prefix))
       .reduce((sum, [, value]) => sum + value.last7d, 0);
-  const stages = [
-    ["banner seen", "alert_banner_shown:"],
-    ["banner tapped", "alert_banner_clicked:"],
-    ["form viewed", "alert_form_viewed:"],
-    ["submit attempted", "alert_submit_attempted:"],
-    ["accepted", "alert_accepted:"],
-    ["email verified", "alert_verification_completed:"],
+  const last30d = (prefix: string) =>
+    Object.entries(e.events)
+      .filter(([key]) => key.startsWith(prefix))
+      .reduce((sum, [, value]) => sum + (value.last30d ?? value.total), 0);
+  const conversion = (current: number, previous: number) =>
+    previous > 0 ? `${Math.round((current / previous) * 100)}% from prior` : "no prior-stage data";
+
+  const StepRow = ({
+    stages,
+  }: {
+    stages: ReadonlyArray<readonly [string, string]>;
+  }) => (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      {stages.map(([label, prefix], index) => {
+        const count30d = last30d(prefix);
+        const previous30d = index > 0 ? last30d(stages[index - 1][1]) : 0;
+        return (
+          <Kpi
+            key={prefix}
+            label={label}
+            value={count30d}
+            sub={`${index > 0 ? conversion(count30d, previous30d) : "path start"} · +${last7d(prefix)} last 7d`}
+          />
+        );
+      })}
+    </div>
+  );
+
+  const bannerStages = [
+    ["banner seen", "alert_banner_shown:banner"],
+    ["banner tapped", "alert_banner_clicked:banner"],
+  ] as const;
+  const regionalStages = [
+    ["form viewed", "alert_form_viewed:alert_form"],
+    ["submit attempted", "alert_submit_attempted:alert_form"],
+    ["accepted · confirm", "alert_verification_pending:alert_form"],
+  ] as const;
+  const premiumStages = [
+    ["form viewed", "alert_form_viewed:premium_subscribe"],
+    ["submit attempted", "alert_submit_attempted:premium_subscribe"],
+    ["accepted · confirm", "alert_verification_pending:premium_subscribe"],
+  ] as const;
+  const confirmationStages = [
+    ["accepted · confirm", "alert_verification_pending:"],
+    ["email sent", "alert_verification_email_sent:verification"],
+    ["email verified", "alert_verification_completed:verification"],
   ] as const;
   const failures = total("alert_validation_failed:") + total("alert_api_failed:");
+  const alreadyVerified = last30d("alert_already_verified:");
 
   return (
     <div className="rounded-lg border bg-white p-5">
       <h3 className="text-sm font-semibold mb-1 lowercase">powder-alert funnel</h3>
       <p className="text-xs text-muted-foreground mb-4">
-        privacy-safe first-party counts · no email addresses or destinations recorded
+        last 30 days · privacy-safe first-party counts · no email addresses or destinations recorded
       </p>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-        {stages.map(([label, prefix]) => (
-          <Kpi key={prefix} label={label} value={total(prefix)} sub={`+${last7d(prefix)} last 7d`} />
-        ))}
+      <div className="space-y-4">
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">forecast-page banner</p>
+          <StepRow stages={bannerStages} />
+        </div>
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">regional alert form</p>
+          <StepRow stages={regionalStages} />
+        </div>
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">premium-page alert form</p>
+          <StepRow stages={premiumStages} />
+        </div>
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">new subscription confirmation</p>
+          <StepRow stages={confirmationStages} />
+        </div>
       </div>
+      {alreadyVerified > 0 ? (
+        <p className="mt-3 text-xs text-slate-600">
+          {alreadyVerified} already-verified preference updates · excluded from confirmation conversion
+        </p>
+      ) : null}
       {failures > 0 ? (
         <p className="mt-3 text-xs text-rose-700">
           {failures} blocked attempts · {total("alert_validation_failed:")} validation · {total("alert_api_failed:")} server

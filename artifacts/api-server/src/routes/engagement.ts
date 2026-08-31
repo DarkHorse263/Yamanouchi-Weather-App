@@ -36,7 +36,9 @@ const ALERT_KINDS = new Set([
   "alert_submit_attempted",
   "alert_validation_failed",
   "alert_api_failed",
-  "alert_accepted",
+  "alert_verification_pending",
+  "alert_already_verified",
+  "alert_verification_email_sent",
 ]);
 const KINDS = new Set([
   "view",

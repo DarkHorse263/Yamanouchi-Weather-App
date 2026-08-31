@@ -229,7 +229,11 @@ export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
         message: result.message,
         devVerifyUrl: (result as { devVerifyUrl?: string | null }).devVerifyUrl ?? null,
       });
-      pingAlertFunnel("accepted", "alert_form");
+      const status = (result as { status?: string }).status;
+      pingAlertFunnel(
+        status === "already_verified" ? "already_verified" : "verification_pending",
+        "alert_form",
+      );
       // Conversion event · snow/powder alert subscribed. No email or other PII
       // is sent · only the non-identifying shape of the subscription.
       track("alert_subscribe", {
@@ -272,7 +276,7 @@ export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
     );
   }
 
-  const errMessage = extractErrorMessage(mutation.error);
+  const errMessage = mutation.error ? extractErrorMessage(mutation.error) : null;
 
   return (
     <form id={formId} onSubmit={handleSubmit} noValidate className="rounded-2xl glass border border-border p-6 space-y-4">

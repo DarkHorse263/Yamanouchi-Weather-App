@@ -70,7 +70,10 @@ export function PremiumSubscribe() {
       });
       const st = (res as { status?: string }).status;
       setStatus(st === "already_verified" ? "already" : "sent");
-      pingAlertFunnel("accepted", "premium_subscribe");
+      pingAlertFunnel(
+        st === "already_verified" ? "already_verified" : "verification_pending",
+        "premium_subscribe",
+      );
     } catch (err) {
       setErrorMsg(
         err instanceof Error
