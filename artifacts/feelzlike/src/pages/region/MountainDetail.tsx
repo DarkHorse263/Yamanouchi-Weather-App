@@ -1125,15 +1125,8 @@ export function MountainDetail() {
           </PremiumGate>
         )}
 
-        {/* PREMIUM · Personalised triggers · push when conditions hit.
-            Hidden in green season - powder alerts are snow-only. */}
-        {!isGreen && powderAlertsAvailable && (
-          <PremiumGate
-            title="Powder & weather alerts"
-            titleJa="降雪・気象アラート"
-            blurb="Get a push when conditions hit. Set thresholds for snowfall, wind, freezing level."
-            blurbJa="条件達成時にプッシュ通知。降雪・風速・凍結高度を設定。"
-          >
+        {/* Standard feature · available year-round so visitors can prepare for winter. */}
+        {powderAlertsAvailable && (
             <div className="glass rounded-3xl p-5 md:p-8">
               <div className="mb-4">
                 <p className="byline text-muted-foreground">{t("Alerts", "アラート")}</p>
@@ -1147,7 +1140,6 @@ export function MountainDetail() {
                 defaultMountain={mountainAlertsAvailable ? locationId : undefined}
               />
             </div>
-          </PremiumGate>
         )}
 
         {/* Webcams (free) · shared component, self-hides when no webcam

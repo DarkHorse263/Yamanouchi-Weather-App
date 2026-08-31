@@ -16,7 +16,7 @@ import puppeteer from "puppeteer";
  *
  * Honesty rails (same as the fb campaign pack): only real app features, no
  * "live roads" claims outside nsw/nz, location-neutral AU copy, promo line
- * matches the real free-until-31-december window, everything lands on the
+ * keeps powder alerts positioned as a permanent standard feature, and everything lands on the
  * home page in Ads Manager (these are just the images).
  *
  * Run: pnpm --filter @workspace/api-server exec tsx ./src/scripts/build-social-ads.ts
@@ -93,7 +93,7 @@ const VERSIONS: Version[] = [
       { icon: IC.mail, text: "powder alerts · emailed when a dump is coming" },
       { icon: IC.globe, text: "australia · japan · new zealand · canada" },
     ],
-    cta: "free until 31 december · feelzlike.com",
+    cta: "real mountain conditions · feelzlike.com",
   },
   {
     id: "japan",
@@ -109,7 +109,7 @@ const VERSIONS: Version[] = [
       { icon: IC.snow, text: "observed snow depths · not just forecasts" },
       { icon: IC.train, text: "trains · buses · stay and eat guides" },
     ],
-    cta: "free until 31 december · feelzlike.com",
+    cta: "plan japan with live conditions · feelzlike.com",
   },
   {
     id: "australia",
@@ -119,10 +119,10 @@ const VERSIONS: Version[] = [
     screenshotPath: "/snowy-mountains/jindabyne/",
     callouts: [
       { icon: IC.gauge, text: "live snow · feels-like temps at the lifts" },
-      { icon: IC.mail, text: "powder alerts · emailed free" },
+      { icon: IC.mail, text: "powder alerts · set your own threshold" },
       { icon: IC.mountain, text: "compare every mountain your town serves" },
     ],
-    cta: "free until 31 december · feelzlike.com",
+    cta: "set your powder alert · feelzlike.com",
   },
   {
     id: "nz",
@@ -134,9 +134,9 @@ const VERSIONS: Version[] = [
     callouts: [
       { icon: IC.snow, text: "reported snow bases · not just models" },
       { icon: IC.road, text: "live highway conditions to the hill" },
-      { icon: IC.mail, text: "powder alerts · emailed free" },
+      { icon: IC.mail, text: "powder alerts · set your own threshold" },
     ],
-    cta: "free until 31 december · feelzlike.com",
+    cta: "set your powder alert · feelzlike.com",
   },
 ];
 

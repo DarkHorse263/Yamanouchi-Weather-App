@@ -23,6 +23,7 @@ import { useEffect, useRef } from "react";
 import AlertsVerify from "@/pages/alerts/Verify";
 import AlertsManage from "@/pages/alerts/Manage";
 import AlertsUnsubscribed from "@/pages/alerts/Unsubscribed";
+import Alerts from "@/pages/Alerts";
 import CountryHome from "@/pages/CountryHome";
 import NearYouWeather from "@/pages/NearYouWeather";
 import Privacy from "@/pages/legal/Privacy";
@@ -240,6 +241,8 @@ function Router() {
       <Route path="/sign-up/*?" component={SignUpPage} />
       <Route path="/near-you" component={NearYouWeather} />
       <Route path="/near-you/" component={NearYouWeather} />
+      <Route path="/alerts" component={Alerts} />
+      <Route path="/alerts/" component={Alerts} />
       <Route path="/alerts/verify" component={AlertsVerify} />
       <Route path="/alerts/manage" component={AlertsManage} />
       <Route path="/alerts/unsubscribed" component={AlertsUnsubscribed} />
@@ -350,8 +353,8 @@ function ClerkProviderWithRoutes() {
         },
         signUp: {
           start: {
-            title: "snow alerts + premium",
-            subtitle: "free until 30 december · no card needed",
+            title: "your feelzlike account",
+            subtitle: "save your preferences across every device",
           },
         },
       }}

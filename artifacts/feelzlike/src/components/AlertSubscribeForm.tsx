@@ -1,10 +1,11 @@
-import { useState, useId, useMemo } from "react";
+import { useEffect, useState, useId, useMemo } from "react";
 import { useSubscribeToAlerts } from "@workspace/api-client-react";
-import { useLanguage, usePremium, usePremiumAccess } from "@workspace/feelzlike-shell";
-import { BellRing, Mail, Snowflake, Loader2, CheckCircle2, Sparkles } from "lucide-react";
+import { useLanguage } from "@workspace/feelzlike-shell";
+import { BellRing, Mail, Snowflake, Loader2, CheckCircle2 } from "lucide-react";
 import { RegionCountryPicker } from "@/components/RegionCountryPicker";
 import { track } from "@/lib/analytics";
-import { classifyGateError, extractErrorMessage } from "@/lib/gateErrors";
+import { extractErrorMessage } from "@/lib/gateErrors";
+import { pingAlertFunnel } from "@/lib/engagement";
 import { CatalogueMountainPicker } from "@/components/CatalogueMountainPicker";
 import { isAlertCatalogueMountain } from "@/lib/alertCatalogueMountains";
 
@@ -164,8 +165,6 @@ interface Props {
 
 export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
   const { t } = useLanguage();
-  const { isPromoPeriod, promoEndsAt } = usePremium();
-  const { promptSignUp } = usePremiumAccess();
   const formId = useId();
   const browserTz = useMemo(() => {
     try { return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"; } catch { return "UTC"; }
@@ -184,8 +183,13 @@ export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
   const [horizon, setHorizon] = useState<24 | 48 | 72>(48);
   const [consent, setConsent] = useState(false);
   const [submitted, setSubmitted] = useState<{ message: string; devVerifyUrl?: string | null } | null>(null);
+  const [validationMessage, setValidationMessage] = useState<string | null>(null);
 
   const mutation = useSubscribeToAlerts();
+
+  useEffect(() => {
+    pingAlertFunnel("form_viewed", "alert_form");
+  }, []);
 
   const toggleRegion = (id: string) => {
     setRegions((prev) => prev.includes(id) ? prev.filter((r) => r !== id) : [...prev, id]);
@@ -196,7 +200,18 @@ export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || (regions.length === 0 && mountains.length === 0) || !consent) return;
+    pingAlertFunnel("submit_attempted", "alert_form");
+    if (!email || (regions.length === 0 && mountains.length === 0) || !consent) {
+      setValidationMessage(
+        t(
+          "Add your email, choose at least one region or mountain, and tick the consent box.",
+          "メールアドレスを入力し、地域または山を1つ以上選び、同意欄にチェックしてください。",
+        ),
+      );
+      pingAlertFunnel("validation_failed", "alert_form");
+      return;
+    }
+    setValidationMessage(null);
     try {
       const result = await mutation.mutateAsync({
         data: {
@@ -214,6 +229,7 @@ export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
         message: result.message,
         devVerifyUrl: (result as { devVerifyUrl?: string | null }).devVerifyUrl ?? null,
       });
+      pingAlertFunnel("accepted", "alert_form");
       // Conversion event · snow/powder alert subscribed. No email or other PII
       // is sent · only the non-identifying shape of the subscription.
       track("alert_subscribe", {
@@ -228,6 +244,7 @@ export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
       });
     } catch {
       // mutation.error will surface the error below
+      pingAlertFunnel("api_failed", "alert_form");
     }
   };
 
@@ -249,32 +266,20 @@ export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
     );
   }
 
-  const gateError = classifyGateError(mutation.error);
-  const authRequired = gateError === "auth";
-  const paymentRequired = gateError === "payment";
-  const errMessage = gateError === "other" ? extractErrorMessage(mutation.error) : null;
-  const canSubmit = !!email && (regions.length > 0 || mountains.length > 0) && consent && !mutation.isPending;
+  const errMessage = extractErrorMessage(mutation.error);
 
   return (
-    <form id={formId} onSubmit={handleSubmit} className="rounded-2xl glass border border-border p-6 space-y-4">
+    <form id={formId} onSubmit={handleSubmit} noValidate className="rounded-2xl glass border border-border p-6 space-y-4">
       <div className="flex flex-wrap items-center gap-2">
         <BellRing className="w-5 h-5 text-primary" />
         <h3 className="text-lg font-bold text-foreground">{t("Subscribe to powder alerts", "パウダーアラートを購読")}</h3>
-        <span className="inline-flex items-center gap-1 rounded-full bg-primary/15 border border-primary/30 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
-          <Sparkles className="w-3 h-3" /> {t("premium", "プレミアム")}
+        <span className="inline-flex items-center rounded-full bg-primary/15 border border-primary/30 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
+          {t("standard feature", "標準機能")}
         </span>
       </div>
       <p className="text-sm text-muted-foreground -mt-2">
         {t("We'll only email when forecast snowfall meets your threshold. Unsubscribe in one click.", "予報降雪量がしきい値に達したときのみメールを送信します。ワンクリックで購読解除できます。")}
       </p>
-      {isPromoPeriod && promoEndsAt && (
-        <p className="text-xs text-primary/90 -mt-1 font-medium">
-          {t(
-            `free for subscribers until ${formatDate(promoEndsAt)} · no card needed`,
-            `${formatDate(promoEndsAt)}まで購読者は無料 · カード不要`,
-          )}
-        </p>
-      )}
 
       <label className="block">
         <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
@@ -365,35 +370,9 @@ export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
         </span>
       </label>
 
-      {authRequired && (
-        <div className="text-xs text-foreground bg-primary/10 border border-primary/30 rounded-lg px-3 py-2.5 space-y-1.5">
-          <div className="flex items-center gap-1.5 font-bold text-primary">
-            <Sparkles className="w-3.5 h-3.5" /> {t("powder alerts come with your free account", "パウダーアラートは無料アカウントで利用できます")}
-          </div>
-          <p className="text-muted-foreground leading-relaxed">
-            {t("create a free account with this email and your subscription is saved · free until the promo ends, no card needed.", "このメールで無料アカウントを作成すると購読が保存されます · プロモ期間中は無料、カード不要です。")}
-          </p>
-          <button
-            type="button"
-            onClick={() => promptSignUp({ email, feature: "alerts" })}
-            className="inline-block text-primary font-bold underline hover:no-underline"
-          >
-            {t("create my free account", "無料アカウントを作成")}
-          </button>
-        </div>
-      )}
-
-      {paymentRequired && (
-        <div className="text-xs text-foreground bg-primary/10 border border-primary/30 rounded-lg px-3 py-2.5 space-y-1.5">
-          <div className="flex items-center gap-1.5 font-bold text-primary">
-            <Sparkles className="w-3.5 h-3.5" /> {t("Powder alerts are a premium feature", "パウダーアラートはプレミアム機能です")}
-          </div>
-          <p className="text-muted-foreground leading-relaxed">
-            {t("The launch promo has ended. See plans on the premium page.", "ローンチプロモは終了しました。プレミアムページでプランをご覧ください。")}
-          </p>
-          <a href="/premium" className="inline-block text-primary font-bold underline hover:no-underline">
-            {t("Go to premium", "プレミアムへ")}
-          </a>
+      {validationMessage && (
+        <div className="text-xs text-amber-200 bg-amber-500/10 border border-amber-500/30 rounded-lg px-3 py-2">
+          {validationMessage}
         </div>
       )}
 
@@ -405,7 +384,7 @@ export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
 
       <button
         type="submit"
-        disabled={!canSubmit}
+        disabled={mutation.isPending}
         className="w-full rounded-lg bg-primary text-primary-foreground font-bold text-sm py-3 hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center justify-center gap-2"
       >
         {mutation.isPending && <Loader2 className="w-4 h-4 animate-spin" />}
@@ -414,12 +393,3 @@ export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
     </form>
   );
 }
-
-function formatDate(d: Date): string {
-  return d
-    .toLocaleDateString("en-AU", { month: "long", day: "numeric", year: "numeric" })
-    .toLowerCase();
-}
-
-// Gate-error detection (401 AUTH_REQUIRED vs 402 PAYMENT_REQUIRED) lives in
-// @/lib/gateErrors so this form and PremiumSubscribe can't drift apart.

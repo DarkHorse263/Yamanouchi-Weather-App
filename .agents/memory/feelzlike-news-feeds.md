@@ -1,6 +1,6 @@
 ---
-name: feelzlike news + newsletter REMOVED (alerts now premium)
-description: The on-site news feed and general email newsletter were removed by product decision; snow/powder email alerts were kept and made premium. Do not reintroduce without sign-off.
+name: feelzlike news + newsletter REMOVED
+description: The on-site news feed and general email newsletter were removed; powder email alerts remain as a permanent standard feature.
 ---
 
 # feelzlike news + newsletter were removed
@@ -24,14 +24,14 @@ newsletter router, admin campaigns, and newsletter email templates were removed.
 Newsletter DB tables were left DORMANT. `PremiumSubscribe` was repointed off the
 newsletter flow toward the alerts/premium capture.
 
-## 3. Snow/powder email alerts KEPT and made PREMIUM
-Snow/powder alerts are the retained email product and are now premium-gated:
-`requireEntitlement("alerts.snow")` guards `POST /alerts/subscribe` (promo-window
-aware — see feelzlike-premium-promo.md). The premium hub showcases powder alerts
-as THE premium weather offering.
-**Why:** alerts are high-value and monetizable; the generic newsletter was not.
-**How to apply:** keep the entitlement gate on alert subscription; don't un-gate
-it or fold alerts back into a free general newsletter.
+## 3. Snow/powder email alerts KEPT as a STANDARD feature
+Snow/powder alerts are the retained email product. They require explicit consent
+and double opt-in, but do not require an account or premium entitlement. Signup
+surfaces remain visible year-round so visitors can prepare before winter.
+**Why:** powder alerts are the core retention loop; account and premium gates
+produced no genuine public signups.
+**How to apply:** keep alert subscription public, consent-based, and double-opt-in.
+Do not fold alerts back into a general newsletter or premium/account gate.
 
 ## If news is ever reintroduced (historical legal posture)
 The old feed was aggregate-only (headline + short excerpt + link-out + source

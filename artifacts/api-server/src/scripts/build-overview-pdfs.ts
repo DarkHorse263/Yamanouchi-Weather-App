@@ -267,7 +267,7 @@ const investorBody = /* html */ `
   <div class="grid2">
     <div class="card"><h4>1. Local tourism sponsorship</h4><p>Each town is a discrete sellable surface. Tourism bodies pay to own the basecamp their visitors open every morning. In discussion.</p></div>
     <div class="card"><h4>2. Affiliate commission <em class="middot">·</em> live</h4><p>Stays via Booking.com, Hotels.com and trivago; car hire via Europcar. Tracked through CJ and Awin behind ads consent. We are their top-of-funnel.</p></div>
-    <div class="card"><h4>3. Premium subscription <em class="middot">·</em> live</h4><p>Powder, wind and road alerts plus the trip planner. Free through 31 December 2026, then $5.99 per month or $60 per year.</p></div>
+    <div class="card"><h4>3. Premium subscription <em class="middot">·</em> planned</h4><p>Premium wind, road and planning tools open in December 2026 at $5.99 per month or $60 per year. Powder email alerts remain a standard feature.</p></div>
     <div class="card"><h4>4. Native advertising</h4><p>Hire-shop, transfer, instructor and gear placements inside each town's stays, eats and explore tabs. Planned.</p></div>
   </div>
 

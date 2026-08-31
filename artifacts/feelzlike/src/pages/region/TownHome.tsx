@@ -585,20 +585,7 @@ export function TownHome() {
           );
         })}
 
-        {/* ALERTS - a working link to the (currently free) alerts page. The
-            PremiumGate wrapper is kept so that if premium is switched back on it
-            renders the locked teaser card instead; while premium is off it
-            passes this link straight through, so no lock icon is shown.
-            Hidden in green season - powder alerts are snow-only. */}
-        {!isGreen && (
-          <PremiumGate
-            tight
-            title="Powder & weather alerts"
-            titleJa="降雪・気象アラート"
-            blurb="Get a push when your conditions hit. Set thresholds for snow, wind, freezing level and more."
-            blurbJa="条件達成時にプッシュ通知。降雪量・風速・凍結高度などを設定。"
-            ctaHref={`~/${region.id}/alerts`}
-          >
+        {/* Standard powder alerts · available year-round without an account. */}
             <Link
               href={`~/${region.id}/alerts`}
               className="group flex items-center gap-5 rounded-[2rem] border-0 bg-white p-6 shadow-[0_12px_40px_-12px_rgba(0,40,150,0.5)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(0,30,120,0.5)]"
@@ -619,8 +606,6 @@ export function TownHome() {
               </div>
               <ArrowUpRight className="w-6 h-6 text-[#0055FF] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 shrink-0" />
             </Link>
-          </PremiumGate>
-        )}
       </section>
       </div>
     </div>

@@ -3,7 +3,6 @@ import { Link } from "wouter";
 import { useClerk } from "@clerk/react";
 import {
   Sparkles,
-  Lock,
   UserRound,
   BellRing,
   ParkingCircle,
@@ -11,12 +10,9 @@ import {
   CalendarRange,
   WifiOff,
   Check,
-  Gift,
   ArrowLeft,
   Mail,
-  Zap,
 } from "lucide-react";
-import { usePremium, PremiumGate } from "@workspace/feelzlike-shell";
 import { useAuthAccount } from "@/components/auth/SignUpProvider";
 import { PremiumSubscribe } from "@/components/PremiumSubscribe";
 
@@ -47,13 +43,14 @@ const FREE_FEATURES = [
   "mountain comparison · today's best pick",
   "roads, transport & parking basics",
   "stay & eat launchpads",
+  "powder email alerts · your own threshold",
 ];
 
 const PREMIUM_FEATURES: Feature[] = [
   {
     Icon: BellRing,
-    title: "push alerts",
-    blurb: "powder, wind hold, road closure · pushed the moment they trigger.",
+    title: "live disruption alerts",
+    blurb: "wind holds and road closures · pushed the moment they trigger.",
     status: "live",
   },
   {
@@ -83,20 +80,7 @@ const PREMIUM_FEATURES: Feature[] = [
   },
 ];
 
-function formatDate(d: Date) {
-  return d
-    .toLocaleDateString("en-AU", { month: "long", day: "numeric", year: "numeric" })
-    .toLowerCase();
-}
-
 export default function Premium() {
-  const {
-    isPremium,
-    isPromoPeriod,
-    isPromoUpcoming,
-    promoStartsAt,
-    promoEndsAt,
-  } = usePremium();
   const { isAuthenticated, isLoading, email, promptSignUp } = useAuthAccount();
 
   // Failure landings from the magic-link flow redirect here with ?signin=…
@@ -171,104 +155,32 @@ export default function Premium() {
                 <p className="text-xs font-bold text-[#0055FF] uppercase tracking-wider">create free account</p>
                 <h2 className="text-lg font-black text-slate-900 mt-1">unlock every premium feature instantly.</h2>
                 <p className="text-sm text-slate-600 mt-1.5 leading-relaxed">
-                  {isPromoPeriod && promoEndsAt ? `free for subscribers until ${formatDate(promoEndsAt)}, no card needed.` : "create an account to access premium features."}
-                  {" "}already get powder alerts? use the same email to sign in.
+                  create an account to save your preferences and access premium features.
+                  powder alerts work without an account.
                 </p>
                 <button
                   type="button"
                   onClick={() => promptSignUp({ feature: "premium-page" })}
                   className="mt-4 w-full sm:w-auto rounded-xl bg-[#0055FF] text-white font-bold text-sm px-6 py-3 hover:bg-[#0055FF]/90 transition-colors shadow-sm active:scale-[0.98]"
                 >
-                  claim your free account
+                  create account
                 </button>
               </div>
             </div>
           )}
         </div>
 
-        {/* Current Status Block */}
-        <div
-          className={`rounded-2xl border p-5 md:p-6 ${
-            isPremium
-              ? "bg-emerald-50/60 border-emerald-200"
-              : isPromoUpcoming
-              ? "bg-sky-50/60 border-sky-200"
-              : "bg-white border-border shadow-sm"
-          }`}
-        >
-          <div className="flex items-start gap-4">
-            <div
-              className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${
-                isPremium
-                  ? "bg-emerald-500 text-white shadow-sm shadow-emerald-500/20"
-                  : isPromoUpcoming
-                  ? "bg-sky-500 text-white shadow-sm shadow-sky-500/20"
-                  : "bg-slate-100 text-slate-500"
-              }`}
-            >
-              {isPremium ? (
-                <Zap className="w-6 h-6 fill-current" />
-              ) : isPromoUpcoming ? (
-                <Gift className="w-6 h-6" />
-              ) : (
-                <Lock className="w-6 h-6" />
-              )}
-            </div>
-            <div className="flex-1 min-w-0 pt-0.5">
-              <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                your tier
-              </p>
-              <p className="text-xl font-black text-slate-900 mt-0.5">
-                {isPromoPeriod
-                  ? "premium · free for subscribers"
-                  : isPremium
-                  ? "premium"
-                  : "free"}
-              </p>
-              {isPromoPeriod && promoEndsAt && (
-                <p className="text-sm font-medium text-emerald-700 mt-1 inline-flex items-center gap-1.5">
-                  <Gift className="w-4 h-4" />
-                  free until {formatDate(promoEndsAt)} · no card needed
-                </p>
-              )}
-              {isPromoUpcoming && promoStartsAt && (
-                <p className="text-sm font-medium text-sky-700 mt-1 inline-flex items-center gap-1.5">
-                  <Gift className="w-4 h-4" />
-                  launch promo opens {formatDate(promoStartsAt)} · free for subscribers until {promoEndsAt && formatDate(promoEndsAt)}.
-                </p>
-              )}
-              {!isPremium && !isPromoUpcoming && (
-                <p className="text-sm text-slate-500 mt-1">
-                  the launch promo has wrapped. subscribe to hear when monthly &
-                  yearly plans open.
-                </p>
-              )}
-            </div>
-          </div>
-
-          <div className="mt-6 pt-5 border-t border-black/5">
+        <div className="rounded-2xl border border-border bg-white shadow-sm p-5 md:p-6">
+          <div>
             <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-              powder alerts · the premium feature you can use today
+              powder alerts · standard feature
             </p>
             <p className="text-sm text-slate-600 mb-4 leading-relaxed max-w-lg">
-              {isPromoPeriod && promoEndsAt
-                ? `pick your regions and we'll email you when powder's on the way. free for subscribers until ${formatDate(
-                    promoEndsAt,
-                  )} · no card needed.`
-                : "pick your regions and we'll email you when powder's on the way."}
+              pick your regions and we'll email you when powder's on the way.
+              no account needed.
             </p>
-            <div className="max-w-md">
-              {/* Same soft gate as every other premium surface (Aug 2026):
-                  signed-out visitors see the form but any tap prompts the
-                  free sign-up instead of submitting directly. */}
-              <PremiumGate
-                title="Powder alerts"
-                titleJa="パウダーアラート"
-                blurb="Email alerts when forecast snowfall meets your threshold."
-                blurbJa="予測降雪がしきい値に達したらメールでお知らせ。"
-              >
+            <div id="powder-alerts" className="max-w-md scroll-mt-6">
                 <PremiumSubscribe />
-              </PremiumGate>
             </div>
           </div>
         </div>
@@ -296,11 +208,6 @@ export default function Premium() {
           <section>
             <h2 className="text-lg font-black text-slate-900 mb-4 inline-flex items-center gap-2 flex-wrap">
               <Sparkles className="w-5 h-5 text-[#0055FF]" /> premium
-              {isPromoPeriod && promoEndsAt && (
-                <span className="text-xs font-bold text-emerald-700 bg-emerald-100 border border-emerald-200 px-2 py-0.5 rounded-full ml-1">
-                  free until {formatDate(promoEndsAt)}
-                </span>
-              )}
             </h2>
             <div className="grid gap-3">
               {PREMIUM_FEATURES.map((f) => {
@@ -361,13 +268,8 @@ export default function Premium() {
               <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                 pricing
               </p>
-              <h2 className="text-lg font-black text-slate-900 mt-1">after 31 december 2026</h2>
+              <h2 className="text-lg font-black text-slate-900 mt-1">premium plans · from december 2026</h2>
             </div>
-            {isPromoPeriod && promoEndsAt && (
-              <div className="bg-emerald-50 text-emerald-800 text-xs font-bold px-3 py-1.5 rounded-lg border border-emerald-200 inline-flex items-center gap-1.5">
-                <Gift className="w-3.5 h-3.5" /> free until {formatDate(promoEndsAt)}
-              </div>
-            )}
           </div>
           
           <div className="grid sm:grid-cols-2 gap-4">
@@ -393,11 +295,9 @@ export default function Premium() {
               <p className="text-xs text-slate-600 mt-2 font-medium">$5 / month, billed yearly.</p>
             </div>
           </div>
-          {isPromoPeriod && (
-            <p className="text-sm text-slate-500 mt-4 leading-relaxed font-medium">
-              monthly & yearly plans open after the launch promo wraps. we'll email subscribers first - no card needed until then.
-            </p>
-          )}
+          <p className="text-sm text-slate-500 mt-4 leading-relaxed font-medium">
+            powder email alerts remain a standard feature when premium plans open.
+          </p>
         </section>
 
         <footer className="pt-8 pb-4 border-t border-white/20 mt-8 flex flex-col items-center justify-center text-center">

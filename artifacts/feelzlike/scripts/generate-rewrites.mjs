@@ -44,6 +44,7 @@ const paths = [
   "/ca/all-ski-areas",
   "/us",
   "/compare",
+  "/alerts",
   "/premium",
   "/near-you",
   "/legal/privacy",

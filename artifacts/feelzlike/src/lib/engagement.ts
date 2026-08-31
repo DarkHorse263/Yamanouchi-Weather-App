@@ -54,6 +54,29 @@ export function pingPwaEvent(kind: "pwa_install" | "pwa_launch"): void {
   ping({ kind });
 }
 
+export type AlertFunnelStage =
+  | "banner_shown"
+  | "banner_clicked"
+  | "banner_dismissed"
+  | "form_viewed"
+  | "submit_attempted"
+  | "validation_failed"
+  | "api_failed"
+  | "accepted";
+
+export type AlertFunnelSurface = "banner" | "alert_form" | "premium_subscribe" | "verification";
+
+/**
+ * Powder-alert funnel counters. Only a finite stage and coarse surface are
+ * sent; never include an email address, destination, token, or URL.
+ */
+export function pingAlertFunnel(
+  stage: AlertFunnelStage,
+  surface: AlertFunnelSurface,
+): void {
+  ping({ kind: `alert_${stage}`, surface });
+}
+
 /**
  * Partner-link counters · "shown" fires when a partner booking button/card
  * actually renders on screen; "clicked" when the visitor taps it. First-party

@@ -1,13 +1,12 @@
 import { Router, type IRouter } from "express";
 import { z } from "zod";
-import { db, alertSubscribersTable } from "@workspace/db";
-import { eq } from "drizzle-orm";
+import { db, alertSubscribersTable, engagementEventDailyTable } from "@workspace/db";
+import { and, eq, isNull, sql } from "drizzle-orm";
 import { issueToken, verifyToken, isTokenStillValid } from "../lib/alertTokens.js";
 import { sendEmail } from "../lib/emailSender.js";
 import { verificationEmail } from "../lib/emailTemplates.js";
 import { getAppPublicUrl } from "../lib/appUrl.js";
 import { normaliseAlertDestinations } from "../lib/regions.js";
-import { requireEntitlement } from "../middlewares/require-entitlement.js";
 
 const router: IRouter = Router();
 
@@ -102,12 +101,10 @@ function publicSubscriberShape(row: {
 }
 
 // ─── POST /alerts/subscribe ───────────────────────────────────────────────
-// Powder alerts are a premium feature. `requireEntitlement("alerts.snow")`
-// lets everyone through during the launch promo (the resolver grants a
-// synthetic pro sub while the window is open) and returns 402 afterwards.
-// Verify / manage / unsubscribe stay open so existing subscribers can always
-// confirm, edit, and opt out - the latter is also a legal requirement.
-router.post("/alerts/subscribe", requireEntitlement("alerts.snow"), async (req, res): Promise<void> => {
+// Powder alerts are a permanent standard feature. Subscribing is intentionally
+// public and protected by explicit consent plus email verification; no account
+// or premium entitlement is required.
+router.post("/alerts/subscribe", async (req, res): Promise<void> => {
   const schema = AlertsSubscribeBody.safeParse(req.body);
   if (!schema.success) {
     res.status(400).json({ error: "INVALID_BODY", message: "Request body is malformed." });
@@ -233,7 +230,25 @@ router.get("/alerts/verify", async (req, res): Promise<void> => {
       return;
     }
     if (row.verifiedAt === null) {
-      await db.update(alertSubscribersTable).set({ verifiedAt: new Date() }).where(eq(alertSubscribersTable.id, row.id));
+      const verified = await db
+        .update(alertSubscribersTable)
+        .set({ verifiedAt: new Date() })
+        .where(and(eq(alertSubscribersTable.id, row.id), isNull(alertSubscribersTable.verifiedAt)))
+        .returning({ id: alertSubscribersTable.id });
+      if (verified.length > 0) {
+        const day = new Date().toISOString().slice(0, 10);
+        try {
+          await db
+            .insert(engagementEventDailyTable)
+            .values({ day, event: "alert_verification_completed:verification", count: 1 })
+            .onConflictDoUpdate({
+              target: [engagementEventDailyTable.day, engagementEventDailyTable.event],
+              set: { count: sql`${engagementEventDailyTable.count} + 1` },
+            });
+        } catch (engagementErr) {
+          console.warn("[/alerts/verify] completion metric failed:", engagementErr);
+        }
+      }
     }
     const manageToken = issueToken(row.id, "manage");
     res.json({

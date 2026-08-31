@@ -1,21 +1,13 @@
 import { motion } from "framer-motion";
-import { BellRing, Gift, ArrowRight } from "lucide-react";
+import { BellRing, ArrowRight } from "lucide-react";
 import { useEffect, useRef } from "react";
-import { usePremium } from "@workspace/feelzlike-shell";
 import { useAuthAccount } from "@/components/auth/SignUpProvider";
 import { track } from "@/lib/analytics";
 
-function formatDate(d: Date): string {
-  return d
-    .toLocaleDateString("en-AU", { month: "long", day: "numeric", year: "numeric" })
-    .toLowerCase();
-}
-
 /**
  * HomeSignUpInvite · the landing page's one sign-up ask. Anonymous visitors
- * see a single card pitching free snow alerts (the concrete, immediate value
- * of an account) with the launch-promo offer when it's running. Tapping opens
- * Clerk's sign-up/sign-in flow. Signed-in members never see it.
+ * see a single card explaining the value of an account. Powder alerts are a
+ * separate standard feature and no longer used as an account incentive.
  *
  * Deliberately not dismissible and not repeated anywhere else on the landing
  * page: one honest ask, in one place, below the live-conditions block so the
@@ -23,7 +15,6 @@ function formatDate(d: Date): string {
  */
 export function HomeSignUpInvite() {
   const { isAuthenticated, isLoading, promptSignUp } = useAuthAccount();
-  const { isPromoPeriod, promoEndsAt } = usePremium();
 
   const visible = !isAuthenticated && !isLoading;
 
@@ -54,14 +45,11 @@ export function HomeSignUpInvite() {
             </div>
             <div className="min-w-0 flex-1">
               <p className="text-[13px] font-semibold leading-snug text-slate-900">
-                free snow alerts · emailed when a dump is coming
+                save your home region and units on every device
               </p>
-              {isPromoPeriod && promoEndsAt ? (
-                <p className="mt-0.5 inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700">
-                  <Gift className="h-3 w-3" />
-                  free until {formatDate(promoEndsAt)} · no card needed
-                </p>
-              ) : null}
+              <p className="mt-0.5 text-[11px] font-semibold text-slate-600">
+                create an account when you want preferences to follow you
+              </p>
             </div>
             <button
               type="button"

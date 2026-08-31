@@ -1,13 +1,13 @@
-import { useState, useMemo, type FormEvent } from "react";
+import { useEffect, useState, useMemo, type FormEvent } from "react";
 import { useSubscribeToAlerts } from "@workspace/api-client-react";
 import { Mail, Check, AlertCircle, Loader2, Sparkles } from "lucide-react";
 import { RegionCountryPicker } from "@/components/RegionCountryPicker";
-import { isPaymentRequired } from "@/lib/gateErrors";
+import { pingAlertFunnel } from "@/lib/engagement";
 
 /**
- * Powder-alert signup for the /premium hub · powder alerts are the premium
- * weather feature, so "subscribing" here opts you into the real thing (no
- * login, double opt-in). Light-themed quick-start: email + region tick-boxes
+ * Powder-alert signup for the /premium hub. Alerts are a standard feature
+ * with no account requirement and use double opt-in. Light-themed quick-start:
+ * email + region tick-boxes
  * + explicit consent.
  *
  * Threshold + look-ahead default to 15cm / 48hr (the same server defaults);
@@ -35,6 +35,10 @@ export function PremiumSubscribe() {
 
   const mutation = useSubscribeToAlerts();
 
+  useEffect(() => {
+    pingAlertFunnel("form_viewed", "premium_subscribe");
+  }, []);
+
   const toggleRegion = (id: string) =>
     setRegions((prev) =>
       prev.includes(id) ? prev.filter((r) => r !== id) : [...prev, id],
@@ -42,7 +46,13 @@ export function PremiumSubscribe() {
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!email || regions.length === 0 || !consent) return;
+    pingAlertFunnel("submit_attempted", "premium_subscribe");
+    if (!email || regions.length === 0 || !consent) {
+      setErrorMsg("add your email, choose at least one region, and tick the consent box.");
+      setStatus("error");
+      pingAlertFunnel("validation_failed", "premium_subscribe");
+      return;
+    }
     setStatus("loading");
     setErrorMsg(null);
     try {
@@ -60,15 +70,15 @@ export function PremiumSubscribe() {
       });
       const st = (res as { status?: string }).status;
       setStatus(st === "already_verified" ? "already" : "sent");
+      pingAlertFunnel("accepted", "premium_subscribe");
     } catch (err) {
       setErrorMsg(
-        isPaymentRequired(err)
-          ? "the launch promo has ended · monthly and yearly plans open below."
-          : err instanceof Error
-            ? err.message
-            : "could not sign you up · try again shortly.",
+        err instanceof Error
+          ? err.message
+          : "could not sign you up · try again shortly.",
       );
       setStatus("error");
+      pingAlertFunnel("api_failed", "premium_subscribe");
     }
   }
 
@@ -85,11 +95,8 @@ export function PremiumSubscribe() {
     );
   }
 
-  const canSubmit =
-    !!email && regions.length > 0 && consent && status !== "loading";
-
   return (
-    <form onSubmit={onSubmit} className="space-y-3">
+    <form onSubmit={onSubmit} noValidate className="space-y-3">
       <div className="relative">
         <Mail className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
         <input
@@ -126,7 +133,7 @@ export function PremiumSubscribe() {
 
       <button
         type="submit"
-        disabled={!canSubmit}
+        disabled={status === "loading"}
         className="w-full inline-flex items-center justify-center gap-1.5 rounded-full bg-foreground text-background px-5 py-2.5 text-sm font-semibold hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
       >
         {status === "loading" ? (

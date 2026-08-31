@@ -612,6 +612,45 @@ function PartnerLinksCard({ e }: { e: EngagementPayload }) {
   );
 }
 
+function AlertFunnelCard({ e }: { e: EngagementPayload }) {
+  const total = (prefix: string) =>
+    Object.entries(e.events)
+      .filter(([key]) => key.startsWith(prefix))
+      .reduce((sum, [, value]) => sum + value.total, 0);
+  const last7d = (prefix: string) =>
+    Object.entries(e.events)
+      .filter(([key]) => key.startsWith(prefix))
+      .reduce((sum, [, value]) => sum + value.last7d, 0);
+  const stages = [
+    ["banner seen", "alert_banner_shown:"],
+    ["banner tapped", "alert_banner_clicked:"],
+    ["form viewed", "alert_form_viewed:"],
+    ["submit attempted", "alert_submit_attempted:"],
+    ["accepted", "alert_accepted:"],
+    ["email verified", "alert_verification_completed:"],
+  ] as const;
+  const failures = total("alert_validation_failed:") + total("alert_api_failed:");
+
+  return (
+    <div className="rounded-lg border bg-white p-5">
+      <h3 className="text-sm font-semibold mb-1 lowercase">powder-alert funnel</h3>
+      <p className="text-xs text-muted-foreground mb-4">
+        privacy-safe first-party counts · no email addresses or destinations recorded
+      </p>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        {stages.map(([label, prefix]) => (
+          <Kpi key={prefix} label={label} value={total(prefix)} sub={`+${last7d(prefix)} last 7d`} />
+        ))}
+      </div>
+      {failures > 0 ? (
+        <p className="mt-3 text-xs text-rose-700">
+          {failures} blocked attempts · {total("alert_validation_failed:")} validation · {total("alert_api_failed:")} server
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
 const DASHBOARDS: Array<{ label: string; sub: string; href: string }> = [
   // Deep-linked to the feelzlike property (p544105028) so it never opens
   // another business's Analytics account.
@@ -677,6 +716,7 @@ export default function AdminStats() {
             </div>
           ) : null}
           {engagement.data ? <EngagementCard e={engagement.data} /> : null}
+          {engagement.data ? <AlertFunnelCard e={engagement.data} /> : null}
           {engagement.data ? <PartnerLinksCard e={engagement.data} /> : null}
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">

@@ -349,7 +349,7 @@ async function buildHtml(): Promise<string> {
 
 <div class="note"><strong>reading results:</strong> meta shows clicks per ad and per country. google analytics shows what people did after · reports → acquisition → traffic acquisition, look for source "facebook", campaign "winter26-launch" · the "content" tag tells you which message won. the number that matters most: verified powder-alert subscribers.</div>
 
-<div class="honesty"><strong>honest copy rails:</strong> "free powder alerts" is true through 31 december 2026 (launch promo) · revisit ad copy before 2027. feelzlike is not in the app stores · never say "download the app", say "add to home screen · works like an app". don't promise live lift status in ads.</div>
+<div class="honesty"><strong>honest copy rails:</strong> powder email alerts are a permanent standard feature · premium plans open in december 2026. feelzlike is not in the app stores · never say "download the app", say "add to home screen · works like an app". don't promise live lift status in ads.</div>
 
 <div class="pagebreak"></div>
 <h2>the 12 ads · copy and links</h2>

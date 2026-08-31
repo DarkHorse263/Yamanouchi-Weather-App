@@ -28,7 +28,25 @@ import {
  */
 const router: IRouter = Router();
 
-const KINDS = new Set(["view", "pwa_install", "pwa_launch", "partner_shown", "partner_clicked"]);
+const ALERT_KINDS = new Set([
+  "alert_banner_shown",
+  "alert_banner_clicked",
+  "alert_banner_dismissed",
+  "alert_form_viewed",
+  "alert_submit_attempted",
+  "alert_validation_failed",
+  "alert_api_failed",
+  "alert_accepted",
+]);
+const KINDS = new Set([
+  "view",
+  "pwa_install",
+  "pwa_launch",
+  "partner_shown",
+  "partner_clicked",
+  ...ALERT_KINDS,
+]);
+const ALERT_SURFACES = new Set(["banner", "alert_form", "premium_subscribe", "verification"]);
 
 // FINITE partner-label whitelist for partner_shown / partner_clicked events.
 // Mirrors the affiliate providers rendered by the client (StayCard PROVIDERS
@@ -103,6 +121,11 @@ router.post("/engagement/ping", async (req: Request, res: Response) => {
           typeof req.body?.partner === "string" ? req.body.partner.toLowerCase() : "";
         const partner = PARTNERS.has(rawPartner) ? rawPartner : "other";
         event = `${kind}:${partner}`;
+      } else if (ALERT_KINDS.has(kind)) {
+        const rawSurface =
+          typeof req.body?.surface === "string" ? req.body.surface.toLowerCase() : "";
+        const surface = ALERT_SURFACES.has(rawSurface) ? rawSurface : "other";
+        event = `${kind}:${surface}`;
       }
       await db
         .insert(engagementEventDailyTable)

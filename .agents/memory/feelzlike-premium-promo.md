@@ -3,6 +3,23 @@ name: feelzlike premium promo window
 description: How the launch-promo window and premium gating are wired in the feelzlike shell.
 ---
 
+## Current product rule: access window stays, public launch-promo messaging does not
+
+The existing temporary premium access behaviour remains active until paid premium
+starts in December 2026. Public UI and marketing must not advertise “free until
+December” or use a launch-promo date as the offer.
+
+Powder email alerts are a permanent standard feature and are exempt from both the
+account gate and premium entitlement gate. Premium positioning must separate
+future wind/road/planning features from standard powder email alerts.
+
+**Why:** the temporary promotion confused the permanent value proposition, while
+account/premium-gated alert forms prevented visitor signups.
+
+**How to apply:** preserve the current access resolver until billing changes, but
+do not surface its dates in public copy. Never wrap powder-alert signup in
+`PremiumGate` or `requireEntitlement`.
+
 The launch-promo and premium-gating state lives in `lib/feelzlike-shell/src/usePremium.ts` and is consumed via the exported `usePremium()` hook. The shape is `{ isPremium, isPromoPeriod, isPromoUpcoming, daysLeftInPromo, promoStartsAt, promoEndsAt }`.
 
 ## Rule: date-only env vars must be parsed as LOCAL time, not UTC
@@ -23,9 +40,11 @@ The promo runs 1 June 2026 → end-of-day 31 December 2026 by default. Overridab
 
 **How to apply:** every premium-only API route must call `requireEntitlement('<entitlement>')`. New entitlements go in `artifacts/api-server/src/lib/entitlements.ts` and must be added to the appropriate tier(s) in `TIER_ENTITLEMENTS`.
 
-## Decision: SOFT MEMBER GATE (July 2026) supersedes the pass-through
+## Decision: SOFT MEMBER GATE for premium-only surfaces
 
-The pure pass-through below was superseded ahead of the Japan season. `PremiumGate` (lib/feelzlike-shell/src/PremiumGate.tsx) now soft-gates: children stay fully visible, but for SIGNED-OUT visitors any tap inside opens the free sign-up sheet (passwordless email magic link · no password, no card). Signed-in members pass through. No prompt ever fires on page load · only on explicit tap.
+`PremiumGate` applies only to premium-only surfaces. Signed-out visitors see
+blurred content and an explicit account prompt on tap. Standard powder-alert
+signup must never use this gate.
 
 - Auth = magic-link flow: POST `/api/auth/email/request` → branded email → GET `/api/auth/email/verify` (HMAC token via ALERT_TOKEN_SECRET, 30 min TTL) → find-or-create `users` row (authProvider "email") + `sid` session (`provider:"email"` in SessionData · logout must NOT run the OIDC end-session for these).
 - Signing in also claims a pending alert subscription (marks `verifiedAt`) · same-inbox proof.

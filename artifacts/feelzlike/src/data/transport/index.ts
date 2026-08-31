@@ -137,6 +137,7 @@ import { HIGHMOUNT_TRANSPORT } from "./highmount";
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
   "victorias-high-country": VICTORIAS_HIGH_COUNTRY_TRANSPORT,
+  "australian-capital-territory": [],
   tasmania: TASMANIA_TRANSPORT,
   yamanouchi: YAMANOUCHI_TRANSPORT,
   "nozawa-onsen": NOZAWA_ONSEN_TRANSPORT,

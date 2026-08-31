@@ -287,7 +287,7 @@ async function buildHtml(): Promise<string> {
 
 <div class="note"><strong>button choice:</strong> still <b>Learn more</b> on every ad · never "Sign Up" (it flips the ad into lead-ad territory and meta demands a lead form).</div>
 
-<div class="honesty"><strong>honest copy rails (unchanged):</strong> "free powder alerts" is true through 31 december 2026 · never say "download the app", say "add to home screen · works like an app" · no live-roads or live-lifts promises in ads.</div>
+<div class="honesty"><strong>honest copy rails:</strong> powder email alerts are a permanent standard feature · premium plans open in december 2026 · never say "download the app", say "add to home screen · works like an app" · no live-roads or live-lifts promises in ads.</div>
 
 <div class="pagebreak"></div>
 <h2>the phase 2 ads · 5 per country</h2>

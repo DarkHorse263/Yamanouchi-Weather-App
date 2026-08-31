@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import { X, BellRing, ArrowUpRight } from "lucide-react";
-import { useLanguage, useRegion, useOptionalSeason } from "@workspace/feelzlike-shell";
+import { useLanguage, useRegion } from "@workspace/feelzlike-shell";
 import { track } from "@/lib/analytics";
 import { shouldCountImpression, IMPRESSION_MIN_RATIO } from "@/lib/promoImpression";
+import { pingAlertFunnel } from "@/lib/engagement";
 
 /**
  * First-party funnel ping · anonymous aggregate counter for the admin Stats
@@ -29,9 +30,6 @@ function pingPromoCounter(event: "shown" | "clicked" | "dismissed"): void {
  * subscribe to free snow-alert emails. Shown on forecast/weather pages only
  * (never the landing page), once per visitor: dismissing it persists in
  * localStorage and it never reappears on that device.
- *
- * Hidden in green season - powder alerts are snow-only (mirrors the alerts
- * tile on TownHome).
  *
  * Dismissal is a cooldown, not forever: we store the dismissal timestamp and
  * the banner becomes eligible again after 14 days - conditions change enough
@@ -75,12 +73,8 @@ function writeDismissed(): void {
 export function AlertPromoBanner() {
   const { t } = useLanguage();
   const { region } = useRegion();
-  const seasonCtx = useOptionalSeason();
   const [dismissed, setDismissed] = useState(readDismissed);
-
-  // Snow-only feature · hide when the region is in green season.
-  const isGreen = region.seasons && seasonCtx?.season === "green";
-  const visible = !dismissed && !isGreen;
+  const visible = !dismissed;
 
   // Impression event · fired once per page view, but only when the banner
   // actually scrolls INTO VIEW (>=half visible). It used to fire on mount,
@@ -99,6 +93,7 @@ export function AlertPromoBanner() {
       shownRef.current = true;
       track("alert_promo_shown", { category: "alert" });
       pingPromoCounter("shown");
+      pingAlertFunnel("banner_shown", "banner");
     };
     // Ancient browsers without IntersectionObserver: keep the old mount count
     // rather than silently counting nothing.
@@ -129,6 +124,7 @@ export function AlertPromoBanner() {
     setDismissed(true);
     track("alert_promo_dismissed", { category: "alert" });
     pingPromoCounter("dismissed");
+    pingAlertFunnel("banner_dismissed", "banner");
   };
 
   return (
@@ -138,7 +134,7 @@ export function AlertPromoBanner() {
           <BellRing className="w-5 h-5" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="byline text-primary uppercase">{t("free snow alerts", "無料降雪アラート")}</p>
+          <p className="byline text-primary uppercase">{t("powder alerts", "降雪アラート")}</p>
           <p className="mt-0.5 text-sm text-muted-foreground leading-snug">
             {t(
               "get emailed when a dump is coming · set your own snow threshold",
@@ -150,6 +146,7 @@ export function AlertPromoBanner() {
             onClick={() => {
               track("alert_promo_clicked", { category: "alert" });
               pingPromoCounter("clicked");
+              pingAlertFunnel("banner_clicked", "banner");
             }}
             className="mt-2 inline-flex items-center gap-1 text-[13px] font-semibold text-primary hover:underline"
           >

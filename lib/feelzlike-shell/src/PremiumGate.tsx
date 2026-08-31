@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { Sparkles } from "lucide-react";
-import { usePremium } from "./usePremium";
 import { usePremiumAccess } from "./PremiumAccess";
 
 interface PremiumGateProps {
@@ -19,12 +18,12 @@ interface PremiumGateProps {
 }
 
 /**
- * SOFT MEMBER GATE (Japan-season sign-ups, Nov/Dec 2026 run-up):
+ * SOFT MEMBER GATE:
  * For signed-out visitors the premium section renders BLURRED (Aug 2026
  * owner request · content stays in the layout but is unreadable) and any
- * tap inside opens the free sign-up prompt instead of interacting.
- * Signed-in members (free accounts · every premium feature is free until
- * the promo ends) pass straight through un-blurred.
+ * tap inside opens the account sign-up prompt instead of interacting.
+ * Signed-in members pass straight through un-blurred while the host app's
+ * premium access policy allows the feature.
  *
  * The gate never prompts on its own · only on an explicit tap · so a visitor
  * who just reads the page is never interrupted.
@@ -36,8 +35,6 @@ interface PremiumGateProps {
  */
 export function PremiumGate({ title, children }: PremiumGateProps) {
   const access = usePremiumAccess();
-  const { isPromoPeriod, promoEndsAt } = usePremium();
-
   // usePremium's `isPremium` is true during the promo window for everyone
   // client-side · the lock decision here is purely "does this visitor have
   // an account".
@@ -62,12 +59,12 @@ export function PremiumGate({ title, children }: PremiumGateProps) {
         {children}
       </div>
       {/* Full-area invisible button · a tap anywhere on the blurred section
-          opens the free sign-up prompt (inert children can't receive events,
+          opens the account sign-up prompt (inert children can't receive events,
           so this overlay carries the interaction instead). */}
       <button
         type="button"
         onClick={prompt}
-        aria-label={`${title} · free with account · sign up`}
+        aria-label={`${title} · account required · sign up`}
         className="absolute inset-0 z-[5] cursor-pointer bg-transparent"
       />
       <button
@@ -76,9 +73,7 @@ export function PremiumGate({ title, children }: PremiumGateProps) {
         className="absolute top-2 right-2 z-10 inline-flex items-center gap-1 rounded-full bg-primary/15 border border-primary/30 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-primary hover:bg-primary/25 transition"
       >
         <Sparkles className="w-3 h-3" />
-        {isPromoPeriod && promoEndsAt
-          ? `free with account · until ${promoEndsAt.toLocaleDateString("en-AU", { day: "numeric", month: "short" }).toLowerCase()}`
-          : "free with account"}
+        member access
       </button>
     </div>
   );

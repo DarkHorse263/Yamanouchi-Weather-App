@@ -232,17 +232,17 @@ const body = /* html */ `
 
   <h2>Pricing</h2>
   <div class="pricing">
-    <h3>Launch offer <em class="middot">·</em> every premium feature free until 31 December 2026</h3>
+    <h3>Premium plans open in December 2026</h3>
     <div class="pricing-grid">
       <div class="pricing-tile intro">
-        <div class="label">Launch period</div>
-        <div class="price">Free</div>
-        <div class="meta">Until 31 December 2026 <em class="middot">·</em> no card required</div>
+        <div class="label">Standard feature</div>
+        <div class="price">Powder alerts</div>
+        <div class="meta">Email alerts with your own snowfall threshold</div>
       </div>
       <div class="pricing-tile">
         <div class="label">Monthly</div>
         <div class="price">$5.99<span style="font-size:10pt;color:#64748b;font-weight:500;"> /month</span></div>
-        <div class="meta">From 1 January 2027 <em class="middot">·</em> cancel anytime</div>
+        <div class="meta">From December 2026 <em class="middot">·</em> cancel anytime</div>
       </div>
       <div class="pricing-tile">
         <div class="label">Annual</div>
@@ -253,11 +253,10 @@ const body = /* html */ `
   </div>
 
   <p>
-    Until <strong>31 December 2026</strong> every feelzlike feature, including powder
-    alerts and the trip planner, is free with no credit card required. From
-    <strong>1 January 2027</strong> the alerting and planning tools move to a
-    subscription, while the core town weather, snow radar and side-by-side mountain
-    comparison stay free for everyone.
+    Powder email alerts are a permanent standard feature with no account required.
+    Premium wind, road and planning tools move to monthly and annual plans in
+    <strong>December 2026</strong>, while core town weather, snow radar and
+    side-by-side mountain comparison stay available to everyone.
   </p>
 
   <h2>Availability</h2>

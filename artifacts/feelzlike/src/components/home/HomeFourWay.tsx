@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 import {
   ArrowUpRight,
   BellRing,
@@ -12,7 +12,6 @@ import {
   MountainSnow,
 } from "lucide-react";
 import { PlaceSearch } from "./PlaceSearch";
-import { useAuthAccount } from "@/components/auth/AuthAccountContext";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
 import { track } from "@/lib/analytics";
 
@@ -102,9 +101,7 @@ function HomeAction({
 }
 
 export function HomeFourWay() {
-  const [, navigate] = useLocation();
   const u = useUnits();
-  const { isAuthenticated, promptSignUp } = useAuthAccount();
   const [nearestId, setNearestId] = useState<string | null>(() => readLastNearest()?.id ?? null);
   const [checkingLocation, setCheckingLocation] = useState(true);
 
@@ -180,15 +177,6 @@ export function HomeFourWay() {
     () => regionsQuery.data?.regions.find((region) => region.id === nearestId) ?? null,
     [nearestId, regionsQuery.data?.regions],
   );
-
-  const openSnowAlerts = () => {
-    track("home_snow_alert_action_click", { category: isAuthenticated ? "navigation" : "auth" });
-    if (isAuthenticated) {
-      navigate("/account");
-    } else {
-      promptSignUp({ feature: "home_snow_alert" });
-    }
-  };
 
   return (
     <main className="px-4 pb-8 md:px-6 md:pb-10">
@@ -285,9 +273,10 @@ export function HomeFourWay() {
 
       <section className="grid grid-cols-2 gap-3" aria-label="browse and compare">
         <HomeAction
+          href="/alerts"
           icon={BellRing}
-          title="snow alerts + premium"
-          onClick={openSnowAlerts}
+          title="powder alerts"
+          onClick={() => track("home_snow_alert_action_click", { category: "navigation" })}
         />
         <HomeAction
           href="/compare"

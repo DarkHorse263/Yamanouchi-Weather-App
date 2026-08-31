@@ -324,12 +324,22 @@ add(
 );
 
 add(
+  "/alerts",
+  "powder alerts · your snowfall threshold · feelzlike",
+  "Set powder alerts for the ski regions and mountains you care about. No account required.",
+  `<main>
+    <h1>powder alerts</h1>
+    <p>Choose your regions or mountains and set the snowfall threshold that matters to you. No account required.</p>
+  </main>`,
+);
+
+add(
   "/premium",
-  "feelzlike premium · snow alerts for your towns · feelzlike",
-  "feelzlike premium — email snow and powder alerts for your favourite resort towns across Australia, Japan, New Zealand, and Canada.",
+  "feelzlike premium · proactive mountain intelligence · feelzlike",
+  "Premium wind, road, and planning tools for mountain travel. Powder email alerts remain a standard feature.",
   `<main>
     <h1>feelzlike premium</h1>
-    <p>Email snow and powder alerts for your favourite resort towns across Australia, Japan, New Zealand, and Canada.</p>
+    <p>Premium wind, road, and planning tools for mountain travel. Powder email alerts remain a standard feature.</p>
   </main>`,
 );
 

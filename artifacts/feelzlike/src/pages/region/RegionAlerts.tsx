@@ -1,11 +1,6 @@
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
-import { BellRing, Info, Sun } from "lucide-react";
-import {
-  PremiumGate,
-  useOptionalSeason,
-  useRegion,
-  useLanguage,
-} from "@workspace/feelzlike-shell";
+import { BellRing, Info } from "lucide-react";
+import { useRegion, useLanguage } from "@workspace/feelzlike-shell";
 import { PageMeta } from "@/lib/seo/PageMeta";
 
 /**
@@ -19,18 +14,11 @@ import { PageMeta } from "@/lib/seo/PageMeta";
  * region-agnostic (AlertSubscribeForm lists every live region), so this page
  * simply gives it a home everywhere.
  *
- * Season-aware: hidden behind a "back in winter" placeholder during the
- * green season, matching the other snow-only surfaces. Wrapped in
- * PremiumGate like the bespoke pages so the gate state stays consistent.
+ * Available year-round so visitors can set an alert before winter begins.
  */
 export function RegionAlerts() {
   const { region } = useRegion();
   const { t } = useLanguage();
-  const seasonCtx = useOptionalSeason();
-  const isGreen = seasonCtx?.season === "green";
-
-  if (isGreen) return <GreenSeasonNotice t={t} />;
-
   return (
     <div className="p-4 md:p-8 max-w-3xl mx-auto space-y-6">
       <PageMeta
@@ -72,33 +60,7 @@ export function RegionAlerts() {
         </div>
       </div>
 
-      <PremiumGate
-        title="Powder & weather alerts"
-        titleJa="降雪・気象アラート"
-        blurb="Get a push when conditions hit. Set thresholds for snowfall, wind and freezing level."
-        blurbJa="条件達成時にプッシュ通知。降雪・風速・凍結高度を設定。"
-      >
-        <AlertSubscribeForm defaultRegion={region.id} />
-      </PremiumGate>
-    </div>
-  );
-}
-
-function GreenSeasonNotice({ t }: { t: (en: string, ja: string) => string }) {
-  return (
-    <div className="p-4 md:p-8 max-w-2xl mx-auto">
-      <div className="rounded-2xl border border-emerald-200 bg-emerald-50/60 p-8 md:p-10 text-center">
-        <Sun className="w-10 h-10 text-emerald-600 mx-auto mb-4" />
-        <h1 className="font-display font-semibold text-2xl md:text-3xl text-emerald-900">
-          {t("Powder alerts return for snow season", "降雪アラートは雪シーズンに再開")}
-        </h1>
-        <p className="text-sm md:text-base text-emerald-800/80 mt-3 leading-relaxed">
-          {t(
-            "Snowfall thresholds aren't tracked over the green season. Switch the season pill back to winter once the forecast shows snow on the way.",
-            "グリーンシーズン中は降雪しきい値を追跡していません。雪の予報が出たらシーズン切替を冬に戻してください。",
-          )}
-        </p>
-      </div>
+      <AlertSubscribeForm defaultRegion={region.id} />
     </div>
   );
 }
