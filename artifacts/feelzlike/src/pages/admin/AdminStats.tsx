@@ -49,6 +49,37 @@ interface EmailIncidentsPayload {
   incidents: EmailIncident[];
 }
 
+interface ThredboReadinessEvidence {
+  seedLiftId: string;
+  name: string;
+  currentThresholdKmh: number;
+  verifiedAt: string;
+  windHoldStarts: number[];
+  releases: number[];
+  ignoredMissingWind: number;
+  flags: string[];
+  recommendation: {
+    thresholdKmh: number;
+    startMedianKmh: number;
+    releaseMedianKmh: number;
+    basis: string;
+  } | null;
+}
+interface ThredboReadinessFailure {
+  id: string;
+  runKey: string;
+  state: "failed" | "expired";
+  detail: string | null;
+  evidence: ThredboReadinessEvidence;
+  readyAt: string | null;
+  failedAt: string;
+  acknowledgedAt: string | null;
+  acknowledgedByEmail: string | null;
+}
+interface ThredboReadinessFailuresPayload {
+  failures: ThredboReadinessFailure[];
+}
+
 interface RecentSignup {
   id: string;
   email: string;
@@ -253,6 +284,96 @@ function EmailIncidentsCard({ incidents }: { incidents: EmailIncident[] }) {
       )}
       {resolve.isError ? (
         <p className="mt-2 text-xs text-rose-700">couldn't resolve · {(resolve.error as Error).message}</p>
+      ) : null}
+    </div>
+  );
+}
+
+function ThredboReadinessFailuresCard({ failures }: { failures: ThredboReadinessFailure[] }) {
+  const queryClient = useQueryClient();
+  const acknowledge = useMutation({
+    mutationFn: (id: string) =>
+      adminFetch<{ failure: Pick<ThredboReadinessFailure, "id" | "acknowledgedAt" | "acknowledgedByEmail"> }>(
+        `/thredbo-readiness-failures/${id}/acknowledge`,
+        { method: "PATCH", body: JSON.stringify({}) },
+      ),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["admin", "thredbo-readiness-failures"] });
+    },
+  });
+  const outstanding = failures.filter((failure) => !failure.acknowledgedAt);
+
+  return (
+    <div className={`rounded-lg border p-5 ${outstanding.length ? "border-rose-300 bg-rose-50" : "bg-white"}`}>
+      <h3 className="text-sm font-semibold mb-1 lowercase">
+        thredbo wind review failures{outstanding.length ? ` · ${outstanding.length} needs review` : ""}
+      </h3>
+      <p className="text-xs text-slate-700 mb-3">
+        failed or expired review notifications · inspect the saved evidence manually, then acknowledge here ·
+        acknowledgement never resends email or changes a public wind threshold
+      </p>
+      {failures.length === 0 ? (
+        <p className="text-sm text-muted-foreground">no failed thredbo review notifications.</p>
+      ) : (
+        <ul className="space-y-3">
+          {failures.map((failure) => {
+            const e = failure.evidence;
+            return (
+              <li key={failure.id} className="rounded-md border bg-white p-3 text-sm">
+                <div className="flex flex-wrap items-start justify-between gap-2">
+                  <div>
+                    <div className="font-semibold">{e.name}</div>
+                    <div className="text-xs text-muted-foreground">{e.seedLiftId} · milestone {failure.runKey}</div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="rounded bg-rose-100 px-2 py-0.5 text-[11px] font-semibold text-rose-800">
+                      {failure.state}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      {new Date(failure.failedAt).toLocaleString()}
+                    </span>
+                  </div>
+                </div>
+                <div className="mt-2 grid gap-1 text-xs text-slate-700 sm:grid-cols-2">
+                  <div>wind-hold starts · {e.windHoldStarts.join(", ")} km/h</div>
+                  <div>open releases · {e.releases.join(", ")} km/h</div>
+                  <div>evidence flags · {e.flags.length ? e.flags.join(", ") : "none"}</div>
+                  <div>transitions without concurrent wind · {e.ignoredMissingWind}</div>
+                  <div>
+                    recommendation · {e.recommendation ? `${e.recommendation.thresholdKmh} km/h` : "none"} · public stays {e.currentThresholdKmh} km/h
+                  </div>
+                  {failure.readyAt ? (
+                    <div>evidence ready · {new Date(failure.readyAt).toLocaleString()}</div>
+                  ) : null}
+                </div>
+                {failure.detail ? <p className="mt-2 text-xs text-rose-800">{failure.detail}</p> : null}
+                <div className="mt-3 flex justify-end">
+                  {failure.acknowledgedAt ? (
+                    <span className="text-xs text-emerald-800">
+                      acknowledged {new Date(failure.acknowledgedAt).toLocaleString()} by {failure.acknowledgedByEmail ?? "an admin"}
+                    </span>
+                  ) : (
+                    <button
+                      type="button"
+                      disabled={acknowledge.isPending}
+                      onClick={() => {
+                        if (window.confirm(`Confirm you manually reviewed the saved evidence for ${e.name}?`)) {
+                          acknowledge.mutate(failure.id);
+                        }
+                      }}
+                      className="rounded bg-[#0055FF] px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+                    >
+                      acknowledge manual review
+                    </button>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+      {acknowledge.isError ? (
+        <p className="mt-2 text-xs text-rose-700">couldn't acknowledge · {(acknowledge.error as Error).message}</p>
       ) : null}
     </div>
   );
@@ -532,6 +653,10 @@ export default function AdminStats() {
   const stats = useAdminQuery<StatsPayload>("stats", "/stats");
   const signups = useAdminQuery<SignupsPayload>("signups", "/recent-signups");
   const emailIncidents = useAdminQuery<EmailIncidentsPayload>("email-incidents", "/email-incidents");
+  const thredboReadinessFailures = useAdminQuery<ThredboReadinessFailuresPayload>(
+    "thredbo-readiness-failures",
+    "/thredbo-readiness-failures",
+  );
   const engagement = useAdminQuery<EngagementPayload>("engagement", "/engagement");
 
   return (
@@ -544,6 +669,13 @@ export default function AdminStats() {
         <div className="text-sm text-rose-700">failed to load stats · {stats.error.message}</div>
       ) : stats.data ? (
         <div className="space-y-5">
+          {thredboReadinessFailures.data ? (
+            <ThredboReadinessFailuresCard failures={thredboReadinessFailures.data.failures} />
+          ) : thredboReadinessFailures.error ? (
+            <div className="rounded-lg border border-rose-300 bg-rose-50 p-5 text-sm text-rose-800">
+              couldn't check thredbo wind review failures · {thredboReadinessFailures.error.message}
+            </div>
+          ) : null}
           {engagement.data ? <EngagementCard e={engagement.data} /> : null}
           {engagement.data ? <PartnerLinksCard e={engagement.data} /> : null}
 

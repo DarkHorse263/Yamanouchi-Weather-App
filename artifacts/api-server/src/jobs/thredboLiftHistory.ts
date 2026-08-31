@@ -164,27 +164,30 @@ async function claimReadinessMilestone(
   }
 }
 
-async function finishReadinessMilestone(
+export async function finishReadinessMilestone(
   runKey: string,
   ok: boolean,
   summary: string,
-): Promise<void> {
-  await db
+): Promise<boolean> {
+  const finished = await db
     .update(jobRunsTable)
     .set({
       finishedAt: sql`now()`,
       ok,
       summary: sql`${jobRunsTable.summary}::jsonb || jsonb_build_object(
-        'status', ${ok ? "sent" : "failed"},
-        'detail', ${summary}
+        'status', ${ok ? "sent" : "failed"}::text,
+        'detail', ${summary}::text
       )`,
     })
     .where(
       and(
         eq(jobRunsTable.jobName, READINESS_JOB_NAME),
         eq(jobRunsTable.runKey, runKey),
+        isNull(jobRunsTable.finishedAt),
       ),
-    );
+    )
+    .returning({ id: jobRunsTable.id });
+  return finished.length > 0;
 }
 
 function readinessRecipient(): string | null {
@@ -237,12 +240,6 @@ function readinessEmail(row: LiftWindAnalysis): {
 
 export async function notifyReadyThredboLiftWindEvidence(): Promise<number> {
   const recipient = readinessRecipient();
-  if (!recipient) {
-    console.warn(
-      "[thredboLiftHistory] wind evidence may be ready but no THREDBO_WIND_REVIEW_EMAIL / ADMIN_EMAILS is configured",
-    );
-    return 0;
-  }
   const transitions = await db
     .select()
     .from(thredboLiftTransitionsTable)
@@ -257,6 +254,17 @@ export async function notifyReadyThredboLiftWindEvidence(): Promise<number> {
     const runKey = thredboWindReadinessRunKey(row);
     const claimedAnalysis = await claimReadinessMilestone(runKey, row);
     if (!claimedAnalysis) continue;
+    if (!recipient) {
+      await finishReadinessMilestone(
+        runKey,
+        false,
+        `${claimedAnalysis.name}: no THREDBO_WIND_REVIEW_EMAIL or ADMIN_EMAILS recipient was configured; human review required`,
+      );
+      console.error(
+        `[thredboLiftHistory] readiness notification for ${claimedAnalysis.name} closed as failed because no review recipient is configured`,
+      );
+      continue;
+    }
 
     const result = await sendEmail({
       ...readinessEmail(claimedAnalysis),

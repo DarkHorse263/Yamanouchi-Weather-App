@@ -3,10 +3,14 @@ import assert from "node:assert/strict";
 import {
   findLiftTransitions,
   fiveMinuteRunKey,
+  finishReadinessMilestone,
   thredboWindReadinessRetryExpired,
   thredboWindReadinessRunKey,
   windColumns,
 } from "../../jobs/thredboLiftHistory.js";
+import { db, jobRunsTable } from "@workspace/db";
+import { and, eq } from "drizzle-orm";
+import { randomUUID } from "node:crypto";
 import { classifyThredboHistoryFreshness } from "../../jobs/smokeTest.js";
 import { parseFreshWindReading } from "../thredboWindObservation.js";
 import type { ThredboLiveLiftStatus } from "../thredboLiftStatus.js";
@@ -60,6 +64,58 @@ test("wind readiness stops retries before provider deduplication expires", () =>
     ),
     true,
   );
+});
+
+test("a stale readiness worker cannot overwrite an acknowledged terminal failure", async () => {
+  const runKey = `terminal-fence-test:${randomUUID()}`;
+  await db.insert(jobRunsTable).values({
+    jobName: "thredbo-lift-wind-readiness",
+    runKey,
+    summary: JSON.stringify({
+      createdAt: new Date().toISOString(),
+      analysis: { seedLiftId: "test-lift", name: "Test lift" },
+    }),
+  });
+  try {
+    assert.equal(await finishReadinessMilestone(runKey, false, "human review required"), true);
+    await db
+      .update(jobRunsTable)
+      .set({
+        acknowledgedAt: new Date(),
+        acknowledgedByUserId: "test-admin",
+        acknowledgedByEmail: "test-admin@example.com",
+      })
+      .where(
+        and(
+          eq(jobRunsTable.jobName, "thredbo-lift-wind-readiness"),
+          eq(jobRunsTable.runKey, runKey),
+        ),
+      );
+
+    assert.equal(await finishReadinessMilestone(runKey, true, "late stale success"), false);
+    const [row] = await db
+      .select()
+      .from(jobRunsTable)
+      .where(
+        and(
+          eq(jobRunsTable.jobName, "thredbo-lift-wind-readiness"),
+          eq(jobRunsTable.runKey, runKey),
+        ),
+      );
+    assert.equal(row?.ok, false);
+    assert.ok(row?.acknowledgedAt instanceof Date);
+    assert.match(row?.summary ?? "", /human review required/);
+    assert.doesNotMatch(row?.summary ?? "", /late stale success/);
+  } finally {
+    await db
+      .delete(jobRunsTable)
+      .where(
+        and(
+          eq(jobRunsTable.jobName, "thredbo-lift-wind-readiness"),
+          eq(jobRunsTable.runKey, runKey),
+        ),
+      );
+  }
 });
 
 test("BOM wind parser keeps fresh readings and rejects stale ones", () => {

@@ -1,6 +1,6 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import { and, eq, gte, lte, desc, isNotNull, isNull, count, sql } from "drizzle-orm";
-import { db, alertSubscribersTable, newsletterSubscribersTable, promoFunnelDailyTable, emailDeliveryIncidentsTable, pageViewDailyTable, visitorDailyTable, engagementEventDailyTable, usersTable, thredboLiftTransitionsTable } from "@workspace/db";
+import { db, alertSubscribersTable, newsletterSubscribersTable, promoFunnelDailyTable, emailDeliveryIncidentsTable, pageViewDailyTable, visitorDailyTable, engagementEventDailyTable, usersTable, thredboLiftTransitionsTable, jobRunsTable } from "@workspace/db";
 import { getAuth, clerkClient } from "@clerk/express";
 import { requireAdminUser } from "../middlewares/requireAdminUser.js";
 import { loadPromoFunnel } from "../lib/adminPromoFunnel.js";
@@ -13,6 +13,7 @@ import { resolveEmailDeliveryIncident } from "../lib/emailDeliveryIncidents.js";
  * out) vs 403 (logged in but not admin).
  */
 const router: IRouter = Router();
+const THREDBO_READINESS_JOB_NAME = "thredbo-lift-wind-readiness";
 
 /**
  * Origin-pinning guard for the entire admin surface · protects BOTH:
@@ -121,6 +122,113 @@ router.get("/thredbo-lift-history", async (req: Request, res: Response) => {
   } catch (error) {
     console.error("[admin/thredbo-lift-history] failed", error);
     res.status(500).json({ error: "LIFT_HISTORY_FAILED" });
+  }
+});
+
+router.get("/thredbo-readiness-failures", async (req: Request, res: Response): Promise<void> => {
+  try {
+    const rows = await db
+      .select({
+        id: jobRunsTable.id,
+        runKey: jobRunsTable.runKey,
+        finishedAt: jobRunsTable.finishedAt,
+        summary: jobRunsTable.summary,
+        acknowledgedAt: jobRunsTable.acknowledgedAt,
+        acknowledgedByEmail: jobRunsTable.acknowledgedByEmail,
+      })
+      .from(jobRunsTable)
+      .where(
+        and(
+          eq(jobRunsTable.jobName, THREDBO_READINESS_JOB_NAME),
+          eq(jobRunsTable.ok, false),
+        ),
+      )
+      .orderBy(desc(jobRunsTable.finishedAt))
+      .limit(50);
+
+    const failures = rows.flatMap((row) => {
+      try {
+        const summary = JSON.parse(row.summary ?? "{}") as {
+          createdAt?: unknown;
+          status?: unknown;
+          detail?: unknown;
+          analysis?: unknown;
+        };
+        if (
+          (summary.status !== "failed" && summary.status !== "expired") ||
+          !summary.analysis ||
+          typeof summary.analysis !== "object"
+        ) {
+          return [];
+        }
+        return [{
+          id: row.id,
+          runKey: row.runKey,
+          state: summary.status,
+          detail: typeof summary.detail === "string" ? summary.detail : null,
+          evidence: summary.analysis,
+          readyAt: typeof summary.createdAt === "string" ? summary.createdAt : null,
+          failedAt: row.finishedAt,
+          acknowledgedAt: row.acknowledgedAt,
+          acknowledgedByEmail: row.acknowledgedByEmail,
+        }];
+      } catch {
+        console.warn("[admin/thredbo-readiness-failures] invalid summary", { jobRunId: row.id });
+        return [];
+      }
+    });
+    res.json({ failures });
+  } catch (err) {
+    console.error("[admin/thredbo-readiness-failures] failed", err);
+    res.status(500).json({ error: "THREDBO_READINESS_FAILURES_FAILED" });
+  }
+});
+
+router.patch("/thredbo-readiness-failures/:id/acknowledge", async (req: Request, res: Response): Promise<void> => {
+  try {
+    const rawId = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+    const id = typeof rawId === "string" ? rawId.trim() : "";
+    if (!id) {
+      res.status(400).json({ error: "INVALID_ID" });
+      return;
+    }
+    const admin = res.locals.adminUser as { userId?: string; email?: string } | undefined;
+    if (!admin?.userId || !admin.email) {
+      res.status(500).json({ error: "ADMIN_IDENTITY_MISSING" });
+      return;
+    }
+    const [acknowledged] = await db
+      .update(jobRunsTable)
+      .set({
+        acknowledgedAt: new Date(),
+        acknowledgedByUserId: admin.userId,
+        acknowledgedByEmail: admin.email,
+      })
+      .where(
+        and(
+          eq(jobRunsTable.id, id),
+          eq(jobRunsTable.jobName, THREDBO_READINESS_JOB_NAME),
+          eq(jobRunsTable.ok, false),
+          isNull(jobRunsTable.acknowledgedAt),
+        ),
+      )
+      .returning({
+        id: jobRunsTable.id,
+        acknowledgedAt: jobRunsTable.acknowledgedAt,
+        acknowledgedByEmail: jobRunsTable.acknowledgedByEmail,
+      });
+    if (!acknowledged) {
+      res.status(404).json({ error: "FAILURE_NOT_FOUND_OR_ALREADY_ACKNOWLEDGED" });
+      return;
+    }
+    console.info("[admin/thredbo-readiness-failures] acknowledged", {
+      jobRunId: id,
+      adminUserId: admin.userId,
+    });
+    res.json({ failure: acknowledged });
+  } catch (err) {
+    console.error("[admin/thredbo-readiness-failures] acknowledge failed", err);
+    res.status(500).json({ error: "THREDBO_READINESS_ACKNOWLEDGE_FAILED" });
   }
 });
 

@@ -24,6 +24,9 @@ export const jobRunsTable = pgTable(
     finishedAt: timestamp("finished_at", { withTimezone: true }),
     ok: boolean("ok"),
     summary: text("summary"),
+    acknowledgedAt: timestamp("acknowledged_at", { withTimezone: true }),
+    acknowledgedByUserId: text("acknowledged_by_user_id"),
+    acknowledgedByEmail: text("acknowledged_by_email"),
   },
   (t) => [uniqueIndex("job_runs_name_key_uidx").on(t.jobName, t.runKey)],
 );
