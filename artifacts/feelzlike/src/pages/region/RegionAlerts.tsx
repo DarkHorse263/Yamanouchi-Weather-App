@@ -53,8 +53,8 @@ export function RegionAlerts() {
           </p>
           <p>
             {t(
-              "Subscribe below and we'll email you when the forecast shows your threshold being met in your selected window.",
-              "以下から登録すると、選択した期間にしきい値を超える予報が出た際にメールでお知らせします。",
+              "No account is needed. Subscribe below, verify your email, and we'll notify you when the forecast reaches your threshold.",
+              "アカウントは不要です。以下から登録してメールを確認すると、予報がしきい値に達した際にお知らせします。",
             )}
           </p>
         </div>

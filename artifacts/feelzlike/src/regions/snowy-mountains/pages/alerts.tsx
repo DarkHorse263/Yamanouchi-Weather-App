@@ -32,7 +32,7 @@ export default function Alerts() {
         <Info className="w-5 h-5 text-sky-500 mt-0.5 shrink-0" />
         <div className="text-sm text-slate-600">
           <p className="text-slate-900 font-bold mb-1">Real-time storm tracking is coming soon to the Snowy Mountains.</p>
-          <p>For now, subscribe below and we'll email you when our forecast models show your threshold being met in your selected window.</p>
+          <p>No account is needed. Subscribe below, verify your email, and we'll notify you when our forecast models reach your threshold.</p>
         </div>
       </div>
 

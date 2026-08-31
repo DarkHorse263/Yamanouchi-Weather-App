@@ -137,8 +137,8 @@ export function AlertPromoBanner() {
           <p className="byline text-primary uppercase">{t("powder alerts", "降雪アラート")}</p>
           <p className="mt-0.5 text-sm text-muted-foreground leading-snug">
             {t(
-              "get emailed when a dump is coming · set your own snow threshold",
-              "まとまった降雪の前にメールでお知らせ · しきい値は自由に設定",
+              "no account needed · verify your email, then get notified when a dump is coming",
+              "アカウント不要 · メール確認後、まとまった降雪の前にお知らせ",
             )}
           </p>
           <Link

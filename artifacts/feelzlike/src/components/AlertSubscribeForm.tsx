@@ -256,6 +256,12 @@ export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
           <h3 className="text-lg font-bold text-foreground">{t("Almost there", "もう少しです")}</h3>
         </div>
         <p className="text-sm text-muted-foreground">{submitted.message}</p>
+        <p className="text-xs text-muted-foreground">
+          {t(
+            "Your alert stays inactive until you verify your email. You still don't need an account.",
+            "メールアドレスを確認するまでアラートは有効になりません。アカウントは引き続き不要です。",
+          )}
+        </p>
         {submitted.devVerifyUrl && (
           <div className="text-xs bg-black/30 rounded p-3 border border-white/10">
             <div className="text-muted-foreground mb-1 font-bold uppercase tracking-wider">Dev mode - no email sent</div>
@@ -278,7 +284,16 @@ export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
         </span>
       </div>
       <p className="text-sm text-muted-foreground -mt-2">
-        {t("We'll only email when forecast snowfall meets your threshold. Unsubscribe in one click.", "予報降雪量がしきい値に達したときのみメールを送信します。ワンクリックで購読解除できます。")}
+        {t(
+          "No account needed. We'll send a verification email first, then only email when forecast snowfall meets your threshold.",
+          "アカウントは不要です。最初に確認メールを送信し、その後は予報降雪量がしきい値に達したときのみメールを送信します。",
+        )}
+      </p>
+      <p className="text-xs text-muted-foreground">
+        {t(
+          "Create an account only if you want to manage alerts alongside your other feelzlike preferences. Every alert email includes a one-click unsubscribe link.",
+          "他のfeelzlike設定と一緒にアラートを管理したい場合のみ、アカウントを作成してください。すべてのアラートメールにワンクリックの購読解除リンクがあります。",
+        )}
       </p>
 
       <label className="block">
