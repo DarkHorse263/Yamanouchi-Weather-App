@@ -12,3 +12,6 @@ description: How US town stay/eat/car-hire parity actually works and what remain
 - Crested Butte's Mountain Express site served injected replica-shopping spam in Aug 2026 despite its bus pages still loading. Treat it as compromised and use clean Gunnison Valley RTA links until the operator site is independently reverified.
 - **Why:** an HTTP 200 is not enough when a legitimate operator domain has been content-hijacked; linking it would expose visitors to unsafe material.
 - **How to apply:** keep Mountain Express out of public transport data and re-check page content, not just status, before restoring it.
+- Curated transport links in the generated smoke-test manifest receive conservative parking and hidden-commerce-spam inspection; operator identity phrases are opt-in only when branding is stable across linked pages.
+- **Why:** generic identity assertions are noisy when operators rebrand or vary page templates, while off-screen commerce injection and domain-parking language are strong compromise signals.
+- **How to apply:** add a stable identity in the manifest generator only after checking every linked page; preserve reachability-only treatment when automated HTML inspection is blocked or interrupted.

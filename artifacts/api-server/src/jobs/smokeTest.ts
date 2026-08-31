@@ -11,9 +11,11 @@
  *  2. /api/healthz says ok, /api/regions returns the full region list,
  *     and one weather canary per country (AU/JP/NZ) returns data
  *  3. every user-facing external link in src/data + src/regions (from the
- *     generated manifest external-links.json) still resolves. Bot-blocked
- *     responses (403/429 etc.) count as reachable - only 404/410, hard 5xx
- *     and dead hosts fail, each retried once to filter transient blips.
+ *     generated manifest external-links.json) still resolves. Curated
+ *     transport pages that return readable HTML also get conservative
+ *     parking/content-hijack checks, plus opt-in stable operator identities.
+ *     Bot-blocked responses (403/429 etc.) remain reachability-only and count
+ *     as reachable. Failures are retried once to filter transient blips.
  *
  * On failure it emails the owner (SMOKE_ALERT_EMAIL, falling back to the
  * first ADMIN_EMAILS entry) via the branded shell. All-clear runs only log.
@@ -38,6 +40,10 @@ import { sendEmail } from "../lib/emailSender.js";
 import { brandedEmail } from "../lib/emailTemplates.js";
 import externalLinks from "../data/external-links.json";
 import { bandElevations } from "../lib/openMeteoElevation.js";
+import {
+  checkExternalLinkContent,
+  type LinkContentCheck,
+} from "../lib/externalLinkIntegrity.js";
 
 const ORIGIN = (process.env.SMOKE_TARGET_ORIGIN ?? process.env.PUBLIC_ORIGIN ?? "https://feelzlike.com").replace(/\/$/, "");
 
@@ -425,16 +431,35 @@ async function checkLiveLiftFeeds(failures: SmokeFailure[]): Promise<number> {
 interface LinkEntry {
   url: string;
   sources: string[];
+  contentCheck?: LinkContentCheck;
 }
 
-type LinkVerdict = "ok" | "blocked" | "broken" | "dead";
+type LinkVerdict = "ok" | "blocked" | "broken" | "dead" | "hijacked";
 
-export async function probeLink(url: string): Promise<{ verdict: LinkVerdict; detail: string }> {
+const MAX_INSPECTED_HTML_BYTES = 512_000;
+export async function probeLink(
+  url: string,
+  contentCheck?: LinkContentCheck,
+): Promise<{ verdict: LinkVerdict; detail: string }> {
   try {
     const res = await fetchRaw(url, LINK_TIMEOUT_MS);
-    // Drain a little of the body so keep-alive sockets recycle cleanly.
+    if (res.status < 400) {
+      if (contentCheck && (res.headers.get("content-type") ?? "").toLowerCase().includes("text/html")) {
+        try {
+          const integrity = checkExternalLinkContent(await readHtmlPrefix(res), contentCheck);
+          if (!integrity.ok) {
+            return { verdict: "hijacked", detail: `HTTP ${res.status} · ${integrity.detail}` };
+          }
+        } catch {
+          // A readable 2xx page is still reachable. If inspection itself is
+          // blocked or interrupted, preserve the old reachability-only result.
+        }
+      } else {
+        await res.body?.cancel().catch(() => undefined);
+      }
+      return { verdict: "ok", detail: `HTTP ${res.status}` };
+    }
     await res.body?.cancel().catch(() => undefined);
-    if (res.status < 400) return { verdict: "ok", detail: `HTTP ${res.status}` };
     if (BLOCKED_STATUSES.has(res.status)) return { verdict: "blocked", detail: `HTTP ${res.status} (bot-gated, reachable)` };
     return { verdict: "broken", detail: `HTTP ${res.status}` };
   } catch (err) {
@@ -463,16 +488,16 @@ async function checkExternalLinks(failures: SmokeFailure[]): Promise<{ checked: 
   let blocked = 0;
 
   const firstPass = await mapPool(links, LINK_CONCURRENCY, async (link) => {
-    const result = await probeLink(link.url);
+    const result = await probeLink(link.url, link.contentCheck);
     return { link, ...result };
   });
 
   // Retry failures once, sequentially and gently - most transient DNS blips,
   // handshake resets and cold CDN caches clear on a second attempt.
-  const suspect = firstPass.filter((r) => r.verdict === "broken" || r.verdict === "dead");
+  const suspect = firstPass.filter((r) => r.verdict === "broken" || r.verdict === "dead" || r.verdict === "hijacked");
   for (const s of suspect) {
     await new Promise((r) => setTimeout(r, 1500));
-    const retry = await probeLink(s.link.url);
+    const retry = await probeLink(s.link.url, s.link.contentCheck);
     if (retry.verdict === "ok" || retry.verdict === "blocked") {
       s.verdict = retry.verdict;
       s.detail = retry.detail;
@@ -484,8 +509,13 @@ async function checkExternalLinks(failures: SmokeFailure[]): Promise<{ checked: 
 
   for (const r of firstPass) {
     if (r.verdict === "blocked") blocked++;
-    if (r.verdict === "broken" || r.verdict === "dead") {
-      failures.push({ check: r.verdict === "broken" ? "dead link" : "unreachable link", url: r.link.url, detail: r.detail, sources: r.link.sources });
+    if (r.verdict === "broken" || r.verdict === "dead" || r.verdict === "hijacked") {
+      const check = r.verdict === "broken"
+        ? "dead link"
+        : r.verdict === "dead"
+          ? "unreachable link"
+          : "unsafe link content";
+      failures.push({ check, url: r.link.url, detail: r.detail, sources: r.link.sources });
     }
   }
 
@@ -532,6 +562,7 @@ function failureEmail(report: SmokeReport): { subject: string; html: string; tex
     "lift history collection": "Thredbo lift history collection",
     "dead link": "dead outbound links",
     "unreachable link": "unreachable outbound links",
+    "unsafe link content": "outbound links with suspicious content",
   };
 
   const MAX_PER_GROUP = 25;
@@ -746,4 +777,24 @@ export function startSmokeCron(): void {
     sweepDueRun().catch((err) => console.error("[smokeTest] wake-up sweep failed:", err));
   }, 90_000).unref?.();
   console.log("[smokeTest] scheduler on: daily 19:45 UTC + wake-up catch-up, DB-claimed (job_runs)");
+}
+
+async function readHtmlPrefix(res: Response): Promise<string> {
+  if (!res.body) return "";
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let bytes = 0;
+  let text = "";
+  try {
+    while (bytes < MAX_INSPECTED_HTML_BYTES) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      bytes += value.byteLength;
+      text += decoder.decode(value, { stream: true });
+    }
+    text += decoder.decode();
+    return text;
+  } finally {
+    await reader.cancel().catch(() => undefined);
+  }
 }

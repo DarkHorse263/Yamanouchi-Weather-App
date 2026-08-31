@@ -33,6 +33,13 @@ const OUT = join(ROOT, "../api-server/src/data/external-links.json");
 // runtime instead. Match on basename so the path separator never matters.
 const SKIP_FILES = new Set(["canadaDirectory.ts"]);
 
+// Only assert identity text for operators whose branding is stable across all
+// linked pages. Other transport links still get conservative parking/hijack
+// checks, without a brittle text assertion that would create alert noise.
+const STABLE_OPERATOR_IDENTITIES = new Map([
+  ["gunnisonvalleyrta.com", ["Gunnison Valley RTA"]],
+]);
+
 const EXCLUDE_HOSTS = [
   // affiliate / tracking - never machine-visit
   "awin1.com", "tidd.ly", "anrdoezrs.net", "dpbolvw.net", "jdoqocy.com",
@@ -114,6 +121,14 @@ for (const dir of SCAN_DIRS) {
       const entry = byUrl.get(url) ?? { url, sources: [] };
       const src = relative(ROOT, file);
       if (!entry.sources.includes(src)) entry.sources.push(src);
+      if (src.startsWith("src/data/transport/")) {
+        const hostname = new URL(url).hostname.replace(/^www\./, "").toLowerCase();
+        entry.contentCheck = {
+          ...(STABLE_OPERATOR_IDENTITIES.has(hostname)
+            ? { expectedAny: STABLE_OPERATOR_IDENTITIES.get(hostname) }
+            : {}),
+        };
+      }
       byUrl.set(url, entry);
     }
   }
