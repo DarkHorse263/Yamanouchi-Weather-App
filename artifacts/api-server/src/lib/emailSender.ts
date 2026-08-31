@@ -22,6 +22,11 @@ interface SendArgs {
   html: string;
   text: string;
   tag?: string;
+  /**
+   * Stable key for retrying the same logical message without sending it twice.
+   * Resend retains keys for 24 hours.
+   */
+  idempotencyKey?: string;
 }
 
 interface SendResult {
@@ -126,6 +131,9 @@ export async function sendEmail(args: SendArgs): Promise<SendResult> {
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
+        ...(args.idempotencyKey
+          ? { "Idempotency-Key": args.idempotencyKey }
+          : {}),
       },
       body: JSON.stringify({
         from: FROM,

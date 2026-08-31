@@ -51,6 +51,15 @@ export interface LiftWindAnalysis {
 
 export const MIN_EVENT_SAMPLES = 3;
 
+export function hasMinimumThredboWindEvidence(
+  analysis: Pick<LiftWindAnalysis, "windHoldStarts" | "releases">,
+): boolean {
+  return (
+    analysis.windHoldStarts.length >= MIN_EVENT_SAMPLES &&
+    analysis.releases.length >= MIN_EVENT_SAMPLES
+  );
+}
+
 function windAtTransition(row: LiftWindTransition): WindSample | null {
   const top = [row.topWindKmh, row.topGustKmh].filter(
     (value): value is number => value !== null && Number.isFinite(value),
@@ -130,10 +139,10 @@ export function analyzeThredboLiftWindHistory(
     if (stations.size > 1) flags.push("mixed_wind_stations");
 
     let recommendation: LiftWindAnalysis["recommendation"] = null;
-    if (
-      startValues.length >= MIN_EVENT_SAMPLES &&
-      releaseValues.length >= MIN_EVENT_SAMPLES
-    ) {
+    if (hasMinimumThredboWindEvidence({
+      windHoldStarts: startValues,
+      releases: releaseValues,
+    })) {
       const startMedianKmh = median(startValues);
       const releaseMedianKmh = median(releaseValues);
       const startsBelowReleases =

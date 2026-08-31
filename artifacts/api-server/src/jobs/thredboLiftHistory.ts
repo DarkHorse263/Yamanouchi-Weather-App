@@ -1,5 +1,5 @@
 import cron, { type ScheduledTask } from "node-cron";
-import { and, desc, eq, inArray, isNull, lt, sql } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, isNull, lt, sql } from "drizzle-orm";
 import {
   db,
   jobRunsTable,
@@ -16,8 +16,21 @@ import {
   fetchThredboWindSnapshot,
   type ThredboWindSnapshot,
 } from "../lib/thredboWindObservation.js";
+import {
+  analyzeThredboLiftWindHistory,
+  hasMinimumThredboWindEvidence,
+  type LiftWindAnalysis,
+} from "../lib/thredboLiftWindAnalysis.js";
+import { THREDBO_THRESHOLDS } from "../lib/thredboLiftThresholds.js";
+import { sendEmail } from "../lib/emailSender.js";
 
 const JOB_NAME = "thredbo-lift-history";
+const READINESS_JOB_NAME = "thredbo-lift-wind-readiness";
+const READINESS_MILESTONE_VERSION = "minimum-evidence-v1";
+const READINESS_STALE_CLAIM_MINUTES = 15;
+// Resend retains idempotency keys for 24 hours. Stop automatic retries before
+// that window closes rather than risk duplicating an ambiguously accepted mail.
+const READINESS_MAX_RETRY_HOURS = 23;
 const STALE_CLAIM_MINUTES = 15;
 const SWEEP_INTERVAL_MS = 5 * 60_000;
 const MAX_WIND_FEED_SKEW_MS = 90 * 60_000;
@@ -53,6 +66,225 @@ async function finishRun(runKey: string, ok: boolean, summary: string): Promise<
     .update(jobRunsTable)
     .set({ finishedAt: sql`now()`, ok, summary })
     .where(and(eq(jobRunsTable.jobName, JOB_NAME), eq(jobRunsTable.runKey, runKey)));
+}
+
+export function thredboWindReadinessRunKey(
+  analysis: Pick<LiftWindAnalysis, "seedLiftId">,
+): string {
+  return `${READINESS_MILESTONE_VERSION}:${analysis.seedLiftId}`;
+}
+
+interface ReadinessClaim {
+  createdAt: string;
+  analysis: LiftWindAnalysis;
+}
+
+export function thredboWindReadinessRetryExpired(
+  createdAt: Date,
+  now: Date = new Date(),
+): boolean {
+  return (
+    now.getTime() - createdAt.getTime() >=
+    READINESS_MAX_RETRY_HOURS * 60 * 60_000
+  );
+}
+
+async function expireReadinessMilestone(
+  runKey: string,
+  retryWindowStarts: Date,
+): Promise<boolean> {
+  const expired = await db
+    .update(jobRunsTable)
+    .set({
+      finishedAt: sql`now()`,
+      ok: false,
+      summary: sql`${jobRunsTable.summary}::jsonb || jsonb_build_object(
+        'status', 'expired',
+        'detail', 'automatic notification expired after transient delivery failures; human review required'
+      )`,
+    })
+    .where(
+      and(
+        eq(jobRunsTable.jobName, READINESS_JOB_NAME),
+        eq(jobRunsTable.runKey, runKey),
+        isNull(jobRunsTable.finishedAt),
+        sql`(${jobRunsTable.summary}::jsonb->>'createdAt')::timestamptz <= ${retryWindowStarts}`,
+      ),
+    )
+    .returning({ id: jobRunsTable.id });
+  return expired.length > 0;
+}
+
+async function claimReadinessMilestone(
+  runKey: string,
+  analysis: LiftWindAnalysis,
+): Promise<LiftWindAnalysis | null> {
+  const now = new Date();
+  const staleBefore = new Date(
+    now.getTime() - READINESS_STALE_CLAIM_MINUTES * 60_000,
+  );
+  const retryWindowStarts = new Date(
+    now.getTime() - READINESS_MAX_RETRY_HOURS * 60 * 60_000,
+  );
+  const initialClaim: ReadinessClaim = {
+    createdAt: now.toISOString(),
+    analysis,
+  };
+  if (await expireReadinessMilestone(runKey, retryWindowStarts)) {
+    console.error(
+      `[thredboLiftHistory] readiness notification ${runKey} exhausted its safe retry window; milestone closed as failed for human review`,
+    );
+    return null;
+  }
+  const claimed = await db
+    .insert(jobRunsTable)
+    .values({
+      jobName: READINESS_JOB_NAME,
+      runKey,
+      summary: JSON.stringify(initialClaim),
+    })
+    .onConflictDoUpdate({
+      target: [jobRunsTable.jobName, jobRunsTable.runKey],
+      set: { startedAt: sql`now()` },
+      setWhere: and(
+        isNull(jobRunsTable.finishedAt),
+        lt(jobRunsTable.startedAt, staleBefore),
+        sql`(${jobRunsTable.summary}::jsonb->>'createdAt')::timestamptz > ${retryWindowStarts}`,
+      ),
+    })
+    .returning({ summary: jobRunsTable.summary });
+  if (!claimed[0]?.summary) return null;
+  try {
+    return (JSON.parse(claimed[0].summary) as ReadinessClaim).analysis;
+  } catch {
+    console.error(
+      `[thredboLiftHistory] invalid readiness claim payload for ${runKey}; automatic send suppressed`,
+    );
+    return null;
+  }
+}
+
+async function finishReadinessMilestone(
+  runKey: string,
+  ok: boolean,
+  summary: string,
+): Promise<void> {
+  await db
+    .update(jobRunsTable)
+    .set({
+      finishedAt: sql`now()`,
+      ok,
+      summary: sql`${jobRunsTable.summary}::jsonb || jsonb_build_object(
+        'status', ${ok ? "sent" : "failed"},
+        'detail', ${summary}
+      )`,
+    })
+    .where(
+      and(
+        eq(jobRunsTable.jobName, READINESS_JOB_NAME),
+        eq(jobRunsTable.runKey, runKey),
+      ),
+    );
+}
+
+function readinessRecipient(): string | null {
+  const explicit = process.env.THREDBO_WIND_REVIEW_EMAIL?.trim();
+  if (explicit) return explicit;
+  const admins = (process.env.ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((email) => email.trim())
+    .filter(Boolean);
+  return admins[0] ?? null;
+}
+
+function readinessEmail(row: LiftWindAnalysis): {
+  subject: string;
+  html: string;
+  text: string;
+} {
+  const starts = row.windHoldStarts.length;
+  const releases = row.releases.length;
+  const conflicts = row.flags.includes("conflicting_samples") ? "yes" : "no";
+  const recommendation = row.recommendation
+    ? `${row.recommendation.thresholdKmh} km/h (current public threshold: ${row.currentThresholdKmh} km/h)`
+    : "none available; keep the current public threshold";
+  const flags = row.flags.length ? row.flags.join(", ") : "none";
+  const text = [
+    `${row.name} now has enough wind evidence for human review.`,
+    "",
+    `Clean wind-hold starts: ${starts}`,
+    `Clean reopen releases: ${releases}`,
+    `Conflicting samples: ${conflicts}`,
+    `Evidence flags: ${flags}`,
+    `Analyzer recommendation: ${recommendation}`,
+    "",
+    "No public prediction threshold was changed. Run the Thredbo lift wind analysis and review the underlying samples before making any change.",
+  ].join("\n");
+  return {
+    subject: `Thredbo wind evidence ready · ${row.name}`,
+    text,
+    html: `<p><strong>${row.name}</strong> now has enough wind evidence for human review.</p>
+<ul>
+<li>Clean wind-hold starts: ${starts}</li>
+<li>Clean reopen releases: ${releases}</li>
+<li>Conflicting samples: ${conflicts}</li>
+<li>Evidence flags: ${flags}</li>
+<li>Analyzer recommendation: ${recommendation}</li>
+</ul>
+<p><strong>No public prediction threshold was changed.</strong> Run the Thredbo lift wind analysis and review the underlying samples before making any change.</p>`,
+  };
+}
+
+export async function notifyReadyThredboLiftWindEvidence(): Promise<number> {
+  const recipient = readinessRecipient();
+  if (!recipient) {
+    console.warn(
+      "[thredboLiftHistory] wind evidence may be ready but no THREDBO_WIND_REVIEW_EMAIL / ADMIN_EMAILS is configured",
+    );
+    return 0;
+  }
+  const transitions = await db
+    .select()
+    .from(thredboLiftTransitionsTable)
+    .orderBy(asc(thredboLiftTransitionsTable.feedUpdatedAt));
+  const ready = analyzeThredboLiftWindHistory(
+    transitions,
+    THREDBO_THRESHOLDS,
+  ).filter(hasMinimumThredboWindEvidence);
+  let sent = 0;
+
+  for (const row of ready) {
+    const runKey = thredboWindReadinessRunKey(row);
+    const claimedAnalysis = await claimReadinessMilestone(runKey, row);
+    if (!claimedAnalysis) continue;
+
+    const result = await sendEmail({
+      ...readinessEmail(claimedAnalysis),
+      to: recipient,
+      tag: "thredbo-wind-ready",
+      idempotencyKey: `${READINESS_JOB_NAME}:${runKey}`,
+    });
+    if (!result.delivered) {
+      if (result.permanent) {
+        await finishReadinessMilestone(
+          runKey,
+          false,
+          `${claimedAnalysis.name}: permanent email failure (${result.error ?? result.provider})`,
+        );
+      }
+      console.warn(
+        `[thredboLiftHistory] readiness email for ${claimedAnalysis.name} not delivered; ${result.permanent ? "milestone closed as a permanent failure" : "milestone lease left for an idempotent retry within 23 hours"}`,
+      );
+      continue;
+    }
+    await finishReadinessMilestone(
+      runKey,
+      true,
+      `${claimedAnalysis.name}: ${claimedAnalysis.windHoldStarts.length} starts, ${claimedAnalysis.releases.length} releases, conflicts=${claimedAnalysis.flags.includes("conflicting_samples")}, recommendation=${claimedAnalysis.recommendation?.thresholdKmh ?? "none"}`,
+    );
+    sent += 1;
+  }
+  return sent;
 }
 
 async function latestStatuses(liftIds: string[]): Promise<PriorStatus[]> {
@@ -141,6 +373,7 @@ export async function sweepThredboLiftHistory(now: Date = new Date()): Promise<v
       return;
     }
     if (!claimed) return;
+    await notifyReadyThredboLiftWindEvidence();
     const live = await fetchFreshThredboLiftStatus();
     if (!live) {
       await finishRun(runKey, false, "feed unavailable or stale; no transition recorded");

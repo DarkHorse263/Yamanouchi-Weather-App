@@ -2,6 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   analyzeThredboLiftWindHistory,
+  hasMinimumThredboWindEvidence,
   type CuratedLiftThreshold,
   type LiftWindTransition,
 } from "../thredboLiftWindAnalysis.js";
@@ -64,6 +65,7 @@ test("recommends a rounded threshold from sufficient separated evidence", () => 
   assert.deepEqual(result?.windHoldStarts, [82, 88, 92]);
   assert.deepEqual(result?.releases, [62, 68, 72]);
   assert.equal(result?.recommendation?.thresholdKmh, 80);
+  assert.equal(hasMinimumThredboWindEvidence(result!), true);
 });
 
 test("counts only open to wind-hold transitions as hold starts", () => {
@@ -119,4 +121,5 @@ test("flags conflicting distributions and mixed station evidence", () => {
   assert.ok(result?.flags.includes("mixed_wind_stations"));
   assert.ok(result?.flags.includes("conflicting_samples"));
   assert.equal(result?.recommendation, null);
+  assert.equal(hasMinimumThredboWindEvidence(result!), true);
 });

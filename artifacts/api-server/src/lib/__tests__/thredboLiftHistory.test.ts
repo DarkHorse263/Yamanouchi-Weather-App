@@ -1,6 +1,12 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { findLiftTransitions, fiveMinuteRunKey, windColumns } from "../../jobs/thredboLiftHistory.js";
+import {
+  findLiftTransitions,
+  fiveMinuteRunKey,
+  thredboWindReadinessRetryExpired,
+  thredboWindReadinessRunKey,
+  windColumns,
+} from "../../jobs/thredboLiftHistory.js";
 import { classifyThredboHistoryFreshness } from "../../jobs/smokeTest.js";
 import { parseFreshWindReading } from "../thredboWindObservation.js";
 import type { ThredboLiveLiftStatus } from "../thredboLiftStatus.js";
@@ -28,6 +34,31 @@ test("fiveMinuteRunKey buckets every replica into the same UTC claim", () => {
   assert.equal(
     fiveMinuteRunKey(new Date("2026-08-30T03:09:59.999Z")),
     "2026-08-30T03:05:00.000Z",
+  );
+});
+
+test("wind readiness uses one stable milestone per curated lift", () => {
+  assert.equal(
+    thredboWindReadinessRunKey({ seedLiftId: "kosciuszko-express" }),
+    "minimum-evidence-v1:kosciuszko-express",
+  );
+});
+
+test("wind readiness stops retries before provider deduplication expires", () => {
+  const now = new Date("2026-08-31T12:00:00Z");
+  assert.equal(
+    thredboWindReadinessRetryExpired(
+      new Date("2026-08-30T13:00:00.001Z"),
+      now,
+    ),
+    false,
+  );
+  assert.equal(
+    thredboWindReadinessRetryExpired(
+      new Date("2026-08-30T13:00:00.000Z"),
+      now,
+    ),
+    true,
   );
 });
 
