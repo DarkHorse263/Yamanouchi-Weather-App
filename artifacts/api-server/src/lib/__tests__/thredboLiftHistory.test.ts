@@ -4,6 +4,7 @@ import {
   findLiftTransitions,
   fiveMinuteRunKey,
   finishReadinessMilestone,
+  notifyReadyThredboLiftWindEvidenceWithDependencies,
   thredboWindReadinessRetryExpired,
   thredboWindReadinessRunKey,
   windColumns,
@@ -14,6 +15,7 @@ import { randomUUID } from "node:crypto";
 import { classifyThredboHistoryFreshness } from "../../jobs/smokeTest.js";
 import { parseFreshWindReading } from "../thredboWindObservation.js";
 import type { ThredboLiveLiftStatus } from "../thredboLiftStatus.js";
+import type { LiftWindAnalysis } from "../thredboLiftWindAnalysis.js";
 
 const live: ThredboLiveLiftStatus = {
   updatedAt: "2026-08-30T03:05:00.000Z",
@@ -64,6 +66,51 @@ test("wind readiness stops retries before provider deduplication expires", () =>
     ),
     true,
   );
+});
+
+test("ready wind evidence without a recipient becomes a durable failed human-review item", async () => {
+  const analysis: LiftWindAnalysis = {
+    liveLiftIds: ["test-lift"],
+    seedLiftId: "test-lift",
+    name: "Test lift",
+    currentThresholdKmh: 60,
+    verifiedAt: "2026-08-31",
+    windHoldStarts: [61, 63, 65],
+    releases: [45, 47, 49],
+    ignoredMissingWind: 0,
+    flags: [],
+    recommendation: {
+      thresholdKmh: 55,
+      startMedianKmh: 63,
+      releaseMedianKmh: 47,
+      basis: "3 wind-hold starts and 3 open releases",
+    },
+  };
+  const finished: Array<{ runKey: string; ok: boolean; summary: string }> = [];
+  let sends = 0;
+
+  const sent = await notifyReadyThredboLiftWindEvidenceWithDependencies({
+    loadReady: async () => [analysis],
+    claim: async (_runKey, row) => row,
+    finish: async (runKey, ok, summary) => {
+      finished.push({ runKey, ok, summary });
+      return true;
+    },
+    recipient: () => null,
+    send: async () => {
+      sends += 1;
+      return { delivered: true, provider: "test" };
+    },
+  });
+
+  assert.equal(sent, 0);
+  assert.equal(sends, 0);
+  assert.deepEqual(finished, [{
+    runKey: "minimum-evidence-v1:test-lift",
+    ok: false,
+    summary:
+      "Test lift: no THREDBO_WIND_REVIEW_EMAIL or ADMIN_EMAILS recipient was configured; human review required",
+  }]);
 });
 
 test("a stale readiness worker cannot overwrite an acknowledged terminal failure", async () => {

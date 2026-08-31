@@ -238,24 +238,44 @@ function readinessEmail(row: LiftWindAnalysis): {
   };
 }
 
-export async function notifyReadyThredboLiftWindEvidence(): Promise<number> {
-  const recipient = readinessRecipient();
-  const transitions = await db
-    .select()
-    .from(thredboLiftTransitionsTable)
-    .orderBy(asc(thredboLiftTransitionsTable.feedUpdatedAt));
-  const ready = analyzeThredboLiftWindHistory(
-    transitions,
-    THREDBO_THRESHOLDS,
-  ).filter(hasMinimumThredboWindEvidence);
+interface ReadinessEmail {
+  to: string;
+  subject: string;
+  html: string;
+  text: string;
+  tag: string;
+  idempotencyKey: string;
+}
+
+export interface ThredboReadinessNotifierDependencies {
+  loadReady: () => Promise<LiftWindAnalysis[]>;
+  claim: (
+    runKey: string,
+    analysis: LiftWindAnalysis,
+  ) => Promise<LiftWindAnalysis | null>;
+  finish: (runKey: string, ok: boolean, summary: string) => Promise<boolean>;
+  recipient: () => string | null;
+  send: (email: ReadinessEmail) => Promise<{
+    delivered: boolean;
+    provider: string;
+    error?: string;
+    permanent?: boolean;
+  }>;
+}
+
+export async function notifyReadyThredboLiftWindEvidenceWithDependencies(
+  dependencies: ThredboReadinessNotifierDependencies,
+): Promise<number> {
+  const recipient = dependencies.recipient();
+  const ready = await dependencies.loadReady();
   let sent = 0;
 
   for (const row of ready) {
     const runKey = thredboWindReadinessRunKey(row);
-    const claimedAnalysis = await claimReadinessMilestone(runKey, row);
+    const claimedAnalysis = await dependencies.claim(runKey, row);
     if (!claimedAnalysis) continue;
     if (!recipient) {
-      await finishReadinessMilestone(
+      await dependencies.finish(
         runKey,
         false,
         `${claimedAnalysis.name}: no THREDBO_WIND_REVIEW_EMAIL or ADMIN_EMAILS recipient was configured; human review required`,
@@ -266,7 +286,7 @@ export async function notifyReadyThredboLiftWindEvidence(): Promise<number> {
       continue;
     }
 
-    const result = await sendEmail({
+    const result = await dependencies.send({
       ...readinessEmail(claimedAnalysis),
       to: recipient,
       tag: "thredbo-wind-ready",
@@ -274,7 +294,7 @@ export async function notifyReadyThredboLiftWindEvidence(): Promise<number> {
     });
     if (!result.delivered) {
       if (result.permanent) {
-        await finishReadinessMilestone(
+        await dependencies.finish(
           runKey,
           false,
           `${claimedAnalysis.name}: permanent email failure (${result.error ?? result.provider})`,
@@ -285,7 +305,7 @@ export async function notifyReadyThredboLiftWindEvidence(): Promise<number> {
       );
       continue;
     }
-    await finishReadinessMilestone(
+    await dependencies.finish(
       runKey,
       true,
       `${claimedAnalysis.name}: ${claimedAnalysis.windHoldStarts.length} starts, ${claimedAnalysis.releases.length} releases, conflicts=${claimedAnalysis.flags.includes("conflicting_samples")}, recommendation=${claimedAnalysis.recommendation?.thresholdKmh ?? "none"}`,
@@ -293,6 +313,24 @@ export async function notifyReadyThredboLiftWindEvidence(): Promise<number> {
     sent += 1;
   }
   return sent;
+}
+
+export async function notifyReadyThredboLiftWindEvidence(): Promise<number> {
+  const transitions = await db
+    .select()
+    .from(thredboLiftTransitionsTable)
+    .orderBy(asc(thredboLiftTransitionsTable.feedUpdatedAt));
+  const ready = analyzeThredboLiftWindHistory(
+    transitions,
+    THREDBO_THRESHOLDS,
+  ).filter(hasMinimumThredboWindEvidence);
+  return notifyReadyThredboLiftWindEvidenceWithDependencies({
+    loadReady: async () => ready,
+    claim: claimReadinessMilestone,
+    finish: finishReadinessMilestone,
+    recipient: readinessRecipient,
+    send: sendEmail,
+  });
 }
 
 async function latestStatuses(liftIds: string[]): Promise<PriorStatus[]> {
