@@ -8,6 +8,10 @@ import {
   visitorDailyTable,
   engagementEventDailyTable,
 } from "@workspace/db";
+import {
+  engagementNeedsVisitorHash,
+  isHumanEngagementRequest,
+} from "../lib/engagementRequestPolicy.js";
 
 /**
  * Engagement ping · POST /api/engagement/ping
@@ -67,12 +71,8 @@ const STATIC_PAGES = new Set([
   "alerts", "legal", "au", "jp", "nz", "ca",
 ]);
 
-const BOT_RE =
-  /bot|crawl|spider|slurp|headless|lighthouse|pingdom|monitor|preview|facebookexternalhit|whatsapp|telegram|discord|curl|wget|python-requests|axios|node-fetch/i;
-
 function visitorHash(req: Request): string | null {
   const ua = req.headers["user-agent"] ?? "";
-  if (!ua || BOT_RE.test(String(ua))) return null;
   // No secret → no visitor hashing at all (fail closed rather than salt
   // with a public fallback string, which would weaken the privacy design).
   const secret = process.env.SESSION_SECRET;
@@ -97,10 +97,16 @@ router.post("/engagement/ping", async (req: Request, res: Response) => {
 
   try {
     const day = new Date().toISOString().slice(0, 10);
-    const hash = visitorHash(req);
-    if (!hash) return; // bot or missing UA · don't count anything
+    const userAgent = req.headers["user-agent"];
+    if (!isHumanEngagementRequest(userAgent)) return;
 
-    if (kind === "view") {
+    if (engagementNeedsVisitorHash(kind)) {
+      // Visitor hashes are needed only for page-view and returning-visitor
+      // counts. One-shot aggregate events (including alert funnel stages)
+      // carry no visitor identity and must keep counting if hashing is
+      // temporarily unavailable.
+      const hash = visitorHash(req);
+      if (!hash) return;
       const rawPage = typeof req.body?.page === "string" ? req.body.page.toLowerCase() : "";
       const page = STATIC_PAGES.has(rawPage) || REGION_IDS.has(rawPage) ? rawPage : "other";
       await Promise.all([

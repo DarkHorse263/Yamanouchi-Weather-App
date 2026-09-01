@@ -83,6 +83,7 @@
 - [feelzlike US transport](feelzlike-us-transport.md) — town "content parity" = curated transport data (stay/eat are generic OTA/Maps); 7 flagship US regions done, rest empty; US towns usually need the rideshare allowlist.
 - [feelzlike promo funnel counting](feelzlike-promo-funnel-counting.md) — banner "shown" must be viewport-gated (IntersectionObserver), not on-mount; zero dismissals = suspect impression over-count, not broken clicks.
 - [feelzlike engagement counting](feelzlike-engagement-counting.md) — cookieless first-party visitor counts; finite page-label whitelist; fail-closed without secret; dev preview = no data by design.
+- [feelzlike funnel counting](feelzlike-funnel-counting.md) — anonymous aggregate funnel events must not depend on visitor hashing; filter bots by UA, require SESSION_SECRET only for visitor/page-view identity.
 - [feelzlike Japanese SEO](feelzlike-ja-seo.md) — JP snapshots get ja-first bilingual descriptions extracted from region TS at build time; re-running prerender without a fresh vite build bakes stale bodies.
 - [feelzlike route rename](feelzlike-route-rename.md) — renaming a top-level route touches ~12 registries; generate-rewrites emits stdout only, artifact.toml must be updated to match.
 - [feelzlike Japan source reconciliation](feelzlike-japan-source-reconciliation.md) — canonical identity keys preserve generic resort words; fuzzy matching may strip them, but must never drive deduplication.
