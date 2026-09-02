@@ -59,9 +59,9 @@ export const VERIFIED_AUTHORED_VILLAGE_ELEVATIONS = {
   },
   "park-city/deer-valley-resort": {
     elevationM: 2003,
-    sourceUrl: "https://www.deervalley.com/-/media/Deer-Valley/Media/DeerValleyMediaPressKit2024.pdf",
-    citation: "Deer Valley's official media press kit lists the Snow Park base at 6,570 ft (2,003 m).",
-    verifiedAt: "2026-08-29",
+    sourceUrl: "https://www.deervalley.com/about-us/faqs",
+    citation: "Deer Valley's official FAQ lists the Snow Park base at 6,570 ft (2,003 m).",
+    verifiedAt: "2026-09-03",
   },
   "vail-valley/vail-mountain": {
     elevationM: 2475,
@@ -82,10 +82,10 @@ export const VERIFIED_AUTHORED_VILLAGE_ELEVATIONS = {
     verifiedAt: "2026-08-29",
   },
   "banff-lake-louise/mt-norquay": {
-    elevationM: 1630,
-    sourceUrl: "https://banffnorquay.com/winter/about/",
-    citation: "Mt Norquay's official resort facts state a base elevation of 1,630 m.",
-    verifiedAt: "2026-08-29",
+    elevationM: 1680,
+    sourceUrl: "https://banffnorquay.com/trail-map/",
+    citation: "Mt Norquay's official trail-map page states a base elevation of 1,680 m.",
+    verifiedAt: "2026-09-03",
   },
   "banff-lake-louise/lake-louise-resort": {
     elevationM: 1646,

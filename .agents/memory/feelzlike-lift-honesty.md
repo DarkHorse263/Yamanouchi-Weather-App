@@ -119,9 +119,12 @@ Charlotte Pass `/on-mountain/`; Selwyn homepage is 200.
 **Phase 2 live sources:** Thredbo uses its official per-lift XML. Perisher's
 official lift page has rows and summary counts but no data-owned timestamp, so
 it is verified only when paired with the official snow report's own fresh
-`Report Updated` stamp and matching `Lifts Open` count. Perisher parsing must
-also require every expected resort area and reject unknown/malformed candidate
-rows; partial agreement is not enough. Charlotte Pass uses one official rendered
+`Report Updated` stamp and plausible positive `Expected Lifts` count. Do not
+require that morning-plan count to equal the later live-page open count: the two
+official pages update at different times as lifts open or move onto hold. The
+live page's own summary must still agree exactly with every parsed row.
+Perisher parsing must also require every expected resort area and reject
+unknown/malformed candidate rows; partial agreement is not enough. Charlotte Pass uses one official rendered
 page containing five indexed lift tabs, `article:modified_time`, and an `As at`
 date. Keep status and freshness proof coupled to that single HTML revision;
 its WordPress REST body exposes unexpanded Divi markup and must not be paired
@@ -132,7 +135,9 @@ serve-stale fallback must re-check the source-owned timestamp and turn the
 resort unverified as soon as it crosses the freshness limit.
 
 **Why:** transport headers only proved that Perisher served HTML now, not that
-the lift data was updated now; a cache fetched near the 24-hour boundary could
+the lift data was updated now; the resort later renamed its snow-report count
+to `Expected Lifts` and that morning plan legitimately differed from the
+subsequently updated live rows. A cache fetched near the 24-hour boundary could
 otherwise keep stale claims verified for another 5-30 minutes.
 
 **How to apply:** live rows replace static catalogue rows only after strict

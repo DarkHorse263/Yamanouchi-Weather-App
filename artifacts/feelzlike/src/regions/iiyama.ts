@@ -90,7 +90,7 @@ export const iiyamaRegion: RegionConfig = {
       lng: 138.4047,
       blurb: "'Romance no Kamisama' resort · wide groomers and family terrain on Mt Kayano",
       blurbJa: "「恋人の聖地」 · 茅野山の幅広い圧雪バーンとファミリー向け地形",
-      websiteUrl: "https://kijimadaira.jp/",
+      websiteUrl: "https://kijimadaira-ski.com/",
       beginner_friendly: true,
       kids_lessons: true,
       terrain_park: true,
@@ -177,7 +177,7 @@ export const iiyamaRegion: RegionConfig = {
     { category: "Resorts", categoryJa: "スキー場", label: "Madarao Mountain Resort", labelJa: "斑尾高原スキー場", url: "https://www.madarao.jp/" },
     { category: "Resorts", categoryJa: "スキー場", label: "Tangram Ski Circus", labelJa: "タングラムスキーサーカス", url: "https://www.tangram.jp/ski/" },
     { category: "Resorts", categoryJa: "スキー場", label: "Togari Onsen Madarao", labelJa: "戸狩温泉スキー場", url: "https://www.togari.jp/" },
-    { category: "Resorts", categoryJa: "スキー場", label: "Kijimadaira · Romance no Kamisama", labelJa: "スノーリゾート ロマンスの神様", url: "https://kijimadaira.jp/" },
+    { category: "Resorts", categoryJa: "スキー場", label: "Kijimadaira · Romance no Kamisama", labelJa: "スノーリゾート ロマンスの神様", url: "https://kijimadaira-ski.com/" },
     { category: "Resorts", categoryJa: "スキー場", label: "Kijima Snow Park", labelJa: "キジマスノーパーク", url: "https://kijimadaira.org/" },
     { category: "Transport", categoryJa: "交通", label: "JR East · Hokuriku Shinkansen (Iiyama)", labelJa: "JR東日本 · 北陸新幹線 (飯山)", url: "https://www.jreast.co.jp/" },
     // Backcountry safety · the Madarao / Togari area sees regular

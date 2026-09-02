@@ -9,7 +9,7 @@
  *     catch-all rewrite swallowed a prerendered page - the exact regression
  *     class that caused the Google "alternative page" warnings)
  *  2. /api/healthz says ok, /api/regions returns the full region list,
- *     and one weather canary per country (AU/JP/NZ) returns data
+ *     and one weather canary per published country returns data
  *  3. every user-facing external link in src/data + src/regions (from the
  *     generated manifest external-links.json) still resolves. Curated
  *     transport pages that return readable HTML also get conservative
@@ -70,6 +70,8 @@ const WEATHER_CANARIES = [
   { id: "thredbo", country: "AU" },
   { id: "furano-ski-resort", country: "JP" },
   { id: "coronet-peak", country: "NZ" },
+  { id: "whistler", country: "CA" },
+  { id: "alta", country: "US" },
 ];
 
 // Headline-vs-elevation snow consistency canaries. Guards the Whakapapa
@@ -334,6 +336,12 @@ const LIVE_LIFT_FEED_CANARIES = [
   { id: "perisher", name: "Perisher" },
   { id: "charlottes-pass", name: "Charlotte Pass" },
 ] as const;
+const API_CHECK_TOTAL =
+  2 +
+  WEATHER_CANARIES.length +
+  SNOW_CONSISTENCY_CANARIES.length +
+  LIVE_LIFT_FEED_CANARIES.length +
+  1; // Thredbo history freshness
 
 const THREDBO_HISTORY_JOB_NAME = "thredbo-lift-history";
 const THREDBO_HISTORY_FRESH_MS = 30 * 60_000;
@@ -656,7 +664,7 @@ export async function runSmokeTest(opts: { skipExternal?: boolean; noEmail?: boo
 
     console.log(
       `[smokeTest] done in ${Math.round(report.durationMs / 1000)}s · ${report.ok ? "ALL CLEAR" : `${failures.length} FAILURES`} · ` +
-      `${report.pagesChecked} pages, ${report.apiChecksPassed}/11 api checks, ${report.linksChecked} links (${blocked} bot-gated)`,
+      `${report.pagesChecked} pages, ${report.apiChecksPassed}/${API_CHECK_TOTAL} api checks, ${report.linksChecked} links (${blocked} bot-gated)`,
     );
     lastReport = report;
     return report;

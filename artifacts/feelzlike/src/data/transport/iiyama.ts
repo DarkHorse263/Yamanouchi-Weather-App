@@ -65,7 +65,7 @@ export const IIYAMA_TRANSPORT: TransportProviderList = [
     leg: "to_mountain",
     operator: "Kijimadaira Ski Resort",
     phone: null,
-    website: "https://kijimadaira.jp/",
+    website: "https://kijimadaira-ski.com/access/",
     route_summary:
       "Seasonal shuttle service from Iiyama Shinkansen Station to Kijimadaira Ski Resort (~25 min). Operates on selected winter days · advance booking required.",
     route_summary_local:

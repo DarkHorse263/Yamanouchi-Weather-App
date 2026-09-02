@@ -11,11 +11,16 @@
 // be presented as live.
 //
 // Perisher does not print an update timestamp on the lift page itself. Its
-// official snow report does publish both "Report Updated" and "Lifts Open",
-// linked to this lift report. We fetch both official pages and require:
+// official snow report publishes both "Report Updated" and an "Expected
+// Lifts" count linked to this lift report. We fetch both official pages and
+// require:
 //   - the report-owned timestamp is <=24h old;
-//   - the report's open count agrees with the parsed live rows;
+//   - the report carries a plausible positive operating-lift count;
 //   - all lift rows, counts, and areas pass strict structural validation.
+//
+// The snow report is a morning plan while the lift report changes through the
+// day, so their open counts legitimately diverge as lifts open or go on hold.
+// The lift page's own summary must still agree exactly with every parsed row.
 
 import type { LiveLift } from "./thredboLiftStatus.js";
 
@@ -119,12 +124,14 @@ function sydneyWallTimeToUtc(
 function parseReportProof(
   raw: string,
   nowMs: number,
-): { updatedAt: string; liftsOpen: number } | null {
+): { updatedAt: string; expectedLifts: number } | null {
   const updated = decodeHtml(raw).match(
     /Report Updated:\s*(\d{1,2})\s+([A-Za-z]{3})\s+(\d{1,2}):(\d{2})(am|pm)/i,
   );
-  const liftsOpen = raw.match(/Lifts Open[\s\S]{0,500}?tab-big[^>]*>\s*(\d+)/i);
-  if (!updated || !liftsOpen) return null;
+  const expectedLifts = raw.match(
+    /(?:Lifts Open|Expected Lifts)[\s\S]{0,500}?tab-big[^>]*>\s*(\d+)/i,
+  );
+  if (!updated || !expectedLifts) return null;
 
   const monthIndex = [
     "jan", "feb", "mar", "apr", "may", "jun",
@@ -166,7 +173,7 @@ function parseReportProof(
   }
   return {
     updatedAt: new Date(updatedMs).toISOString(),
-    liftsOpen: Number(liftsOpen[1]),
+    expectedLifts: Number(expectedLifts[1]),
   };
 }
 
@@ -176,7 +183,13 @@ export function parsePerisherLiftHtml(
   snowReportHtml: string,
   nowMs = Date.now(),
 ): PerisherLiveLiftStatus | null {
-  if (!/Current Lift Status/i.test(liftHtml)) return null;
+  const hasOfficialReportHeading =
+    /Current Lift Status/i.test(liftHtml) ||
+    (
+      /<h1[^>]*>\s*Lift Report\s*<\/h1>/i.test(liftHtml) &&
+      /<h1[^>]*>\s*Lifts expected to open(?:&nbsp;|\s)*today\s*<\/h1>/i.test(liftHtml)
+    );
+  if (!hasOfficialReportHeading) return null;
   const proof = parseReportProof(snowReportHtml, nowMs);
   if (!proof) return null;
   if (!EXPECTED_AREAS.every((area) => liftHtml.includes(`>${area}<`))) return null;
@@ -217,8 +230,11 @@ export function parsePerisherLiftHtml(
   // Count agreement is the structural integrity check: reject empty, partial,
   // or layout-changed pages instead of claiming the missing lifts are closed.
   if (lifts.length === 0 || lifts.length !== expectedRows) return null;
-  const parsedOpen = lifts.filter((lift) => lift.status === "open").length;
-  if (parsedOpen !== proof.liftsOpen) return null;
+  if (
+    !Number.isInteger(proof.expectedLifts) ||
+    proof.expectedLifts <= 0 ||
+    proof.expectedLifts > lifts.length
+  ) return null;
   return { lifts, updatedAt: proof.updatedAt };
 }
 

@@ -56,6 +56,12 @@ test("parses the complete official five-lift report", () => {
   ]);
 });
 
+test("maps the official partial-height OPEN TO MID STATION status to open", () => {
+  const result = parse(["OPEN TO MID STATION", "CLOSED", "CLOSED", "CLOSED", "CLOSED"]);
+  assert.ok(result);
+  assert.equal(result.lifts[0]?.status, "open");
+});
+
 test("rejects stale or future source timestamps", () => {
   assert.equal(parse(undefined, "2026-08-28T00:47:12"), null);
   assert.equal(parse(undefined, "2026-08-30T03:47:12"), null);

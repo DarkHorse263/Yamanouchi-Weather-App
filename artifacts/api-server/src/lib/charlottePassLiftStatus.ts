@@ -51,7 +51,11 @@ function slugify(name: string): string {
 
 function mapStatus(raw: string): LiveLift["status"] | null {
   const status = raw.replace(/^lift status:\s*/i, "").trim().toLowerCase();
-  if (status === "open" || status === "open to the top for the better skiers and boarders") return "open";
+  if (
+    status === "open" ||
+    status === "open to mid station" ||
+    status === "open to the top for the better skiers and boarders"
+  ) return "open";
   if (status === "closed") return "closed";
   if (status === "on hold" || status === "hold") return "on-hold";
   if (status === "wind hold" || status === "wind-hold") return "wind-hold";

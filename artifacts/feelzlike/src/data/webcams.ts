@@ -803,7 +803,7 @@ const USA: Record<string, MountainWebcam[]> = {
     { id: "timberline-lodge-official", mountainId: "timberline-lodge", name: "Timberline conditions & cams", description: "Official cams embedded in the live conditions page.", embedType: "external", pageUrl: "https://www.timberlinelodge.com/conditions", source: "Timberline Lodge", verifiedAt: USA_VERIFIED },
   ],
   "mt-hood-skibowl": [
-    { id: "mt-hood-skibowl-official", mountainId: "mt-hood-skibowl", name: "Skibowl webcams", description: "Official cams over America's largest night-ski area.", embedType: "external", pageUrl: "https://www.skibowl.com/webcams", source: "Mt. Hood Skibowl", verifiedAt: USA_VERIFIED },
+    { id: "mt-hood-skibowl-official", mountainId: "mt-hood-skibowl", name: "Skibowl webcams", description: "Official cams over America's largest night-ski area.", embedType: "external", pageUrl: "https://skibowl.com/winter-condition-and-lift-status/", source: "Mt. Hood Skibowl", verifiedAt: USA_VERIFIED },
   ],
   "mt-bachelor": [
     { id: "mt-bachelor-official", mountainId: "mt-bachelor", name: "Mt. Bachelor webcams", description: "Official cams around the 360° volcanic cone.", embedType: "external", pageUrl: "https://www.mtbachelor.com/the-mountain/webcams/", source: "Mt. Bachelor", verifiedAt: USA_VERIFIED },

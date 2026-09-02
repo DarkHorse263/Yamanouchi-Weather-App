@@ -11,12 +11,20 @@ const AREAS = ["Perisher Valley", "Smiggin Holes", "Blue Cow", "Guthega"]
   .map((name) => `<div>${name}</div>`)
   .join("");
 
-function report(rows: string, counts = "Open: 1 | Closed: 1 | Busy: 0 | On Hold: 0 | On Standby: 0"): string {
-  return `<h1>Current Lift Status</h1>${AREAS}<div>${counts}</div><table>${rows}</table>`;
+function report(
+  rows: string,
+  counts = "Open: 1 | Closed: 1 | Busy: 0 | On Hold: 0 | On Standby: 0",
+  heading = "<h1>Current Lift Status</h1>",
+): string {
+  return `${heading}${AREAS}<div>${counts}</div><table>${rows}</table>`;
 }
 
-function snowReport(updated = "30 Aug 7:12am", liftsOpen = 1): string {
-  return `<p>Report Updated: ${updated}</p><div>Lifts Open</div><div class="psr-snow-report__tab-big">${liftsOpen}</div>`;
+function snowReport(
+  updated = "30 Aug 7:12am",
+  expectedLifts = 1,
+  label: "Lifts Open" | "Expected Lifts" = "Lifts Open",
+): string {
+  return `<p>Report Updated: ${updated}</p><div>${label}</div><div class="psr-snow-report__tab-big">${expectedLifts}</div>`;
 }
 
 function row(status: string, name: string, opens = "8:30AM", closes = "4:30PM"): string {
@@ -98,13 +106,38 @@ test("rejects missing report proof, unknown statuses, and summary/row mismatches
   );
 });
 
-test("rejects missing area sections and disagreement with the timestamped report count", () => {
+test("rejects missing area sections and implausible timestamped report counts", () => {
   const valid = report(row("Open", "A") + row("Closed", "B"));
   assert.equal(
     parsePerisherLiftHtml(valid.replace("<div>Guthega</div>", ""), snowReport(), NOW),
     null,
   );
-  assert.equal(parsePerisherLiftHtml(valid, snowReport("30 Aug 7:12am", 2), NOW), null);
+  assert.equal(parsePerisherLiftHtml(valid, snowReport("30 Aug 7:12am", 0), NOW), null);
+  assert.equal(parsePerisherLiftHtml(valid, snowReport("30 Aug 7:12am", 3), NOW), null);
+});
+
+test("accepts the current Expected Lifts label and later live-count movement", () => {
+  const valid = report(
+    row("Open", "A") + row("Open", "B") + row("Closed", "C"),
+    "Open: 2 | Closed: 1 | Busy: 0 | On Hold: 0 | On Standby: 0",
+    "<h1>Lift Report</h1><h1>Lifts expected to open&nbsp;today</h1>",
+  );
+  const result = parsePerisherLiftHtml(
+    valid,
+    snowReport("30 Aug 7:12am", 1, "Expected Lifts"),
+    NOW,
+  );
+  assert.ok(result);
+  assert.equal(result.lifts.filter((lift) => lift.status === "open").length, 2);
+});
+
+test("rejects a generic Lift Report page without the official operations heading", () => {
+  const generic = report(
+    row("Open", "A") + row("Closed", "B"),
+    undefined,
+    "<h1>Lift Report</h1>",
+  );
+  assert.equal(parsePerisherLiftHtml(generic, snowReport(), NOW), null);
 });
 
 test("cached status becomes unusable exactly when its source crosses 24 hours", () => {
