@@ -229,10 +229,20 @@ async function checkApi(failures: SmokeFailure[]): Promise<number> {
 
   try {
     const res = await fetchRaw(`${ORIGIN}/api/regions`, PAGE_TIMEOUT_MS);
-    const json = (await res.json().catch(() => ({}))) as { regions?: unknown[] };
-    const count = Array.isArray(json.regions) ? json.regions.length : 0;
-    if (res.ok && count >= 15) passed++;
-    else failures.push({ check: "api", url: `${ORIGIN}/api/regions`, detail: `HTTP ${res.status}, ${count} regions (expected 15+)` });
+    const json = (await res.json().catch(() => ({}))) as {
+      regions?: Array<{ status?: string; headline?: unknown }>;
+    };
+    const regions = Array.isArray(json.regions) ? json.regions : [];
+    const count = regions.length;
+    const liveRegions = regions.filter((region) => region.status === "live");
+    const headlineCount = liveRegions.filter((region) => region.headline != null).length;
+    const headlineCoverage = liveRegions.length > 0 ? headlineCount / liveRegions.length : 0;
+    if (res.ok && count >= 15 && headlineCoverage >= 0.95) passed++;
+    else failures.push({
+      check: "api",
+      url: `${ORIGIN}/api/regions`,
+      detail: `HTTP ${res.status}, ${count} regions, ${headlineCount}/${liveRegions.length} live headlines (expected 15+ regions and 95%+ headline coverage)`,
+    });
   } catch (err) {
     failures.push({ check: "api", url: `${ORIGIN}/api/regions`, detail: errMessage(err) });
   }

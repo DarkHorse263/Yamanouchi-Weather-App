@@ -22,7 +22,7 @@ const router: IRouter = Router();
 
 type RegionStatus = "live" | "soon";
 
-interface RegionConfig {
+export interface RegionConfig {
   id: string;
   name: string;
   country: string;
@@ -2314,7 +2314,7 @@ function compass(deg: number | undefined): string {
   return dirs[Math.round(((deg % 360) / 45)) % 8];
 }
 
-interface HeadlineReading {
+export interface HeadlineReading {
   locationName: string;
   tempC: number;
   feelsLikeC: number;
@@ -2352,71 +2352,12 @@ const cache = new Map<string, CacheEntry>();
 const inFlight = new Map<string, Promise<HeadlineReading | null>>();
 const FRESH_MS = 5 * 60 * 1000;          // serve straight from cache for 5 min
 const STALE_MS = 6 * 60 * 60 * 1000;     // keep stale entries usable for 6 hours
+const HEADLINE_BATCH_SIZE = 20;
+const HEADLINE_BATCH_CONCURRENCY = 3;
+const HEADLINE_BATCH_RETRIES = 2;
 
 let cacheStats = { hits: 0, staleServed: 0, upstreamCalls: 0, upstreamFails: 0, coalesced: 0 };
 export function getCacheStats() { return { ...cacheStats, entries: cache.size, inFlight: inFlight.size }; }
-
-async function fetchHeadline(r: RegionConfig): Promise<HeadlineReading | null> {
-  if (r.status === "soon" || !Number.isFinite(r.lat) || !Number.isFinite(r.lon)) return null;
-
-  const cacheKey = r.id;
-  const now = Date.now();
-  const cached = cache.get(cacheKey);
-
-  // Fresh hit - fastest path
-  if (cached && cached.freshUntil > now) {
-    cacheStats.hits++;
-    return cached.data;
-  }
-
-  // Coalesce: if a refresh is already in flight for this key, ride it
-  const existing = inFlight.get(cacheKey);
-  if (existing) {
-    cacheStats.coalesced++;
-    // If we have stale data, serve it immediately rather than waiting
-    if (cached && cached.staleUntil > now) {
-      cacheStats.staleServed++;
-      return cached.data;
-    }
-    return existing;
-  }
-
-  // Kick off the refresh
-  const refresh = fetchHeadlineUpstream(r)
-    .then((fresh) => {
-      if (fresh) {
-        cache.set(cacheKey, {
-          data: fresh,
-          freshUntil: Date.now() + FRESH_MS,
-          staleUntil: Date.now() + STALE_MS,
-        });
-        cacheStats.upstreamCalls++;
-        return fresh;
-      }
-      // Upstream gave us nothing usable
-      cacheStats.upstreamFails++;
-      return cached?.data ?? null;
-    })
-    .catch((err) => {
-      cacheStats.upstreamFails++;
-      console.warn(`[regions] headline fetch failed for ${r.id}:`, err);
-      return cached?.data ?? null; // serve stale on error if we have any
-    })
-    .finally(() => {
-      inFlight.delete(cacheKey);
-    });
-
-  inFlight.set(cacheKey, refresh);
-
-  // Stale-while-revalidate: serve cached data immediately, refresh runs in background
-  if (cached && cached.staleUntil > now) {
-    cacheStats.staleServed++;
-    return cached.data;
-  }
-
-  // No cache at all - must wait for fresh
-  return refresh;
-}
 
 export function buildHeadlineQueryParams(
   r: Pick<RegionConfig, "lat" | "lon" | "elevation" | "timezone" | "model"> & { id?: string },
@@ -2429,12 +2370,6 @@ export function buildHeadlineQueryParams(
   }
   if (r.timezone !== undefined && r.timezone.length === 0) {
     throw new Error(`[regions] headline region "${r.id ?? "unknown"}" timezone must not be empty`);
-  }
-  if (r.elevation !== undefined && (!Number.isFinite(r.elevation) || r.elevation <= 0)) {
-    throw new Error(`[regions] headline region "${r.id}" elevation must be a positive finite number`);
-  }
-  if (r.timezone !== undefined && r.timezone.length === 0) {
-    throw new Error(`[regions] headline region "${r.id}" timezone must not be empty`);
   }
   return new URLSearchParams({
     latitude: String(r.lat),
@@ -2449,21 +2384,35 @@ export function buildHeadlineQueryParams(
     ...(r.model ? { models: r.model } : {}),
   });
 }
-async function fetchHeadlineUpstream(r: RegionConfig): Promise<HeadlineReading | null> {
-  const params = buildHeadlineQueryParams(r);
 
-  try {
-    // Open-Meteo asks all integrators to identify themselves so they can reach
-    // out about quota / abuse before throttling. They're CC-BY 4.0; commercial
-    // use needs their commercial tier - see replit.md "External Dependencies".
-    const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
-      signal: AbortSignal.timeout(8000),
-      headers: {
-        "User-Agent": "feelzlike/1.0 (mountain-weather-pwa; contact: info@feelzlike.com)",
-      },
-    });
-    if (!res.ok) throw new Error(`Open-Meteo ${res.status}`);
-    const d: any = await res.json();
+/** Open-Meteo applies `models` to the whole request, so callers group by model.
+ * Coordinate-dependent parameters remain comma-aligned. `nan` asks Open-Meteo
+ * to use its DEM for just that location when other locations specify elevation. */
+export function buildHeadlineBatchQueryParams(regions: readonly RegionConfig[]): URLSearchParams {
+  if (regions.length === 0) throw new Error("[regions] cannot build an empty headline batch");
+  const model = regions[0].model;
+  if (regions.some((r) => r.model !== model)) {
+    throw new Error("[regions] headline batches must use one model");
+  }
+  regions.forEach((r) => buildHeadlineQueryParams(r));
+  const anyElevation = regions.some((r) => r.elevation !== undefined);
+  return new URLSearchParams({
+    latitude: regions.map((r) => String(r.lat)).join(","),
+    longitude: regions.map((r) => String(r.lon)).join(","),
+    ...(anyElevation
+      ? { elevation: regions.map((r) => r.elevation === undefined ? "nan" : String(r.elevation)).join(",") }
+      : {}),
+    current: "temperature_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,weather_code,snowfall",
+    daily: "temperature_2m_max,temperature_2m_min,precipitation_sum,snowfall_sum,weather_code",
+    hourly: "snowfall",
+    forecast_days: "7",
+    forecast_hours: "24",
+    timezone: regions.map((r) => r.timezone ?? "auto").join(","),
+    ...(model ? { models: model } : {}),
+  });
+}
+
+async function parseHeadline(r: RegionConfig, d: any): Promise<HeadlineReading | null> {
     const cur = d.current ?? {};
     const daily = d.daily ?? {};
     const hourly = d.hourly ?? {};
@@ -2558,17 +2507,172 @@ async function fetchHeadlineUpstream(r: RegionConfig): Promise<HeadlineReading |
     }
 
     return headline;
-  } catch (err) {
-    console.warn(`[regions] upstream fetch failed for ${r.id}:`, err);
-    throw err; // let the caller fall back to stale cache
+}
+
+class HeadlineUpstreamError extends Error {
+  constructor(readonly status?: number, readonly retryAfterMs?: number) {
+    super(`Open-Meteo ${status ?? "network error"}`);
   }
+}
+
+function isTransientHeadlineError(error: unknown): boolean {
+  if (error instanceof HeadlineUpstreamError) {
+    return error.status === undefined || error.status === 408 || error.status === 425 ||
+      error.status === 429 || error.status >= 500;
+  }
+  return error instanceof TypeError || (error instanceof Error && error.name === "TimeoutError");
+}
+
+async function fetchHeadlineBatch(regions: RegionConfig[]): Promise<Array<HeadlineReading | null>> {
+  const params = buildHeadlineBatchQueryParams(regions);
+  let lastError: unknown;
+  for (let attempt = 0; attempt <= HEADLINE_BATCH_RETRIES; attempt++) {
+    try {
+      cacheStats.upstreamCalls++;
+      const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
+        signal: AbortSignal.timeout(8000),
+        headers: {
+          "User-Agent": "feelzlike/1.0 (mountain-weather-pwa; contact: info@feelzlike.com)",
+        },
+      });
+      if (!res.ok) {
+        const retryAfterHeader = res.headers.get("retry-after");
+        const retryAfter = retryAfterHeader === null ? Number.NaN : Number(retryAfterHeader);
+        throw new HeadlineUpstreamError(
+          res.status,
+          Number.isFinite(retryAfter) ? Math.max(0, retryAfter * 1000) : undefined,
+        );
+      }
+      const json: any = await res.json();
+      const payloads: any[] = regions.length === 1 ? [json] : json;
+      if (!Array.isArray(payloads) || payloads.length !== regions.length) {
+        throw new Error(
+          `[regions] Open-Meteo batch alignment mismatch: requested ${regions.length}, received ${
+            Array.isArray(payloads) ? payloads.length : "non-array"
+          }`,
+        );
+      }
+      return Promise.all(payloads.map((payload, index) => parseHeadline(regions[index], payload)));
+    } catch (error) {
+      lastError = error;
+      if (attempt === HEADLINE_BATCH_RETRIES || !isTransientHeadlineError(error)) break;
+      const retryAfterMs = error instanceof HeadlineUpstreamError ? error.retryAfterMs : undefined;
+      const backoffMs = retryAfterMs ?? 150 * (2 ** attempt) + Math.floor(Math.random() * 100);
+      await new Promise((resolve) => setTimeout(resolve, backoffMs));
+    }
+  }
+  throw lastError;
+}
+
+interface PendingHeadline {
+  region: RegionConfig;
+  cached?: CacheEntry;
+  promise: Promise<HeadlineReading | null>;
+  resolve: (value: HeadlineReading | null) => void;
+}
+
+async function refreshHeadlineBatch(pending: PendingHeadline[]): Promise<void> {
+  let readings: Array<HeadlineReading | null>;
+  try {
+    readings = await fetchHeadlineBatch(pending.map((item) => item.region));
+  } catch (error) {
+    console.warn(`[regions] headline batch failed (${pending.map((item) => item.region.id).join(",")}):`, error);
+    readings = pending.map(() => null);
+  }
+  pending.forEach((item, index) => {
+    const fresh = readings[index];
+    if (fresh) {
+      const now = Date.now();
+      cache.set(item.region.id, { data: fresh, freshUntil: now + FRESH_MS, staleUntil: now + STALE_MS });
+    } else {
+      cacheStats.upstreamFails++;
+    }
+    item.resolve(fresh ?? item.cached?.data ?? null);
+    if (inFlight.get(item.region.id) === item.promise) inFlight.delete(item.region.id);
+  });
+}
+
+async function runHeadlineRefreshes(pending: PendingHeadline[]): Promise<void> {
+  const groups = new Map<string, PendingHeadline[]>();
+  for (const item of pending) {
+    const key = item.region.model ?? "";
+    groups.set(key, [...(groups.get(key) ?? []), item]);
+  }
+  const batches: PendingHeadline[][] = [];
+  for (const group of groups.values()) {
+    for (let i = 0; i < group.length; i += HEADLINE_BATCH_SIZE) {
+      batches.push(group.slice(i, i + HEADLINE_BATCH_SIZE));
+    }
+  }
+  let next = 0;
+  const worker = async () => {
+    while (next < batches.length) {
+      const batch = batches[next++];
+      await refreshHeadlineBatch(batch);
+    }
+  };
+  await Promise.all(
+    Array.from({ length: Math.min(HEADLINE_BATCH_CONCURRENCY, batches.length) }, () => worker()),
+  );
+}
+
+/** Cache-aware bulk loader. In-flight entries are installed synchronously before
+ * any network work starts, coalescing concurrent cold `/regions` requests. */
+export async function loadRegionHeadlines(regions: readonly RegionConfig[]): Promise<Array<HeadlineReading | null>> {
+  const now = Date.now();
+  const pending: PendingHeadline[] = [];
+  const results: Array<Promise<HeadlineReading | null>> = regions.map((region) => {
+    if (region.status === "soon" || !Number.isFinite(region.lat) || !Number.isFinite(region.lon)) {
+      return Promise.resolve(null);
+    }
+    const cached = cache.get(region.id);
+    if (cached && cached.freshUntil > now) {
+      cacheStats.hits++;
+      return Promise.resolve(cached.data);
+    }
+    const existing = inFlight.get(region.id);
+    if (existing) {
+      cacheStats.coalesced++;
+      if (cached && cached.staleUntil > now) {
+        cacheStats.staleServed++;
+        return Promise.resolve(cached.data);
+      }
+      return existing;
+    }
+    let resolve!: (value: HeadlineReading | null) => void;
+    const promise = new Promise<HeadlineReading | null>((done) => { resolve = done; });
+    const item = { region, cached, promise, resolve };
+    pending.push(item);
+    inFlight.set(region.id, promise);
+    if (cached && cached.staleUntil > now) {
+      cacheStats.staleServed++;
+      return Promise.resolve(cached.data);
+    }
+    return promise;
+  });
+  if (pending.length) void runHeadlineRefreshes(pending);
+  return Promise.all(results);
+}
+
+export function __resetHeadlineCacheForTests(): void {
+  cache.clear();
+  inFlight.clear();
+  cacheStats = { hits: 0, staleServed: 0, upstreamCalls: 0, upstreamFails: 0, coalesced: 0 };
+}
+
+export function __primeHeadlineCacheForTests(
+  id: string,
+  data: HeadlineReading,
+  freshForMs: number,
+  staleForMs: number,
+): void {
+  const now = Date.now();
+  cache.set(id, { data, freshUntil: now + freshForMs, staleUntil: now + staleForMs });
 }
 
 router.get("/regions", async (_req, res) => {
   try {
-    const headlines = await Promise.all(
-      ALL_REGIONS.map((r) => fetchHeadline(r).catch(() => null)),
-    );
+    const headlines = await loadRegionHeadlines(ALL_REGIONS);
     const regions: RegionPayload[] = ALL_REGIONS.map((r, i) => {
       const { lat, lon, model, timezone, ...rest } = r;
       void lat; void lon; void model; void timezone;
