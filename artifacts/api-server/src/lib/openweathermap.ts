@@ -29,6 +29,10 @@ export interface OwmLocationInput {
 
 const OWM_BASE = "https://api.openweathermap.org/data/2.5";
 
+function apiKey(): string {
+  return process.env.OWM_API_KEY || process.env.VITE_OWM_API_KEY || "";
+}
+
 /** Map an OpenWeatherMap condition id to the nearest WMO code used by the
  *  app's getWeatherDescription() table. */
 function owmToWmo(id: number): number {
@@ -98,11 +102,11 @@ async function fetchJson(url: string, timeoutMs = 8000): Promise<any> {
 export async function fetchOpenWeatherMapAsOpenMeteo(
   location: OwmLocationInput,
 ): Promise<any | null> {
-  const apiKey = process.env.OWM_API_KEY;
-  if (!apiKey) return null;
+  const key = apiKey();
+  if (!key) return null;
 
   const { latitude, longitude } = location;
-  const common = `lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+  const common = `lat=${latitude}&lon=${longitude}&appid=${key}&units=metric`;
 
   let current: any;
   let forecast: any;

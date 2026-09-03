@@ -7,6 +7,7 @@
 - [feelzlike AU official radar](feelzlike-bom-radar-animation.md) — PRIMARY = licensed WillyWeather (API quirks inside); fallback = BOM composite (rate-limited, keep its protections); ladder ends still→link-out.
 - [feelzlike map cross-region](feelzlike-map-cross-region.md) — interactive RadarMap shows ALL same-country towns/resorts (AU/JP grouped), not region-only; local REGION_COUNTRY duplicates registry on purpose.
 - [feelzlike weather source fallback](feelzlike-weather-source-fallback.md) — non-BOM needs OWM fallback reshaped to Open-Meteo; serve-stale cache is load-shedding; /near-you degrades per-section.
+- [feelzlike regional headline resilience](feelzlike-regional-headline-resilience.md) — bulk overview refreshes need a hard deadline, bounded providers, and a cross-replica honest-stale snapshot.
 - [feelzlike news + newsletter REMOVED](feelzlike-news-feeds.md) — news/general newsletter removed; powder email alerts remain as a permanent account-free standard feature.
 - [feelzlike trip planner](feelzlike-trip-planner.md) — /plan = simple per-destination comparison snapshot (AU-only, ensemble per mountain id at mid-mountain, fail-soft per mountain); best-window ranker + travel-day layer were REMOVED by user request (over-complicated); don't reintroduce without sign-off.
 - [feelzlike observation reconciliation](feelzlike-observation-reconciliation.md) — "sunny while raining" is model lag; fix is JP-only dry->wet JMA AMeDAS override w/ elevation-aware station pick, fail-soft.

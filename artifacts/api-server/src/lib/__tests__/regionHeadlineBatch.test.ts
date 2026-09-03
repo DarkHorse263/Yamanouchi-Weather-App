@@ -162,6 +162,38 @@ test("429 batches retry without falling back to per-region requests", async () =
   assert.deepEqual(requestedBatchSizes, [2, 2]);
 });
 
+test("an oversized Retry-After serves snapshot data and promptly releases refresh state", async () => {
+  __resetHeadlineCacheForTests();
+  const cached = reading("snapshot");
+  __primeHeadlineCacheForTests("snapshot", cached, -1, 30);
+  let calls = 0;
+  globalThis.fetch = async () => {
+    calls++;
+    return new Response("", { status: 429, headers: { "retry-after": "86400" } });
+  };
+
+  const started = Date.now();
+  const values = await loadRegionHeadlines([region("snapshot", 1)]);
+  assert.equal(values[0]?.tempC, cached.tempC);
+  assert.equal(values[0]?.stale, true);
+  assert.ok(Date.now() - started < 100, "snapshot response waited for upstream retry");
+
+  for (let i = 0; i < 20 && getCacheStats().inFlight > 0; i++) {
+    await new Promise((resolve) => setTimeout(resolve, 5));
+  }
+  assert.equal(calls, 1, "oversized Retry-After should not trigger immediate retries");
+  assert.equal(getCacheStats().inFlight, 0);
+  assert.equal(getCacheStats().batchActive, 0);
+
+  await new Promise((resolve) => setTimeout(resolve, 35));
+  const retryStarted = Date.now();
+  const expired = await loadRegionHeadlines([region("snapshot", 1)]);
+  assert.equal(expired[0], null, "expired snapshot data must not be invented as current");
+  assert.ok(Date.now() - retryStarted < 100, "expired cache joined a stuck refresh");
+  assert.equal(calls, 2);
+  assert.equal(getCacheStats().inFlight, 0);
+});
+
 test("fresh cache avoids fetch and stale cache is served while a failed refresh runs", async () => {
   __resetHeadlineCacheForTests();
   const cached = reading("cached");
@@ -175,7 +207,9 @@ test("fresh cache avoids fetch and stale cache is served while a failed refresh 
 
   const values = await loadRegionHeadlines([region("fresh", 1), region("stale", 2)]);
   assert.equal(values[0], cached);
-  assert.equal(values[1], cached);
+  assert.equal(values[1]?.tempC, cached.tempC);
+  assert.equal(values[1]?.stale, true);
+  assert.match(values[1]?.source ?? "", /stale/);
   assert.equal(calls, 1);
   await new Promise((resolve) => setImmediate(resolve));
   assert.equal(getCacheStats().hits, 1);

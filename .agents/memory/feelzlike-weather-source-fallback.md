@@ -52,11 +52,10 @@ coalesce concurrent cold loads. The daily smoke check must fail below 95% live
 headline coverage.
 
 **Why:** launching one Open-Meteo request per region caused 429s and left only
-76 of 210 overview headlines populated after a cold request. Naively applying
-the detailed-page OWM fallback would turn that into as many as 420 OWM calls and
-exhaust its quota. Multi-location Open-Meteo batches populated 209 of 210
-headlines with 11 calls in about two seconds; the remaining null is the
-intentional indoor Snowplanet/Auckland directory entry.
+partial overview coverage after a cold request. Naively applying the detailed-
+page OWM fallback would multiply fallback traffic by the catalogue size and
+exhaust its quota. Multi-location Open-Meteo batches preserve alignment while
+using a bounded number of upstream calls.
 
 **How to apply:** group batches by model because Open-Meteo applies `models` to
 the whole request. Keep latitude, longitude, elevation and timezone lists in the

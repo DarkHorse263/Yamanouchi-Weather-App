@@ -1,4 +1,6 @@
 import { Router, type IRouter } from "express";
+import { and, eq } from "drizzle-orm";
+import { db, jobRunsTable } from "@workspace/db";
 import { LruTtlCache } from "../lib/lru-cache.js";
 import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
 import { reconcileDryToWet } from "../lib/amedas.js";
@@ -2323,9 +2325,11 @@ export interface HeadlineReading {
   windDirectionDeg: number | null;
   description: string;
   weatherCode: number | null;
-  snowfallMmNext24h: number;
+  snowfallMmNext24h: number | null;
   observedAt: string;
   source: string;
+  stale?: boolean;
+  staleSince?: string;
   forecast: Array<{
     date: string;
     maxC: number;
@@ -2355,9 +2359,170 @@ const STALE_MS = 6 * 60 * 60 * 1000;     // keep stale entries usable for 6 hour
 const HEADLINE_BATCH_SIZE = 20;
 const HEADLINE_BATCH_CONCURRENCY = 3;
 const HEADLINE_BATCH_RETRIES = 2;
+const HEADLINE_RETRY_DELAY_MAX_MS = 2_000;
+const REGIONS_RESPONSE_DEADLINE_MS = 15_000;
+const SHARED_SNAPSHOT_JOB = "regional-headline-snapshot";
+const SHARED_SNAPSHOT_KEY = "current";
+let headlineBatchActive = 0;
+let headlineBatchPeak = 0;
+let sharedSnapshotHydrated = false;
+let sharedSnapshotHydration: Promise<number> | null = null;
+let sharedSnapshotPersistTimer: ReturnType<typeof setTimeout> | null = null;
+let sharedSnapshotPersisting: Promise<void> | null = null;
 
 let cacheStats = { hits: 0, staleServed: 0, upstreamCalls: 0, upstreamFails: 0, coalesced: 0 };
-export function getCacheStats() { return { ...cacheStats, entries: cache.size, inFlight: inFlight.size }; }
+export function getCacheStats() {
+  return {
+    ...cacheStats,
+    entries: cache.size,
+    inFlight: inFlight.size,
+    batchActive: headlineBatchActive,
+    batchPeak: headlineBatchPeak,
+    sharedSnapshotHydrated,
+  };
+}
+
+interface SharedHeadlineSnapshot {
+  version: 1;
+  savedAt: string;
+  entries: Array<[string, CacheEntry]>;
+}
+
+function staleReading(entry: CacheEntry): HeadlineReading {
+  return {
+    ...entry.data,
+    source: entry.data.source.includes("stale") ? entry.data.source : `${entry.data.source} · stale`,
+    stale: true,
+    staleSince: new Date(entry.freshUntil).toISOString(),
+  };
+}
+
+function parseSharedSnapshot(raw: string | null): SharedHeadlineSnapshot | null {
+  if (!raw) return null;
+  try {
+    const parsed = JSON.parse(raw) as Partial<SharedHeadlineSnapshot>;
+    if (parsed.version !== 1 || !Array.isArray(parsed.entries)) return null;
+    const entries = parsed.entries.filter(
+      (entry): entry is [string, CacheEntry] =>
+        Array.isArray(entry) &&
+        typeof entry[0] === "string" &&
+        Boolean(entry[1]) &&
+        Number.isFinite(entry[1].freshUntil) &&
+        Number.isFinite(entry[1].staleUntil) &&
+        typeof entry[1].data?.locationName === "string" &&
+        typeof entry[1].data?.tempC === "number" &&
+        typeof entry[1].data?.observedAt === "string" &&
+        typeof entry[1].data?.source === "string" &&
+        Array.isArray(entry[1].data?.forecast),
+    );
+    return {
+      version: 1,
+      savedAt: typeof parsed.savedAt === "string" ? parsed.savedAt : new Date(0).toISOString(),
+      entries,
+    };
+  } catch {
+    return null;
+  }
+}
+
+async function readSharedSnapshot(): Promise<SharedHeadlineSnapshot | null> {
+  const rows = await db
+    .select({ summary: jobRunsTable.summary })
+    .from(jobRunsTable)
+    .where(and(
+      eq(jobRunsTable.jobName, SHARED_SNAPSHOT_JOB),
+      eq(jobRunsTable.runKey, SHARED_SNAPSHOT_KEY),
+    ))
+    .limit(1);
+  return parseSharedSnapshot(rows[0]?.summary ?? null);
+}
+
+async function hydrateSharedSnapshot(): Promise<number> {
+  if (sharedSnapshotHydrated) return 0;
+  if (sharedSnapshotHydration) return sharedSnapshotHydration;
+  sharedSnapshotHydration = (async () => {
+    try {
+      const snapshot = await readSharedSnapshot();
+      const now = Date.now();
+      let loaded = 0;
+      for (const [id, entry] of snapshot?.entries ?? []) {
+        if (entry.staleUntil <= now) continue;
+        const existing = cache.get(id);
+        if (!existing || existing.freshUntil < entry.freshUntil) {
+          cache.set(id, entry);
+          loaded++;
+        }
+      }
+      return loaded;
+    } catch (err) {
+      console.warn("[regions] shared snapshot hydration failed:", err);
+      return 0;
+    } finally {
+      sharedSnapshotHydrated = true;
+      sharedSnapshotHydration = null;
+    }
+  })();
+  return sharedSnapshotHydration;
+}
+
+async function persistSharedSnapshot(): Promise<void> {
+  if (sharedSnapshotPersisting) return sharedSnapshotPersisting;
+  const now = new Date();
+  const snapshot: SharedHeadlineSnapshot = {
+    version: 1,
+    savedAt: now.toISOString(),
+    entries: [...cache.entries()],
+  };
+  sharedSnapshotPersisting = db
+    .insert(jobRunsTable)
+    .values({
+      jobName: SHARED_SNAPSHOT_JOB,
+      runKey: SHARED_SNAPSHOT_KEY,
+      startedAt: now,
+      finishedAt: now,
+      ok: true,
+      summary: JSON.stringify(snapshot),
+    })
+    .onConflictDoUpdate({
+      target: [jobRunsTable.jobName, jobRunsTable.runKey],
+      set: {
+        startedAt: now,
+        finishedAt: now,
+        ok: true,
+        summary: JSON.stringify(snapshot),
+      },
+    })
+    .then(() => undefined)
+    .catch((err) => {
+      console.warn("[regions] shared snapshot persist failed:", err);
+    })
+    .finally(() => {
+      sharedSnapshotPersisting = null;
+    });
+  return sharedSnapshotPersisting;
+}
+
+function scheduleSharedSnapshotPersist(): void {
+  if (sharedSnapshotPersistTimer) return;
+  sharedSnapshotPersistTimer = setTimeout(() => {
+    sharedSnapshotPersistTimer = null;
+    void persistSharedSnapshot();
+  }, 1000);
+  sharedSnapshotPersistTimer.unref?.();
+}
+
+export async function resolveWithinDeadline<T>(
+  seed: T,
+  load: Promise<T>,
+  deadlineMs: number,
+): Promise<{ value: T; completed: boolean }> {
+  return Promise.race([
+    load.then((value) => ({ value, completed: true })),
+    new Promise<{ value: T; completed: boolean }>((resolve) =>
+      setTimeout(() => resolve({ value: seed, completed: false }), deadlineMs),
+    ),
+  ]);
+}
 
 export function buildHeadlineQueryParams(
   r: Pick<RegionConfig, "lat" | "lon" | "elevation" | "timezone" | "model"> & { id?: string },
@@ -2526,8 +2691,11 @@ function isTransientHeadlineError(error: unknown): boolean {
 async function fetchHeadlineBatch(regions: RegionConfig[]): Promise<Array<HeadlineReading | null>> {
   const params = buildHeadlineBatchQueryParams(regions);
   let lastError: unknown;
-  for (let attempt = 0; attempt <= HEADLINE_BATCH_RETRIES; attempt++) {
-    try {
+  headlineBatchActive++;
+  headlineBatchPeak = Math.max(headlineBatchPeak, headlineBatchActive);
+  try {
+    for (let attempt = 0; attempt <= HEADLINE_BATCH_RETRIES; attempt++) {
+      try {
       cacheStats.upstreamCalls++;
       const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
         signal: AbortSignal.timeout(8000),
@@ -2552,16 +2720,26 @@ async function fetchHeadlineBatch(regions: RegionConfig[]): Promise<Array<Headli
           }`,
         );
       }
-      return Promise.all(payloads.map((payload, index) => parseHeadline(regions[index], payload)));
-    } catch (error) {
-      lastError = error;
-      if (attempt === HEADLINE_BATCH_RETRIES || !isTransientHeadlineError(error)) break;
-      const retryAfterMs = error instanceof HeadlineUpstreamError ? error.retryAfterMs : undefined;
-      const backoffMs = retryAfterMs ?? 150 * (2 ** attempt) + Math.floor(Math.random() * 100);
-      await new Promise((resolve) => setTimeout(resolve, backoffMs));
+        return Promise.all(payloads.map((payload, index) => parseHeadline(regions[index], payload)));
+      } catch (error) {
+        lastError = error;
+        if (attempt === HEADLINE_BATCH_RETRIES || !isTransientHeadlineError(error)) break;
+        const retryAfterMs = error instanceof HeadlineUpstreamError ? error.retryAfterMs : undefined;
+        // Never let an arbitrary upstream Retry-After pin every batch worker.
+        // A delay beyond our retry budget ends this batch immediately; the
+        // next request may schedule a new bounded refresh after inFlight clears.
+        if (retryAfterMs !== undefined && retryAfterMs > HEADLINE_RETRY_DELAY_MAX_MS) break;
+        const backoffMs = Math.min(
+          HEADLINE_RETRY_DELAY_MAX_MS,
+          retryAfterMs ?? 150 * (2 ** attempt) + Math.floor(Math.random() * 100),
+        );
+        await new Promise((resolve) => setTimeout(resolve, backoffMs));
+      }
     }
+    throw lastError;
+  } finally {
+    headlineBatchActive--;
   }
-  throw lastError;
 }
 
 interface PendingHeadline {
@@ -2579,17 +2757,20 @@ async function refreshHeadlineBatch(pending: PendingHeadline[]): Promise<void> {
     console.warn(`[regions] headline batch failed (${pending.map((item) => item.region.id).join(",")}):`, error);
     readings = pending.map(() => null);
   }
+  let cacheChanged = false;
   pending.forEach((item, index) => {
     const fresh = readings[index];
     if (fresh) {
       const now = Date.now();
       cache.set(item.region.id, { data: fresh, freshUntil: now + FRESH_MS, staleUntil: now + STALE_MS });
+      cacheChanged = true;
     } else {
       cacheStats.upstreamFails++;
     }
     item.resolve(fresh ?? item.cached?.data ?? null);
     if (inFlight.get(item.region.id) === item.promise) inFlight.delete(item.region.id);
   });
+  if (cacheChanged) scheduleSharedSnapshotPersist();
 }
 
 async function runHeadlineRefreshes(pending: PendingHeadline[]): Promise<void> {
@@ -2625,7 +2806,9 @@ export async function loadRegionHeadlines(regions: readonly RegionConfig[]): Pro
     if (region.status === "soon" || !Number.isFinite(region.lat) || !Number.isFinite(region.lon)) {
       return Promise.resolve(null);
     }
-    const cached = cache.get(region.id);
+    const stored = cache.get(region.id);
+    const cached = stored && stored.staleUntil > now ? stored : undefined;
+    if (stored && !cached) cache.delete(region.id);
     if (cached && cached.freshUntil > now) {
       cacheStats.hits++;
       return Promise.resolve(cached.data);
@@ -2635,7 +2818,7 @@ export async function loadRegionHeadlines(regions: readonly RegionConfig[]): Pro
       cacheStats.coalesced++;
       if (cached && cached.staleUntil > now) {
         cacheStats.staleServed++;
-        return Promise.resolve(cached.data);
+        return Promise.resolve(staleReading(cached));
       }
       return existing;
     }
@@ -2646,7 +2829,7 @@ export async function loadRegionHeadlines(regions: readonly RegionConfig[]): Pro
     inFlight.set(region.id, promise);
     if (cached && cached.staleUntil > now) {
       cacheStats.staleServed++;
-      return Promise.resolve(cached.data);
+      return Promise.resolve(staleReading(cached));
     }
     return promise;
   });
@@ -2658,6 +2841,8 @@ export function __resetHeadlineCacheForTests(): void {
   cache.clear();
   inFlight.clear();
   cacheStats = { hits: 0, staleServed: 0, upstreamCalls: 0, upstreamFails: 0, coalesced: 0 };
+  headlineBatchActive = 0;
+  headlineBatchPeak = 0;
 }
 
 export function __primeHeadlineCacheForTests(
@@ -2672,7 +2857,23 @@ export function __primeHeadlineCacheForTests(
 
 router.get("/regions", async (_req, res) => {
   try {
-    const headlines = await loadRegionHeadlines(ALL_REGIONS);
+    // A new autoscale replica starts with an empty process cache. Hydrate the
+    // last sourced cross-replica snapshot first, then cap the HTTP wait while
+    // bounded batch refreshes continue in the background.
+    await Promise.race([
+      hydrateSharedSnapshot(),
+      new Promise<number>((resolve) => setTimeout(() => resolve(0), 1000)),
+    ]);
+    const seed: Array<HeadlineReading | null> = ALL_REGIONS.map((region) => {
+      const entry = cache.get(region.id);
+      if (!entry || entry.staleUntil <= Date.now()) return null;
+      return entry.freshUntil > Date.now() ? entry.data : staleReading(entry);
+    });
+    const { value: headlines } = await resolveWithinDeadline(
+      seed,
+      loadRegionHeadlines(ALL_REGIONS),
+      REGIONS_RESPONSE_DEADLINE_MS,
+    );
     const regions: RegionPayload[] = ALL_REGIONS.map((r, i) => {
       const { lat, lon, model, timezone, ...rest } = r;
       void lat; void lon; void model; void timezone;
@@ -2689,6 +2890,11 @@ router.get("/regions", async (_req, res) => {
       generatedAt: new Date().toISOString(),
       sourceCount: 7,
       refreshIntervalMin: 15,
+      headlineCoverage: {
+        available: headlines.filter(Boolean).length,
+        total: ALL_REGIONS.filter((region) => region.status !== "soon").length,
+        stale: headlines.filter((headline) => headline?.stale).length,
+      },
     });
   } catch (err) {
     // Log full error server-side (Sentry catches it via the express handler)
@@ -2699,12 +2905,43 @@ router.get("/regions", async (_req, res) => {
   }
 });
 
+router.get("/regions/_resilience", async (_req, res) => {
+  try {
+    const snapshot = await readSharedSnapshot();
+    const now = Date.now();
+    const liveIds = new Set(
+      ALL_REGIONS.filter((region) => region.status !== "soon").map((region) => region.id),
+    );
+    const validEntries = (snapshot?.entries ?? []).filter(
+      ([id, entry]) => liveIds.has(id) && entry.staleUntil > now,
+    );
+    const stale = validEntries.filter(([, entry]) => entry.freshUntil <= now).length;
+    res.set("Cache-Control", "no-store");
+    res.json({
+      scenario: "new replica with primary provider unavailable",
+      available: validEntries.length,
+      total: liveIds.size,
+      stale,
+      coverage: liveIds.size > 0 ? validEntries.length / liveIds.size : 0,
+      savedAt: snapshot?.savedAt ?? null,
+    });
+  } catch (err) {
+    console.warn("[regions] resilience snapshot check failed:", err);
+    res.status(503).json({ error: "REGIONAL_SNAPSHOT_UNAVAILABLE" });
+  }
+});
+
 // Internal cache stats endpoint - useful for monitoring + debugging
 router.get("/regions/_stats", (_req, res) => {
   res.json({
     cache: getCacheStats(),
     fresh_ms: FRESH_MS,
     stale_ms: STALE_MS,
+    batch_size: HEADLINE_BATCH_SIZE,
+    batch_concurrency: HEADLINE_BATCH_CONCURRENCY,
+    batch_retries: HEADLINE_BATCH_RETRIES,
+    retry_delay_max_ms: HEADLINE_RETRY_DELAY_MAX_MS,
+    response_deadline_ms: REGIONS_RESPONSE_DEADLINE_MS,
     regions: ALL_REGIONS.map((r) => ({ id: r.id, status: r.status })),
   });
 });

@@ -18,9 +18,10 @@ interface HeadlineReading {
   windDirectionDeg: number | null;
   description: string;
   weatherCode: number | null;
-  snowfallMmNext24h: number;
+  snowfallMmNext24h: number | null;
   observedAt: string;
   source: string;
+  stale?: boolean;
   forecast: Array<{
     date: string;
     maxC: number;
@@ -499,8 +500,15 @@ function CountryPickerEasternFallback() {
                                     )}
                                   </span>
                                   {typeof temp === "number" && (
-                                    <span className="shrink-0 text-base font-bold tabular-nums text-sky-900">
-                                      {Math.round(temp)}&deg;C
+                                    <span className="shrink-0 text-right">
+                                      <span className="block text-base font-bold tabular-nums text-sky-900">
+                                        {Math.round(temp)}&deg;C
+                                      </span>
+                                      {r.headline?.stale && (
+                                        <span className="block text-[9px] font-bold uppercase tracking-wide text-slate-600">
+                                          cached
+                                        </span>
+                                      )}
                                     </span>
                                   )}
                                 </a>
@@ -700,8 +708,15 @@ export function CountryPicker() {
                                     )}
                                   </span>
                                   {typeof temp === "number" && (
-                                    <span className="shrink-0 text-base font-bold tabular-nums text-sky-900">
-                                      {Math.round(temp)}&deg;C
+                                    <span className="shrink-0 text-right">
+                                      <span className="block text-base font-bold tabular-nums text-sky-900">
+                                        {Math.round(temp)}&deg;C
+                                      </span>
+                                      {r.headline?.stale && (
+                                        <span className="block text-[9px] font-bold uppercase tracking-wide text-slate-600">
+                                          cached
+                                        </span>
+                                      )}
                                     </span>
                                   )}
                                 </a>

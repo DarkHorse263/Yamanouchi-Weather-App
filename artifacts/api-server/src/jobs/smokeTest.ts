@@ -228,6 +228,12 @@ async function checkApi(failures: SmokeFailure[]): Promise<number> {
   }
 
   try {
+    const statsUrl = `${ORIGIN}/api/regions/_stats`;
+    const beforeRes = await fetchRaw(statsUrl, PAGE_TIMEOUT_MS);
+    const before = (await beforeRes.json().catch(() => ({}))) as {
+      cache?: { upstreamCalls?: number; batchPeak?: number };
+      batch_concurrency?: number;
+    };
     const res = await fetchRaw(`${ORIGIN}/api/regions`, PAGE_TIMEOUT_MS);
     const json = (await res.json().catch(() => ({}))) as {
       regions?: Array<{ status?: string; headline?: unknown }>;
@@ -237,14 +243,48 @@ async function checkApi(failures: SmokeFailure[]): Promise<number> {
     const liveRegions = regions.filter((region) => region.status === "live");
     const headlineCount = liveRegions.filter((region) => region.headline != null).length;
     const headlineCoverage = liveRegions.length > 0 ? headlineCount / liveRegions.length : 0;
-    if (res.ok && count >= 15 && headlineCoverage >= 0.95) passed++;
-    else failures.push({
-      check: "api",
-      url: `${ORIGIN}/api/regions`,
-      detail: `HTTP ${res.status}, ${count} regions, ${headlineCount}/${liveRegions.length} live headlines (expected 15+ regions and 95%+ headline coverage)`,
-    });
+    const afterRes = await fetchRaw(statsUrl, PAGE_TIMEOUT_MS);
+    const after = (await afterRes.json().catch(() => ({}))) as {
+      cache?: { upstreamCalls?: number; batchPeak?: number };
+      batch_concurrency?: number;
+    };
+    const upstreamDelta = Math.max(
+      0,
+      Number(after.cache?.upstreamCalls ?? 0) - Number(before.cache?.upstreamCalls ?? 0),
+    );
+    const concurrencyLimit = Number(after.batch_concurrency ?? before.batch_concurrency ?? 3);
+    const observedPeak = Number(after.cache?.batchPeak ?? 0);
+    const resilienceUrl = `${ORIGIN}/api/regions/_resilience`;
+    const resilienceRes = await fetchRaw(resilienceUrl, PAGE_TIMEOUT_MS);
+    const resilience = (await resilienceRes.json().catch(() => ({}))) as {
+      available?: number;
+      total?: number;
+      coverage?: number;
+    };
+    const resilienceCoverage = Number(resilience.coverage ?? 0);
+    if (
+      res.ok &&
+      count >= 15 &&
+      headlineCoverage >= 0.95 &&
+      upstreamDelta <= liveRegions.length &&
+      observedPeak <= concurrencyLimit &&
+      resilienceRes.ok &&
+      resilienceCoverage >= 0.9
+    ) {
+      passed++;
+    } else {
+      failures.push({
+        check: "regional headline resilience",
+        url: `${ORIGIN}/api/regions`,
+        detail:
+          `HTTP ${res.status}, ${count} regions, ${headlineCount}/${liveRegions.length} live headlines ` +
+          `(${Math.round(headlineCoverage * 100)}%, expected 95%+), ${upstreamDelta} batch attempts, ` +
+          `peak batch concurrency ${observedPeak}/${concurrencyLimit}, cold-replica provider-outage snapshot ` +
+          `${resilience.available ?? 0}/${resilience.total ?? 0} (${Math.round(resilienceCoverage * 100)}%)`,
+      });
+    }
   } catch (err) {
-    failures.push({ check: "api", url: `${ORIGIN}/api/regions`, detail: errMessage(err) });
+    failures.push({ check: "regional headline resilience", url: `${ORIGIN}/api/regions`, detail: errMessage(err) });
   }
 
   for (const canary of WEATHER_CANARIES) {
