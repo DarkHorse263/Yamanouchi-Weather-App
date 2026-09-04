@@ -93,3 +93,4 @@
 - [feelzlike transition pollers](feelzlike-transition-pollers.md) — job_runs dedupes a time bucket but does not serialize adjacent buckets; ordered state-history pollers also need a cross-replica advisory lock.
 - [feelzlike readiness notifications](feelzlike-readiness-notifications.md) — persist immutable evidence snapshots; retry only inside provider idempotency retention, then close visibly rather than risk duplicate mail.
 - [feelzlike email incident resolution](feelzlike-email-incident-resolution.md) — webhook inserts and admin unblocks share a per-email transaction lock; latest incident alone controls suppression.
+- [feelzlike GitHub reconciliation](feelzlike-github-reconciliation.md) — GitHub connector API does not authenticate CLI pushes; use Replit Git Push after safe local ancestry reconciliation.
