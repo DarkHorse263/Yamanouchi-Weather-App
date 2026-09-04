@@ -42,6 +42,7 @@ const RADAR_REGION_KEYS: RadarRegionKey[] = [
   "snowy-mountains",
   "victorias-high-country",
   "tasmania",
+  "australian-capital-territory",
   "yamanouchi",
   "nozawa-onsen",
   "iiyama",
@@ -320,13 +321,13 @@ export default function NearYouWeather() {
       <main className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-white/70 transition-colors hover:text-white"
+          className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-white transition-colors hover:underline hover:underline-offset-2"
         >
           <ArrowLeft className="h-4 w-4" />
           back
         </Link>
 
-        <div className="mt-4 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/70">
+        <div className="mt-4 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-white">
           <MapPin className="h-3.5 w-3.5" />
           {hasSearchPlace ? "conditions for" : "your current location"}
         </div>
@@ -341,7 +342,7 @@ export default function NearYouWeather() {
         </div>
 
         {phase === "checking" || phase === "locating" ? (
-          <p className="mt-8 text-white/70">finding your location…</p>
+          <p className="mt-8 text-white">finding your location…</p>
         ) : showTap ? (
           <div className="mt-8 rounded-2xl border border-border bg-white p-6 max-w-md">
             <p className="text-[14px] leading-snug text-slate-600">
@@ -452,7 +453,7 @@ export default function NearYouWeather() {
                       <>
                         <WeatherConditions current={full.current} t={t} />
                         <WeatherToday daily={full.daily[0]} t={t} />
-                        <WeatherHourly hourly={full.hourly} t={t} />
+                        <WeatherHourly hourly={full.hourly} t={t} nowCode={heroCurrent.weatherCode} nowIsDay={heroCurrent.isDay} />
                         <WeatherOutlook days={full.daily.slice(1, 7)} t={t} />
                       </>
                     ) : weather.isError ? (
@@ -466,7 +467,7 @@ export default function NearYouWeather() {
                       // Current conditions already render from the cheap
                       // local-weather payload while the heavier hourly/7-day
                       // forecast is still in flight · no false error during the gap.
-                      <p className="mt-4 text-[13px] text-white/80">
+                      <p className="mt-4 text-[13px] text-white">
                         loading the hourly and 7-day forecast…
                       </p>
                     )}
@@ -476,7 +477,7 @@ export default function NearYouWeather() {
 
               if (weather.isLoading || localQuery.isLoading) {
                 return (
-                  <p className="mt-8 text-white/80">
+                  <p className="mt-8 text-white">
                     loading current conditions…
                   </p>
                 );
@@ -596,7 +597,7 @@ function RadarSection({
     <section className="mt-4 rounded-2xl border border-border bg-white overflow-hidden">
       <div className="flex items-center justify-between gap-3 px-5 pt-4 pb-3 flex-wrap">
         <div>
-          <p className="byline text-muted-foreground/70 inline-flex items-center gap-1.5">
+          <p className="byline text-slate-700 inline-flex items-center gap-1.5">
             <RadarIcon className="w-3 h-3" /> {byline}
           </p>
           <h2 className="font-display font-semibold text-lg text-foreground mt-1">
@@ -619,7 +620,7 @@ function RadarSection({
         location={{ official, windy: { lat, lon: lng, zoom: 9 } }}
         markers={[{ id: "you", name: "you", lat, lng }]}
       />
-      <p className="text-xs text-muted-foreground/70 px-5 py-3 border-t border-border">
+      <p className="text-xs text-slate-700 px-5 py-3 border-t border-border">
         {official ? (
           <>
             the official tab shows the bureau of meteorology radar nearest you

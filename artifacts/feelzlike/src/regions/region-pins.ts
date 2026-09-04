@@ -3,6 +3,7 @@ export type RegionKey =
   | "snowy-mountains"
   | "victorias-high-country"
   | "tasmania"
+  | "australian-capital-territory"
   | "yamanouchi"
   | "nozawa-onsen"
   | "iiyama"
@@ -141,6 +142,8 @@ export const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: nu
       { id: "mt-hotham", name: "Mt Hotham", lat: -36.9779, lng: 147.1361, accent: "#f97316" },
       { id: "lake-mountain", name: "Lake Mountain", lat: -37.5181, lng: 145.8983, accent: "#f97316" },
       { id: "mt-donna-buang", name: "Mt Donna Buang", lat: -37.6961, lng: 145.6989, accent: "#f97316" },
+      { id: "mt-baw-baw", name: "Mt Baw Baw", lat: -37.8383, lng: 146.2747, accent: "#f97316" },
+      { id: "rawson", name: "Rawson", lat: -37.9570, lng: 146.3990, accent: "#0ea5e9" },
       { id: "mount-beauty", name: "Mount Beauty", lat: -36.7327, lng: 147.1696, accent: "#0ea5e9" },
       { id: "bright", name: "Bright", lat: -36.7300, lng: 146.9617, accent: "#0ea5e9" },
       { id: "mansfield", name: "Mansfield", lat: -37.0539, lng: 146.0894, accent: "#0ea5e9" },
@@ -150,9 +153,18 @@ export const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: nu
     center: { lat: -41.54, lng: 147.67 },
     pins: [
       { id: "ben-lomond", name: "Ben Lomond", lat: -41.5378, lng: 147.6736, accent: "#f97316" },
+      { id: "mount-mawson", name: "Mount Mawson", lat: -42.6830, lng: 146.5860, accent: "#f97316" },
+      { id: "maydena", name: "Maydena", lat: -42.7573, lng: 146.6262, accent: "#0ea5e9" },
       { id: "ben-lomond-base", name: "Ben Lomond Base", lat: -41.5392, lng: 147.6486, accent: "#0ea5e9" },
       { id: "launceston", name: "Launceston", lat: -41.4332, lng: 147.1442, accent: "#0ea5e9" },
       { id: "hobart", name: "Hobart", lat: -42.8821, lng: 147.3272, accent: "#0ea5e9" },
+    ],
+  },
+  "australian-capital-territory": {
+    center: { lat: -35.53, lng: 149.00 },
+    pins: [
+      { id: "corin-forest", name: "Corin Forest", lat: -35.5294, lng: 148.9915, accent: "#f97316" },
+      { id: "canberra", name: "Canberra", lat: -35.2809, lng: 149.1300, accent: "#0ea5e9" },
     ],
   },
   yamanouchi: {

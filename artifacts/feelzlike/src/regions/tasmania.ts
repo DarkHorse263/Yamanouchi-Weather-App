@@ -3,15 +3,13 @@ import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_1604
 
 /**
  * Tasmania · boutique alpine region in northeast TAS. Ben Lomond is the
- * only commercial ski lift operation on the island · conditions are
- * weather-dependent and short windows reward locals. Three base towns:
+ * commercial ski lift operation on the island. Mount Mawson is the second
+ * operating field: volunteer staffed, public and wholly conditions-dependent.
  *
  *   Ben Lomond Base → on-mountain village (Carr Villa / Creek Inn)
  *   Launceston      → closest city base · ~90 min drive
+ *   Maydena         → nearest town to Mt Field and Mount Mawson
  *   Hobart          → state capital · long day-trips when conditions deliver
- *
- * Mt Mawson in Mt Field NP is intentionally excluded · it's a club tow,
- * not a commercial operation, and the user brief is chairlift-first.
  */
 export const tasmaniaRegion: RegionConfig = {
   id: "tasmania",
@@ -20,9 +18,10 @@ export const tasmaniaRegion: RegionConfig = {
   shortTag: "TAS",
   brand: { wordmarkUrl: wordmark },
   seasons: true,
-  summaryMountains: ["Ben Lomond"],
+  summaryMountains: ["Ben Lomond", "Mount Mawson"],
   resorts: [
     { path: "/mountain/ben-lomond", label: "Ben Lomond" },
+    { path: "/mountain/mount-mawson", label: "Mount Mawson" },
   ],
   mountains: [
     {
@@ -38,8 +37,27 @@ export const tasmaniaRegion: RegionConfig = {
       kids_lessons: true,
       backcountry_access: true,
     },
+    {
+      id: "mount-mawson",
+      name: "Mount Mawson",
+      elevationM: 1250,
+      lat: -42.6830,
+      lng: 146.5860,
+      blurb: "volunteer club field · public access · natural-snow and conditions dependent",
+      websiteUrl: "https://parks.tas.gov.au/things-to-do/skiing-and-snow-activities",
+      snowReportUrl: "https://www.mtmawson.info/",
+    },
   ],
   baseTowns: [
+    {
+      id: "maydena",
+      name: "Maydena",
+      lat: -42.7573,
+      lng: 146.6262,
+      radiusM: 3000,
+      blurb: "Derwent Valley gateway · nearest town to Mt Field and Mount Mawson",
+      nearbyMountainIds: ["mount-mawson"],
+    },
     {
       id: "ben-lomond-base",
       name: "Ben Lomond Base",
@@ -48,7 +66,7 @@ export const tasmaniaRegion: RegionConfig = {
       // on-mountain village (Carr Villa / Creek Inn) · tight radius around
       // the alpine village core at the foot of the chairlifts.
       radiusM: 1500,
-      blurb: "tasmania's only ski lift operation · on-mountain village at the foot of the lifts",
+      blurb: "tasmania's commercial ski area · on-mountain village at the foot of the lifts",
       nearbyMountainIds: ["ben-lomond"],
     },
     {
@@ -71,7 +89,7 @@ export const tasmaniaRegion: RegionConfig = {
       // it's where most visiting skiers actually land.
       radiusM: 5000,
       blurb: "tasmania's capital · long day-trips when conditions deliver",
-      nearbyMountainIds: ["ben-lomond"],
+      nearbyMountainIds: ["ben-lomond", "mount-mawson"],
     },
   ],
   footer: "v0.3 · feelzlike",
@@ -80,6 +98,8 @@ export const tasmaniaRegion: RegionConfig = {
     { category: "Tourism", label: "Visit Northern Tasmania", url: "https://www.northerntasmania.com.au/" },
     { category: "Resorts", label: "Ben Lomond Snow Sports", url: "https://tasmania.ski/" },
     { category: "National Park", label: "Ben Lomond National Park · Parks Tasmania", url: "https://parks.tas.gov.au/explore-our-parks/ben-lomond-national-park" },
+    { category: "Ski fields", label: "Skiing and snow activities · Parks Tasmania", url: "https://parks.tas.gov.au/things-to-do/skiing-and-snow-activities" },
+    { category: "Club field", label: "Mount Mawson Ski Club", url: "https://www.mtmawson.info/" },
     { category: "Transport", label: "Transport Tasmania · live traffic", url: "https://www.transport.tas.gov.au/" },
     { category: "Backcountry safety", label: "Bureau of Meteorology · Tasmania alpine forecast", url: "http://www.bom.gov.au/tas/forecasts/alpine.shtml" },
   ],

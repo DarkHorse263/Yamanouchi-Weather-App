@@ -20,6 +20,8 @@
     "test:regionProximity": "tsx --test src/lib/__tests__/regionProximity.test.ts",
     "test:precip": "tsx --test src/lib/__tests__/precip.test.ts",
     "test:nearYouRegionRow": "tsx --tsconfig tsconfig.test.json --test src/components/home/__tests__/NearYouRegionRow.test.tsx",
+    "test:japanCatalogue": "tsx --test src/regions/__tests__/japan-catalogue.test.ts",
+    "test:canadaCatalogue": "tsx --test src/regions/__tests__/canada-catalogue.test.ts",
     "test:skiSeason": "tsx --test src/lib/__tests__/skiSeason.test.ts",
     "test:lifts": "tsx --test src/data/__tests__/lifts.test.ts",
     "test:cj": "tsx --test src/lib/__tests__/cj.test.ts",
@@ -27,7 +29,10 @@
     "test:snowmaking": "tsx --test src/lib/__tests__/snowmaking.test.ts",
     "test:gateErrors": "tsx --test src/lib/__tests__/gateErrors.test.ts",
     "test:unitsFormat": "tsx --test src/lib/__tests__/unitsFormat.test.ts",
-    "test:all": "tsx --test src/lib/__tests__/mountainScore.test.ts src/lib/__tests__/windHoldPrediction.test.ts src/lib/__tests__/powderFactor.test.ts src/lib/__tests__/tripPlanner.test.ts src/lib/__tests__/regionProximity.test.ts src/lib/__tests__/precip.test.ts src/lib/__tests__/skiSeason.test.ts src/lib/__tests__/cj.test.ts src/lib/__tests__/snowmaking.test.ts src/lib/__tests__/bom-radar.test.ts src/lib/__tests__/gateErrors.test.ts src/lib/__tests__/unitsFormat.test.ts && tsx --tsconfig tsconfig.test.json --test src/components/home/__tests__/NearYouRegionRow.test.tsx"
+    "test:promoImpression": "tsx --test src/lib/__tests__/promoImpression.test.ts",
+    "test:mountainSummary": "tsx --test src/lib/__tests__/mountainSummary.test.ts",
+    "test:australianCoverage": "node --test scripts/australian-coverage.test.mjs",
+    "test:all": "tsx --test src/lib/__tests__/mountainScore.test.ts src/lib/__tests__/windHoldPrediction.test.ts src/lib/__tests__/powderFactor.test.ts src/lib/__tests__/tripPlanner.test.ts src/lib/__tests__/regionProximity.test.ts src/lib/__tests__/precip.test.ts src/lib/__tests__/skiSeason.test.ts src/lib/__tests__/cj.test.ts src/lib/__tests__/snowmaking.test.ts src/lib/__tests__/bom-radar.test.ts src/lib/__tests__/gateErrors.test.ts src/lib/__tests__/unitsFormat.test.ts src/lib/__tests__/promoImpression.test.ts src/lib/__tests__/mountainSummary.test.ts src/regions/__tests__/japan-catalogue.test.ts src/regions/__tests__/ski-catalogue.test.ts src/regions/__tests__/canada-catalogue.test.ts && tsx --tsconfig tsconfig.test.json --test src/components/home/__tests__/NearYouRegionRow.test.tsx && node --test scripts/australian-coverage.test.mjs"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -73,6 +78,10 @@
     "@workspace/api-client-react": "workspace:*",
     "@workspace/feelzlike-dashboard": "workspace:*",
     "@workspace/feelzlike-shell": "workspace:*",
+    "@workspace/canada-ski-catalogue": "workspace:*",
+    "@workspace/japan-ski-catalogue": "workspace:*",
+    "@workspace/ski-catalogue": "workspace:*",
+    "@workspace/western-us-ski-catalogue": "workspace:*",
 
     "class-variance-authority": "catalog:",
     "clsx": "catalog:",
@@ -99,6 +108,7 @@
     "wouter": "^3.3.5",
     "zod": "catalog:"
   },
+
   "dependencies": {
     "@clerk/react": "^6.13.1",
     "@clerk/themes": "^2.4.57",

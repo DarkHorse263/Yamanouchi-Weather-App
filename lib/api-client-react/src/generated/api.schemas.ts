@@ -83,6 +83,7 @@ export const RegionId = {
   "snowy-mountains": "snowy-mountains",
   "victorias-high-country": "victorias-high-country",
   tasmania: "tasmania",
+  "australian-capital-territory": "australian-capital-territory",
   yamanouchi: "yamanouchi",
   "nozawa-onsen": "nozawa-onsen",
   iiyama: "iiyama",
@@ -396,9 +397,8 @@ export const SubscribeRequestDelivery = {
 
 export interface SubscribeRequest {
   email: string;
-  /** @minItems 1 */
   regions: string[];
-  mountains?: string[];
+  mountains: string[];
   /**
    * @minimum 5
    * @maximum 50
@@ -483,9 +483,8 @@ export const UpdatePreferencesBodyDelivery = {
 } as const;
 
 export interface UpdatePreferencesBody {
-  /** @minItems 1 */
   regions: string[];
-  mountains?: string[];
+  mountains: string[];
   /**
    * @minimum 5
    * @maximum 50
@@ -1438,6 +1437,9 @@ export interface ResortLiftStatus {
   seasonStatus: ResortLiftStatusSeasonStatus;
   operatingHours?: string;
   liftStatusUrl?: string;
+  /** True ONLY when the lift rows come from the resort's own live feed fetched fresh (e.g. Thredbo's official per-lift XML). False/absent means the rows are a static reference catalogue - clients must NOT render open/closed claims from them.
+   */
+  liveStatusVerified?: boolean;
   lastUpdated: string;
 }
 

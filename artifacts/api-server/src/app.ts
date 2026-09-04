@@ -16,6 +16,59 @@ import {
 } from "./middlewares/clerkProxyMiddleware.js";
 import { setSubscriptionResolver } from "./middlewares/require-entitlement.js";
 import { resolvePromoSubscription } from "./lib/promo.js";
+import { publishedCatalogueRecords, travelRegions } from "@workspace/japan-ski-catalogue/public-runtime";
+import { publishedRecords as publishedSkiCatalogueRecords, publishedRegions as publishedSkiCatalogueRegions } from "@workspace/ski-catalogue/public-runtime";
+import {
+  publishedCatalogueRecords as publishedCanadaCatalogueRecords,
+  travelRegions as canadaTravelRegions,
+} from "@workspace/canada-ski-catalogue/public-runtime";
+import {
+  publishedCatalogueRecords as publishedWesternUsCatalogueRecords,
+  regions as westernUsCatalogueRegions,
+} from "@workspace/western-us-ski-catalogue/public-runtime";
+
+const CATALOGUE_MOUNTAIN_IDS_BY_REGION = new Map<string, Set<string>>();
+const CATALOGUE_BASE_TOWN_IDS_BY_REGION = new Map<string, Set<string>>();
+
+function canadaLocalityId(regionId: string, locality: string): string {
+  return `${regionId}-${locality.normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
+}
+for (const record of [...publishedCatalogueRecords, ...publishedCanadaCatalogueRecords]) {
+  const ids = CATALOGUE_MOUNTAIN_IDS_BY_REGION.get(record.travelRegionId) ?? new Set<string>();
+  ids.add(record.publicId);
+  for (const alias of record.aliases) ids.add(alias);
+  CATALOGUE_MOUNTAIN_IDS_BY_REGION.set(record.travelRegionId, ids);
+
+  const townIds = CATALOGUE_BASE_TOWN_IDS_BY_REGION.get(record.travelRegionId) ?? new Set<string>();
+  townIds.add(
+    "baseTownId" in record
+      ? record.baseTownId
+      : canadaLocalityId(record.travelRegionId, record.locality),
+  );
+  CATALOGUE_BASE_TOWN_IDS_BY_REGION.set(record.travelRegionId, townIds);
+}
+const CATALOGUE_TRAVEL_REGION_IDS = new Set([
+  ...travelRegions.map((region) => region.travelRegionId),
+  ...canadaTravelRegions.map((region) => region.travelRegionId),
+  ...westernUsCatalogueRegions.map((region) => region.regionId),
+]);
+for (const record of publishedSkiCatalogueRecords) {
+  const ids = CATALOGUE_MOUNTAIN_IDS_BY_REGION.get(record.regionId) ?? new Set<string>();
+  ids.add(record.publicId);
+  for (const alias of record.aliases) ids.add(alias);
+  CATALOGUE_MOUNTAIN_IDS_BY_REGION.set(record.regionId, ids);
+  const towns = CATALOGUE_BASE_TOWN_IDS_BY_REGION.get(record.regionId) ?? new Set<string>();
+  towns.add(record.localityId);
+  CATALOGUE_BASE_TOWN_IDS_BY_REGION.set(record.regionId, towns);
+}
+for (const record of publishedWesternUsCatalogueRecords) {
+  const ids = CATALOGUE_MOUNTAIN_IDS_BY_REGION.get(record.regionId) ?? new Set<string>();
+  ids.add(record.publicId); for (const alias of record.aliases) ids.add(alias);
+  CATALOGUE_MOUNTAIN_IDS_BY_REGION.set(record.regionId, ids);
+  const towns = CATALOGUE_BASE_TOWN_IDS_BY_REGION.get(record.regionId) ?? new Set<string>();
+  towns.add(record.baseTownId); CATALOGUE_BASE_TOWN_IDS_BY_REGION.set(record.regionId, towns);
+}
 
 // Entitlement resolver · the soft member gate. During the launch promo every
 // premium feature is free, but only for signed-in members (free email
@@ -230,11 +283,16 @@ if (process.env.NODE_ENV === "production") {
         marysville: "Marysville",
         warburton: "Warburton",
         omeo: "Omeo",
+        rawson: "Rawson",
       },
     },
     "tasmania": {
       name: "Tasmania",
-      towns: { "ben-lomond-base": "Ben Lomond Base", launceston: "Launceston", hobart: "Hobart" },
+      towns: { "ben-lomond-base": "Ben Lomond Base", launceston: "Launceston", maydena: "Maydena", hobart: "Hobart" },
+    },
+    "australian-capital-territory": {
+      name: "Australian Capital Territory",
+      towns: { canberra: "Canberra" },
     },
     // Japan
     "yamanouchi": {
@@ -669,7 +727,7 @@ if (process.env.NODE_ENV === "production") {
   // Top-level routes handled by the SPA (before the /:region catch-all).
   const KNOWN_TOP_LEVEL = new Set([
     "/", "/countries", "/about", "/au", "/jp", "/nz", "/ca", "/ca/all-ski-areas", "/us", "/near-you",
-    "/plan", "/legal/privacy", "/legal/terms",
+    "/compare", "/legal/privacy", "/legal/terms",
     "/premium",
     "/alerts/verify", "/alerts/manage", "/alerts/unsubscribed",
     "/account",
@@ -709,7 +767,8 @@ if (process.env.NODE_ENV === "production") {
 
     const regionSlug = parts[0];
     const regionData = KNOWN_REGIONS[regionSlug];
-    if (!regionData) return false;               // unknown region → 404
+    const isCatalogueRegion = CATALOGUE_TRAVEL_REGION_IDS.has(regionSlug);
+    if (!regionData && !isCatalogueRegion) return false; // unknown region → 404
 
     if (parts.length === 1) return true;          // /:region home
 
@@ -719,15 +778,32 @@ if (process.env.NODE_ENV === "production") {
     if (VALID_REGION_SUBS.has(sub1)) return true;
 
     // /:region/mountain/:id or /:region/resort/:id
-    if (/^(?:mountain|resort)\/[^/]+$/.test(sub1)) return true;
+    if (/^(?:mountain|resort)\/[^/]+$/.test(sub1)) {
+      // Catalogue-only regions retain strict path validation: a published id
+      // (or its collision-checked safe alias) must belong to this exact region.
+      // Authored regions deliberately retain their existing route ids as well
+      // as accepting catalogue ids; only regions absent from KNOWN_REGIONS are
+      // constrained exclusively to the catalogue registry.
+      if (!regionData && isCatalogueRegion) {
+        const locationId = parts[2];
+        return !!locationId && (CATALOGUE_MOUNTAIN_IDS_BY_REGION.get(regionSlug)?.has(locationId) ?? false);
+      }
+      return true;
+    }
 
     // /:region/:town
     const townSlug = parts[1];
-    if (!regionData.towns[townSlug]) return false; // unknown town → 404
+    const isAuthoredTown = !!regionData?.towns[townSlug];
+    const isCatalogueTown =
+      CATALOGUE_BASE_TOWN_IDS_BY_REGION.get(regionSlug)?.has(townSlug) ?? false;
+    if (!isAuthoredTown && !isCatalogueTown) return false; // unknown town → 404
 
     if (parts.length === 2) return true;           // /:region/:town home
 
     // /:region/:town/:subpath
+    // Catalogue base-town publication currently establishes the town home
+    // route only. Authored towns retain their explicitly supported sub-pages.
+    if (!isAuthoredTown) return false;
     const townSub = parts.slice(2).join("/");
     return VALID_TOWN_SUBS.has(townSub);
   }
@@ -765,9 +841,9 @@ if (process.env.NODE_ENV === "production") {
       title: "feelzlike premium · snow alerts for your towns · feelzlike",
       description: "feelzlike premium · email snow and powder alerts for your favourite resort towns across Australia, Japan, and New Zealand.",
     },
-    "/plan": {
-      title: "trip planner · find the best conditions · feelzlike",
-      description: "Plan a multi-day resort town trip by comparing forecasts across regions and towns.",
+    "/compare": {
+      title: "compare mountains · snow side by side · feelzlike",
+      description: "Compare the next week of fresh snow and temps across the mountains you're choosing between.",
     },
     "/legal/privacy": {
       title: "privacy policy · feelzlike",
@@ -926,6 +1002,14 @@ if (process.env.NODE_ENV === "production") {
     const camsMatch = urlPath.match(/^(\/[^/]+\/[^/]+)\/cams\/?$/);
     if (camsMatch) {
       res.redirect(301, `${camsMatch[1]}/roads`);
+      return;
+    }
+
+    // Server-side 301 redirect: /plan was renamed to /compare in Aug 2026
+    // (the page is a snow comparison tool, not a trip planner). Server-side
+    // so crawlers and old links land on the canonical URL.
+    if (/^\/plan\/?$/.test(urlPath)) {
+      res.redirect(301, "/compare/");
       return;
     }
 

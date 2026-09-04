@@ -1,4 +1,6 @@
 import type { RegionConfig } from "@workspace/feelzlike-shell";
+import { mergeJapanCatalogueRegions } from "./japan-catalogue";
+import { mergeSkiCatalogueRegions, SKI_CATALOGUE_REGION_COUNTRIES } from "./ski-catalogue";
 import { snowyMountainsRegion } from "./snowy-mountains";
 import { yamanouchiRegion } from "./yamanouchi";
 import { victoriasHighCountryRegion } from "./victorias-high-country";
@@ -22,6 +24,7 @@ import { minakamiRegion } from "./minakami";
 import { kusatsuManzaRegion } from "./kusatsu-manza";
 import { hachimantaiRegion } from "./hachimantai";
 import { tasmaniaRegion } from "./tasmania";
+import { australianCapitalTerritoryRegion } from "./australian-capital-territory";
 import { queenstownRegion } from "./queenstown";
 import { wanakaRegion } from "./wanaka";
 import { mtHuttRegion } from "./mt-hutt";
@@ -158,10 +161,14 @@ import { highmountRegion } from "./highmount";
 // Snow, Bromley Mountain, Magic Mountain), Okemo (Okemo Mountain
 // Resort), Jay Peak/Northeast Kingdom (Jay Peak, Burke Mountain). First
 // Eastern-timezone (America/New_York) US regions on this branch.
-export const REGIONS: RegionConfig[] = [
+import { mergeCanadaCatalogueRegions } from "./canada-catalogue";
+import { mergeWesternUsCatalogueRegions } from "./western-us-catalogue";
+import { regions as westernUsCatalogueRegions } from "@workspace/western-us-ski-catalogue/public-runtime";
+const AUTHORED_REGIONS: RegionConfig[] = [
   snowyMountainsRegion,
   victoriasHighCountryRegion,
   tasmaniaRegion,
+  australianCapitalTerritoryRegion,
   yamanouchiRegion,
   nozawaOnsenRegion,
   iiyamaRegion,
@@ -279,6 +286,11 @@ export const REGIONS: RegionConfig[] = [
   highmountRegion,
 ];
 
+// Catalogue projections are ordered deliberately: Japan first, then Canada.
+export const REGIONS: RegionConfig[] = mergeWesternUsCatalogueRegions(
+  mergeSkiCatalogueRegions(mergeCanadaCatalogueRegions(mergeJapanCatalogueRegions(AUTHORED_REGIONS))),
+);
+
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
   REGIONS.map((r) => [r.id, r]),
 );
@@ -296,6 +308,7 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
   "tasmania": "AU",
+  "australian-capital-territory": "AU",
   "yamanouchi": "JP",
   "nozawa-onsen": "JP",
   "iiyama": "JP",
@@ -411,6 +424,150 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "hunter": "US",
   "windham": "US",
   "highmount": "US",
+  ...Object.fromEntries(
+    REGIONS
+      .filter((region) => !AUTHORED_REGIONS.some((authored) => authored.id === region.id))
+       .map((region) => [region.id, region.shortTag === "CA" ? "CA" as const : "JP" as const]),
+  ),
+  ...Object.fromEntries(
+    Object.entries(SKI_CATALOGUE_REGION_COUNTRIES)
+      .filter((entry): entry is [string, CountryCode] =>
+        ["AU", "JP", "NZ", "CA", "US"].includes(entry[1]),
+      ),
+  ),
+  ...Object.fromEntries(
+    westernUsCatalogueRegions.map((region) => [region.regionId, "US" as const]),
+  ),
+};
+
+const incomingWesternRegionCountryEntries: Record<string, CountryCode> = {
+  "snowy-mountains": "AU",
+  "victorias-high-country": "AU",
+  "tasmania": "AU",
+  "australian-capital-territory": "AU",
+  "yamanouchi": "JP",
+  "nozawa-onsen": "JP",
+  "iiyama": "JP",
+  "bandai": "JP",
+  "daisen": "JP",
+  "hakuba-valley": "JP",
+  "myoko": "JP",
+  "niseko": "JP",
+  "furano": "JP",
+  "sapporo": "JP",
+  "tomamu-sahoro": "JP",
+  "asahikawa": "JP",
+  "rusutsu-kiroro": "JP",
+  "yuzawa": "JP",
+  "zao-onsen": "JP",
+  "hakkoda-aomori-spring": "JP",
+  "appi-shizukuishi": "JP",
+  "minakami": "JP",
+  "kusatsu-manza": "JP",
+  "hachimantai": "JP",
+  "queenstown": "NZ",
+  "wanaka": "NZ",
+  "mt-hutt": "NZ",
+  "ruapehu": "NZ",
+  "whistler": "CA",
+  "powder-highway": "CA",
+  "okanagan": "CA",
+  "vancouver": "CA",
+  "banff-lake-louise": "CA",
+  "canmore": "CA",
+  "jasper": "CA",
+  "quebec-laurentians": "CA",
+  "quebec-charlevoix": "CA",
+  "quebec-eastern-townships": "CA",
+  "summit-county": "US",
+  "vail-valley": "US",
+  "aspen-snowmass": "US",
+  "steamboat": "US",
+  "winter-park": "US",
+  "crested-butte": "US",
+  "telluride": "US",
+  "durango": "US",
+  "boulder-front-range": "US",
+  "cottonwood-canyons": "US",
+  "park-city": "US",
+  "ogden-valley": "US",
+  "provo": "US",
+  "cache-valley": "US",
+  "north-lake-tahoe": "US",
+  "south-lake-tahoe": "US",
+  "mammoth-lakes": "US",
+  "big-bear": "US",
+  "bear-valley": "US",
+  "mt-shasta": "US",
+  "killington-pico": "US",
+  "stowe-smugglers-notch": "US",
+  "mad-river-valley": "US",
+  "southern-vermont": "US",
+  "okemo": "US",
+  "jay-peak-nek": "US",
+  "jackson-hole": "US",
+  "grand-targhee": "US",
+  "big-sky": "US",
+  "bozeman-bridger-bowl": "US",
+  "whitefish": "US",
+  "red-lodge": "US",
+  "taos": "US",
+  "angel-fire": "US",
+  "santa-fe": "US",
+  "albuquerque-sandia": "US",
+  "harbor-springs": "US",
+  "keweenaw-peninsula": "US",
+  "poconos": "US",
+  "laurel-highlands": "US",
+  "berkshires": "US",
+  "central-massachusetts": "US",
+  "lutsen-north-shore": "US",
+  "wausau": "US",
+  "wisconsin-dells": "US",
+  "snowshoe": "US",
+  "canaan-valley": "US",
+  "high-country": "US",
+  "maggie-valley": "US",
+  "blue-ridge": "US",
+  "shenandoah-valley": "US",
+  "lake-tahoe-nevada": "US",
+  "flagstaff": "US",
+  "white-mountains-az": "US",
+  "black-hills": "US",
+  "girdwood": "US",
+  "juneau": "US",
+  "litchfield-hills": "US",
+  "vernon": "US",
+  "mt-hood": "US",
+  "bend": "US",
+  "crystal-mountain": "US",
+  "snoqualmie-pass": "US",
+  "stevens-pass": "US",
+  "mt-baker": "US",
+  "sun-valley": "US",
+  "sandpoint": "US",
+  "boise": "US",
+  "donnelly-mccall": "US",
+  "white-mountains": "US",
+  "franconia-notch": "US",
+  "waterville-valley": "US",
+  "lakes-region": "US",
+  "carrabassett-valley": "US",
+  "newry-bethel": "US",
+  "rangeley": "US",
+  "lake-placid": "US",
+  "north-creek": "US",
+  "hunter": "US",
+  "windham": "US",
+  "highmount": "US",
+  ...Object.fromEntries(
+    REGIONS
+      .filter((region) => !AUTHORED_REGIONS.some((authored) => authored.id === region.id))
+      .map((region) => [region.id, "JP" as const]),
+  ),
+  ...Object.fromEntries(
+    westernUsCatalogueRegions.map((region) => [region.regionId, "US" as const]),
+  ),
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
   AU: { name: "Australia", flag: "🇦🇺" },

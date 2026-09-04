@@ -27,7 +27,7 @@ import { sendPush } from "../lib/pushSender.js";
 import { powderAlertEmail } from "../lib/emailTemplates.js";
 import { issueToken } from "../lib/alertTokens.js";
 import { getAppPublicUrl } from "../lib/appUrl.js";
-import type { RegionId } from "../lib/regions.js";
+import { resolveCatalogueAlertTarget, type RegionId } from "../lib/regions.js";
 
 const QUIET_HOURS_OVERRIDE_CM = 50;
 const PER_SUBSCRIBER_RATE_LIMIT_HOURS = 12;
@@ -45,6 +45,7 @@ const REGION_ANCHORS: Record<RegionId, {
   // Tasmania · anchor on Ben Lomond summit (Legges Tor, the highest
   // skiable point and the island's only commercial chairlift area).
   "tasmania": { lat: -41.5378, lon: 147.6736, elevation: 1572, region: "AU", displayName: "Tasmania" },
+  "australian-capital-territory": { lat: -35.5294, lon: 148.9915, elevation: 1200, region: "AU", displayName: "Australian Capital Territory" },
   "yamanouchi": { lat: 36.738, lon: 138.508, elevation: 1500, region: "JP", displayName: "Yamanouchi" },
   // Nozawa Onsen · single resort, anchor on Mt Kenashi summit.
   "nozawa-onsen": { lat: 36.9290, lon: 138.4500, elevation: 1650, region: "JP", displayName: "Nozawa Onsen" },
@@ -292,6 +293,13 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
 
   Sentry.addBreadcrumb({ category: "alert-evaluator", message: `run started${dryRun ? " (dryRun)" : ""}`, level: "info" });
 
+  const active = await db.select().from(alertSubscribersTable).where(
+    and(
+      isNotNull(alertSubscribersTable.verifiedAt),
+      isNull(alertSubscribersTable.unsubscribedAt),
+    ),
+  );
+
   // 1. Snapshot the live forecast for each anchor once per run, so two
   //    subscribers in the same region don't trigger two upstream fetches.
   const forecastByRegion = new Map<RegionId, { snowByDay: number[] }>();
@@ -314,14 +322,31 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
     }
   }
 
-  // 2. Active subscribers = verified AND not unsubscribed. Both filters are
-  //    pushed into SQL so the table can grow without dragging the cron.
-  const active = await db.select().from(alertSubscribersTable).where(
-    and(
-      isNotNull(alertSubscribersTable.verifiedAt),
-      isNull(alertSubscribersTable.unsubscribedAt),
-    ),
-  );
+  const forecastByMountain = new Map<string, { snowByDay: number[] }>();
+  const selectedMountainIds = new Set(active.flatMap((subscriber) => subscriber.mountains));
+  for (const mountainId of selectedMountainIds) {
+    const target = resolveCatalogueAlertTarget(mountainId);
+    if (!target) continue;
+    try {
+      const forecast = await getEnsembleForecast({
+        latitude: target.latitude,
+        longitude: target.longitude,
+        elevation: target.elevation,
+        region: target.modelRegion,
+        days: 4,
+      });
+      forecastByMountain.set(mountainId, {
+        snowByDay: forecast.days.map((day) => {
+          const value = typeof day.snowMean === "number" && Number.isFinite(day.snowMean) ? day.snowMean : 0;
+          return Math.max(0, value);
+        }),
+      });
+    } catch (err) {
+      report.errors++;
+      console.warn(`[alertEvaluator] forecast fetch failed for mountain ${mountainId}:`, err);
+      Sentry.captureException(err, { tags: { component: "alert-evaluator", mountain: mountainId } });
+    }
+  }
 
   for (const sub of active) {
     report.subscribersChecked++;
@@ -336,14 +361,45 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
     }
 
     // Find the most-impactful matching region for this subscriber (highest snow).
-    let bestMatch: { region: RegionId; snowCm: number; horizonDays: number } | null = null;
+    let bestMatch: {
+      key: string;
+      name: string;
+      region: string;
+      route: string;
+      snowCm: number;
+      horizonDays: number;
+    } | null = null;
     const horizonDays = Math.max(1, Math.ceil(sub.horizonHours / 24));
     for (const region of sub.regions as RegionId[]) {
       const f = forecastByRegion.get(region);
       if (!f) continue;
       const snowSum = f.snowByDay.slice(0, horizonDays).reduce((a, b) => a + b, 0);
       if (snowSum >= sub.snowfallThresholdCm && (!bestMatch || snowSum > bestMatch.snowCm)) {
-        bestMatch = { region, snowCm: Math.round(snowSum), horizonDays };
+        const anchor = REGION_ANCHORS[region];
+        bestMatch = {
+          key: region,
+          name: anchor.displayName,
+          region,
+          route: `/${region}/today`,
+          snowCm: Math.round(snowSum),
+          horizonDays,
+        };
+      }
+    }
+    for (const mountainId of sub.mountains) {
+      const target = resolveCatalogueAlertTarget(mountainId);
+      const forecast = forecastByMountain.get(mountainId);
+      if (!target || !forecast) continue;
+      const snowSum = forecast.snowByDay.slice(0, horizonDays).reduce((a, b) => a + b, 0);
+      if (snowSum >= sub.snowfallThresholdCm && (!bestMatch || snowSum > bestMatch.snowCm)) {
+        bestMatch = {
+          key: mountainId,
+          name: target.name,
+          region: target.regionId,
+          route: target.route,
+          snowCm: Math.round(snowSum),
+          horizonDays,
+        };
       }
     }
     if (!bestMatch) {
@@ -351,8 +407,11 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
       continue;
     }
 
-    // Quiet hours in subscriber's local timezone.
-    if (isQuietHour(sub.timezone) && bestMatch.snowCm < QUIET_HOURS_OVERRIDE_CM) {
+    const alertTimezone = resolveCatalogueAlertTarget(bestMatch.key)?.timezone ?? sub.timezone;
+
+    // Catalogue mountain alerts use the mountain's weather-page timezone.
+    // Existing region alerts keep the subscriber timezone behavior unchanged.
+    if (isQuietHour(alertTimezone) && bestMatch.snowCm < QUIET_HOURS_OVERRIDE_CM) {
       report.skipped.quietHours++;
       continue;
     }
@@ -361,7 +420,7 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
     // user (UTC+11) would see the "daily" window roll over at 11am local -
     // re-alerting them mid-morning, or suppressing a real new storm late
     // evening local. dateKey() now formats in `sub.timezone`.
-    const alertWindow = `${bestMatch.region}:${dateKey(startedAt, sub.timezone)}`;
+    const alertWindow = `${bestMatch.key}:${dateKey(startedAt, alertTimezone)}`;
     const yesterday = new Date(Date.now() - 24 * 3_600_000);
     const recent = await db.select({ id: dispatchedAlertsTable.id })
       .from(dispatchedAlertsTable)
@@ -405,14 +464,13 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
     // claimed this slot and we skip - preventing duplicate sends when two runs
     // overlap (e.g. cron + manual /internal/alerts/run). On send failure we
     // mark the row success=false so future runs can retry.
-    const anchor = REGION_ANCHORS[bestMatch.region]!;
     const manageToken = issueToken(sub.id, "manage");
     const unsubToken = issueToken(sub.id, "unsub");
     const baseUrl = getAppPublicUrl();
     const tmpl = powderAlertEmail({
-      topMountain: { name: anchor.displayName, region: bestMatch.region, snowfallCm: bestMatch.snowCm },
+      topMountain: { name: bestMatch.name, region: bestMatch.region, snowfallCm: bestMatch.snowCm },
       otherMountains: [],
-      todaysCallUrl: `${baseUrl}/${bestMatch.region}/today`,
+      todaysCallUrl: `${baseUrl}${bestMatch.route}`,
       manageUrl: `${baseUrl}/alerts/manage?token=${encodeURIComponent(manageToken)}`,
       unsubscribeUrl: `${baseUrl}/api/alerts/unsubscribe?token=${encodeURIComponent(unsubToken)}`,
     });
@@ -420,7 +478,7 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
     const dispatched = { emailOk: false, pushOk: false };
     if (sub.delivery === "email" || sub.delivery === "both") {
       const claim = await claimDispatchSlot({
-        subscriberId: sub.id, mountain: anchor.displayName, region: bestMatch.region,
+        subscriberId: sub.id, mountain: bestMatch.name, region: bestMatch.region,
         alertWindow, snowfallCm: bestMatch.snowCm, delivery: "email",
       });
       if (!claim.claimed) {
@@ -446,7 +504,7 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
       // unclaim the slot - we still consider push delivered if at least one
       // endpoint succeeded.
       const claim = targets.length > 0 ? await claimDispatchSlot({
-        subscriberId: sub.id, mountain: anchor.displayName, region: bestMatch.region,
+        subscriberId: sub.id, mountain: bestMatch.name, region: bestMatch.region,
         alertWindow, snowfallCm: bestMatch.snowCm, delivery: "push",
       }) : { claimed: false as const, id: "" };
       if (claim.claimed) {
@@ -454,7 +512,7 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
         for (const t of targets) {
           const pr = await sendPush(
             { endpoint: t.endpoint, keys: { p256dh: t.p256dh, auth: t.auth } },
-            { title: tmpl.subject, body: `${bestMatch.snowCm}cm forecast at ${anchor.displayName}`, url: `/${bestMatch.region}/today`, tag: alertWindow },
+            { title: tmpl.subject, body: `${bestMatch.snowCm}cm forecast at ${bestMatch.name}`, url: bestMatch.route, tag: alertWindow },
           );
           if (!pr.ok && pr.gone) {
             await db.delete(pushSubscriptionsTable).where(eq(pushSubscriptionsTable.id, t.id));
