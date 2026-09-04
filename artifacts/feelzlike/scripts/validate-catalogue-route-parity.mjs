@@ -14,6 +14,7 @@ import {
   townFeatures,
   regionMountains,
   publishedCatalogueMountainRoutes,
+  staticRoutePaths,
 } from "./seo-regions.mjs";
 import legacyRouteDeclarations from "../src/lib/legacyRoutes.json" with { type: "json" };
 
@@ -25,10 +26,6 @@ execFileSync(
   { stdio: "inherit" },
 );
 const expected = publishedCatalogueMountainRoutes.map(({ path }) => path);
-const staticPaths = [
-  "/", "/countries", "/au", "/jp", "/nz", "/ca", "/ca/all-ski-areas", "/us",
-  "/compare", "/premium", "/near-you", "/legal/privacy", "/legal/terms",
-];
 const legacyPaths = new Set(
   legacyRouteDeclarations.flatMap(({ from, suffixes }) =>
     suffixes.map((suffix) => `${from}${suffix}`),
@@ -36,7 +33,7 @@ const legacyPaths = new Set(
 );
 
 function expectedBuildPaths() {
-  const paths = [...staticPaths];
+  const paths = [...staticRoutePaths];
   for (const region of REGIONS) {
     paths.push(`/${region.slug}`);
     for (const feature of regionFeatures(region)) paths.push(`/${region.slug}/${feature}`);

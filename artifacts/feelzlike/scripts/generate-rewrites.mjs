@@ -32,24 +32,11 @@ import {
   townFeatures,
   regionMountains,
   publishedCatalogueMountainRoutes,
+  staticRoutePaths,
 } from "./seo-regions.mjs";
 import legacyRouteDeclarations from "../src/lib/legacyRoutes.json" with { type: "json" };
 
-const paths = [
-  "/countries",
-  "/au",
-  "/jp",
-  "/nz",
-  "/ca",
-  "/ca/all-ski-areas",
-  "/us",
-  "/compare",
-  "/alerts",
-  "/premium",
-  "/near-you",
-  "/legal/privacy",
-  "/legal/terms",
-];
+const paths = staticRoutePaths.filter((path) => path !== "/");
 
 const legacyRewrites = legacyRouteDeclarations.flatMap(({ from, to, suffixes }) =>
   suffixes.map((suffix) => ({

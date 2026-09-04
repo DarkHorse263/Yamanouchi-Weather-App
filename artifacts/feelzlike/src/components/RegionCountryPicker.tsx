@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useLanguage } from "@workspace/feelzlike-shell";
 import { Check, ChevronDown } from "lucide-react";
-import { ALERT_REGIONS } from "@/components/AlertSubscribeForm";
+import { ALERT_REGIONS, COUNTRY_REGION_TOTALS } from "@/lib/alertRegions";
 
 /**
  * Region multi-select grouped into collapsible country sections.
@@ -31,7 +31,7 @@ export function RegionCountryPicker({ selected, onToggle, variant = "light" }: P
 
   const groups = useMemo(() => {
     const order: string[] = [];
-    const byCountry: Record<string, typeof ALERT_REGIONS> = {};
+    const byCountry: Record<string, Array<(typeof ALERT_REGIONS)[number]>> = {};
     for (const r of ALERT_REGIONS) {
       const key = r.country.split("·")[0]!.trim();
       if (!byCountry[key]) order.push(key);
@@ -77,7 +77,9 @@ export function RegionCountryPicker({ selected, onToggle, variant = "light" }: P
                   {t(`${count} selected`, `${count}件選択中`)}
                 </span>
               )}
-              <span className="text-[11px] text-muted-foreground tabular-nums">{rs.length}</span>
+               <span className="text-[11px] text-muted-foreground tabular-nums">
+                 {COUNTRY_REGION_TOTALS[key as keyof typeof COUNTRY_REGION_TOTALS] ?? rs.length}
+               </span>
               <ChevronDown
                 className={`w-4 h-4 text-muted-foreground transition-transform ${isOpen ? "rotate-180" : ""}`}
                 aria-hidden="true"

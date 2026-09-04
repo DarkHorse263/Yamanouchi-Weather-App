@@ -27,10 +27,6 @@ publicDir = "artifacts/feelzlike/dist/public"
 serve = "static"
 
 [[services.production.rewrites]]
-from = "/us-wi/mountain/mountain-top-at-grand-geneva-wi/"
-to = "/us-wi/mountain/mountain-top-at-grand-geneva-wi/index.html"
-
-[[services.production.rewrites]]
 from = "/powder-highway/mountain/sun-peaks-resort/"
 to = "/okanagan/mountain/sun-peaks-resort/index.html"
 

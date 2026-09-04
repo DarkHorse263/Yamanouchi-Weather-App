@@ -26,6 +26,7 @@ import {
   townFeatures,
   regionMountains,
   publishedCatalogueMountainRoutes,
+  staticRoutePaths,
 } from "./seo-regions.mjs";
 
 const SITE_URL = process.env.PUBLIC_ORIGIN || "https://feelzlike.com";
@@ -63,19 +64,26 @@ function canonicalLoc(path) {
 }
 
 const staticUrls = [
-  url("/",                "daily",   "1.0"),
-  url("/countries",       "daily",   "0.9"),
-  url("/au",              "daily",   "0.9"),
-  url("/jp",              "daily",   "0.9"),
-  url("/nz",              "daily",   "0.9"),
-  url("/ca",              "daily",   "0.9"),
-  url("/ca/all-ski-areas","weekly",  "0.6"),
-  url("/us",              "daily",   "0.9"),
-  url("/compare",         "weekly",  "0.8"),
-  url("/premium",         "weekly",  "0.6"),
-  url("/near-you",        "weekly",  "0.6"),
-  url("/legal/privacy",   "monthly", "0.4"),
-  url("/legal/terms",     "monthly", "0.4"),
+  ...staticRoutePaths.map((path) => {
+    const metadata = {
+      "/": ["daily", "1.0"],
+      "/countries": ["daily", "0.9"],
+      "/au": ["daily", "0.9"],
+      "/jp": ["daily", "0.9"],
+      "/nz": ["daily", "0.9"],
+      "/ca": ["daily", "0.9"],
+      "/ca/all-ski-areas": ["weekly", "0.6"],
+      "/us": ["daily", "0.9"],
+      "/compare": ["weekly", "0.8"],
+      "/alerts": ["weekly", "0.6"],
+      "/premium": ["weekly", "0.6"],
+      "/near-you": ["weekly", "0.6"],
+      "/legal/privacy": ["monthly", "0.4"],
+      "/legal/terms": ["monthly", "0.4"],
+    };
+    const [changefreq, priority] = metadata[path];
+    return url(path, changefreq, priority);
+  }),
 ];
 
 // ── Dynamic region + town URLs ────────────────────────────────────────────

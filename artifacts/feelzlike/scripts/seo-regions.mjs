@@ -31,6 +31,16 @@ import {
   travelRegions as canadaTravelRegions,
 } from "@workspace/canada-ski-catalogue/public-runtime";
 
+/**
+ * Public, indexable routes that are not derived from a region or catalogue
+ * record. Sitemap, rewrite, and route-parity generation import this rather
+ * than maintaining independent copies.
+ */
+export const staticRoutePaths = [
+  "/", "/countries", "/au", "/jp", "/nz", "/ca", "/ca/all-ski-areas", "/us",
+  "/compare", "/alerts", "/premium", "/near-you", "/legal/privacy", "/legal/terms",
+];
+
 export const REGIONS = [
   // ── Australia ───────────────────────────────────────────────────────────
   {

@@ -22,7 +22,7 @@ import {
 } from "@workspace/api-client-react";
 import type { AccountResponse } from "@workspace/api-client-react";
 import { useAuthAccount } from "@/components/auth/SignUpProvider";
-import { ALERT_REGIONS } from "@/components/AlertSubscribeForm";
+import { ALERT_REGIONS } from "@/lib/alertRegions";
 import { RegionCountryPicker } from "@/components/RegionCountryPicker";
 import { CatalogueMountainPicker } from "@/components/CatalogueMountainPicker";
 

@@ -126,7 +126,10 @@ export function MountainDetail() {
   const isWeatherOnly = publicationCapabilities?.contentMode === "weather-only";
   const mountainAlertsAvailable = publicationCapabilities?.powderAlertsAvailable ?? false;
   const powderAlertsAvailable = regionAlertsAvailable(region.id);
-  const capabilityCopy = mountainDetailCopy(isWeatherOnly);
+  const capabilityCopy = mountainDetailCopy(
+    isWeatherOnly,
+    catalogueRecord?.weatherEligible ?? !isWeatherOnly,
+  );
   const elevLat = mountainCfg?.lat;
   const elevLng = mountainCfg?.lng;
   const elevSummitM = mountainCfg?.elevationM;

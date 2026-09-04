@@ -13,8 +13,8 @@ export interface MountainDetailCopy {
   heroCamBadge: { en: string; ja: string };
 }
 
-export function mountainDetailCopy(weatherOnly: boolean): MountainDetailCopy {
-  if (weatherOnly) {
+export function mountainDetailCopy(weatherOnly: boolean, hasLiveWeatherFeed = !weatherOnly): MountainDetailCopy {
+  if (!hasLiveWeatherFeed) {
     return {
       sourceBadge: { en: "Weather", ja: "天気" },
       scrollCue: { en: "Weather details below", ja: "天気の詳細は下へ" },

@@ -8,6 +8,7 @@ import { extractErrorMessage } from "@/lib/gateErrors";
 import { pingAlertFunnel } from "@/lib/engagement";
 import { CatalogueMountainPicker } from "@/components/CatalogueMountainPicker";
 import { isAlertCatalogueMountain } from "@/lib/alertCatalogueMountains";
+import { ALERT_REGIONS } from "@/lib/alertRegions";
 
 /**
  * Powder-alert subscription form. Mounts inside any region's Alerts page.
@@ -17,140 +18,6 @@ import { isAlertCatalogueMountain } from "@/lib/alertCatalogueMountains";
  * defaults to "useful but not noisy" (15cm / 48hr), unsubscribe in one click.
  */
 
-// Region list mirrors the active region registry (src/regions/index.ts) and the
-// server's REGION_IDS (api-server/src/lib/regions.ts). The alert evaluator
-// monitors every one of these via REGION_ANCHORS, so keep all three in sync
-// when a region goes live. Tickbox UI lets users select multiple.
-export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; country: string }> = [
-  // Australia
-  { id: "snowy-mountains", nameEn: "Snowy Mountains", nameJa: "スノーウィーマウンテンズ", country: "AU · NSW" },
-  { id: "victorias-high-country", nameEn: "Victoria's High Country", nameJa: "ビクトリア高原地方", country: "AU · VIC" },
-  { id: "tasmania", nameEn: "Tasmania", nameJa: "タスマニア", country: "AU · TAS" },
-  { id: "australian-capital-territory", nameEn: "Australian Capital Territory", nameJa: "オーストラリア首都特別地域", country: "AU · ACT" },
-  // Japan
-  { id: "yamanouchi", nameEn: "Yamanouchi", nameJa: "山ノ内町", country: "JP · Nagano" },
-  { id: "nozawa-onsen", nameEn: "Nozawa Onsen", nameJa: "野沢温泉村", country: "JP · Nagano" },
-  { id: "iiyama", nameEn: "Iiyama", nameJa: "飯山市", country: "JP · Nagano" },
-  { id: "hakuba-valley", nameEn: "Hakuba Valley", nameJa: "白馬バレー", country: "JP · Nagano" },
-  { id: "myoko", nameEn: "Myoko", nameJa: "妙高", country: "JP · Niigata" },
-  { id: "niseko", nameEn: "Niseko", nameJa: "ニセコ", country: "JP · Hokkaido" },
-  { id: "furano", nameEn: "Furano", nameJa: "富良野", country: "JP · Hokkaido" },
-  { id: "sapporo", nameEn: "Sapporo", nameJa: "札幌", country: "JP · Hokkaido" },
-  { id: "tomamu-sahoro", nameEn: "Tomamu & Sahoro", nameJa: "トマム・サホロ", country: "JP · Hokkaido" },
-  { id: "asahikawa", nameEn: "Asahikawa", nameJa: "旭川", country: "JP · Hokkaido" },
-  { id: "rusutsu-kiroro", nameEn: "Rusutsu & Kiroro", nameJa: "ルスツ・キロロ", country: "JP · Hokkaido" },
-  { id: "yuzawa", nameEn: "Yuzawa", nameJa: "湯沢", country: "JP · Niigata" },
-  { id: "zao-onsen", nameEn: "Zao Onsen", nameJa: "蔵王温泉", country: "JP · Yamagata" },
-  { id: "bandai", nameEn: "Bandai", nameJa: "磐梯", country: "JP · Fukushima" },
-  { id: "daisen", nameEn: "Daisen", nameJa: "大山", country: "JP · Tottori" },
-  { id: "hakkoda-aomori-spring", nameEn: "Hakkoda & Aomori Spring", nameJa: "八甲田・青森スプリング", country: "JP · Aomori" },
-  { id: "appi-shizukuishi", nameEn: "Appi & Shizukuishi", nameJa: "安比高原・雫石", country: "JP · Iwate" },
-  { id: "minakami", nameEn: "Minakami", nameJa: "みなかみ", country: "JP · Gunma" },
-  { id: "kusatsu-manza", nameEn: "Kusatsu & Manza", nameJa: "草津・万座", country: "JP · Gunma" },
-  { id: "hachimantai", nameEn: "Hachimantai", nameJa: "八幡平", country: "JP · Iwate" },
-  // New Zealand
-  { id: "queenstown", nameEn: "Queenstown", nameJa: "クイーンズタウン", country: "NZ · Otago" },
-  { id: "wanaka", nameEn: "Wanaka", nameJa: "ワナカ", country: "NZ · Otago" },
-  { id: "mt-hutt", nameEn: "Mt Hutt", nameJa: "マウントハット", country: "NZ · Canterbury" },
-  { id: "ruapehu", nameEn: "Ruapehu", nameJa: "ルアペフ", country: "NZ · North Island" },
-  // Canada
-  { id: "whistler", nameEn: "Whistler", nameJa: "ウィスラー", country: "CA · British Columbia" },
-  { id: "powder-highway", nameEn: "Powder Highway", nameJa: "パウダーハイウェイ", country: "CA · BC Interior" },
-  { id: "okanagan", nameEn: "Okanagan", nameJa: "オカナガン", country: "CA · BC Interior" },
-  { id: "vancouver", nameEn: "Vancouver & the Island", nameJa: "バンクーバー・アイランド", country: "CA · British Columbia" },
-  { id: "banff-lake-louise", nameEn: "Banff & Lake Louise", nameJa: "バンフ・レイクルイーズ", country: "CA · Alberta" },
-  { id: "canmore", nameEn: "Canmore", nameJa: "キャンモア", country: "CA · Alberta" },
-  { id: "jasper", nameEn: "Jasper", nameJa: "ジャスパー", country: "CA · Alberta" },
-  { id: "quebec-laurentians", nameEn: "Laurentians", nameJa: "ローレンシャン", country: "CA · Québec" },
-  { id: "quebec-charlevoix", nameEn: "Charlevoix", nameJa: "シャルルヴォワ", country: "CA · Québec" },
-  { id: "quebec-eastern-townships", nameEn: "Eastern Townships", nameJa: "イースタンタウンシップス", country: "CA · Québec" },
-  // United States (Colorado)
-  { id: "summit-county", nameEn: "Summit County", nameJa: "サミットカウンティー", country: "US · Colorado" },
-  { id: "vail-valley", nameEn: "Vail Valley", nameJa: "ヴェイル・バレー", country: "US · Colorado" },
-  { id: "aspen-snowmass", nameEn: "Aspen Snowmass", nameJa: "アスペン・スノーマス", country: "US · Colorado" },
-  { id: "steamboat", nameEn: "Steamboat", nameJa: "スチームボート", country: "US · Colorado" },
-  { id: "winter-park", nameEn: "Winter Park", nameJa: "ウィンターパーク", country: "US · Colorado" },
-  { id: "crested-butte", nameEn: "Crested Butte", nameJa: "クレステッド・ビュート", country: "US · Colorado" },
-  { id: "telluride", nameEn: "Telluride", nameJa: "テルライド", country: "US · Colorado" },
-  { id: "durango", nameEn: "Durango", nameJa: "デュランゴ", country: "US · Colorado" },
-  { id: "boulder-front-range", nameEn: "Boulder / Front Range", nameJa: "ボルダー・フロントレンジ", country: "US · Colorado" },
-
-  // United States (Utah)
-  { id: "cottonwood-canyons", nameEn: "Cottonwood Canyons", nameJa: "コトンウッド・キャニオンズ", country: "US · Utah" },
-  { id: "park-city", nameEn: "Park City", nameJa: "パークシティ", country: "US · Utah" },
-  { id: "ogden-valley", nameEn: "Ogden Valley", nameJa: "オグデンバレー", country: "US · Utah" },
-  { id: "provo", nameEn: "Provo", nameJa: "プロボ", country: "US · Utah" },
-  { id: "cache-valley", nameEn: "Cache Valley", nameJa: "キャッシュバレー", country: "US · Utah" },
-  { id: "north-lake-tahoe", nameEn: "North Lake Tahoe", nameJa: "ノーザーンレイキ・タホー", country: "US · California" },
-  { id: "south-lake-tahoe", nameEn: "South Lake Tahoe", nameJa: "サザーンレイキ・タホー", country: "US · California" },
-  { id: "mammoth-lakes", nameEn: "Mammoth Lakes", nameJa: "マモスレイカズ", country: "US · California" },
-  { id: "big-bear", nameEn: "Big Bear", nameJa: "ビグベアー", country: "US · California" },
-  { id: "bear-valley", nameEn: "Bear Valley", nameJa: "ベアバリー", country: "US · California" },
-  { id: "mt-shasta", nameEn: "Mt. Shasta", nameJa: "シャスタ山", country: "US · California" },
-
-  // United States (Vermont)
-  { id: "killington-pico", nameEn: "Killington/Pico", nameJa: "キリントン・ピコ", country: "US · Vermont" },
-  { id: "stowe-smugglers-notch", nameEn: "Stowe/Smugglers' Notch", nameJa: "ストウ・スマグラーズノッチ", country: "US · Vermont" },
-  { id: "mad-river-valley", nameEn: "Mad River Valley", nameJa: "マッドリバーバレー", country: "US · Vermont" },
-  { id: "southern-vermont", nameEn: "Southern Vermont", nameJa: "サザンバーモント", country: "US · Vermont" },
-  { id: "okemo", nameEn: "Okemo", nameJa: "オキーモ", country: "US · Vermont" },
-  { id: "jay-peak-nek", nameEn: "Jay Peak/Northeast Kingdom", nameJa: "ジェイピーク", country: "US · Vermont" },
-  { id: "jackson-hole", nameEn: "Jackson Hole", nameJa: "ジャクソンホール", country: "US · Wyoming" },
-  { id: "grand-targhee", nameEn: "Grand Targhee", nameJa: "グランドターガビー", country: "US · Wyoming" },
-  { id: "big-sky", nameEn: "Big Sky", nameJa: "ビッグスカイ", country: "US · Montana" },
-  { id: "bozeman-bridger-bowl", nameEn: "Bozeman / Bridger Bowl", nameJa: "ボーズマン／ブリッジャーボウル", country: "US · Montana" },
-  { id: "whitefish", nameEn: "Whitefish", nameJa: "ホワイトフィッシュ", country: "US · Montana" },
-  { id: "red-lodge", nameEn: "Red Lodge", nameJa: "レッドロッジ", country: "US · Montana" },
-  { id: "taos", nameEn: "Taos", nameJa: "タオス", country: "US · New Mexico" },
-  { id: "angel-fire", nameEn: "Angel Fire", nameJa: "エンジェルファイア", country: "US · New Mexico" },
-  { id: "santa-fe", nameEn: "Santa Fe", nameJa: "サンタフェ", country: "US · New Mexico" },
-  { id: "albuquerque-sandia", nameEn: "Albuquerque", nameJa: "アルバカーキー", country: "US · New Mexico" },
-  { id: "harbor-springs", nameEn: "Harbor Springs", nameJa: "ハーバースプリングス", country: "US · Michigan" },
-  { id: "keweenaw-peninsula", nameEn: "Keweenaw Peninsula", nameJa: "キーウィノー半島", country: "US · Michigan" },
-  { id:"poconos",nameEn:"Poconos",nameJa:"ポコノス",country:"US · Pennsylvania" },
-  { id:"laurel-highlands",nameEn:"Laurel Highlands",nameJa:"ローレルハイランズ",country:"US · Pennsylvania" },
-  {id:"berkshires",nameEn:"Berkshires",nameJa:"バークシャーズ",country:"US · Massachusetts"},
-  {id:"central-massachusetts",nameEn:"Central Massachusetts",nameJa:"中央マサチューセッツ",country:"US · Massachusetts"},
-  {id:"lutsen-north-shore",nameEn:"Lutsen / North Shore",nameJa:"ルーツェン／ノースショア",country:"US · Minnesota"},
-  {id:"wausau",nameEn:"Wausau",nameJa:"ウォーソー",country:"US · Wisconsin"},
-  {id:"wisconsin-dells",nameEn:"Wisconsin Dells",nameJa:"ウィスコンシンデルズ",country:"US · Wisconsin"},
-  {id:"snowshoe",nameEn:"Snowshoe",nameJa:"スノーシュー",country:"US · West Virginia"},
-  {id:"canaan-valley",nameEn:"Canaan Valley",nameJa:"カナーンバレー",country:"US · West Virginia"},
-  {id:"high-country",nameEn:"High Country",nameJa:"ハイカントリー",country:"US · North Carolina"},
-  {id:"maggie-valley",nameEn:"Maggie Valley",nameJa:"マギーバレー",country:"US · North Carolina"},
-  {id:"blue-ridge",nameEn:"Blue Ridge",nameJa:"ブルーリッジ",country:"US · Virginia"},
-  {id:"shenandoah-valley",nameEn:"Shenandoah Valley",nameJa:"シェナンドー・バレー",country:"US · Virginia"},
-  {id:"lake-tahoe-nevada",nameEn:"Lake Tahoe Nevada",nameJa:"レイク・タホ（ネバダ）",country:"US · Nevada"},
-  {id:"flagstaff",nameEn:"Flagstaff",nameJa:"フラッグスタッフ",country:"US · Arizona"},
-  {id:"white-mountains-az",nameEn:"White Mountains",nameJa:"ホワイトマウンテンズ",country:"US · Arizona"},
-  {id:"black-hills",nameEn:"Black Hills",nameJa:"ブラックヒルズ",country:"US · South Dakota"},
-  {id:"girdwood",nameEn:"Girdwood",nameJa:"ガードウッド",country:"US · Alaska"},
-  {id:"juneau",nameEn:"Juneau",nameJa:"ジュノー",country:"US · Alaska"},
-  {id:"litchfield-hills",nameEn:"Litchfield Hills",nameJa:"リッチフィールドヒルズ",country:"US · Connecticut"},
-  {id:"vernon",nameEn:"Vernon",nameJa:"バーノン",country:"US · New Jersey"},
-  { id: "mt-hood", nameEn: "Mt. Hood", nameJa: "マウントフッド", country: "US · Oregon" },
-  { id: "bend", nameEn: "Bend", nameJa: "ベンド", country: "US · Oregon" },
-  { id: "crystal-mountain", nameEn: "Crystal Mountain", nameJa: "クリスタルマウンテン", country: "US · Washington" },
-  { id: "snoqualmie-pass", nameEn: "Snoqualmie Pass", nameJa: "スノーカルミーパス", country: "US · Washington" },
-  { id: "stevens-pass", nameEn: "Stevens Pass", nameJa: "スティーブンスパス", country: "US · Washington" },
-  { id: "mt-baker", nameEn: "Mt. Baker", nameJa: "マウントベーカー", country: "US · Washington" },
-  { id: "sun-valley", nameEn: "Sun Valley", nameJa: "サンバレー", country: "US · Idaho" },
-  { id: "sandpoint", nameEn: "Sandpoint", nameJa: "サンドポイント", country: "US · Idaho" },
-  { id: "boise", nameEn: "Boise", nameJa: "ボイシ", country: "US · Idaho" },
-  { id: "donnelly-mccall", nameEn: "Donnelly / McCall", nameJa: "ドネリー／マッコール", country: "US · Idaho" },
-  { id: "white-mountains", nameEn: "White Mountains", nameJa: "ホワイトマウンテンズ", country: "US · New Hampshire" },
-  { id: "franconia-notch", nameEn: "Franconia Notch", nameJa: "フランコニアノッチ", country: "US · New Hampshire" },
-  { id: "waterville-valley", nameEn: "Waterville Valley", nameJa: "ウォータービルバレー", country: "US · New Hampshire" },
-  { id: "lakes-region", nameEn: "Lakes Region", nameJa: "レイクスリージョン", country: "US · New Hampshire" },
-  { id: "carrabassett-valley", nameEn: "Carrabassett Valley", nameJa: "キャラバセットバレー", country: "US · Maine" },
-  { id: "newry-bethel", nameEn: "Newry / Bethel", nameJa: "ニューリー／ベセル", country: "US · Maine" },
-  { id: "rangeley", nameEn: "Rangeley", nameJa: "レンジリー", country: "US · Maine" },
-  { id: "lake-placid", nameEn: "Lake Placid", nameJa: "レークプラシッド", country: "US · New York" },
-  { id: "north-creek", nameEn: "North Creek", nameJa: "ノースクリーク", country: "US · New York" },
-  { id: "hunter", nameEn: "Hunter", nameJa: "ハンター", country: "US · New York" },
-  { id: "windham", nameEn: "Windham", nameJa: "ウィンダム", country: "US · New York" },
-  { id: "highmount", nameEn: "Highmount", nameJa: "ハイマウント", country: "US · New York" },
-];
 
 const HORIZONS: Array<{ value: 24 | 48 | 72; label: string; labelJa: string }> = [
   { value: 24, label: "Next 24 hr", labelJa: "24時間以内" },
