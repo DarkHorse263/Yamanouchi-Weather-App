@@ -1107,3 +1107,87 @@ mtime_ms = 1787707696154
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/f7a016de-4779-4320-9426-932a834e1490/64061848-5870-417a-b5d8-e05f9dc8db1d"
 storage_version_token = "1787707706030303"
 content_type = "text/csv"
+
+[[outputs]]
+id = "oUSS1_n7J02GQ8pnk4hWG"
+uri = "file://exports/video-ads/refresh-2026-11/feelzlike-anthem-refresh-2026-11-all-formats.zip"
+type = "unspecified"
+title = "feelzlike anthem campaign · refreshed full bundle"
+description = "All 45 updated masters: Australia, USA, Japanese Japan, English Japan, and Australia-to-Japan winter; landscape, square, vertical; voiced, silent, and silent-copy."
+logical_id = "5e5cce3e-2846-4538-ae27-94823c3c67f0"
+content_hash = "sha256:704faf22f11b38248dba40fba0d04742f6e8b96f676bff46fb9b54ff7a8a1d7a"
+size = 11954386
+mtime_ms = 1788763036297
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/5e5cce3e-2846-4538-ae27-94823c3c67f0/bb536194-ac47-46db-baeb-17b1a0a31095"
+storage_version_token = "1788763137166341"
+content_type = "application/octet-stream"
+
+[[outputs]]
+id = "o2R57-3y2SZvEyikU3R0C"
+uri = "file://exports/video-ads/refresh-2026-11/feelzlike-anthem-refresh-2026-11-au-japan-winter-vertical-voiced.mp4"
+type = "video"
+title = "Australia → Japan winter · vertical voiced"
+description = "20-second 9:16 master introducing feelzlike to Australians preparing and planning for a Japan winter trip."
+logical_id = "cbb3b558-530a-4f94-b001-29d4e625dc0c"
+content_hash = "sha256:200f27f4a5f62e31837dc933cba49f6273a5af7c2df69ab01c0a34ce62755891"
+size = 531199
+mtime_ms = 1788763023585
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/cbb3b558-530a-4f94-b001-29d4e625dc0c/798f3ba4-8be9-4088-a943-c110bd67c8bd"
+storage_version_token = "1788763138600261"
+content_type = "video/mp4"
+
+[[outputs]]
+id = "kPn9UqkmLDzozNeELMKDZ"
+uri = "file://exports/video-ads/refresh-2026-11/manifest.csv"
+type = "table"
+title = "Refreshed anthem campaign manifest"
+description = "Filename, market, frame, duration, audio status, and visual source for all 45 delivery masters."
+logical_id = "5096acaf-6e47-45a6-947f-76271f1e48ed"
+content_hash = "sha256:26bb7ce3e688d731463445a66d7ee1d546be5460207aaafb53a5a80e8a7f5b40"
+size = 5300
+mtime_ms = 1788763035824
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/5096acaf-6e47-45a6-947f-76271f1e48ed/b5b789f7-8bdd-4910-b953-c18fbd6661a7"
+storage_version_token = "1788763140090171"
+content_type = "text/csv"
+
+[[outputs]]
+id = "4IV8QXw0Z1i-7SpZl7YdA"
+uri = "file://exports/video-ads/refresh-2026-09/feelzlike-anthem-refresh-2026-09-all-formats.zip"
+type = "unspecified"
+title = "feelzlike anthem campaign · September 2026 refresh"
+description = "Corrected final bundle with all 45 updated masters across five audience versions, three aspect ratios, and voiced/silent placements."
+logical_id = "26b1203f-78f4-4791-8e3f-4e397c27ebbf"
+content_hash = "sha256:cbc506f58f87b9401f50ffd4975ce088d9c3925945e084381f7aa6147a3f0019"
+size = 11942080
+mtime_ms = 1788763203544
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/26b1203f-78f4-4791-8e3f-4e397c27ebbf/8870de26-e4cc-46ee-94b3-f019c9ace2da"
+storage_version_token = "1788763241094405"
+content_type = "application/octet-stream"
+
+[[outputs]]
+id = "TA_8XhN3d5r9XMpXBe4u0"
+uri = "file://exports/video-ads/refresh-2026-09/feelzlike-anthem-refresh-2026-09-au-japan-winter-vertical-voiced.mp4"
+type = "video"
+title = "Australia → Japan winter · vertical voiced"
+description = "Final 20-second 9:16 master for Australians preparing and planning for a Japan winter trip."
+logical_id = "cbbc9c38-edb3-424b-bd6e-e71dffc84231"
+content_hash = "sha256:200f27f4a5f62e31837dc933cba49f6273a5af7c2df69ab01c0a34ce62755891"
+size = 531199
+mtime_ms = 1788763023585
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/cbbc9c38-edb3-424b-bd6e-e71dffc84231/5f1a73a4-c7c3-42be-aee9-b5a735707194"
+storage_version_token = "1788763242680253"
+content_type = "video/mp4"
+
+[[outputs]]
+id = "2KsMLAAoMK2D_AVfj3ZFz"
+uri = "file://exports/video-ads/refresh-2026-09/manifest.csv"
+type = "table"
+title = "September 2026 anthem campaign manifest"
+description = "Verified delivery manifest for all 45 corrected masters."
+logical_id = "87d18521-5ebc-47db-a12f-078157c31535"
+content_hash = "sha256:0ad241eb448670af3011d66826f76cc0391bafe8633aeffa70a72174f7860e43"
+size = 5255
+mtime_ms = 1788763194960
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/87d18521-5ebc-47db-a12f-078157c31535/ad2016b4-a0e9-43e8-b15a-5d5bbd1f5bee"
+storage_version_token = "1788763244136074"
+content_type = "text/csv"
