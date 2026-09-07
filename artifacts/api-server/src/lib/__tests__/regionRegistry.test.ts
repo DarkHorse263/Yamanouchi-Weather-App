@@ -157,6 +157,26 @@ test("catalogue alerts use the same runtime metadata and route as weather pages"
   assert.equal(resolveCatalogueAlertTarget("private-or-unknown-mountain"), undefined);
 });
 
+test("alert validation accepts the shared-catalogue eastern and midwestern USA mountains", () => {
+  const ids = [
+    "norway-mountain",
+    "crystal-mountain-mi",
+    "holiday-valley",
+    "jack-frost-pa",
+    "whitecap-mountains-resort-wi",
+    "spirit-mountain-mn",
+    "giants-ridge-mn",
+  ];
+  for (const id of ids) {
+    const record = publishedRecords.find((candidate) => candidate.publicId === id);
+    assert.ok(record, `representative USA mountain "${id}" is not published`);
+    assert.equal(record.countryCode, "US");
+    assert.equal(record.alertEligible, true);
+    assert.equal(resolveCatalogueAlertTarget(id)?.id, id);
+  }
+  assert.deepEqual(normaliseAlertDestinations([], ids), { regions: [], mountains: ids });
+});
+
 test("western US catalogue alert aliases resolve to their canonical published mountain", () => {
   const record = publishedWesternUsRecords.find((candidate) => candidate.publicId === "arctic-valley-ski-area");
   assert.ok(record, "representative western US mountain is not published");
