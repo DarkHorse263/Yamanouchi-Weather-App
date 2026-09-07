@@ -16,7 +16,7 @@ const westernUsStateNames = new Map(
 
 export const alertCatalogueMountains: readonly AlertCatalogueMountain[] = [
   ...publishedRecords
-    .filter((record) => record.alertEligible)
+    .filter((record) => record.countryCode === "US" && record.alertEligible)
     .map((record) => ({
       publicId: record.publicId,
       name: record.name,
