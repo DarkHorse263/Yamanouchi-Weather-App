@@ -1191,3 +1191,59 @@ mtime_ms = 1788763194960
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/87d18521-5ebc-47db-a12f-078157c31535/ad2016b4-a0e9-43e8-b15a-5d5bbd1f5bee"
 storage_version_token = "1788763244136074"
 content_type = "text/csv"
+
+[[outputs]]
+id = "evGm7xwBkR--eCTfu9LVY"
+uri = "file://exports/video-ads/reference-faithful-proof/feelzlike-anthem-au-landscape-current-ui.mp4"
+type = "video"
+title = "Corrected reference proof · Australia landscape"
+description = "34.3-second proof preserving the supplied August composition, pacing, end card and audio, with only real current-app screens replaced."
+logical_id = "0258c7a7-984c-4ff1-a1d1-dfe436c8e7eb"
+content_hash = "sha256:51a2aef07cf7d73f5fda71d4f7334e0ce77b013e21b9d5e48b4d098e98314eb0"
+size = 6173440
+mtime_ms = 1788780001294
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/0258c7a7-984c-4ff1-a1d1-dfe436c8e7eb/1feb000b-5da9-45ca-8391-be33f2d1eebc"
+storage_version_token = "1788780213622212"
+content_type = "video/mp4"
+
+[[outputs]]
+id = "WBEN1_kOjk1R_RBX6_raY"
+uri = "file://exports/video-ads/reference-faithful-proof/feelzlike-anthem-au-square-silent-current-ui.mp4"
+type = "video"
+title = "Corrected reference proof · Australia square silent"
+description = "34.3-second silent proof matching the supplied square treatment with current real-app screens."
+logical_id = "4929afc0-1010-4c9e-a22c-9f838543496a"
+content_hash = "sha256:1e7505dd719dd54e97c89f12492dab9e355401c302267d31f7b1ddaf35d18242"
+size = 3432671
+mtime_ms = 1788780031105
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/4929afc0-1010-4c9e-a22c-9f838543496a/bd41289e-ee76-4168-8868-92351e78e022"
+storage_version_token = "1788780215130835"
+content_type = "video/mp4"
+
+[[outputs]]
+id = "hJv8Y_ayWePV6LVTRpZbN"
+uri = "file://exports/video-ads/reference-faithful-proof/comparisons/landscape-grid.jpg"
+type = "image"
+title = "Original vs corrected · landscape comparison"
+description = "Timestamp-matched frames. Original is left; current-UI proof is right."
+logical_id = "27c403ab-d116-48c7-9fe3-58bb5022f29a"
+content_hash = "sha256:8036f63b6f55ad0eec7d1451b4014415e11439e8f46d5f3dbe27498f0b12d3c2"
+size = 155055
+mtime_ms = 1788780167143
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/27c403ab-d116-48c7-9fe3-58bb5022f29a/6925b078-7e30-4143-9be1-fb5b71f8849d"
+storage_version_token = "1788780216636256"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "089d1QVuLHQl0qwR2ug9x"
+uri = "file://exports/video-ads/reference-faithful-proof/comparisons/square-grid.jpg"
+type = "image"
+title = "Original vs corrected · square comparison"
+description = "Timestamp-matched frames. Original is left; current-UI proof is right."
+logical_id = "e9963959-1c7b-4151-88d5-7ef539df5ac8"
+content_hash = "sha256:f3e7a7b4d6bc65621e8232cce280ff7550812ade67f66229a7e0c80d3614dd75"
+size = 161397
+mtime_ms = 1788780167298
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/e9963959-1c7b-4151-88d5-7ef539df5ac8/d58ffc4d-54d9-4b45-a795-c18aea84d7bb"
+storage_version_token = "1788780218081322"
+content_type = "image/jpeg"

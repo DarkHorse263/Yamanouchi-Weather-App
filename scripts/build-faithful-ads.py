@@ -1,0 +1,142 @@
+#!/usr/bin/env python3
+import os, subprocess, sys, shutil
+from pathlib import Path
+from PIL import Image, ImageDraw, ImageFilter
+
+ROOT = Path("/home/runner/workspace")
+OUT = ROOT / "exports/video-ads/refresh-2026-09-reference-faithful"
+TMP = Path("/tmp/ad_build")
+SRC_FRAMES = Path("/tmp/adrec_faithful")
+
+OUT.mkdir(parents=True, exist_ok=True)
+TMP.mkdir(parents=True, exist_ok=True)
+
+AU_MASTER = ROOT / "exports/video-ads/feelzlike-anthem-au.mp4"
+if not AU_MASTER.exists():
+    print("Master not found!")
+    sys.exit(1)
+
+subprocess.run(["ffmpeg", "-y", "-i", str(AU_MASTER), "-vframes", "1", "-vf", "crop=10:1920:0:0,scale=1080:1920", str(TMP / "bg.png")], check=True)
+subprocess.run(["ffmpeg", "-y", "-sseof", "-0.1", "-i", str(AU_MASTER), "-vframes", "1", str(TMP / "end_card.png")], check=True)
+
+bg_img = Image.open(TMP / "bg.png").convert("RGB")
+end_card_img = Image.open(TMP / "end_card.png").convert("RGB")
+
+MARKETS = {
+    "au": {
+        "master": "feelzlike-anthem-au.mp4",
+        "segs": ["au-home", "au-mtn", "au-qtown", "au-alerts"],
+        "audio_offset": 0
+    },
+    "us": {
+        "master": "feelzlike-anthem-us.mp4",
+        "segs": ["us-home", "us-mtn", "us-town", "us-alerts"],
+        "audio_offset": 0
+    },
+    "jp": {
+        "master": "feelzlike-anthem-jp.mp4",
+        "segs": ["jp-home", "jp-mtn", "jp-niseko", "jp-happo", "jp-town", "jp-alerts"],
+        "audio_offset": 0
+    },
+    "jp-english": {
+        "master": "feelzlike-anthem-jp-english.mp4",
+        "segs": ["jpen-home", "jpen-mtn", "jpen-niseko", "jpen-happo", "jpen-town", "jpen-alerts"],
+        "audio_offset": 0
+    },
+    "au-japan-winter": {
+        "master": "feelzlike-anthem-au.mp4",
+        "segs": ["jpen-home", "jpen-mtn", "jpen-town", "jpen-alerts"],
+        "audio_offset": 0
+    }
+}
+
+phone_w, phone_h = 780, 1688
+px, py = 150, 116
+
+mask = Image.new("L", (phone_w, phone_h), 0)
+ImageDraw.Draw(mask).rounded_rectangle([0, 0, phone_w-1, phone_h-1], radius=65, fill=255)
+
+print("Processing segment frames...")
+processed_segs = set()
+for m, data in MARKETS.items():
+    for seg in data["segs"]:
+        if seg in processed_segs: continue
+        processed_segs.add(seg)
+        seg_dir = SRC_FRAMES / seg
+        out_dir = TMP / "segs_processed" / seg
+        out_dir.mkdir(parents=True, exist_ok=True)
+        
+        frames = sorted(list(seg_dir.glob("*.png")))
+        if not frames:
+            print(f"WARNING: No frames found for {seg}")
+            continue
+            
+        for f in frames:
+            img = Image.open(f).convert("RGB")
+            img = img.resize((phone_w, phone_h), Image.Resampling.LANCZOS)
+            comp = bg_img.copy()
+            comp.paste(img, (px, py), mask)
+            comp.save(out_dir / f.name)
+            
+        # Compile to intermediate video
+        subprocess.run(["ffmpeg", "-y", "-framerate", "12", "-pattern_type", "glob", "-i", f"{out_dir}/*.png", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", "30", str(TMP / f"{seg}.mp4")], check=True)
+        print(f"Processed {seg}")
+
+# End card video
+subprocess.run(["ffmpeg", "-y", "-loop", "1", "-i", str(TMP / "end_card.png"), "-c:v", "libx264", "-t", "6", "-pix_fmt", "yuv420p", "-r", "30", str(TMP / "end_card.mp4")], check=True)
+
+# Generate masters
+for market_key, data in MARKETS.items():
+    print(f"Building {market_key}...")
+    orig_master = ROOT / "exports/video-ads" / data["master"]
+    dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", str(orig_master)], capture_output=True, text=True).stdout)
+    end_card_dur = dur - 30.0 + 1.0 # 30 seconds of content, plus 1 second for xfade overlap
+
+    segs = data["segs"]
+    
+    # Dynamically build filter_complex
+    filter_complex = ""
+    inputs = []
+    current_time = 0.0
+    for i, s in enumerate(segs):
+        seg_mp4 = TMP / f"{s}.mp4"
+        inputs.extend(["-i", str(seg_mp4)])
+        
+        seg_dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", str(seg_mp4)], capture_output=True, text=True).stdout)
+        
+        if i == 0:
+            current_time = seg_dur
+        else:
+            offset = current_time - 0.5
+            filter_complex += f"[{'0:v' if i==1 else f'v{i-1}'}][{i}:v]xfade=transition=fade:duration=0.5:offset={offset:.2f}[v{i}];"
+            current_time = offset + seg_dur
+            
+    # Add end card
+    inputs.extend(["-i", str(TMP / "end_card.mp4")])
+    offset = current_time - 0.5
+    filter_complex += f"[{f'v{len(segs)-1}'}][{len(segs)}:v]xfade=transition=fade:duration=0.5:offset={offset:.2f}[v]"
+    
+    master_vert = OUT / f"feelzlike-anthem-refresh-2026-09-{market_key}-vertical-silent.mp4"
+    
+    subprocess.run(["ffmpeg", "-y"] + inputs + ["-filter_complex", filter_complex, "-map", "[v]", "-t", str(dur), "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", "30", str(master_vert)], check=True)
+    
+    # Mix audio
+    master_vert_voiced = OUT / f"feelzlike-anthem-refresh-2026-09-{market_key}-vertical-voiced.mp4"
+    subprocess.run(["ffmpeg", "-y", "-i", str(master_vert), "-i", str(orig_master), "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "copy", str(master_vert_voiced)], check=True)
+    
+    # Generate derived aspect ratios: landscape (1920x1080) and square (1000x1000)
+    # Background: scaled-to-fill + boxblur 30 + slight darken
+    # Foreground: 9:16 scaled to canvas height centered
+    for fmt, (fw, fh) in [("landscape", (1920, 1080)), ("square", (1000, 1000))]:
+        silent = OUT / f"feelzlike-anthem-refresh-2026-09-{market_key}-{fmt}-silent.mp4"
+        voiced = OUT / f"feelzlike-anthem-refresh-2026-09-{market_key}-{fmt}-voiced.mp4"
+        
+        fc = (
+            f"[0:v]scale={fw}:{fh}:force_original_aspect_ratio=increase,crop={fw}:{fh},boxblur=30,colorchannelmixer=r=.7:g=.7:b=.7[bg];"
+            f"[0:v]scale=-1:{fh}[fg];"
+            f"[bg][fg]overlay=(W-w)/2:(H-h)/2[v]"
+        )
+        subprocess.run(["ffmpeg", "-y", "-i", str(master_vert), "-filter_complex", fc, "-map", "[v]", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", "30", str(silent)], check=True)
+        subprocess.run(["ffmpeg", "-y", "-i", str(silent), "-i", str(orig_master), "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "copy", str(voiced)], check=True)
+        
+print("All master formats and variants rebuilt faithfully.")
