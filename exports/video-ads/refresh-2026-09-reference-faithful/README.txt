@@ -11,9 +11,10 @@ Preservation approach
   the current feelzlike interface.
 · Existing market audio is copied unchanged from the corresponding original.
 · Silent files contain no audio.
-· The Australia-to-Japan-winter cut uses a new Australian-English voiceover and
-  claim-safe copy about covered destinations, mountain weather, transport
-  context and powder alerts.
+· The Australia-to-Japan-winter cut uses a new continuous Australian-English
+  voiceover over the same original dream-trance anthem source as the AU cut.
+  Its claim-safe copy covers destinations, mountain weather, transport context
+  and powder alerts.
 · No App Store availability or nationwide-complete Japan claim is made.
 
 The earlier refresh-2026-09 directory is rejected and superseded by this

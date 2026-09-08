@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T00:52:17.597522+00:00",
+  "generatedAt": "2026-09-08T08:38:18.078195+00:00",
   "videoCount": 45,
   "allValid": true,
   "errors": [],
@@ -17,7 +17,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "a51c784a901a2611b1c8332138c62e203f1b8123a5a620422ed84d097aaa9b12",
+      "sha256": "fe020f95e1512c2410e49c9ea6bbb34f507e32c1a08aa2ccbd7c1e681e108f57",
       "valid": true,
       "errors": []
     },
@@ -50,8 +50,8 @@
       "pixelFormat": "yuv420p",
       "frameRate": "30/1",
       "fastStart": true,
-      "audioReferenceMatch": null,
-      "sha256": "be21db38551d721c78a2eb0686f2461cd5dbce835dff1df6b4455ec062f21f67",
+      "audioReferenceMatch": true,
+      "sha256": "1543c04f5b4989d0a5a604a2f682d41214cf87dc1e02a005ed33cb3efce6ec2b",
       "valid": true,
       "errors": []
     },
@@ -85,7 +85,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "12cca22544fc20bddef3016ed45e3e0344169a4b3717f1198f98d0cd95d658b4",
+      "sha256": "fb157b7d95d817efffccb7303c8e6bfeea06c25de4416c001ca73d63305a7275",
       "valid": true,
       "errors": []
     },
@@ -118,8 +118,8 @@
       "pixelFormat": "yuv420p",
       "frameRate": "30/1",
       "fastStart": true,
-      "audioReferenceMatch": null,
-      "sha256": "f9400604a4eebf4ac0b744b5bb53aad216abeb12388a4e6803c42af91476ad8c",
+      "audioReferenceMatch": true,
+      "sha256": "dbeca58ae0272c1bcdba8158e8d16133e9752a246e97ddd9078fed69beba1b80",
       "valid": true,
       "errors": []
     },
@@ -136,7 +136,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "37f318ac3526f6eb3af369956b98135ec88fac007fd6d79dbff7c0a0aba07b8d",
+      "sha256": "491e0ddabe243904420ff2b60360d9773f9c481a4e849672f807b7b9bff276a2",
       "valid": true,
       "errors": []
     },
@@ -152,8 +152,8 @@
       "pixelFormat": "yuv420p",
       "frameRate": "30/1",
       "fastStart": true,
-      "audioReferenceMatch": null,
-      "sha256": "d0bec23f8eed4d2134c233ca3f9335c781e28f2918aa6e254e7c307c28e94c2a",
+      "audioReferenceMatch": true,
+      "sha256": "26a394f954d4bf8b64948bfb1b998817f37ce6d9cc0d96d266a5c6b172c56a69",
       "valid": true,
       "errors": []
     },
@@ -170,7 +170,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "692c15d7da97d4e6df84a557fe232d7d8ee55cd0cb532cc4d565dcdcb3e30a84",
+      "sha256": "6595cdfaa975dd5c6c6e37538778116ab36a597a0928dbcb983a87d853844892",
       "valid": true,
       "errors": []
     },
@@ -238,7 +238,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "5fd2117f558b4d0fef3871afc46b19aed803dada6bc01e3a209c76e6687c585b",
+      "sha256": "24014d1b2557f0b5f64b7e1eddd3c58b69afdd3c8770b44e3b6b2afab5b4c35c",
       "valid": true,
       "errors": []
     },
@@ -289,7 +289,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "5edeff8cbd3a0313fcc548deea2db8952b7875eba2a4368bd55c9a7327a9375f",
+      "sha256": "fbc8606104e3250afd68b69a5c72146d55fe93ced46a78cb33972e7d1e078599",
       "valid": true,
       "errors": []
     },
@@ -323,7 +323,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "6a4f3a115fc9b4e778bb4e0da60eb01fd6e8112f221e5827ceaffd8cf74960ff",
+      "sha256": "74f52e030875ee2181a0463d227af87051ba9b7b9b975172a513222588532382",
       "valid": true,
       "errors": []
     },
@@ -340,7 +340,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "6c74454f5f334c0f1b02e3b2df59f653fa490ce5aebe5945ebf391655cfd1ac0",
+      "sha256": "666c2a6e726ec98f7da0eefce57650e3da5d15ee6c65d4f565cf6e9370ac8420",
       "valid": true,
       "errors": []
     },
@@ -357,7 +357,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": true,
-      "sha256": "5d73fc5b40b6f41677283d0dc11fc121e45df10ff339066af57de241cd51ec58",
+      "sha256": "ca2073a0395e290e0a03a5aa5cb38dd881fe5521cbfeb8a54b0804c7d2b97b66",
       "valid": true,
       "errors": []
     },
@@ -374,7 +374,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "af720ad52f012a8d63a7c823d61cc96b59a5d47c465c39e89d8e8f0e670e6dd9",
+      "sha256": "bfd67499f88f0f12f585e79c57ca1805f52679410e099bdcfcf698bdb4e19bfe",
       "valid": true,
       "errors": []
     },
@@ -391,7 +391,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "cb097216d290c09379f9a2d3d6925be3a730bb769c836cb69758f51ac13826c2",
+      "sha256": "ddb35584f7e8a7c13be08ca92acbe963b3576db00b11dd3b6d1c75912ae1cdbf",
       "valid": true,
       "errors": []
     },
@@ -408,7 +408,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "711587880a2260b92d6fc8c39ef9b1ba998887864d8dd13bf47b3a26abe7b8c7",
+      "sha256": "fd6abb07e3546ef49bf166681021b4f0942fd5bcd8f94dfaef3c867886651696",
       "valid": true,
       "errors": []
     },
@@ -425,7 +425,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": true,
-      "sha256": "41414dee94ba10edb067fcfb8a921a337201d2b3bb3f9270ede1c43a0a7c3c67",
+      "sha256": "62d8fe7a22166e57bc7afcc84dba879885581a7ef13f200e73e02ade966a3a62",
       "valid": true,
       "errors": []
     },
@@ -442,7 +442,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "0151b3ca5aa998080a2623e8ed379da8e212bbd4ef76faae85a0c100dee3ab11",
+      "sha256": "aed34280f20b6cd349cc60c60df763f8afdf977cbaf7ca1a68de2779df5bd986",
       "valid": true,
       "errors": []
     },
@@ -459,7 +459,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": true,
-      "sha256": "1fce92e9472d94bbd6ec072e1e873d1ef79bc6975bc6611afd090905c2119e99",
+      "sha256": "ae5ad250b1ae7586c76b274902ab14ea761c1213c2d538685b12866d58453444",
       "valid": true,
       "errors": []
     },
@@ -476,7 +476,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "f2770feede946350c9eaf398679dc08b574bf6860b8491ad3f4243641d130086",
+      "sha256": "0cddbab091306a6cba8e5605efb475014ca613dba8142c9b2e01ed6f671fab48",
       "valid": true,
       "errors": []
     },
@@ -544,7 +544,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "0995d94923354fd9ed49209fda46b38bb0eca556e3d806ec9b47604790b377f9",
+      "sha256": "1dfcfe28c92b1e5d9cb52ca367072a90cb6d809a463d0d5fa73c97c22771d120",
       "valid": true,
       "errors": []
     },
@@ -595,7 +595,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "0eca5ebf3c2051eb258fcbfea1a605b0b4d4facdd79826788a58693c6c3b94e6",
+      "sha256": "e2d8a5beac0c264503ddf3b5ccc8c62ac58b1fafb10b955b51af70181d6ceca3",
       "valid": true,
       "errors": []
     },
@@ -629,7 +629,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "b194eda9d96281abe7ce9ba525a621ebbfadf24b8904f15dd331f84a4cdc421b",
+      "sha256": "0544fdda5d1dd88ee5f812161d21c20ab02ad7cf075eef67ee74e79845fbcefd",
       "valid": true,
       "errors": []
     },
@@ -697,7 +697,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "cba270579d51f058b640024e41a0d32f46ee8bfca5be72a3d8d45406e0da3a2c",
+      "sha256": "1e608d8cebf8e1150aa560ddfe7609617e088e613d4f36637a321b800f07f4f4",
       "valid": true,
       "errors": []
     },
@@ -748,7 +748,7 @@
       "frameRate": "30/1",
       "fastStart": true,
       "audioReferenceMatch": null,
-      "sha256": "bc1771f8ee11aa3b484a536b3ac91fbe8da2fa1eb56383dbdff2ea3a0af78dcf",
+      "sha256": "ce947ce6f199d35b9bb3c0d2c7a66e8dc569f579fa082164b019272017d6ace6",
       "valid": true,
       "errors": []
     },

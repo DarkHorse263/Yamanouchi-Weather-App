@@ -1260,28 +1260,28 @@ logical_id = "933b5a2a-00dc-4eb0-a86e-cfcdb53c357a"
 id = "-5StOjrc6z86la6b5PaYN"
 uri = "file://exports/video-ads/feelzlike-anthem-reference-faithful-2026-09-part-1.zip"
 type = "unspecified"
-title = "feelzlike anthem campaign · part 1 of 2"
-description = "AU, US and Australia-to-Japan-winter: 27 validated MP4s plus the shared manifest, README and six contact sheets."
+title = "feelzlike anthem refresh · part 1"
+description = "Australia, USA and AU-to-Japan videos. Updated music, narration, end-card and silent-copy timing included."
 logical_id = "be6eb0c9-b7af-496e-a8d8-64e00a5169b8"
-content_hash = "sha256:3c447c8f8fe0a5bafa4dc2475cfae84ab431cf16a395a1e40b3ec050048a62d0"
-size = 69231723
-mtime_ms = 1788828743403
-storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/be6eb0c9-b7af-496e-a8d8-64e00a5169b8/cd8a90ce-db04-4523-80c1-040774485190"
-storage_version_token = "1788828774806942"
+content_hash = "sha256:4e3368e34944b83efd1858500a7e2103a96266a6bfa4539db95a2a6ef4cb85e4"
+size = 70193201
+mtime_ms = 1788856706030
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/be6eb0c9-b7af-496e-a8d8-64e00a5169b8/c2215083-b966-477c-9024-b8860e15073d"
+storage_version_token = "1788856774934374"
 content_type = "application/octet-stream"
 
 [[outputs]]
 id = "53Mq03nTFg_wOJBFFtvEV"
 uri = "file://exports/video-ads/feelzlike-anthem-reference-faithful-2026-09-part-2.zip"
 type = "unspecified"
-title = "feelzlike anthem campaign · part 2 of 2"
-description = "JP and JP-English: 18 validated MP4s plus the shared manifest, README and six contact sheets."
+title = "feelzlike anthem refresh · part 2"
+description = "Japan and Japan-English videos. Includes the resolved JP-English end-card hold and corrected silent-copy timing."
 logical_id = "b14e949e-13c8-456f-8fff-abd760718dc7"
-content_hash = "sha256:9c371d2b731e85c4b1280033d74ce5f5c8511eb89750e719c06e9e0cfcc03cb0"
-size = 65617153
-mtime_ms = 1788828745519
-storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/b14e949e-13c8-456f-8fff-abd760718dc7/edaa4094-33b6-485c-a321-9bc61f76b235"
-storage_version_token = "1788828776629403"
+content_hash = "sha256:25c8ee56d43d3c8a372c6f2aac328a7ec6e6567035f73f79ec322ee0dc8babb1"
+size = 65130844
+mtime_ms = 1788856708903
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/b14e949e-13c8-456f-8fff-abd760718dc7/ec7b2a4e-ae2d-4eb3-8c73-6dc4805e293a"
+storage_version_token = "1788856777240935"
 content_type = "application/octet-stream"
 
 [[outputs]]
@@ -1311,3 +1311,11 @@ mtime_ms = 1788828166288
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/19b7216b-f65a-4d31-936b-b1e8818e50d6/53c15fd7-782c-4493-8598-8ca67942478f"
 storage_version_token = "1788828779702283"
 content_type = "video/mp4"
+
+[[outputs]]
+id = "eeAji-Pud7qb3000rNx3u"
+uri = "file://attached_assets/generated_audio/vo-anthem-au-japan-winter-v2.mp3"
+type = "audio"
+title = "flowing AU to Japan anthem voiceover"
+description = "Text-to-speech audio: Planning a winter trip to Japan? feelzlike helps you see what is happening in the mountains before you leave Australia. Check current weather for the Japanese destinations we co…"
+logical_id = "4e30bc1f-cb0b-488f-a31e-eac30490e7f1"

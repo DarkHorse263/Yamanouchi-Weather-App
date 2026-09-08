@@ -12,6 +12,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 TMP.mkdir(parents=True, exist_ok=True)
 
 AU_MASTER = ROOT / "exports/video-ads/feelzlike-anthem-au.mp4"
+AU_JAPAN_AUDIO = ROOT / "attached_assets/generated_audio/au-japan-winter-audio-v2.m4a"
 if not AU_MASTER.exists():
     print("Master not found!")
     sys.exit(1)
@@ -120,27 +121,65 @@ for market_key, data in MARKETS.items():
 
     segs = data["segs"]
     
-    # Dynamically build filter_complex
+    # Calculate natural segment durations.
+    seg_durs = []
+    for s in segs:
+        seg_mp4 = TMP / f"{s}.mp4"
+        dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", str(seg_mp4)], capture_output=True, text=True).stdout)
+        seg_durs.append(dur)
+        
     filter_complex = ""
     inputs = []
-    current_time = 0.0
     for i, s in enumerate(segs):
         seg_mp4 = TMP / f"{s}.mp4"
         inputs.extend(["-i", str(seg_mp4)])
-        
-        seg_dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", str(seg_mp4)], capture_output=True, text=True).stdout)
-        
-        if i == 0:
-            current_time = seg_dur
-        else:
-            offset = current_time - 0.5
-            filter_complex += f"[{'0:v' if i==1 else f'v{i-1}'}][{i}:v]xfade=transition=fade:duration=0.5:offset={offset:.2f}[v{i}];"
-            current_time = offset + seg_dur
-            
+
+    # AU proof, US and JP keep their approved natural segment cadence.
+    # JP-English and AU-to-Japan are fitted so the final dissolve completes
+    # and the navy end card holds fully opaque for the last three seconds.
+    fit_end_card = market_key in {"jp-english", "au-japan-winter"}
+    if fit_end_card:
+        target_segs_dur = dur_master - 3.0 + (len(segs) - 1) * 0.5
+        scale = target_segs_dur / sum(seg_durs)
+        for i in range(len(segs)):
+            filter_complex += f"[{i}:v]setpts={scale:.8f}*PTS[v_scaled{i}];"
+
+        current_time = 0.0
+        for i, seg_dur in enumerate(seg_durs):
+            scaled_dur = seg_dur * scale
+            if i == 0:
+                current_time = scaled_dur
+            else:
+                offset = current_time - 0.5
+                previous = "v_scaled0" if i == 1 else f"v_mix{i-1}"
+                filter_complex += (
+                    f"[{previous}][v_scaled{i}]"
+                    f"xfade=transition=fade:duration=0.5:offset={offset:.6f}[v_mix{i}];"
+                )
+                current_time = offset + scaled_dur
+        final_video = f"v_mix{len(segs)-1}" if len(segs) > 1 else "v_scaled0"
+    else:
+        current_time = 0.0
+        for i, seg_dur in enumerate(seg_durs):
+            if i == 0:
+                current_time = seg_dur
+            else:
+                offset = current_time - 0.5
+                previous = "0:v" if i == 1 else f"v{i-1}"
+                filter_complex += (
+                    f"[{previous}][{i}:v]"
+                    f"xfade=transition=fade:duration=0.5:offset={offset:.6f}[v{i}];"
+                )
+                current_time = offset + seg_dur
+        final_video = f"v{len(segs)-1}" if len(segs) > 1 else "0:v"
+
     # Add end card
     inputs.extend(["-i", str(TMP / "end_card.mp4")])
     offset = current_time - 0.5
-    filter_complex += f"[{f'v{len(segs)-1}'}][{len(segs)}:v]xfade=transition=fade:duration=0.5:offset={offset:.2f}[v]"
+    filter_complex += (
+        f"[{final_video}][{len(segs)}:v]"
+        f"xfade=transition=fade:duration=0.5:offset={offset:.6f}[v]"
+    )
     
     master_vert = OUT / f"feelzlike-anthem-{market_key}-silent.mp4"
     
@@ -150,7 +189,9 @@ for market_key, data in MARKETS.items():
     master_vert_voiced = OUT / f"feelzlike-anthem-{market_key}.mp4"
     dur_voiced = target_durs["voiced_vertical"]
     if market_key == "au-japan-winter":
-        subprocess.run(["ffmpeg", "-y", "-i", str(master_vert), "-i", "/tmp/au-japan-winter-audio.m4a", "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "copy", "-t", str(dur_voiced), "-movflags", "+faststart", str(master_vert_voiced)], check=True)
+        if not AU_JAPAN_AUDIO.exists():
+            raise FileNotFoundError(f"Build the AU-to-Japan audio first: {AU_JAPAN_AUDIO}")
+        subprocess.run(["ffmpeg", "-y", "-i", str(master_vert), "-i", str(AU_JAPAN_AUDIO), "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "copy", "-t", str(dur_voiced), "-movflags", "+faststart", str(master_vert_voiced)], check=True)
     else:
         orig_master = ROOT / "exports/video-ads" / data["master"]
         subprocess.run(["ffmpeg", "-y", "-i", str(master_vert), "-i", str(orig_master), "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "copy", "-t", str(dur_voiced), "-movflags", "+faststart", str(master_vert_voiced)], check=True)
@@ -171,7 +212,7 @@ for market_key, data in MARKETS.items():
         )
         subprocess.run(["ffmpeg", "-y", "-i", str(master_vert), "-filter_complex", fc, "-map", "[v]", "-t", str(dur_s), "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", "30", "-movflags", "+faststart", str(silent)], check=True)
         if market_key == "au-japan-winter":
-            subprocess.run(["ffmpeg", "-y", "-i", str(silent), "-i", "/tmp/au-japan-winter-audio.m4a", "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "copy", "-t", str(dur_v), "-movflags", "+faststart", str(voiced)], check=True)
+            subprocess.run(["ffmpeg", "-y", "-i", str(silent), "-i", str(AU_JAPAN_AUDIO), "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "copy", "-t", str(dur_v), "-movflags", "+faststart", str(voiced)], check=True)
         else:
             orig_voiced_fmt = ROOT / f"exports/video-ads/feelzlike-anthem-{market_key}-{fmt}.mp4"
             subprocess.run(["ffmpeg", "-y", "-i", str(silent), "-i", str(orig_voiced_fmt), "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "copy", "-t", str(dur_v), "-movflags", "+faststart", str(voiced)], check=True)

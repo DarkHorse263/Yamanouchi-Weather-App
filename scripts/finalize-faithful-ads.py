@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ORIGINALS = ROOT / "exports" / "video-ads"
 OUT = ORIGINALS / "refresh-2026-09-reference-faithful"
 ZIP_PATH = ORIGINALS / "feelzlike-anthem-reference-faithful-2026-09.zip"
+AU_JAPAN_AUDIO = ROOT / "attached_assets/generated_audio/au-japan-winter-audio-v2.m4a"
 SPLIT_PACKAGES = (
     (
         ORIGINALS / "feelzlike-anthem-reference-faithful-2026-09-part-1.zip",
@@ -138,9 +139,10 @@ Preservation approach
   the current feelzlike interface.
 · Existing market audio is copied unchanged from the corresponding original.
 · Silent files contain no audio.
-· The Australia-to-Japan-winter cut uses a new Australian-English voiceover and
-  claim-safe copy about covered destinations, mountain weather, transport
-  context and powder alerts.
+· The Australia-to-Japan-winter cut uses a new continuous Australian-English
+  voiceover over the same original dream-trance anthem source as the AU cut.
+  Its claim-safe copy covers destinations, mountain weather, transport context
+  and powder alerts.
 · No App Store availability or nationwide-complete Japan claim is made.
 
 The earlier refresh-2026-09 directory is rejected and superseded by this
@@ -207,10 +209,11 @@ def main() -> None:
             errors.append("moov atom does not precede mdat")
 
         audio_reference_match = None
-        if audio_mode == "voiced" and market != "au-japan-winter":
-            audio_reference_match = decoded_audio_md5(path) == decoded_audio_md5(ORIGINALS / name)
+        if audio_mode == "voiced":
+            audio_reference = AU_JAPAN_AUDIO if market == "au-japan-winter" else ORIGINALS / name
+            audio_reference_match = decoded_audio_md5(path) == decoded_audio_md5(audio_reference)
             if not audio_reference_match:
-                errors.append("decoded audio differs from original")
+                errors.append("decoded audio differs from approved reference")
 
         sha256 = hashlib.sha256(path.read_bytes()).hexdigest()
         records.append(

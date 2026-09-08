@@ -101,11 +101,32 @@ orig_au_sq = orig_dir / "feelzlike-anthem-au-square.mp4"
 new_au_sq = OUT / "feelzlike-anthem-au-square.mp4"
 build_comparison(orig_au_sq, new_au_sq, times, OUT / "contact-au-square-compare.jpg", "AU Square Comparison")
 
-# Compact for US, JP, JP-EN, AU-JA
-compact_times = [5, 15, 25, 31]
-build_compact(OUT / "feelzlike-anthem-us.mp4", compact_times, OUT / "contact-us-vertical.jpg", "US Vertical")
-build_compact(OUT / "feelzlike-anthem-jp-landscape.mp4", compact_times, OUT / "contact-jp-landscape.jpg", "JP Landscape")
-build_compact(OUT / "feelzlike-anthem-jp-english.mp4", compact_times, OUT / "contact-jp-english-vertical.jpg", "JP-English Vertical")
-build_compact(OUT / "feelzlike-anthem-au-japan-winter-square.mp4", compact_times, OUT / "contact-au-japan-winter-square.jpg", "AU-Japan-Winter Square")
+# Silent-copy checks show country ordering and the feelzlike.com/end-card sync.
+build_compact(
+    OUT / "feelzlike-anthem-us-vertical-silent-copy.mp4",
+    [1.5, 8, 14.8, 21.5, 28.4, 32.3],
+    OUT / "contact-us-vertical.jpg",
+    "US silent copy · USA first · feelzlike.com with end card",
+)
+build_compact(
+    OUT / "feelzlike-anthem-jp-landscape-silent-copy.mp4",
+    [1.5, 10, 18, 27, 35.4, 43.2],
+    OUT / "contact-jp-landscape.jpg",
+    "JP silent copy · Japan first · feelzlike.com with end card",
+)
+
+# Dense final-frame checks confirm the JP-English dissolve resolves and holds.
+build_compact(
+    OUT / "feelzlike-anthem-jp-english.mp4",
+    [30.8, 31.8, 32.1, 32.4, 33.5, 34.9, 35.2],
+    OUT / "contact-jp-english-vertical.jpg",
+    "JP-English · resolved navy end-card hold",
+)
+build_compact(
+    OUT / "feelzlike-anthem-au-japan-winter-square-silent-copy.mp4",
+    [1.5, 8, 14.8, 21.5, 28.3, 32, 34],
+    OUT / "contact-au-japan-winter-square.jpg",
+    "AU to Japan · Japan first · copy held through finish",
+)
 
 print("Contact sheets generated.")

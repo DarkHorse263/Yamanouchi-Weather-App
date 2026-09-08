@@ -39,3 +39,13 @@ Preserve the August anthem campaign as the creative master. Replace only the pix
 **Why:** The owner rejected a redesigned refresh and explicitly approved the surgical current-UI replacement proof as the standard for every market.
 
 **How to apply:** Never illustrate or recreate the interface, regenerate legacy audio, shorten a cut, or change the campaign composition during an app-screen refresh. Validate every export against its corresponding original file, including silent and silent-copy versions, because their reference runtimes can differ from voiced versions.
+
+### AU-to-Japan audio and final-copy exception
+
+The AU-to-Japan cut is the one approved audio exception: use a new continuous Charlotte Australian-English narration over the original `ad-dreamtrance-bed.mp3` anthem source. Never substitute another generated bed or copy the mixed AU master audio, because that master already contains the AU narration. Fit the read so its closing feelzlike line continues across the navy end-card hold and ends near the final frame.
+
+Silent-copy country lists lead with the target market (Australia, USA, Japan, Japan, Japan). Reveal the final `feelzlike.com` pill with that cut's actual app end-card transition and hold it through the finish, rather than scheduling all copy inside an arbitrary percentage of runtime.
+
+**Why:** The owner rejected a different music bed, an early and broken-flow AU-to-Japan narration finish, a JP-English cut that stopped mid-dissolve, and silent-copy messaging that completed too early.
+
+**How to apply:** Keep the approved AU/US/JP timings untouched. Repair only the affected ending when possible, and inspect dense final-frame contact sheets before packaging.

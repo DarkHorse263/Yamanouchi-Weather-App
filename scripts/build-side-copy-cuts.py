@@ -15,25 +15,39 @@ DIN = f"{WS}/attached_assets/DINPro-Bold_1777358240555.ttf"
 CJK = "/nix/store/20yhhw5xdvaw9xrgb1xr0k75xfdvlypk-noto-fonts-cjk-2.001/share/fonts/opentype/noto-cjk/NotoSansCJK.ttc"
 WHITE = (255, 255, 255, 255)
 
-EN = ["live snow · weather · roads",
-      "australia · nz · japan · canada · usa",
-      "powder alerts to your inbox",
-      "plan your travel",
-      "feelzlike.com"]
-JA = ["積雪・天気・道路をライブで",
-      "日本・豪州・NZ・カナダ・米国",
-      "パウダーアラートをメールで",
-      "旅の計画も",
-      "feelzlike.com"]
 
 MARKETS = [  # (key, master, side, lines)
-    ("au", "feelzlike-anthem-au-silent.mp4", "left", EN),
-    ("us", "feelzlike-anthem-us-silent.mp4", "right", EN),
-    ("jp", "feelzlike-anthem-jp-silent.mp4", "left", JA),
-    ("jp-english", "feelzlike-anthem-jp-english-silent.mp4", "right", EN),
+    ("au", "feelzlike-anthem-au-silent.mp4", "left", [
+        "live snow · weather · roads",
+        "australia · nz · japan · canada · usa",
+        "powder alerts to your inbox",
+        "plan your travel",
+        "feelzlike.com"
+    ]),
+    ("us", "feelzlike-anthem-us-silent.mp4", "right", [
+        "live snow · weather · roads",
+        "usa · canada · japan · australia · nz",
+        "powder alerts to your inbox",
+        "plan your travel",
+        "feelzlike.com"
+    ]),
+    ("jp", "feelzlike-anthem-jp-silent.mp4", "left", [
+        "積雪・天気・道路をライブで",
+        "日本・豪州・NZ・カナダ・米国",
+        "パウダーアラートをメールで",
+        "旅の計画も",
+        "feelzlike.com"
+    ]),
+    ("jp-english", "feelzlike-anthem-jp-english-silent.mp4", "right", [
+        "live snow · weather · roads",
+        "japan · australia · nz · canada · usa",
+        "powder alerts to your inbox",
+        "plan your travel",
+        "feelzlike.com"
+    ]),
     ("au-japan-winter", "feelzlike-anthem-au-japan-winter-silent.mp4", "right", [
         "planning a japan winter?",
-        "check the destinations we cover",
+        "japan · australia · nz · canada · usa",
         "mountain weather · routes · transport",
         "powder alerts before you fly",
         "feelzlike.com"
@@ -44,6 +58,14 @@ FORMATS = {  # name: (W, H, phone_h)
     "landscape": (1920, 1080, 960),
     "square": (1000, 1000, 640),
     "vertical": (1080, 1920, 1150),
+}
+
+END_CARD_STARTS = {
+    "au": 28.0,
+    "us": 28.0,
+    "jp": 35.0,
+    "jp-english": 31.766667,
+    "au-japan-winter": 28.0,
 }
 
 def font(path, size):
@@ -106,7 +128,7 @@ def build(key, master, side, lines, force=False):
     dur = dur_of(src)
     if key == "jp":
         dur = 43.633333
-    ja = lines is JA
+    ja = any("積雪" in l for l in lines)
     for fmt, (W, H, ph) in FORMATS.items():
         pw = round(ph * 9 / 16 / 2) * 2
         ph = round(ph / 2) * 2
@@ -126,8 +148,10 @@ def build(key, master, side, lines, force=False):
         maskp = f"{TMP}/mask-{fmt}.png"
         rounded_mask(pw, ph, int(pw * 0.08), maskp)
         pngs = line_pngs(key, fmt, W, H, lines, ja, zone)
-        t0, span = 1.2, dur * 0.55
-        starts = [t0 + i * span / len(pngs) for i in range(len(pngs))]
+        t0 = 1.2
+        t_end = END_CARD_STARTS.get(key, dur - 3.5)
+        span = t_end - t0
+        starts = [t0 + i * span / (len(pngs) - 1) for i in range(len(pngs))]
         inputs = ["-i", src, "-loop", "1", "-i", maskp]
         for p in pngs:
             inputs += ["-loop", "1", "-i", p]
