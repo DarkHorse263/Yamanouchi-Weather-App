@@ -1247,3 +1247,67 @@ mtime_ms = 1788780167298
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/e9963959-1c7b-4151-88d5-7ef539df5ac8/d58ffc4d-54d9-4b45-a795-c18aea84d7bb"
 storage_version_token = "1788780218081322"
 content_type = "image/jpeg"
+
+[[outputs]]
+id = "oOwib_RmKG1nRV9rfJJfK"
+uri = "file://attached_assets/generated_audio/vo-anthem-au-japan-winter.mp3"
+type = "audio"
+title = "feelzlike Australia to Japan winter voiceover"
+description = "Text-to-speech audio: Planning a Japan winter? Discover feelzlike before you fly. Check current mountain weather. Explore the Japanese destinations we cover. And find route and transport context for …"
+logical_id = "933b5a2a-00dc-4eb0-a86e-cfcdb53c357a"
+
+[[outputs]]
+id = "-5StOjrc6z86la6b5PaYN"
+uri = "file://exports/video-ads/feelzlike-anthem-reference-faithful-2026-09-part-1.zip"
+type = "unspecified"
+title = "feelzlike anthem campaign · part 1 of 2"
+description = "AU, US and Australia-to-Japan-winter: 27 validated MP4s plus the shared manifest, README and six contact sheets."
+logical_id = "be6eb0c9-b7af-496e-a8d8-64e00a5169b8"
+content_hash = "sha256:3c447c8f8fe0a5bafa4dc2475cfae84ab431cf16a395a1e40b3ec050048a62d0"
+size = 69231723
+mtime_ms = 1788828743403
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/be6eb0c9-b7af-496e-a8d8-64e00a5169b8/cd8a90ce-db04-4523-80c1-040774485190"
+storage_version_token = "1788828774806942"
+content_type = "application/octet-stream"
+
+[[outputs]]
+id = "53Mq03nTFg_wOJBFFtvEV"
+uri = "file://exports/video-ads/feelzlike-anthem-reference-faithful-2026-09-part-2.zip"
+type = "unspecified"
+title = "feelzlike anthem campaign · part 2 of 2"
+description = "JP and JP-English: 18 validated MP4s plus the shared manifest, README and six contact sheets."
+logical_id = "b14e949e-13c8-456f-8fff-abd760718dc7"
+content_hash = "sha256:9c371d2b731e85c4b1280033d74ce5f5c8511eb89750e719c06e9e0cfcc03cb0"
+size = 65617153
+mtime_ms = 1788828745519
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/b14e949e-13c8-456f-8fff-abd760718dc7/edaa4094-33b6-485c-a321-9bc61f76b235"
+storage_version_token = "1788828776629403"
+content_type = "application/octet-stream"
+
+[[outputs]]
+id = "lG_d11Ff8z0cwh-kTc-Sf"
+uri = "file://exports/video-ads/refresh-2026-09-reference-faithful/feelzlike-anthem-au-landscape.mp4"
+type = "video"
+title = "Australia anthem · landscape · current UI"
+description = "Reference-faithful 34.3-second Australia landscape cut with the original campaign composition and unchanged audio."
+logical_id = "814cf02d-8826-4736-ad4b-0d483a993ed6"
+content_hash = "sha256:ebc46d6ceae05d4e7e0829f7dc03fefdf05b1b4756ba6f86cbafcb541b51ff90"
+size = 3465192
+mtime_ms = 1788827150124
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/814cf02d-8826-4736-ad4b-0d483a993ed6/9fef448f-f9e2-46ea-90d6-70ec9d48aa61"
+storage_version_token = "1788828778114584"
+content_type = "video/mp4"
+
+[[outputs]]
+id = "VGAx_JsoRuDMWJ0LxDA-r"
+uri = "file://exports/video-ads/refresh-2026-09-reference-faithful/feelzlike-anthem-au-japan-winter.mp4"
+type = "video"
+title = "Australia to Japan winter · vertical"
+description = "New 34.3-second Australia-to-Japan cut using current real app screens, Australian-English voiceover and the existing anthem music bed."
+logical_id = "19b7216b-f65a-4d31-936b-b1e8818e50d6"
+content_hash = "sha256:d0bec23f8eed4d2134c233ca3f9335c781e28f2918aa6e254e7c307c28e94c2a"
+size = 3473154
+mtime_ms = 1788828166288
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/19b7216b-f65a-4d31-936b-b1e8818e50d6/53c15fd7-782c-4493-8598-8ca67942478f"
+storage_version_token = "1788828779702283"
+content_type = "video/mp4"

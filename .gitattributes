@@ -4,3 +4,6 @@ yam.part.aa filter=lfs diff=lfs merge=lfs -text
 yam.part.ab filter=lfs diff=lfs merge=lfs -text
 feelzlike.tar.gz filter=lfs diff=lfs merge=lfs -text
 exports/video-ads/feelzlike-anthem-all-formats.zip filter=lfs diff=lfs merge=lfs -text
+exports/video-ads/feelzlike-anthem-reference-faithful-2026-09-part-1.zip filter=lfs diff=lfs merge=lfs -text
+exports/video-ads/feelzlike-anthem-reference-faithful-2026-09-part-2.zip filter=lfs diff=lfs merge=lfs -text
+exports/video-ads/feelzlike-anthem-reference-faithful-2026-09.zip filter=lfs diff=lfs merge=lfs -text

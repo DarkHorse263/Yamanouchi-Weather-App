@@ -8,7 +8,7 @@ import os, subprocess, sys
 from PIL import Image, ImageDraw, ImageFont
 
 WS = "/home/runner/workspace"
-SRC = f"{WS}/exports/video-ads"
+SRC = f"{WS}/exports/video-ads/refresh-2026-09-reference-faithful"
 OUT = SRC
 TMP = "/tmp/sidecuts"
 DIN = f"{WS}/attached_assets/DINPro-Bold_1777358240555.ttf"
@@ -27,10 +27,17 @@ JA = ["積雪・天気・道路をライブで",
       "feelzlike.com"]
 
 MARKETS = [  # (key, master, side, lines)
-    ("au", "anthem3-master-au.mp4", "left", EN),
-    ("us", "anthem3-master-us.mp4", "right", EN),
-    ("jp", "anthem3-master-jp.mp4", "left", JA),
-    ("jp-english", "anthem3-master-jpen.mp4", "right", EN),
+    ("au", "feelzlike-anthem-au-silent.mp4", "left", EN),
+    ("us", "feelzlike-anthem-us-silent.mp4", "right", EN),
+    ("jp", "feelzlike-anthem-jp-silent.mp4", "left", JA),
+    ("jp-english", "feelzlike-anthem-jp-english-silent.mp4", "right", EN),
+    ("au-japan-winter", "feelzlike-anthem-au-japan-winter-silent.mp4", "right", [
+        "planning a japan winter?",
+        "check the destinations we cover",
+        "mountain weather · routes · transport",
+        "powder alerts before you fly",
+        "feelzlike.com"
+    ]),
 ]
 
 FORMATS = {  # name: (W, H, phone_h)
@@ -94,9 +101,11 @@ def dur_of(path):
                         "-of", "csv=p=0", path], capture_output=True, text=True)
     return float(r.stdout.strip())
 
-def build(key, master, side, lines):
+def build(key, master, side, lines, force=False):
     src = f"{SRC}/{master}"
     dur = dur_of(src)
+    if key == "jp":
+        dur = 43.633333
     ja = lines is JA
     for fmt, (W, H, ph) in FORMATS.items():
         pw = round(ph * 9 / 16 / 2) * 2
@@ -133,6 +142,9 @@ def build(key, master, side, lines):
             fc.append(f"[{cur}][l{i}]overlay=0:0:shortest=1[v{i+1}]")
             cur = f"v{i+1}"
         out = f"{OUT}/feelzlike-anthem-{key}-{fmt}-silent-copy.mp4"
+        if os.path.exists(out) and not force:
+            print(f"Skipping {out}")
+            continue
         cmd = ["ffmpeg", "-y", *inputs, "-filter_complex", ";".join(fc),
                "-map", f"[{cur}]", "-t", f"{dur}", "-r", "30", "-c:v", "libx264",
                "-crf", "18", "-pix_fmt", "yuv420p", "-movflags", "+faststart", out]
@@ -144,7 +156,8 @@ def build(key, master, side, lines):
 if __name__ == "__main__":
     os.makedirs(TMP, exist_ok=True)
     which = sys.argv[1:] or [m[0] for m in MARKETS]
+    force = bool(sys.argv[1:])
     for key, master, side, lines in MARKETS:
         if key in which:
-            build(key, master, side, lines)
+            build(key, master, side, lines, force=force)
     print("done")

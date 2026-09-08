@@ -50,6 +50,8 @@ MARKETS = {
     }
 }
 
+SELECTED_MARKETS = set(sys.argv[1:])
+
 phone_w, phone_h = 780, 1688
 px, py = 150, 116
 
@@ -59,6 +61,8 @@ ImageDraw.Draw(mask).rounded_rectangle([0, 0, phone_w-1, phone_h-1], radius=65, 
 print("Processing segment frames...")
 processed_segs = set()
 for m, data in MARKETS.items():
+    if SELECTED_MARKETS and m not in SELECTED_MARKETS:
+        continue
     for seg in data["segs"]:
         if seg in processed_segs: continue
         processed_segs.add(seg)
@@ -83,14 +87,36 @@ for m, data in MARKETS.items():
         print(f"Processed {seg}")
 
 # End card video
-subprocess.run(["ffmpeg", "-y", "-loop", "1", "-i", str(TMP / "end_card.png"), "-c:v", "libx264", "-t", "6", "-pix_fmt", "yuv420p", "-r", "30", str(TMP / "end_card.mp4")], check=True)
+subprocess.run(["ffmpeg", "-y", "-loop", "1", "-i", str(TMP / "end_card.png"), "-c:v", "libx264", "-t", "15", "-pix_fmt", "yuv420p", "-r", "30", str(TMP / "end_card.mp4")], check=True)
 
 # Generate masters
 for market_key, data in MARKETS.items():
+    if SELECTED_MARKETS and market_key not in SELECTED_MARKETS:
+        continue
     print(f"Building {market_key}...")
-    orig_master = ROOT / "exports/video-ads" / data["master"]
-    dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", str(orig_master)], capture_output=True, text=True).stdout)
-    end_card_dur = dur - 30.0 + 1.0 # 30 seconds of content, plus 1 second for xfade overlap
+    
+    # check if finished
+    final_test = OUT / f"feelzlike-anthem-{market_key}-square.mp4"
+    if not SELECTED_MARKETS and final_test.exists():
+        print(f"Skipping {market_key}, already exists.")
+        continue
+
+    target_durs = {}
+    if market_key == "au-japan-winter":
+        for fmt in ["vertical", "landscape", "square"]:
+            target_durs[f"silent_{fmt}"] = 34.300
+            target_durs[f"voiced_{fmt}"] = 34.300
+    else:
+        for fmt, orig_fmt_name in [("vertical", ""), ("landscape", "-landscape"), ("square", "-square")]:
+            orig_silent = ROOT / f"exports/video-ads/feelzlike-anthem-{market_key}{orig_fmt_name}-silent.mp4"
+            orig_voiced = ROOT / f"exports/video-ads/feelzlike-anthem-{market_key}{orig_fmt_name}.mp4"
+            dur_silent = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", str(orig_silent)], capture_output=True, text=True).stdout)
+            dur_voiced = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", str(orig_voiced)], capture_output=True, text=True).stdout)
+            target_durs[f"silent_{fmt}"] = dur_silent
+            target_durs[f"voiced_{fmt}"] = dur_voiced
+            
+    # Use vertical silent duration for the master generation
+    dur_master = target_durs["silent_vertical"]
 
     segs = data["segs"]
     
@@ -116,27 +142,39 @@ for market_key, data in MARKETS.items():
     offset = current_time - 0.5
     filter_complex += f"[{f'v{len(segs)-1}'}][{len(segs)}:v]xfade=transition=fade:duration=0.5:offset={offset:.2f}[v]"
     
-    master_vert = OUT / f"feelzlike-anthem-refresh-2026-09-{market_key}-vertical-silent.mp4"
+    master_vert = OUT / f"feelzlike-anthem-{market_key}-silent.mp4"
     
-    subprocess.run(["ffmpeg", "-y"] + inputs + ["-filter_complex", filter_complex, "-map", "[v]", "-t", str(dur), "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", "30", str(master_vert)], check=True)
+    subprocess.run(["ffmpeg", "-y"] + inputs + ["-filter_complex", filter_complex, "-map", "[v]", "-t", str(dur_master), "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", "30", "-movflags", "+faststart", str(master_vert)], check=True)
     
     # Mix audio
-    master_vert_voiced = OUT / f"feelzlike-anthem-refresh-2026-09-{market_key}-vertical-voiced.mp4"
-    subprocess.run(["ffmpeg", "-y", "-i", str(master_vert), "-i", str(orig_master), "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "copy", str(master_vert_voiced)], check=True)
+    master_vert_voiced = OUT / f"feelzlike-anthem-{market_key}.mp4"
+    dur_voiced = target_durs["voiced_vertical"]
+    if market_key == "au-japan-winter":
+        subprocess.run(["ffmpeg", "-y", "-i", str(master_vert), "-i", "/tmp/au-japan-winter-audio.m4a", "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "copy", "-t", str(dur_voiced), "-movflags", "+faststart", str(master_vert_voiced)], check=True)
+    else:
+        orig_master = ROOT / "exports/video-ads" / data["master"]
+        subprocess.run(["ffmpeg", "-y", "-i", str(master_vert), "-i", str(orig_master), "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "copy", "-t", str(dur_voiced), "-movflags", "+faststart", str(master_vert_voiced)], check=True)
     
     # Generate derived aspect ratios: landscape (1920x1080) and square (1000x1000)
     # Background: scaled-to-fill + boxblur 30 + slight darken
     # Foreground: 9:16 scaled to canvas height centered
     for fmt, (fw, fh) in [("landscape", (1920, 1080)), ("square", (1000, 1000))]:
-        silent = OUT / f"feelzlike-anthem-refresh-2026-09-{market_key}-{fmt}-silent.mp4"
-        voiced = OUT / f"feelzlike-anthem-refresh-2026-09-{market_key}-{fmt}-voiced.mp4"
+        silent = OUT / f"feelzlike-anthem-{market_key}-{fmt}-silent.mp4"
+        voiced = OUT / f"feelzlike-anthem-{market_key}-{fmt}.mp4"
+        dur_s = target_durs[f"silent_{fmt}"]
+        dur_v = target_durs[f"voiced_{fmt}"]
         
         fc = (
-            f"[0:v]scale={fw}:{fh}:force_original_aspect_ratio=increase,crop={fw}:{fh},boxblur=30,colorchannelmixer=r=.7:g=.7:b=.7[bg];"
+            f"[0:v]scale={fw}:{fh}:force_original_aspect_ratio=increase,crop={fw}:{fh},boxblur=30,colorlevels=rimin=0.0:gimin=0.0:bimin=0.0:rimax=1.0:gimax=1.0:bimax=1.0:romin=0.0:gomin=0.0:bomin=0.0:romax=0.8:gomax=0.8:bomax=0.8[bg];"
             f"[0:v]scale=-1:{fh}[fg];"
             f"[bg][fg]overlay=(W-w)/2:(H-h)/2[v]"
         )
-        subprocess.run(["ffmpeg", "-y", "-i", str(master_vert), "-filter_complex", fc, "-map", "[v]", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", "30", str(silent)], check=True)
-        subprocess.run(["ffmpeg", "-y", "-i", str(silent), "-i", str(orig_master), "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "copy", str(voiced)], check=True)
+        subprocess.run(["ffmpeg", "-y", "-i", str(master_vert), "-filter_complex", fc, "-map", "[v]", "-t", str(dur_s), "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", "30", "-movflags", "+faststart", str(silent)], check=True)
+        if market_key == "au-japan-winter":
+            subprocess.run(["ffmpeg", "-y", "-i", str(silent), "-i", "/tmp/au-japan-winter-audio.m4a", "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "copy", "-t", str(dur_v), "-movflags", "+faststart", str(voiced)], check=True)
+        else:
+            orig_voiced_fmt = ROOT / f"exports/video-ads/feelzlike-anthem-{market_key}-{fmt}.mp4"
+            subprocess.run(["ffmpeg", "-y", "-i", str(silent), "-i", str(orig_voiced_fmt), "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "copy", "-t", str(dur_v), "-movflags", "+faststart", str(voiced)], check=True)
+
         
 print("All master formats and variants rebuilt faithfully.")

@@ -7,29 +7,12 @@ const FPS = 12;
 const BASE = "http://localhost:80";
 
 const SEGS = [
-  // AU
-  ["au-home",   "en", `${BASE}/`, 9, 0, 1500],
-  ["au-mtn",    "en", `${BASE}/snowy-mountains/mountain/perisher`, 11, 0, 1900],
-  ["au-qtown",  "en", `${BASE}/queenstown`, 4, 0, 500],
-  ["au-alerts", "en", `${BASE}/alerts`, 6, "ALERT", "ALERT"],
-
-  // US
-  ["us-home",   "en", `${BASE}/`, 9, 0, 1500],
-  ["us-mtn",    "en", `${BASE}/vail-valley/mountain/vail-mountain`, 11, 0, 1900],
-  ["us-town",   "en", `${BASE}/vail-valley`, 4, 0, 500],
-  ["us-alerts", "en", `${BASE}/alerts`, 6, "ALERT", "ALERT"],
-
   // JP
-  ["jp-home",    "ja", `${BASE}/`, 9, 0, 1500],
-  ["jp-mtn",     "ja", `${BASE}/iiyama/mountain/madarao`, 11, 0, 1900],
-  ["jp-niseko",  "ja", `${BASE}/niseko/mountain/grand-hirafu`, 4, 0, 560],
-  ["jp-happo",   "ja", `${BASE}/hakuba-valley/mountain/happo-one`, 4, 0, 560],
-  ["jp-town",    "ja", `${BASE}/iiyama`, 4, 0, 500],
   ["jp-alerts",  "ja", `${BASE}/alerts`, 6, "ALERT", "ALERT"],
 
   // JP-EN
   ["jpen-home",  "en", `${BASE}/`, 9, 0, 1500],
-  ["jpen-mtn",   "en", `${BASE}/iiyama/mountain/madarao`, 11, 0, 1900],
+  ["jpen-mtn",   "en", `${BASE}/iiyama/mountain/madarao-kogen`, 11, 0, 1900],
   ["jpen-niseko","en", `${BASE}/niseko/mountain/grand-hirafu`, 4, 0, 560],
   ["jpen-happo", "en", `${BASE}/hakuba-valley/mountain/happo-one`, 4, 0, 560],
   ["jpen-town",  "en", `${BASE}/iiyama`, 4, 0, 500],
@@ -46,12 +29,7 @@ const SEGS = [
   
   const ease = t => t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2;
 
-  const requested = new Set(process.argv.slice(2));
-  const segments = requested.size
-    ? SEGS.filter(([name]) => requested.has(name))
-    : SEGS;
-
-  for (const [name, lang, url, secs, y0raw, y1raw] of segments) {
+  for (const [name, lang, url, secs, y0raw, y1raw] of SEGS) {
     const dir = `/tmp/adrec_faithful/${name}`;
     fs.rmSync(dir, { recursive: true, force: true });
     fs.mkdirSync(dir, { recursive: true });
@@ -63,7 +41,9 @@ const SEGS = [
     await page.evaluateOnNewDocument((l) => {
       localStorage.setItem("feelzlike.consent.v1", JSON.stringify({ necessary: true, analytics: false, ads: false, decidedAt: new Date().toISOString() }));
       localStorage.setItem("feelzlike:installDismissedAt", JSON.stringify(Date.now()));
-      localStorage.setItem("feelzlike:lang", l);
+      for (const rid of ["niseko", "hakuba-valley", "iiyama"]) {
+        localStorage.setItem(`feelzlike:${rid}:lang`, l);
+      }
       const hide = () => {
         for (const el of document.querySelectorAll("span,div,p,button")) {
           const t = (el.textContent || "").toLowerCase();

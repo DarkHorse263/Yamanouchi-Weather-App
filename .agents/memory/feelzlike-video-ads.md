@@ -1,6 +1,6 @@
 ---
 name: feelzlike AI video ads
-description: How the 15s/30s vertical video ads are produced (AI clips + real app screenshots + TTS) and the traps hit.
+description: How the AI ads and reference-faithful anthem refreshes are produced, including the creative constraints the owner approved.
 ---
 
 # feelzlike AI video ads (Aug 2026)
@@ -17,8 +17,8 @@ Output: `exports/video-ads/feelzlike-ad-{15s,30s}.mp4` (1080x1920 9:16). Owner a
 - Owner feedback baked in (v3): people DRIVE to snow from town (no snow at the door/window), nobody talks on camera (generated lips can't sync to TTS — narration only), no "free until" line in video ads. App-on-screen shots are HONEST: generate a locked-off clip of a phone with a plain WHITE screen, then corner-pin the real screenshot onto it — and it must be tracked PER FRAME (a static pin over a hand-held phone reads as fake; owner rejected it). Recipe: flood-fill the white region from a centre seed each frame (extreme-point corner picking gets poisoned by lamp glow; clips are 720x1280 native), temporal-smooth the quad, PIL PERSPECTIVE warp with rounded-corner feathered mask + slight brighten, re-encode frames.
 - Cars in AU/NZ footage must be RIGHT-HAND DRIVE, driving on the LEFT — prompt it explicitly or the model produces LHD.
 - App-screen ads (no people): record live prod pages via puppeteer as 12fps frame sequences (390x844 dpr2, consent + `feelzlike:installDismissedAt` pre-seeded), round-corner overlay on brand gradient, xfade concat. Promo chips ("until 31 dec") must be hidden with a MutationObserver installed via evaluateOnNewDocument — one-shot hides get undone by React re-renders — and the selector must include `button` (the chip is a BUTTON, not span/div).
-- Japanese-UI recordings: language is per-region localStorage (`feelzlike:<regionId>:lang` = "ja"), seed before load; home + alerts surfaces have no ja mode. Japan market gets TWO cuts (ja + en screens/VO).
-- Owner wants Madarao (iiyama/madarao-kogen) leading the Japan cuts to showcase the Snowball Japan partner card, and the world coverage map in the home opener (scroll home to .leaflet-container, pre-warm tiles ~6s before framing).
+- Japanese-UI recordings: language uses the app-wide localStorage key `feelzlike:lang`; seed it before load. Home + alerts surfaces have no ja mode. Japan market gets TWO cuts (ja + en screens/VO).
+- Owner wants Madarao (`/iiyama/mountain/madarao`) leading the Japan cuts and the world coverage map in the home opener. `madarao-kogen` is the town id, not the mountain id; using it in the mountain route records an empty green shell.
 - Headless chromium has NO CJK fonts AND no emoji fonts by default (flags = tofu boxes too); install noto-fonts-cjk-sans + noto-fonts-color-emoji and list both dirs in the FONTCONFIG_FILE fonts.conf.
 - TTS takes vary: same voice can stumble ("118" → spell out "one hundred and eighteen") or add filler; listen/regenerate before mixing. Japan-English cut uses the Australian voice (Jess) by owner preference.
 - End-card HTML screenshots: chromium headless pads the bottom with a white strip at exact window-size — render taller (e.g. 1080x2100) and crop to 1920, then pixel-check the bottom rows.
@@ -31,3 +31,11 @@ Output: `exports/video-ads/feelzlike-ad-{15s,30s}.mp4` (1080x1920 9:16). Owner a
 - Aspect variants (16:9 1920x1080 + 1000x1000 square for FB) are derived FROM the finished 9:16 finals, not recomposited: fg = 9:16 scaled to canvas height centered, bg = same video scaled-to-fill + boxblur 30 + slight darken; silent versions = `-an -c:v copy`. Audio never changes when only screens are re-shot — mux the old cut's audio track onto the new silent master.
 - When a merged translation task changes recorded screens, only re-record the affected page segments from LOCAL DEV (prod lags until republish); per-segment mp4s + xfade offsets let you rebuild a cut by re-encoding 2 segments instead of everything.
 - Silent "copy-point" variants: `scripts/build-side-copy-cuts.py` (PIL + ffmpeg) lays the 9:16 master to one side (au/jp left, us/jpen right per owner) on flat #0055FF with 5 fading copy lines (DIN Pro Bold; JP cut uses ja lines via nix NotoSansCJK.ttc — no CJK in fc-list by default); outputs `*-silent-copy.mp4` per market x landscape/square/vertical. Env restarts kill nohup background renders — run one market per foreground shell call (~2min each).
+
+## Approved anthem refresh method
+
+Preserve the August anthem campaign as the creative master. Replace only the pixels inside the existing phone screen with recordings of the current real app. Keep the original shot order, market timing, phone geometry, rounded mask, same-video blurred side extensions, side-copy layout, navy end card, voiceovers, music, and full runtime. Derive landscape and square from the completed 9:16 master.
+
+**Why:** The owner rejected a redesigned refresh and explicitly approved the surgical current-UI replacement proof as the standard for every market.
+
+**How to apply:** Never illustrate or recreate the interface, regenerate legacy audio, shorten a cut, or change the campaign composition during an app-screen refresh. Validate every export against its corresponding original file, including silent and silent-copy versions, because their reference runtimes can differ from voiced versions.
