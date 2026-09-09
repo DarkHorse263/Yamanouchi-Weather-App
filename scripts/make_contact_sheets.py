@@ -126,7 +126,7 @@ build_compact(
     OUT / "feelzlike-anthem-au-japan-winter-square-silent-copy.mp4",
     [1.5, 8, 14.8, 21.5, 28.3, 32, 34],
     OUT / "contact-au-japan-winter-square.jpg",
-    "AU to Japan · Japan first · copy held through finish",
+    "AU to Japan · 265 resorts across 37 regions · copy held through finish",
 )
 
 print("Contact sheets generated.")

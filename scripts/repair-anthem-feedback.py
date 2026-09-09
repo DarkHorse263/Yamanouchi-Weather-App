@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ORIGINALS = ROOT / "exports/video-ads"
 OUT = ORIGINALS / "refresh-2026-09-reference-faithful"
 AU_ORIGINAL = ORIGINALS / "feelzlike-anthem-au.mp4"
-AU_JAPAN_AUDIO = ROOT / "attached_assets/generated_audio/au-japan-winter-audio-v2.m4a"
+AU_JAPAN_AUDIO = ROOT / "attached_assets/generated_audio/au-japan-winter-audio-v5.m4a"
 TMP = OUT / ".anthem-feedback-repair"
 
 

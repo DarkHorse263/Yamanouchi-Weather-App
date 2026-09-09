@@ -42,7 +42,7 @@ Preserve the August anthem campaign as the creative master. Replace only the pix
 
 ### AU-to-Japan audio and final-copy exception
 
-The AU-to-Japan cut is the one approved audio exception: use a new continuous Charlotte Australian-English narration over the original `ad-dreamtrance-bed.mp3` anthem source. Never substitute another generated bed or copy the mixed AU master audio, because that master already contains the AU narration. Fit the read so its closing feelzlike line continues across the navy end-card hold and ends near the final frame.
+The AU-to-Japan cut is the one approved audio exception: use a new continuous Charlotte Australian-English narration over the exact `ad-music-bed.mp3` source used by the JP-English anthem. Never substitute another generated bed or copy the mixed JP-English master audio, because that master already contains its narration. Keep the new read naturally paced rather than time-compressing a long script, and land its closing feelzlike line across the navy end-card hold.
 
 Silent-copy country lists lead with the target market (Australia, USA, Japan, Japan, Japan). Reveal the final `feelzlike.com` pill with that cut's actual app end-card transition and hold it through the finish, rather than scheduling all copy inside an arbitrary percentage of runtime.
 

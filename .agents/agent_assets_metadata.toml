@@ -1260,14 +1260,14 @@ logical_id = "933b5a2a-00dc-4eb0-a86e-cfcdb53c357a"
 id = "-5StOjrc6z86la6b5PaYN"
 uri = "file://exports/video-ads/feelzlike-anthem-reference-faithful-2026-09-part-1.zip"
 type = "unspecified"
-title = "feelzlike anthem refresh · part 1"
-description = "Australia, USA and AU-to-Japan videos. Updated music, narration, end-card and silent-copy timing included."
+title = "feelzlike anthem refresh · corrected part 1"
+description = "Australia, USA and AU-to-Japan. Includes the JP-English music bed match, natural v5 narration and 265-resort silent copy."
 logical_id = "be6eb0c9-b7af-496e-a8d8-64e00a5169b8"
-content_hash = "sha256:4e3368e34944b83efd1858500a7e2103a96266a6bfa4539db95a2a6ef4cb85e4"
-size = 70193201
-mtime_ms = 1788856706030
-storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/be6eb0c9-b7af-496e-a8d8-64e00a5169b8/c2215083-b966-477c-9024-b8860e15073d"
-storage_version_token = "1788856774934374"
+content_hash = "sha256:ec71381236acc042f4220b8878560d47db8ddacdab55b7597058be77804f8351"
+size = 70434661
+mtime_ms = 1788913882876
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/be6eb0c9-b7af-496e-a8d8-64e00a5169b8/b8d5a6b8-b330-4154-b766-e5d063b10c11"
+storage_version_token = "1788914067913798"
 content_type = "application/octet-stream"
 
 [[outputs]]
@@ -1275,13 +1275,13 @@ id = "53Mq03nTFg_wOJBFFtvEV"
 uri = "file://exports/video-ads/feelzlike-anthem-reference-faithful-2026-09-part-2.zip"
 type = "unspecified"
 title = "feelzlike anthem refresh · part 2"
-description = "Japan and Japan-English videos. Includes the resolved JP-English end-card hold and corrected silent-copy timing."
+description = "Japan and Japan-English exports from the fully validated 45-video package."
 logical_id = "b14e949e-13c8-456f-8fff-abd760718dc7"
-content_hash = "sha256:25c8ee56d43d3c8a372c6f2aac328a7ec6e6567035f73f79ec322ee0dc8babb1"
-size = 65130844
-mtime_ms = 1788856708903
-storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/b14e949e-13c8-456f-8fff-abd760718dc7/ec7b2a4e-ae2d-4eb3-8c73-6dc4805e293a"
-storage_version_token = "1788856777240935"
+content_hash = "sha256:651813c823959b2783afe01f76a1ef60df9973c780c2e6fd435a00e4e01408b0"
+size = 65135993
+mtime_ms = 1788913884956
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/b14e949e-13c8-456f-8fff-abd760718dc7/56b99b74-c607-4593-a034-17c36ac15bb4"
+storage_version_token = "1788914069836224"
 content_type = "application/octet-stream"
 
 [[outputs]]
@@ -1319,3 +1319,27 @@ type = "audio"
 title = "flowing AU to Japan anthem voiceover"
 description = "Text-to-speech audio: Planning a winter trip to Japan? feelzlike helps you see what is happening in the mountains before you leave Australia. Check current weather for the Japanese destinations we co…"
 logical_id = "4e30bc1f-cb0b-488f-a31e-eac30490e7f1"
+
+[[outputs]]
+id = "ZjmsKZuBg6pTJoAr1lH4Q"
+uri = "file://attached_assets/generated_audio/vo-anthem-au-japan-winter-v3.mp3"
+type = "audio"
+title = "smooth AU to Japan anthem voiceover"
+description = "Text-to-speech audio: Planning a winter trip to Japan? Start with feelzlike. Explore two hundred and sixty-five ski resorts across thirty-seven Japanese regions. Check mountain weather, snowfall and …"
+logical_id = "2a4876e8-b883-498c-aa18-e9c0a8867479"
+
+[[outputs]]
+id = "-7smIhErhwIpWiUDGYS0u"
+uri = "file://attached_assets/generated_audio/vo-anthem-au-japan-winter-v4.mp3"
+type = "audio"
+title = "natural paced AU to Japan anthem voiceover"
+description = "Text-to-speech audio: Planning a winter trip to Japan? Start with feelzlike. Explore two hundred and sixty-five ski resorts across thirty-seven regions, with mountain weather, snowfall, freezing leve…"
+logical_id = "7b00485b-7223-4292-9980-e1c22fe0a4a7"
+
+[[outputs]]
+id = "S-PZbJ1UXv_aKe1MSRtPU"
+uri = "file://attached_assets/generated_audio/vo-anthem-au-japan-winter-v5.mp3"
+type = "audio"
+title = "final flowing AU to Japan anthem voiceover"
+description = "Text-to-speech audio: Planning a winter trip to Japan? Start with feelzlike. Explore two hundred and sixty-five ski resorts across thirty-seven regions, with mountain weather, snowfall, freezing leve…"
+logical_id = "454c335f-39d6-436d-b383-9714452cedca"

@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ORIGINALS = ROOT / "exports" / "video-ads"
 OUT = ORIGINALS / "refresh-2026-09-reference-faithful"
 ZIP_PATH = ORIGINALS / "feelzlike-anthem-reference-faithful-2026-09.zip"
-AU_JAPAN_AUDIO = ROOT / "attached_assets/generated_audio/au-japan-winter-audio-v2.m4a"
+AU_JAPAN_AUDIO = ROOT / "attached_assets/generated_audio/au-japan-winter-audio-v5.m4a"
 SPLIT_PACKAGES = (
     (
         ORIGINALS / "feelzlike-anthem-reference-faithful-2026-09-part-1.zip",
@@ -140,7 +140,7 @@ Preservation approach
 · Existing market audio is copied unchanged from the corresponding original.
 · Silent files contain no audio.
 · The Australia-to-Japan-winter cut uses a new continuous Australian-English
-  voiceover over the same original dream-trance anthem source as the AU cut.
+  voiceover over the exact music source and mix treatment used by JP-English.
   Its claim-safe copy covers destinations, mountain weather, transport context
   and powder alerts.
 · No App Store availability or nationwide-complete Japan claim is made.

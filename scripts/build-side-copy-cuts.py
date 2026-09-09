@@ -47,7 +47,7 @@ MARKETS = [  # (key, master, side, lines)
     ]),
     ("au-japan-winter", "feelzlike-anthem-au-japan-winter-silent.mp4", "right", [
         "planning a japan winter?",
-        "japan · australia · nz · canada · usa",
+        "265 unique Japanese ski resorts,\nacross 37 regions",
         "mountain weather · routes · transport",
         "powder alerts before you fly",
         "feelzlike.com"
@@ -71,10 +71,13 @@ END_CARD_STARTS = {
 def font(path, size):
     return ImageFont.truetype(path, size)
 
+def text_width(text, f, dr):
+    return max(dr.textlength(line, font=f) for line in text.splitlines())
+
 def fit_font(path, size, lines, maxw, dr):
     while size > 20:
         f = font(path, size)
-        if all(dr.textlength(t, font=f) <= maxw for t in lines):
+        if all(text_width(t, f, dr) <= maxw for t in lines):
             return f, size
         size -= 2
     return font(path, size), size
@@ -111,8 +114,17 @@ def line_pngs(key, fmt, W, H, lines, ja, zone):
             d.text((px + padx, y - pady + (ph - size) // 2 - int(size * 0.08)), text, font=f, fill=(0, 85, 255, 255))
         else:
             f = body_font
-            tw = d.textlength(text, font=f)
-            d.text((x0 + (zw - tw) // 2, y), text, font=f, fill=WHITE)
+            text_lines = text.splitlines()
+            line_height = int(size * 1.1)
+            text_y = y - ((len(text_lines) - 1) * line_height) // 2
+            for line_number, line in enumerate(text_lines):
+                tw = d.textlength(line, font=f)
+                d.text(
+                    (x0 + (zw - tw) // 2, text_y + line_number * line_height),
+                    line,
+                    font=f,
+                    fill=WHITE,
+                )
         p = f"{TMP}/{key}-{fmt}-line{i}.png"
         img.save(p)
         paths.append(p)

@@ -12,7 +12,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 TMP.mkdir(parents=True, exist_ok=True)
 
 AU_MASTER = ROOT / "exports/video-ads/feelzlike-anthem-au.mp4"
-AU_JAPAN_AUDIO = ROOT / "attached_assets/generated_audio/au-japan-winter-audio-v2.m4a"
+AU_JAPAN_AUDIO = ROOT / "attached_assets/generated_audio/au-japan-winter-audio-v5.m4a"
 if not AU_MASTER.exists():
     print("Master not found!")
     sys.exit(1)

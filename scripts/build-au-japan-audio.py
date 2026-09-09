@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Mix the AU-to-Japan narration over the original feelzlike anthem bed."""
+"""Mix AU-to-Japan narration to match the JP-English anthem audio."""
 
 from __future__ import annotations
 
@@ -8,11 +8,12 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BED = ROOT / "attached_assets/generated_audio/ad-dreamtrance-bed.mp3"
-VOICE = ROOT / "attached_assets/generated_audio/vo-anthem-au-japan-winter-v2.mp3"
-OUTPUT = ROOT / "attached_assets/generated_audio/au-japan-winter-audio-v2.m4a"
+BED = ROOT / "attached_assets/generated_audio/ad-music-bed.mp3"
+VOICE = ROOT / "attached_assets/generated_audio/vo-anthem-au-japan-winter-v5.mp3"
+OUTPUT = ROOT / "attached_assets/generated_audio/au-japan-winter-audio-v5.m4a"
 VIDEO_DURATION = 34.3
-VOICE_TARGET_DURATION = 34.0
+VOICE_DELAY_MS = 800
+VOICE_LEVEL_MATCH = 0.314
 
 
 def duration(path: Path) -> float:
@@ -38,28 +39,23 @@ def main() -> None:
         if not path.exists():
             raise FileNotFoundError(path)
 
-    tempo = duration(VOICE) / VOICE_TARGET_DURATION
-    voice_filter = (
-        f"atempo={tempo:.8f},"
-        "loudnorm=I=-18:TP=-2:LRA=7,"
-        f"apad=whole_dur={VIDEO_DURATION}[vo];"
-        "[vo]asplit=2[vo_sc][vo_mix];"
-    )
     filter_complex = (
-        f"[0:a]atrim=0:{VIDEO_DURATION},asetpts=N/SR/TB,volume=0.90[bed];"
-        f"[1:a]{voice_filter}"
+        f"[0:a]atrim=0:{VIDEO_DURATION},asetpts=N/SR/TB,volume=0.70[bed];"
+        f"[1:a]volume={VOICE_LEVEL_MATCH},adelay={VOICE_DELAY_MS}|{VOICE_DELAY_MS},"
+        f"apad=whole_dur={VIDEO_DURATION}[voice];"
+        "[voice]asplit=2[vo_sc][vo_mix_base];"
+        "[vo_mix_base]volume=2.80[vo_mix];"
         "[bed][vo_sc]sidechaincompress="
-        "threshold=0.035:ratio=8:attack=15:release=420[ducked];"
+        "threshold=0.005:ratio=4:attack=20:release=400[ducked];"
         "[ducked][vo_mix]amix=inputs=2:duration=longest:normalize=0,"
-        f"loudnorm=I=-16:TP=-1.5:LRA=8,atrim=0:{VIDEO_DURATION}[mix]"
+        f"loudnorm=I=-16.18:TP=-4.35:LRA=2.3,"
+        f"atrim=0:{VIDEO_DURATION}[mix]"
     )
 
     subprocess.run(
         [
             "ffmpeg",
             "-y",
-            "-stream_loop",
-            "-1",
             "-i",
             str(BED),
             "-i",
