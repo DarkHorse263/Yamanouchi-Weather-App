@@ -11,11 +11,13 @@ The Express api-server is well-hardened in `app.ts`: helmet (CSP/frameguard inte
 - `lib/supabase.ts` JWT = Supabase **anon** key (role:"anon"), public-by-design and genuinely used in `routes/snow.ts`. **Why:** anon keys are meant to be embedded; security depends on Supabase **RLS** being enabled (external infra, not checkable from code).
 - `feelzlike/index.html` "generic-api-key" = NavigateWork client analytics key — public-by-design (like a GA id).
 - `attached_assets/*.swift` JWT = same anon key in an uploaded iOS reference file (not shipped app code).
-- No private secrets are committed (no service_role / sk_live / AKIA / PEM). Real secrets live in env vars.
+- Never generalize a clean scan into proof that no private secrets are committed; assess current findings without printing credential values.
 
 ## Other scanner noise
 - html-in-template MEDIUMs in `emailTemplates.ts` / `newsletterEmailTemplates.ts` interpolate only **server-controlled** data (catalog mountain names, numbers, generated URLs) — no user free-text. Admin HTML uses `escapeHtml`.
 - direct-response-write MEDIUMs in `radar.ts` / `places-google.ts` are binary image proxies (allowlist-validated, correct content-type) — not HTML XSS.
-- Dependency highs/moderates are all dev/build/transitive (vite, esbuild, ws, lodash, qs, brace-expansion, uuid); vite/esbuild ones affect the dev server only, not the prod static build.
+- Do not dismiss dependency findings as build-only or harmless because they are transitive. Trace the installed production graph and actual callers on every audit; externally sourced XML and runtime SDK dependencies require particular attention.
 
-**How to apply:** on a future security pass, skip re-investigating the above; focus any real effort on (1) confirming Supabase RLS, (2) routine dependency bumps.
+**Why:** a later audit found runtime-reachable vulnerable dependencies despite the older blanket “dev-only” assessment. Scanner results and dependency reachability change over time.
+
+**How to apply:** revalidate classifications on each security pass. Public anon-key status does not prove database policies are safe; Supabase RLS and cross-user isolation require separate verification. A low finding count is not proof of absence of vulnerabilities.
