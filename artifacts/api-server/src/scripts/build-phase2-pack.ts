@@ -318,7 +318,9 @@ async function main(): Promise<void> {
   });
   try {
     const page = await browser.newPage();
-    await page.setContent(html, { waitUntil: "networkidle0" });
+    await page.setContent(html, { waitUntil: "load", timeout: 60_000 });
+    await page.waitForNetworkIdle({ timeout: 60_000 });
+    await page.evaluate(() => document.fonts.ready);
     const outPath = path.join(OUT, "feelzlike-facebook-phase2-pack.pdf");
     await page.pdf({ path: outPath, format: "A4", printBackground: true });
     console.log(`wrote ${outPath}`);

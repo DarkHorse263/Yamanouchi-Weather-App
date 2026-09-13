@@ -19,6 +19,7 @@
 - [feelzlike region readiness model](feelzlike-region-routing.md) — nav town-scoped + data-gated; region-level routes are direct-URL-only (redirect home, never stub); link town→region routes with the `~` escape or they silently hit the Not-found stub.
 - [feelzlike geolocation funnel](feelzlike-geolocation-funnel.md) — NearYou never auto-prompts; denied = search-first + gesture "try again" (iOS Permissions API "denied" is often stale, reload alone loops); installed-PWA tip = remove/re-add icon.
 - [feelzlike security posture](feelzlike-security-posture.md) — public keys need RLS verification; re-trace dependency runtime exposure each audit, never assume highs are dev-only.
+- [feelzlike dependency upgrades](feelzlike-dependency-upgrades.md) — inspect all workspace overrides; Orval catalog detection needs explicit targets and generated-library compilation.
 - [shell output token aliasing](shell-output-aliasing.md) — bash/rg/cat output in this env silently aliases some identifiers (NAV→ln, RegionStub→n); use the `read` tool for trustworthy content.
 - [monorepo project-reference rebuild](monorepo-project-reference-rebuild.md) — after codegen/schema edits, `tsc` consumers fail "no exported member" until you `tsc -b` the lib decls, even though dev server works.
 - [feelzlike location-weather endpoint](feelzlike-weather-endpoint-sharing.md) — single `/weather/:id` serves AU+JP; region-gate forecast_days (undefined region = AU); consumers slice-cap `daily`, audit for open-ended slices.

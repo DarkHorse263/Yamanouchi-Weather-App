@@ -30,6 +30,10 @@ export default defineConfig({
       clean: true,
       prettier: true,
       override: {
+        query: {
+          // Catalog dependencies are not reliably detected by Orval.
+          version: 5,
+        },
         fetch: {
           includeHttpResponseReturnType: false,
         },
@@ -52,11 +56,15 @@ export default defineConfig({
       client: "zod",
       target: "generated",
       schemas: { path: "generated/types", type: "typescript" },
+      // Keep the hand-maintained root exports; a blanket types export collides
+      // with the runtime schemas exported by generated/api.
+      indexFiles: false,
       mode: "split",
       clean: true,
       prettier: true,
       override: {
         zod: {
+          version: 3,
           coerce: {
             query: ['boolean', 'number', 'string'],
             param: ['boolean', 'number', 'string'],

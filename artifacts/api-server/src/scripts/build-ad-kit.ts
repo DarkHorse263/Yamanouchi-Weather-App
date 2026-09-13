@@ -348,12 +348,16 @@ async function render(
   try {
     if (fmt.output === "png") {
       await page.setViewport({ width: fmt.trimW, height: fmt.trimH, deviceScaleFactor: 1 });
-      await page.setContent(html, { waitUntil: "networkidle0" });
+      await page.setContent(html, { waitUntil: "load", timeout: 60_000 });
+      await page.waitForNetworkIdle({ timeout: 60_000 });
+      await page.evaluate(() => document.fonts.ready);
       const out = path.join(outDir, `${fmt.id}.png`);
       await page.screenshot({ path: out as `${string}.png`, type: "png" });
       console.log("wrote:", fmt.label, "->", path.relative(ROOT, out));
     } else {
-      await page.setContent(html, { waitUntil: "networkidle0" });
+      await page.setContent(html, { waitUntil: "load", timeout: 60_000 });
+      await page.waitForNetworkIdle({ timeout: 60_000 });
+      await page.evaluate(() => document.fonts.ready);
       const out = path.join(outDir, `${fmt.id}.pdf`);
       const pageW = fmt.trimW + 2 * fmt.bleed + 2 * fmt.mark;
       const pageH = fmt.trimH + 2 * fmt.bleed + 2 * fmt.mark;

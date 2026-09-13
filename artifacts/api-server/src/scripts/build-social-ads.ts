@@ -162,7 +162,9 @@ async function capturePhoneShot(
         if (winterRegion) window.localStorage.setItem(`feelzlike:${winterRegion}:season`, "winter");
       } catch { /* ignore */ }
     }, forceWinterRegionId ?? "");
-    await page.goto(`${SITE}${urlPath}`, { waitUntil: "networkidle2", timeout: 60000 });
+    await page.goto(`${SITE}${urlPath}`, { waitUntil: "domcontentloaded", timeout: 60000 });
+    await page.waitForNetworkIdle({ timeout: 60000, concurrency: 2 });
+    await page.evaluate(() => document.fonts.ready);
     await new Promise((r) => setTimeout(r, 2500)); // let live data + images settle
     // hide any remaining fixed bottom overlays (install prompt etc.)
     await page.evaluate((targetText) => {
@@ -310,7 +312,9 @@ async function main() {
         const page = await browser.newPage();
         try {
           await page.setViewport({ width: fmt.w, height: fmt.h, deviceScaleFactor: 1 });
-          await page.setContent(buildHtml(v, fmt, { fontCss, logo, shot }), { waitUntil: "networkidle0" });
+          await page.setContent(buildHtml(v, fmt, { fontCss, logo, shot }), { waitUntil: "load", timeout: 60_000 });
+          await page.waitForNetworkIdle({ timeout: 60_000 });
+          await page.evaluate(() => document.fonts.ready);
           const out = path.join(OUT, `feelzlike-ad-${v.id}-${fmt.id}.png`);
           await page.screenshot({ path: out as `${string}.png`, type: "png" });
           console.log("wrote:", path.relative(ROOT, out));
