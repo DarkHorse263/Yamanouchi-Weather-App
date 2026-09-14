@@ -214,7 +214,14 @@ paths:
       operationId: subscribeToAlerts
       tags: [alerts]
       summary: Subscribe to powder alerts
-      description: Creates (or updates) a powder-alert subscription for the given email and sends a verification email. Idempotent — re-submitting with the same email updates preferences.
+      description: |
+        Creates a powder-alert subscription only when the email address does not
+        already have a subscription, then sends a verification email. Repeating
+        a request for an existing pending subscription resends its verification
+        email without changing the saved preferences. Existing verified or
+        unsubscribed subscriptions are rejected with 409 SUBSCRIPTION_EXISTS;
+        no preferences are changed, and the caller should use the alert
+        management link or their account to manage the existing subscription.
       requestBody:
         required: true
         content:
@@ -234,6 +241,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+        "409":
+          description: |
+            A verified or unsubscribed subscription already exists for this
+            address. No preferences have been changed; use the alert management
+            link or the signed-in account to manage it.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                error: SUBSCRIPTION_EXISTS
+                message: This address already has a subscription. Use your alert management link or sign in to your account to manage it. No preferences have been changed.
         "422":
           description: Email delivery is blocked after an earlier bounce or spam complaint
           content:
@@ -2000,7 +2019,7 @@ components:
           type: boolean
         status:
           type: string
-          enum: [verification_sent, already_verified]
+          enum: [verification_sent]
         message:
           type: string
         emailDelivered:

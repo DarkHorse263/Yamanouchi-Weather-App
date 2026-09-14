@@ -121,13 +121,14 @@ export function verifyToken(token: string, expectedKind?: TokenKind): TokenVerif
 }
 
 /**
- * Returns true if a token's issued-at timestamp is at or after the given
+ * Returns true if a token's issued-at timestamp is strictly after the given
  * cutoff. Use to reject tokens that were issued before the subscriber
  * performed a destructive action (e.g. unsubscribe).
  */
 export function isTokenStillValid(payload: { iat: number }, invalidatedAt: Date | null): boolean {
   if (!invalidatedAt) return true;
-  // `iat` is in epoch seconds; floor the cutoff to seconds for comparison.
+  // Tokens have second precision. Revoke the entire cutoff second too:
+  // rounding down and accepting equality lets just-revoked tokens survive.
   const cutoffSec = Math.floor(invalidatedAt.getTime() / 1000);
-  return payload.iat >= cutoffSec;
+  return payload.iat > cutoffSec;
 }

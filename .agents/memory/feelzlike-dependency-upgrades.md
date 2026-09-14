@@ -23,3 +23,9 @@ the manually maintained Zod entry point.
 
 **How to apply:** generate into a scratch copy containing the real package
 entry points and type-check both libraries, not just the generator's exit code.
+
+For narrow contract fixes, separate generator migrations from the requested change.
+**Why:** existing checked-in clients may use an older query/request-options shape;
+regeneration can silently rewrite thousands of unrelated lines while still compiling.
+**How to apply:** inspect the generated diff, preserve unrelated client behavior,
+and ensure Orval resolves the workspace tsconfig when detecting customFetch arguments.

@@ -416,7 +416,6 @@ export type SubscribeResponseStatus =
 
 export const SubscribeResponseStatus = {
   verification_sent: "verification_sent",
-  already_verified: "already_verified",
 } as const;
 
 export interface SubscribeResponse {

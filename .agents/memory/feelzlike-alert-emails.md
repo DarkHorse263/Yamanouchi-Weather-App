@@ -17,6 +17,14 @@ remain mandatory. Signup invitations and forms stay visible year-round.
 **How to apply:** preserve double opt-in and one-click unsubscribe, but never add
 an auth or premium entitlement requirement to powder-alert signup.
 
+## Existing subscriber ownership boundary
+Do not restore anonymous preference updates or reactivation just to make repeat
+signup convenient. Recovery/re-subscription is a separate product decision.
+**Why:** the security hardening deliberately avoids adding a new recovery flow;
+knowing an email address or ticking consent does not prove mailbox ownership.
+**How to apply:** any future recovery flow must prove ownership before changing
+saved preferences or reactivating delivery, and must not revive revoked links.
+
 ## Sender — VERIFIED + LIVE (19 jul 2026)
 - feelzlike.com is verified in Resend; `ALERT_FROM_EMAIL` is set (shared env) to `feelzlike <info@feelzlike.com>` (owner decision 27 jul 2026: info@ is THE address everywhere — sender, reply-to, legal pages, footer, API user-agents; old enquiries@navigatework.com.au and hello@/contact@/alerts@ variants were replaced). Production picks it up on next publish.
 - FROM is env-driven with fallback `feelzlike alerts <onboarding@resend.dev>` (delivers to account owner only) — that fallback only matters if the env var is ever deleted.

@@ -1,7 +1,7 @@
 import { Router, type IRouter } from "express";
 import { z } from "zod";
 import { db, alertSubscribersTable, engagementEventDailyTable } from "@workspace/db";
-import { and, eq, isNull, sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { issueToken, verifyToken, isTokenStillValid } from "../lib/alertTokens.js";
 import { sendEmail } from "../lib/emailSender.js";
 import { verificationEmail } from "../lib/emailTemplates.js";
@@ -153,46 +153,33 @@ router.post("/alerts/subscribe", async (req, res): Promise<void> => {
   };
 
   try {
-    // Atomic upsert by email. Two concurrent subscribe requests for the same
-    // address would race on a read-then-write and either duplicate-insert
-    // (violating the unique index) or both think they're the "first". The
-    // unique index on `email` plus ON CONFLICT DO UPDATE makes this single-shot.
-    // Re-opting-in clears the soft-unsubscribe flag because the user has just
-    // gone through double opt-in again.
-    const upserted = await db
+    // An email address is not proof of ownership. Never change an existing
+    // row here, even while pending: a previously emailed link must not confirm
+    // preferences silently replaced by a later anonymous request.
+    const inserted = await db
       .insert(alertSubscribersTable)
       .values(payload)
-      .onConflictDoUpdate({
-        target: alertSubscribersTable.email,
-        set: {
-          ...payload,
-          unsubscribedAt: null,
-          unsubscribeReason: null,
-        },
-      })
+      .onConflictDoNothing({ target: alertSubscribersTable.email })
       .returning({
         id: alertSubscribersTable.id,
         verifiedAt: alertSubscribersTable.verifiedAt,
         unsubscribedAt: alertSubscribersTable.unsubscribedAt,
       });
-    const row = upserted[0]!;
-    const id = row.id;
-    // `unsubscribedAt` is always null here because the upsert just cleared it.
-    // For the "already verified" short-circuit we look at the pre-upsert state
-    // - i.e. `verifiedAt` being non-null on the returned row.
-    const alreadyVerified = row.verifiedAt !== null;
-
-    if (alreadyVerified) {
-      // Already opted-in - don't re-send a verification email; just confirm.
-      res.json({
-        ok: true,
-        status: "already_verified",
-        message: "Your preferences have been updated.",
+    const row = inserted[0] ?? (await db.select()
+      .from(alertSubscribersTable).where(eq(alertSubscribersTable.email, email)).limit(1))[0];
+    if (!row) {
+      res.status(503).json({ error: "SUBSCRIBE_FAILED", message: "Please try again shortly." });
+      return;
+    }
+    if (row.verifiedAt !== null || row.unsubscribedAt !== null) {
+      res.status(409).json({
+        error: "SUBSCRIPTION_EXISTS",
+        message: "This address already has a subscription. Use your alert management link or sign in to your account to manage it. No preferences have been changed.",
       });
       return;
     }
 
-    const verifyToken = issueToken(id, "verify");
+    const verifyToken = issueToken(row.id, "verify");
     const verifyUrl = `${getAppPublicUrl()}/alerts/verify?token=${encodeURIComponent(verifyToken)}`;
     const tmpl = verificationEmail(verifyUrl);
     const send = await sendEmail({ to: email, subject: tmpl.subject, html: tmpl.html, text: tmpl.text, tag: "alert_verify" });
@@ -242,26 +229,45 @@ router.get("/alerts/verify", async (req, res): Promise<void> => {
   }
 
   try {
-    const rows = await db.select().from(alertSubscribersTable).where(eq(alertSubscribersTable.id, result.payload.sub)).limit(1);
-    const row = rows[0];
-    if (!row) {
+    // Serialize verification/minting with unsubscribe's row update. Without
+    // the lock an unsubscribe between our read and mint could refresh a
+    // revoked verification link into a newer management capability.
+    const verification = await db.transaction(async (tx) => {
+      const rows = await tx.select().from(alertSubscribersTable)
+        .where(eq(alertSubscribersTable.id, result.payload.sub)).limit(1).for("update");
+      const row = rows[0];
+      if (!row) return { status: "missing" as const };
+      if (row.unsubscribedAt !== null || !isTokenStillValid(result.payload, row.tokensInvalidatedAt)) {
+        return { status: "revoked" as const };
+      }
+      const newlyVerified = row.verifiedAt === null;
+      if (newlyVerified) {
+        await tx.update(alertSubscribersTable)
+          .set({ verifiedAt: new Date() })
+          .where(eq(alertSubscribersTable.id, row.id));
+      }
+      return {
+        status: "verified" as const,
+        email: row.email,
+        manageToken: issueToken(row.id, "manage"),
+        newlyVerified,
+      };
+    });
+    if (verification.status === "missing") {
       res.status(404).json({ error: "SUBSCRIBER_NOT_FOUND" });
       return;
     }
-    if (row.verifiedAt === null) {
-      const verified = await db
-        .update(alertSubscribersTable)
-        .set({ verifiedAt: new Date() })
-        .where(and(eq(alertSubscribersTable.id, row.id), isNull(alertSubscribersTable.verifiedAt)))
-        .returning({ id: alertSubscribersTable.id });
-      if (verified.length > 0) {
-        void recordAlertMetric("alert_verification_completed:verification");
-      }
+    if (verification.status === "revoked") {
+      res.status(400).json({ error: "INVALID_TOKEN", reason: "revoked" });
+      return;
     }
-    const manageToken = issueToken(row.id, "manage");
+    if (verification.newlyVerified) {
+      void recordAlertMetric("alert_verification_completed:verification");
+    }
+    const { email, manageToken } = verification;
     res.json({
       ok: true,
-      email: row.email,
+      email,
       manageToken,
       manageUrl: `${getAppPublicUrl()}/alerts/manage?token=${encodeURIComponent(manageToken)}`,
     });
@@ -276,14 +282,17 @@ router.get("/alerts/verify", async (req, res): Promise<void> => {
 async function loadSubscriberForManageToken(
   res: import("express").Response,
   payload: { sub: string; iat: number },
+  tx?: Parameters<Parameters<typeof db.transaction>[0]>[0],
 ): Promise<typeof alertSubscribersTable.$inferSelect | null> {
-  const rows = await db.select().from(alertSubscribersTable).where(eq(alertSubscribersTable.id, payload.sub)).limit(1);
+  const query = (tx ?? db).select().from(alertSubscribersTable)
+    .where(eq(alertSubscribersTable.id, payload.sub)).limit(1);
+  const rows = await (tx ? query.for("update") : query);
   const row = rows[0];
   if (!row) {
     res.status(404).json({ error: "SUBSCRIBER_NOT_FOUND" });
     return null;
   }
-  if (!isTokenStillValid(payload, row.tokensInvalidatedAt)) {
+  if (row.unsubscribedAt !== null || !isTokenStillValid(payload, row.tokensInvalidatedAt)) {
     res.status(400).json({ error: "INVALID_TOKEN", reason: "revoked" });
     return null;
   }
@@ -336,15 +345,14 @@ router.put("/alerts/manage", async (req, res): Promise<void> => {
     timezone: asTimezone(body["timezone"]),
   };
   try {
-    const existing = await loadSubscriberForManageToken(res, result.payload);
-    if (!existing) return;
-    await db.update(alertSubscribersTable).set(update).where(eq(alertSubscribersTable.id, result.payload.sub));
-    const rows = await db.select().from(alertSubscribersTable).where(eq(alertSubscribersTable.id, result.payload.sub)).limit(1);
-    const row = rows[0];
-    if (!row) {
-      res.status(404).json({ error: "SUBSCRIBER_NOT_FOUND" });
-      return;
-    }
+    const row = await db.transaction(async (tx) => {
+      const existing = await loadSubscriberForManageToken(res, result.payload, tx);
+      if (!existing) return null;
+      const rows = await tx.update(alertSubscribersTable).set(update)
+        .where(eq(alertSubscribersTable.id, result.payload.sub)).returning();
+      return rows[0]!;
+    });
+    if (!row) return;
     res.json({ ok: true, subscriber: publicSubscriberShape(row) });
   } catch (err) {
     console.error("[/alerts/manage PUT] error:", err);
@@ -365,24 +373,27 @@ async function performUnsubscribe(
   const result = r1.ok ? r1 : verifyToken(token, "manage");
   if (!result.ok) return { ok: false, status: 400, error: "INVALID_TOKEN", reason: result.reason };
 
-  // Replay protection: reject if the token was issued before a previous
-  // tokensInvalidatedAt cutoff (e.g. user already clicked unsubscribe before).
-  const rows = await db.select({
-    id: alertSubscribersTable.id,
-    tokensInvalidatedAt: alertSubscribersTable.tokensInvalidatedAt,
-  }).from(alertSubscribersTable).where(eq(alertSubscribersTable.id, result.payload.sub)).limit(1);
-  const row = rows[0];
-  if (!row) return { ok: false, status: 404, error: "SUBSCRIBER_NOT_FOUND" };
-  if (!isTokenStillValid(result.payload, row.tokensInvalidatedAt)) {
-    return { ok: false, status: 400, error: "INVALID_TOKEN", reason: "revoked" };
-  }
-
-  await db.update(alertSubscribersTable).set({
-    unsubscribedAt: new Date(),
-    unsubscribeReason: reason,
-    tokensInvalidatedAt: new Date(),
-  }).where(eq(alertSubscribersTable.id, result.payload.sub));
-  return { ok: true };
+  return db.transaction(async (tx) => {
+    // Take the same lock as verification before choosing the cutoff, so it
+    // also revokes capabilities minted by a concurrent verification.
+    const rows = await tx.select({
+      id: alertSubscribersTable.id,
+      tokensInvalidatedAt: alertSubscribersTable.tokensInvalidatedAt,
+    }).from(alertSubscribersTable).where(eq(alertSubscribersTable.id, result.payload.sub))
+      .limit(1).for("update");
+    const row = rows[0];
+    if (!row) return { ok: false as const, status: 404, error: "SUBSCRIBER_NOT_FOUND" };
+    if (!isTokenStillValid(result.payload, row.tokensInvalidatedAt)) {
+      return { ok: false as const, status: 400, error: "INVALID_TOKEN", reason: "revoked" };
+    }
+    const now = new Date();
+    await tx.update(alertSubscribersTable).set({
+      unsubscribedAt: now,
+      unsubscribeReason: reason,
+      tokensInvalidatedAt: now,
+    }).where(eq(alertSubscribersTable.id, result.payload.sub));
+    return { ok: true as const };
+  });
 }
 
 // ─── GET /alerts/unsubscribe?token=… ─────────────────────────────────────

@@ -26,12 +26,19 @@ const PushUnsubscribeBody = z
   })
   .passthrough();
 
-async function checkTokenNotRevoked(subscriberId: string, payload: { iat: number }): Promise<boolean> {
-  const rows = await db.select({ tokensInvalidatedAt: alertSubscribersTable.tokensInvalidatedAt })
-    .from(alertSubscribersTable).where(eq(alertSubscribersTable.id, subscriberId)).limit(1);
+async function checkTokenNotRevoked(
+  tx: Parameters<Parameters<typeof db.transaction>[0]>[0],
+  subscriberId: string,
+  payload: { iat: number },
+): Promise<boolean> {
+  const rows = await tx.select({
+    tokensInvalidatedAt: alertSubscribersTable.tokensInvalidatedAt,
+    unsubscribedAt: alertSubscribersTable.unsubscribedAt,
+  })
+    .from(alertSubscribersTable).where(eq(alertSubscribersTable.id, subscriberId)).limit(1).for("update");
   const row = rows[0];
   if (!row) return false;
-  return isTokenStillValid(payload, row.tokensInvalidatedAt);
+  return row.unsubscribedAt === null && isTokenStillValid(payload, row.tokensInvalidatedAt);
 }
 
 /**
@@ -49,11 +56,6 @@ router.post("/alerts/push/subscribe", async (req, res): Promise<void> => {
     res.status(400).json({ error: "INVALID_TOKEN", reason: result.reason });
     return;
   }
-  if (!(await checkTokenNotRevoked(result.payload.sub, result.payload))) {
-    res.status(400).json({ error: "INVALID_TOKEN", reason: "revoked" });
-    return;
-  }
-
   const parsed = PushSubscribeBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: "INVALID_SUBSCRIPTION", message: "endpoint, keys.p256dh and keys.auth are required." });
@@ -67,12 +69,20 @@ router.post("/alerts/push/subscribe", async (req, res): Promise<void> => {
     // device, so re-subscribing with the same browser must update in place.
     // Read-then-write would race against the unique index and return 500 on
     // a fast double-subscribe (e.g. PWA reinstall).
-    await db.insert(pushSubscriptionsTable)
-      .values({ subscriberId: result.payload.sub, endpoint, p256dh, auth, userAgent })
-      .onConflictDoUpdate({
-        target: pushSubscriptionsTable.endpoint,
-        set: { subscriberId: result.payload.sub, p256dh, auth, userAgent, failureCount: 0 },
-      });
+    const updated = await db.transaction(async (tx) => {
+      if (!(await checkTokenNotRevoked(tx, result.payload.sub, result.payload))) return false;
+      await tx.insert(pushSubscriptionsTable)
+        .values({ subscriberId: result.payload.sub, endpoint, p256dh, auth, userAgent })
+        .onConflictDoUpdate({
+          target: pushSubscriptionsTable.endpoint,
+          set: { subscriberId: result.payload.sub, p256dh, auth, userAgent, failureCount: 0 },
+        });
+      return true;
+    });
+    if (!updated) {
+      res.status(400).json({ error: "INVALID_TOKEN", reason: "revoked" });
+      return;
+    }
     res.json({ ok: true });
   } catch (err) {
     console.error("[/alerts/push/subscribe] error:", err);
@@ -87,10 +97,6 @@ router.delete("/alerts/push/subscribe", async (req, res): Promise<void> => {
     res.status(400).json({ error: "INVALID_TOKEN", reason: result.reason });
     return;
   }
-  if (!(await checkTokenNotRevoked(result.payload.sub, result.payload))) {
-    res.status(400).json({ error: "INVALID_TOKEN", reason: "revoked" });
-    return;
-  }
   const parsed = PushUnsubscribeBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: "MISSING_ENDPOINT" });
@@ -98,12 +104,20 @@ router.delete("/alerts/push/subscribe", async (req, res): Promise<void> => {
   }
   const { endpoint } = parsed.data;
   try {
-    await db.delete(pushSubscriptionsTable).where(
-      and(
-        eq(pushSubscriptionsTable.subscriberId, result.payload.sub),
-        eq(pushSubscriptionsTable.endpoint, endpoint),
-      ),
-    );
+    const deleted = await db.transaction(async (tx) => {
+      if (!(await checkTokenNotRevoked(tx, result.payload.sub, result.payload))) return false;
+      await tx.delete(pushSubscriptionsTable).where(
+        and(
+          eq(pushSubscriptionsTable.subscriberId, result.payload.sub),
+          eq(pushSubscriptionsTable.endpoint, endpoint),
+        ),
+      );
+      return true;
+    });
+    if (!deleted) {
+      res.status(400).json({ error: "INVALID_TOKEN", reason: "revoked" });
+      return;
+    }
     res.json({ ok: true });
   } catch (err) {
     console.error("[/alerts/push/subscribe DELETE] error:", err);

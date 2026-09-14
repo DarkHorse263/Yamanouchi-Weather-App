@@ -750,7 +750,14 @@ export function useGetPowderAlerts<
 }
 
 /**
- * Creates (or updates) a powder-alert subscription for the given email and sends a verification email. Idempotent — re-submitting with the same email updates preferences.
+ * Creates a powder-alert subscription only when the email address does not
+ * already have a subscription, then sends a verification email. Repeating
+ * a request for an existing pending subscription resends its verification
+ * email without changing the saved preferences. Existing verified or
+ * unsubscribed subscriptions are rejected with 409 SUBSCRIPTION_EXISTS;
+ * no preferences are changed, and the caller should use the alert
+ * management link or their account to manage the existing subscription.
+
  * @summary Subscribe to powder alerts
  */
 export const getSubscribeToAlertsUrl = () => {
