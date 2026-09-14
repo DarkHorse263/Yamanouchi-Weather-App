@@ -96,3 +96,4 @@
 - [feelzlike readiness notifications](feelzlike-readiness-notifications.md) — persist immutable evidence snapshots; retry only inside provider idempotency retention, then close visibly rather than risk duplicate mail.
 - [feelzlike email incident resolution](feelzlike-email-incident-resolution.md) — webhook inserts and admin unblocks share a per-email transaction lock; latest incident alone controls suppression.
 - [feelzlike GitHub reconciliation](feelzlike-github-reconciliation.md) — GitHub connector API does not authenticate CLI pushes; use Replit Git Push after safe local ancestry reconciliation.
+- [feelzlike data saving](feelzlike-data-saving.md) — media consent is source-local; visibility gates downloads; blocked storage must still sync preferences; no attribution or hard byte-cap claims.

@@ -130,22 +130,65 @@ async function cacheFirst(request, cacheName) {
   }
 }
 
+function createRequestAbort(request, timeoutMs) {
+  const controller = new AbortController();
+  const clientSignal = request.signal;
+  let timedOut = false;
+  const timeout = setTimeout(() => {
+    timedOut = true;
+    controller.abort();
+  }, timeoutMs);
+
+  // Passing a new timeout signal to fetch would otherwise detach the
+  // browser's cancellation signal. Keep the two signals joined so a
+  // component that leaves the viewport can stop an in-flight SW fetch too.
+  const abortFromClient = () => controller.abort();
+  if (clientSignal.aborted) {
+    abortFromClient();
+  } else {
+    clientSignal.addEventListener("abort", abortFromClient, { once: true });
+  }
+
+  return {
+    signal: controller.signal,
+    get timedOut() {
+      return timedOut;
+    },
+    dispose() {
+      clearTimeout(timeout);
+      clientSignal.removeEventListener("abort", abortFromClient);
+    },
+  };
+}
+
 async function networkFirst(request, cacheName, { timeoutMs = 4500, cacheMode } = {}) {
   const cache = await caches.open(cacheName);
+  const cancellation = createRequestAbort(request, timeoutMs);
   try {
-    // Race the network against a timeout so flaky mobile connections don't
-    // hang the page indefinitely — fall back to cache if we time out.
-    // `cacheMode` ("reload") lets a caller bypass the browser HTTP cache so a
-    // stale max-age response can't win over fresh data.
-    const networkResponse = await Promise.race([
-      fetch(request, cacheMode ? { cache: cacheMode } : undefined),
-      new Promise((_, reject) =>
-        setTimeout(() => reject(new Error("net-timeout")), timeoutMs),
-      ),
-    ]);
+    // Abort a timed-out request instead of leaving it running after the
+    // network-first fallback has already been returned. `cacheMode`
+    // ("reload") still lets callers bypass the browser HTTP cache so a stale
+    // max-age response can't win over fresh data. The joined signal also
+    // preserves cancellation from the original client Request.
+    const networkResponse = await fetch(request, {
+      ...(cacheMode ? { cache: cacheMode } : {}),
+      signal: cancellation.signal,
+    });
+    if (cancellation.signal.aborted) throw new Error("request-aborted");
     if (networkResponse && networkResponse.ok && request.method === "GET") {
-      cache.put(request, networkResponse.clone());
+      // Cache.put consumes the cloned response body after fetch() resolves at
+      // headers. Await it while the timeout remains armed; otherwise the SW
+      // can clear the timer while an abandoned media/body stream is still
+      // reading in the background.
+      try {
+        await cache.put(request, networkResponse.clone());
+      } catch (cacheError) {
+        // A quota/cache write failure must not discard a usable network
+        // response. An abort, however, means that response may be partial.
+        if (cancellation.signal.aborted) throw cacheError;
+      }
     }
+    if (cancellation.signal.aborted) throw new Error("request-aborted");
     return networkResponse;
   } catch (err) {
     const cached = await cache.match(request);
@@ -163,18 +206,36 @@ async function networkFirst(request, cacheName, { timeoutMs = 4500, cacheMode } 
       JSON.stringify({ offline: true, error: "network-unreachable" }),
       { status: 503, headers: { "Content-Type": "application/json" } },
     );
+  } finally {
+    cancellation.dispose();
   }
 }
 
 async function staleWhileRevalidate(request, cacheName) {
   const cache = await caches.open(cacheName);
   const cached = await cache.match(request);
-  const networkPromise = fetch(request)
-    .then((response) => {
-      if (response && response.ok) cache.put(request, response.clone());
-      return response;
-    })
-    .catch(() => undefined);
+  const cancellation = createRequestAbort(request, 4500);
+  const networkPromise = (async () => {
+    try {
+      if (cancellation.signal.aborted) return undefined;
+      const response = await fetch(request, { signal: cancellation.signal });
+      if (cancellation.signal.aborted) return undefined;
+      if (response && response.ok) {
+        try {
+          // Keep the timeout armed through the cloned body read just as in
+          // networkFirst. Cache failures remain non-fatal to the response.
+          await cache.put(request, response.clone());
+        } catch (cacheError) {
+          if (cancellation.signal.aborted) return undefined;
+        }
+      }
+      return cancellation.signal.aborted ? undefined : response;
+    } catch (err) {
+      return undefined;
+    } finally {
+      cancellation.dispose();
+    }
+  })();
   return cached || (await networkPromise) || Response.error();
 }
 
@@ -231,6 +292,11 @@ self.addEventListener("fetch", (event) => {
   //     alert prefs, profile). A cached copy would survive sign-out and show
   //     stale prefs right after a save. Never cache.
   if (url.pathname.startsWith("/api/account")) return;
+
+  // 2a-quinquies-bis. Radar metadata is view-scoped media discovery. Its
+  // callers abort when the map leaves the viewport, so do not let a cached
+  // SWR response start a revalidation after the client has gone away.
+  if (url.pathname.startsWith("/api/radar")) return;
 
   // 2a-bis. Locality search + details → network-first, bypassing the browser
   //     HTTP cache. Their response shape changes across deploys (the search

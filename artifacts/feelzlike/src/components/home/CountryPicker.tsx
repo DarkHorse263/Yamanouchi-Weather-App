@@ -348,7 +348,6 @@ function CountryPickerEasternFallback() {
     },
     staleTime: 5 * 60 * 1000,
     refetchInterval: 10 * 60 * 1000,
-    refetchOnWindowFocus: true,
   });
 
   // The generated catalogue ships with the client, so state-first US additions
@@ -575,7 +574,6 @@ export function CountryPicker() {
     },
     staleTime: 5 * 60 * 1000,
     refetchInterval: 10 * 60 * 1000,
-    refetchOnWindowFocus: true,
   });
 
   const regions = data?.regions ?? SAFE_FALLBACK_REGIONS;

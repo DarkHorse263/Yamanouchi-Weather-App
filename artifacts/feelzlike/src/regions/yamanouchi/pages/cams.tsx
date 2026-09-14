@@ -1,7 +1,10 @@
 import { useLanguage } from "@workspace/feelzlike-shell";
 import { useSeason } from "@workspace/feelzlike-shell";
 import { motion } from "framer-motion";
-import { ExternalLink, Camera, Video, AlertTriangle } from "lucide-react";
+import { useCallback, useState } from "react";
+import { ExternalLink, Camera, Video, AlertTriangle, MousePointerClick } from "lucide-react";
+import { useDataSaver } from "@/hooks/useDataSaver";
+import { useMediaActivity } from "@/hooks/useMediaActivity";
 
 type CamDef = {
   id: string;
@@ -204,7 +207,17 @@ const GREEN_CAMS: CamDef[] = [
 export default function Cams() {
   const { t } = useLanguage();
   const { isWinter } = useSeason();
+  const { dataSaver } = useDataSaver();
   const CAMS = isWinter ? WINTER_CAMS : GREEN_CAMS;
+  const [requestedCams, setRequestedCams] = useState<Set<string>>(() => new Set());
+  const requestCam = useCallback((id: string) => {
+    setRequestedCams((current) => {
+      if (current.has(id)) return current;
+      const next = new Set(current);
+      next.add(id);
+      return next;
+    });
+  }, []);
 
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto pb-28">
@@ -271,16 +284,13 @@ export default function Cams() {
                   </a>
                 </div>
               ) : (
-                <div className="relative" style={{ paddingBottom: "56.25%", height: 0 }}>
-                  <iframe
-                    src={cam.embedUrl}
-                    title={cam.title}
-                    className="absolute inset-0 w-full h-full border-0"
-                    allowFullScreen
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    loading="lazy"
-                  />
-                </div>
+                <CamMedia
+                  cam={cam}
+                  t={t}
+                  dataSaver={dataSaver}
+                  requested={requestedCams.has(cam.id)}
+                  onRequestLoad={() => requestCam(cam.id)}
+                />
               )}
                 <div className="border-t border-border bg-white px-4 py-3">
                   <p className="text-xs font-semibold text-slate-800">
@@ -311,4 +321,81 @@ export default function Cams() {
       </div>
     </div>
   );
+}
+
+function CamMedia({
+  cam,
+  t,
+  dataSaver,
+  requested,
+  onRequestLoad,
+}: {
+  cam: CamDef;
+  t: (en: string, ja?: string) => string;
+  dataSaver: boolean;
+  requested: boolean;
+  onRequestLoad: () => void;
+}) {
+  const { ref, active } = useMediaActivity();
+  const clickToLoad = isClickToLoadMedia(cam.embedUrl);
+  const shouldLoad = active && requestedOrAllowed({ dataSaver, requested, clickToLoad });
+
+  return (
+    <div ref={ref} className="relative aspect-video bg-slate-100">
+      {shouldLoad ? (
+        <iframe
+          src={withoutAutoplay(cam.embedUrl)}
+          title={cam.title}
+          className="absolute inset-0 w-full h-full border-0"
+          allowFullScreen
+          allow="encrypted-media; picture-in-picture"
+          loading="lazy"
+          referrerPolicy="no-referrer"
+        />
+      ) : (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-5 text-center">
+          <MousePointerClick className="w-7 h-7 text-slate-400" />
+          <p className="text-xs font-semibold text-slate-600">
+            {clickToLoad || dataSaver
+              ? t("Click to load this live feed", "クリックしてライブ映像を読み込む")
+              : t("Live feed loads when visible", "表示時にライブ映像を読み込みます")}
+          </p>
+          {(clickToLoad || dataSaver) && (
+            <button
+              type="button"
+              onClick={onRequestLoad}
+              className="rounded-lg bg-primary text-white px-3 py-1.5 text-xs font-bold"
+            >
+              {t("Load live feed", "ライブ映像を読み込む")}
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function requestedOrAllowed({
+  dataSaver,
+  requested,
+  clickToLoad,
+}: {
+  dataSaver: boolean;
+  requested: boolean;
+  clickToLoad: boolean;
+}) {
+  // YouTube (and any future Windy card) always needs an intentional click,
+  // even when the user has not enabled Data Saver. Other official embeds may
+  // load only while visible, unless Data Saver requires an explicit action.
+  return requested || (!dataSaver && !clickToLoad);
+}
+
+function isClickToLoadMedia(url: string) {
+  return /(?:youtube(?:-nocookie)?\.com|youtu\.be|windy\.com)/i.test(url);
+}
+
+function withoutAutoplay(url: string) {
+  const parsed = new URL(url);
+  parsed.searchParams.delete("autoplay");
+  return parsed.toString();
 }

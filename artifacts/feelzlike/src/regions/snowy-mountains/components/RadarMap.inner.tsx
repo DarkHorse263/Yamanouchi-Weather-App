@@ -1,6 +1,8 @@
 import { type RegionKey, type PinSpec, REGION_DEFAULTS } from "@/regions/region-pins";
 export type { RegionKey };
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useDataSaver } from "@/hooks/useDataSaver";
+import { useMediaActivity } from "@/hooks/useMediaActivity";
 import type { OfficialRadarSource, WindySource } from "@/lib/bom-radar";
 import {
   MapContainer,
@@ -1288,11 +1290,16 @@ interface RvManifest {
 // throttled even after resume), so a visitor reopening the app after a while
 // would otherwise sit on a stale radar until the next tick fires · this pulls
 // the latest immediately. Throttled so rapid app-switching can't cause churn.
-function useForegroundRefresh(onForeground: () => void, minGapMs = 90_000) {
+function useForegroundRefresh(
+  onForeground: () => void,
+  minGapMs = 90_000,
+  enabled = true,
+) {
   const cbRef = useRef(onForeground);
   cbRef.current = onForeground;
   const lastRef = useRef(Date.now());
   useEffect(() => {
+    if (!enabled) return;
     function trigger() {
       if (typeof document !== "undefined" && document.visibilityState !== "visible") {
         return;
@@ -1308,32 +1315,50 @@ function useForegroundRefresh(onForeground: () => void, minGapMs = 90_000) {
       document.removeEventListener("visibilitychange", trigger);
       window.removeEventListener("focus", trigger);
     };
-  }, [minGapMs]);
+  }, [enabled, minGapMs]);
 }
 
-function useRainviewerManifest() {
+function useRainviewerManifest(enabled: boolean) {
   const [manifest, setManifest] = useState<RvManifest | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   // Exposes the effect's current loader so the foreground-refresh hook can pull
   // a fresh manifest the instant the app is reopened.
   const loadRef = useRef<() => void>(() => {});
 
   useEffect(() => {
+    if (!enabled) {
+      // Dropping the manifest also drops every TileLayer that references it.
+      // This is deliberate: hidden/offscreen radar must not keep tile requests
+      // alive, and Data Saver must not fetch anything before an explicit load.
+      loadRef.current = () => {};
+      setManifest(null);
+      setLoading(false);
+      setError(null);
+      return;
+    }
     let cancelled = false;
+    let controller: AbortController | null = null;
     async function load() {
+      if (cancelled || controller) return;
+      controller = new AbortController();
+      setLoading(true);
       try {
-        const r = await fetch(RAINVIEWER_MANIFEST, { cache: "no-store" });
+        const r = await fetch(RAINVIEWER_MANIFEST, {
+          cache: "no-store",
+          signal: controller.signal,
+        });
         if (!r.ok) throw new Error(`manifest ${r.status}`);
         const data = (await r.json()) as RvManifest;
         if (cancelled) return;
         setManifest(data);
         setError(null);
       } catch (e) {
-        if (cancelled) return;
+        if (cancelled || (e instanceof Error && e.name === "AbortError")) return;
         setError(String(e));
       } finally {
         if (!cancelled) setLoading(false);
+        controller = null;
       }
     }
     loadRef.current = load;
@@ -1343,13 +1368,15 @@ function useRainviewerManifest() {
     const id = window.setInterval(load, 5 * 60 * 1000);
     return () => {
       cancelled = true;
+      controller?.abort();
+      controller = null;
       window.clearInterval(id);
     };
-  }, []);
+  }, [enabled]);
 
   // Cross-origin (RainViewer), so the service worker never touches it · the
   // foreground refetch is the only thing that un-freezes it after a resume.
-  useForegroundRefresh(() => loadRef.current());
+  useForegroundRefresh(() => loadRef.current(), 90_000, enabled);
 
   return { manifest, loading, error };
 }
@@ -1547,6 +1574,16 @@ export default function RadarMapInner({
   region = "snowy-mountains",
   location,
 }: RadarMapInnerProps) {
+  const { dataSaver } = useDataSaver();
+  const { ref: activityRef, active: mediaActive } = useMediaActivity();
+  // Data Saver deliberately requires a gesture before any radar provider,
+  // basemap tile, or official image is contacted. This state is local to this
+  // radar surface: navigating to another radar must not silently opt it in.
+  const [radarRequested, setRadarRequested] = useState(false);
+  // Windy is always click-to-load, including normal mode. Its third-party
+  // frame is mounted only after that gesture and only while this surface is
+  // visible.
+  const [windyRequested, setWindyRequested] = useState(false);
   const regionCfg = REGION_CONFIG[region];
   const regionDefaults = REGION_DEFAULTS[region];
   const effectiveCenter = center ?? regionDefaults.center;
@@ -1584,12 +1621,6 @@ export default function RadarMapInner({
   // a stale tab (e.g. an uncovered point keeping a prior point's "official",
   // or an AU page inheriting "interactive" from JP/NZ). Adjusting state during
   // render is React's recommended pattern here and avoids a wrong-tab flash.
-  const sourceKey = `${region}:${effectiveOfficial?.imageUrl ?? effectiveOfficial?.href ?? "none"}`;
-  const [prevSourceKey, setPrevSourceKey] = useState(sourceKey);
-  if (sourceKey !== prevSourceKey) {
-    setPrevSourceKey(sourceKey);
-    setView(defaultView);
-  }
   // Active Windy overlay · drives the Windy iframe's `overlay=` param.
   const [windyOverlay, setWindyOverlay] = useState<"snow" | "wind" | "temp" | "rain">(
     season === "winter" ? "snow" : "rain",
@@ -1602,7 +1633,6 @@ export default function RadarMapInner({
     setWindyOverlay(season === "winter" ? "snow" : "rain");
   }, [season]);
 
-  const { manifest, loading, error } = useRainviewerManifest();
   const [frameIndex, setFrameIndex] = useState(0);
   // Default to PAUSED. Autoplay swaps tile layers every 700ms which
   // visibly fights leaflet's zoom-level retiling. Users can hit play.
@@ -1638,6 +1668,53 @@ export default function RadarMapInner({
   const anyPointLayer =
     pointLayers.snowfall || pointLayers.wind || pointLayers.temp || pointLayers.rainRisk;
 
+  // Include the effective source coordinates as well as the provider URL.
+  // A /near-you search can stay on the same BOM/JMA product while moving the
+  // Windy/map centre, so that is still a new source from the user's point of
+  // view. Consent and transient media state must not leak across that change.
+  const sourceKey = [
+    region,
+    effectiveOfficial?.imageUrl ?? effectiveOfficial?.href ?? "none",
+    effectiveCenter.lat,
+    effectiveCenter.lng,
+    effectiveWindy.lat,
+    effectiveWindy.lon,
+    effectiveWindy.zoom,
+  ].join(":");
+  const [prevSourceKey, setPrevSourceKey] = useState(sourceKey);
+  const sourceChanged = sourceKey !== prevSourceKey;
+  if (sourceChanged) {
+    setPrevSourceKey(sourceKey);
+    setView(defaultView);
+    setRadarRequested(false);
+    setWindyRequested(false);
+    setFrameIndex(0);
+    setPlaying(false);
+    setProbe(null);
+    setProbeData(null);
+    setProbeLoading(false);
+    setProbeError(null);
+  }
+
+  // A hidden/offscreen surface owns no media. Unmounting the active internals
+  // also unloads Leaflet tile layers, official image frames, and third-party
+  // iframes instead of merely hiding a still-live provider. `sourceChanged`
+  // closes the one render where React is applying the source reset, so an old
+  // consent cannot render the new source even briefly.
+  const radarActive =
+    mediaActive && !sourceChanged && (!dataSaver || radarRequested);
+  const interactiveRadarActive = radarActive && view === "interactive";
+  const { manifest, loading, error } = useRainviewerManifest(interactiveRadarActive);
+
+  useEffect(() => {
+    if (view !== "windy") {
+      // Returning to Windy must require a fresh explicit click. This prevents
+      // a previously loaded third-party frame from becoming an autoplaying
+      // provider after a tab switch.
+      setWindyRequested(false);
+    }
+  }, [view]);
+
   function togglePoint(layer: PointLayer) {
     setPointLayers((prev) => ({ ...prev, [layer]: !prev[layer] }));
   }
@@ -1645,15 +1722,21 @@ export default function RadarMapInner({
   // Combined radar timeline: past frames followed by nowcast frames.
   const radarFrames = useMemo<RvFrame[]>(() => {
     if (!manifest) return [];
+    // Data Saver loads one latest observed frame only. In particular, do not
+    // mount the nowcast list: hidden TileLayers preload every frame's tiles.
+    if (dataSaver) return manifest.radar.past.slice(-1);
     return [...manifest.radar.past, ...manifest.radar.nowcast];
-  }, [manifest]);
+  }, [dataSaver, manifest]);
 
-  const nowcastStart = manifest?.radar.past.length ?? 0;
+  const nowcastStart = dataSaver
+    ? radarFrames.length
+    : manifest?.radar.past.length ?? 0;
   const isNowcast = frameIndex >= nowcastStart;
 
   // Animate radar at ~700ms per frame while precip is shown + playing.
   useEffect(() => {
     if (view !== "interactive") return;
+    if (!interactiveRadarActive || dataSaver) return;
     if (!playing || !showPrecip || radarFrames.length === 0) return;
     tickRef.current = window.setInterval(() => {
       setFrameIndex((i) => (i + 1) % radarFrames.length);
@@ -1661,7 +1744,7 @@ export default function RadarMapInner({
     return () => {
       if (tickRef.current) window.clearInterval(tickRef.current);
     };
-  }, [view, playing, showPrecip, radarFrames.length]);
+  }, [dataSaver, interactiveRadarActive, view, playing, showPrecip, radarFrames.length]);
 
   // Whenever the manifest refreshes, jump to the most recent observed
   // frame (end of past, just before nowcast) so the loop starts at "now".
@@ -1684,8 +1767,9 @@ export default function RadarMapInner({
   // Fetch point values from Open-Meteo for the clicked spot. Re-runs when
   // the user clicks a new point or flips the metric toggle (units change).
   useEffect(() => {
-    if (!probe) return;
+    if (!probe || !interactiveRadarActive) return;
     let cancelled = false;
+    const controller = new AbortController();
     setProbeLoading(true);
     setProbeError(null);
     const u = new URL("https://api.open-meteo.com/v1/forecast");
@@ -1698,7 +1782,7 @@ export default function RadarMapInner({
     u.searchParams.set("temperature_unit", metric ? "celsius" : "fahrenheit");
     u.searchParams.set("wind_speed_unit", metric ? "kmh" : "mph");
     u.searchParams.set("precipitation_unit", metric ? "mm" : "inch");
-    fetch(u.toString())
+    fetch(u.toString(), { signal: controller.signal })
       .then((r) => {
         if (!r.ok) throw new Error(`open-meteo ${r.status}`);
         return r.json();
@@ -1720,15 +1804,28 @@ export default function RadarMapInner({
         });
       })
       .catch((e) => {
-        if (!cancelled) setProbeError(String(e));
+        if (!cancelled && !(e instanceof Error && e.name === "AbortError")) {
+          setProbeError(String(e));
+        }
       })
       .finally(() => {
         if (!cancelled) setProbeLoading(false);
       });
     return () => {
       cancelled = true;
+      controller.abort();
     };
-  }, [probe, metric]);
+  }, [interactiveRadarActive, probe, metric]);
+
+  // Source/view/Data Saver changes must remove stale readouts immediately and
+  // make the effect cleanup abort any pending Open-Meteo request.
+  useEffect(() => {
+    if (interactiveRadarActive) return;
+    setProbe(null);
+    setProbeData(null);
+    setProbeLoading(false);
+    setProbeError(null);
+  }, [interactiveRadarActive]);
 
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const handleMapReady = useCallback((m: L.Map) => setMapInstance(m), []);
@@ -1797,7 +1894,10 @@ export default function RadarMapInner({
   }, [windyOverlay, effectiveWindy]);
 
   return (
-    <div className="relative w-full h-[520px] md:h-[640px] bg-slate-900">
+    <div
+      ref={activityRef}
+      className="relative w-full h-[520px] md:h-[640px] bg-slate-900"
+    >
       {/* View switcher (top-left). Three modes: our interactive ski radar
           (default · dark map, weather layers, click-to-read points), Windy
           (rich multi-layer), and the official regional source. */}
@@ -1820,7 +1920,7 @@ export default function RadarMapInner({
       {/* Cross-region framing · jump between the whole country's towns +
           resorts and the current region. Interactive view only, and only
           when there are neighbouring regions to show. */}
-      {view === "interactive" && hasOtherRegions && (
+      {view === "interactive" && interactiveRadarActive && hasOtherRegions && (
         <div className="absolute top-16 left-3 z-[1000] flex gap-1 rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-lg p-1">
           <button
             type="button"
@@ -1854,28 +1954,36 @@ export default function RadarMapInner({
             <ModePill active={windyOverlay === "temp"} onClick={() => setWindyOverlay("temp")} icon={Thermometer} label="Temp" />
             <ModePill active={windyOverlay === "rain"} onClick={() => setWindyOverlay("rain")} icon={CloudRain} label="Radar" />
           </div>
-          <iframe
-            title="windy.com weather map · snow, wind, temperature and radar"
-            src={windyUrl}
-            className="absolute inset-0 w-full h-full border-0"
-            sandbox="allow-scripts allow-same-origin allow-popups"
-            referrerPolicy="no-referrer"
-            loading="lazy"
-          />
+          {mediaActive && !sourceChanged && windyRequested ? (
+            <iframe
+              title="windy.com weather map · snow, wind, temperature and radar"
+              src={windyUrl}
+              className="absolute inset-0 w-full h-full border-0"
+              sandbox="allow-scripts allow-same-origin allow-popups"
+              referrerPolicy="no-referrer"
+              loading="lazy"
+            />
+          ) : (
+            <WindyLoadPrompt
+              active={mediaActive && !sourceChanged}
+              onLoad={() => setWindyRequested(true)}
+            />
+          )}
         </>
       )}
 
-      {view === "official" && effectiveOfficial && (
+      {view === "official" && effectiveOfficial && radarActive && (
         // key by the source URL so switching regions / locations remounts the
         // view and resets its internal `imgFailed` state.
         <OfficialView
           key={effectiveOfficial.imageUrl ?? effectiveOfficial.href}
           official={effectiveOfficial}
           center={effectiveCenter}
+          dataSaver={dataSaver}
         />
       )}
 
-      {view === "interactive" && (
+      {view === "interactive" && interactiveRadarActive && (
         <MapContainer
           center={centerTuple}
           zoom={zoom}
@@ -1998,9 +2106,21 @@ export default function RadarMapInner({
         </MapContainer>
       )}
 
+      {view !== "windy" && !mediaActive && (
+        <RadarActivityPlaceholder />
+      )}
+
+      {view !== "windy" && mediaActive && dataSaver && !radarRequested && (
+        <RadarLoadPrompt onLoad={() => setRadarRequested(true)} />
+      )}
+
+      {view === "interactive" && mediaActive && !dataSaver && !interactiveRadarActive && (
+        <RadarActivityPlaceholder />
+      )}
+
       {/* Weather Layers panel (top-right). Precip radar lit on load; the
           rest are point readouts surfaced on map click. Interactive only. */}
-      {view === "interactive" && !panelOpen && (
+      {view === "interactive" && interactiveRadarActive && !panelOpen && (
         <button
           type="button"
           onClick={() => setPanelOpen(true)}
@@ -2011,7 +2131,7 @@ export default function RadarMapInner({
           <span className="text-xs font-bold lowercase">layers</span>
         </button>
       )}
-      {view === "interactive" && panelOpen && (
+      {view === "interactive" && interactiveRadarActive && panelOpen && (
         <div className="absolute top-3 right-3 z-[1000] w-64 max-w-[calc(100%-1.5rem)] rounded-2xl bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-xl text-white">
           <div className="flex items-center justify-between gap-2 px-3 pt-3 pb-2">
             <h3 className="text-sm font-bold lowercase leading-tight">weather layers</h3>
@@ -2095,7 +2215,7 @@ export default function RadarMapInner({
 
       {/* Hint chip · only when a point layer is armed but nothing clicked
           yet, so users know the readout is a click away. */}
-      {view === "interactive" && anyPointLayer && !probe && (
+      {view === "interactive" && interactiveRadarActive && anyPointLayer && !probe && (
         <div className="absolute left-1/2 -translate-x-1/2 bottom-20 z-[1000] rounded-full bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-lg px-3 py-1.5 text-[11px] font-medium text-slate-200">
           click anywhere on the map to read values here
         </div>
@@ -2103,12 +2223,12 @@ export default function RadarMapInner({
 
       {/* Floating control bar (bottom): play/pause + timestamp + scrubber.
           Shown only when the precip radar layer is on. */}
-      {view === "interactive" && showPrecip && (
+      {view === "interactive" && showPrecip && interactiveRadarActive && (
         <div className="absolute left-3 right-3 bottom-3 z-[1000] rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-lg px-3 py-2 flex items-center gap-3 text-white">
           <button
             type="button"
             onClick={() => setPlaying((p) => !p)}
-            disabled={radarFrames.length === 0}
+            disabled={dataSaver || radarFrames.length === 0}
             className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-sky-500 text-white disabled:opacity-40"
             aria-label={playing ? "Pause radar animation" : "Play radar animation"}
           >
@@ -2261,6 +2381,68 @@ function ModePill({
       <Icon className="w-3.5 h-3.5" />
       {label}
     </button>
+  );
+}
+
+function RadarActivityPlaceholder() {
+  return (
+    <div className="absolute inset-0 grid place-items-center bg-slate-900 text-center px-6">
+      <div className="max-w-xs">
+        <p className="text-sm font-semibold text-white">radar paused</p>
+        <p className="mt-1 text-xs text-slate-300">
+          live radar pauses while this map is offscreen. scroll it into view to resume.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function RadarLoadPrompt({ onLoad }: { onLoad: () => void }) {
+  return (
+    <div className="absolute inset-0 grid place-items-center bg-slate-900 text-center px-6">
+      <div className="max-w-xs">
+        <Radar className="mx-auto h-8 w-8 text-sky-300" aria-hidden="true" />
+        <p className="mt-3 text-sm font-semibold text-white">radar ready to load</p>
+        <p className="mt-1 text-xs text-slate-300">
+          data saver is on · load one latest radar image when you want it.
+        </p>
+        <button
+          type="button"
+          onClick={onLoad}
+          className="mt-4 inline-flex items-center justify-center rounded-full bg-sky-500 px-4 py-2 text-xs font-semibold text-white hover:bg-sky-400"
+        >
+          load latest radar
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function WindyLoadPrompt({
+  active,
+  onLoad,
+}: {
+  active: boolean;
+  onLoad: () => void;
+}) {
+  return (
+    <div className="absolute inset-0 grid place-items-center bg-slate-100 text-center px-6">
+      <div className="max-w-xs">
+        <Globe2 className="mx-auto h-8 w-8 text-slate-600" aria-hidden="true" />
+        <p className="mt-3 text-sm font-semibold text-slate-800">load windy</p>
+        <p className="mt-1 text-xs text-slate-500">
+          windy is a third-party interactive map and loads only after you ask for it.
+        </p>
+        <button
+          type="button"
+          disabled={!active}
+          onClick={onLoad}
+          className="mt-4 inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-xs font-semibold text-white hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          load windy map
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -2566,21 +2748,30 @@ function PanZoomStage({ children }: { children: React.ReactNode }) {
 function OfficialView({
   official,
   center,
+  dataSaver,
 }: {
   official: OfficialRadarSource;
   center: { lat: number; lng: number };
+  dataSaver: boolean;
 }) {
   const radarId = bomRadarId(official.imageUrl);
   if (radarId) {
-    return <WillyOfficialView official={official} radarId={radarId} center={center} />;
+    return (
+      <WillyOfficialView
+        official={official}
+        radarId={radarId}
+        center={center}
+        dataSaver={dataSaver}
+      />
+    );
   }
   // Japanese points render the JMA nowcast as live map tiles · same
   // layered-on-our-basemap pattern as the AU licensed feed. NZ (MetService)
   // stays link-out only.
   if (official.href.includes("jma.go.jp")) {
-    return <JmaOfficialView official={official} center={center} />;
+    return <JmaOfficialView official={official} center={center} dataSaver={dataSaver} />;
   }
-  return <OfficialStillView official={official} />;
+  return <OfficialStillView official={official} dataSaver={dataSaver} />;
 }
 
 // ─── WillyWeather licensed AU radar ─────────────────────────────────────
@@ -2612,10 +2803,12 @@ function WillyOfficialView({
   official,
   radarId,
   center,
+  dataSaver,
 }: {
   official: OfficialRadarSource;
   radarId: string;
   center: { lat: number; lng: number };
+  dataSaver: boolean;
 }) {
   const [data, setData] = useState<WillyRadarData | null>(null);
   // null = first fetch still in flight · true = WillyWeather unusable, fall
@@ -2623,6 +2816,7 @@ function WillyOfficialView({
   const [failed, setFailed] = useState<boolean | null>(null);
   const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState(() => {
+    if (dataSaver) return false;
     if (typeof window === "undefined" || !window.matchMedia) return true;
     return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   });
@@ -2633,28 +2827,43 @@ function WillyOfficialView({
   const loadRef = useRef<() => void>(() => {});
   useEffect(() => {
     let cancelled = false;
+    let controller: AbortController | null = null;
     async function load() {
+      if (cancelled || controller) return;
+      controller = new AbortController();
       try {
         const res = await fetch(
           `/api/willy-radar?lat=${center.lat.toFixed(3)}&lng=${center.lng.toFixed(3)}`,
-          { cache: "no-store" },
+          { cache: "no-store", signal: controller.signal },
         );
         if (!res.ok) throw new Error(`willy ${res.status}`);
         const next = (await res.json()) as WillyRadarData;
         if (cancelled) return;
-        if (!next.provider || !Array.isArray(next.frames) || next.frames.length < 2) {
+        if (
+          !next.provider ||
+          !Array.isArray(next.frames) ||
+          next.frames.length < (dataSaver ? 1 : 2)
+        ) {
           setFailed(true);
           return;
         }
-        setData(next);
-        setActive(next.frames.length - 1);
+        const frames = dataSaver ? next.frames.slice(-1) : next.frames;
+        setData({ ...next, frames });
+        setActive(frames.length - 1);
         setFailedFrames(new Set());
         setFailed(false);
-      } catch {
+      } catch (e) {
         // Only fall back if we have nothing usable on screen · a transient
         // blip on a background refresh shouldn't discard a working loop
         // (the freshness readout goes amber on its own past 45 min).
-        if (!cancelled) setFailed((prev) => (prev === false ? false : true));
+        if (
+          !cancelled &&
+          !(e instanceof Error && e.name === "AbortError")
+        ) {
+          setFailed((prev) => (prev === false ? false : true));
+        }
+      } finally {
+        controller = null;
       }
     }
     loadRef.current = load;
@@ -2664,10 +2873,16 @@ function WillyOfficialView({
     const id = window.setInterval(load, 4 * 60 * 1000);
     return () => {
       cancelled = true;
+      controller?.abort();
+      controller = null;
       window.clearInterval(id);
     };
-  }, [center.lat, center.lng]);
-  useForegroundRefresh(() => loadRef.current());
+  }, [center.lat, center.lng, dataSaver]);
+  useForegroundRefresh(() => loadRef.current(), 90_000, true);
+
+  useEffect(() => {
+    if (dataSaver) setPlaying(false);
+  }, [dataSaver]);
 
   // Tick for the "x min ago" freshness readout.
   const [nowMs, setNowMs] = useState(() => Date.now());
@@ -2691,7 +2906,13 @@ function WillyOfficialView({
 
   const allFramesFailed = frames.length > 0 && failedFrames.size >= frames.length;
   if (failed || allFramesFailed) {
-    return <BomAnimatedOfficialView official={official} radarId={radarId} />;
+    return (
+      <BomAnimatedOfficialView
+        official={official}
+        radarId={radarId}
+        dataSaver={dataSaver}
+      />
+    );
   }
   if (failed === null || !data) {
     return (
@@ -2779,7 +3000,8 @@ function WillyOfficialView({
           <button
             type="button"
             onClick={() => setPlaying((p) => !p)}
-            className="grid place-items-center w-6 h-6 rounded-full bg-slate-900 text-white hover:bg-slate-800"
+            disabled={dataSaver}
+            className="grid place-items-center w-6 h-6 rounded-full bg-slate-900 text-white hover:bg-slate-800 disabled:opacity-40"
             aria-label={playing ? "pause radar loop" : "play radar loop"}
           >
             {playing ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -2885,9 +3107,11 @@ function jmaTileUrl(t: { basetime: string; validtime: string }): string {
 function JmaOfficialView({
   official,
   center,
+  dataSaver,
 }: {
   official: OfficialRadarSource;
   center: { lat: number; lng: number };
+  dataSaver: boolean;
 }) {
   const [times, setTimes] = useState<JmaTimesData["times"] | null>(null);
   // null = first fetch still in flight · true = discovery unusable, fall
@@ -2895,6 +3119,7 @@ function JmaOfficialView({
   const [failed, setFailed] = useState<boolean | null>(null);
   const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState(() => {
+    if (dataSaver) return false;
     if (typeof window === "undefined" || !window.matchMedia) return true;
     return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   });
@@ -2910,17 +3135,28 @@ function JmaOfficialView({
   useEffect(() => {
     let cancelled = false;
     let firstLoad = true;
+    let controller: AbortController | null = null;
     async function load() {
+      if (cancelled || controller) return;
+      controller = new AbortController();
       try {
-        const res = await fetch("/api/jma-radar/times", { cache: "no-store" });
+        const res = await fetch("/api/jma-radar/times", {
+          cache: "no-store",
+          signal: controller.signal,
+        });
         if (!res.ok) throw new Error(`jma ${res.status}`);
         const next = (await res.json()) as JmaTimesData;
         if (cancelled) return;
-        if (!Array.isArray(next.times) || next.times.length < 2) {
+        if (
+          !Array.isArray(next.times) ||
+          next.times.length < (dataSaver ? 1 : 2)
+        ) {
           setFailed(true);
           return;
         }
-        const frames = next.times.slice(-JMA_FRAME_COUNT);
+        const frames = dataSaver
+          ? next.times.slice(-1)
+          : next.times.slice(-JMA_FRAME_COUNT);
         setTimes(frames);
         if (playingRef.current || firstLoad) {
           setActive(frames.length - 1);
@@ -2930,10 +3166,17 @@ function JmaOfficialView({
         }
         firstLoad = false;
         setFailed(false);
-      } catch {
+      } catch (e) {
         // Only fall back if nothing usable is on screen · a transient blip
         // on a background refresh shouldn't discard a working loop.
-        if (!cancelled) setFailed((prev) => (prev === false ? false : true));
+        if (
+          !cancelled &&
+          !(e instanceof Error && e.name === "AbortError")
+        ) {
+          setFailed((prev) => (prev === false ? false : true));
+        }
+      } finally {
+        controller = null;
       }
     }
     loadRef.current = load;
@@ -2943,10 +3186,16 @@ function JmaOfficialView({
     const id = window.setInterval(load, 4 * 60 * 1000);
     return () => {
       cancelled = true;
+      controller?.abort();
+      controller = null;
       window.clearInterval(id);
     };
-  }, []);
-  useForegroundRefresh(() => loadRef.current());
+  }, [dataSaver]);
+  useForegroundRefresh(() => loadRef.current(), 90_000, true);
+
+  useEffect(() => {
+    if (dataSaver) setPlaying(false);
+  }, [dataSaver]);
 
   // Tick for the "x min ago" freshness readout.
   const [nowMs, setNowMs] = useState(() => Date.now());
@@ -2969,7 +3218,7 @@ function JmaOfficialView({
   }, [playing, active, frames.length]);
 
   if (failed) {
-    return <OfficialStillView official={official} />;
+    return <OfficialStillView official={official} dataSaver={dataSaver} />;
   }
   if (failed === null || !times) {
     return (
@@ -3040,7 +3289,8 @@ function JmaOfficialView({
           <button
             type="button"
             onClick={() => setPlaying((p) => !p)}
-            className="grid place-items-center w-6 h-6 rounded-full bg-slate-900 text-white hover:bg-slate-800"
+            disabled={dataSaver}
+            className="grid place-items-center w-6 h-6 rounded-full bg-slate-900 text-white hover:bg-slate-800 disabled:opacity-40"
             aria-label={playing ? "pause radar loop" : "play radar loop"}
           >
             {playing ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -3113,9 +3363,11 @@ function JmaOfficialView({
 function BomAnimatedOfficialView({
   official,
   radarId,
+  dataSaver,
 }: {
   official: OfficialRadarSource;
   radarId: string;
+  dataSaver: boolean;
 }) {
   const [frames, setFrames] = useState<BomFrame[]>([]);
   const [unavailable, setUnavailable] = useState(false);
@@ -3123,6 +3375,7 @@ function BomAnimatedOfficialView({
   // Respect reduced-motion: discover the frames either way, but start paused so
   // the radar doesn't auto-loop for users who've asked the OS to limit motion.
   const [playing, setPlaying] = useState(() => {
+    if (dataSaver) return false;
     if (typeof window === "undefined" || !window.matchMedia) return true;
     return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   });
@@ -3142,24 +3395,36 @@ function BomAnimatedOfficialView({
   const framesLoadRef = useRef<() => void>(() => {});
   useEffect(() => {
     let cancelled = false;
+    let controller: AbortController | null = null;
     async function load() {
+      if (cancelled || controller) return;
+      controller = new AbortController();
       try {
         const res = await fetch(`/api/bom-radar/frames?radar=${radarId}&count=6`, {
           cache: "no-store",
+          signal: controller.signal,
         });
         if (!res.ok) throw new Error(`frames ${res.status}`);
         const data = (await res.json()) as { frames?: BomFrame[] };
         const next = data.frames ?? [];
         if (cancelled) return;
-        if (next.length < 2) {
+        if (next.length < (dataSaver ? 1 : 2)) {
           setUnavailable(true);
           return;
         }
-        setFrames(next);
-        setActive(next.length - 1);
+        const frames = dataSaver ? next.slice(-1) : next;
+        setFrames(frames);
+        setActive(frames.length - 1);
         setUnavailable(false);
-      } catch {
-        if (!cancelled) setUnavailable(true);
+      } catch (e) {
+        if (
+          !cancelled &&
+          !(e instanceof Error && e.name === "AbortError")
+        ) {
+          setUnavailable(true);
+        }
+      } finally {
+        controller = null;
       }
     }
     framesLoadRef.current = load;
@@ -3167,12 +3432,18 @@ function BomAnimatedOfficialView({
     const id = window.setInterval(load, 5 * 60 * 1000);
     return () => {
       cancelled = true;
+      controller?.abort();
+      controller = null;
       window.clearInterval(id);
     };
-  }, [radarId]);
+  }, [dataSaver, radarId]);
   // Reopening the app (especially an installed PWA) jumps straight to BOM's
   // newest frame instead of waiting up to 5 min for the next interval tick.
-  useForegroundRefresh(() => framesLoadRef.current());
+  useForegroundRefresh(() => framesLoadRef.current(), 90_000, true);
+
+  useEffect(() => {
+    if (dataSaver) setPlaying(false);
+  }, [dataSaver]);
 
   // Tick every 30s so the "x min ago" freshness readout stays honest while
   // the tab sits open (the frame list itself refreshes on its own interval).
@@ -3197,8 +3468,8 @@ function BomAnimatedOfficialView({
   // failed to load) show the single still so the tab is never blank · the still
   // keeps its own onError link-out ladder.
   const allFramesFailed = frames.length > 0 && failedFrames.size >= frames.length;
-  if (unavailable || frames.length < 2 || allFramesFailed) {
-    return <OfficialStillView official={official} />;
+  if (unavailable || (!dataSaver && frames.length < 2) || allFramesFailed) {
+    return <OfficialStillView official={official} dataSaver={dataSaver} />;
   }
 
   const layerClass =
@@ -3278,7 +3549,8 @@ function BomAnimatedOfficialView({
           <button
             type="button"
             onClick={() => setPlaying((p) => !p)}
-            className="grid place-items-center w-6 h-6 rounded-full bg-slate-900 text-white hover:bg-slate-800"
+            disabled={dataSaver}
+            className="grid place-items-center w-6 h-6 rounded-full bg-slate-900 text-white hover:bg-slate-800 disabled:opacity-40"
             aria-label={playing ? "pause radar loop" : "play radar loop"}
           >
             {playing ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -3346,7 +3618,13 @@ function BomAnimatedOfficialView({
   );
 }
 
-function OfficialStillView({ official }: { official: OfficialRadarSource }) {
+function OfficialStillView({
+  official,
+  dataSaver,
+}: {
+  official: OfficialRadarSource;
+  dataSaver: boolean;
+}) {
   // Track upstream image failure (BOM/JMA blocks our request, gif 404,
   // network blip, etc.) so we can degrade gracefully to the same
   // "open source" link-out we show for non-embeddable regions, instead
@@ -3357,25 +3635,36 @@ function OfficialStillView({ official }: { official: OfficialRadarSource }) {
   // once it has loaded, so the picture stays current without flashing a gap.
   // This is the fallback when the animated frame loop isn't available.
   const baseSrc = official.imageUrl ? officialImageSrc(official.imageUrl) : null;
-  const [src, setSrc] = useState<string | null>(baseSrc);
+  // In Data Saver mode do not let the base URL start a second request before
+  // the one explicit, cache-busted latest-still preload completes.
+  const [src, setSrc] = useState<string | null>(dataSaver ? null : baseSrc);
   const preloadRef = useRef<() => void>(() => {});
   useEffect(() => {
-    setSrc(baseSrc);
+    setSrc(dataSaver ? null : baseSrc);
     setImgFailed(false);
     if (!baseSrc) {
       preloadRef.current = () => {};
       return;
     }
+    let pending: HTMLImageElement | null = null;
     const preload = () => {
+      // A hidden/offscreen cleanup cancels an owned image request. Avoid
+      // starting a second preload while one is already in flight.
+      if (pending) pending.src = "";
       const next = `${baseSrc}${baseSrc.includes("?") ? "&" : "?"}r=${Date.now()}`;
       const img = new Image();
+      pending = img;
       // Clearing imgFailed on a successful preload doubles as gentle
       // auto-recovery: if the initial load hit a transient BOM 403/blip and
       // showed the link-out, a later refresh that loads cleanly brings
       // the official image back · no extra requests beyond the refresh itself.
       img.onload = () => {
+        pending = null;
         setSrc(next);
         setImgFailed(false);
+      };
+      img.onerror = () => {
+        pending = null;
       };
       img.src = next;
     };
@@ -3386,12 +3675,16 @@ function OfficialStillView({ official }: { official: OfficialRadarSource }) {
     // showed last night's radar). The instant cache-busted fetch swaps in the
     // current picture within seconds while the cached copy avoids a blank gap.
     preload();
-    const id = window.setInterval(preload, 4 * 60 * 1000);
-    return () => window.clearInterval(id);
-  }, [baseSrc]);
+    const id = dataSaver ? null : window.setInterval(preload, 4 * 60 * 1000);
+    return () => {
+      if (id !== null) window.clearInterval(id);
+      if (pending) pending.src = "";
+      pending = null;
+    };
+  }, [baseSrc, dataSaver]);
   // Match the animated + RainViewer views: pull a fresh still the moment the
   // app is reopened, rather than lagging on a backgrounded interval.
-  useForegroundRefresh(() => preloadRef.current());
+  useForegroundRefresh(() => preloadRef.current(), 90_000, true);
   return (
     <div className="absolute inset-0 flex flex-col bg-slate-100">
       <div className="relative flex-1 overflow-hidden p-4">

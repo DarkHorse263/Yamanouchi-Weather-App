@@ -31,6 +31,7 @@
     "test:gateErrors": "tsx --test src/lib/__tests__/gateErrors.test.ts",
     "test:unitsFormat": "tsx --test src/lib/__tests__/unitsFormat.test.ts",
     "test:userPrefs": "tsx --tsconfig tsconfig.test.json --test src/components/auth/__tests__/UserPrefsProvider.test.tsx",
+    "test:dataSaver": "tsx --tsconfig tsconfig.test.json --test src/hooks/__tests__/dataSaver.test.ts",
     "test:profileRiskHint": "tsx --test src/lib/__tests__/profileRiskHint.test.ts",
     "test:powderThresholdText": "tsx --test src/lib/__tests__/powderThresholdText.test.ts",
     "test:powderThresholds": "tsx --test src/types/__tests__/weather.test.ts",

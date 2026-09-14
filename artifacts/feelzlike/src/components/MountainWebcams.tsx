@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useState, useId } from "react";
+import { useEffect, useMemo, useState, useId, type ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Camera, ExternalLink, MapPin, Pause, Play, RefreshCw, X } from "lucide-react";
 import { getMountainWebcams, type MountainWebcam } from "@/data/webcams";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
+import { useDataSaver } from "@/hooks/useDataSaver";
+import { useMediaActivity } from "@/hooks/useMediaActivity";
 
 interface MountainWebcamsProps {
   mountainId: string;
@@ -34,11 +36,22 @@ export function MountainWebcams({
 }: MountainWebcamsProps) {
   const t = tProp ?? ((en: string) => en);
   const u = useUnits();
+  const { dataSaver } = useDataSaver();
   const cams = useMemo(() => getMountainWebcams(mountainId), [mountainId]);
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
+  const [requestedCams, setRequestedCams] = useState<Set<string>>(() => new Set());
   const [autoRotate, setAutoRotate] = useState(false);
   const [carouselIdx, setCarouselIdx] = useState(0);
   const headingId = useId();
+
+  const requestCam = (camId: string) => {
+    setRequestedCams((current) => {
+      if (current.has(camId)) return current;
+      const next = new Set(current);
+      next.add(camId);
+      return next;
+    });
+  };
 
   // Auto-rotate cycles every 8s - pauses while modal is open.
   useEffect(() => {
@@ -160,7 +173,15 @@ export function MountainWebcams({
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
             >
-              <WebcamMedia cam={cams[carouselIdx]} t={t} liveLabels={liveLabels} large />
+              <WebcamMedia
+                cam={cams[carouselIdx]}
+                t={t}
+                liveLabels={liveLabels}
+                dataSaver={dataSaver}
+                requested={requestedCams.has(cams[carouselIdx].id)}
+                onRequestLoad={() => requestCam(cams[carouselIdx].id)}
+                large
+              />
             </motion.div>
           </AnimatePresence>
           <div className="flex items-center justify-center gap-1.5 py-3 border-t border-border">
@@ -185,12 +206,22 @@ export function MountainWebcams({
           <button
             key={cam.id}
             type="button"
-            onClick={() => setActiveIdx(idx)}
+            onClick={() => {
+              requestCam(cam.id);
+              setActiveIdx(idx);
+            }}
             className="group text-left rounded-2xl border border-border bg-white overflow-hidden hover:border-primary/40 hover:shadow-md transition-all flex flex-col"
             aria-label={t(`Open ${cam.name}`, `${cam.nameJa ?? cam.name}を開く`)}
           >
             <div className="relative aspect-video bg-secondary overflow-hidden">
-              <WebcamMedia cam={cam} t={t} liveLabels={liveLabels} />
+              <WebcamMedia
+                cam={cam}
+                t={t}
+                liveLabels={liveLabels}
+                dataSaver={dataSaver}
+                requested={requestedCams.has(cam.id)}
+                onRequestLoad={() => requestCam(cam.id)}
+              />
               {cam.vantage && (
                 <div className="absolute top-2.5 left-2.5 rounded-full bg-white/85 backdrop-blur-md px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1 shadow-sm">
                   <MapPin className="w-3 h-3" />
@@ -258,7 +289,15 @@ export function MountainWebcams({
               >
                 <X className="w-4 h-4" />
               </button>
-              <WebcamMedia cam={activeCam} t={t} liveLabels={liveLabels} large />
+              <WebcamMedia
+                cam={activeCam}
+                t={t}
+                liveLabels={liveLabels}
+                dataSaver={dataSaver}
+                requested={requestedCams.has(activeCam.id)}
+                onRequestLoad={() => requestCam(activeCam.id)}
+                large
+              />
               <div className="p-5">
                 <h3 className="font-display font-semibold text-xl text-foreground">
                   {t(activeCam.name, activeCam.nameJa ?? activeCam.name)}
@@ -301,15 +340,22 @@ function WebcamMedia({
   cam,
   t,
   liveLabels,
+  dataSaver,
+  requested,
+  onRequestLoad,
   large = false,
 }: {
   cam: MountainWebcam;
   t: (en: string, ja?: string) => string;
   liveLabels: boolean;
+  dataSaver: boolean;
+  requested: boolean;
+  onRequestLoad: () => void;
   large?: boolean;
 }) {
   const [errored, setErrored] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
+  const { ref: activityRef, active } = useMediaActivity();
 
   // Reset error when cam changes (carousel rotates)
   useEffect(() => {
@@ -318,14 +364,41 @@ function WebcamMedia({
   }, [cam.id]);
 
   const aspectClass = large ? "aspect-video" : "h-full w-full";
+  const clickToLoad = isClickToLoadMedia(cam.embedUrl);
+  const shouldLoad = active && requestedOrAllowed({ dataSaver, requested, clickToLoad });
+  const wrapperClass = `relative ${large ? aspectClass : "absolute inset-0"}`;
+  let content: ReactNode;
 
-  if (cam.embedType === "image" && cam.embedUrl && !errored) {
-    return (
-      <div className={`relative ${large ? aspectClass : "absolute inset-0"} bg-secondary`}>
+  if (!shouldLoad && cam.embedType !== "external") {
+    content = (
+      <>
+        <Camera className={`${large ? "w-12 h-12" : "w-8 h-8"} text-foreground/30 mb-2`} />
+        <p className={`${large ? "text-sm" : "text-[11px]"} font-semibold text-foreground/70`}>
+          {clickToLoad || dataSaver
+            ? t("Click to load webcam", "クリックしてカメラを読み込む")
+            : t("Webcam loads when visible", "表示時にカメラを読み込みます")}
+        </p>
+        {large && (clickToLoad || dataSaver) && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onRequestLoad();
+            }}
+            className="mt-3 inline-flex items-center rounded-lg bg-foreground text-background px-3 py-1.5 text-xs font-semibold"
+          >
+            {t("Load webcam", "カメラを読み込む")}
+          </button>
+        )}
+      </>
+    );
+  } else if (cam.embedType === "image" && cam.embedUrl && !errored) {
+    content = (
+      <>
         <img
           src={`${cam.embedUrl}${cam.embedUrl.includes("?") ? "&" : "?"}_=${refreshKey}`}
           alt={cam.name}
-          loading="lazy"
+          loading="eager"
           referrerPolicy="no-referrer"
           onError={() => setErrored(true)}
           className="w-full h-full object-cover"
@@ -343,55 +416,84 @@ function WebcamMedia({
             {t("Refresh", "更新")}
           </button>
         )}
-      </div>
+      </>
     );
-  }
-
-  if (cam.embedType === "iframe" && cam.embedUrl && !errored) {
-    return (
-      <div className={`relative ${large ? aspectClass : "absolute inset-0"} bg-secondary`}>
+  } else if (cam.embedType === "iframe" && cam.embedUrl && !errored) {
+    content = (
+      <>
         <iframe
-          src={cam.embedUrl}
+          src={withoutAutoplay(cam.embedUrl)}
           title={cam.name}
-          loading="lazy"
+          loading="eager"
           sandbox="allow-scripts allow-same-origin"
           referrerPolicy="no-referrer"
           className="w-full h-full border-0"
           onError={() => setErrored(true)}
         />
-      </div>
+      </>
+    );
+  } else {
+    // External / fallback card - branded teaser pointing to the source.
+    content = (
+      <>
+        <Camera className={`${large ? "w-12 h-12" : "w-8 h-8"} text-foreground/30 mb-2`} />
+        <p className={`${large ? "text-sm" : "text-[11px]"} font-semibold text-foreground/70`}>
+          {liveLabels
+            ? t("Live cam available on resort site", "公式サイトでライブカメラ配信中")
+            : t("Webcam available on resort site", "公式サイトでカメラを公開中")}
+        </p>
+        {large && (
+          <a
+            href={cam.pageUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-foreground text-background px-4 py-2 text-xs font-semibold hover:bg-foreground/90 transition-colors"
+          >
+            {liveLabels
+              ? t("Open live cam", "ライブカメラを開く")
+              : t("Open webcam", "カメラを開く")}
+            <ExternalLink className="w-3 h-3" />
+          </a>
+        )}
+      </>
     );
   }
 
-  // External / fallback card - branded teaser pointing to the source.
   return (
     <div
-      className={`relative ${
-        large ? aspectClass : "absolute inset-0"
-      } bg-gradient-to-br from-slate-100 via-blue-50 to-cyan-50 flex flex-col items-center justify-center p-4 text-center`}
+      ref={activityRef}
+      className={`${wrapperClass} ${
+        shouldLoad && (cam.embedType === "image" || cam.embedType === "iframe")
+          ? "bg-secondary"
+          : "bg-gradient-to-br from-slate-100 via-blue-50 to-cyan-50"
+      } flex flex-col items-center justify-center p-4 text-center`}
     >
-      <Camera className={`${large ? "w-12 h-12" : "w-8 h-8"} text-foreground/30 mb-2`} />
-      <p className={`${large ? "text-sm" : "text-[11px]"} font-semibold text-foreground/70`}>
-        {liveLabels
-          ? t("Live cam available on resort site", "公式サイトでライブカメラ配信中")
-          : t("Webcam available on resort site", "公式サイトでカメラを公開中")}
-      </p>
-      {large && (
-        <a
-          href={cam.pageUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-foreground text-background px-4 py-2 text-xs font-semibold hover:bg-foreground/90 transition-colors"
-        >
-          {liveLabels
-            ? t("Open live cam", "ライブカメラを開く")
-            : t("Open webcam", "カメラを開く")}
-          <ExternalLink className="w-3 h-3" />
-        </a>
-      )}
+      {content}
     </div>
   );
+}
+
+function requestedOrAllowed({
+  dataSaver,
+  requested,
+  clickToLoad,
+}: {
+  dataSaver: boolean;
+  requested: boolean;
+  clickToLoad: boolean;
+}) {
+  return requested || (!dataSaver && !clickToLoad);
+}
+
+function isClickToLoadMedia(url?: string) {
+  return !!url && /(?:youtube(?:-nocookie)?\.com|youtu\.be|windy\.com)/i.test(url);
+}
+
+function withoutAutoplay(url: string) {
+  const parsed = new URL(url);
+  parsed.searchParams.delete("autoplay");
+  return parsed.toString();
 }
 
 function vantageJa(v: "base" | "mid" | "summit" | "village"): string {

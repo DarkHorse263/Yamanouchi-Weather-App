@@ -5,13 +5,18 @@ import { useState } from "react";
 import { MapPin, Ticket, Clock, ExternalLink, Map, Expand, BedDouble, Utensils, Droplets, Snowflake, PawPrint, Trees, Building, Mountain, type LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { GuideToursCard } from "@/components/GuideToursCard";
+import { useDataSaver } from "@/hooks/useDataSaver";
+import { useMediaActivity } from "@/hooks/useMediaActivity";
 
 type FilterType = "all" | "onsen" | "culture" | "nature" | "activity";
 
 export default function Explore({ embedded = false }: { embedded?: boolean }) {
   const { t } = useLanguage();
+  const { dataSaver } = useDataSaver();
+  const { ref: activityRef, active } = useMediaActivity();
   const [categoryFilter, setCategoryFilter] = useState<FilterType>("all");
   const [mapExpanded, setMapExpanded] = useState(false);
+  const [mapRequested, setMapRequested] = useState(false);
 
   const { data, isLoading, error } = useGetAttractions({
     category: categoryFilter === "all" ? undefined : categoryFilter,
@@ -92,16 +97,40 @@ export default function Explore({ embedded = false }: { embedded?: boolean }) {
 
         {/* The iframe */}
         <div
+          ref={activityRef}
           className="transition-all duration-500 ease-in-out"
           style={{ height: mapExpanded ? "70vh" : "420px" }}
         >
-          <iframe
-            src="https://platinumaps.jp/d/yamanouchi?culture=en"
-            className="w-full h-full border-0"
-            title={t("Yamanouchi Digital Map", "山ノ内町デジタルマップ")}
-            loading="lazy"
-            allow="geolocation"
-          />
+          {active && (!dataSaver || mapRequested) ? (
+            <iframe
+              src="https://platinumaps.jp/d/yamanouchi?culture=en"
+              className="w-full h-full border-0"
+              title={t("Yamanouchi Digital Map", "山ノ内町デジタルマップ")}
+              loading="lazy"
+              allow="geolocation"
+              referrerPolicy="no-referrer"
+            />
+          ) : (
+            <div className="w-full h-full bg-slate-100 flex items-center justify-center p-6 text-center">
+              {dataSaver && !mapRequested ? (
+                <div className="rounded-2xl bg-white/95 border border-slate-200 shadow-lg px-5 py-4 max-w-xs">
+                  <p className="text-sm font-bold text-slate-800">
+                    {t("Load the digital map", "デジタルマップを読み込む")}
+                  </p>
+                  <p className="text-xs text-slate-500 mt-1 mb-3">
+                    {t("The map stays off until you choose to load it.", "読み込むまでマップを停止します。")}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setMapRequested(true)}
+                    className="rounded-lg bg-primary text-white px-4 py-2 text-xs font-bold"
+                  >
+                    {t("Load map", "マップを読み込む")}
+                  </button>
+                </div>
+              ) : null}
+            </div>
+          )}
         </div>
 
         {/* Footer note */}

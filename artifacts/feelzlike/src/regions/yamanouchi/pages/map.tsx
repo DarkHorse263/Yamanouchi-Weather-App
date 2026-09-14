@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { useLanguage } from "@workspace/feelzlike-shell";
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
@@ -7,6 +6,8 @@ import L from "leaflet";
 import { CloudSun, Thermometer, Star } from "lucide-react";
 import { useSeason } from "@workspace/feelzlike-shell";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
+import { useDataSaver } from "@/hooks/useDataSaver";
+import { useMediaActivity } from "@/hooks/useMediaActivity";
 
 function MapResizer() {
   const map = useMap();
@@ -38,25 +39,81 @@ interface RainViewerData {
   satellite: { infrared: { path: string; time: number }[] };
 }
 
-function useRainViewer() {
-  const [data, setData] = useState<RainViewerData | null>(null);
+const POLL_REQUEST_TIMEOUT_MS = 15000;
+
+/**
+ * Poll without allowing a slow request to overlap with the next poll. A
+ * timeout also ensures that an unavailable upstream cannot hold this map's
+ * request open until the next page visit.
+ */
+function useSerializedJsonPoll<T>(
+  enabled: boolean,
+  url: string,
+  intervalMs: number,
+) {
+  const [data, setData] = useState<T | null>(null);
+
   useEffect(() => {
-    // Proxy through our backend (caches for 60s, keeps the third-party
-    // host out of the browser CORS surface, lets us swap providers
-    // without a frontend release). BASE_URL is e.g. "/yamanouchi/" so
-    // the "/../api" trick resolves to "/api" regardless of region.
-    const apiBase = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/../api`.replace(/\/+$/, "");
-    const url = `${apiBase}/radar/rainviewer`;
-    const load = () =>
-      fetch(url)
-        .then(r => r.json())
-        .then(setData)
-        .catch(() => {});
-    load();
-    const iv = setInterval(load, 300000);
-    return () => clearInterval(iv);
-  }, []);
+    if (!enabled) return;
+
+    let disposed = false;
+    let pollTimer: ReturnType<typeof setTimeout> | null = null;
+    let requestController: AbortController | null = null;
+
+    const load = async (): Promise<void> => {
+      const controller = new AbortController();
+      requestController = controller;
+      const requestTimer = setTimeout(
+        () => controller.abort(),
+        POLL_REQUEST_TIMEOUT_MS,
+      );
+
+      try {
+        const response = await fetch(url, { signal: controller.signal });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const nextData = await response.json() as T;
+        if (!disposed) setData(nextData);
+      } catch {
+        // Aborting when the map leaves the viewport or a request times out is
+        // expected. Keep the previous response for the next visible visit.
+      } finally {
+        clearTimeout(requestTimer);
+        if (requestController === controller) requestController = null;
+        // Schedule only after this request settles: slow feeds can never
+        // accumulate overlapping polls.
+        if (!disposed) {
+          pollTimer = setTimeout(() => void load(), intervalMs);
+        }
+      }
+    };
+
+    void load();
+    return () => {
+      disposed = true;
+      if (pollTimer) clearTimeout(pollTimer);
+      requestController?.abort();
+    };
+  }, [enabled, intervalMs, url]);
+
   return data;
+}
+
+function useRainViewer(enabled: boolean) {
+  // Proxy through our backend (caches for 60s, keeps the third-party host out
+  // of the browser CORS surface, and lets us swap providers without a
+  // frontend release). BASE_URL is e.g. "/yamanouchi/" so the "/../api"
+  // trick resolves to "/api" regardless of region.
+  const apiBase = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/../api`.replace(/\/+$/, "");
+  const url = `${apiBase}/radar/rainviewer`;
+  return useSerializedJsonPoll<RainViewerData>(enabled, url, 300000);
+}
+
+function useJapanTemps(enabled: boolean) {
+  return useSerializedJsonPoll<{ cities: CityTemp[]; updatedAt: string }>(
+    enabled,
+    "/api/japan-temps",
+    600000,
+  );
 }
 
 function RadarOverlay({ host, frames }: { host: string; frames: { path: string; time: number }[] }) {
@@ -261,89 +318,108 @@ export default function MapView() {
   const { t, language: lang } = useLanguage();
   const u = useUnits();
   const { isWinter } = useSeason();
+  const { dataSaver } = useDataSaver();
+  const { ref: activityRef, active: mediaActive } = useMediaActivity();
   const [activeLayer, setActiveLayer] = useState<MapLayer>("radar");
+  const [mediaRequested, setMediaRequested] = useState(false);
   const tabs = isWinter ? WINTER_TABS : GREEN_TABS;
+  const mediaReady = mediaActive && (!dataSaver || mediaRequested);
 
   useEffect(() => {
     if (!isWinter && activeLayer === "snow") setActiveLayer("rain");
     if (isWinter && activeLayer === "rain") setActiveLayer("snow");
   }, [isWinter]);
 
-  const { data: japanTemps } = useQuery<{ cities: CityTemp[]; updatedAt: string }>({
-    queryKey: ["japan-temps"],
-    queryFn: async () => {
-      const res = await fetch("/api/japan-temps");
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return res.json();
-    },
-    refetchInterval: 600000,
-  });
+  const japanTemps = useJapanTemps(mediaReady && activeLayer === "temp");
 
   const cities = japanTemps?.cities ?? [];
-  const showTemp = activeLayer === "temp" && cities.length > 0;
+  const showTemp = mediaReady && activeLayer === "temp" && cities.length > 0;
 
-  const rv = useRainViewer();
+  const rv = useRainViewer(mediaReady && activeLayer === "radar");
   const frames = useMemo(() => {
     if (!rv) return [];
     return [...(rv.radar?.past || []), ...(rv.radar?.nowcast || [])];
   }, [rv]);
 
   return (
-    <div className="relative w-full h-[calc(100vh-4rem)] md:h-screen">
-      <MapContainer
-        center={[36.5, 137.5]}
-        zoom={6}
-        minZoom={4}
-        maxZoom={13}
-        className="w-full h-full z-0"
-        zoomControl={true}
-        scrollWheelZoom={true}
-        attributionControl={false}
-      >
-        <MapResizer />
-        <TileLayer url={BASE_TILE} />
-        <OverlaySwitcher activeLayer={activeLayer} />
-        <ViewResetter activeLayer={activeLayer} />
-        {activeLayer === "radar" && rv && frames.length > 0 && (
-          <RadarOverlay host={rv.host} frames={frames} />
-        )}
-        {showTemp && <TempZoomer />}
-        {showTemp && cities.map(city => {
-          const icon = createCityTempLabel(city, lang === "ja", `${u.wind(city.wind)} ${u.windUnit}`);
-          if (!icon || city.temp === null) return null;
-          const tc = tempColor(city.temp);
-          const isFeatured = FEATURED_KEYS.has(city.key);
-          return (
-            <Marker
-              key={city.key}
-              position={[city.lat, city.lng]}
-              icon={icon}
-              zIndexOffset={isFeatured ? 1000 : 0}
-            >
-              <Popup>
-                <div className="p-3 min-w-[170px]">
-                  <div className="flex items-center gap-1.5 mb-1">
-                    <span className="text-[11px] font-bold text-slate-700">
-                      {lang === "ja" ? city.nameJa : city.name}
-                    </span>
-                    {isFeatured && <Star className="w-3 h-3 text-amber-400 fill-amber-400" />}
-                  </div>
-                  <div className="grid grid-cols-2 gap-1.5 mt-2">
-                    <div className="rounded-lg p-2 text-center" style={{ background: tc.bg }}>
-                      <div className="text-[9px] font-bold uppercase" style={{ color: tc.text }}>{t("Temp", "気温")}</div>
-                      <div className="text-base font-black" style={{ color: tc.text }}>{city.temp.toFixed(1)}°</div>
+    <div ref={activityRef} className="relative w-full h-[calc(100vh-4rem)] md:h-screen">
+      {mediaReady ? (
+        <MapContainer
+          center={[36.5, 137.5]}
+          zoom={6}
+          minZoom={4}
+          maxZoom={13}
+          className="w-full h-full z-0"
+          zoomControl={true}
+          scrollWheelZoom={true}
+          attributionControl={false}
+        >
+          <MapResizer />
+          <TileLayer url={BASE_TILE} />
+          <OverlaySwitcher activeLayer={activeLayer} />
+          <ViewResetter activeLayer={activeLayer} />
+          {activeLayer === "radar" && rv && frames.length > 0 && (
+            <RadarOverlay host={rv.host} frames={frames} />
+          )}
+          {showTemp && <TempZoomer />}
+          {showTemp && cities.map(city => {
+            const icon = createCityTempLabel(city, lang === "ja", `${u.wind(city.wind)} ${u.windUnit}`);
+            if (!icon || city.temp === null) return null;
+            const tc = tempColor(city.temp);
+            const isFeatured = FEATURED_KEYS.has(city.key);
+            return (
+              <Marker
+                key={city.key}
+                position={[city.lat, city.lng]}
+                icon={icon}
+                zIndexOffset={isFeatured ? 1000 : 0}
+              >
+                <Popup>
+                  <div className="p-3 min-w-[170px]">
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <span className="text-[11px] font-bold text-slate-700">
+                        {lang === "ja" ? city.nameJa : city.name}
+                      </span>
+                      {isFeatured && <Star className="w-3 h-3 text-amber-400 fill-amber-400" />}
                     </div>
-                    <div className="bg-slate-50 rounded-lg p-2 text-center">
-                      <div className="text-[9px] text-slate-500 font-bold uppercase">{t("Wind", "風")}</div>
-                      <div className="text-base font-black text-slate-700">{u.wind(city.wind)}<span className="text-[10px] ml-0.5">{u.windUnit}</span></div>
+                    <div className="grid grid-cols-2 gap-1.5 mt-2">
+                      <div className="rounded-lg p-2 text-center" style={{ background: tc.bg }}>
+                        <div className="text-[9px] font-bold uppercase" style={{ color: tc.text }}>{t("Temp", "気温")}</div>
+                        <div className="text-base font-black" style={{ color: tc.text }}>{city.temp.toFixed(1)}°</div>
+                      </div>
+                      <div className="bg-slate-50 rounded-lg p-2 text-center">
+                        <div className="text-[9px] text-slate-500 font-bold uppercase">{t("Wind", "風")}</div>
+                        <div className="text-base font-black text-slate-700">{u.wind(city.wind)}<span className="text-[10px] ml-0.5">{u.windUnit}</span></div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Popup>
-            </Marker>
-          );
-        })}
-      </MapContainer>
+                </Popup>
+              </Marker>
+            );
+          })}
+        </MapContainer>
+      ) : (
+        <div className="w-full h-full bg-slate-100 flex items-center justify-center p-6">
+          {dataSaver && !mediaRequested ? (
+            <div className="rounded-2xl bg-white/95 border border-slate-200 shadow-lg px-5 py-4 max-w-xs text-center">
+              <CloudSun className="w-8 h-8 text-primary mx-auto mb-2" />
+              <p className="text-sm font-bold text-slate-800">
+                {t("Load the weather map", "天気マップを読み込む")}
+              </p>
+              <p className="text-xs text-slate-500 mt-1 mb-3">
+                {t("Map tiles and radar stay off until you choose to load them.", "読み込むまで地図タイルとレーダーを停止します。")}
+              </p>
+              <button
+                type="button"
+                onClick={() => setMediaRequested(true)}
+                className="rounded-lg bg-primary text-white px-4 py-2 text-xs font-bold"
+              >
+                {t("Load map", "マップを読み込む")}
+              </button>
+            </div>
+          ) : null}
+        </div>
+      )}
 
       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
         <div className="bg-white/95 backdrop-blur-md shadow-lg border border-white/50 rounded-full p-1 flex gap-1">

@@ -47,7 +47,18 @@ import {
   type LegacyRouteDeclaration,
 } from "@/lib/legacyRoutes";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // Polling continues while a page is visible, but never keeps a hidden
+      // tab's weather/live-data timers running. Avoid refetching every active
+      // query together when a tab regains focus; each query's normal stale
+      // time and interval still preserve its freshness contract.
+      refetchIntervalInBackground: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 // REQUIRED — copy verbatim. Resolves the key from window.location.hostname so
 // the same build serves multiple Clerk custom domains.

@@ -36,3 +36,13 @@ export { PageHeader } from "./PageHeader";
 export type { PageHeaderProps } from "./PageHeader";
 export { usePremium, setPremiumPreview } from "./usePremium";
 export { cn } from "./cn";
+export {
+  DATA_SAVER_CHANGE_EVENT,
+  DATA_SAVER_STORAGE_KEY,
+  browserDataSaverDefault,
+  readDataSaverOverride,
+  useDataSaver,
+} from "./hooks/useDataSaver";
+export type { DataSaverState } from "./hooks/useDataSaver";
+export { useMediaActivity } from "./hooks/useMediaActivity";
+export type { MediaActivityState } from "./hooks/useMediaActivity";

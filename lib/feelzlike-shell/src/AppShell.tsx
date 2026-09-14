@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, Leaf, Snowflake, ArrowLeft, Lock, ChevronDown, Compass } from "lucide-react";
+import { ChevronLeft, Leaf, Snowflake, ArrowLeft, Lock, ChevronDown, Compass, Gauge } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "./cn";
 import { useRegion } from "./RegionProvider";
@@ -12,6 +12,7 @@ import { TownPicker } from "./TownPicker";
 import { DEFAULT_TOWN_NAV, DEFAULT_MOUNTAIN_NAV, DEFAULT_REGION_NAV } from "./defaultNav";
 import { sectionAccentFor, mixSection } from "./sectionAccents";
 import type { NavItem } from "./types";
+import { useDataSaver } from "./hooks/useDataSaver";
 
 const RESERVED_TOWN_SLUGS = new Set(["mountain", "mountains", "radar", "alerts", "resort", "premium"]);
 
@@ -155,6 +156,7 @@ export function AppShell({
   // Mobile bottom-nav "plan" menu open state. Must live at the component top
   // level (not inside the render IIFE) so the hook order is safe.
   const [travelOpen, setTravelOpen] = useState(false);
+  const { dataSaver, setDataSaver } = useDataSaver();
 
   // Publish the mobile bottom-nav height as a CSS variable so bottom-anchored
   // overlays (consent banner, install prompt) can sit ABOVE the nav instead of
@@ -385,6 +387,11 @@ export function AppShell({
         </nav>
 
         <div className="px-6 pb-5 pt-3">
+          <DataSaverToggle
+            dataSaver={dataSaver}
+            onChange={setDataSaver}
+            t={t}
+          />
           <p className="byline text-slate-500/60">{region.footer ?? "v0.4 · feelzlike"}</p>
         </div>
       </aside>
@@ -410,24 +417,28 @@ export function AppShell({
             <span className="text-[10px] font-bold uppercase tracking-wider text-white/80">{region.shortTag}</span>
           )}
         </div>
-        {(region.seasons || (region.language && region.language.locales.length > 1)) && (
-          <div className="flex items-center justify-end gap-2 px-4 pb-2 -mt-1">
-            {region.seasons && seasonCtx && (
-              <SeasonPill
-                season={seasonCtx.season}
-                onChange={seasonCtx.setSeason}
-                t={t}
-              />
-            )}
-            {region.language && region.language.locales.length > 1 && (
-              <LangPill
-                locales={region.language.locales}
-                current={lang.language}
-                onChange={lang.setLanguage}
-              />
-            )}
-          </div>
-        )}
+        <div className="flex items-center justify-end gap-2 px-4 pb-2 -mt-1">
+          {region.seasons && seasonCtx && (
+            <SeasonPill
+              season={seasonCtx.season}
+              onChange={seasonCtx.setSeason}
+              t={t}
+            />
+          )}
+          {region.language && region.language.locales.length > 1 && (
+            <LangPill
+              locales={region.language.locales}
+              current={lang.language}
+              onChange={lang.setLanguage}
+            />
+          )}
+          <DataSaverToggle
+            dataSaver={dataSaver}
+            onChange={setDataSaver}
+            t={t}
+            compact
+          />
+        </div>
       </header>
 
       {/* Main */}
@@ -435,9 +446,8 @@ export function AppShell({
         className={cn(
           "flex-1 md:ml-64 w-full md:w-[calc(100%-16rem)] min-h-[100dvh] md:pt-0 pb-20 md:pb-0 transition-colors duration-500",
           seasonCtx?.season === "green" ? "bg-[#059669]" : "bg-[#0055FF]",
-          (region.seasons || (region.language && region.language.locales.length > 1))
-            ? "pt-24"
-            : "pt-14",
+          // The mobile header always includes the shared data-saver control.
+          "pt-24",
         )}
       >
         {/* Back bar - shown on any "feature" subpage (a town subpage other
@@ -694,6 +704,51 @@ function BackBar({
 function SectionLabel({ children }: { children: ReactNode }) {
   return (
     <p className="px-3 pt-2 pb-2 byline text-slate-500/70">{children}</p>
+  );
+}
+
+function DataSaverToggle({
+  dataSaver,
+  onChange,
+  t,
+  compact = false,
+}: {
+  dataSaver: boolean;
+  onChange: (enabled: boolean) => void;
+  t: (en: string, ja?: string) => string;
+  compact?: boolean;
+}) {
+  const stateLabel = dataSaver ? t("on", "オン") : t("off", "オフ");
+  return (
+    <button
+      type="button"
+      aria-pressed={dataSaver}
+      aria-label={t(
+        dataSaver ? "Turn data saver off" : "Turn data saver on",
+        dataSaver ? "データセーバーをオフにする" : "データセーバーをオンにする",
+      )}
+      title={t(
+        dataSaver
+          ? "data saver is on · media loads only when requested"
+          : "data saver is off · tap to limit background media",
+        dataSaver
+          ? "データセーバー オン · メディアはリクエスト時のみ読み込み"
+          : "データセーバー オフ · タップしてバックグラウンドメディアを制限",
+      )}
+      onClick={() => onChange(!dataSaver)}
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-full border text-[10px] font-semibold tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
+        compact
+          ? "border-white/25 bg-black/10 px-2 py-1 text-white/90 hover:bg-white/15"
+          : "border-slate-200 bg-slate-50 px-2.5 py-1.5 text-slate-600 hover:border-primary/30 hover:text-primary",
+      )}
+    >
+      <Gauge className="h-3.5 w-3.5" aria-hidden="true" />
+      <span>{t("data saver", "データセーバー")}</span>
+      <span aria-hidden="true" className="opacity-70">
+        {stateLabel}
+      </span>
+    </button>
   );
 }
 
