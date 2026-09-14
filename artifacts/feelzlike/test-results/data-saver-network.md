@@ -7,6 +7,13 @@ Mode: Playwright browser acceptance pass; no application files changed.
 Status: implementation checks and the bounded visible/offscreen browser checks
 passed; hidden-tab recurring-request measurement remains unverified.
 
+Follow-up (2026-09-14): the outstanding synthetic hidden-tab checks are now
+recorded in [hidden-tab-network.md](hidden-tab-network.md). AU/JP radar and
+Windy iframe checks observed zero new media requests across 310 seconds of
+virtual hidden time and no burst in the short resume window. See that report
+for fixture, byte-measurement, and synthetic-visibility limitations. The
+original observations and harness failure below are retained as history.
+
 ## Results
 
 - **Data Saver control:** visible in the shared shell. Toggled on, then reloaded
