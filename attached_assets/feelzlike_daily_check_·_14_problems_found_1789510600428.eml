@@ -1,0 +1,291 @@
+Received: from SY4P282MB1354.AUSP282.PROD.OUTLOOK.COM (2603:10c6:10:a1::10) by
+ SY5P282MB4686.AUSP282.PROD.OUTLOOK.COM with HTTPS; Sun, 13 Sep 2026 20:06:09
+ +0000
+Received: from ME3P282CA0147.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:1c9::7)
+ by SY4P282MB1354.AUSP282.PROD.OUTLOOK.COM (2603:10c6:10:a1::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Sun, 13 Sep
+ 2026 20:06:07 +0000
+Received: from ML1PEPF00011308.ausprd01.prod.outlook.com
+ (2603:10c6:220:1c9:cafe::9e) by ME3P282CA0147.outlook.office365.com
+ (2603:10c6:220:1c9::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.12 via Frontend Transport; Sun,
+ 13 Sep 2026 20:06:07 +0000
+Authentication-Results: spf=pass (sender IP is 23.251.234.52)
+ smtp.mailfrom=send.feelzlike.com; dkim=pass (signature was verified)
+ header.d=feelzlike.com;dkim=pass (signature was verified)
+ header.d=amazonses.com;dmarc=pass action=none
+ header.from=feelzlike.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of send.feelzlike.com
+ designates 23.251.234.52 as permitted sender)
+ receiver=protection.outlook.com; client-ip=23.251.234.52;
+ helo=e234-52.smtp-out.ap-northeast-1.amazonses.com; pr=C
+Received: from e234-52.smtp-out.ap-northeast-1.amazonses.com (23.251.234.52)
+ by ML1PEPF00011308.mail.protection.outlook.com (10.167.241.85) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.7
+ via Frontend Transport; Sun, 13 Sep 2026 20:06:06 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=resend;
+	d=feelzlike.com; t=1789329964;
+	h=From:To:Reply-To:Subject:Message-ID:Date:MIME-Version:Content-Type;
+	bh=SKY7MUMZfQtHKEL7+N/sUlZi1alM574ZgzSJI6jizWY=;
+	b=I0MPTRsdVzfwNjFs6Zt3a20oXboNBR9NEZzQvTO7dK5nXx4ALRagMiQ3MwOIIGHg
+	+33/tvsVcMSkhC+1hCLnzRr8gNnhFajukPFCa5wjoDhhfHh0n+nTgjs+BiNBRJwoktb
+	Y0ETuw6U/jlLYMKUDw6IiLVS7e9ZbsZriRZBM7FE=
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=zh4gjftm6etwoq6afzugpky45synznly; d=amazonses.com; t=1789329964;
+	h=From:To:Reply-To:Subject:Message-ID:Date:MIME-Version:Content-Type:Feedback-ID;
+	bh=SKY7MUMZfQtHKEL7+N/sUlZi1alM574ZgzSJI6jizWY=;
+	b=VrqPuwKxKdlh4dOltiZUiuqTrfqnNIjb21J6Q/HuHN6N3NbJt+WdYpchRKFSu8eH
+	BKttrzc7Kl1nQx6MT7/ZR+3GfX3Apb2+4RT1NGpGCYSO6yZ/8K+F8slSYYDbRoaeTVO
+	k7QhPt3sm2A24wdfAVEMkaMiX5peUN0vnsIqCExU=
+From: feelzlike <info@feelzlike.com>
+To: james@navigatework.com.au
+Reply-To: info@feelzlike.com
+Subject: =?UTF-8?Q?feelzlike_daily_check_=C2=B7_14_problems?=
+ =?UTF-8?Q?_found?=
+Message-ID: <010601a09c607dcc-55cabad4-8386-4ab5-920a-a17ec497b817-000000@ap-northeast-1.amazonses.com>
+Date: Sun, 13 Sep 2026 20:06:04 +0000
+Content-Type: multipart/alternative;
+ boundary="--_NmP-930412072d2d5b4c-Part_1"
+Feedback-ID: :1.ap-northeast-1.rJqblb2iiX4g90ekhj071PGlKr4Rq1tDgsmgGXn+kyRER5FNqbzLLE2wvhuLcBtUCGkSbZuHyzEd23ZWQPLRCTbD+e6Y2o4Nmrd8W8/LZLhZGW2OiQrKc9JZLumem3RLOmQ9jDX7Ic1/Owf8jvk+NumZBEUfAbEdz+MOwk7cO9Vn62y/ZPOD8Ic+VjH+pyoh:1.ap-northeast-1.RirEgqlsQndpFdi8TUL4OAg2i1Pw380m+rTe2cbKEVU=:AmazonSES
+X-SES-Outgoing: 2026.09.13-23.251.234.52
+Return-Path: 010601a09c607dcc-55cabad4-8386-4ab5-920a-a17ec497b817-000000@send.feelzlike.com
+X-MS-Exchange-Organization-ExpirationStartTime: 13 Sep 2026 20:06:06.6657
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: eb083dfe-2b48-4c34-20d2-08df11d27233
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: febefc03-2be7-43ba-af66-5490103dee38:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: ML1PEPF00011308:EE_|SY4P282MB1354:EE_|SY5P282MB4686:EE_
+X-MS-Exchange-Organization-AuthSource: ML1PEPF00011308.ausprd01.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: eb083dfe-2b48-4c34-20d2-08df11d27233
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:0;ARA:13230040|7049299003|3109299003|69100299015|7149299003|32142699015|13003099007|4113699003|19002099009|10067099003|5063699009|8096899003|4076899003|57112099003|18002099003|43062017;
+X-Forefront-Antispam-Report: CIP:23.251.234.52;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:e234-52.smtp-out.ap-northeast-1.amazonses.com;PTR:e234-52.smtp-out.ap-northeast-1.amazonses.com;CAT:NONE;SFS:(13230040)(7049299003)(3109299003)(69100299015)(7149299003)(32142699015)(13003099007)(4113699003)(19002099009)(10067099003)(5063699009)(8096899003)(4076899003)(57112099003)(18002099003)(43062017);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Sep 2026 20:06:06.3903
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: eb083dfe-2b48-4c34-20d2-08df11d27233
+X-MS-Exchange-CrossTenant-Id: febefc03-2be7-43ba-af66-5490103dee38
+X-MS-Exchange-CrossTenant-AuthSource: ML1PEPF00011308.ausprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SY4P282MB1354
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.2383856
+X-MS-Exchange-Processed-By-BccFoldering: 15.21.0406.000
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944506478)(944626604)(920097)(930201)(20251009189)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?UjJXZWdkZ0VCZi9QbVBMZ3Y0bXF5YS84clNacVBBRUx3RURQRjVzVm40a1FH?=
+ =?utf-8?B?TlM3R29ReXFHWjhuSVBMSHFiekFkTE1YeURVNitubklOalJiSVpxUklIdllm?=
+ =?utf-8?B?RUI5V3lrdFpPckRJb2VMZkx1RldmYll5OVNpTlhlRGFCVVpxbzR1Z2lpWnRZ?=
+ =?utf-8?B?a25GVVNHNjJCWVRMV2NnM2xITmlYeS9EWUR6N2VhakQ1RFlvM09qK200cVgv?=
+ =?utf-8?B?MHNmVWNtdG1PRjNxbU8vVUpIQU15aDZDOUh4UGJDVlJSQlpZTXhuU0lZUFJI?=
+ =?utf-8?B?eGRlZmtyWStsTE9vMXYvSE1qaUhhbnJxanRPMVRLK01XNnZSclNrZ1JOb2pt?=
+ =?utf-8?B?aDJvWXdWUDBSS0p1cVpsVGFFWTAyVlBzN2NmQ3cvemRIeXN2QURXTG9sZjR6?=
+ =?utf-8?B?SnFOYU5uT1NzR2UwQ1hBaGJsSHVyRjg4Q25JRy9maEJ2RnErbmM0MnNWTW5a?=
+ =?utf-8?B?MDRrMTF6RnNyVEd6MTU1elF4NXVETGVxeTJKK2RaeGJyWFJBeTBWanhwK2I1?=
+ =?utf-8?B?dWJLVnRXakF5SjlNN2Z5alNIa1NoeUVQdFREMi9qQ2JsWkZ4aWNQZXNLQUJy?=
+ =?utf-8?B?cUVDSnBiTFR3clN1NitaTlB6Y05ueTIrQldlNEdwMnRVTzQ4ZDNMOEoxQUtO?=
+ =?utf-8?B?UWNqeVVTbUFZdzVxZE1IVzkzUTNnWExzb2lHa1lhcWdDY1FTQzFFQjRPOUJ4?=
+ =?utf-8?B?R0RKZlBGZmxrSTFrRGNUL0k2QTNwQVdqM29RR2RwZnVJL2lBUWJRUE55S3gv?=
+ =?utf-8?B?WjI2dHkvWndHakJBMTJUZEp5U2xYck5FejBiK1RhOU5abEE2dVlsQXdlUnJ3?=
+ =?utf-8?B?NU01ZkxmRE5icEplZ1lGU09jRGFQbFFmKzNsTmJ6Vlo1NENaWUNCMmVXUXFk?=
+ =?utf-8?B?eHIvMklTN2NQUitoR0tEZXFKMStzUjZxTVNZTEZuSnZTd255Nlo1clpwWXBr?=
+ =?utf-8?B?bURtOTBxYzkyK2tmazRMM2s5OVhmRlhSZ0t0ZHdQMVVUa01NT0N4R0JjOWEz?=
+ =?utf-8?B?WmFsT25aK2lEY3JQdURMMU8zWGJLSyt2TU5lR1NESHF2aklyUnhVYm44M3pW?=
+ =?utf-8?B?UThWam1ablFTS2VkV201eHFGNWo0b2MxemxiaFJOQlF1NXNIeDNUdjhKQVBT?=
+ =?utf-8?B?QjErU1ROT0haY2NTOGg2a1ZISVlIMDNUemVmWkRNbExiZENPZzYwWnZFSndG?=
+ =?utf-8?B?TmQ5TGJMMHU5cWZGN2FxNE1IN3V2OEVJa3Mzb0U1a2d2S0VlRGNveVM2REdl?=
+ =?utf-8?B?UnhXbEFmdEVzeHI4TU93MmkxZXMvWGxrUUdzMkt5Y1lBcGE4K0lKOGxFVk85?=
+ =?utf-8?B?OTFyY1hMSnArZ29qY3JpOXBqNis0T0ZnbEkzcmNlSlNIem1IUmJZa3NodUVm?=
+ =?utf-8?B?ODRLWmhvdTZKWTVLY3l2Zk1YZUpLSEp1Rzk5b2NEUXNWSzBvcko0UGpVbnF3?=
+ =?utf-8?B?UGdvd1NBUE5aZUVmM2t0ZlVwZ3ZIbzZCaGo0RVc3ZEMydjVFSWZWdUlQaGVk?=
+ =?utf-8?B?RUNvMk9IZlh0bXViMm1CNTh1NnFNNTVRRE9YME5ET1RtdklvL1dNcExBWUEz?=
+ =?utf-8?B?OFUvUFBrTTdvQml3ZE9SKy9tZm5LUVZyY3ZlY1lvSzBaaEYxTnEzNm5NQmlC?=
+ =?utf-8?B?TndnRWx1ZXI0RElmTUVobERGZTdTbTZad2pYWFRTSVNQYWlkRTdFem8xRFFU?=
+ =?utf-8?B?WXRoWUtPTVppWnNKZFRNZDlZNzdNUkM4dU9Nb1B6alBwTjkva2hjTDFRPT0=?=
+MIME-Version: 1.0
+
+----_NmP-930412072d2d5b4c-Part_1
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+this morning's automated check of feelzlike.com found 14 problems.
+
+regional headline resilience (1):
+  https://feelzlike.com/api/regions - =
+HTTP 200, 210 regions, 209/210 live headlines (100%, expected 95%+), 11 =
+batch attempts, peak batch concurrency 3/3, cold-replica provider-outage =
+snapshot 0/210 (0%)
+
+live lift feed silently off (1):
+  https://feelzlike.com/api/lift-status/charlottes-pass - =
+liveStatusVerified=3Dfalse, totalLifts=3D5 in-season - Charlotte Pass feed =
+down/stale, page is silently in no-live mode
+
+unreachable outbound links =
+(12):
+  http://sekionsen.jp/ - fetch failed (ECONNREFUSED) (failed twice)
+  https://alpenblick-resort.com/ski - fetch failed (ECONNREFUSED) (failed =
+twice)
+  https://nozawaski.com/en/live-camera/ - fetch failed =
+(ECONNREFUSED) (failed twice)
+  https://shibu-katei.jp/english.html - fetch=
+ failed (ECONNREFUSED) (failed twice)
+  https://shibuonsen.=
+net/shop/category/eat/ - fetch failed (ECONNREFUSED) (failed twice)
+  https://shibuonsen.net/shop/wakabaya/ - fetch failed (ECONNREFUSED) =
+(failed twice)
+  https://shibuonsen.net/stay/ - fetch failed (ECONNREFUSED)=
+ (failed twice)
+  https://www.happo-one.jp/ - fetch failed (ECONNREFUSED) =
+(failed twice)
+  https://www.nozawaski.com/ - fetch failed (ECONNREFUSED) =
+(failed twice)
+  https://www.nozawaski.com/en/access/ - fetch failed =
+(ECONNREFUSED) (failed twice)
+  https://www.shibuonsen.net/ - fetch failed =
+(ECONNREFUSED) (failed twice)
+  https://www.shibuonsen.net/en/ - fetch =
+failed (ECONNREFUSED) (failed twice)
+
+
+----_NmP-930412072d2d5b4c-Part_1
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html><html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><m=
+eta name=3D"viewport" content=3D"width=3Ddevice-width,initial-scale=3D1"><t=
+itle>daily site check =C2=B7 problems found</title></head>
+<body style=3D"margin:0;padding:0;background:#f0f6fc;font-family:-apple-sys=
+tem,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#=
+0a1628;">
+  <span style=3D"display:none!important;visibility:hidden;opacity:0;color:t=
+ransparent;height:0;width:0;font-size:1px;line-height:1px;">14 problems fou=
+nd on feelzlike.com</span>
+  <table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" border=
+=3D"0" width=3D"100%" style=3D"background:#f0f6fc;padding:24px 0;">
+    <tr><td align=3D"center">
+      <table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" bord=
+er=3D"0" width=3D"560" style=3D"max-width:560px;background:#fff;border-radi=
+us:12px;overflow:hidden;box-shadow:0 1px 3px rgba(10,22,40,0.06);">
+        <tr><td align=3D"center" style=3D"background:#ffffff;padding:28px 3=
+2px 20px 32px;">
+          <img src=3D"https://feelzlike.com/branding/wordmark-inline.png" w=
+idth=3D"190" height=3D"46" alt=3D"feelzlike" style=3D"display:block;width:1=
+90px;height:auto;border:0;">
+          <div style=3D"font-family:-apple-system,BlinkMacSystemFont,'Segoe=
+ UI',Roboto,Helvetica,Arial,sans-serif;font-size:11px;color:#64748b;text-tr=
+ansform:lowercase;letter-spacing:0.14em;margin-top:10px;">real conditions f=
+or mountain travel</div>
+        </td></tr>
+        <tr><td style=3D"padding:0;font-size:0;line-height:0;">
+          <table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" =
+border=3D"0" width=3D"100%"><tr>
+            <td width=3D"70%" style=3D"height:4px;background:#0c75df;font-s=
+ize:0;line-height:0;">&nbsp;</td>
+            <td width=3D"30%" style=3D"height:4px;background:#ec008c;font-s=
+ize:0;line-height:0;">&nbsp;</td>
+          </tr></table>
+        </td></tr>
+        <tr><td style=3D"padding:32px;">
+          <h1 style=3D"font-family:-apple-system,BlinkMacSystemFont,'Segoe =
+UI',Roboto,Helvetica,Arial,sans-serif;font-size:22px;font-weight:800;color:=
+#0a1628;margin:0 0 16px 0;line-height:1.25;text-transform:lowercase;">daily=
+ site check =C2=B7 problems found</h1>
+          <div style=3D"font-size:15px;line-height:1.6;color:#334155;"><p>t=
+his morning's automated check of <strong>feelzlike.com</strong> found 14 pr=
+oblems. everything else passed (2797 pages, 1173 outbound links checked).</=
+p><h3 style=3D"font-size:14px;text-transform:lowercase;margin:20px 0 8px 0;=
+">regional headline resilience (1)</h3><ul style=3D"margin:0;padding-left:1=
+8px;"><li style=3D"margin:4px 0;word-break:break-all;"><a href=3D"https://f=
+eelzlike.com/api/regions" style=3D"color:#0c75df;">https://feelzlike.com/ap=
+i/regions</a> - HTTP 200, 210 regions, 209/210 live headlines (100%, expect=
+ed 95%+), 11 batch attempts, peak batch concurrency 3/3, cold-replica provi=
+der-outage snapshot 0/210 (0%)</li></ul><h3 style=3D"font-size:14px;text-tr=
+ansform:lowercase;margin:20px 0 8px 0;">live lift feed silently off (1)</h3=
+><ul style=3D"margin:0;padding-left:18px;"><li style=3D"margin:4px 0;word-b=
+reak:break-all;"><a href=3D"https://feelzlike.com/api/lift-status/charlotte=
+s-pass" style=3D"color:#0c75df;">https://feelzlike.com/api/lift-status/char=
+lottes-pass</a> - liveStatusVerified=3Dfalse, totalLifts=3D5 in-season - Ch=
+arlotte Pass feed down/stale, page is silently in no-live mode</li></ul><h3=
+ style=3D"font-size:14px;text-transform:lowercase;margin:20px 0 8px 0;">unr=
+eachable outbound links (12)</h3><ul style=3D"margin:0;padding-left:18px;">=
+<li style=3D"margin:4px 0;word-break:break-all;"><a href=3D"http://sekionse=
+n.jp/" style=3D"color:#0c75df;">http://sekionsen.jp/</a> - fetch failed (EC=
+ONNREFUSED) (failed twice) <span style=3D"color:#64748b;">=C2=B7 used in sr=
+c/regions/myoko.ts</span></li><li style=3D"margin:4px 0;word-break:break-al=
+l;"><a href=3D"https://alpenblick-resort.com/ski" style=3D"color:#0c75df;">=
+https://alpenblick-resort.com/ski</a> - fetch failed (ECONNREFUSED) (failed=
+ twice) <span style=3D"color:#64748b;">=C2=B7 used in src/regions/myoko.ts<=
+/span></li><li style=3D"margin:4px 0;word-break:break-all;"><a href=3D"http=
+s://nozawaski.com/en/live-camera/" style=3D"color:#0c75df;">https://nozawas=
+ki.com/en/live-camera/</a> - fetch failed (ECONNREFUSED) (failed twice) <sp=
+an style=3D"color:#64748b;">=C2=B7 used in src/data/webcams.ts</span></li><=
+li style=3D"margin:4px 0;word-break:break-all;"><a href=3D"https://shibu-ka=
+tei.jp/english.html" style=3D"color:#0c75df;">https://shibu-katei.jp/englis=
+h.html</a> - fetch failed (ECONNREFUSED) (failed twice) <span style=3D"colo=
+r:#64748b;">=C2=B7 used in src/data/curated/by_region/yamanouchi/shibu_onse=
+n/stays.json</span></li><li style=3D"margin:4px 0;word-break:break-all;"><a=
+ href=3D"https://shibuonsen.net/shop/category/eat/" style=3D"color:#0c75df;=
+">https://shibuonsen.net/shop/category/eat/</a> - fetch failed (ECONNREFUSE=
+D) (failed twice) <span style=3D"color:#64748b;">=C2=B7 used in src/data/cu=
+rated/by_region/yamanouchi/shibu_onsen/eats.json</span></li><li style=3D"ma=
+rgin:4px 0;word-break:break-all;"><a href=3D"https://shibuonsen.net/shop/wa=
+kabaya/" style=3D"color:#0c75df;">https://shibuonsen.net/shop/wakabaya/</a>=
+ - fetch failed (ECONNREFUSED) (failed twice) <span style=3D"color:#64748b;=
+">=C2=B7 used in src/data/curated/by_region/yamanouchi/shibu_onsen/eats.jso=
+n</span></li><li style=3D"margin:4px 0;word-break:break-all;"><a href=3D"ht=
+tps://shibuonsen.net/stay/" style=3D"color:#0c75df;">https://shibuonsen.net=
+/stay/</a> - fetch failed (ECONNREFUSED) (failed twice) <span style=3D"colo=
+r:#64748b;">=C2=B7 used in src/data/curated/by_region/yamanouchi/shibu_onse=
+n/stays.json</span></li><li style=3D"margin:4px 0;word-break:break-all;"><a=
+ href=3D"https://www.happo-one.jp/" style=3D"color:#0c75df;">https://www.ha=
+ppo-one.jp/</a> - fetch failed (ECONNREFUSED) (failed twice) <span style=3D=
+"color:#64748b;">=C2=B7 used in src/regions/hakuba-valley.ts</span></li><li=
+ style=3D"margin:4px 0;word-break:break-all;"><a href=3D"https://www.nozawa=
+ski.com/" style=3D"color:#0c75df;">https://www.nozawaski.com/</a> - fetch f=
+ailed (ECONNREFUSED) (failed twice) <span style=3D"color:#64748b;">=C2=B7 u=
+sed in src/regions/nozawa-onsen.ts</span></li><li style=3D"margin:4px 0;wor=
+d-break:break-all;"><a href=3D"https://www.nozawaski.com/en/access/" style=
+=3D"color:#0c75df;">https://www.nozawaski.com/en/access/</a> - fetch failed=
+ (ECONNREFUSED) (failed twice) <span style=3D"color:#64748b;">=C2=B7 used i=
+n src/data/transport/nozawa-onsen.ts</span></li><li style=3D"margin:4px 0;w=
+ord-break:break-all;"><a href=3D"https://www.shibuonsen.net/" style=3D"colo=
+r:#0c75df;">https://www.shibuonsen.net/</a> - fetch failed (ECONNREFUSED) (=
+failed twice) <span style=3D"color:#64748b;">=C2=B7 used in src/regions/yam=
+anouchi.ts</span></li><li style=3D"margin:4px 0;word-break:break-all;"><a h=
+ref=3D"https://www.shibuonsen.net/en/" style=3D"color:#0c75df;">https://www=
+.shibuonsen.net/en/</a> - fetch failed (ECONNREFUSED) (failed twice) <span =
+style=3D"color:#64748b;">=C2=B7 used in src/regions/yamanouchi/pages/activi=
+ties.tsx</span></li></ul><p style=3D"margin-top:20px;color:#64748b;font-siz=
+e:13px;">dead links usually mean a provider changed their website. fixing t=
+hem is a data edit, not an outage - but pages not loading or api problems m=
+ean visitors are affected right now.</p></div>
+          <table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" =
+style=3D"margin:24px 0;">
+         <tr><td style=3D"border-radius:8px;background:#0c75df;">
+           <a href=3D"https://feelzlike.com/" style=3D"display:inline-block=
+;padding:14px 28px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',=
+Roboto,Helvetica,Arial,sans-serif;font-size:15px;font-weight:700;color:#fff=
+;text-decoration:none;letter-spacing:0.02em;">open feelzlike</a>
+         </td></tr>
+       </table>
+        </td></tr>
+        <tr><td style=3D"padding:20px 32px;border-top:1px solid #e2e8f0;fon=
+t-size:12px;color:#64748b;line-height:1.5;">
+          automated daily smoke test =C2=B7 sent only when something needs =
+attention =C2=B7 recipient is set by SMOKE_ALERT_EMAIL / ADMIN_EMAILS
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>=
+
+----_NmP-930412072d2d5b4c-Part_1--

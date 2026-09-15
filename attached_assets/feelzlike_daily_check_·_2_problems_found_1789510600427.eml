@@ -1,0 +1,215 @@
+Received: from SY1P282MB6372.AUSP282.PROD.OUTLOOK.COM (2603:10c6:10:31b::11)
+ by SY5P282MB4686.AUSP282.PROD.OUTLOOK.COM with HTTPS; Mon, 14 Sep 2026
+ 20:07:08 +0000
+Received: from MEWPR01CA0035.ausprd01.prod.outlook.com (2603:10c6:220:1e5::8)
+ by SY1P282MB6372.AUSP282.PROD.OUTLOOK.COM (2603:10c6:10:31b::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Mon, 14 Sep
+ 2026 20:07:06 +0000
+Received: from ML1PEPF0000F17A.ausprd01.prod.outlook.com
+ (2603:10c6:220:1e5:cafe::3b) by MEWPR01CA0035.outlook.office365.com
+ (2603:10c6:220:1e5::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.12 via Frontend Transport; Mon,
+ 14 Sep 2026 20:07:06 +0000
+Authentication-Results: spf=pass (sender IP is 23.251.234.55)
+ smtp.mailfrom=send.feelzlike.com; dkim=pass (signature was verified)
+ header.d=feelzlike.com;dkim=pass (signature was verified)
+ header.d=amazonses.com;dmarc=pass action=none
+ header.from=feelzlike.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of send.feelzlike.com
+ designates 23.251.234.55 as permitted sender)
+ receiver=protection.outlook.com; client-ip=23.251.234.55;
+ helo=e234-55.smtp-out.ap-northeast-1.amazonses.com; pr=C
+Received: from e234-55.smtp-out.ap-northeast-1.amazonses.com (23.251.234.55)
+ by ML1PEPF0000F17A.mail.protection.outlook.com (10.167.241.71) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.7
+ via Frontend Transport; Mon, 14 Sep 2026 20:07:05 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=resend;
+	d=feelzlike.com; t=1789416423;
+	h=From:To:Reply-To:Subject:Message-ID:Date:MIME-Version:Content-Type;
+	bh=gExT0ogp9Fu7l4WSFlZTkaZwgSVL0483nhir5eRK5ZI=;
+	b=ROcGbn9h1qkGu8s1CwLPD1bUHwIK8/mgOeRz3zWpqQcGoe/yJtrLY3LAeErETM5B
+	Xnlm2bOst6mB6aDKGH1P5okamVvgsOakGdSyXc8KoBE9wBGAK7lAFjQePUbyqLkG9cS
+	/yvuOYMOVkzFMwj94cRyJKVHAmnFXMm//QV3tL/c=
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=zh4gjftm6etwoq6afzugpky45synznly; d=amazonses.com; t=1789416423;
+	h=From:To:Reply-To:Subject:Message-ID:Date:MIME-Version:Content-Type:Feedback-ID;
+	bh=gExT0ogp9Fu7l4WSFlZTkaZwgSVL0483nhir5eRK5ZI=;
+	b=AJ0ME+33mlybSvSF2f35EzyN3vQlTg4OWuMC3robVY89FeLff2hhYW15z0GqT857
+	swldBmMwCzfN0R2y75B3fkgGzGR99g+wnO2tzGN0a54d3stn0Q4PuE/z8TZKOaijEXB
+	iPVvZbJBoKcMdvIOc1n5X4KXA3BZ4uTH4dAgbq2I=
+From: feelzlike <info@feelzlike.com>
+To: james@navigatework.com.au
+Reply-To: info@feelzlike.com
+Subject: =?UTF-8?Q?feelzlike_daily_check_=C2=B7_2_problems_?=
+ =?UTF-8?Q?found?=
+Message-ID: <010601a0a187c02a-b437107d-3c52-43ff-ac57-671cb31be7e5-000000@ap-northeast-1.amazonses.com>
+Date: Mon, 14 Sep 2026 20:07:03 +0000
+Content-Type: multipart/alternative;
+ boundary="--_NmP-11132acdc9fadee5-Part_1"
+Feedback-ID: :1.ap-northeast-1.rJqblb2iiX4g90ekhj071PGlKr4Rq1tDgsmgGXn+kyRER5FNqbzLLE2wvhuLcBtUCGkSbZuHyzEd23ZWQPLRCTbD+e6Y2o4Nmrd8W8/LZLhZGW2OiQrKc9JZLumem3RLOmQ9jDX7Ic1/Owf8jvk+NumZBEUfAbEdz+MOwk7cO9Vn62y/ZPOD8Ic+VjH+pyoh:1.ap-northeast-1.RirEgqlsQndpFdi8TUL4OAg2i1Pw380m+rTe2cbKEVU=:AmazonSES
+X-SES-Outgoing: 2026.09.14-23.251.234.55
+Return-Path: 010601a0a187c02a-b437107d-3c52-43ff-ac57-671cb31be7e5-000000@send.feelzlike.com
+X-MS-Exchange-Organization-ExpirationStartTime: 14 Sep 2026 20:07:05.8195
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: 78dbde9b-133b-4a95-0981-08df129bbfdf
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: febefc03-2be7-43ba-af66-5490103dee38:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: ML1PEPF0000F17A:EE_|SY1P282MB6372:EE_|SY5P282MB4686:EE_
+X-MS-Exchange-Organization-AuthSource: ML1PEPF0000F17A.ausprd01.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: 78dbde9b-133b-4a95-0981-08df129bbfdf
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:0;ARA:13230040|704160511799003|32142699015|7049299003|3109299003|69100299015|7149299003|5063699009|19002099009|10067099003|18002099003|57112099003|4113699003|4076899003|8096899003|13003099007|43062017;
+X-Forefront-Antispam-Report: CIP:23.251.234.55;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:e234-55.smtp-out.ap-northeast-1.amazonses.com;PTR:e234-55.smtp-out.ap-northeast-1.amazonses.com;CAT:NONE;SFS:(13230040)(704160511799003)(32142699015)(7049299003)(3109299003)(69100299015)(7149299003)(5063699009)(19002099009)(10067099003)(18002099003)(57112099003)(4113699003)(4076899003)(8096899003)(13003099007)(43062017);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2026 20:07:05.5498
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 78dbde9b-133b-4a95-0981-08df129bbfdf
+X-MS-Exchange-CrossTenant-Id: febefc03-2be7-43ba-af66-5490103dee38
+X-MS-Exchange-CrossTenant-AuthSource: ML1PEPF0000F17A.ausprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SY1P282MB6372
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.2662770
+X-MS-Exchange-Processed-By-BccFoldering: 15.21.0406.000
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944506478)(944626604)(920097)(930201)(20251009189)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?VHBHcU9ZNHltS3RaREdPTkMzckRyTWlTbWtsbms2NmxIZFM3VEs2WDJWN2JE?=
+ =?utf-8?B?RU5OeEllaFNNcngvN3pFTHUycFFkN1RteUVKbmtMQnFoNEQ5YVhERldHSEpT?=
+ =?utf-8?B?YlVNdlVpK1ZBaEtCS1d6Uzk5c3NHVU1rM1hVeDUwRWErK0MrWVRSMTBkNEZh?=
+ =?utf-8?B?ckhoWXJPaXV2MXJuT0NTNmtEOVU2eWsyMkFlRlRCYXRVVjZsaU1kbGlocis2?=
+ =?utf-8?B?bGdrTHVCeVVmcndFTE1VUFZ5L2JvYXNyR2xhWTIyRDhzQXRxU0oybkd0TTh0?=
+ =?utf-8?B?RlIvbldMS0QxUnNXbUpJbGZqS0tXS1FGWGVUL3g1cUZ3UDMyOFBrYjR0MVVY?=
+ =?utf-8?B?NTN6bTZJd2VpT0VpNXNLa1IzcGQ2dVZxWVVoUVVtWTV0eEtSdW85YUtqZ3Ez?=
+ =?utf-8?B?V1NyMDVjbGlnZ2Z6Y3pzeFBXclFaWkFoM05LMUp5eUltNi9TdTdZMDh2N09w?=
+ =?utf-8?B?MTIyUzZORzFUZWRadE5KdUVkZ1BWVjlrQUVUNlBYV1AzYnpNbTlkTlJrZnY0?=
+ =?utf-8?B?MHdIMW1kV1N4cTJmb3BWai8yUlJKVDBoeVdiSHp5ckJ0UnMzZ3VTTDBobGh3?=
+ =?utf-8?B?R29hODF3V2FDUTVrWXovL3V1S1FhVzVWV1haeUF6clBjZU5zeVFadHkyVnFZ?=
+ =?utf-8?B?UjR4eUNXSnB0NGxvRzFlU3VYMGZNVmxWQ0ZXTkl5Y2J4dldkMTFpMURLVitk?=
+ =?utf-8?B?U3dHcysrNml3VEJic3NHNStwcWNBNDBBZEVFenA3eUNSeDhiWFh6aW8vcVAr?=
+ =?utf-8?B?VWRIV2o3T1laa0Y2RWNKSHgzZ3lkN0xGbHRlNVRDaGZrbUZUZnVWU0lObFQ5?=
+ =?utf-8?B?VnpCNlVmL2x2dWtpYjI4U2wrdEliOTQrQkx3d2EzTHJ2NE1Ydy95bnBCVkM4?=
+ =?utf-8?B?YlYrYkdMck9NN00vUE1XVkFPVFVEMStqM25uT3VaRGtvejI0NDZXc2ozRmk5?=
+ =?utf-8?B?QzVTYnladEExSlRlb2cxRG8vSU5IL3lDLzBSclh0cnVJSkNYVTlpS2cvV1N0?=
+ =?utf-8?B?UVRWRTV2d3lDNWZ2RkMrNVJrTWRjUzgwR3BmTDkwNStaN0YvL3Q5QkJoZWp0?=
+ =?utf-8?B?WGZneXRRb1RwT01IOTlFbmw1dlNPT0ZYZGJFc0xkTWlkVGpYWG1FMHQ5V25R?=
+ =?utf-8?B?YkV6WXl3MUdLcTdpUUIvUU5ibmpQTUh3SEFFY1NLRjV2UnlHMnZwS0QrQVJo?=
+ =?utf-8?B?RnBHMno5eGE0cU9ldmdJMjVuVktwaGU1Nzc4QkE2bENiSHRRVVZrOVY1bGlJ?=
+ =?utf-8?B?RFJhU0lzS00vRlJHZ2F0OXRUL2hUZ241YlpiU1V6MUZJMjdpWlZ1QVJ2S00x?=
+ =?utf-8?B?YytWZVJLMSs2OGNGWmpxbGpvOWNSQU1uRFdUc2JnaGlSTHFZTG5IbEpuUWxn?=
+ =?utf-8?B?NjFBZVNZbkVSWkUxSmgwT3dwS1FQUTBwbnZVRWtwV0Rlbmp2T1hKQnZGVFRh?=
+ =?utf-8?B?c0lWaWo5Y0w5aXhXRUVIQUQxR0ZvZjlyOU1hRDhQU21WQjY0dWtMUE82Mmdq?=
+ =?utf-8?B?M1lsbnZHVTlEdzNCZHRkRnVSb2NFZEJZQ0JtWUN0N0FNakdSQ01ldllJMkJJ?=
+ =?utf-8?B?VmZHWndkRWpRWG1UUjkwZ3VKNkovZTFQb0w2ZHI2bU4rVEt3MERPbVladzlm?=
+ =?utf-8?B?RC9XOHdtZXJHTWRlc3I4YWZqaE5pMm43dE4xN0g2QnVoM2x5RW80RnAwdk9h?=
+ =?utf-8?B?MnBVeUFERXErUEkwZDR3dkhjb1lNYnZ6bVpGRXVtQUpEc1c1cDQyTEg2NGx4?=
+ =?utf-8?Q?/IXV+zFdVLulLzIgMtvgVZUD3MIDemrGbqzisfL?=
+MIME-Version: 1.0
+
+----_NmP-11132acdc9fadee5-Part_1
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+this morning's automated check of feelzlike.com found 2 problems.
+
+live lift feed silently off (1):
+  https://feelzlike.=
+com/api/lift-status/charlottes-pass - liveStatusVerified=3Dfalse, =
+totalLifts=3D5 in-season - Charlotte Pass feed down/stale, page is silently=
+ in no-live mode
+
+unreachable outbound links (1):
+  https://www.nihonkotsu.=
+co.jp/ - fetch failed (ECONNREFUSED) (failed twice)
+
+
+----_NmP-11132acdc9fadee5-Part_1
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html><html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><m=
+eta name=3D"viewport" content=3D"width=3Ddevice-width,initial-scale=3D1"><t=
+itle>daily site check =C2=B7 problems found</title></head>
+<body style=3D"margin:0;padding:0;background:#f0f6fc;font-family:-apple-sys=
+tem,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#=
+0a1628;">
+  <span style=3D"display:none!important;visibility:hidden;opacity:0;color:t=
+ransparent;height:0;width:0;font-size:1px;line-height:1px;">2 problems foun=
+d on feelzlike.com</span>
+  <table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" border=
+=3D"0" width=3D"100%" style=3D"background:#f0f6fc;padding:24px 0;">
+    <tr><td align=3D"center">
+      <table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" bord=
+er=3D"0" width=3D"560" style=3D"max-width:560px;background:#fff;border-radi=
+us:12px;overflow:hidden;box-shadow:0 1px 3px rgba(10,22,40,0.06);">
+        <tr><td align=3D"center" style=3D"background:#ffffff;padding:28px 3=
+2px 20px 32px;">
+          <img src=3D"https://feelzlike.com/branding/wordmark-inline.png" w=
+idth=3D"190" height=3D"46" alt=3D"feelzlike" style=3D"display:block;width:1=
+90px;height:auto;border:0;">
+          <div style=3D"font-family:-apple-system,BlinkMacSystemFont,'Segoe=
+ UI',Roboto,Helvetica,Arial,sans-serif;font-size:11px;color:#64748b;text-tr=
+ansform:lowercase;letter-spacing:0.14em;margin-top:10px;">real conditions f=
+or mountain travel</div>
+        </td></tr>
+        <tr><td style=3D"padding:0;font-size:0;line-height:0;">
+          <table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" =
+border=3D"0" width=3D"100%"><tr>
+            <td width=3D"70%" style=3D"height:4px;background:#0c75df;font-s=
+ize:0;line-height:0;">&nbsp;</td>
+            <td width=3D"30%" style=3D"height:4px;background:#ec008c;font-s=
+ize:0;line-height:0;">&nbsp;</td>
+          </tr></table>
+        </td></tr>
+        <tr><td style=3D"padding:32px;">
+          <h1 style=3D"font-family:-apple-system,BlinkMacSystemFont,'Segoe =
+UI',Roboto,Helvetica,Arial,sans-serif;font-size:22px;font-weight:800;color:=
+#0a1628;margin:0 0 16px 0;line-height:1.25;text-transform:lowercase;">daily=
+ site check =C2=B7 problems found</h1>
+          <div style=3D"font-size:15px;line-height:1.6;color:#334155;"><p>t=
+his morning's automated check of <strong>feelzlike.com</strong> found 2 pro=
+blems. everything else passed (2797 pages, 1173 outbound links checked).</p=
+><h3 style=3D"font-size:14px;text-transform:lowercase;margin:20px 0 8px 0;"=
+>live lift feed silently off (1)</h3><ul style=3D"margin:0;padding-left:18p=
+x;"><li style=3D"margin:4px 0;word-break:break-all;"><a href=3D"https://fee=
+lzlike.com/api/lift-status/charlottes-pass" style=3D"color:#0c75df;">https:=
+//feelzlike.com/api/lift-status/charlottes-pass</a> - liveStatusVerified=3D=
+false, totalLifts=3D5 in-season - Charlotte Pass feed down/stale, page is s=
+ilently in no-live mode</li></ul><h3 style=3D"font-size:14px;text-transform=
+:lowercase;margin:20px 0 8px 0;">unreachable outbound links (1)</h3><ul sty=
+le=3D"margin:0;padding-left:18px;"><li style=3D"margin:4px 0;word-break:bre=
+ak-all;"><a href=3D"https://www.nihonkotsu.co.jp/" style=3D"color:#0c75df;"=
+>https://www.nihonkotsu.co.jp/</a> - fetch failed (ECONNREFUSED) (failed tw=
+ice) <span style=3D"color:#64748b;">=C2=B7 used in src/data/transport/daise=
+n.ts</span></li></ul><p style=3D"margin-top:20px;color:#64748b;font-size:13=
+px;">dead links usually mean a provider changed their website. fixing them =
+is a data edit, not an outage - but pages not loading or api problems mean =
+visitors are affected right now.</p></div>
+          <table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" =
+style=3D"margin:24px 0;">
+         <tr><td style=3D"border-radius:8px;background:#0c75df;">
+           <a href=3D"https://feelzlike.com/" style=3D"display:inline-block=
+;padding:14px 28px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',=
+Roboto,Helvetica,Arial,sans-serif;font-size:15px;font-weight:700;color:#fff=
+;text-decoration:none;letter-spacing:0.02em;">open feelzlike</a>
+         </td></tr>
+       </table>
+        </td></tr>
+        <tr><td style=3D"padding:20px 32px;border-top:1px solid #e2e8f0;fon=
+t-size:12px;color:#64748b;line-height:1.5;">
+          automated daily smoke test =C2=B7 sent only when something needs =
+attention =C2=B7 recipient is set by SMOKE_ALERT_EMAIL / ADMIN_EMAILS
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>=
+
+----_NmP-11132acdc9fadee5-Part_1--
