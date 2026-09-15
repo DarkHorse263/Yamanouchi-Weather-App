@@ -14,6 +14,7 @@ import { useRegion, useLanguage } from "@workspace/feelzlike-shell";
 import type { MountainLink } from "@workspace/feelzlike-shell";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
+import { REGION_COUNTRY } from "@/regions";
 
 /**
  * Region mountains list.
@@ -54,6 +55,7 @@ export function MountainsList() {
   const { region } = useRegion();
   const { t } = useLanguage();
   const mountains = region.mountains ?? [];
+  const isAustria = REGION_COUNTRY[region.id] === "AT";
 
   const { groups, standalone } = useMemo(() => groupMountains(mountains), [mountains]);
 
@@ -70,10 +72,14 @@ export function MountainsList() {
         description={t(
           indoorOnly
             ? `Indoor snow facilities in ${region.name}. Facility information only; no outdoor mountain weather or snow forecast.`
-            : `All mountains and ski resorts in ${region.name}. Live conditions, lift status and snow forecasts for each resort.`,
+            : isAustria
+              ? `All mountains and ski resorts in ${region.name}. Current mountain weather and official resort links for each resort; live lift, snow-report and webcam data are not ingested here.`
+              : `All mountains and ski resorts in ${region.name}. Live conditions, lift status and snow forecasts for each resort.`,
           indoorOnly
             ? `${region.name}の屋内スノー施設一覧。施設情報のみで、屋外の山岳天気・降雪予報は表示しません。`
-            : `${region.name}の全山・スキー場一覧。各スキー場のライブ状況・リフト運行・降雪予報。`,
+            : isAustria
+              ? `${region.name}の全山・スキー場一覧。各スキー場の現在の山岳天気と公式リンク。ライブのリフト・雪レポート・ライブカメラデータは連携していません。`
+              : `${region.name}の全山・スキー場一覧。各スキー場のライブ状況・リフト運行・降雪予報。`,
         )}
         path={`/${region.id}/mountains`}
       />
@@ -96,7 +102,7 @@ export function MountainsList() {
                 <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </span>
-              {t("Live", "ライブ")}
+              {t(isAustria ? "Current weather" : "Live", isAustria ? "現在の天気" : "ライブ")}
             </span>}
           </div>
 
@@ -112,10 +118,14 @@ export function MountainsList() {
               {t(
                 indoorOnly
                   ? "Facility directory for indoor snow activities. Outdoor conditions, lifts, cams and natural-snow forecasts do not apply."
-                  : "Real-time conditions, lift status and live cams for every mountain in the region.",
+                  : isAustria
+                    ? "Current mountain weather and official resort links for every mountain in the region. Live lift, snow-report and webcam data are not ingested here."
+                    : "Real-time conditions, lift status and live cams for every mountain in the region.",
                 indoorOnly
                   ? "屋内スノー施設の案内です。屋外状況・リフト・ライブカメラ・自然降雪予報は対象外です。"
-                  : "地域内すべてのスキー場のリアルタイム状況・リフト稼働・ライブカメラ。",
+                  : isAustria
+                    ? "地域内すべてのスキー場の現在の山岳天気と公式リンク。ライブのリフト・雪レポート・ライブカメラデータは連携していません。"
+                    : "地域内すべてのスキー場のリアルタイム状況・リフト稼働・ライブカメラ。",
               )}
             </p>
             <div className="text-right shrink-0">
@@ -153,6 +163,7 @@ export function MountainsList() {
                 index={groups.length + i}
                 indexLabel={`M${String(groups.length + i + 1).padStart(2, "0")}`}
                 t={t}
+                showLiveFeeds={!isAustria}
               />
             ))}
           </div>
@@ -317,11 +328,13 @@ function MountainCard({
   index,
   indexLabel,
   t,
+  showLiveFeeds,
 }: {
   mountain: MountainLink;
   index: number;
   indexLabel: string;
   t: (en: string, ja: string) => string;
+  showLiveFeeds: boolean;
 }) {
   const u = useUnits();
   const indoor = isIndoorFacility(m);
@@ -348,7 +361,7 @@ function MountainCard({
           <div className="flex items-center gap-2">
             {!indoor && <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9px] font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-700 border border-emerald-500/20">
               <Activity className="w-2 h-2" />
-              {t("Live", "ライブ")}
+              {t(showLiveFeeds ? "Live" : "Weather", showLiveFeeds ? "ライブ" : "天気")}
             </span>}
             <ArrowUpRight className="w-4 h-4 text-muted-foreground/50 group-hover:text-blue-700 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
           </div>
@@ -378,7 +391,7 @@ function MountainCard({
                 </p>
               </div>
               <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-200">
-                {t("View live", "ライブ表示")}
+                {t(showLiveFeeds ? "View live" : "View forecast", showLiveFeeds ? "ライブ表示" : "予報を見る")}
               </span>
             </div>
           </>

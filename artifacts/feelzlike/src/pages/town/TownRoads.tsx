@@ -184,33 +184,95 @@ export function TownRoads() {
     () => chainStatuses.some((c) => c.dataSource === "live"),
     [chainStatuses],
   );
+  const hasRoadCamCapability = roadCams.length > 0 || Boolean(roadCamsSourcePageUrl);
+  const roadsMetaTitle = dataAvailable
+    ? hasRoadCamCapability
+      ? `${town?.name ?? "Town"} road conditions & cams`
+      : `${town?.name ?? "Town"} road conditions`
+    : hasRoadCamCapability
+      ? `${town?.name ?? "Town"} roadside cams`
+      : `${town?.name ?? "Town"} arrival & road guidance`;
+  const roadsMetaDescription = dataAvailable
+    ? hasRoadCamCapability
+      ? `Live road conditions and roadside webcams from ${town?.name ?? "town"} to the mountain in ${region.name}.`
+      : `Live road conditions from ${town?.name ?? "town"} to the mountain in ${region.name}.`
+    : hasRoadCamCapability
+      ? `Official roadside cameras for ${town?.name ?? "town"} and the mountain routes in ${region.name}. Live road status is not provided here.`
+      : `Official arrival and road guidance for ${town?.name ?? "town"} in ${region.name}. Live road conditions and roadside webcams are not provided here.`;
 
   return (
     <div className={cn("min-h-[100dvh] pb-8 transition-colors duration-500", seasonCtx?.season === "green" ? "bg-[#059669]" : "bg-[#0055FF]")}>
       <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
         {town && (
         <PageMeta
-          title={t(`${town.name} road conditions & cams`, `${town.name}の道路状況・カメラ`)}
+          title={t(
+            roadsMetaTitle,
+            dataAvailable
+              ? hasRoadCamCapability
+                ? `${town.name}の道路状況・カメラ`
+                : `${town.name}の道路状況`
+              : hasRoadCamCapability
+                ? `${town.name}の道路カメラ`
+                : `${town.name}の到着・道路案内`,
+          )}
           description={t(
-            `Live road conditions, chain requirements and roadside webcams from ${town.name} to the mountain in ${region.name}.`,
-            `${region.name}・${t(town.name, town.nameJa)}から山までの道路状況・チェーン規制・路傍カメラ。`,
+            roadsMetaDescription,
+            dataAvailable
+              ? hasRoadCamCapability
+                ? `${region.name}・${t(town.name, town.nameJa)}から山までの道路状況と路傍カメラ。`
+                : `${region.name}・${t(town.name, town.nameJa)}から山までの道路状況。`
+              : hasRoadCamCapability
+                ? `${region.name}・${t(town.name, town.nameJa)}と山間ルートの公式道路カメラ。ライブ道路状況は提供していません。`
+                : `${region.name}・${t(town.name, town.nameJa)}の公式到着・道路案内。ライブ道路状況と路傍カメラは提供していません。`,
           )}
           path={`/${region.id}/${town.id}/roads`}
         />
       )}
       <PageHeader
         byline={`${region.name} · ${town ? t(town.name, town.nameJa) : t("Town", "町")}`}
-        title={t("Road conditions & cams", "道路状況・ライブカメラ")}
+        title={t(
+          dataAvailable
+            ? hasRoadCamCapability
+              ? "Road conditions & cams"
+              : "Road conditions"
+            : hasRoadCamCapability
+              ? "Roadside cams"
+              : chainStatuses.length > 0
+                ? "Chain rules & arrival guidance"
+                : "Arrival & road guidance",
+          dataAvailable
+            ? hasRoadCamCapability
+              ? "道路状況・ライブカメラ"
+              : "道路状況"
+            : hasRoadCamCapability
+              ? "道路ライブカメラ"
+              : chainStatuses.length > 0
+                ? "チェーン規則・到着案内"
+                : "到着・道路案内",
+        )}
         description={
           dataAvailable
             ? t(
-                `Live route conditions from ${town?.name ?? "town"} to the mountain, plus roadside cams.`,
-                `${town ? t(town.name, town.nameJa) : "町"}から山までのルートの最新状況と路傍カメラ。`,
+                hasRoadCamCapability
+                  ? `Live route conditions from ${town?.name ?? "town"} to the mountain, plus roadside cams.`
+                  : `Live route conditions from ${town?.name ?? "town"} to the mountain.`,
+                hasRoadCamCapability
+                  ? `${town ? t(town.name, town.nameJa) : "町"}から山までのルートの最新状況と路傍カメラ。`
+                  : `${town ? t(town.name, town.nameJa) : "町"}から山までのルートの最新状況。`,
               )
-            : t(
-                `Seasonal chain rules for the roads from ${town?.name ?? "town"} to the mountain, plus the official road-camera map.`,
-                `${town ? t(town.name, town.nameJa) : "町"}から山までの道路の季節ごとのチェーン規制と、公式の道路カメラマップ。`,
-              )
+            : chainStatuses.length > 0
+              ? t(
+                  hasRoadCamCapability
+                    ? `Published chain rules for the roads from ${town?.name ?? "town"} to the mountain, plus official roadside cameras.`
+                    : `Published chain rules for the roads from ${town?.name ?? "town"} to the mountain. Live road status and roadside webcams are not provided here.`,
+                  hasRoadCamCapability
+                    ? `${town ? t(town.name, town.nameJa) : "町"}から山までの公表チェーン規則と公式道路カメラ。`
+                    : `${town ? t(town.name, town.nameJa) : "町"}から山までの公表チェーン規則。ライブ道路状況と路傍カメラは提供していません。`,
+                )
+              : t(
+                  `Official arrival and road guidance for ${town?.name ?? "town"}. Live road conditions and roadside webcams are not provided here.`,
+                  `${town ? t(town.name, town.nameJa) : "町"}の公式到着・道路案内。ライブ道路状況と路傍カメラは提供していません。`,
+                )
         }
         stamp={
           dataAvailable ? (

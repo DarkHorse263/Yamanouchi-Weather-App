@@ -1077,6 +1077,18 @@ export const MOUNTAIN_WEBCAMS: Record<string, MountainWebcam[]> = {
       verifiedAt: "2026-09-12",
     },
   ],
+  "st-anton-resort": [
+    {
+      id: "st-anton-official",
+      mountainId: "st-anton-resort",
+      name: "St Anton am Arlberg official webcams",
+      description: "Official St Anton camera page. Embedded use has not been verified, so this opens the source site.",
+      embedType: "external",
+      pageUrl: "https://www.stantonamarlberg.com/en/webcams",
+      source: "St Anton am Arlberg",
+      verifiedAt: "2026-09-12",
+    },
+  ],
   ...YAMANOUCHI,
   ...SNOWY_MOUNTAINS,
   ...NEW_ZEALAND,

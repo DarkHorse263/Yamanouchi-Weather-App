@@ -84,6 +84,12 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
     // interactive radar at the representative combined-resort midpoint.
     official: { label: "Interactive weather radar", imageUrl: null, href: "https://www.windy.com/", attribution: "Interactive radar · user initiated" },
   },
+  "st-anton": {
+    windy: { lat: 47.1297, lon: 10.2683, zoom: 11 },
+    // No claimed official radar feed: users can opt in to the existing
+    // interactive radar at the representative St Anton resort midpoint.
+    official: { label: "Interactive weather radar", imageUrl: null, href: "https://www.windy.com/", attribution: "Interactive radar · user initiated" },
+  },
   "snowy-mountains": {
     windy: { lat: -36.42, lon: 148.42, zoom: 9 },
     official: {
@@ -961,6 +967,7 @@ const RADAR_WINDOW = 3;
 type MapCountry = "AU" | "AT" | "JP" | "NZ" | "CA" | "US";
 const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "lech-zuers": "AT",
+  "st-anton": "AT",
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
   tasmania: "AU",
@@ -1084,6 +1091,7 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
 const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", AT: "austria", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" };
 const REGION_LABEL: Record<RegionKey, string> = {
   "lech-zuers": "lech zürs",
+  "st-anton": "st anton am arlberg",
   "snowy-mountains": "snowy mountains",
   "victorias-high-country": "victoria's high country",
   tasmania: "tasmania",

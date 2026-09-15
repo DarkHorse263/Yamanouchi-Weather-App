@@ -26,6 +26,13 @@ test("explicit Austria pilot bands retain the authored base, midpoint and upper 
   );
 });
 
+test("St Anton keeps its village, representative midpoint and Valluga bands", () => {
+  assert.deepEqual(
+    bandElevations(2811, { upper: 2811, mid: 2058, lower: 1304 }),
+    { upper: 2811, mid: 2058, lower: 1304 },
+  );
+});
+
 test("snow is monotone with elevation: upper >= mid >= lower", () => {
   // FL sweeps 2100m -> 1200m across the day: high bands flip to snow earlier
   const times = H("2026-07-12", 10);

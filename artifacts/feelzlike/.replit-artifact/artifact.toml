@@ -191,6 +191,54 @@ from = "/lech-zuers/zuers/explore/"
 to = "/lech-zuers/zuers/explore/index.html"
 
 [[services.production.rewrites]]
+from = "/st-anton/"
+to = "/st-anton/index.html"
+
+[[services.production.rewrites]]
+from = "/st-anton/mountains/"
+to = "/st-anton/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/st-anton/alerts/"
+to = "/st-anton/alerts/index.html"
+
+[[services.production.rewrites]]
+from = "/st-anton/stay/"
+to = "/st-anton/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/st-anton/mountain/st-anton-resort/"
+to = "/st-anton/mountain/st-anton-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/st-anton/st-anton/"
+to = "/st-anton/st-anton/index.html"
+
+[[services.production.rewrites]]
+from = "/st-anton/st-anton/weather/"
+to = "/st-anton/st-anton/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/st-anton/st-anton/stay/"
+to = "/st-anton/st-anton/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/st-anton/st-anton/eat/"
+to = "/st-anton/st-anton/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/st-anton/st-anton/roads/"
+to = "/st-anton/st-anton/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/st-anton/st-anton/transport/"
+to = "/st-anton/st-anton/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/st-anton/st-anton/explore/"
+to = "/st-anton/st-anton/explore/index.html"
+
+[[services.production.rewrites]]
 from = "/snowy-mountains/"
 to = "/snowy-mountains/index.html"
 

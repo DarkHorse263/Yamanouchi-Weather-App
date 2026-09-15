@@ -109,7 +109,11 @@ function regionTownList(region) {
 function townSectionLinks(region, townId) {
   return townFeatures(region)
     .map((s) => {
-      const label = s === "roads" ? "roads & cams" : s;
+      const label = s === "roads"
+        ? region.country === "AT"
+          ? "arrival & road guidance"
+          : "roads & cams"
+        : s;
       return `<a href="/${region.slug}/${townId}/${s}">${esc(label)}</a>`;
     })
     .join(" · ");
@@ -206,8 +210,8 @@ add(
 
 add(
   "/at",
-  "Austria · Lech Zürs resort town weather · feelzlike",
-  "Weather and conditions for Lech and Zürs in Vorarlberg, Austria. The combined resort view uses a representative forecast midpoint.",
+  "Austria · resort town weather · feelzlike",
+  "Weather and conditions for Lech Zürs and St Anton am Arlberg in Austria. Each combined resort view uses a representative forecast midpoint.",
   `<main>
     <h1>Austria · resort town weather</h1>
     ${BY_COUNTRY("AT").map((r) => `
@@ -388,6 +392,7 @@ for (const region of REGIONS) {
   // Japanese copy from the app's region registry (null for non-JP regions).
   const ja = regionJapanese(region);
   const regionNameJa = region.nameJa || region.name;
+  const isAustria = region.country === "AT";
 
   // Region home
   addJa(
@@ -414,7 +419,9 @@ for (const region of REGIONS) {
     const featureLabel = feature.charAt(0).toUpperCase() + feature.slice(1);
 
     const descriptions = {
-      mountains: `Mountains and ski resorts in the ${region.name} — live snow conditions, lift status, and terrain info.`,
+      mountains: isAustria
+        ? `Mountains and ski resorts in the ${region.name} — current mountain weather and official resort links. Live lift, snow-report and webcam data are not ingested here.`
+        : `Mountains and ski resorts in the ${region.name} — live snow conditions, lift status, and terrain info.`,
       alerts:    `Current weather alerts and conditions for the ${region.name}.`,
       stay:      `Where to stay in the ${region.name} — accommodation options in all base towns.`,
     };
@@ -428,7 +435,11 @@ for (const region of REGIONS) {
     const bodies = {
       mountains: `<main>
       <h1>${esc(region.name)} · mountains</h1>
-      <p>Live snow conditions, lift status, and weather for mountains and ski resorts in the ${esc(region.name)}.</p>
+      <p>${esc(
+        isAustria
+          ? `Current mountain weather and official resort links for mountains and ski resorts in the ${region.name}. Live lift, snow-report and webcam data are not ingested here.`
+          : `Live snow conditions, lift status, and weather for mountains and ski resorts in the ${region.name}.`,
+      )}</p>
       <ul>
         ${region.mountains.map((m) => `<li><strong>${esc(m.name)}</strong> — ${esc(m.blurb)}</li>`).join("\n        ")}
       </ul>
@@ -487,7 +498,9 @@ for (const region of REGIONS) {
         : `${withJaName(m.name, mountainNameJa)} · snow conditions & forecast · ${region.name} · feelzlike`,
       catalogueMountain
         ? `Weather forecast and current conditions for ${m.name} in ${region.name}.`
-        : `Live snow conditions, weather forecast, and lift info for ${m.name} in the ${region.name}.`,
+        : isAustria
+          ? `Current mountain weather and official resort links for ${m.name} in the ${region.name}. Live lift, snow-report and webcam data are not ingested here.`
+          : `Live snow conditions, weather forecast, and lift info for ${m.name} in the ${region.name}.`,
       jaMountainDesc,
       catalogueMountain
         ? `<main>
@@ -497,7 +510,11 @@ for (const region of REGIONS) {
     </main>`
         : `<main>
       <h1>${esc(m.name)} · ${esc(region.name)}</h1>
-      <p>Live snow conditions, weather by elevation, and the extended forecast for ${esc(m.name)}.</p>
+      <p>${esc(
+        isAustria
+          ? `Current mountain weather, weather by elevation, and official resort links for ${m.name}. Live lift, snow-report and webcam data are not ingested here.`
+          : `Live snow conditions, weather by elevation, and the extended forecast for ${m.name}.`,
+      )}</p>
       <p>Part of the <a href="/${region.slug}">${esc(region.name)}</a>.</p>
     </main>`,
     );
@@ -513,7 +530,9 @@ for (const region of REGIONS) {
     addJa(
       `/${region.slug}/${town.id}`,
       `${withJaName(town.name, jt.nameJa)} · ${region.name} conditions · feelzlike`,
-      `Live weather, road conditions, and visitor info for ${town.name} in the ${region.name}.`,
+      isAustria
+        ? `Live weather, official arrival guidance, and visitor info for ${town.name} in the ${region.name}. Live road conditions and roadside webcams are not provided here.`
+        : `Live weather, road conditions, and visitor info for ${town.name} in the ${region.name}.`,
       ja
         ? `${townNameJa}（${regionNameJa}）のライブ天気・道路状況・観光情報。${jt.blurbJa ? `${jt.blurbJa}。` : ""}`
         : null,
@@ -531,7 +550,9 @@ for (const region of REGIONS) {
       weather:   { label: "weather forecast",  desc: `${town.name} weather forecast and radar — ${region.name}.` },
       stay:      { label: "where to stay",     desc: `Accommodation in ${town.name}, ${region.name} — hotels, lodges, and short stays.` },
       eat:       { label: "where to eat",      desc: `Cafes and restaurants in ${town.name}, ${region.name}.` },
-      roads:     { label: "roads & cams",      desc: `Live road conditions and traffic cameras near ${town.name}, ${region.name}.` },
+      roads:     isAustria
+        ? { label: "arrival & road guidance", desc: `Official arrival and road guidance near ${town.name}, ${region.name}. Live road conditions and roadside webcams are not provided here.` }
+        : { label: "roads & cams",            desc: `Live road conditions and traffic cameras near ${town.name}, ${region.name}.` },
       transport: { label: "getting there",     desc: `Transport options to and from ${town.name}, ${region.name}.` },
       explore:   { label: "explore",           desc: `Things to do in ${town.name}, ${region.name} — trails, activities, and local experiences.` },
     };
@@ -540,7 +561,9 @@ for (const region of REGIONS) {
       weather:   `${townNameJa}（${regionNameJa}）の天気予報と雨雲レーダー。`,
       stay:      `${townNameJa}（${regionNameJa}）の宿泊 · ホテル・旅館・ロッジ。`,
       eat:       `${townNameJa}（${regionNameJa}）のカフェ・レストラン。`,
-      roads:     `${townNameJa}（${regionNameJa}）周辺のライブ道路状況とライブカメラ。`,
+      roads:     isAustria
+        ? `${townNameJa}（${regionNameJa}）周辺の公式到着・道路案内。ライブ道路状況と路傍カメラは提供していません。`
+        : `${townNameJa}（${regionNameJa}）周辺のライブ道路状況とライブカメラ。`,
       transport: `${townNameJa}（${regionNameJa}）へのアクセス・交通手段。`,
       explore:   `${townNameJa}（${regionNameJa}）の楽しみ方 · アクティビティと観光。`,
     } : {};

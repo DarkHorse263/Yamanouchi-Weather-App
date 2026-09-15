@@ -134,9 +134,11 @@ import { HUNTER_TRANSPORT } from "./hunter";
 import { WINDHAM_TRANSPORT } from "./windham";
 import { HIGHMOUNT_TRANSPORT } from "./highmount";
 import { LECH_ZUERS_TRANSPORT } from "./lech-zuers";
+import { ST_ANTON_TRANSPORT } from "./st-anton";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "lech-zuers": LECH_ZUERS_TRANSPORT,
+  "st-anton": ST_ANTON_TRANSPORT,
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
   "victorias-high-country": VICTORIAS_HIGH_COUNTRY_TRANSPORT,
   "australian-capital-territory": [],

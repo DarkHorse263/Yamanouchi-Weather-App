@@ -43,6 +43,9 @@ export const REGION_ANCHORS: Record<RegionId, {
   // Combined Lech/Zürs pilot anchor. This is a declared representative
   // midpoint, not a forecast assertion for every Ski Arlberg sector.
   "lech-zuers": { lat: 47.1900, lon: 10.1530, elevation: 1950, region: "OTHER", timezone: "Europe/Vienna", displayName: "Lech Zürs" },
+  // St Anton anchor. This is the same declared representative midpoint used
+  // by the mountain weather location, not a forecast for the wider network.
+  "st-anton": { lat: 47.1297, lon: 10.2683, elevation: 2058, region: "OTHER", timezone: "Europe/Vienna", displayName: "St Anton am Arlberg" },
   "snowy-mountains": { lat: -36.45, lon: 148.32, elevation: 1700, region: "AU", displayName: "Snowy Mountains" },
   "victorias-high-country": { lat: -36.9779, lon: 147.1361, elevation: 1862, region: "AU", displayName: "Victoria's High Country" },
   // Tasmania · anchor on Ben Lomond summit (Legges Tor, the highest

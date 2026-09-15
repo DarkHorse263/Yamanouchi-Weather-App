@@ -21,6 +21,12 @@ export const VERIFIED_AUTHORED_VILLAGE_ELEVATIONS = {
     citation: "Ski Arlberg's official Lech Zürs ski-region page lists Lech at 1,450 m.",
     verifiedAt: "2026-09-12",
   },
+  "st-anton/st-anton-resort": {
+    elevationM: 1304,
+    sourceUrl: "https://www.arlberg.com/en/villages/st-anton-am-arlberg",
+    citation: "Arlberg's independent St Anton village profile lists the village elevation as 1,304 m.",
+    verifiedAt: "2026-09-12",
+  },
   "bend/mt-bachelor": {
     elevationM: 1737,
     sourceUrl: "https://www.mtbachelor.com/the-mountain/resort-policies-safety/mountain-stats/",

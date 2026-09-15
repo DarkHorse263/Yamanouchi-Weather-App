@@ -20,3 +20,22 @@ test("Lech Zürs ensemble anchor uses its local Europe/Vienna day boundary", () 
     days: 4,
   });
 });
+
+test("St Anton ensemble anchor uses its local Europe/Vienna day boundary", () => {
+  assert.deepEqual(REGION_ANCHORS["st-anton"], {
+    lat: 47.1297,
+    lon: 10.2683,
+    elevation: 2058,
+    region: "OTHER",
+    timezone: "Europe/Vienna",
+    displayName: "St Anton am Arlberg",
+  });
+  assert.deepEqual(ensembleQueryForAnchor(REGION_ANCHORS["st-anton"]), {
+    latitude: 47.1297,
+    longitude: 10.2683,
+    elevation: 2058,
+    region: "OTHER",
+    timezone: "Europe/Vienna",
+    days: 4,
+  });
+});

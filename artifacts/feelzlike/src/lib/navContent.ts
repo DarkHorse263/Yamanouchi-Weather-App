@@ -23,6 +23,7 @@ import type { RegionConfig } from "@workspace/feelzlike-shell";
  * Regions whose Roads & cams page actually renders content today. Roads is
  * driven by live feeds rather than a single static array, so it can't be
  * derived cheaply like the others:
+ *   · lech-zuers/st-anton   · official Austria road/arrival link-outs
  *   · snowy-mountains       · Live Traffic NSW road conditions + cams
  *   · victorias-high-country· VicEmergency alerts (fire/road) section
  *   · yamanouchi            · curated road webcams
@@ -41,6 +42,7 @@ import type { RegionConfig } from "@workspace/feelzlike-shell";
  */
 const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "lech-zuers",
+  "st-anton",
   "snowy-mountains",
   "victorias-high-country",
   // Japan · every region ships seasonal chain rules (per-approach, from

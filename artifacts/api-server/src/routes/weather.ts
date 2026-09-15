@@ -58,6 +58,10 @@ const LOCATIONS: LocationConfig[] = [
   { id: "lech-zuers-resort", name: "Lech Zürs Resort", latitude: 47.1900, longitude: 10.1530, elevation: 1950, description: "Product-selected mid-mountain representative forecast for the combined Lech and Zürs pilot area; it is not universal slope weather.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Europe/Vienna", region: "AT" },
   { id: "lech", name: "Lech", latitude: 47.2070, longitude: 10.1410, elevation: 1450, description: "Village weather for Lech at its official listed elevation of 1,450 m.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Europe/Vienna", region: "AT" },
   { id: "zuers", name: "Zürs", latitude: 47.1719, longitude: 10.1640, elevation: 1717, description: "Village weather for Zürs at its official listed elevation of 1,717 m.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Europe/Vienna", region: "AT" },
+  // St Anton uses one declared representative midpoint for the authored
+  // resort view; village conditions remain a separate location.
+  { id: "st-anton-resort", name: "St Anton Resort", latitude: 47.1297, longitude: 10.2683, elevation: 2058, description: "Product-selected representative mid-mountain forecast for St Anton, between the village at 1,304 m and Valluga at 2,811 m; it is not universal slope weather.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Europe/Vienna", region: "AT" },
+  { id: "st-anton", name: "St Anton am Arlberg", latitude: 47.1297, longitude: 10.2683, elevation: 1304, description: "Village weather for St Anton am Arlberg at its independently listed elevation of 1,304 m.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Europe/Vienna", region: "AT" },
 
   {
     id: "thredbo",

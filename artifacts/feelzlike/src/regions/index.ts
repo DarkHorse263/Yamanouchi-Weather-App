@@ -121,6 +121,7 @@ import { hunterRegion } from "./hunter";
 import { windhamRegion } from "./windham";
 import { highmountRegion } from "./highmount";
 import { lechZuersRegion } from "./lech-zuers";
+import { stAntonRegion } from "./st-anton";
 
 // Active region registry · AU: Snowy Mountains + Victoria's High Country
 // + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
@@ -168,6 +169,7 @@ import { applyVerifiedVillageElevations } from "./verified-village-elevations";
 import { regions as westernUsCatalogueRegions } from "@workspace/western-us-ski-catalogue/public-runtime";
 const AUTHORED_REGIONS: RegionConfig[] = [
   lechZuersRegion,
+  stAntonRegion,
   snowyMountainsRegion,
   victoriasHighCountryRegion,
   tasmaniaRegion,
@@ -314,6 +316,7 @@ export function getRegion(id: string): RegionConfig | undefined {
 export type CountryCode = "AU" | "JP" | "NZ" | "CA" | "US" | "AT";
 export const REGION_COUNTRY: Record<string, CountryCode> = {
   "lech-zuers": "AT",
+  "st-anton": "AT",
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
   "tasmania": "AU",
@@ -451,6 +454,7 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
 
 const incomingWesternRegionCountryEntries: Record<string, CountryCode> = {
   "lech-zuers": "AT",
+  "st-anton": "AT",
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
   "tasmania": "AU",

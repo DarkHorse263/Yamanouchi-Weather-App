@@ -1623,6 +1623,7 @@ components:
       type: string
       enum:
         - lech-zuers
+        - st-anton
         - snowy-mountains
         - victorias-high-country
         - tasmania

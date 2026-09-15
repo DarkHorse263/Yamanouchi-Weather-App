@@ -1,6 +1,7 @@
 
 export type RegionKey =
   | "lech-zuers"
+  | "st-anton"
   | "snowy-mountains"
   | "victorias-high-country"
   | "tasmania"
@@ -130,6 +131,15 @@ export const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: nu
       { id: "lech-zuers-resort", name: "Lech Zürs Resort", lat: 47.1900, lng: 10.1530, accent: "#f97316" },
       { id: "lech", name: "Lech", lat: 47.2070, lng: 10.1410, accent: "#0ea5e9" },
       { id: "zuers", name: "Zürs", lat: 47.1719, lng: 10.1640, accent: "#0ea5e9" },
+    ],
+  },
+  "st-anton": {
+    center: { lat: 47.130, lng: 10.268 },
+    pins: [
+      // display-only offset keeps the resort and village markers legible;
+      // forecast coordinates remain the authored St Anton representative point.
+      { id: "st-anton-resort", name: "St Anton Resort", lat: 47.1320, lng: 10.2710, accent: "#f97316" },
+      { id: "st-anton", name: "St Anton am Arlberg", lat: 47.1297, lng: 10.2683, accent: "#0ea5e9" },
     ],
   },
   "snowy-mountains": {

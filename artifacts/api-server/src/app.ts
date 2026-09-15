@@ -267,10 +267,15 @@ if (process.env.NODE_ENV === "production") {
   // Mirrors the region data in artifacts/feelzlike/src/regions/ (all 12
   // regions). Keep in sync with feelzlike/scripts/seo-regions.mjs.
   const KNOWN_REGIONS: Record<string, { name: string; towns: Record<string, string> }> = {
-    // Austria pilot · Lech and Zürs only, not the broader Ski Arlberg network.
+    // Austria authored regions · Lech Zürs and St Anton, without attributing
+    // the wider Ski Arlberg network to either scoped view.
     "lech-zuers": {
       name: "Lech Zürs",
       towns: { lech: "Lech", zuers: "Zürs" },
+    },
+    "st-anton": {
+      name: "St Anton am Arlberg",
+      towns: { "st-anton": "St Anton am Arlberg" },
     },
     // Australia
     "snowy-mountains": {
@@ -827,8 +832,8 @@ if (process.env.NODE_ENV === "production") {
       description: "Choose a country to explore resort town weather and conditions.",
     },
     "/at": {
-      title: "Austria · Lech Zürs resort town weather · feelzlike",
-      description: "Weather and conditions for Lech and Zürs in Vorarlberg, Austria. The combined resort view uses a representative forecast midpoint.",
+      title: "Austria · resort town weather · feelzlike",
+      description: "Weather and conditions for Lech Zürs and St Anton am Arlberg in Austria. Combined resort views use declared representative forecast midpoints.",
     },
     "/au": {
       title: "Australia · resort town weather · feelzlike",

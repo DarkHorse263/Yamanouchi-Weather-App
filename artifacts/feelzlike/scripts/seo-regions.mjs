@@ -42,7 +42,7 @@ export const staticRoutePaths = [
 ];
 
 export const REGIONS = [
-  // ── Austria pilot · Lech and Zürs only ──────────────────────────────────
+  // ── Austria authored regions · Lech Zürs and St Anton ───────────────────
   {
     slug: "lech-zuers",
     name: "Lech Zürs",
@@ -56,6 +56,20 @@ export const REGIONS = [
     towns: [
       { id: "lech", name: "Lech", blurb: "Alpine village at 1,450 m" },
       { id: "zuers", name: "Zürs", blurb: "Alpine village at 1,717 m" },
+    ],
+  },
+  {
+    slug: "st-anton",
+    name: "St Anton am Arlberg",
+    subtitle: "Tyrol · Austria",
+    country: "AT",
+    hasAlerts: true,
+    hasRoads: true,
+    mountains: [
+      { name: "St Anton Resort", blurb: "St Anton-specific view · representative midpoint forecast, not whole-network conditions" },
+    ],
+    towns: [
+      { id: "st-anton", name: "St Anton am Arlberg", blurb: "Tyrolean resort village at 1,304 m" },
     ],
   },
   // ── Australia ───────────────────────────────────────────────────────────

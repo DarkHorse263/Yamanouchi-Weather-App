@@ -20,6 +20,7 @@ import {
 // at `artifacts/feelzlike/src/regions/index.ts`.
 export const REGION_IDS = [
   "lech-zuers",
+  "st-anton",
   "snowy-mountains",
   "victorias-high-country",
   "tasmania",
@@ -295,6 +296,11 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "lech": "lech-zuers",
   "zuers": "lech-zuers",
   "lech-zuers-roads": "lech-zuers",
+
+  // St Anton am Arlberg, AT · one village and one combined resort view.
+  "st-anton-resort": "st-anton",
+  "st-anton": "st-anton",
+  "st-anton-roads": "st-anton",
 
   // Snowy Mountains, AU
   "thredbo": "snowy-mountains",
