@@ -4,12 +4,14 @@ import { getElevationForecast } from "../lib/openMeteoElevation";
 const router: IRouter = Router();
 
 /**
- * GET /api/elevation-forecast?lat=&lng=&summitElevationM=&name=
+ * GET /api/elevation-forecast?lat=&lng=&summitElevationM=&
+ *   upperElevationM=&midElevationM=&lowerElevationM=&name=
  *
  * Returns a 7-day elevation-banded forecast (upper / mid / lower) for an
  * arbitrary mountain, sourced from Open-Meteo. The API server makes three
  * calls (one per elevation band) so that the temperature lapse rate is
- * applied per band.
+ * applied per band. Existing callers omit the optional explicit band fields
+ * and retain proportional bands; a curated pilot can supply all three.
  *
  * Responses:
  *   200 → { configured: true, forecast: ElevationForecast | null }
@@ -19,6 +21,9 @@ router.get("/elevation-forecast", async (req, res) => {
   const lat = Number(req.query["lat"]);
   const lng = Number(req.query["lng"]);
   const summitElevationM = Number(req.query["summitElevationM"]);
+  const explicitRaw = ["upperElevationM", "midElevationM", "lowerElevationM"].map(
+    (key) => req.query[key],
+  );
   const name =
     typeof req.query["name"] === "string" ? req.query["name"] : undefined;
 
@@ -42,7 +47,37 @@ router.get("/elevation-forecast", async (req, res) => {
     return;
   }
 
-  const forecast = await getElevationForecast({ lat, lng, summitElevationM, name });
+  const hasExplicitBands = explicitRaw.some((value) => value != null);
+  let elevationBands: { upper: number; mid: number; lower: number } | undefined;
+  if (hasExplicitBands) {
+    const [upper, mid, lower] = explicitRaw.map((value) =>
+      typeof value === "string" && value.trim() !== "" ? Number(value) : NaN,
+    );
+    if (
+      !Number.isFinite(upper) ||
+      !Number.isFinite(mid) ||
+      !Number.isFinite(lower) ||
+      lower <= 0 ||
+      upper > 9000 ||
+      !(lower < mid && mid < upper)
+    ) {
+      res.status(400).json({
+        error: "BAD_ELEVATION_BANDS",
+        message: "upperElevationM, midElevationM and lowerElevationM must all be positive, ordered upper > mid > lower values",
+      });
+      return;
+    }
+    elevationBands = { upper, mid, lower };
+  }
+
+  const forecast = await getElevationForecast({
+    lat,
+    lng,
+    summitElevationM,
+    elevationBands,
+    name,
+  });
+  res.setHeader("Cache-Control", "private, max-age=60");
   res.json({ configured: true, forecast });
 });
 

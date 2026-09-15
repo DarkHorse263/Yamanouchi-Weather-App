@@ -62,6 +62,8 @@ router.get("/town-ensemble", async (req, res): Promise<void> => {
       ? "Asia/Tokyo"
       : region === "AU"
         ? "Australia/Sydney"
+        : regionRaw === "AT"
+          ? "Europe/Vienna"
         : "UTC";
 
   try {

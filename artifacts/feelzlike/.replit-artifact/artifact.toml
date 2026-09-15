@@ -63,6 +63,10 @@ from = "/countries/"
 to = "/countries/index.html"
 
 [[services.production.rewrites]]
+from = "/at/"
+to = "/at/index.html"
+
+[[services.production.rewrites]]
 from = "/au/"
 to = "/au/index.html"
 
@@ -109,6 +113,82 @@ to = "/legal/privacy/index.html"
 [[services.production.rewrites]]
 from = "/legal/terms/"
 to = "/legal/terms/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/"
+to = "/lech-zuers/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/mountains/"
+to = "/lech-zuers/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/alerts/"
+to = "/lech-zuers/alerts/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/stay/"
+to = "/lech-zuers/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/mountain/lech-zuers-resort/"
+to = "/lech-zuers/mountain/lech-zuers-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/lech/"
+to = "/lech-zuers/lech/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/lech/weather/"
+to = "/lech-zuers/lech/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/lech/stay/"
+to = "/lech-zuers/lech/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/lech/eat/"
+to = "/lech-zuers/lech/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/lech/roads/"
+to = "/lech-zuers/lech/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/lech/transport/"
+to = "/lech-zuers/lech/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/lech/explore/"
+to = "/lech-zuers/lech/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/zuers/"
+to = "/lech-zuers/zuers/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/zuers/weather/"
+to = "/lech-zuers/zuers/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/zuers/stay/"
+to = "/lech-zuers/zuers/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/zuers/eat/"
+to = "/lech-zuers/zuers/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/zuers/roads/"
+to = "/lech-zuers/zuers/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/zuers/transport/"
+to = "/lech-zuers/zuers/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/lech-zuers/zuers/explore/"
+to = "/lech-zuers/zuers/explore/index.html"
 
 [[services.production.rewrites]]
 from = "/snowy-mountains/"

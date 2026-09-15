@@ -1065,6 +1065,18 @@ const USA: Record<string, MountainWebcam[]> = {
 void IIYAMA_DORMANT;
 
 export const MOUNTAIN_WEBCAMS: Record<string, MountainWebcam[]> = {
+  "lech-zuers-resort": [
+    {
+      id: "lech-zuers-official",
+      mountainId: "lech-zuers-resort",
+      name: "Lech Zürs official webcams",
+      description: "Official Lech, Oberlech and Zürs camera page. Embedded use has not been verified, so this opens the source site.",
+      embedType: "external",
+      pageUrl: "https://www.lechzuers.com/en/live-infos/webcams",
+      source: "Lech Zürs",
+      verifiedAt: "2026-09-12",
+    },
+  ],
   ...YAMANOUCHI,
   ...SNOWY_MOUNTAINS,
   ...NEW_ZEALAND,

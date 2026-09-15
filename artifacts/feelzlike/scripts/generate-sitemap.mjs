@@ -68,6 +68,7 @@ const staticUrls = [
     const metadata = {
       "/": ["daily", "1.0"],
       "/countries": ["daily", "0.9"],
+      "/at": ["daily", "0.9"],
       "/au": ["daily", "0.9"],
       "/jp": ["daily", "0.9"],
       "/nz": ["daily", "0.9"],

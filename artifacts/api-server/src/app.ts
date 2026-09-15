@@ -267,6 +267,11 @@ if (process.env.NODE_ENV === "production") {
   // Mirrors the region data in artifacts/feelzlike/src/regions/ (all 12
   // regions). Keep in sync with feelzlike/scripts/seo-regions.mjs.
   const KNOWN_REGIONS: Record<string, { name: string; towns: Record<string, string> }> = {
+    // Austria pilot · Lech and Zürs only, not the broader Ski Arlberg network.
+    "lech-zuers": {
+      name: "Lech Zürs",
+      towns: { lech: "Lech", zuers: "Zürs" },
+    },
     // Australia
     "snowy-mountains": {
       name: "Snowy Mountains",
@@ -726,7 +731,7 @@ if (process.env.NODE_ENV === "production") {
 
   // Top-level routes handled by the SPA (before the /:region catch-all).
   const KNOWN_TOP_LEVEL = new Set([
-    "/", "/countries", "/about", "/au", "/jp", "/nz", "/ca", "/ca/all-ski-areas", "/us", "/near-you",
+    "/", "/countries", "/about", "/at", "/au", "/jp", "/nz", "/ca", "/ca/all-ski-areas", "/us", "/near-you",
     "/compare", "/legal/privacy", "/legal/terms",
     "/premium",
     "/alerts/verify", "/alerts/manage", "/alerts/unsubscribed",
@@ -819,7 +824,11 @@ if (process.env.NODE_ENV === "production") {
     },
     "/countries": {
       title: "browse resort regions by country · feelzlike",
-      description: "Choose a country to explore resort town weather and conditions · Australia, Japan, and New Zealand.",
+      description: "Choose a country to explore resort town weather and conditions.",
+    },
+    "/at": {
+      title: "Austria · Lech Zürs resort town weather · feelzlike",
+      description: "Weather and conditions for Lech and Zürs in Vorarlberg, Austria. The combined resort view uses a representative forecast midpoint.",
     },
     "/au": {
       title: "Australia · resort town weather · feelzlike",

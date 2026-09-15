@@ -36,10 +36,13 @@ const MAX_FAILURES_PER_24H = 3;
 // is a regional indicator, not a per-resort prediction - when we want
 // per-resort accuracy we'll move to per-mountain coords (the schema already
 // has subscriber.mountains[] for that).
-const REGION_ANCHORS: Record<RegionId, {
+export const REGION_ANCHORS: Record<RegionId, {
   lat: number; lon: number; elevation: number; region: "AU" | "JP" | "OTHER";
-  displayName: string;
+  displayName: string; timezone?: string;
 }> = {
+  // Combined Lech/Zürs pilot anchor. This is a declared representative
+  // midpoint, not a forecast assertion for every Ski Arlberg sector.
+  "lech-zuers": { lat: 47.1900, lon: 10.1530, elevation: 1950, region: "OTHER", timezone: "Europe/Vienna", displayName: "Lech Zürs" },
   "snowy-mountains": { lat: -36.45, lon: 148.32, elevation: 1700, region: "AU", displayName: "Snowy Mountains" },
   "victorias-high-country": { lat: -36.9779, lon: 147.1361, elevation: 1862, region: "AU", displayName: "Victoria's High Country" },
   // Tasmania · anchor on Ben Lomond summit (Legges Tor, the highest
@@ -250,6 +253,19 @@ const REGION_ANCHORS: Record<RegionId, {
   "highmount": { lat: 42.139, lon: -74.505, elevation: 1045, region: "OTHER", displayName: "Highmount" },
 };
 
+/** Build an ensemble request from a regional anchor. This preserves an
+ * anchor's local day boundary where it is explicitly known. */
+export function ensembleQueryForAnchor(anchor: (typeof REGION_ANCHORS)[RegionId]) {
+  return {
+    latitude: anchor.lat,
+    longitude: anchor.lon,
+    elevation: anchor.elevation,
+    region: anchor.region,
+    timezone: anchor.timezone,
+    days: 4,
+  };
+}
+
 interface EvaluatorReport {
   startedAt: string;
   finishedAt: string;
@@ -305,10 +321,7 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
   const forecastByRegion = new Map<RegionId, { snowByDay: number[] }>();
   for (const [regionId, anchor] of Object.entries(REGION_ANCHORS) as Array<[RegionId, typeof REGION_ANCHORS[RegionId]]>) {
     try {
-      const f = await getEnsembleForecast({
-        latitude: anchor.lat, longitude: anchor.lon, elevation: anchor.elevation,
-        region: anchor.region, days: 4,
-      });
+      const f = await getEnsembleForecast(ensembleQueryForAnchor(anchor));
       forecastByRegion.set(regionId, {
         snowByDay: f.days.map((d) => {
           const v = typeof d.snowMean === "number" && Number.isFinite(d.snowMean) ? d.snowMean : 0;

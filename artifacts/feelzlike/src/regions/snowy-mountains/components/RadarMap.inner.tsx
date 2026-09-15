@@ -78,6 +78,12 @@ interface RegionConfig {
 }
 
 const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
+  "lech-zuers": {
+    windy: { lat: 47.1900, lon: 10.1530, zoom: 11 },
+    // No claimed official radar feed: users can opt in to the existing
+    // interactive radar at the representative combined-resort midpoint.
+    official: { label: "Interactive weather radar", imageUrl: null, href: "https://www.windy.com/", attribution: "Interactive radar · user initiated" },
+  },
   "snowy-mountains": {
     windy: { lat: -36.42, lon: 148.42, zoom: 9 },
     official: {
@@ -952,8 +958,9 @@ const RADAR_WINDOW = 3;
 // Australian town + resort, and likewise within Japan. Kept local so the
 // map stays self-contained · keep in step with REGION_COUNTRY in
 // src/regions/index.ts.
-type MapCountry = "AU" | "JP" | "NZ" | "CA" | "US";
+type MapCountry = "AU" | "AT" | "JP" | "NZ" | "CA" | "US";
 const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
+  "lech-zuers": "AT",
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
   tasmania: "AU",
@@ -1074,8 +1081,9 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "windham": "US",
   "highmount": "US",
 };
-const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" };
+const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", AT: "austria", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" };
 const REGION_LABEL: Record<RegionKey, string> = {
+  "lech-zuers": "lech zürs",
   "snowy-mountains": "snowy mountains",
   "victorias-high-country": "victoria's high country",
   tasmania: "tasmania",

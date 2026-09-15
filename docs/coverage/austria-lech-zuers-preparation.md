@@ -1,6 +1,6 @@
 # Austria: Lech Zürs preparation
 
-Prepared 12 September 2026. Research only; not published or registered in the app.
+Prepared 12 September 2026. Implementation approved 15 September 2026 (Sydney). Publication remains a separate owner action.
 
 ## Initial scope
 
@@ -36,6 +36,13 @@ Retrieved 12 September 2026:
 
 ## Content still needed before launch
 
+### Additional official evidence checked for implementation
+
+- https://www.skiarlberg.at/en/lech-zuers/winter/ski-region identifies Lech Zürs as a distinct ski region within Ski Arlberg. It lists village elevations Lech 1,450 m, Oberlech 1,750 m, Zürs 1,717 m and the Madlochjoch ski link at 2,450 m. Network-wide trail/lift totals on this page must not be attributed to the pilot.
+- https://warnung.vorarlberg.at/vtgdb/dist/index.html is the Vorarlberg authority's warning portal. The English avalanche bulletin is linked at `#//lwd_lagebericht_en.html`. Use as a link-out only: its landing-page date is not a current bulletin timestamp.
+- Initial counting decision: one combined Lech Zürs resort coverage entry, two village entries, one region. Do not count peaks or sectors as extra resorts. The forecast is a representative point with explicitly defined elevation, not uniform conditions over the whole connected network.
+- Initial AT powder threshold policy: use the existing Canada 0.75 cm/hour tier explicitly rather than inheriting Australia's unknown-country fallback. This is a product alert threshold, not a claim about Austrian snow climatology.
+
 - Official sector/resort identity and counting boundaries; coordinates and lower/mid/upper forecast elevations.
 - Distinguish village weather from on-mountain forecasts.
 - Official lift map and individual lift inventory, without claiming live status until a timestamped winter feed is verified.
@@ -48,8 +55,8 @@ Retrieved 12 September 2026:
 
 ## Codebase integration preparation
 
-Read-only exploration found no current Austrian country or region support.
-Use an authored region for this first small destination rather than creating a national catalogue pipeline.
+Initial exploration found no Austrian support. The approved pilot is now implemented
+as an authored region rather than a national catalogue pipeline.
 
 Relevant integration surfaces:
 
@@ -63,7 +70,11 @@ Relevant integration surfaces:
 - Keep account-free powder alerts, current weather elevation/phase rules and unknown-condition honesty intact.
 
 Do not interfere with concurrent security remediation or paywall work.
-No application files were changed during preparation.
+The initial preparation was read-only; implementation followed owner approval.
+The pilot includes AT country navigation/search, real seven-day mountain weather,
+explicit 1,450/1,950/2,450 m forecast bands, Europe/Vienna regional alerts,
+two village pages, curated transport and official-report links.
+Snow/lift/road live ingestion and camera embedding are deliberately excluded until verified.
 
 ## Release checks
 

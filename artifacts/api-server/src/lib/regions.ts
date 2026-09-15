@@ -19,6 +19,7 @@ import {
 // `jobs/alertEvaluator.ts` REGION_ANCHORS, and the frontend region registry
 // at `artifacts/feelzlike/src/regions/index.ts`.
 export const REGION_IDS = [
+  "lech-zuers",
   "snowy-mountains",
   "victorias-high-country",
   "tasmania",
@@ -289,6 +290,12 @@ export function isKnownRegionId(value: unknown): value is RegionId | CatalogueTr
  * When a new resort or town is added, register it here.
  */
 export const LOCATION_TO_REGION: Record<string, RegionId> = {
+  // Lech Zürs, AT · pilot scope is two villages and one combined resort only.
+  "lech-zuers-resort": "lech-zuers",
+  "lech": "lech-zuers",
+  "zuers": "lech-zuers",
+  "lech-zuers-roads": "lech-zuers",
+
   // Snowy Mountains, AU
   "thredbo": "snowy-mountains",
   "perisher": "snowy-mountains",

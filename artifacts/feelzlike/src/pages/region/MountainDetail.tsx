@@ -133,10 +133,13 @@ export function MountainDetail() {
   const elevLat = mountainCfg?.lat;
   const elevLng = mountainCfg?.lng;
   const elevSummitM = mountainCfg?.elevationM;
+  const explicitElevationBands = mountainCfg?.elevationBands;
   const elevName = mountainCfg?.name;
   const websiteUrl = mountainCfg?.websiteUrl;
   const snowReportUrl = isWeatherOnly ? undefined : mountainCfg?.snowReportUrl;
-  const snowElevationM = elevSummitM != null ? midMountainElevation(elevSummitM) : undefined;
+  const snowElevationM = elevSummitM != null
+    ? midMountainElevation(elevSummitM, explicitElevationBands?.midM)
+    : undefined;
 
   const q = useGetLocationWeather(
     locationId,
@@ -242,6 +245,11 @@ export function MountainDetail() {
   const current = data?.current;
   const daily = data?.daily ?? [];
   const hourly = data?.hourly ?? [];
+  // Austria's supported API horizon is seven days. Never present its final
+  // two days as an "Extended (14-day)" product, even if an upstream response
+  // is unexpectedly longer; existing 14-day countries keep that panel.
+  const supportsExtended14DayOutlook =
+    REGION_COUNTRY[region.id] !== "AT" && daily.length > 7;
   const location = data?.location;
   const metaName = elevName ?? location?.name ?? locationId;
   const pageMetadata = mountainPageMetadata({
@@ -604,7 +612,11 @@ export function MountainDetail() {
               mountainCfg?.baseElevationM,
               elevSummitM,
             )}
-            midElevationM={elevSummitM != null ? midMountainElevation(elevSummitM) : undefined}
+            midElevationM={
+              elevSummitM != null
+                ? midMountainElevation(elevSummitM, explicitElevationBands?.midM)
+                : undefined
+            }
           />
 
           {/* live cam thumbnail · a real look at the mountain right in the
@@ -797,7 +809,9 @@ export function MountainDetail() {
               </div>
               {location?.elevation != null && (
                 <p className="byline text-muted-foreground/70 hidden md:block tabular-nums">
-                  {u.elev(location.elevation)}{u.elevUnit} · {t("top elevation", "山頂標高")}
+                  {u.elev(location.elevation)}{u.elevUnit} · {explicitElevationBands
+                    ? t("representative forecast midpoint", "代表的な予報中間地点")
+                    : t("top elevation", "山頂標高")}
                 </p>
               )}
             </div>
@@ -900,7 +914,7 @@ export function MountainDetail() {
             gates whatever the region's forecast window extends to (14 days
             for AU, shorter elsewhere). Skipped entirely when the payload has
             nothing past day 5 - a lock over empty data would be a tease. */}
-        {daily.length > 5 && (
+        {supportsExtended14DayOutlook && (
           <PremiumGate
             title="Next 6 days"
             titleJa="今後6日間"
@@ -970,6 +984,7 @@ export function MountainDetail() {
               lat={elevLat}
               lng={elevLng}
               summitElevationM={elevSummitM}
+              elevationBands={explicitElevationBands}
               name={elevName}
             />
           </PremiumGate>

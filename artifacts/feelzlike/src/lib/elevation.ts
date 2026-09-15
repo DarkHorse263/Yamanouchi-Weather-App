@@ -10,7 +10,12 @@
  *   mid = summit - min(300, round(summit * 0.15)), floored against the
  *   lower band so tiny hills never collapse.
  */
-export function midMountainElevation(summitM: number): number {
+export function midMountainElevation(summitM: number, explicitMidM?: number): number {
+  // A declared midpoint is used only by the Austria pilot. Existing regions
+  // omit it and retain the historical proportional derivation below.
+  if (typeof explicitMidM === "number" && Number.isFinite(explicitMidM) && explicitMidM > 0) {
+    return Math.round(explicitMidM);
+  }
   if (!Number.isFinite(summitM) || summitM <= 0) return Math.round(summitM);
   const summit = Math.round(summitM);
   const midDrop = Math.min(300, Math.round(summit * 0.15));

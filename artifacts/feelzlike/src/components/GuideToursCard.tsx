@@ -21,6 +21,7 @@ const GOWITHGUIDE_URL_BY_COUNTRY: Record<CountryCode, string> = {
   AU: "https://gowithguide.com/australia",
   NZ: "https://gowithguide.com/new-zealand",
   JP: "https://gowithguide.com/japan",
+  AT: "https://gowithguide.com/",
   CA: "https://gowithguide.com/canada",
   // GoWithGuide does not expose a US country landing page in the approved
   // destination set, so retain the working global destination as the US link.

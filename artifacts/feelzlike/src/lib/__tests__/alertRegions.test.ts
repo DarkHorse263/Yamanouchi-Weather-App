@@ -5,6 +5,7 @@ import { projectAlertRegions } from "../alertRegionProjection";
 test("country totals include all canonical regions while alert choices remain eligible-only", () => {
   const regions = [
     { id: "au-live", name: "Australian Alps", subtitle: "Victoria · Australia" },
+    { id: "at-live", name: "Lech Zürs", subtitle: "Vorarlberg · Austria" },
     { id: "nz-live", name: "Canterbury", subtitle: "Canterbury · New Zealand" },
     { id: "nz-directory", name: "Auckland", subtitle: "Auckland · New Zealand" },
     { id: "ca-live", name: "Alberta", subtitle: "Alberta · Canada" },
@@ -12,6 +13,7 @@ test("country totals include all canonical regions while alert choices remain el
   ] as const;
   const countries = {
     "au-live": "AU",
+    "at-live": "AT",
     "nz-live": "NZ",
     "nz-directory": "NZ",
     "ca-live": "CA",
@@ -19,10 +21,11 @@ test("country totals include all canonical regions while alert choices remain el
   } as const;
   const projection = projectAlertRegions(regions, countries, (id) => id !== "nz-directory");
 
-  assert.deepEqual(projection.countryRegionTotals, { AU: 1, JP: 0, NZ: 2, CA: 1, US: 1 });
+  assert.deepEqual(projection.countryRegionTotals, { AU: 1, AT: 1, JP: 0, NZ: 2, CA: 1, US: 1 });
   assert.deepEqual(projection.alertRegions.map((region) => region.id), [
-    "au-live", "nz-live", "ca-live", "us-live",
+    "au-live", "at-live", "nz-live", "ca-live", "us-live",
   ]);
+  assert.equal(projection.alertRegions.find((region) => region.id === "at-live")?.country, "AT · Vorarlberg");
   assert.equal(projection.alertRegions.find((region) => region.id === "nz-live")?.country, "NZ · Canterbury");
 });
 

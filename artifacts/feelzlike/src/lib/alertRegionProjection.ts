@@ -1,4 +1,4 @@
-export type AlertCountryCode = "AU" | "JP" | "NZ" | "CA" | "US";
+export type AlertCountryCode = "AU" | "AT" | "JP" | "NZ" | "CA" | "US";
 
 export interface CanonicalAlertRegion {
   id: string;
@@ -19,7 +19,7 @@ export interface AlertRegionProjection {
   countryRegionTotals: Readonly<Record<AlertCountryCode, number>>;
 }
 
-const COUNTRY_CODES: readonly AlertCountryCode[] = ["AU", "JP", "NZ", "CA", "US"];
+const COUNTRY_CODES: readonly AlertCountryCode[] = ["AU", "AT", "JP", "NZ", "CA", "US"];
 
 /**
  * Pure projection used by alert selectors. Keeping it independent of the UI

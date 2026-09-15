@@ -70,7 +70,8 @@
 // route AND the response gained liveStatusVerified (Thredbo's official live
 // per-lift feed). Real open/closed lift claims must never be served a session
 // stale from an installed PWA.
-const CACHE_VERSION = "v24";
+// v25: Austria coverage and explicit mountain elevation-band responses.
+const CACHE_VERSION = "v25";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
@@ -321,6 +322,7 @@ self.addEventListener("fetch", (event) => {
   //     /api/weather prefix and used to fall into the catch-all SWR.
   if (
     url.pathname.startsWith("/api/weather") ||
+    url.pathname.startsWith("/api/elevation-forecast") ||
     url.pathname.startsWith("/api/town-weather") ||
     url.pathname.startsWith("/api/today") ||
     url.pathname.startsWith("/api/road") ||
@@ -328,7 +330,7 @@ self.addEventListener("fetch", (event) => {
     url.pathname.startsWith("/api/vic-emergency-incidents") ||
     url.pathname.startsWith("/api/lift-status")
   ) {
-    event.respondWith(networkFirst(request, DATA_CACHE));
+    event.respondWith(networkFirst(request, DATA_CACHE, { cacheMode: "reload" }));
     return;
   }
 

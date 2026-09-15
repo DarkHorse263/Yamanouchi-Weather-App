@@ -18,7 +18,7 @@
 // straight in.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export type SkiCountry = "AU" | "JP" | "NZ" | "CA" | "US";
+export type SkiCountry = "AU" | "JP" | "NZ" | "CA" | "US" | "AT";
 
 /**
  * Whether the country's ski-lift season is open on `now`.
@@ -37,6 +37,8 @@ export type SkiCountry = "AU" | "JP" | "NZ" | "CA" | "US";
  *                            so this window is broadened vs. CA's on purpose
  *                            - kept in sync with `isUsSnowSeason` in the
  *                            api-server's routes/roads.ts)
+ *   AT · Dec – Apr         (northern winter; local operation remains subject
+ *                            to the resort's official report)
  *
  * @param country - resort country code (matches `CountryCode` from `@/regions`)
  * @param now - optional override for "current time" (tests pass a fixed Date).
@@ -53,6 +55,7 @@ export function isLiftSeasonOpen(country: SkiCountry, now: Date = new Date()): b
       if (m === 9) return d <= 10; // October
       return false;
     case "JP":
+    case "AT":
       return m === 11 || m <= 3; // Dec – Apr
     case "CA":
       // 15 Nov – 15 May inclusive

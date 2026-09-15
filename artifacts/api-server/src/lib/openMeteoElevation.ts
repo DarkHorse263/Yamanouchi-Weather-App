@@ -29,6 +29,8 @@ export interface ElevationBand {
 export interface ElevationForecast {
   resortName: string;
   source: "open-meteo";
+  /** Whether the requested band elevations were explicitly authored or derived. */
+  elevationBandsSource: "configured" | "derived";
   upperLiftElevationM: number | null;
   midLiftElevationM: number | null;
   lowerLiftElevationM: number | null;
@@ -40,6 +42,12 @@ export interface ElevationForecastInput {
   lat: number;
   lng: number;
   summitElevationM: number;
+  /** Optional explicit bands; omitted regions retain proportional derivation. */
+  elevationBands?: {
+    upper: number;
+    mid: number;
+    lower: number;
+  };
   name?: string;
 }
 
@@ -54,7 +62,17 @@ function num(v: unknown): number | null {
   return v;
 }
 
-export function bandElevations(summit: number): { upper: number; mid: number; lower: number } {
+export function bandElevations(
+  summit: number,
+  explicit?: { upper: number; mid: number; lower: number },
+): { upper: number; mid: number; lower: number } {
+  if (explicit) {
+    return {
+      upper: Math.round(explicit.upper),
+      mid: Math.round(explicit.mid),
+      lower: Math.round(explicit.lower),
+    };
+  }
   // Mountains in our regions span ~1100-2300m summit.
   // Vertical drop varies (~100m at Selwyn to ~700m at Thredbo). Use a
   // proportional split so small hills don't end up with negative base
@@ -301,7 +319,7 @@ async function fetchUpstream(
   input: ElevationForecastInput,
 ): Promise<ElevationForecast | null> {
   const { lat, lng, summitElevationM, name } = input;
-  const elevations = bandElevations(summitElevationM);
+  const elevations = bandElevations(summitElevationM, input.elevationBands);
 
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
@@ -363,6 +381,7 @@ async function fetchUpstream(
     return {
       resortName: name ?? "",
       source: "open-meteo",
+      elevationBandsSource: input.elevationBands ? "configured" : "derived",
       upperLiftElevationM: elevations.upper,
       midLiftElevationM: elevations.mid,
       lowerLiftElevationM: elevations.lower,
@@ -381,7 +400,11 @@ async function fetchUpstream(
 }
 
 function cacheKey(input: ElevationForecastInput): string {
-  return `${input.lat.toFixed(4)},${input.lng.toFixed(4)}@${Math.round(input.summitElevationM)}`;
+  const explicit = input.elevationBands;
+  const bandKey = explicit
+    ? `:${Math.round(explicit.upper)}/${Math.round(explicit.mid)}/${Math.round(explicit.lower)}`
+    : "";
+  return `${input.lat.toFixed(4)},${input.lng.toFixed(4)}@${Math.round(input.summitElevationM)}${bandKey}`;
 }
 
 export async function getElevationForecast(

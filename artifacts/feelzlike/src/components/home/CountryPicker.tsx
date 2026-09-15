@@ -37,7 +37,7 @@ interface Region {
   id: string;
   name: string;
   country: string;
-  countryCode: "AU" | "JP" | "NZ" | "CA" | "US";
+  countryCode: "AU" | "AT" | "JP" | "NZ" | "CA" | "US";
   region: string;
   status: RegionStatus;
   href: string;
@@ -58,6 +58,7 @@ interface RegionsResponse {
 
 // ─── fallback (matches landing) ────────────────────
 const FALLBACK_REGIONS: Region[] = [
+  { id: "lech-zuers",              name: "Lech Zürs",                      country: "Austria", countryCode: "AT", region: "Vorarlberg", status: "live", href: "/lech-zuers/", baseTowns: ["Lech", "Zürs"], mountains: ["Lech Zürs Resort"], headlineLabel: "Lech", headline: null },
   { id: "snowy-mountains",        name: "Snowy Mountains",                country: "Australia", countryCode: "AU", region: "New South Wales", status: "live", href: "/snowy-mountains/",        baseTowns: ["Jindabyne", "Berridale", "Cooma"],                            mountains: ["Perisher", "Thredbo", "Selwyn", "Charlotte's Pass"],          headlineLabel: "Jindabyne",     headline: null },
   { id: "victorias-high-country", name: "Victoria\u2019s High Country",   country: "Australia", countryCode: "AU", region: "Victoria",        status: "live", href: "/victorias-high-country/", baseTowns: ["Mount Beauty", "Bright", "Mansfield", "Harrietville", "Dinner Plain", "Rawson"], mountains: ["Mt Buller", "Mt Stirling", "Falls Creek", "Mt Hotham", "Mt Baw Baw"], headlineLabel: "Mount Beauty", headline: null },
   { id: "tasmania",               name: "Tasmania",                       country: "Australia", countryCode: "AU", region: "Tasmania",        status: "live", href: "/tasmania/",              baseTowns: ["Ben Lomond Base", "Launceston", "Maydena", "Hobart"],         mountains: ["Ben Lomond", "Mount Mawson"],                                headlineLabel: "Launceston",   headline: null },
@@ -313,7 +314,7 @@ const PRIMARY_TOWN: Record<string, string> = {
 };
 
 // AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA + US = northern (snow Dec-Mar).
-export function seasonForCountry(code: "AU" | "JP" | "NZ" | "CA" | "US"): "winter" | "green" {
+export function seasonForCountry(code: "AU" | "AT" | "JP" | "NZ" | "CA" | "US"): "winter" | "green" {
   const month = new Date().getMonth() + 1;
   if (code === "AU" || code === "NZ") return month >= 6 && month <= 9 ? "winter" : "green";
   return month >= 12 || month <= 3 ? "winter" : "green";
@@ -372,13 +373,14 @@ function CountryPickerEasternFallback() {
   const regions = data?.regions ?? (offlineRegions.length > 0 ? offlineRegions : FALLBACK_REGIONS);
   const liveCount = regions.filter((r) => r.status === "live").length;
 
-  type Country = { code: "AU" | "JP" | "NZ" | "CA" | "US"; name: string; flag: string; regions: Region[] };
+  type Country = { code: "AU" | "AT" | "JP" | "NZ" | "CA" | "US"; name: string; flag: string; regions: Region[] };
   const COUNTRIES: Country[] = ([
     // Season-first ordering: Australia + New Zealand (jun-oct season) before
     // Japan, Canada and the United States (dec-mar).
     { code: "AU" as const, name: "Australia",   flag: "\u{1F1E6}\u{1F1FA}", regions: regions.filter((r) => r.countryCode === "AU") },
     { code: "NZ" as const, name: "New Zealand", flag: "\u{1F1F3}\u{1F1FF}", regions: regions.filter((r) => r.countryCode === "NZ") },
     { code: "JP" as const, name: "Japan",       flag: "\u{1F1EF}\u{1F1F5}", regions: regions.filter((r) => r.countryCode === "JP") },
+    { code: "AT" as const, name: "Austria",     flag: "\u{1F1E6}\u{1F1F9}", regions: regions.filter((r) => r.countryCode === "AT") },
     { code: "CA" as const, name: "Canada",      flag: "\u{1F1E8}\u{1F1E6}", regions: regions.filter((r) => r.countryCode === "CA") },
     { code: "US" as const, name: "United States", flag: "\u{1F1FA}\u{1F1F8}", regions: regions.filter((r) => r.countryCode === "US") },
   ] satisfies Country[]).filter((c) => c.regions.length > 0);
@@ -579,13 +581,14 @@ export function CountryPicker() {
   const regions = data?.regions ?? SAFE_FALLBACK_REGIONS;
   const liveCount = regions.filter((r) => r.status === "live").length;
 
-  type Country = { code: "AU" | "JP" | "NZ" | "CA" | "US"; name: string; flag: string; regions: Region[] };
+  type Country = { code: "AU" | "AT" | "JP" | "NZ" | "CA" | "US"; name: string; flag: string; regions: Region[] };
   const COUNTRIES: Country[] = ([
     // Season-first ordering: Australia + New Zealand (jun-oct season) before
     // Japan, Canada and the United States (dec-mar).
     { code: "AU" as const, name: "Australia",   flag: "\u{1F1E6}\u{1F1FA}", regions: regions.filter((r) => r.countryCode === "AU") },
     { code: "NZ" as const, name: "New Zealand", flag: "\u{1F1F3}\u{1F1FF}", regions: regions.filter((r) => r.countryCode === "NZ") },
     { code: "JP" as const, name: "Japan",       flag: "\u{1F1EF}\u{1F1F5}", regions: regions.filter((r) => r.countryCode === "JP") },
+    { code: "AT" as const, name: "Austria",     flag: "\u{1F1E6}\u{1F1F9}", regions: regions.filter((r) => r.countryCode === "AT") },
     { code: "CA" as const, name: "Canada",      flag: "\u{1F1E8}\u{1F1E6}", regions: regions.filter((r) => r.countryCode === "CA") },
     { code: "US" as const, name: "United States", flag: "\u{1F1FA}\u{1F1F8}", regions: regions.filter((r) => r.countryCode === "US") },
   ] satisfies Country[]).filter((c) => c.regions.length > 0);

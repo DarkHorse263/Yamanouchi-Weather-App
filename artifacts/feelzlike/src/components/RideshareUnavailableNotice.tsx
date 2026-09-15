@@ -69,9 +69,11 @@ export const RIDESHARE_AVAILABLE_TOWNS: ReadonlySet<string> = new Set<string>([
 ]);
 
 /**
- * US and Canadian towns default to not showing a categorical "no rideshare"
+ * US, Canadian and Austrian towns default to not showing a categorical "no rideshare"
  * claim. Both countries have broad Uber/Lyft coverage and the town catalogue
- * grows faster than a hand-maintained allowlist can be audited.
+ * grows faster than a hand-maintained allowlist can be audited. Austrian
+ * availability has not been verified; suppressing this notice does not
+ * advertise a rideshare provider or guarantee service.
  *
  * AU, JP and NZ retain the previous allowlist behaviour.
  */
@@ -80,6 +82,6 @@ export function townHasRideshare(
   countryCode?: string,
 ): boolean {
   if (!townId) return false;
-  if (countryCode === "US" || countryCode === "CA") return true;
+  if (countryCode === "US" || countryCode === "CA" || countryCode === "AT") return true;
   return RIDESHARE_AVAILABLE_TOWNS.has(townId);
 }

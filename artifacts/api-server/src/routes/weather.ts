@@ -39,13 +39,26 @@ export interface LocationConfig {
   bomSecondaryStation?: string;
   /** BOM observation product id for the station's state: NSW=IDN60801 (default), VIC=IDV60801, TAS=IDT60801. */
   bomProduct?: string;
-  /** Open-Meteo timezone, defaults to "Australia/Sydney". JP locations use "Asia/Tokyo", NZ uses "Pacific/Auckland", CA uses America/Vancouver (BC) or America/Edmonton (AB), US uses America/Denver (CO). */
+  /** Open-Meteo timezone, defaults to "Australia/Sydney". AT uses Europe/Vienna; JP uses Asia/Tokyo, NZ Pacific/Auckland, CA America/Vancouver (BC) or America/Edmonton (AB), US America/Denver (CO). */
   timezone?: string;
-  /** ISO region code; AU=Australia, JP=Japan, NZ=New Zealand, CA=Canada, US=United States. Used for ensemble model selection + forecast horizon. */
-  region?: "AU" | "JP" | "NZ" | "CA" | "US";
+  /** ISO region code; AU=Australia, AT=Austria, JP=Japan, NZ=New Zealand, CA=Canada, US=United States. Used for ensemble model selection + forecast horizon. */
+  region?: "AU" | "AT" | "JP" | "NZ" | "CA" | "US";
+}
+
+/** Supported daily horizon by country. Austria intentionally receives the
+ * standard seven-day outlook; AU and the established non-JP catalogue retain
+ * their existing 14-day response behaviour. */
+export function forecastDaysForRegion(region: LocationConfig["region"]): 7 | 14 {
+  return region === "AT" || region === "JP" ? 7 : 14;
 }
 
 const LOCATIONS: LocationConfig[] = [
+  // Austria pilot · the mountain location is a declared representative
+  // midpoint for combined Lech/Zürs, not a claim about every slope.
+  { id: "lech-zuers-resort", name: "Lech Zürs Resort", latitude: 47.1900, longitude: 10.1530, elevation: 1950, description: "Product-selected mid-mountain representative forecast for the combined Lech and Zürs pilot area; it is not universal slope weather.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Europe/Vienna", region: "AT" },
+  { id: "lech", name: "Lech", latitude: 47.2070, longitude: 10.1410, elevation: 1450, description: "Village weather for Lech at its official listed elevation of 1,450 m.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Europe/Vienna", region: "AT" },
+  { id: "zuers", name: "Zürs", latitude: 47.1719, longitude: 10.1640, elevation: 1717, description: "Village weather for Zürs at its official listed elevation of 1,717 m.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Europe/Vienna", region: "AT" },
+
   {
     id: "thredbo",
     name: "Thredbo",
@@ -1454,13 +1467,10 @@ async function fetchOpenMeteo(location: LocationConfig) {
     hourly: "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,cloud_cover,wind_speed_10m,snowfall,freezing_level_height",
     daily: "weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,rain_sum,showers_sum,snowfall_sum,wind_speed_10m_max,uv_index_max",
     timezone: location.timezone ?? "Australia/Sydney",
-    // AU ski season (opened Jun 2026) runs the premium "extended" outlook out
-    // to 14 days · Open-Meteo's reliable ceiling is ~16, and accuracy past ~10
-    // is low so we stop at 14. JP resorts keep the 7-day window (their UI caps
-    // the outlook at 6 days anyway). Snowy Mtns entries have no `region` set →
-    // treated as AU. Free strips still slice(0,5)/slice(1,7), so only the AU
-    // resort premium section surfaces the extra days.
-    forecast_days: location.region === "JP" ? "7" : "14",
+    // Austria and Japan use the supported seven-day horizon. Existing AU and
+    // other catalogue locations retain their intentional 14-day behaviour;
+    // only payloads with days 6–14 render the Extended (14-day) UI.
+    forecast_days: String(forecastDaysForRegion(location.region)),
     // 168 hours (7 days) so the freezing-level phase partition covers the
     // full 7-day outlook the clients display (and the Elevation forecast
     // bands mirror). The served hourly[] payload is still capped to 72h
@@ -1704,13 +1714,13 @@ router.get("/forecast/:locationId", async (req, res) => {
       latitude: location.latitude,
       longitude: location.longitude,
       elevation: forecastElevation,
-      // NZ, CA and US have no dedicated national model in the ensemble ·
+      // AT, NZ, CA and US have no dedicated national model in the ensemble ·
       // fall back to the global blend ("OTHER"). JP keeps JMA, everything
       // else is AU.
       region:
         location.region === "JP"
           ? "JP"
-          : location.region === "NZ" || location.region === "CA" || location.region === "US"
+          : location.region === "AT" || location.region === "NZ" || location.region === "CA" || location.region === "US"
             ? "OTHER"
             : "AU",
       timezone: location.timezone ?? "Australia/Sydney",

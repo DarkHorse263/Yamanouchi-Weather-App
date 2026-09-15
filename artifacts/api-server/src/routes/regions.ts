@@ -28,7 +28,7 @@ export interface RegionConfig {
   id: string;
   name: string;
   country: string;
-  countryCode: "AU" | "JP" | "NZ" | "CA" | "US";
+  countryCode: "AU" | "AT" | "JP" | "NZ" | "CA" | "US";
   region: string;
   status: RegionStatus;
   href: string;
@@ -44,6 +44,23 @@ export interface RegionConfig {
 }
 
 const REGIONS: RegionConfig[] = [
+  {
+    id: "lech-zuers",
+    name: "Lech Zürs",
+    country: "Austria",
+    countryCode: "AT",
+    region: "Vorarlberg",
+    status: "live",
+    href: "/lech-zuers/",
+    baseTowns: ["Lech", "Zürs"],
+    mountains: ["Lech Zürs Resort"],
+    headlineLabel: "Lech",
+    lat: 47.2070,
+    lon: 10.1410,
+    elevation: 1450,
+    timezone: "Europe/Vienna",
+    sourceLabel: "Open-Meteo · OpenWeatherMap fallback",
+  },
   {
     id: "snowy-mountains",
     name: "Snowy Mountains",

@@ -31,6 +31,19 @@ export interface MountainLink {
   elevationM?: number;
   /** Optional real resort village / base-area elevation */
   baseElevationM?: number;
+  /**
+   * Explicit forecast-band elevations for the rare resort whose published
+   * lower/upper elevations and product-selected midpoint should not use the
+   * default proportional derivation. Omit for the established derived-band
+   * behaviour used by every existing region.
+   */
+  elevationBands?: {
+    upperM: number;
+    midM: number;
+    lowerM: number;
+    /** Short provenance shown beside the elevation-band forecast. */
+    sourceLabel: string;
+  };
   /** Short tagline shown on the region overview card */
   blurb?: string;
   blurbJa?: string;

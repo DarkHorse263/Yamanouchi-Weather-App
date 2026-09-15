@@ -13,6 +13,12 @@ interface Props {
   lat: number | undefined;
   lng: number | undefined;
   summitElevationM: number | undefined;
+  elevationBands?: {
+    upperM: number;
+    midM: number;
+    lowerM: number;
+    sourceLabel: string;
+  };
   name?: string;
 }
 
@@ -27,7 +33,13 @@ interface Props {
  * no data · this is an additive layer over the existing single-elevation
  * readings, not a replacement.
  */
-export function ElevationBands({ lat, lng, summitElevationM, name }: Props) {
+export function ElevationBands({
+  lat,
+  lng,
+  summitElevationM,
+  elevationBands,
+  name,
+}: Props) {
   const { t } = useLanguage();
   const u = useUnits();
   const enabled =
@@ -40,6 +52,13 @@ export function ElevationBands({ lat, lng, summitElevationM, name }: Props) {
     lat: lat ?? 0,
     lng: lng ?? 0,
     summitElevationM: summitElevationM ?? 0,
+    ...(elevationBands
+      ? {
+          upperElevationM: elevationBands.upperM,
+          midElevationM: elevationBands.midM,
+          lowerElevationM: elevationBands.lowerM,
+        }
+      : {}),
     ...(name ? { name } : {}),
   };
   const q = useGetElevationForecast(params, {
@@ -66,7 +85,10 @@ export function ElevationBands({ lat, lng, summitElevationM, name }: Props) {
           {t("elevation forecast", "標高別予報")}
         </p>
         <p className="text-xs text-slate-700">
-          {t("source · open-meteo", "出典 · open-meteo")}
+          {t(
+            `source · open-meteo · ${elevationBands?.sourceLabel ?? "derived elevation bands"}`,
+            `出典 · open-meteo · ${elevationBands?.sourceLabel ?? "算出した標高帯"}`,
+          )}
         </p>
       </div>
 

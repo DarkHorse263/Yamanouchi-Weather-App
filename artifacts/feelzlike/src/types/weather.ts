@@ -50,6 +50,10 @@ export const POWDER_THRESHOLDS_NZ_CA: Required<PowderThresholds> = {
   minDuration: 3,
   maxTemp: 2,
 };
+/** Austria pilot policy: the same transparent initial 0.75 cm/h, 22 km/h tier. */
+export const POWDER_THRESHOLDS_AT: Required<PowderThresholds> = {
+  ...POWDER_THRESHOLDS_NZ_CA,
+};
 
 /**
  * Pick the powder threshold set for a country code (matches CountryCode in
@@ -59,7 +63,7 @@ export const POWDER_THRESHOLDS_NZ_CA: Required<PowderThresholds> = {
  * "undefined region = AU" convention.
  */
 export function powderThresholdsForCountry(
-  country: "AU" | "JP" | "NZ" | "CA" | "US" | undefined,
+  country: "AU" | "JP" | "NZ" | "CA" | "US" | "AT" | undefined,
 ): Required<PowderThresholds> {
   switch (country) {
     case "JP":
@@ -68,6 +72,8 @@ export function powderThresholdsForCountry(
     case "CA":
     case "US":
       return POWDER_THRESHOLDS_NZ_CA;
+    case "AT":
+      return POWDER_THRESHOLDS_AT;
     default:
       return POWDER_THRESHOLDS_AU;
   }

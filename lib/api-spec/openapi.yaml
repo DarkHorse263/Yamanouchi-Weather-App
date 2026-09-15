@@ -515,7 +515,8 @@ paths:
         sourced from Open-Meteo. The API server makes three Open-Meteo calls
         (one per elevation band) so the temperature lapse rate is applied per
         band. Provide the mountain coordinates and summit elevation; mid and
-        base elevations are derived proportionally on the server.
+        base elevations are derived proportionally on the server. A curated
+        pilot may instead provide all three optional explicit band elevations.
       parameters:
         - name: lat
           in: query
@@ -537,6 +538,30 @@ paths:
           in: query
           required: true
           description: Summit / top-of-lift elevation in metres.
+          schema:
+            type: number
+            minimum: 1
+            maximum: 9000
+        - name: upperElevationM
+          in: query
+          required: false
+          description: Optional explicit upper forecast elevation in metres. Must be provided with midElevationM and lowerElevationM.
+          schema:
+            type: number
+            minimum: 1
+            maximum: 9000
+        - name: midElevationM
+          in: query
+          required: false
+          description: Optional explicit midpoint forecast elevation in metres. Must be provided with upperElevationM and lowerElevationM.
+          schema:
+            type: number
+            minimum: 1
+            maximum: 9000
+        - name: lowerElevationM
+          in: query
+          required: false
+          description: Optional explicit lower/base forecast elevation in metres. Must be provided with upperElevationM and midElevationM.
           schema:
             type: number
             minimum: 1
@@ -1597,6 +1622,7 @@ components:
     RegionId:
       type: string
       enum:
+        - lech-zuers
         - snowy-mountains
         - victorias-high-country
         - tasmania
@@ -4021,6 +4047,10 @@ components:
         source:
           type: string
           enum: [open-meteo]
+        elevationBandsSource:
+          type: string
+          enum: [configured, derived]
+          description: Whether the displayed band elevations were explicitly configured or proportionally derived.
         upperLiftElevationM:
           type: number
           nullable: true
@@ -4040,6 +4070,7 @@ components:
       required:
         - resortName
         - source
+        - elevationBandsSource
         - upperLiftElevationM
         - midLiftElevationM
         - lowerLiftElevationM

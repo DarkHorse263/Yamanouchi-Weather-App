@@ -136,6 +136,7 @@ const COUNTRY_CHIPS: Array<{ code: CountryCode | "ALL"; label: string }> = [
   { code: "AU", label: "australia" },
   { code: "NZ", label: "new zealand" },
   { code: "JP", label: "japan" },
+  { code: "AT", label: "austria" },
   { code: "CA", label: "canada" },
   { code: "US", label: "united states" },
 ];

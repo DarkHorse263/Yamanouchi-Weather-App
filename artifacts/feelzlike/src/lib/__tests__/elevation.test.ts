@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { baseBandElevation, resolveVillageElevation } from "../elevation";
+import { baseBandElevation, midMountainElevation, resolveVillageElevation } from "../elevation";
 
 test("real village elevation wins over the derived lower band", () => {
   assert.equal(resolveVillageElevation(1365, 2037), 1365);
@@ -12,4 +12,8 @@ test("missing village elevation falls back to the derived lower band", () => {
 
 test("missing village and summit elevations stay absent", () => {
   assert.equal(resolveVillageElevation(undefined, undefined), undefined);
+});
+
+test("an authored midpoint overrides proportional derivation for the Austria pilot", () => {
+  assert.equal(midMountainElevation(2450, 1950), 1950);
 });

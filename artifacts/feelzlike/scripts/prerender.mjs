@@ -160,11 +160,12 @@ function addJa(path, title, enDescription, jaDescription, body) {
 add(
   "/",
   "feelzlike · weather for resort towns",
-  "Live weather, road conditions, and lift status for resort towns across Australia, Japan, New Zealand, Canada, and the United States. Towns first, mountains second.",
+  "Weather and town conditions for resort towns across Austria, Australia, Japan, New Zealand, Canada, and the United States. Towns first, mountains second.",
   `<main>
     <h1>feelzlike · weather for resort towns</h1>
-    <p>Live weather, road conditions, and lift status for resort towns across Australia, Japan, New Zealand, Canada, and the United States. Towns first, mountains second.</p>
+    <p>Weather and town conditions for resort towns across Austria, Australia, Japan, New Zealand, Canada, and the United States. Towns first, mountains second.</p>
     <nav aria-label="Browse by country">
+      <a href="/at">Austria</a> ·
       <a href="/au">Australia</a> ·
       <a href="/jp">Japan</a> ·
       <a href="/nz">New Zealand</a> ·
@@ -189,16 +190,34 @@ const countryLine = (code, label) =>
 add(
   "/countries",
   "browse resort regions by country · feelzlike",
-  "Choose a country to explore resort town weather and conditions — Australia, Japan, New Zealand, Canada, and the United States.",
+  "Choose a country to explore resort town weather and conditions — Austria, Australia, Japan, New Zealand, Canada, and the United States.",
   `<main>
     <h1>browse resort regions by country</h1>
     <ul>
-      ${countryLine("AU", "Australia")}
+       ${countryLine("AT", "Austria")}
+       ${countryLine("AU", "Australia")}
       ${countryLine("JP", "Japan")}
       ${countryLine("NZ", "New Zealand")}
       ${countryLine("CA", "Canada")}
       ${countryLine("US", "United States")}
     </ul>
+  </main>`,
+);
+
+add(
+  "/at",
+  "Austria · Lech Zürs resort town weather · feelzlike",
+  "Weather and conditions for Lech and Zürs in Vorarlberg, Austria. The combined resort view uses a representative forecast midpoint.",
+  `<main>
+    <h1>Austria · resort town weather</h1>
+    ${BY_COUNTRY("AT").map((r) => `
+    <section>
+      <h2><a href="/${r.slug}">${esc(r.name)}</a> · ${esc(r.subtitle)}</h2>
+      <p>The combined resort forecast uses a representative midpoint; check official sources for lift, road, snow-report and avalanche information.</p>
+      <ul>
+        ${regionTownList(r)}
+      </ul>
+    </section>`).join("\n")}
   </main>`,
 );
 

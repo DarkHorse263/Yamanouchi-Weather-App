@@ -37,11 +37,27 @@ import {
  * than maintaining independent copies.
  */
 export const staticRoutePaths = [
-  "/", "/countries", "/au", "/jp", "/nz", "/ca", "/ca/all-ski-areas", "/us",
+  "/", "/countries", "/at", "/au", "/jp", "/nz", "/ca", "/ca/all-ski-areas", "/us",
   "/compare", "/alerts", "/premium", "/near-you", "/legal/privacy", "/legal/terms",
 ];
 
 export const REGIONS = [
+  // ── Austria pilot · Lech and Zürs only ──────────────────────────────────
+  {
+    slug: "lech-zuers",
+    name: "Lech Zürs",
+    subtitle: "Vorarlberg · Austria",
+    country: "AT",
+    hasAlerts: true,
+    hasRoads: true,
+    mountains: [
+      { name: "Lech Zürs Resort", blurb: "Combined Lech and Zürs pilot · representative midpoint forecast, not whole-network conditions" },
+    ],
+    towns: [
+      { id: "lech", name: "Lech", blurb: "Alpine village at 1,450 m" },
+      { id: "zuers", name: "Zürs", blurb: "Alpine village at 1,717 m" },
+    ],
+  },
   // ── Australia ───────────────────────────────────────────────────────────
   {
     slug: "snowy-mountains",

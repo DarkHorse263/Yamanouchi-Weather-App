@@ -12,12 +12,19 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { partitionPrecipByBand } from "../openMeteoElevation.js";
+import { bandElevations, partitionPrecipByBand } from "../openMeteoElevation.js";
 
 const H = (day: string, n: number) =>
   Array.from({ length: n }, (_, i) => `${day}T${String(i).padStart(2, "0")}:00`);
 
 const BANDS = { upper: 1737, mid: 1476, lower: 1216 };
+
+test("explicit Austria pilot bands retain the authored base, midpoint and upper elevations", () => {
+  assert.deepEqual(
+    bandElevations(2450, { upper: 2450, mid: 1950, lower: 1450 }),
+    { upper: 2450, mid: 1950, lower: 1450 },
+  );
+});
 
 test("snow is monotone with elevation: upper >= mid >= lower", () => {
   // FL sweeps 2100m -> 1200m across the day: high bands flip to snow earlier

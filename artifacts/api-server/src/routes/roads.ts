@@ -3092,6 +3092,9 @@ router.get("/road-conditions", async (req, res) => {
       region === "quebec-laurentians" ||
       region === "quebec-charlevoix" ||
       region === "quebec-eastern-townships";
+    // Austria pilot: the official Lech Zürs road report is linked out; this
+    // service does not ingest or infer live passability.
+    const isAT = region === "lech-zuers";
     //  · US (Colorado) - no feed wired yet. CDOT publishes cotrip.org, but
     //    nothing is integrated in this pass, so `roads` stays empty and the
     //    advice points at cotrip.org for roads and CAIC for avalanche.
@@ -3259,6 +3262,10 @@ router.get("/road-conditions", async (req, res) => {
       generalAdvice =
         "Live advisories below cover the state-highway approach to the region, from Waka Kotahi (NZTA). The final ski-field access road is a council or ski-area road with no public live feed - use the seasonal chain rule below and check the ski area's own daily road report before heading up. In the NZ ski season (roughly June-October) carry chains and fit them when snow is settling or where directed.";
       liveTrafficUrl = "https://www.journeys.nzta.govt.nz/highway-conditions";
+    } else if (isAT) {
+      generalAdvice =
+        "We do not yet pull live road data for Lech Zürs. Check the official Lech Zürs road report before departure for the current approach status. The approach via Warth is described by the destination as summer-only; do not use it for winter travel unless current official guidance confirms it.";
+      liveTrafficUrl = "https://www.lechzuers.com/en/live-infos/road-report";
     } else if (isCA) {
       // No live Canadian road feed is wired yet · say so plainly rather than
       // shipping an empty list that reads like "all clear".

@@ -120,6 +120,7 @@ import { northCreekRegion } from "./north-creek";
 import { hunterRegion } from "./hunter";
 import { windhamRegion } from "./windham";
 import { highmountRegion } from "./highmount";
+import { lechZuersRegion } from "./lech-zuers";
 
 // Active region registry · AU: Snowy Mountains + Victoria's High Country
 // + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
@@ -166,6 +167,7 @@ import { mergeWesternUsCatalogueRegions } from "./western-us-catalogue";
 import { applyVerifiedVillageElevations } from "./verified-village-elevations";
 import { regions as westernUsCatalogueRegions } from "@workspace/western-us-ski-catalogue/public-runtime";
 const AUTHORED_REGIONS: RegionConfig[] = [
+  lechZuersRegion,
   snowyMountainsRegion,
   victoriasHighCountryRegion,
   tasmaniaRegion,
@@ -309,8 +311,9 @@ export function getRegion(id: string): RegionConfig | undefined {
 // (`/au`, `/jp`) and lets the landing decide which regions belong under
 // which flag without re-deriving from `subtitle` strings. Keep in sync
 // when a new region is added.
-export type CountryCode = "AU" | "JP" | "NZ" | "CA" | "US";
+export type CountryCode = "AU" | "JP" | "NZ" | "CA" | "US" | "AT";
 export const REGION_COUNTRY: Record<string, CountryCode> = {
+  "lech-zuers": "AT",
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
   "tasmania": "AU",
@@ -438,7 +441,7 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   ...Object.fromEntries(
     Object.entries(SKI_CATALOGUE_REGION_COUNTRIES)
       .filter((entry): entry is [string, CountryCode] =>
-        ["AU", "JP", "NZ", "CA", "US"].includes(entry[1]),
+        ["AU", "JP", "NZ", "CA", "US", "AT"].includes(entry[1]),
       ),
   ),
   ...Object.fromEntries(
@@ -447,6 +450,7 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
 };
 
 const incomingWesternRegionCountryEntries: Record<string, CountryCode> = {
+  "lech-zuers": "AT",
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
   "tasmania": "AU",
@@ -576,6 +580,7 @@ const incomingWesternRegionCountryEntries: Record<string, CountryCode> = {
   ),
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
+  AT: { name: "Austria", flag: "🇦🇹" },
   AU: { name: "Australia", flag: "🇦🇺" },
   JP: { name: "Japan", flag: "🇯🇵" },
   NZ: { name: "New Zealand", flag: "🇳🇿" },

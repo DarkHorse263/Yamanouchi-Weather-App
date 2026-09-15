@@ -269,6 +269,8 @@ function Router() {
       <Route path="/plan"><Redirect to="/compare" replace /></Route>
       <Route path="/plan/"><Redirect to="/compare" replace /></Route>
       <Route path="/admin" component={AdminStats} />
+      <Route path="/at"><CountryHome code="AT" /></Route>
+      <Route path="/at/"><CountryHome code="AT" /></Route>
       <Route path="/au"><CountryHome code="AU" /></Route>
       <Route path="/au/"><CountryHome code="AU" /></Route>
       <Route path="/jp"><CountryHome code="JP" /></Route>

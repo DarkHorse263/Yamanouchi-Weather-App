@@ -40,6 +40,7 @@ import type { RegionConfig } from "@workspace/feelzlike-shell";
  * Add a region here the moment its roads feed or cams go live.
  */
 const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
+  "lech-zuers",
   "snowy-mountains",
   "victorias-high-country",
   // Japan · every region ships seasonal chain rules (per-approach, from

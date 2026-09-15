@@ -49,3 +49,14 @@ test("brief NZ snowfall spikes do not earn a medal", () => {
     0,
   );
 });
+
+test("Austria uses its declared conservative three-hour powder policy", () => {
+  const policy = powderThresholdsForCountry("AT");
+  assert.deepEqual(policy, {
+    minSnowfall: 0.75,
+    maxWind: 22,
+    minDuration: 3,
+    maxTemp: 2,
+  });
+  assert.equal(detectPowderWindows(snowRun(0.75), policy).length, 1);
+});

@@ -15,6 +15,12 @@ type VerifiedVillageElevation = {
  * values, so every non-fallback elevation has explicit provenance.
  */
 export const VERIFIED_AUTHORED_VILLAGE_ELEVATIONS = {
+  "lech-zuers/lech-zuers-resort": {
+    elevationM: 1450,
+    sourceUrl: "https://www.skiarlberg.at/en/lech-zuers/winter/ski-region",
+    citation: "Ski Arlberg's official Lech Zürs ski-region page lists Lech at 1,450 m.",
+    verifiedAt: "2026-09-12",
+  },
   "bend/mt-bachelor": {
     elevationM: 1737,
     sourceUrl: "https://www.mtbachelor.com/the-mountain/resort-policies-safety/mountain-stats/",

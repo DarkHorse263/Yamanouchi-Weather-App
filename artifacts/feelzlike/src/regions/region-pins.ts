@@ -1,5 +1,6 @@
 
 export type RegionKey =
+  | "lech-zuers"
   | "snowy-mountains"
   | "victorias-high-country"
   | "tasmania"
@@ -123,6 +124,14 @@ export type RegionKey =
 export interface PinSpec { id: string; name: string; lat: number; lng: number; accent: string }
 
 export const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number }; pins: PinSpec[] }> = {
+  "lech-zuers": {
+    center: { lat: 47.190, lng: 10.153 },
+    pins: [
+      { id: "lech-zuers-resort", name: "Lech Zürs Resort", lat: 47.1900, lng: 10.1530, accent: "#f97316" },
+      { id: "lech", name: "Lech", lat: 47.2070, lng: 10.1410, accent: "#0ea5e9" },
+      { id: "zuers", name: "Zürs", lat: 47.1719, lng: 10.1640, accent: "#0ea5e9" },
+    ],
+  },
   "snowy-mountains": {
     center: { lat: -36.42, lng: 148.42 },
     pins: [

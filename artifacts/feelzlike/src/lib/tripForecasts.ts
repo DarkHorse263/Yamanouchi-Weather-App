@@ -71,7 +71,9 @@ export function useTripForecasts(
 ): Record<string, PlannerForecastEntry> {
   const results = useQueries({
     queries: mountains.map((m) => {
-      const elev = m.elevationM != null ? midMountainElevation(m.elevationM) : undefined;
+      const elev = m.elevationM != null
+        ? midMountainElevation(m.elevationM, m.elevationBands?.midM)
+        : undefined;
       const qs = elev != null ? `?elevationM=${elev}` : "";
       const url = `${import.meta.env.BASE_URL}api/forecast/${m.id}${qs}`;
       return {
