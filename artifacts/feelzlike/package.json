@@ -87,6 +87,7 @@
     "@workspace/api-client-react": "workspace:*",
     "@workspace/feelzlike-dashboard": "workspace:*",
     "@workspace/feelzlike-shell": "workspace:*",
+    "@workspace/promo-constants": "workspace:*",
     "@workspace/canada-ski-catalogue": "workspace:*",
     "@workspace/japan-ski-catalogue": "workspace:*",
     "@workspace/ski-catalogue": "workspace:*",

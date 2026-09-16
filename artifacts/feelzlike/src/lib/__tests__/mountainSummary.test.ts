@@ -69,6 +69,19 @@ test("wind clause only when notable, always conditional language", () => {
   assert.ok(!/lifts (are|closed|open)\b/.test(windy.en));
 });
 
+test("closed-for-season narrative never presents wind as skiable or live", () => {
+  const s = buildMountainSummary({
+    ...base,
+    closedForSeason: true,
+    current: { ...base.current, windSpeed: 75 },
+    snowNext24Cm: 8,
+  });
+  assert.ok(s);
+  assert.match(s.en, /lifts closed for the 2026 season/);
+  assert.ok(!s.en.includes("chairs may hold"));
+  assert.match(s.en, /models suggest ~8\.0 cm/);
+});
+
 test("reported base beats model, range renders both readings", () => {
   const s = buildMountainSummary({
     ...base,

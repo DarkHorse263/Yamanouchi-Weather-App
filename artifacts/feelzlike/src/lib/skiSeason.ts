@@ -81,11 +81,21 @@ export function isLiftSeasonOpen(country: SkiCountry, now: Date = new Date()): b
 /** In-season snow depth (cm) at/under which lifts plausibly cannot run. */
 export const NO_SNOW_CM = 2;
 
-export type LiftOperationStatus = "operating" | "off_season" | "no_lifts_open" | "no_snow";
+export type LiftOperationStatus =
+  | "operating"
+  | "off_season"
+  | "closed_for_season"
+  | "no_lifts_open"
+  | "no_snow";
 
 export interface LiftOperationInput {
   /** Whether the country's lift season is open (see `isLiftSeasonOpen`). */
   seasonOpen: boolean;
+  /**
+   * Explicit dated closure policy. This is stronger than the normal calendar
+   * gate and wins even if a stale/live feed says lifts are open.
+   */
+  closedForSeason?: boolean;
   /** Latest snow depth in cm if known. null/undefined = unknown (NOT zero). */
   snowDepthCm?: number | null;
   /**
@@ -111,10 +121,11 @@ export interface LiftOperationInput {
  * Decide whether lifts can plausibly be running, in strict priority order:
  *
  *   1. off_season   - season closed beats everything; lifts definitively idle.
- *   2. live feed     - an authoritative lift feed (AU) wins over model snow:
+ *   2. closed_for_season - explicit dated closure policy beats every feed.
+ *   3. live feed     - an authoritative lift feed (AU) wins over model snow:
  *                        0 of N open  -> no_lifts_open
  *                        any open      -> operating  (trusted over a ~0 model snow read)
- *   3. no_snow       - no live feed AND a KNOWN near-zero snow depth that is
+ *   4. no_snow       - no live feed AND a KNOWN near-zero snow depth that is
  *                      REPORTED (authoritative). Model depth never triggers
  *                      this - see `snowDepthSource` on LiftOperationInput.
  *   4. operating     - otherwise.
@@ -124,11 +135,13 @@ export interface LiftOperationInput {
  */
 export function computeLiftOperationStatus({
   seasonOpen,
+  closedForSeason = false,
   snowDepthCm,
   snowDepthSource = "model",
   actualLiftsOpen,
   actualTotalLifts,
 }: LiftOperationInput): LiftOperationStatus {
+  if (closedForSeason) return "closed_for_season";
   if (!seasonOpen) return "off_season";
   if (actualTotalLifts != null && actualTotalLifts > 0 && actualLiftsOpen != null) {
     return actualLiftsOpen === 0 ? "no_lifts_open" : "operating";
@@ -153,6 +166,7 @@ export function computeLiftOperationStatus({
 
 export type SkiableNowRead =
   | { kind: "off_season" }
+  | { kind: "closed_for_season" }
   | { kind: "no_base" }
   | { kind: "lifts_closed" }
   | { kind: "lifts_open"; liftsOpen: number; totalLifts: number }
@@ -191,6 +205,8 @@ export function deriveSkiableNowRead(
   switch (status) {
     case "off_season":
       return { kind: "off_season" };
+    case "closed_for_season":
+      return { kind: "closed_for_season" };
     case "no_snow":
       return { kind: "no_base" };
     case "no_lifts_open":

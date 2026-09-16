@@ -12,6 +12,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { isLiftSeasonOpen, computeLiftOperationStatus, deriveSkiableNowRead } from "../skiSeason";
+import { isAuSeasonClosureActive } from "@workspace/promo-constants";
 
 /** Local-time date at midday; `mo` is 1-indexed for readability. */
 const d = (y: number, mo: number, day: number) => new Date(y, mo - 1, day, 12, 0, 0);
@@ -67,6 +68,99 @@ test("op-status: off-season beats everything (the original bug)", () => {
   assert.equal(
     computeLiftOperationStatus({ seasonOpen: false, snowDepthCm: 120, actualLiftsOpen: 8, actualTotalLifts: 8 }),
     "off_season",
+  );
+});
+
+test("AU closure policy: inactive before the Sydney effective date", () => {
+  assert.equal(
+    isAuSeasonClosureActive({
+      countryCode: "AU",
+      locationId: "thredbo",
+      now: new Date("2026-09-15T13:59:59Z"),
+    }),
+    false,
+  );
+});
+
+test("AU closure policy: closed resorts are closed after the Sydney effective date", () => {
+  for (const locationId of [
+    "thredbo",
+    "charlottes-pass",
+    "selwyn",
+    "mt-buller",
+    "mt-stirling",
+    "falls-creek",
+    "mt-hotham",
+    "lake-mountain",
+    "mt-donna-buang",
+    "mt-baw-baw",
+    "ben-lomond",
+    "mount-mawson",
+    "corin-forest",
+  ]) {
+    assert.equal(
+      isAuSeasonClosureActive({
+        countryCode: "AU",
+        locationId,
+        now: new Date("2026-09-16T00:00:00Z"),
+      }),
+      true,
+      `${locationId} should be covered by the 2026 AU closure`,
+    );
+  }
+});
+
+test("AU closure policy: Perisher remains live-monitored", () => {
+  assert.equal(
+    isAuSeasonClosureActive({
+      countryCode: "AU",
+      locationId: "perisher",
+      now: new Date("2026-09-16T00:00:00Z"),
+    }),
+    false,
+  );
+});
+
+test("AU closure policy: next season and non-AU resorts are unaffected", () => {
+  assert.equal(
+    isAuSeasonClosureActive({
+      countryCode: "AU",
+      locationId: "thredbo",
+      now: new Date("2027-09-16T00:00:00Z"),
+    }),
+    false,
+  );
+  assert.equal(
+    isAuSeasonClosureActive({
+      countryCode: "NZ",
+      locationId: "coronet-peak",
+      now: new Date("2026-09-16T00:00:00Z"),
+    }),
+    false,
+  );
+});
+
+test("op-status: dated AU closure beats a positive or stale live feed", () => {
+  assert.equal(
+    computeLiftOperationStatus({
+      seasonOpen: true,
+      closedForSeason: true,
+      snowDepthCm: 120,
+      actualLiftsOpen: 8,
+      actualTotalLifts: 8,
+    }),
+    "closed_for_season",
+  );
+  assert.deepEqual(
+    deriveSkiableNowRead({
+      seasonOpen: true,
+      closedForSeason: true,
+      snowDepthCm: 120,
+      actualLiftsOpen: 8,
+      actualTotalLifts: 8,
+      liveStatusKnown: true,
+    }),
+    { kind: "closed_for_season" },
   );
 });
 

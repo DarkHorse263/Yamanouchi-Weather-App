@@ -11,6 +11,7 @@ import {
 import { getLiftsForMountain, type LiftSeed } from "@/data/lifts";
 import { matchLiveLiftsToSeeds, type LiveLiftRow } from "@/lib/liveLiftMatch";
 import { computeLiftOperationStatus, type LiftOperationStatus as OperationStatus } from "@/lib/skiSeason";
+import { AU_SEASON_CLOSURE_POLICY } from "@workspace/promo-constants";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 /** Bound display-edge unit formatters from useUnits(). */
@@ -41,6 +42,8 @@ interface LiftWindHoldPanelProps {
    * outlook. Required so the panel cannot show "lifts likely open" off-season.
    */
   seasonOpen: boolean;
+  /** Explicit dated closure policy, stronger than a live/feed assertion. */
+  closedForSeason?: boolean;
   /** Latest snow depth in cm if known. null/undefined = unknown (NOT zero). */
   snowDepthCm?: number | null;
   /**
@@ -142,6 +145,16 @@ const NON_OPERATING_COPY: Record<Exclude<OperationStatus, "operating">, {
   chip: { en: string; ja: string };
   banner: { en: string; ja: string };
 }> = {
+  closed_for_season: {
+    chip: {
+      en: `Closed for ${AU_SEASON_CLOSURE_POLICY.seasonYear} season`,
+      ja: `${AU_SEASON_CLOSURE_POLICY.seasonYear}年シーズン終了`,
+    },
+    banner: {
+      en: `This resort is closed for the ${AU_SEASON_CLOSURE_POLICY.seasonYear} season. Weather forecasts and incoming snow remain available; the wind outlook below is not a live operating report.`,
+      ja: `このリゾートは${AU_SEASON_CLOSURE_POLICY.seasonYear}年シーズン終了です。天気予報とこれからの降雪予報は引き続き表示されます。下記の風予測は運行情報ではありません。`,
+    },
+  },
   off_season: {
     chip: { en: "Out of season", ja: "シーズン外" },
     banner: {
@@ -211,6 +224,7 @@ export function LiftWindHoldPanel({
   sectionNumber = "",
   t: tProp,
   seasonOpen,
+  closedForSeason = false,
   snowDepthCm,
   snowDepthSource,
   actualLiftsOpen,
@@ -245,19 +259,20 @@ export function LiftWindHoldPanel({
   // operating). Logic lives in computeLiftOperationStatus so it can be unit
   // tested independently of React. See skiSeason.ts for the full priority doc.
   const operationStatus: OperationStatus = useMemo(
-    () => computeLiftOperationStatus({ seasonOpen, snowDepthCm, snowDepthSource, actualLiftsOpen, actualTotalLifts }),
-    [seasonOpen, snowDepthCm, snowDepthSource, actualLiftsOpen, actualTotalLifts],
+    () => computeLiftOperationStatus({ seasonOpen, closedForSeason, snowDepthCm, snowDepthSource, actualLiftsOpen, actualTotalLifts }),
+    [seasonOpen, closedForSeason, snowDepthCm, snowDepthSource, actualLiftsOpen, actualTotalLifts],
   );
 
-  // A verified live source is required to claim live operation. Without one we
-  // keep the conditional "for when lifts are running" framing even in season.
-  const operating = operationStatus === "operating" && liveStatusKnown;
+  // A verified live source is required to claim live operation. The dated
+  // closure also disables any stale live rows that a caller might still hold.
+  const liveStatusAllowed = liveStatusKnown && !closedForSeason;
+  const operating = operationStatus === "operating" && liveStatusAllowed;
 
   // Live per-lift overlay: only when we have a verified feed AND rows. The
   // matcher handles seed-vs-feed name drift explicitly (see liveLiftMatch.ts).
   const liveMatch = useMemo(
-    () => (liveStatusKnown && liveLifts && liveLifts.length > 0 ? matchLiveLiftsToSeeds(lifts, liveLifts) : null),
-    [liveStatusKnown, liveLifts, lifts],
+    () => (liveStatusAllowed && liveLifts && liveLifts.length > 0 ? matchLiveLiftsToSeeds(lifts, liveLifts) : null),
+    [liveStatusAllowed, liveLifts, lifts],
   );
 
   if (lifts.length === 0) return null;

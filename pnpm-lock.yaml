@@ -424,6 +424,9 @@ importers:
       '@workspace/feelzlike-shell':
         specifier: workspace:*
         version: link:../../lib/feelzlike-shell
+      '@workspace/promo-constants':
+        specifier: workspace:*
+        version: link:../../lib/promo-constants
       '@workspace/japan-ski-catalogue':
         specifier: workspace:*
         version: link:../../lib/japan-ski-catalogue

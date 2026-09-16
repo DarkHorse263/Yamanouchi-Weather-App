@@ -36,10 +36,16 @@
 import cron, { type ScheduledTask } from "node-cron";
 import { and, desc, eq, isNull, lt, sql } from "drizzle-orm";
 import { db, jobRunsTable } from "@workspace/db";
+import { isAuSeasonClosureActive } from "@workspace/promo-constants";
 import { sendEmail } from "../lib/emailSender.js";
 import { brandedEmail } from "../lib/emailTemplates.js";
 import externalLinks from "../data/external-links.json";
 import { bandElevations } from "../lib/openMeteoElevation.js";
+import {
+  isSydneyLiftFeedSeason,
+  shouldCheckLiveLiftCanary,
+  validateClosedLiftProbe,
+} from "../lib/liftPolicy.js";
 import {
   checkExternalLinkContent,
   type LinkContentCheck,
@@ -369,22 +375,25 @@ async function checkSnowConsistency(failures: SmokeFailure[]): Promise<number> {
 // /api/lift-status/thredbo answering liveStatusVerified:false means the feed
 // has been unfetchable or its `updated` stamp is >24h old - by the time the
 // daily run sees false, the outage is already sustained (the server keeps a
-// 30-min serve-stale window, so a momentary blip still reads true).
-// Out of season the resort legitimately stops updating the feed, so the
-// check only runs during the AU season months (June-September, AEST).
+// 30-min serve-stale window, so a momentary blip still reads true). Once the
+// dated 2026 closure policy is active, closed AU resorts are expected to
+// return an explicit closed state instead of a live-feed assertion.
+// Out of season the resort legitimately stops updating the feed, so ordinary
+// live-feed checks run only during June-September (Sydney time). The dated
+// policy closure is always checked through the end of 2026.
 
 /** AU season gate for the live-feed canaries (Jun-Sep, Sydney time). */
 export function isThredboFeedSeason(now: Date = new Date()): boolean {
-  const month = Number(
-    new Intl.DateTimeFormat("en-AU", { timeZone: "Australia/Sydney", month: "numeric" }).format(now),
-  );
-  return month >= 6 && month <= 9;
+  return isSydneyLiftFeedSeason(now);
 }
 
 const LIVE_LIFT_FEED_CANARIES = [
-  { id: "thredbo", name: "Thredbo" },
-  { id: "perisher", name: "Perisher" },
-  { id: "charlottes-pass", name: "Charlotte Pass" },
+  { id: "thredbo", name: "Thredbo", liveFeed: true },
+  { id: "perisher", name: "Perisher", liveFeed: true },
+  { id: "charlottes-pass", name: "Charlotte Pass", liveFeed: true },
+  // Selwyn has no live adapter yet. During the dated closure policy it is
+  // still probed so a stale API snapshot cannot masquerade as current data.
+  { id: "selwyn", name: "Selwyn", liveFeed: false },
 ] as const;
 const API_CHECK_TOTAL =
   2 +
@@ -451,15 +460,34 @@ async function checkThredboHistoryFreshness(
   return 0;
 }
 
-async function checkLiveLiftFeeds(failures: SmokeFailure[]): Promise<number> {
-  if (!isThredboFeedSeason()) return LIVE_LIFT_FEED_CANARIES.length; // out of season: nothing to assert
+async function checkLiveLiftFeeds(failures: SmokeFailure[], now: Date = new Date()): Promise<number> {
   let passed = 0;
   for (const canary of LIVE_LIFT_FEED_CANARIES) {
     const url = `${ORIGIN}/api/lift-status/${canary.id}`;
+    const closedForSeason = isAuSeasonClosureActive({
+      countryCode: "AU",
+      locationId: canary.id,
+      now,
+    });
+    // Ordinary live feeds are skipped outside their normal Sydney season, and
+    // non-live resorts are not asserted during their season. A policy-closed
+    // canary is always checked through the policy year, including Oct-Dec.
+    if (!shouldCheckLiveLiftCanary(canary, now)) {
+      passed++;
+      continue;
+    }
     const probe = async (): Promise<{ ok: boolean; detail: string }> => {
       const res = await fetchRaw(url, PAGE_TIMEOUT_MS);
       if (!res.ok) return { ok: false, detail: `HTTP ${res.status}` };
-      const json = (await res.json().catch(() => ({}))) as { liveStatusVerified?: boolean; totalLifts?: number };
+      const json = (await res.json().catch(() => ({}))) as {
+        liveStatusVerified?: boolean;
+        totalLifts?: number;
+        seasonStatus?: string;
+        lifts?: Array<{ status?: string }>;
+      };
+      if (closedForSeason) {
+        return validateClosedLiftProbe(json);
+      }
       if (json.liveStatusVerified === true && Number(json.totalLifts) > 0) return { ok: true, detail: "live" };
       return {
         ok: false,

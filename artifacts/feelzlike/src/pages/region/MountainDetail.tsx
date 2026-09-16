@@ -48,6 +48,7 @@ import { powderThresholdsForCountry } from "@/types/weather";
 import { PowderCalendar } from "@/components/PowderCalendar";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
 import { isLiftSeasonOpen } from "@/lib/skiSeason";
+import { isAuSeasonClosureActive, AU_SEASON_CLOSURE_POLICY } from "@workspace/promo-constants";
 import { REGION_COUNTRY } from "@/regions";
 import { MountainWebcams } from "@/components/MountainWebcams";
 import { ForecastChart } from "@/components/weather/ForecastChart";
@@ -202,7 +203,12 @@ export function MountainDetail() {
   // (grid-cell natural snow, blind to snowmaking - reads ~0 under running
   // lifts). No report in season -> "not reported", never a confident wrong 0.
   // Off-season the model figure returns (melt curve context, nobody misled).
-  const seasonOpen = isLiftSeasonOpen(REGION_COUNTRY[region.id]);
+  const closedForSeason = isAuSeasonClosureActive({
+    countryCode: REGION_COUNTRY[region.id],
+    locationId,
+    now: new Date(now),
+  });
+  const seasonOpen = !closedForSeason && isLiftSeasonOpen(REGION_COUNTRY[region.id]);
   // Powder medals are judged against country-appropriate thresholds - an
   // AU-calibrated bar would over- or under-award powder days elsewhere.
   const powderThresholds = powderThresholdsForCountry(REGION_COUNTRY[region.id]);
@@ -606,6 +612,7 @@ export function MountainDetail() {
             reportedBaseCm={resortReport?.baseCm}
             reportedBaseMinCm={resortReport?.baseMinCm}
             reportedBaseSource={resortReport ? reportSource : undefined}
+            closedForSeason={closedForSeason}
             trustedModelBaseCm={modelDepthTrusted ? current.snowDepth : undefined}
             freezingLevelM={current.freezingLevel}
             villageElevationM={resolveVillageElevation(
@@ -742,6 +749,7 @@ export function MountainDetail() {
                   ? undefined
                   : {
                       seasonOpen,
+                      closedForSeason,
                       // In season a model depth is suppressed (null = unknown),
                       // never surfaced as a confident wrong ~0.
                       snowDepthCm: resortReport
@@ -1047,28 +1055,51 @@ export function MountainDetail() {
             gate so free visitors don't lose the report link now that the
             old free "On the snow" card is gone (merged Aug 2026). */}
         {!isWeatherOnly && !isGreen && liftReportUrl && (
-          <a
-            href={liftReportUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-start gap-3 rounded-2xl bg-white/10 border border-white/25 px-3.5 py-3 transition-colors hover:bg-white/15"
-          >
-            {/* Sits directly on the blue page canvas · white-on-blue idiom
-                only (text-foreground/text-sky-700 here = illegible black type). */}
-            <Cable className="w-4 h-4 text-sky-200 mt-0.5 shrink-0" />
-            <div className="min-w-0">
-              <p className="text-sm text-white">
-                {t(
-                  "we don't run a live lift feed for this resort yet · today's open lifts and runs are best checked on the official report.",
-                  "このリゾートのライブリフト情報はまだ提供していません · 本日の運行状況は公式レポートでご確認ください。",
-                )}
-              </p>
-              <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-white/90 underline underline-offset-2 group-hover:text-white">
-                {t(`open ${elevName ?? location?.name ?? "resort"} lift report`, "公式リフトレポートを開く")}
-                <ExternalLink className="w-3 h-3" aria-hidden="true" />
-              </span>
+          closedForSeason ? (
+            <div className="group flex items-start gap-3 rounded-2xl bg-white/10 border border-white/25 px-3.5 py-3">
+              <Cable className="w-4 h-4 text-sky-200 mt-0.5 shrink-0" />
+              <div className="min-w-0">
+                <p className="text-sm text-white">
+                  {t(
+                    `closed for the ${AU_SEASON_CLOSURE_POLICY.seasonYear} season · forecasts and incoming snow remain available.`,
+                    `${AU_SEASON_CLOSURE_POLICY.seasonYear}年シーズン終了 · 天気予報とこれからの降雪予報は引き続き利用できます。`,
+                  )}
+                </p>
+                <a
+                  href={liftReportUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-white/90 underline underline-offset-2 hover:text-white"
+                >
+                  {t(`open ${elevName ?? location?.name ?? "resort"} official report`, "公式レポートを開く")}
+                  <ExternalLink className="w-3 h-3" aria-hidden="true" />
+                </a>
+              </div>
             </div>
-          </a>
+          ) : (
+            <a
+              href={liftReportUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-start gap-3 rounded-2xl bg-white/10 border border-white/25 px-3.5 py-3 transition-colors hover:bg-white/15"
+            >
+              {/* Sits directly on the blue page canvas · white-on-blue idiom
+                  only (text-foreground/text-sky-700 here = illegible black type). */}
+              <Cable className="w-4 h-4 text-sky-200 mt-0.5 shrink-0" />
+              <div className="min-w-0">
+                <p className="text-sm text-white">
+                  {t(
+                    "we don't run a live lift feed for this resort yet · today's open lifts and runs are best checked on the official report.",
+                    "このリゾートのライブリフト情報はまだ提供していません · 本日の運行状況は公式レポートでご確認ください。",
+                  )}
+                </p>
+                <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-white/90 underline underline-offset-2 group-hover:text-white">
+                  {t(`open ${elevName ?? location?.name ?? "resort"} lift report`, "公式リフトレポートを開く")}
+                  <ExternalLink className="w-3 h-3" aria-hidden="true" />
+                </span>
+              </div>
+            </a>
+          )
         )}
 
         {!isWeatherOnly && hourly.length > 0 && location?.elevation != null && getLiftsForMountain(locationId).length > 0 && (
@@ -1085,6 +1116,7 @@ export function MountainDetail() {
               sectionNumber=""
               t={t}
               seasonOpen={seasonOpen}
+              closedForSeason={closedForSeason}
               snowDepthCm={
                 resortReport
                   ? resortReport.baseCm

@@ -1,5 +1,6 @@
 import { Router, type IRouter } from "express";
 import { GetLiftStatusResponse, GetLocationLiftStatusResponse, GetLocationLiftStatusParams } from "@workspace/api-zod";
+import { isAuSeasonClosureActive } from "@workspace/promo-constants";
 import { locationMatchesRegion, parseRegionParam, RegionParamError } from "../lib/regions.js";
 import { getThredboLiveLiftStatus } from "../lib/thredboLiftStatus.js";
 import { getPerisherLiveLiftStatus } from "../lib/perisherLiftStatus.js";
@@ -35,8 +36,7 @@ interface ResortLiftData {
   liveStatusVerified?: boolean;
 }
 
-function getSeasonStatus(): "pre-season" | "open" | "late-season" | "closed" {
-  const now = new Date();
+function getSeasonStatus(now: Date = new Date()): "pre-season" | "open" | "late-season" | "closed" {
   const month = now.getMonth() + 1;
 
   if (month >= 6 && month <= 8) return "open";
@@ -432,18 +432,30 @@ const RESORT_LIFTS: ResortLiftData[] = [
   }
 ];
 
-function getResortData(): ResortLiftData[] {
-  const seasonStatus = getSeasonStatus();
-
-  return RESORT_LIFTS.map(resort => ({
-    ...resort,
-    seasonStatus,
-    liveStatusVerified: false,
-    lifts: resort.lifts.map(lift => ({
-      ...lift,
-      status: seasonStatus === "open" ? lift.status : "closed" as const
-    }))
-  }));
+export function getResortData(now: Date = new Date()): ResortLiftData[] {
+  return RESORT_LIFTS.map(resort => {
+    const closedForSeason = isAuSeasonClosureActive({
+      countryCode: "AU",
+      locationId: resort.locationId,
+      now,
+    });
+    const seasonStatus = closedForSeason ? "closed" : getSeasonStatus(now);
+    return {
+      ...resort,
+      seasonStatus,
+      // Never expose normal scheduled hours as a current operating claim once
+      // the dated AU closure is active. The response field is optional so
+      // clients can render their explicit closed-for-season copy instead.
+      operatingHours: closedForSeason ? undefined : resort.operatingHours,
+      liveStatusVerified: false,
+      lifts: resort.lifts.map(lift => ({
+        ...lift,
+        openingTime: closedForSeason ? undefined : lift.openingTime,
+        closingTime: closedForSeason ? undefined : lift.closingTime,
+        status: seasonStatus === "open" ? lift.status : "closed" as const
+      }))
+    };
+  });
 }
 
 /**
@@ -454,12 +466,16 @@ function getResortData(): ResortLiftData[] {
  * so clients fall back to the honest "no live status" mode - live claims are
  * never faked and never stale.
  */
-async function getResortDataWithLive(): Promise<ResortLiftData[]> {
-  const resorts = getResortData();
+async function getResortDataWithLive(now: Date = new Date()): Promise<ResortLiftData[]> {
+  const resorts = getResortData(now);
   const [thredbo, perisher, charlottePass] = await Promise.all([
-    getThredboLiveLiftStatus(),
+    isAuSeasonClosureActive({ countryCode: "AU", locationId: "thredbo", now })
+      ? Promise.resolve(null)
+      : getThredboLiveLiftStatus(),
     getPerisherLiveLiftStatus(),
-    getCharlottePassLiveLiftStatus(),
+    isAuSeasonClosureActive({ countryCode: "AU", locationId: "charlottes-pass", now })
+      ? Promise.resolve(null)
+      : getCharlottePassLiveLiftStatus(),
   ]);
   return resorts.map((resort) => {
     const live =

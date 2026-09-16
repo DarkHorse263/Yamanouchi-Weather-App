@@ -36,6 +36,7 @@ export default function MountainConditionsSummary({
       input.hourly,
       input.current,
       input.utcOffsetSeconds,
+      input.closedForSeason,
       input.snowNext24Cm,
       input.snowfallOutlookElevationM,
       input.snowfallOutlookLevel,

@@ -103,6 +103,10 @@ import { HourlyForecast } from "@/components/HourlyForecast";
 import { PowderCalendar } from "@/components/PowderCalendar";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
 import { isLiftSeasonOpen } from "@/lib/skiSeason";
+import {
+  isAuSeasonClosureActive,
+  AU_SEASON_CLOSURE_POLICY,
+} from "@workspace/promo-constants";
 import { REGION_COUNTRY } from "@/regions";
 import { getLiftsForMountain } from "@/data/lifts";
 import { POWDER_THRESHOLDS_AU } from "@/types/weather";
@@ -120,7 +124,7 @@ type LocationId = "thredbo" | "perisher" | "charlottes-pass" | "selwyn" | "jinda
  * Lift operating windows for the AU resorts. Times are NSW-published
  * winter daily windows · Skitube to Perisher runs much earlier from
  * Bullocks Flat. Used by the hero strip so visitors see first / last
- * lifts before scrolling.
+ * lifts before scrolling while the dated AU closure policy is inactive.
  */
 const AU_LIFT_HOURS: Record<string, { hours: string; note?: string }> = {
   thredbo: { hours: "First lifts 8:30am · last lifts 4:00pm" },
@@ -171,6 +175,11 @@ export default function LocationDetail() {
   useEffect(() => {
     setHeroCamBroken(false);
   }, [heroCam?.imageUrl]);
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 30_000);
+    return () => clearInterval(id);
+  }, []);
   const isResort = locationId === "thredbo" || locationId === "perisher" || locationId === "charlottes-pass" || locationId === "selwyn";
   const { data: liftData } = useGetLocationLiftStatus(locationId as any, { query: { enabled: isResort } as never });
   // Resort-REPORTED snow base (pilot: Thredbo's official XML feed). The
@@ -201,12 +210,21 @@ export default function LocationDetail() {
   // In lift season a weather-model snow depth is suppressed rather than
   // shown (grid-cell natural snow, blind to snowmaking - reads ~0 under
   // running lifts). Off-season the model figure returns (melt curve).
-  const seasonOpen = isLiftSeasonOpen(REGION_COUNTRY[region.id]);
+  const closedForSeason =
+    isResort &&
+    isAuSeasonClosureActive({
+      countryCode: REGION_COUNTRY[region.id],
+      locationId,
+      now: new Date(now),
+    });
+  const seasonOpen = !closedForSeason && isLiftSeasonOpen(REGION_COUNTRY[region.id]);
   const modelDepthTrusted = !seasonOpen;
   // Only paint live open/closed when a resort is wired to a verified live
   // feed AND this response actually carries fresh live rows (server flag).
   const hasLiveLiftStatus =
-    LIVE_LIFT_STATUS_RESORTS.has(locationId) && liftData?.liveStatusVerified === true;
+    !closedForSeason &&
+    LIVE_LIFT_STATUS_RESORTS.has(locationId) &&
+    liftData?.liveStatusVerified === true;
   // Snowy region opts in to season-aware UI · in summer the snow/lift
   // panels make no sense, so we hide them and surface alternative content
   // (Thredbo is the only resort that operates year-round, so it gets a
@@ -217,11 +235,6 @@ export default function LocationDetail() {
   const showThredboSummer = isSummer && locationId === "thredbo";
 
   const [activeChartMetric, setActiveChartMetric] = useState<"temperature" | "snowfall" | "windSpeed">("temperature");
-  const [now, setNow] = useState(() => Date.now());
-  useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 30_000);
-    return () => clearInterval(id);
-  }, []);
 
   // Seasonal page canvas · fallback states share it so loading/error never
   // flash the default white body between blue (winter) and green pages.
@@ -391,7 +404,14 @@ export default function LocationDetail() {
                 <span>Updated <span className="text-white tabular-nums">{formatAgo(observedTime, now)}</span></span>
               </span>
             )}
-            {AU_LIFT_HOURS[locationId] && (
+            {closedForSeason ? (
+              <span className="byline text-white/80 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-white/10 border border-white/20">
+                <Clock className="w-3 h-3 text-white" />
+                <span className="text-white">
+                  Closed for {AU_SEASON_CLOSURE_POLICY.seasonYear} season
+                </span>
+              </span>
+            ) : AU_LIFT_HOURS[locationId] ? (
               <span className="byline text-white/80 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/10 border border-white/20">
                 <Clock className="w-3 h-3 text-white" />
                 <span className="text-white">{AU_LIFT_HOURS[locationId].hours}</span>
@@ -399,7 +419,7 @@ export default function LocationDetail() {
                   <span className="text-white/70">· {AU_LIFT_HOURS[locationId].note}</span>
                 )}
               </span>
-            )}
+            ) : null}
           </motion.div>
 
           {/* Anonymous units toggle · reaches direct-landing SEO visitors who
@@ -467,6 +487,7 @@ export default function LocationDetail() {
             reportedBaseCm={resortReport?.baseCm}
             reportedBaseMinCm={resortReport?.baseMinCm}
             reportedBaseSource={resortReport ? reportSource : undefined}
+             closedForSeason={closedForSeason}
             trustedModelBaseCm={modelDepthTrusted ? current.snowDepth : undefined}
             freezingLevelM={current.freezingLevel}
             villageElevationM={resolveVillageElevation(
@@ -591,6 +612,7 @@ export default function LocationDetail() {
           thresholds={POWDER_THRESHOLDS_AU}
           skiability={{
             seasonOpen,
+            closedForSeason,
             // Resort-reported base takes precedence over the model figure:
             // it can see snowmaking, so it may honestly assert "no base".
             // A "course" reading (Snowy Hydro) may display a base but never
@@ -1007,7 +1029,9 @@ export default function LocationDetail() {
             <Cable className="w-4 h-4 text-sky-200 mt-0.5 shrink-0" />
             <div className="min-w-0">
               <p className="text-sm text-white">
-                verified live lift status is temporarily unavailable · today's open lifts and runs are best checked on the official report.
+                {closedForSeason
+                  ? `closed for the ${AU_SEASON_CLOSURE_POLICY.seasonYear} season · forecasts and incoming snow remain available.`
+                  : "verified live lift status is temporarily unavailable · today's open lifts and runs are best checked on the official report."}
               </p>
               <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-white/90 underline underline-offset-2 group-hover:text-white">
                 open {liftData.locationName} lift report
@@ -1030,6 +1054,7 @@ export default function LocationDetail() {
               hourly={hourly as any}
               sectionNumber=""
               seasonOpen={seasonOpen}
+              closedForSeason={closedForSeason}
               snowDepthCm={
                 resortReport
                   ? resortReport.baseCm

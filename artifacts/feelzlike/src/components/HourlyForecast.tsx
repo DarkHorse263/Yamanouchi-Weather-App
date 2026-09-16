@@ -30,6 +30,7 @@ import {
   type LiftOperationInput,
   type SkiableNowRead,
 } from "@/lib/skiSeason";
+import { AU_SEASON_CLOSURE_POLICY } from "@workspace/promo-constants";
 import { SnowfallOutlook, type SnowfallOutlookProps } from "@workspace/feelzlike-dashboard";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
 import { powderThresholdText } from "@/lib/powderThresholdText";
@@ -363,6 +364,15 @@ function skiableNowDisplay(
   switch (read.kind) {
     case "off_season":
       return { Icon: Info, label: t("Out of season", "シーズン外"), tone: SKIABLE_NOW_TONES.slate };
+    case "closed_for_season":
+      return {
+        Icon: Info,
+        label: t(
+          `Closed for ${AU_SEASON_CLOSURE_POLICY.seasonYear} season`,
+          `${AU_SEASON_CLOSURE_POLICY.seasonYear}年シーズン終了`,
+        ),
+        tone: SKIABLE_NOW_TONES.slate,
+      };
     case "no_base":
       return {
         Icon: AlertTriangle,

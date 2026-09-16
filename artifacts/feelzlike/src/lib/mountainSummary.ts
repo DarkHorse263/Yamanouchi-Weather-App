@@ -15,6 +15,7 @@
  */
 import { buildDayNarrative, type DayNarrativeInput } from "./dayNarrative";
 import { rainSnowSplitM, snowNext24SoWhat, windSoWhat } from "./soWhat";
+import { AU_SEASON_CLOSURE_POLICY } from "@workspace/promo-constants";
 
 /** display-edge formatters · supplied by useUnits at the component layer */
 export interface SummaryFormat {
@@ -27,6 +28,8 @@ export interface SummaryFormat {
 }
 
 export interface MountainSummaryInput extends DayNarrativeInput {
+  /** Explicit dated AU policy state; suppresses any lift-positive wording. */
+  closedForSeason?: boolean;
   /** headline snow next 24h (cm) · already resolved at the outlook elevation */
   snowNext24Cm?: number | null;
   /** the elevation the headline snow ACTUALLY resolved to (never the requested mid) */
@@ -114,14 +117,21 @@ export function buildMountainSummary(input: MountainSummaryInput): MountainSumma
     }
   }
 
-  // 3 · wind vs lifts · only when the wind read is actually notable, and
-  // ALWAYS conditional language — a wind model never claims a lift's status
-  const wind = input.current?.windSpeed;
-  if (wind != null && Number.isFinite(wind) && wind >= 50) {
-    const so = windSoWhat(wind);
-    if (so) {
-      en.push(`wind near ${fmt.wind(wind)} ${fmt.windUnit} · ${so.en}`);
-      ja.push(`風速約${fmt.wind(wind)}${fmt.windUnit}・${so.ja}`);
+  // 3 · dated closure beats any wind/lift interpretation. Forecast snow above
+  // remains useful, but a closed resort must never sound skiable or live.
+  if (input.closedForSeason) {
+    en.push(`lifts closed for the ${AU_SEASON_CLOSURE_POLICY.seasonYear} season`);
+    ja.push(`${AU_SEASON_CLOSURE_POLICY.seasonYear}年シーズンはリフト営業終了`);
+  } else {
+    // wind vs lifts · only when the wind read is actually notable, and
+    // ALWAYS conditional language — a wind model never claims a lift's status
+    const wind = input.current?.windSpeed;
+    if (wind != null && Number.isFinite(wind) && wind >= 50) {
+      const so = windSoWhat(wind);
+      if (so) {
+        en.push(`wind near ${fmt.wind(wind)} ${fmt.windUnit} · ${so.en}`);
+        ja.push(`風速約${fmt.wind(wind)}${fmt.windUnit}・${so.ja}`);
+      }
     }
   }
 

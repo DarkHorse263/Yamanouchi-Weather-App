@@ -71,7 +71,8 @@
 // per-lift feed). Real open/closed lift claims must never be served a session
 // stale from an installed PWA.
 // v25: Austria coverage and explicit mountain elevation-band responses.
-const CACHE_VERSION = "v25";
+// v26: dated Australian closure policy; discard any prior lift-status snapshot.
+const CACHE_VERSION = "v26";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
