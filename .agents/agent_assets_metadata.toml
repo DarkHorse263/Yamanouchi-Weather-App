@@ -1343,3 +1343,17 @@ type = "audio"
 title = "final flowing AU to Japan anthem voiceover"
 description = "Text-to-speech audio: Planning a winter trip to Japan? Start with feelzlike. Explore two hundred and sixty-five ski resorts across thirty-seven regions, with mountain weather, snowfall, freezing leve…"
 logical_id = "454c335f-39d6-436d-b383-9714452cedca"
+
+[[outputs]]
+id = "W2XN3lTk_Y2fCAAzTbOpU"
+uri = "file://exports/feelzlike-subscriber-privacy-brief.pdf"
+type = "pdf"
+title = "feelzlike · subscriber privacy one-pager"
+description = "One-page owner briefing: information collected, safeguards, regulatory scope and priorities before advertising. Includes official sources; not legal sign-off."
+logical_id = "e1985979-9d55-453a-813c-16a561df5300"
+content_hash = "sha256:3e2a9c745feff0938931a071c5f326ab9a10a70fc2f76b517da14426a9066059"
+size = 83118
+mtime_ms = 1789521112487
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/e1985979-9d55-453a-813c-16a561df5300/42b83406-16e7-44b7-ac7a-f6ae68bd9bfb"
+storage_version_token = "1789521135990430"
+content_type = "application/pdf"
