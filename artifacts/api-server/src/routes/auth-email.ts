@@ -3,6 +3,7 @@ import { db, usersTable, alertSubscribersTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
 import { verifyAuthEmailToken } from "../lib/authEmailTokens.js";
 import { getAppPublicUrl } from "../lib/appUrl.js";
+import { authEmailSignInUrl } from "../lib/authEmailRedirect.js";
 
 /**
  * Legacy email-link helper — POST /auth/email/request removed.
@@ -28,7 +29,9 @@ router.get("/auth/email/verify", async (req: Request, res: Response): Promise<vo
   const token = typeof req.query["token"] === "string" ? req.query["token"] : "";
   const result = verifyAuthEmailToken(token);
   if (!result.ok) {
-    res.redirect(`${getAppPublicUrl()}/sign-in?notice=${result.reason === "expired" ? "expired" : "invalid"}`);
+    res.redirect(authEmailSignInUrl(getAppPublicUrl(), {
+      notice: result.reason === "expired" ? "expired" : "invalid",
+    }));
     return;
   }
   const email = result.email.trim().toLowerCase();
@@ -57,14 +60,11 @@ router.get("/auth/email/verify", async (req: Request, res: Response): Promise<vo
     // Redirect to Clerk sign-in, preserving the original destination so the
     // user lands where they intended after authenticating. Clerk's SignIn
     // component honours the ?redirect_url= query parameter.
-    const redirectUrl =
-      result.returnTo && result.returnTo !== "/"
-        ? `${getAppPublicUrl()}/sign-in?redirect_url=${encodeURIComponent(result.returnTo)}`
-        : `${getAppPublicUrl()}/sign-in`;
+    const redirectUrl = authEmailSignInUrl(getAppPublicUrl(), { returnTo: result.returnTo });
     res.redirect(redirectUrl);
   } catch (err) {
     console.error("[/auth/email/verify] error:", err);
-    res.redirect(`${getAppPublicUrl()}/sign-in?notice=error`);
+    res.redirect(authEmailSignInUrl(getAppPublicUrl(), { notice: "error" }));
   }
 });
 

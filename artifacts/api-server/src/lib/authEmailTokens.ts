@@ -1,4 +1,5 @@
 import { createHmac, timingSafeEqual, randomBytes } from "node:crypto";
+import { safeAuthEmailReturnTo } from "./authEmailRedirect.js";
 
 /**
  * Stateless HMAC-signed magic-link tokens for the passwordless email
@@ -83,8 +84,6 @@ export function verifyAuthEmailToken(token: string): VerifyAuthEmailResult {
   if (!Number.isFinite(payload.exp) || payload.exp < Math.floor(Date.now() / 1000)) {
     return { ok: false, reason: "expired" };
   }
-  const returnTo = typeof payload.rt === "string" && payload.rt.startsWith("/") && !payload.rt.startsWith("//")
-    ? payload.rt
-    : "/";
+  const returnTo = safeAuthEmailReturnTo(payload.rt);
   return { ok: true, email: payload.email, returnTo };
 }
