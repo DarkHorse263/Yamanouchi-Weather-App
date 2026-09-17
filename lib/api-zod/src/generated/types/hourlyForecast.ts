@@ -15,6 +15,6 @@ export interface HourlyForecast {
   snowfall?: number;
   windSpeed: number;
   humidity: number;
-  feelsLike: number;
+  feelsLike: number | null;
   cloudCover?: number;
 }

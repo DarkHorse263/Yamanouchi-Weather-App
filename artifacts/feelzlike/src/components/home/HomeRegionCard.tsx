@@ -39,6 +39,7 @@ export function HomeRegionCard() {
       isAuthenticated={isAuthenticated}
       region={region}
       feelsLike={stats?.feelsLikeC != null ? String(u.temp(stats.feelsLikeC)) : null}
+      feelsLikeUnit={u.tempUnit}
       isLoading={regionsQuery.isLoading}
       onNavigate={() => track("welcome_home_region_click", { category: "navigation" })}
     />

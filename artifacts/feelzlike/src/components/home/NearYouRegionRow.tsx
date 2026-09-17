@@ -1,6 +1,7 @@
 import { ArrowRight, Mountain } from "lucide-react";
 import { Link } from "wouter";
 import { classifyRegionProximity } from "@/lib/regionProximity";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 // A region to surface as the tap-through. distanceKm is only set when we know
 // the visitor's location (the true "nearest" case); otherwise it's a softer
@@ -33,6 +34,7 @@ export function NearYouRegionRow({
   suggested: SuggestedRegion;
   onSelect?: () => void;
 }) {
+  const u = useUnits();
   const isFar = classifyRegionProximity(suggested.distanceKm) === "far";
   return (
     <Link
@@ -64,7 +66,7 @@ export function NearYouRegionRow({
             ) : null}
             {suggested.distanceKm != null && suggested.feelsLikeC != null ? " \u00b7 " : null}
             {suggested.feelsLikeC != null ? (
-              <>feelzlike {suggested.feelsLikeC}&deg;</>
+              <>feelzlike {u.temp(suggested.feelsLikeC)}{u.tempUnit}</>
             ) : suggested.distanceKm == null ? (
               <>tap to explore the mountains</>
             ) : null}

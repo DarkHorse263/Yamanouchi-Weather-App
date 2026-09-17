@@ -32,6 +32,7 @@ import { townNavHasContent } from "@/lib/navContent";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { FavouriteStar } from "@/components/FavouriteStar";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 import { TownPartnerCard } from "@/components/TownPartnerCard";
 import { TownPartnerAd } from "@/components/TownPartnerAd";
 import { TOWN_PARTNERS } from "@/data/townPartners";
@@ -687,6 +688,7 @@ function MountainResortRow({
   t: (en: string, ja: string) => string;
   indent?: boolean;
 }) {
+  const u = useUnits();
   const { entry, km, min } = row;
   const catalogueRecord = publishedRecords.find((record) => record.publicId === entry.location.id);
   const indoor = catalogueRecord?.facilityType === "indoor" || catalogueRecord?.weatherEligible === false;
@@ -720,7 +722,7 @@ function MountainResortRow({
       <div className="flex items-center gap-4 shrink-0">
         {!indoor && temp !== undefined && temp !== null ? (
           <p className={`font-display font-black tabular-nums transition-colors duration-300 ${tint ? "text-[#0F172A] group-hover:text-white" : "text-[#0F172A]"} ${indent ? "text-2xl" : "text-3xl"}`}>
-            {Math.round(temp)}°
+            {u.temp(temp)}{u.tempUnit}
           </p>
         ) : null}
         <ArrowUpRight className={`w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 ${tint ? "text-[#0055FF] group-hover:text-white" : "text-slate-400 group-hover:text-[#0055FF]"}`} />
@@ -742,6 +744,7 @@ function MountainParentGroupRow({
   regionId: string;
   t: (en: string, ja: string) => string;
 }) {
+  const u = useUnits();
   const [open, setOpen] = useState(false);
   const meta = PARENT_GROUP_META[parentId] ?? {
     name: parentId,
@@ -761,8 +764,8 @@ function MountainParentGroupRow({
   const tempBadge =
     tMin !== null && tMax !== null
       ? tMin === tMax
-        ? `${Math.round(tMin)}°`
-        : `${Math.round(tMin)}° to ${Math.round(tMax)}°`
+        ? `${u.temp(tMin)}${u.tempUnit}`
+        : `${u.temp(tMin)}${u.tempUnit} to ${u.temp(tMax)}${u.tempUnit}`
       : null;
   const tint = tintFor(parentId);
 
@@ -848,6 +851,7 @@ function TempInTownNow({
   forecastHref?: string;
   forecastLabel?: string;
 }) {
+  const u = useUnits();
   return (
     <div className="rounded-[2rem] border-0 bg-white p-6 md:p-8 shadow-[0_12px_40px_-12px_rgba(0,40,150,0.5)] flex flex-col md:flex-row md:items-center justify-between gap-6">
       <div className="flex-1">
@@ -855,7 +859,7 @@ function TempInTownNow({
         <div className="mt-6 flex items-end justify-between gap-4 flex-wrap">
           <div className="flex items-baseline gap-1">
             <p className="font-display font-black text-6xl md:text-[80px] tracking-tighter text-[#0F172A] leading-none tabular-nums">
-              {temperature !== null ? Math.round(temperature) : isLoading ? "…" : "-"}°
+              {temperature != null ? `${u.temp(temperature)}${u.tempUnit}` : isLoading ? "…" : "-"}
             </p>
           </div>
           <div className="text-right min-w-0">
@@ -864,7 +868,7 @@ function TempInTownNow({
               {isLoading
                 ? loadingLabel
                 : description
-                  ? `${description}${feelsLike !== null ? ` · ${feelsLabel} ${Math.round(feelsLike)}°` : ""}`
+                   ? `${description}${feelsLike != null ? ` · ${feelsLabel} ${u.temp(feelsLike)}${u.tempUnit}` : ""}`
                   : unavailableLabel}
             </p>
           </div>

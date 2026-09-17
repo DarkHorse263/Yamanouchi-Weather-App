@@ -20,6 +20,7 @@
     "test:regionProximity": "tsx --test src/lib/__tests__/regionProximity.test.ts",
     "test:precip": "tsx --test src/lib/__tests__/precip.test.ts",
     "test:nearYouRegionRow": "tsx --tsconfig tsconfig.test.json --test src/components/home/__tests__/NearYouRegionRow.test.tsx",
+    "test:weatherSections": "tsx --tsconfig tsconfig.test.json --test src/components/weather/__tests__/WeatherSections.test.tsx",
     "test:homeRegionCard": "tsx --tsconfig tsconfig.test.json --test src/components/home/__tests__/HomeRegionCard.test.tsx",
     "test:japanCatalogue": "tsx --test src/regions/__tests__/japan-catalogue.test.ts",
     "test:canadaCatalogue": "tsx --test src/regions/__tests__/canada-catalogue.test.ts",

@@ -102,7 +102,7 @@ export function WeatherHero({
                 <>
                   {" · "}
                   <span className="text-foreground/80">
-                    feelzlike {u.temp(current.feelsLike)}°
+                    feelzlike {u.temp(current.feelsLike)}{u.tempUnit}
                   </span>
                 </>
               )}
@@ -159,7 +159,7 @@ export function WeatherConditions({
         label={t("Humidity", "湿度")}
         value={current.humidity !== null ? `${Math.round(current.humidity)}` : "-"}
         unit="%"
-        hint={current.dewpoint !== null ? `Dew ${Math.round(current.dewpoint)}°` : ""}
+        hint={current.dewpoint != null ? `Dew ${u.temp(current.dewpoint)}${u.tempUnit}` : ""}
       />
       <Stat
         icon={Gauge}
@@ -202,8 +202,10 @@ export function WeatherToday({
         <p className="byline text-muted-foreground/70">{t("Today", "今日")}</p>
       </div>
       <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
-        <KV label={t("High", "最高")} value={daily.tempMax !== null ? `${u.temp(daily.tempMax)}°` : "-"} icon={Thermometer} />
-        <KV label={t("Low", "最低")} value={daily.tempMin !== null ? `${u.temp(daily.tempMin)}°` : "-"} icon={Thermometer} />
+        <KV label={t("High", "最高")} value={daily.tempMax != null ? `${u.temp(daily.tempMax)}${u.tempUnit}` : "-"} icon={Thermometer} />
+        <KV label={t("Low", "最低")} value={daily.tempMin != null ? `${u.temp(daily.tempMin)}${u.tempUnit}` : "-"} icon={Thermometer} />
+        <KV label={t("feelzlike high", "体感最高")} value={daily.feelsLikeMax != null ? `${u.temp(daily.feelsLikeMax)}${u.tempUnit}` : "-"} icon={Thermometer} />
+        <KV label={t("feelzlike low", "体感最低")} value={daily.feelsLikeMin != null ? `${u.temp(daily.feelsLikeMin)}${u.tempUnit}` : "-"} icon={Thermometer} />
         <KV label={t("Sunrise", "日の出")} value={fmtTime(daily.sunrise)} icon={Sunrise} />
         <KV label={t("Sunset", "日の入")} value={fmtTime(daily.sunset)} icon={Sunset} />
         <KV
@@ -285,18 +287,23 @@ export function WeatherHourly({
 }) {
   const u = useUnits();
   if (hourly.length === 0) return null;
-  // Find min/max temps for chart scaling
-  const temps = hourly.map((h) => h.temperature ?? 0);
-  const minT = Math.min(...temps);
-  const maxT = Math.max(...temps);
-  const range = Math.max(1, maxT - minT);
+  // Find min/max from finite actual temperatures only. Missing values must not
+  // become a fabricated 0°C bar or distort the range for the real readings.
+  const temps = hourly
+    .map((h) => h.temperature)
+    .filter((value): value is number => typeof value === "number" && Number.isFinite(value));
+  const minT = temps.length > 0 ? Math.min(...temps) : null;
+  const maxT = temps.length > 0 ? Math.max(...temps) : null;
+  const range = minT != null && maxT != null ? Math.max(1, maxT - minT) : 1;
 
   return (
     <section className="mt-4 rounded-2xl border border-border bg-white p-5">
       <div className="flex items-center justify-between">
         <p className="byline text-slate-700">{t("Next 24 hours", "24時間予報")}</p>
         <p className="text-xs text-slate-700">
-          {u.temp(minT)}° to {u.temp(maxT)}°
+          {minT != null && maxT != null
+            ? `${u.temp(minT)}${u.tempUnit} to ${u.temp(maxT)}${u.tempUnit}`
+            : t("temperature unavailable", "気温データなし")}
         </p>
       </div>
       <div className="mt-4 -mx-2 overflow-x-auto">
@@ -313,22 +320,38 @@ export function WeatherHourly({
               isNow ? undefined : h.precipitationProbability,
               isNow ? undefined : h.precipitation,
             );
-            const tNorm = h.temperature !== null ? (h.temperature - minT) / range : 0;
+            const actualTemperature = h.temperature;
+            const hasTemperature =
+              typeof actualTemperature === "number" && Number.isFinite(actualTemperature);
+            const tNorm =
+              hasTemperature && minT != null
+                ? (actualTemperature - minT) / range
+                : null;
             const pop = h.precipitationProbability ?? 0;
             return (
-              <div key={h.time} className="flex flex-col items-center min-w-[44px] flex-1">
+              <div key={h.time} className="flex flex-col items-center min-w-[60px] flex-1">
                 <p className="text-xs text-slate-700 mb-1">
                   {fmtHour(h.time, i)}
                 </p>
                 <Icon className={`w-4 h-4 ${Icon === Snowflake ? "text-snow-accent" : "text-primary/80"}`} strokeWidth={1.5} />
                 <p className="text-xs font-medium text-foreground mt-1">
-                  {u.temp(h.temperature) ?? "-"}°
+                  {u.temp(h.temperature) ?? "-"}{u.tempUnit}
+                </p>
+                <p className="mt-1 text-center text-[11px] leading-tight text-slate-700 tabular-nums" aria-label={`feelzlike ${h.feelsLike != null ? `${u.temp(h.feelsLike)}${u.tempUnit}` : "unavailable"}`}>
+                  <span className="block">feelzlike</span>
+                  <span className="block font-medium">{h.feelsLike != null ? u.temp(h.feelsLike) : "-"}{u.tempUnit}</span>
                 </p>
                 <div className="h-12 w-full flex items-end mt-1">
-                  <div
-                    className="w-full rounded-t bg-primary/20"
-                    style={{ height: `${20 + tNorm * 70}%` }}
-                  />
+                  {tNorm != null ? (
+                    <div
+                      className="w-full rounded-t bg-primary/20"
+                      style={{ height: `${20 + tNorm * 70}%` }}
+                    />
+                  ) : (
+                    <span className="text-xs text-muted-foreground" aria-label={t("temperature unavailable", "気温データなし")}>
+                      -
+                    </span>
+                  )}
                 </div>
                 {pop > 10 && (
                   <p className="text-[10px] text-blue-600 mt-1">{Math.round(pop)}%</p>
@@ -380,12 +403,23 @@ export function WeatherOutlook({
               </p>
               <p className="mt-2 text-sm">
                 <span className="font-semibold text-foreground">
-                  {u.temp(d.tempMax) ?? "-"}°
+                  {u.temp(d.tempMax) ?? "-"}{u.tempUnit}
                 </span>
                 <span className="text-slate-700 ml-2">
-                  {u.temp(d.tempMin) ?? "-"}°
+                  {u.temp(d.tempMin) ?? "-"}{u.tempUnit}
                 </span>
               </p>
+                <p
+                  className="text-[10px] text-muted-foreground tabular-nums leading-tight"
+                  aria-label={t(
+                    `feelzlike high ${d.feelsLikeMax != null ? `${u.temp(d.feelsLikeMax)}${u.tempUnit}` : "unavailable"}; feelzlike low ${d.feelsLikeMin != null ? `${u.temp(d.feelsLikeMin)}${u.tempUnit}` : "unavailable"}`,
+                    `体感最高 ${d.feelsLikeMax != null ? `${u.temp(d.feelsLikeMax)}${u.tempUnit}` : "データなし"}; 体感最低 ${d.feelsLikeMin != null ? `${u.temp(d.feelsLikeMin)}${u.tempUnit}` : "データなし"}`,
+                  )}
+                >
+                  <span className="mr-1">feelzlike</span>
+                  {d.feelsLikeMax != null ? u.temp(d.feelsLikeMax) : "-"}{u.tempUnit} /
+                  {d.feelsLikeMin != null ? ` ${u.temp(d.feelsLikeMin)}${u.tempUnit}` : ` -${u.tempUnit}`}
+                </p>
 
               <div className="mt-3 pt-3 border-t border-border/50 w-full space-y-1.5">
                 <DayStat
@@ -501,7 +535,7 @@ function KV({
 }) {
   const isSnow = Icon === Snowflake || Icon === CloudSnow;
   return (
-    <div>
+    <div role="group" aria-label={`${label}: ${value}`}>
       <div className="flex items-center gap-1.5 byline text-slate-700">
         <Icon className={`w-3 h-3 ${isSnow ? "text-snow-accent" : ""}`} strokeWidth={2} /> {label}
       </div>

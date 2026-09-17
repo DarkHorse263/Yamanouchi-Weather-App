@@ -2978,6 +2978,14 @@ components:
           type: number
         minTemp:
           type: number
+        feelsLikeMax:
+          type: number
+          nullable: true
+          description: Daily maximum apparent temperature in Celsius. Null when the source does not provide a synchronized daily apparent-temperature maximum.
+        feelsLikeMin:
+          type: number
+          nullable: true
+          description: Daily minimum apparent temperature in Celsius. Null when the source does not provide a synchronized daily apparent-temperature minimum.
         weatherCode:
           type: integer
         weatherDescription:
@@ -3028,6 +3036,7 @@ components:
           type: number
         feelsLike:
           type: number
+          nullable: true
         cloudCover:
           type: integer
       required:

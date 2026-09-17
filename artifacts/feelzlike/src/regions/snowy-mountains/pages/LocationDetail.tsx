@@ -278,7 +278,9 @@ export default function LocationDetail() {
   })();
 
   const stats = [
-    { label: "feelzlike", value: `${u.temp(current.feelsLike)}${u.tempUnit}`, icon: Thermometer },
+    ...(current.feelsLike != null
+      ? [{ label: "feelzlike", value: `${u.temp(current.feelsLike)}${u.tempUnit}`, icon: Thermometer }]
+      : []),
     { label: "Wind", value: `${u.wind(current.windSpeed)} ${u.windUnit}${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`, icon: Navigation, hint: windSoWhat(current.windSpeed)?.en ?? null },
     ...(current.windGust ? [{ label: "Gusts", value: `${u.wind(current.windGust)} ${u.windUnit}`, icon: Wind }] : []),
     { label: "Humidity", value: `${current.humidity}%`, icon: Droplets },
@@ -467,7 +469,8 @@ export default function LocationDetail() {
                   <span className="font-display text-white/70 text-3xl md:text-4xl mt-4">{u.tempUnit}</span>
                 </div>
                 <p className="byline text-white/80 mt-1">
-                  {current.weatherDescription} · feelzlike {u.temp(current.feelsLike)}°
+                  {current.weatherDescription}
+                  {current.feelsLike != null && <> · feelzlike {u.temp(current.feelsLike)}{u.tempUnit}</>}
                 </p>
               </div>
             </motion.div>
@@ -705,9 +708,18 @@ export default function LocationDetail() {
                       </p>
 
                       <div className="flex items-baseline justify-center gap-2 font-display mt-1" data-numeric>
-                        <span className="text-foreground text-2xl md:text-3xl font-medium">{Math.round(day.maxTemp)}°</span>
-                        <span className="text-muted-foreground text-base">{Math.round(day.minTemp)}°</span>
+                        <span className="text-foreground text-2xl md:text-3xl font-medium">{day.maxTemp != null ? `${u.temp(day.maxTemp)}${u.tempUnit}` : "-"}</span>
+                        <span className="text-muted-foreground text-base">{day.minTemp != null ? `${u.temp(day.minTemp)}${u.tempUnit}` : "-"}</span>
                       </div>
+                      <p
+                        className="text-[10px] leading-tight text-muted-foreground tabular-nums"
+                        title={`feelzlike high ${(day as any).feelsLikeMax != null ? `${u.temp((day as any).feelsLikeMax)}${u.tempUnit}` : "unavailable"} · low ${(day as any).feelsLikeMin != null ? `${u.temp((day as any).feelsLikeMin)}${u.tempUnit}` : "unavailable"}`}
+                      >
+                        feelzlike{" "}
+                        {(day as any).feelsLikeMax != null ? `${u.temp((day as any).feelsLikeMax)}${u.tempUnit}` : "-"}
+                        {" / "}
+                        {(day as any).feelsLikeMin != null ? `${u.temp((day as any).feelsLikeMin)}${u.tempUnit}` : "-"}
+                      </p>
 
                       {/* snowfall / rainfall bars */}
                       <div className="w-full flex items-end justify-center gap-1.5 h-10 mt-2" aria-hidden>
@@ -802,9 +814,15 @@ export default function LocationDetail() {
                       <WeatherIcon code={displayDayCode(day.weatherCode, snow, dailyRainMm(day))} className="w-7 h-7" />
                     </div>
                     <div className="flex items-baseline justify-center gap-1.5 font-display" data-numeric>
-                      <span className="text-foreground text-lg">{Math.round(day.maxTemp)}°</span>
-                      <span className="text-muted-foreground/60 text-xs">{Math.round(day.minTemp)}°</span>
+                        <span className="text-foreground text-lg">{day.maxTemp != null ? `${u.temp(day.maxTemp)}${u.tempUnit}` : "-"}</span>
+                        <span className="text-muted-foreground/60 text-xs">{day.minTemp != null ? `${u.temp(day.minTemp)}${u.tempUnit}` : "-"}</span>
                     </div>
+                      <p className="text-[10px] leading-tight text-muted-foreground tabular-nums">
+                        feelzlike{" "}
+                        {(day as any).feelsLikeMax != null ? `${u.temp((day as any).feelsLikeMax)}${u.tempUnit}` : "-"}
+                        {" / "}
+                        {(day as any).feelsLikeMin != null ? `${u.temp((day as any).feelsLikeMin)}${u.tempUnit}` : "-"}
+                      </p>
                     <div className="flex items-center justify-center gap-1 text-xs tabular-nums mt-1.5">
                       <Snowflake className="w-3 h-3 text-snow-accent/80" />
                       <span className="font-medium text-snow-accent">

@@ -1230,41 +1230,7 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
     }
   }
 
-  const daily = om?.daily?.time?.map((date: string, i: number) => {
-    // Freezing-level partitioned figures for this day; fall back to the
-    // model's own sums when the partition had no usable freezing level
-    // (mirrors the Elevation forecast's buildBand fallback).
-    const phase =
-      (phaseDayHourCounts.get(date) ?? 0) >= 24 ? phaseByDay?.get(date) : undefined;
-    const daySnowCm = phase?.reliable ? phase.snowfallCm : om.daily.snowfall_sum[i];
-    const dayRainMm = phase?.reliable ? phase.rainfallMm : dailyRainSum(om.daily, i);
-    return {
-    date,
-    maxTemp: om.daily.temperature_2m_max[i],
-    minTemp: om.daily.temperature_2m_min[i],
-    weatherCode: om.daily.weather_code[i],
-    // Daily label derives from the day's TOTALS, not the raw WMO code — the
-    // daily code is the most-severe MOMENT of the day, so it calls a 2.7cm
-    // day "Heavy snow fall" and a steady 17cm day plain "Snow".
-    weatherDescription: dailyConditionLabel({
-      code: om.daily.weather_code[i],
-      snowfallCm: daySnowCm,
-      rainMm: dayRainMm,
-      fallback: getWeatherDescription(om.daily.weather_code[i]),
-    }),
-    precipitationSum: om.daily.precipitation_sum[i],
-    // True liquid rain (rain + showers, phase-partitioned). Open-Meteo's
-    // precipitation_sum INCLUDES the water equivalent of snowfall, so clients
-    // must never label it "rain" — on a snow day that double-reports the
-    // snow as rain.
-    rainSum: dayRainMm,
-    snowfallSum: daySnowCm,
-    windSpeedMax: om.daily.wind_speed_10m_max[i],
-    uvIndexMax: om.daily.uv_index_max?.[i] ?? 0,
-    sunrise: om.daily.sunrise[i],
-    sunset: om.daily.sunset[i]
-    };
-  }) ?? [];
+  const daily = buildDailyForecast(om, phaseByDay, phaseDayHourCounts);
 
   const bomHourlyData = buildBomHourly(bomObs, bomSecondaryObs);
   // Build the Open-Meteo hourly array (next 72h forecast). past_hours=24 (for
@@ -1274,22 +1240,29 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
   // OM rows start at the current hour.
   const omPastCutoffMs = Date.now() - 60 * 60 * 1000;
   const omOffsetSec = Number(om?.utc_offset_seconds) || 0;
-  const omHourlyAll: any[] = (om?.hourly?.time?.map((time: string, i: number) => ({
-    time,
-    temperature: om.hourly.temperature_2m[i],
-    weatherCode: om.hourly.weather_code[i],
-    weatherDescription: getWeatherDescription(om.hourly.weather_code[i]),
-    precipitation: om.hourly.precipitation[i],
-    // Freezing-level partitioned snow (same story as `current` + `daily`);
-    // hours without a usable FL keep the model's own value.
-    snowfall: (typeof phaseSnowHourly?.[i] === "number"
-      ? Math.round((phaseSnowHourly[i] as number) * 10) / 10
-      : om.hourly.snowfall?.[i]) ?? 0,
-    windSpeed: om.hourly.wind_speed_10m[i],
-    humidity: om.hourly.relative_humidity_2m[i],
-    feelsLike: om.hourly.apparent_temperature[i],
-    cloudCover: om.hourly.cloud_cover[i]
-  })) ?? []).filter((h: any) => {
+  const omHourlyAll: any[] = (om?.hourly?.time?.map((time: string, i: number) => {
+    const temperature = finiteNumberOrNull(om.hourly.temperature_2m?.[i]);
+    // Temperature is required by HourlyForecast. Drop a wholly invalid row
+    // rather than fabricating a 0°C reading; apparent temperature remains
+    // independently nullable below.
+    if (temperature == null) return null;
+    return {
+      time,
+      temperature,
+      weatherCode: om.hourly.weather_code[i],
+      weatherDescription: getWeatherDescription(om.hourly.weather_code[i]),
+      precipitation: om.hourly.precipitation[i],
+      // Freezing-level partitioned snow (same story as `current` + `daily`);
+      // hours without a usable FL keep the model's own value.
+      snowfall: (typeof phaseSnowHourly?.[i] === "number"
+        ? Math.round((phaseSnowHourly[i] as number) * 10) / 10
+        : om.hourly.snowfall?.[i]) ?? 0,
+      windSpeed: om.hourly.wind_speed_10m[i],
+      humidity: om.hourly.relative_humidity_2m[i],
+      feelsLike: finiteNumberOrNull(om.hourly.apparent_temperature?.[i]),
+      cloudCover: om.hourly.cloud_cover[i],
+    };
+  }) ?? []).filter((h: any): h is Record<string, unknown> => h !== null).filter((h: any) => {
     const localAsUtcMs = Date.parse(h.time + "Z");
     if (Number.isNaN(localAsUtcMs)) return false;
     const utcMs = localAsUtcMs - omOffsetSec * 1000;
@@ -1370,7 +1343,9 @@ function buildBomHourly(
       snowfall: 0,
       windSpeed: reading.wind_spd_kmh ?? secReading?.wind_spd_kmh ?? 0,
       humidity: reading.rel_hum ?? secReading?.rel_hum ?? 0,
-      feelsLike: reading.apparent_t ?? secReading?.apparent_t ?? temp,
+      // Apparent temperature is independent observation data; an absent
+      // provider value is unknown, not the measured air temperature.
+      feelsLike: finiteNumberOrNull(reading.apparent_t ?? secReading?.apparent_t),
       cloudCover: (reading.cloud_oktas ?? secReading?.cloud_oktas ?? 0) * 12.5
     });
   }
@@ -1460,7 +1435,68 @@ function dailyRainSum(daily: any, i: number): number | null {
   return Math.round(((Number(rain) || 0) + (Number(showers) || 0)) * 10) / 10;
 }
 
-async function fetchOpenMeteo(location: LocationConfig) {
+function finiteNumberOrNull(value: unknown): number | null {
+  return typeof value === "number" && Number.isFinite(value) ? value : null;
+}
+
+/**
+ * Map the provider's daily arrays to the standard weather contract.
+ *
+ * Open-Meteo's apparent_temperature_max/min are daily fields calculated by
+ * the provider over the same local calendar day as the temperature extrema.
+ * Keep those values independent: neither temperature extrema nor wind
+ * extrema are valid substitutes for a missing apparent-temperature field.
+ */
+export function buildDailyForecast(
+  om: any,
+  phaseByDay: Map<string, { reliable: boolean; snowfallCm: number; rainfallMm: number }> | null = null,
+  phaseDayHourCounts: Map<string, number> = new Map(),
+): Array<Record<string, unknown>> {
+  const daily = om?.daily;
+  if (!daily || !Array.isArray(daily.time)) return [];
+
+  return daily.time.map((date: string, i: number) => {
+    // Freezing-level partitioned figures for this day; fall back to the
+    // model's own sums when the partition had no usable freezing level
+    // (mirrors the Elevation forecast's buildBand fallback).
+    const phase =
+      (phaseDayHourCounts.get(date) ?? 0) >= 24 ? phaseByDay?.get(date) : undefined;
+    const daySnowCm = phase?.reliable ? phase.snowfallCm : daily.snowfall_sum[i];
+    const dayRainMm = phase?.reliable ? phase.rainfallMm : dailyRainSum(daily, i);
+    return {
+      date,
+      maxTemp: daily.temperature_2m_max[i],
+      minTemp: daily.temperature_2m_min[i],
+      // These are deliberately not derived from maxTemp/minTemp or wind
+      // extrema. A missing provider value is an honest null.
+      feelsLikeMax: finiteNumberOrNull(daily.apparent_temperature_max?.[i]),
+      feelsLikeMin: finiteNumberOrNull(daily.apparent_temperature_min?.[i]),
+      weatherCode: daily.weather_code[i],
+      // Daily label derives from the day's TOTALS, not the raw WMO code — the
+      // daily code is the most-severe MOMENT of the day, so it calls a 2.7cm
+      // day "Heavy snow fall" and a steady 17cm day plain "Snow".
+      weatherDescription: dailyConditionLabel({
+        code: daily.weather_code[i],
+        snowfallCm: daySnowCm,
+        rainMm: dayRainMm,
+        fallback: getWeatherDescription(daily.weather_code[i]),
+      }),
+      precipitationSum: daily.precipitation_sum[i],
+      // True liquid rain (rain + showers, phase-partitioned). Open-Meteo's
+      // precipitation_sum INCLUDES the water equivalent of snowfall, so clients
+      // must never label it "rain" — on a snow day that double-reports the
+      // snow as rain.
+      rainSum: dayRainMm,
+      snowfallSum: daySnowCm,
+      windSpeedMax: daily.wind_speed_10m_max[i],
+      uvIndexMax: daily.uv_index_max?.[i] ?? 0,
+      sunrise: daily.sunrise[i],
+      sunset: daily.sunset[i],
+    };
+  });
+}
+
+export async function fetchOpenMeteo(location: LocationConfig) {
   const params = new URLSearchParams({
     latitude: location.latitude.toString(),
     longitude: location.longitude.toString(),
@@ -1469,7 +1505,7 @@ async function fetchOpenMeteo(location: LocationConfig) {
     elevation: location.elevation.toString(),
     current: "temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,snow_depth,freezing_level_height",
     hourly: "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,cloud_cover,wind_speed_10m,snowfall,freezing_level_height",
-    daily: "weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,rain_sum,showers_sum,snowfall_sum,wind_speed_10m_max,uv_index_max",
+    daily: "weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,precipitation_sum,rain_sum,showers_sum,snowfall_sum,wind_speed_10m_max,uv_index_max",
     timezone: location.timezone ?? "Australia/Sydney",
     // Austria and Japan use the supported seven-day horizon. Existing AU and
     // other catalogue locations retain their intentional 14-day behaviour;

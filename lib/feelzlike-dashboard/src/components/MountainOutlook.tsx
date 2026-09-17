@@ -6,6 +6,9 @@ export interface OutlookDay {
   date: string;
   maxTemp: number;
   minTemp: number;
+  /** Daily feels-like extrema in canonical Celsius. Older responses may omit them. */
+  feelsLikeMax?: number | null;
+  feelsLikeMin?: number | null;
   weatherCode?: number | null;
   weatherDescription?: string;
   precipitationSum?: number;
@@ -160,6 +163,15 @@ export function MountainOutlook({
                 <span className="text-foreground text-lg md:text-xl">{Math.round(cvTemp(day.maxTemp))}{tempUnitLabel}</span>
                 <span className="text-muted-foreground/60 text-xs">{Math.round(cvTemp(day.minTemp))}{tempUnitLabel}</span>
               </div>
+              <p
+                className="text-[10px] leading-tight text-muted-foreground/80 tabular-nums"
+                title={`feelzlike high ${day.feelsLikeMax != null ? `${Math.round(cvTemp(day.feelsLikeMax))}${tempUnitLabel}` : "unavailable"} · low ${day.feelsLikeMin != null ? `${Math.round(cvTemp(day.feelsLikeMin))}${tempUnitLabel}` : "unavailable"}`}
+              >
+                feelzlike{" "}
+                {day.feelsLikeMax != null ? `${Math.round(cvTemp(day.feelsLikeMax))}${tempUnitLabel}` : "-"}
+                {" / "}
+                {day.feelsLikeMin != null ? `${Math.round(cvTemp(day.feelsLikeMin))}${tempUnitLabel}` : "-"}
+              </p>
 
               <div className="w-full flex items-end justify-center gap-1 h-9 mt-1.5" aria-hidden>
                 <div className="flex flex-col items-center justify-end h-full">

@@ -146,7 +146,9 @@ export function detectPowderWindows(
       h !== undefined &&
       (h.snowfall ?? 0) >= minSnowfall &&
       (h.windSpeed ?? 0) < maxWind &&
-      (h.temperature ?? 0) <= maxTemp;
+      h.temperature != null &&
+      Number.isFinite(h.temperature) &&
+      h.temperature <= maxTemp;
     if (meets) {
       if (curStart < 0) curStart = i;
     } else if (curStart >= 0) {

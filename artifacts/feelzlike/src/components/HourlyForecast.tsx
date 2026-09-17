@@ -458,7 +458,8 @@ function HourCell({
   const snowCm = Math.round((hour.snowfall ?? 0) * 10) / 10;
   const snow = snowCm > 0 ? u.snowVal(snowCm, 1) : "0";
   const wind = u.wind(hour.windSpeed ?? 0) ?? 0;
-  const temp = u.temp(hour.temperature ?? 0);
+  const temp = hour.temperature != null ? u.temp(hour.temperature) : null;
+  const feelsLike = hour.feelsLike != null ? u.temp(hour.feelsLike) : null;
   const cellTone = powderGrade ? GRADE_STYLES[powderGrade].cell : "bg-white/60 border-border";
   const iconTone = powderGrade === "gold"
     ? "text-amber-700"
@@ -472,10 +473,10 @@ function HourCell({
     <div
       role="listitem"
       className={cn(
-        "snap-start shrink-0 w-[58px] md:w-[64px] flex flex-col items-center gap-1 rounded-xl border px-1.5 py-2.5 transition-colors",
+        "snap-start shrink-0 w-[70px] md:w-[74px] flex flex-col items-center gap-1 rounded-xl border px-1.5 py-2.5 transition-colors",
         cellTone,
       )}
-      title={`${hourLabel} · ${temp}${u.tempUnit} · ${snowCm > 0 ? `${snow}${u.snowUnit} snow · ` : ""}${wind} ${u.windUnit} wind${powderGrade ? ` · ${powderGrade.toUpperCase()} powder window` : ""}`}
+      title={`${hourLabel} · actual ${temp != null ? `${temp}${u.tempUnit}` : "unavailable"} · feelzlike ${feelsLike != null ? `${feelsLike}${u.tempUnit}` : "unavailable"} · ${snowCm > 0 ? `${snow}${u.snowUnit} snow · ` : ""}${wind} ${u.windUnit} wind${powderGrade ? ` · ${powderGrade.toUpperCase()} powder window` : ""}`}
     >
       <p
         className={cn(
@@ -492,8 +493,16 @@ function HourCell({
         className="font-display text-base text-foreground tabular-nums leading-none"
         data-numeric
       >
-        {temp}
+        {temp ?? "-"}
         <span className="text-[10px] text-muted-foreground/80">{u.tempUnit}</span>
+      </p>
+      <p
+        className="max-w-full truncate text-[9px] leading-none text-muted-foreground/80 tabular-nums"
+        aria-label={`feelzlike ${feelsLike != null ? `${feelsLike}${u.tempUnit}` : "unavailable"}`}
+      >
+        <span className="mr-0.5">feelzlike</span>
+        {feelsLike ?? "-"}
+        <span className="ml-0.5">{u.tempUnit}</span>
       </p>
       {snowCm > 0 ? (
         <div className="flex items-center gap-1 text-xs font-semibold tabular-nums leading-none text-snow-accent">

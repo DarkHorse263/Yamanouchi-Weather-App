@@ -243,10 +243,10 @@ export function HomeFourWay() {
                   <CloudSun className="h-7 w-7" aria-hidden />
                   <div className="text-center">
                     <span className="block text-[30px] font-bold leading-none tabular-nums">
-                      {u.temp(nearest.headline.tempC)}°
+                      {u.temp(nearest.headline.tempC)}{u.tempUnit}
                     </span>
                     <span className="mt-1 block text-xs font-bold leading-none text-slate-700">
-                      feelzlike {u.temp(nearest.headline.feelsLikeC)}°
+                      feelzlike {u.temp(nearest.headline.feelsLikeC)}{u.tempUnit}
                     </span>
                   </div>
                 </div>

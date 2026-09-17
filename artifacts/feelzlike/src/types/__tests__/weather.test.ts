@@ -50,6 +50,14 @@ test("brief NZ snowfall spikes do not earn a medal", () => {
   );
 });
 
+test("missing or non-finite actual temperature cannot qualify as a powder window", () => {
+  const missing = snowRun(1.1).map((hour) => ({ ...hour, temperature: null })) as HourlyForecast[];
+  const nonFinite = snowRun(1.1).map((hour) => ({ ...hour, temperature: Number.NaN })) as HourlyForecast[];
+
+  assert.equal(detectPowderWindows(missing).length, 0);
+  assert.equal(detectPowderWindows(nonFinite).length, 0);
+});
+
 test("Austria uses its declared conservative three-hour powder policy", () => {
   const policy = powderThresholdsForCountry("AT");
   assert.deepEqual(policy, {

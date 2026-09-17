@@ -5,6 +5,7 @@ interface HomeRegionCardViewProps {
   isAuthenticated: boolean;
   region: { id: string; name: string } | null;
   feelsLike: string | null;
+  feelsLikeUnit?: string;
   isLoading: boolean;
   onNavigate?: () => void;
 }
@@ -13,6 +14,7 @@ export function HomeRegionCardView({
   isAuthenticated,
   region,
   feelsLike,
+  feelsLikeUnit = "°C",
   isLoading,
   onNavigate,
 }: HomeRegionCardViewProps) {
@@ -45,7 +47,7 @@ export function HomeRegionCardView({
                 {feelsLike !== null && (
                   <>
                     <span className="text-3xl font-bold leading-none tabular-nums text-[#0055FF]">
-                      {feelsLike}&deg;
+                      {feelsLike}{feelsLikeUnit}
                     </span>
                     <span className="text-[9px] font-semibold uppercase tracking-[0.12em] text-slate-500">
                       feelzlike

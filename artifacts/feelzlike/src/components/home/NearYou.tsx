@@ -483,14 +483,14 @@ export function NearYou() {
               <div className="min-w-0">
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-bold leading-none tabular-nums text-slate-900">
-                    {local.feelsLikeC}&deg;
+                    {u.temp(local.feelsLikeC)}{u.tempUnit}
                   </span>
                   <span className="text-[9px] font-semibold uppercase tracking-[0.12em] text-sky-800">
                     feelzlike
                   </span>
                 </div>
                 <p className="mt-1 text-[13px] leading-snug text-slate-600">
-                  {local.description.toLowerCase()} &middot; actually {local.tempC}&deg;
+                  {local.description.toLowerCase()} &middot; actually {u.temp(local.tempC)}{u.tempUnit}
                   {local.windKph > 0 ? (
                     <>
                       {" "}

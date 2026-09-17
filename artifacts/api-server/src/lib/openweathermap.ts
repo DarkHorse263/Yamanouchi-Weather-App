@@ -149,11 +149,17 @@ export async function fetchOpenWeatherMapAsOpenMeteo(
   const hSnow: number[] = [];
   const hWind: number[] = [];
   const hHum: number[] = [];
-  const hFeels: number[] = [];
+  const hFeels: (number | null)[] = [];
   const hCloud: number[] = [];
 
   for (const entry of list) {
     if (hTime.length >= 72) break;
+    // Temperature is required by the standard hourly contract. Do not turn a
+    // missing provider temperature into a false 0°C reading; skip the whole
+    // expanded row instead. Apparent temperature is nullable and must never
+    // inherit the actual temperature.
+    const temperature = entry.main?.temp;
+    if (typeof temperature !== "number" || !Number.isFinite(temperature)) continue;
     const code = owmToWmo(entry.weather?.[0]?.id ?? 800);
     const rain3 = entry.rain?.["3h"] ?? 0;
     const snow3mm = entry.snow?.["3h"] ?? 0;
@@ -162,13 +168,17 @@ export async function fetchOpenWeatherMapAsOpenMeteo(
     const windKmh = (entry.wind?.speed ?? 0) * 3.6;
     for (let h = 0; h < 3 && hTime.length < 72; h++) {
       hTime.push(toLocalNaiveISO(entry.dt + h * 3600, offsetSec));
-      hTemp.push(entry.main?.temp ?? 0);
+      hTemp.push(temperature);
       hCode.push(code);
       hPrecip.push(Math.round(precipPerHour * 100) / 100);
       hSnow.push(Math.round(snowCmPerHour * 100) / 100);
       hWind.push(windKmh);
       hHum.push(entry.main?.humidity ?? 0);
-      hFeels.push(entry.main?.feels_like ?? entry.main?.temp ?? 0);
+      hFeels.push(
+        typeof entry.main?.feels_like === "number" && Number.isFinite(entry.main.feels_like)
+          ? entry.main.feels_like
+          : null,
+      );
       hCloud.push(entry.clouds?.all ?? 0);
     }
   }
@@ -177,6 +187,10 @@ export async function fetchOpenWeatherMapAsOpenMeteo(
   const byDate = new Map<string, OwmForecastEntry[]>();
   const dateOrder: string[] = [];
   for (const entry of list) {
+    // A forecast bucket without an actual temperature cannot contribute to a
+    // standard daily max/min either; excluding it prevents a fabricated 0°C
+    // from becoming the day's apparent low.
+    if (typeof entry.main?.temp !== "number" || !Number.isFinite(entry.main.temp)) continue;
     const dateKey = toLocalNaiveISO(entry.dt, offsetSec, true);
     if (!byDate.has(dateKey)) {
       byDate.set(dateKey, []);
@@ -191,6 +205,12 @@ export async function fetchOpenWeatherMapAsOpenMeteo(
   const dTime: string[] = [];
   const dMax: number[] = [];
   const dMin: number[] = [];
+  // OpenWeatherMap's free /forecast endpoint only supplies sparse 3-hour
+  // point values. It has no synchronized daily apparent-temperature
+  // extrema, so these remain null rather than presenting the sparse points
+  // as full-day feels-like highs/lows.
+  const dFeelsMax: (number | null)[] = [];
+  const dFeelsMin: (number | null)[] = [];
   const dCode: number[] = [];
   const dPrecip: number[] = [];
   const dRain: number[] = [];
@@ -222,6 +242,8 @@ export async function fetchOpenWeatherMapAsOpenMeteo(
     dTime.push(dateKey);
     dMax.push(Math.max(...temps));
     dMin.push(Math.min(...temps));
+    dFeelsMax.push(null);
+    dFeelsMin.push(null);
     dCode.push(owmToWmo(midday.weather?.[0]?.id ?? 800));
     dPrecip.push(Math.round(precipSum * 10) / 10);
     dRain.push(Math.round(rainSum * 10) / 10);
@@ -249,6 +271,8 @@ export async function fetchOpenWeatherMapAsOpenMeteo(
       time: dTime,
       temperature_2m_max: dMax,
       temperature_2m_min: dMin,
+      apparent_temperature_max: dFeelsMax,
+      apparent_temperature_min: dFeelsMin,
       weather_code: dCode,
       precipitation_sum: dPrecip,
       rain_sum: dRain,

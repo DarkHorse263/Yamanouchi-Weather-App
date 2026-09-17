@@ -4,13 +4,14 @@ import { ArrowRight, Star, X } from "lucide-react";
 import { getRegion } from "@/regions";
 import { track } from "@/lib/analytics";
 import { useFavourites, type FavouriteLocation } from "@/lib/favourites";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 // Slice of GET /api/local-weather `current` we read for a favourite row. The
 // cheap current endpoint (few vars, 1 day) is used deliberately · the expensive
 // town-weather forecast is overkill for a one-line "feelzlike N°" readout.
 interface LocalCurrentLite {
-  feelsLikeC: number;
-  tempC: number;
+  feelsLikeC: number | null;
+  tempC: number | null;
   description: string;
 }
 
@@ -21,6 +22,7 @@ function FavouriteRow({
   fav: FavouriteLocation;
   onRemove: () => void;
 }) {
+  const u = useUnits();
   const region = getRegion(fav.regionId);
   const town = region?.baseTowns?.find((t) => t.id === fav.townId);
   const href = `/${fav.regionId}/${fav.townId}`;
@@ -65,9 +67,9 @@ function FavouriteRow({
             </p>
             <p className="truncate text-[12px] tabular-nums text-slate-500">
               {regionLabel}
-              {current ? (
+              {current?.feelsLikeC != null ? (
                 <>
-                  {" \u00b7 "}feelzlike {current.feelsLikeC}&deg;
+                  {" \u00b7 "}feelzlike {u.temp(current.feelsLikeC)}{u.tempUnit}
                 </>
               ) : null}
             </p>

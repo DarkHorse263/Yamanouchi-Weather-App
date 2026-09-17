@@ -1147,6 +1147,10 @@ export interface DailyForecast {
   date: string;
   maxTemp: number;
   minTemp: number;
+  /** Daily maximum apparent temperature in Celsius. Null when the source does not provide a synchronized daily apparent-temperature maximum. */
+  feelsLikeMax?: number | null;
+  /** Daily minimum apparent temperature in Celsius. Null when the source does not provide a synchronized daily apparent-temperature minimum. */
+  feelsLikeMin?: number | null;
   weatherCode: number;
   weatherDescription: string;
   precipitationSum: number;
@@ -1168,7 +1172,7 @@ export interface HourlyForecast {
   snowfall?: number;
   windSpeed: number;
   humidity: number;
-  feelsLike: number;
+  feelsLike: number | null;
   cloudCover?: number;
 }
 

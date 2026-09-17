@@ -426,7 +426,11 @@ export default function ResortDetail() {
             blurbJa="6日間の山岳予報 · 降雪・風速・気温の長期見通し。"
           >
             <MountainOutlook
-              days={daily as any}
+              days={daily.map((day) => ({
+                ...day,
+                feelsLikeMax: day.feelsLikeMax,
+                feelsLikeMin: day.feelsLikeMin,
+              }))}
               elevation={location.elevation}
               formatTemp={(c) => u.temp(c) ?? c}
               tempUnitLabel={u.tempUnit}
