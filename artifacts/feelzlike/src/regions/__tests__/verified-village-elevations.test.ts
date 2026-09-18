@@ -105,11 +105,28 @@ test("unsupported Yamanouchi elevations remain unset and use the fallback", () =
   assert.ok(UNKNOWN_AUTHORED_VILLAGE_ELEVATIONS.has("yamanouchi/shiga-sun-valley"));
 });
 
-test("keeps all 258 authored keys sourced or documented unknown and disjoint", () => {
+test("retains the sourced Lech and St Anton village elevations", () => {
+  for (const [regionId, mountainId, elevationM, sourceUrl] of [
+    ["lech-zuers", "lech-zuers-resort", 1450, "https://www.skiarlberg.at/en/lech-zuers/winter/ski-region"],
+    ["st-anton", "st-anton-resort", 1304, "https://www.arlberg.com/en/villages/st-anton-am-arlberg"],
+  ] as const) {
+    const evidence = VERIFIED_AUTHORED_VILLAGE_ELEVATIONS[`${regionId}/${mountainId}`];
+    assert.equal(evidence.elevationM, elevationM);
+    assert.equal(evidence.sourceUrl, sourceUrl);
+    const mountain = applyVerifiedVillageElevations([
+      region(regionId, [
+        { id: mountainId, name: mountainId, elevationM: 2200, lat: 47.2, lng: 10.2, blurb: "" },
+      ]),
+    ], { strict: true })[0].mountains![0];
+    assert.equal(mountain.baseElevationM, elevationM);
+  }
+});
+
+test("keeps all 260 authored keys sourced or documented unknown and disjoint", () => {
   const sourcedKeys = Object.keys(VERIFIED_AUTHORED_VILLAGE_ELEVATIONS);
-  assert.equal(sourcedKeys.length, 18);
+  assert.equal(sourcedKeys.length, 20);
   assert.equal(UNKNOWN_AUTHORED_VILLAGE_ELEVATIONS.size, 240);
-  assert.equal(sourcedKeys.length + UNKNOWN_AUTHORED_VILLAGE_ELEVATIONS.size, 258);
+  assert.equal(sourcedKeys.length + UNKNOWN_AUTHORED_VILLAGE_ELEVATIONS.size, 260);
   assert.deepEqual(sourcedKeys.filter((key) => UNKNOWN_AUTHORED_VILLAGE_ELEVATIONS.has(key)), []);
 });
 

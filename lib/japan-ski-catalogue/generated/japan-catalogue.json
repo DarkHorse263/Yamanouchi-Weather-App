@@ -64529,7 +64529,7 @@
         "lng": 138.4047
       },
       "elevationM": 1351,
-      "officialUrl": "https://kijimadaira.jp/",
+      "officialUrl": "https://kijimadaira-ski.com/",
       "verificationDate": "2026-08-24",
       "verificationScope": "existing_public_projection_migration",
       "evidence": [
@@ -64541,9 +64541,9 @@
         {
           "evidenceId": "official:iiyama:kijimadaira",
           "sourceType": "official_website",
-          "sourceRef": "https://kijimadaira.jp/",
+          "sourceRef": "https://kijimadaira-ski.com/",
           "officialUrls": [
-            "https://kijimadaira.jp/"
+            "https://kijimadaira-ski.com/"
           ]
         }
       ],

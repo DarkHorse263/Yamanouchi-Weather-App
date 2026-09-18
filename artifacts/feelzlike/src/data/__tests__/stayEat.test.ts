@@ -1,13 +1,10 @@
 /**
  * Smoke test for the curated Stay + Eat dataset.
  *
- * Vitest is not currently wired in the workspace; when it is added, this file
- * will be picked up automatically (matches `**\/*.test.ts`). In the meantime,
- * the same invariants are enforced at module load time inside `src/data/index.ts`
- * (Zod validation throws on bad data) and the counts can be eyeballed via
- * `CURATED_COUNTS` in any module that imports them.
+ * Runs with the project's existing node:test + tsx runner.
  */
-import { describe, expect, it } from "vitest";
+import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 
 import {
   CURATED_COUNTS,
@@ -31,34 +28,37 @@ const EXPECTED_TOWNS: TownSlug[] = [
 
 describe("curated stay + eat dataset", () => {
   it("has 107 total stays", () => {
-    expect(CURATED_COUNTS.stays).toBe(107);
-    expect(getAllStays()).toHaveLength(107);
+    assert.equal(CURATED_COUNTS.stays, 107);
+    assert.equal(getAllStays().length, 107);
   });
 
-  it("has 121 total eats", () => {
-    expect(CURATED_COUNTS.eats).toBe(121);
-    expect(getAllEats()).toHaveLength(121);
+  it("has 120 total eats after the approved Berridale listing removal", () => {
+    assert.equal(CURATED_COUNTS.eats, 120);
+    assert.equal(getAllEats().length, 120);
+    assert.equal(getEatsByTown("berridale").length, 12);
+    assert.ok(!getAllEats().some((eat) => eat.id === "out-of-bounds-berridale-pizza"));
   });
 
-  it("has 228 entries combined", () => {
-    expect(CURATED_COUNTS.total).toBe(228);
+  it("has 227 entries combined", () => {
+    assert.equal(CURATED_COUNTS.total, 227);
   });
 
   it("covers all 6 expected towns", () => {
     const allTowns = getRegions().flatMap((region) => getTowns(region));
-    expect(allTowns).toEqual(expect.arrayContaining(EXPECTED_TOWNS));
-    expect(allTowns).toHaveLength(EXPECTED_TOWNS.length);
+    assert.deepEqual([...allTowns].sort(), [...EXPECTED_TOWNS].sort());
   });
 
-  it.each(EXPECTED_TOWNS)("town %s has at least one stay and one eat", (town) => {
-    expect(getStaysByTown(town).length).toBeGreaterThan(0);
-    expect(getEatsByTown(town).length).toBeGreaterThan(0);
-  });
+  for (const town of EXPECTED_TOWNS) {
+    it(`town ${town} has at least one stay and one eat`, () => {
+      assert.ok(getStaysByTown(town).length > 0);
+      assert.ok(getEatsByTown(town).length > 0);
+    });
+  }
 
   it("every stay has a booking_links object with at least one key", () => {
     for (const stay of getAllStays()) {
-      expect(stay.booking_links).toBeDefined();
-      expect(Object.keys(stay.booking_links).length).toBeGreaterThan(0);
+      assert.ok(stay.booking_links);
+      assert.ok(Object.keys(stay.booking_links).length > 0);
     }
   });
 
@@ -72,7 +72,7 @@ describe("curated stay + eat dataset", () => {
       );
       return links.length === 0;
     });
-    expect(allNull.length).toBeLessThanOrEqual(15);
+    assert.ok(allNull.length <= 15);
   });
 
   it("every entry's region matches its town's region", () => {
@@ -81,14 +81,14 @@ describe("curated stay + eat dataset", () => {
         keyof typeof TOWNS_BY_REGION,
         readonly TownSlug[],
       ][]).find(([, towns]) => towns.includes(stay.town))?.[0];
-      expect(stay.region).toBe(expectedRegion);
+      assert.equal(stay.region, expectedRegion);
     }
     for (const eat of getAllEats()) {
       const expectedRegion = (Object.entries(TOWNS_BY_REGION) as [
         keyof typeof TOWNS_BY_REGION,
         readonly TownSlug[],
       ][]).find(([, towns]) => towns.includes(eat.town))?.[0];
-      expect(eat.region).toBe(expectedRegion);
+      assert.equal(eat.region, expectedRegion);
     }
   });
 });
