@@ -5,6 +5,18 @@ description: /plan is a simple per-destination comparison snapshot, NOT a best-w
 
 # feelzlike trip planner = comparison snapshot
 
+## Forecast source clock
+
+Use the forecast location's server-resolved timezone for source timestamps, not a
+country-wide timezone or the viewer's clock. Missing metadata must stay unknown.
+
+**Why:** Canada and the US span multiple zones, and catalogue-backed mountains
+can differ from their surrounding region. The as-of date can be a different day
+from the viewer's date.
+
+**How to apply:** reuse the timezone used to bucket the ensemble's daily values
+when adding source-time displays; do not maintain a second client timezone map.
+
 ## Apparent-temperature scope
 
 Prefer provider-native daily apparent extrema from the existing ensemble's own

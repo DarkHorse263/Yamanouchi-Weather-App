@@ -75,7 +75,8 @@
 // v27: weather responses gained daily feels-like extrema. Bust installed PWA
 // snapshots so an old response shape cannot hide the new forecast labels.
 // v28: comparison ensemble now includes nullable apparent highs/lows + coverage.
-const CACHE_VERSION = "v28";
+// v29: forecast responses include the mountain timezone for source-time display.
+const CACHE_VERSION = "v29";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
@@ -298,6 +299,14 @@ self.addEventListener("fetch", (event) => {
   //     stale prefs right after a save. Never cache.
   if (url.pathname.startsWith("/api/account")) return;
 
+  // Only the server may serve a last-good ensemble: it enforces the six-hour
+  // limit and labels it with _stale. A SW timeout/offline cache hit has neither
+  // guarantee, so never turn it into a successful, apparently fresh forecast.
+  if (url.pathname.startsWith("/api/forecast/")) {
+    event.respondWith(fetch(request, { cache: "reload" }));
+    return;
+  }
+
   // 2a-quinquies-bis. Radar metadata is view-scoped media discovery. Its
   // callers abort when the map leaves the viewport, so do not let a cached
   // SWR response start a revalidation after the client has gone away.
@@ -327,7 +336,6 @@ self.addEventListener("fetch", (event) => {
   if (
     url.pathname.startsWith("/api/weather") ||
     url.pathname.startsWith("/api/elevation-forecast") ||
-    url.pathname.startsWith("/api/forecast/") ||
     url.pathname.startsWith("/api/town-weather") ||
     url.pathname.startsWith("/api/today") ||
     url.pathname.startsWith("/api/road") ||

@@ -11,7 +11,9 @@ description: Why an /api response-shape or behaviour change can keep showing the
 
 **Fix pattern (do all three on any /api shape or behaviour change):**
 1. Bump `CACHE_VERSION` in sw.js so activate wipes the poisoned caches (skipWaiting + clients.claim are wired, so the next version takes over on the next visit, no tab close needed).
-2. Make sure the changed endpoint is NOT left on the catch-all SWR. Volatile / behaviour-changing GETs (e.g. search) belong in network-first; pass `{ cacheMode: "reload" }` to ALSO bypass the browser HTTP cache so an already-cached long-max-age body can't win.
+2. Make sure the changed endpoint is NOT left on the catch-all SWR. Volatile / behaviour-changing GETs (e.g. search) belong in network-first; pass `{ cacheMode: "reload" }` to ALSO bypass the browser HTTP cache so an already-cached long-max-age body can't win. Forecast freshness displays are stricter: use network-only when only the server bounds and labels last-good fallbacks.
+
+**Why:** the generic network-first SW timeout/offline fallback returns cached 200s without stale metadata or an age limit. A source timestamp alone cannot distinguish that fallback from a successful refresh.
 3. Keep the server `Cache-Control` short on volatile endpoints (search = 300s) so a future change self-heals fast even for non-SW clients.
 
 **Why:** three independent cache layers (SW Cache Storage, browser HTTP cache, React Query in-memory) each mask a shape change, and `reload` is the only lever that clears an already-poisoned browser HTTP entry immediately — otherwise its old max-age still applies for up to an hour.

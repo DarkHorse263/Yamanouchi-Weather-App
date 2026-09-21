@@ -28,6 +28,7 @@ import { REGION_COUNTRY, COUNTRY_META, type CountryCode } from "@/regions";
 import { readLastTown, readFavouriteRegion } from "@/lib/favouriteRegion";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
 import { DayCell, formatPlannerDate } from "@/components/trip/DayCell";
+import { plannerForecastAsOf } from "@/lib/tripForecastData";
 
 type Units = ReturnType<typeof useUnits>;
 
@@ -121,6 +122,7 @@ function DestinationCard({
   const days =
     entry?.status === "ok" ? entry.days.slice(0, SNAPSHOT_DAYS) : [];
   const totalSnow = days.reduce((sum, d) => sum + Math.max(0, d.snowMean), 0);
+  const asOf = entry?.status === "ok" ? plannerForecastAsOf(entry) : null;
 
   return (
     <div className="rounded-2xl border border-border bg-white p-4">
@@ -150,6 +152,16 @@ function DestinationCard({
           </p>
         ) : (
           <>
+            <div className={`mb-3 rounded-lg p-2 text-xs ${entry._stale ? "bg-amber-50 text-amber-900" : "bg-slate-50 text-slate-700"}`}
+              data-testid={`trip-freshness-${mountain.id}`} role="status">
+              <p className="font-semibold">
+                {entry._stale ? "older forecast · latest update unavailable" : asOf ? "latest available forecast" : "forecast freshness unavailable"}
+              </p>
+              <p>
+                {asOf ? <>as of <time dateTime={entry.generatedAt!}>{asOf}</time> · mountain-local time</> : "source time unavailable"}
+              </p>
+              {entry._stale && <p className="mt-1">showing the last good outlook for air, snow and feelzlike · retrying for an update.</p>}
+            </div>
             <div
               className="grid gap-1.5 overflow-x-auto pb-1"
               role="region"

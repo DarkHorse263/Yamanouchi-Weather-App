@@ -1772,6 +1772,7 @@ router.get("/forecast/:locationId", async (req, res) => {
     res.json({
       location: { id: location.id, name: location.name, elevation: location.elevation },
       forecastElevationM: forecastElevation,
+      timezone: location.timezone ?? "Australia/Sydney",
       ...ensemble,
     });
   } catch (error) {

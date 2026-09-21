@@ -12,20 +12,14 @@
 import { useQueries } from "@tanstack/react-query";
 import { midMountainElevation } from "@/lib/elevation";
 import { mountainKey, type CatalogMountain } from "@/lib/tripPlanner";
-import { toPlannerDay, type ForecastApiDay, type PlannerForecastDay } from "./tripForecastDay";
+import { tripForecastQuery, type PlannerForecastData } from "./tripForecastData";
 export type { PlannerForecastDay } from "./tripForecastDay";
 
 /** Per-mountain fetch state · loading / error is honest, ok carries the days. */
 export type PlannerForecastEntry =
   | { status: "loading" }
   | { status: "error" }
-  | { status: "ok"; days: PlannerForecastDay[] };
-
-interface ForecastApiResponse {
-  days?: ForecastApiDay[];
-  forecastElevationM?: number;
-  generatedAt?: string;
-}
+  | ({ status: "ok" } & PlannerForecastData);
 
 /**
  * Fetch the ensemble forecast for every saved mountain and return a map keyed
@@ -42,16 +36,8 @@ export function useTripForecasts(
       const qs = elev != null ? `?elevationM=${elev}` : "";
       const url = `${import.meta.env.BASE_URL}api/forecast/${m.id}${qs}`;
       return {
-        queryKey: ["trip-forecast", "feelzlike-v1", m.id, elev ?? null] as const,
-        // Ensemble is cached ~30 min server-side · match it so navigating in and
-        // out of the planner doesn't refetch every mountain.
-        staleTime: 30 * 60 * 1000,
-        queryFn: async (): Promise<PlannerForecastDay[]> => {
-          const res = await fetch(url, { cache: "reload" });
-          if (!res.ok) throw new Error(`forecast ${res.status}`);
-          const json = (await res.json()) as ForecastApiResponse;
-          return (json.days ?? []).map(toPlannerDay);
-        },
+        queryKey: ["trip-forecast", "feelzlike-v2", m.id, elev ?? null] as const,
+        ...tripForecastQuery(url),
       };
     }),
   });
@@ -62,10 +48,10 @@ export function useTripForecasts(
     const r = results[i];
     if (!r || r.isPending) {
       out[key] = { status: "loading" };
-    } else if (r.isError) {
+    } else if (r.isError || !r.data?.days.length) {
       out[key] = { status: "error" };
     } else {
-      out[key] = { status: "ok", days: r.data ?? [] };
+      out[key] = { status: "ok", ...r.data };
     }
   });
   return out;
