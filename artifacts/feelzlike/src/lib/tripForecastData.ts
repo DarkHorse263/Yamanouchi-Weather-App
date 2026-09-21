@@ -7,6 +7,26 @@ export interface PlannerForecastData {
   _stale: { ageSeconds: number } | null;
 }
 
+/** Exclude elapsed mountain-local dates before capping the snapshot. Unknown
+ * timezones cannot safely support a "next local days" claim. */
+export function plannerSnapshotDays(
+  data: PlannerForecastData,
+  limit: number,
+  now = new Date(),
+): PlannerForecastDay[] {
+  if (!data.timezone) return [];
+  try {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: data.timezone, year: "numeric", month: "2-digit", day: "2-digit",
+    }).formatToParts(now);
+    const part = (type: string) => parts.find((p) => p.type === type)!.value;
+    const today = `${part("year")}-${part("month")}-${part("day")}`;
+    return data.days.filter((day) => day.date >= today).slice(0, limit);
+  } catch {
+    return [];
+  }
+}
+
 interface ForecastApiResponse {
   days?: ForecastApiDay[];
   generatedAt?: string;

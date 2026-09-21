@@ -28,7 +28,7 @@ import { REGION_COUNTRY, COUNTRY_META, type CountryCode } from "@/regions";
 import { readLastTown, readFavouriteRegion } from "@/lib/favouriteRegion";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
 import { DayCell, formatPlannerDate } from "@/components/trip/DayCell";
-import { plannerForecastAsOf } from "@/lib/tripForecastData";
+import { plannerForecastAsOf, plannerSnapshotDays } from "@/lib/tripForecastData";
 
 type Units = ReturnType<typeof useUnits>;
 
@@ -114,13 +114,15 @@ function DestinationCard({
   mountain,
   entry,
   u,
+  now,
 }: {
   mountain: CatalogMountain;
   entry: PlannerForecastEntry | undefined;
   u: Units;
+  now: Date;
 }) {
   const days =
-    entry?.status === "ok" ? entry.days.slice(0, SNAPSHOT_DAYS) : [];
+    entry?.status === "ok" ? plannerSnapshotDays(entry, SNAPSHOT_DAYS, now) : [];
   const totalSnow = days.reduce((sum, d) => sum + Math.max(0, d.snowMean), 0);
   const asOf = entry?.status === "ok" ? plannerForecastAsOf(entry) : null;
 
@@ -279,6 +281,24 @@ function MountainPicker({
 function TripResults({ mountains }: { mountains: CatalogMountain[] }) {
   const forecasts = useTripForecasts(mountains);
   const u = useUnits();
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    // Re-evaluate at minute boundaries even when cached data hasn't changed.
+    let timer: ReturnType<typeof setTimeout>;
+    const tick = () => {
+      setNow(new Date());
+      timer = setTimeout(tick, 60_000 - Date.now() % 60_000);
+    };
+    const resume = () => { if (!document.hidden) setNow(new Date()); };
+    tick();
+    window.addEventListener("focus", resume);
+    document.addEventListener("visibilitychange", resume);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("focus", resume);
+      document.removeEventListener("visibilitychange", resume);
+    };
+  }, []);
   return (
     <div className="space-y-3">
       {mountains.map((m) => (
@@ -287,6 +307,7 @@ function TripResults({ mountains }: { mountains: CatalogMountain[] }) {
           mountain={m}
           entry={forecasts[mountainKey(m.regionId, m.id)]}
           u={u}
+          now={now}
         />
       ))}
     </div>
