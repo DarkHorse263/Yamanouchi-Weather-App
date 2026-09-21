@@ -1766,6 +1766,9 @@ router.get("/forecast/:locationId", async (req, res) => {
       timezone: location.timezone ?? "Australia/Sydney",
       days: 7,
     });
+    // Provider results have their own bounded cache; keep response-shape updates
+    // and stale fallbacks from sticking in browsers for a full provider TTL.
+    res.setHeader("Cache-Control", "public, max-age=60");
     res.json({
       location: { id: location.id, name: location.name, elevation: location.elevation },
       forecastElevationM: forecastElevation,

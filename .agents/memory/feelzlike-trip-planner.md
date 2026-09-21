@@ -5,6 +5,20 @@ description: /plan is a simple per-destination comparison snapshot, NOT a best-w
 
 # feelzlike trip planner = comparison snapshot
 
+## Apparent-temperature scope
+
+Prefer provider-native daily apparent extrema from the existing ensemble's own
+models. Do not expand MET Norway coverage by silently inventing an apparent
+temperature formula or importing another single-model forecast.
+
+**Why:** apparent temperature depends on synchronized inputs, and different
+providers' formulas are not automatically comparable. Honest partial model
+coverage is preferable to an apparently complete but inconsistent ensemble.
+
+**How to apply:** preserve visible per-day coverage and unavailable readings
+when changing providers; any new derived method needs an explicit comparability
+decision before inclusion.
+
 `/plan` (TripPlanner.tsx) is deliberately simple: pick the mountains you're
 choosing between and see a side-by-side snapshot so you can compare at a glance.
 It does NOT rank a "best window" and it does NOT show travel-day info.

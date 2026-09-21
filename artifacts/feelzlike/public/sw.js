@@ -74,7 +74,8 @@
 // v26: dated Australian closure policy; discard any prior lift-status snapshot.
 // v27: weather responses gained daily feels-like extrema. Bust installed PWA
 // snapshots so an old response shape cannot hide the new forecast labels.
-const CACHE_VERSION = "v27";
+// v28: comparison ensemble now includes nullable apparent highs/lows + coverage.
+const CACHE_VERSION = "v28";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
@@ -326,6 +327,7 @@ self.addEventListener("fetch", (event) => {
   if (
     url.pathname.startsWith("/api/weather") ||
     url.pathname.startsWith("/api/elevation-forecast") ||
+    url.pathname.startsWith("/api/forecast/") ||
     url.pathname.startsWith("/api/town-weather") ||
     url.pathname.startsWith("/api/today") ||
     url.pathname.startsWith("/api/road") ||

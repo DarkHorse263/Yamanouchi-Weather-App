@@ -22,26 +22,14 @@ import {
 } from "@/lib/tripPlanner";
 import {
   useTripForecasts,
-  type PlannerForecastDay,
   type PlannerForecastEntry,
 } from "@/lib/tripForecasts";
 import { REGION_COUNTRY, COUNTRY_META, type CountryCode } from "@/regions";
 import { readLastTown, readFavouriteRegion } from "@/lib/favouriteRegion";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
+import { DayCell, formatPlannerDate } from "@/components/trip/DayCell";
 
 type Units = ReturnType<typeof useUnits>;
-
-// ─── Presentation helpers ──────────────────────────────────────────────────
-
-function asDate(dateStr: string): Date {
-  return new Date(dateStr + "T00:00:00");
-}
-function fmtDow(dateStr: string): string {
-  return asDate(dateStr).toLocaleDateString("en-AU", { weekday: "short" }).toLowerCase();
-}
-function fmtDayNum(dateStr: string): string {
-  return String(asDate(dateStr).getDate());
-}
 
 /** Days we show in a snapshot · a week is plenty to compare at a glance. */
 const SNAPSHOT_DAYS = 7;
@@ -119,33 +107,6 @@ function CountrySwitcher({
   );
 }
 
-// ─── Snapshot day cell ──────────────────────────────────────────────────────
-
-function DayCell({ day, u }: { day: PlannerForecastDay; u: Units }) {
-  const snow = Math.round(day.snowMean);
-  return (
-    <div className="rounded-xl bg-secondary/40 border border-border/50 px-1.5 py-2 flex flex-col items-center text-center">
-      <span className="text-[10px] font-bold uppercase text-foreground leading-none">
-        {fmtDow(day.date)}
-      </span>
-      <span className="text-[9px] text-muted-foreground mt-0.5 leading-none">
-        {fmtDayNum(day.date)}
-      </span>
-      <span
-        className={`mt-1.5 inline-flex items-center gap-0.5 text-[11px] font-bold leading-none ${
-          snow > 0 ? "text-snow-accent" : "text-muted-foreground/60"
-        }`}
-      >
-        <Snowflake className="w-2.5 h-2.5" />
-        {u.snowVal(snow)}{u.snowUnit}
-      </span>
-      <span className="text-[11px] text-foreground font-semibold mt-1 leading-none">
-        {u.temp(day.tempMaxMean)}{u.tempUnit}
-      </span>
-    </div>
-  );
-}
-
 // ─── Per-destination snapshot card ──────────────────────────────────────────
 
 function DestinationCard({
@@ -190,16 +151,40 @@ function DestinationCard({
         ) : (
           <>
             <div
-              className="grid gap-1.5"
-              style={{ gridTemplateColumns: `repeat(${days.length}, minmax(0, 1fr))` }}
+              className="grid gap-1.5 overflow-x-auto pb-1"
+              role="region"
+              aria-label={`${mountain.name} daily comparison, scroll for more days`}
+              tabIndex={0}
+              style={{ gridTemplateColumns: `repeat(${days.length}, minmax(82px, 1fr))` }}
             >
               {days.map((d) => (
                 <DayCell key={d.date} day={d} u={u} />
               ))}
             </div>
             <p className="text-xs text-slate-700 mt-2">
-              fresh snow · daytime temp · next {days.length} days
+              fresh snow · air and feelzlike highs / lows · next {days.length} local days
             </p>
+            <details className="text-xs text-slate-700 mt-2">
+              <summary className="cursor-pointer font-semibold" data-testid={`trip-sources-${mountain.id}`}>
+                about feelzlike and source coverage
+              </summary>
+              <p className="mt-2">
+                mean of each contributing model's daily apparent-temperature high and low,
+                at the same mountain location and forecast elevation as air temperature.
+                each day follows the mountain's timezone. source counts can differ from
+                air temperature, so this may be a smaller model sample.
+                MET Norway does not supply comparable daily feelzlike readings here.
+                missing readings stay unavailable, not zero.
+              </p>
+              <ul className="mt-2 space-y-1">
+                {days.map((d) => (
+                  <li key={d.date}>
+                    {formatPlannerDate(d.date, { day: "numeric", month: "short" })}:{" "}
+                    {d.feelsLikeSources.length > 0 ? d.feelsLikeSources.join(" · ") : "feelzlike unavailable"}
+                  </li>
+                ))}
+              </ul>
+            </details>
           </>
         )}
       </div>
@@ -358,7 +343,7 @@ export default function TripPlanner() {
           </h1>
           <p className="text-white mt-2 leading-relaxed">
             pick the mountains you're choosing between and see the next week of
-            fresh snow and daytime temps side by side · a quick snapshot to help
+            fresh snow, air temps and feelzlike highs and lows side by side · a quick snapshot to help
             you decide where to go.
           </p>
           {countries.length > 1 && (

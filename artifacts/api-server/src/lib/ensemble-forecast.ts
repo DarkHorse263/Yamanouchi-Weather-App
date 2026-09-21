@@ -20,6 +20,7 @@
  * Cached for 30 minutes per (lat,lon,elevation) tuple.
  */
 
+import { validDailyApparentExtrema } from "./ensemble-apparent-extrema.js";
 import { partitionHourlySnowfallCm } from "./openMeteoElevation.js";
 
 const FRESH_MS = 30 * 60 * 1000; // serve straight from cache for 30 min
@@ -40,6 +41,14 @@ export interface EnsembleDay {
   precipSpread: number;
   snowMean: number;
   snowSpread: number;
+  /**
+   * Mean of the contributing models' provider-published DAILY apparent
+   * temperature extrema. Null when no model supplied a valid paired value.
+   */
+  feelsLikeMaxMean: number | null;
+  feelsLikeMinMean: number | null;
+  /** Human-readable labels for the models included in both apparent means. */
+  feelsLikeSources: string[];
   /** Number of independent sources that contributed to this day. */
   sourcesCount: number;
   /** "high" | "medium" | "low" derived from spread + count. */
@@ -49,6 +58,8 @@ export interface EnsembleDay {
     source: string;
     tempMax?: number;
     tempMin?: number;
+    feelsLikeMax?: number;
+    feelsLikeMin?: number;
     precip?: number;
     snow?: number;
   }>;
@@ -124,6 +135,8 @@ interface OpenMeteoModelDaily {
   time: string[];
   temperature_2m_max?: (number | null)[];
   temperature_2m_min?: (number | null)[];
+  apparent_temperature_max?: (number | null)[];
+  apparent_temperature_min?: (number | null)[];
   precipitation_sum?: (number | null)[];
   snowfall_sum?: (number | null)[];
   /**
@@ -147,7 +160,11 @@ async function fetchOpenMeteoMulti(q: EnsembleQuery): Promise<{
     latitude: String(q.latitude),
     longitude: String(q.longitude),
     elevation: String(q.elevation),
-    daily: "temperature_2m_max,temperature_2m_min,precipitation_sum,snowfall_sum",
+    // Apparent extrema are Open-Meteo DAILY variables. Keeping them in this
+    // same multi-model request guarantees identical coordinates, elevation,
+    // timezone, date grid and model suffix as each actual-temperature pair.
+    daily:
+      "temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,snowfall_sum",
     // Hourly precipitation + freezing level per model so we can phase-partition
     // each model's precip at the requested elevation (FL−300m snow line) — the
     // raw snowfall_sum is phased at each model's own grid terrain, which is how
@@ -183,6 +200,8 @@ async function fetchOpenMeteoMulti(q: EnsembleQuery): Promise<{
         time: daily.time ?? [],
         temperature_2m_max: daily[`temperature_2m_max${sfx}`],
         temperature_2m_min: daily[`temperature_2m_min${sfx}`],
+        apparent_temperature_max: daily[`apparent_temperature_max${sfx}`],
+        apparent_temperature_min: daily[`apparent_temperature_min${sfx}`],
         precipitation_sum: daily[`precipitation_sum${sfx}`],
         snowfall_sum: daily[`snowfall_sum${sfx}`],
       };
@@ -370,32 +389,49 @@ async function buildEnsemble(q: EnsembleQuery): Promise<EnsembleForecast> {
       const tempMins: number[] = [];
       const precips: number[] = [];
       const snows: number[] = [];
+      const feelsLikeMaxes: number[] = [];
+      const feelsLikeMins: number[] = [];
+      const feelsLikeSources: string[] = [];
 
       for (const [modelId, daily] of Object.entries(perModel)) {
-        const tMax = daily.temperature_2m_max?.[idx];
-        const tMin = daily.temperature_2m_min?.[idx];
-        const p = daily.precipitation_sum?.[idx];
+        // Do not assume every model array has the same offset. Match the local
+        // YYYY-MM-DD key before reading any suffixed fields from that model.
+        const modelDateIndex = daily.time.indexOf(date);
+        if (modelDateIndex < 0) continue;
+        const tMax = daily.temperature_2m_max?.[modelDateIndex];
+        const tMin = daily.temperature_2m_min?.[modelDateIndex];
+        const apparentMax = daily.apparent_temperature_max?.[modelDateIndex];
+        const apparentMin = daily.apparent_temperature_min?.[modelDateIndex];
+        const p = daily.precipitation_sum?.[modelDateIndex];
         // Prefer the freezing-level partitioned snow (matches the headline and
         // elevation-band story); fail-soft to the model's raw snowfall_sum when
         // the partition was unavailable/unreliable for this day.
         const partitioned = daily.partitionedSnowCmByDate?.get(date);
-        const rawSnow = daily.snowfall_sum?.[idx];
+        const rawSnow = daily.snowfall_sum?.[modelDateIndex];
         const s = typeof partitioned === "number" ? partitioned : rawSnow;
         const label = MODEL_LABELS[modelId]?.label ?? modelId;
         const hasAny =
-          (typeof tMax === "number" && tMax !== null) ||
-          (typeof tMin === "number" && tMin !== null);
+          (typeof tMax === "number" && Number.isFinite(tMax)) ||
+          (typeof tMin === "number" && Number.isFinite(tMin));
         if (!hasAny) continue;
-        if (typeof tMax === "number") tempMaxes.push(tMax);
-        if (typeof tMin === "number") tempMins.push(tMin);
-        if (typeof p === "number") precips.push(p);
-        if (typeof s === "number") snows.push(s);
+        if (typeof tMax === "number" && Number.isFinite(tMax)) tempMaxes.push(tMax);
+        if (typeof tMin === "number" && Number.isFinite(tMin)) tempMins.push(tMin);
+        if (typeof p === "number" && Number.isFinite(p)) precips.push(p);
+        if (typeof s === "number" && Number.isFinite(s)) snows.push(s);
+        const apparent = validDailyApparentExtrema(tMax, tMin, apparentMax, apparentMin);
+        if (apparent) {
+          feelsLikeMaxes.push(apparent.max);
+          feelsLikeMins.push(apparent.min);
+          feelsLikeSources.push(label);
+        }
         perSource.push({
           source: label,
-          tempMax: typeof tMax === "number" ? tMax : undefined,
-          tempMin: typeof tMin === "number" ? tMin : undefined,
-          precip: typeof p === "number" ? p : undefined,
-          snow: typeof s === "number" ? s : undefined,
+          tempMax: typeof tMax === "number" && Number.isFinite(tMax) ? tMax : undefined,
+          tempMin: typeof tMin === "number" && Number.isFinite(tMin) ? tMin : undefined,
+          feelsLikeMax: apparent?.max,
+          feelsLikeMin: apparent?.min,
+          precip: typeof p === "number" && Number.isFinite(p) ? p : undefined,
+          snow: typeof s === "number" && Number.isFinite(s) ? s : undefined,
         });
       }
 
@@ -444,6 +480,11 @@ async function buildEnsemble(q: EnsembleQuery): Promise<EnsembleForecast> {
         precipSpread: Math.round(precipSpread * 10) / 10,
         snowMean,
         snowSpread: Math.round(snowSpread * 10) / 10,
+        feelsLikeMaxMean:
+          feelsLikeMaxes.length > 0 ? Math.round(mean(feelsLikeMaxes) * 10) / 10 : null,
+        feelsLikeMinMean:
+          feelsLikeMins.length > 0 ? Math.round(mean(feelsLikeMins) * 10) / 10 : null,
+        feelsLikeSources,
         sourcesCount,
         confidence: classifyConfidence(tempMaxSpread, snowSpread, precipSpread, sourcesCount),
         perSource,

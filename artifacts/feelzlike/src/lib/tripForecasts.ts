@@ -12,18 +12,8 @@
 import { useQueries } from "@tanstack/react-query";
 import { midMountainElevation } from "@/lib/elevation";
 import { mountainKey, type CatalogMountain } from "@/lib/tripPlanner";
-
-/** One day of the elevation-adjusted ensemble outlook, as the snapshot reads it. */
-export interface PlannerForecastDay {
-  date: string;
-  tempMaxMean: number;
-  tempMinMean: number;
-  precipMean: number;
-  snowMean: number;
-  snowSpread: number;
-  sourcesCount: number;
-  confidence: "high" | "medium" | "low";
-}
+import { toPlannerDay, type ForecastApiDay, type PlannerForecastDay } from "./tripForecastDay";
+export type { PlannerForecastDay } from "./tripForecastDay";
 
 /** Per-mountain fetch state · loading / error is honest, ok carries the days. */
 export type PlannerForecastEntry =
@@ -31,35 +21,10 @@ export type PlannerForecastEntry =
   | { status: "error" }
   | { status: "ok"; days: PlannerForecastDay[] };
 
-/** The subset of the `/forecast/:id` ensemble payload the planner reads. */
-interface ForecastApiDay {
-  date: string;
-  tempMaxMean: number;
-  tempMinMean: number;
-  precipMean: number;
-  snowMean: number;
-  snowSpread: number;
-  sourcesCount: number;
-  confidence: "high" | "medium" | "low";
-}
-
 interface ForecastApiResponse {
   days?: ForecastApiDay[];
   forecastElevationM?: number;
   generatedAt?: string;
-}
-
-function toPlannerDay(d: ForecastApiDay): PlannerForecastDay {
-  return {
-    date: d.date,
-    tempMaxMean: d.tempMaxMean,
-    tempMinMean: d.tempMinMean,
-    precipMean: d.precipMean,
-    snowMean: d.snowMean,
-    snowSpread: d.snowSpread,
-    sourcesCount: d.sourcesCount,
-    confidence: d.confidence,
-  };
 }
 
 /**
@@ -77,12 +42,12 @@ export function useTripForecasts(
       const qs = elev != null ? `?elevationM=${elev}` : "";
       const url = `${import.meta.env.BASE_URL}api/forecast/${m.id}${qs}`;
       return {
-        queryKey: ["trip-forecast", m.id, elev ?? null] as const,
+        queryKey: ["trip-forecast", "feelzlike-v1", m.id, elev ?? null] as const,
         // Ensemble is cached ~30 min server-side · match it so navigating in and
         // out of the planner doesn't refetch every mountain.
         staleTime: 30 * 60 * 1000,
         queryFn: async (): Promise<PlannerForecastDay[]> => {
-          const res = await fetch(url);
+          const res = await fetch(url, { cache: "reload" });
           if (!res.ok) throw new Error(`forecast ${res.status}`);
           const json = (await res.json()) as ForecastApiResponse;
           return (json.days ?? []).map(toPlannerDay);
