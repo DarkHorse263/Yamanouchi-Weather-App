@@ -16,6 +16,7 @@ if (!files.length) throw new Error("No frontend tests discovered");
 console.log(`Running all ${files.length} frontend test files`);
 
 for (const args of [
+  ["run", "test:tripPlannerClock"],
   ["exec", "tsx", "--tsconfig", "tsconfig.test.json", "--test", "--test-concurrency=2", ...files],
   ["exec", "node", "scripts/validate-catalogue-route-parity.mjs"],
 ]) {
