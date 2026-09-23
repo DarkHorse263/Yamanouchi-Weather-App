@@ -114,7 +114,6 @@ import { useUnits } from "@/components/auth/UserPrefsProvider";
 import { UnitsToggle } from "@/components/UnitsToggle";
 import { PremiumGate, useOptionalSeason } from "@workspace/feelzlike-shell";
 import { ThredboSummer } from "../components/ThredboSummer";
-import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
 import MountainConditionsSummary from "@/components/weather/MountainConditionsSummary";
 import { snowNext24SoWhat, windSoWhat } from "@/lib/soWhat";
 
@@ -1135,17 +1134,6 @@ export default function LocationDetail() {
             <ForecastChart data={hourly} metric={activeChartMetric} />
           </motion.div>
         </PremiumGate>
-
-        {/* Standard feature · available year-round so visitors can prepare for winter. */}
-        <div className="glass rounded-3xl p-5 md:p-8">
-          <div className="mb-4">
-            <p className="byline text-muted-foreground">Alerts</p>
-            <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">
-              Personalised triggers
-            </h2>
-          </div>
-          <AlertSubscribeForm defaultRegion="snowy-mountains" />
-        </div>
 
         {/* Webcams (free) · Lift Status was lifted above the Detailed
             conditions paywall so it sits closer to free Conditions. */}

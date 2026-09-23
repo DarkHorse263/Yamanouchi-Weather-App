@@ -12,6 +12,8 @@ export interface PremiumAccessState {
   isAuthenticated: boolean;
   /** True while the auth state is still being resolved · gates stay open. */
   isLoading: boolean;
+  /** Server-verified paid state supplied by the host, never checkout query data. */
+  isPaid?: boolean;
   /** Open the host app's free-sign-up prompt (optionally prefilled). */
   promptSignUp: (opts?: { email?: string; feature?: string }) => void;
 }

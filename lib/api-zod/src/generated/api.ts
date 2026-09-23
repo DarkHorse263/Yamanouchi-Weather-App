@@ -8,6 +8,28 @@
 import * as zod from 'zod';
 
 
+export const GetBillingStatusResponse = zod.object({
+  "purchasesEnabled": zod.boolean(),
+  "reason": zod.string(),
+  "paid": zod.boolean(),
+  "promo": zod.boolean()
+})
+
+
+export const CreateBillingCheckoutBody = zod.object({
+  "plan": zod.enum(['monthly', 'annual'])
+})
+
+export const CreateBillingCheckoutResponse = zod.object({
+  "url": zod.string().url()
+})
+
+
+export const CreateBillingPortalResponse = zod.object({
+  "url": zod.string().url()
+})
+
+
 /**
  * Returns server health status
  * @summary Health check

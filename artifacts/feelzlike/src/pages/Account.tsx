@@ -25,6 +25,7 @@ import { useAuthAccount } from "@/components/auth/SignUpProvider";
 import { ALERT_REGIONS } from "@/lib/alertRegions";
 import { RegionCountryPicker } from "@/components/RegionCountryPicker";
 import { CatalogueMountainPicker } from "@/components/CatalogueMountainPicker";
+import { BillingControls } from "@/components/BillingControls";
 
 function SignOutButton() {
   const { signOut } = useClerk();
@@ -198,6 +199,7 @@ function SignedInAccount({ onDeleted }: { onDeleted: () => void }) {
         initialHomeRegionId={data.profile.homeRegionId}
         initialUnits={data.profile.units === "imperial" ? "imperial" : "metric"}
       />
+      <BillingControls />
 
       <AlertsCard subscription={data.subscription} onChanged={() => void refetch()} />
 

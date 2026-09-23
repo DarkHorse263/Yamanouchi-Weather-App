@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { useUser, useClerk } from "@clerk/react";
 import { PremiumAccessProvider } from "@workspace/feelzlike-shell";
 import { track } from "@/lib/analytics";
+import { useGetBillingStatus } from "@workspace/api-client-react";
 import {
   AuthAccountProvider,
   type AuthAccountState,
@@ -23,6 +24,15 @@ export function SignUpProvider({ children }: { children: ReactNode }) {
   const [, setLocation] = useLocation();
   const { user, isLoaded } = useUser();
   const { signOut } = useClerk();
+  const billing = useGetBillingStatus({ query: {
+    queryKey: ["/api/billing/status", user?.id],
+    enabled: !!user && isLoaded,
+    staleTime: 0,
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
+    refetchInterval: 15000,
+    retry: false,
+  } });
 
   const email = user?.primaryEmailAddress?.emailAddress ?? null;
 
@@ -57,7 +67,8 @@ export function SignUpProvider({ children }: { children: ReactNode }) {
   return (
     <AuthAccountProvider value={state}>
       <PremiumAccessProvider
-        value={{ isAuthenticated: state.isAuthenticated, isLoading: state.isLoading, promptSignUp }}
+        value={{ isAuthenticated: state.isAuthenticated, isLoading: state.isLoading,
+          isPaid: !!user && !billing.isError && billing.data?.paid === true, promptSignUp }}
       >
         {children}
       </PremiumAccessProvider>

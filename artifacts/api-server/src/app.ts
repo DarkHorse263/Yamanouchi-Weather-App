@@ -16,6 +16,9 @@ import {
 } from "./middlewares/clerkProxyMiddleware.js";
 import { setSubscriptionResolver } from "./middlewares/require-entitlement.js";
 import { resolvePromoSubscription } from "./lib/promo.js";
+import { paidEntitlement } from "./lib/billing";
+import { billingWebhook } from "./routes/billing";
+import { pool } from "@workspace/db";
 import { publishedCatalogueRecords, travelRegions } from "@workspace/japan-ski-catalogue/public-runtime";
 import { publishedRecords as publishedSkiCatalogueRecords, publishedRegions as publishedSkiCatalogueRegions } from "@workspace/ski-catalogue/public-runtime";
 import {
@@ -75,14 +78,19 @@ for (const record of publishedWesternUsCatalogueRecords) {
 // sign-up) · anonymous visitors get 401 AUTH_REQUIRED from
 // `requireEntitlement(...)` so the client can prompt a free sign-up instead
 // of a paywall. After the promo closes this returns null even for members
-// (free tier → real 402 paywall). When billing lands, replace the post-promo
-// branch with the real subscription lookup off `req`.
+// (free tier → real 402 paywall). After the promo, verified durable Stripe
+// ownership + subscription state is checked against the canonical provider.
 // SECURITY: use only auth.userId (Clerk's immutable, server-verified principal).
 // Session claims are user-editable custom data and MUST NOT be used for
 // authorization or entitlement decisions.
-setSubscriptionResolver((req) => {
+setSubscriptionResolver(async (req) => {
   const auth = getAuth(req);
-  return resolvePromoSubscription(!!auth.userId);
+  const promo = resolvePromoSubscription(!!auth.userId);
+  if (promo || !auth.userId) return promo;
+  const { rows: [user] } = await pool.query(
+    "SELECT id FROM users WHERE auth_provider='clerk' AND external_auth_id=$1", [auth.userId]);
+  if (!user) return null;
+  return paidEntitlement(user.id);
 });
 
 const app: Express = express();
@@ -169,6 +177,7 @@ const skipForResendWebhook =
     if (req.path === RESEND_WEBHOOK_PATH) return next();
     return parser(req, res, next);
   };
+app.post("/api/stripe/webhook", express.raw({ type: "application/json", limit: "512kb" }), billingWebhook);
 app.use(skipForResendWebhook(express.json({ limit: "100kb" })));
 app.use(skipForResendWebhook(express.urlencoded({ extended: true, limit: "100kb" })));
 

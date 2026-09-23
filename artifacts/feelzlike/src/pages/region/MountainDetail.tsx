@@ -52,7 +52,6 @@ import { isAuSeasonClosureActive, AU_SEASON_CLOSURE_POLICY } from "@workspace/pr
 import { REGION_COUNTRY } from "@/regions";
 import { MountainWebcams } from "@/components/MountainWebcams";
 import { ForecastChart } from "@/components/weather/ForecastChart";
-import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
 import { midMountainElevation, resolveVillageElevation } from "@/lib/elevation";
 import { getLiftsForMountain } from "@/data/lifts";
 import { cn } from "@/lib/utils";
@@ -1188,23 +1187,6 @@ export function MountainDetail() {
               <ForecastChart data={hourly as any} metric={activeChartMetric} />
             </motion.div>
           </PremiumGate>
-        )}
-
-        {/* Standard feature · available year-round so visitors can prepare for winter. */}
-        {powderAlertsAvailable && (
-            <div className="glass rounded-3xl p-5 md:p-8">
-              <div className="mb-4">
-                <p className="byline text-muted-foreground">{t("Alerts", "アラート")}</p>
-                <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">
-                  {t("Personalised triggers", "パーソナライズされたトリガー")}
-                </h2>
-              </div>
-              <AlertSubscribeForm
-                key={`${region.id}/${locationId}`}
-                defaultRegion={region.id}
-                defaultMountain={mountainAlertsAvailable ? locationId : undefined}
-              />
-            </div>
         )}
 
         {/* Webcams (free) · shared component, self-hides when no webcam

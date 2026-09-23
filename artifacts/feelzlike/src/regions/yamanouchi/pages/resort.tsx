@@ -44,7 +44,6 @@ import { isLiftSeasonOpen } from "@/lib/skiSeason";
 import { REGION_COUNTRY } from "@/regions";
 import { getLiftsForMountain } from "@/data/lifts";
 import { ForecastChart } from "@/components/weather/ForecastChart";
-import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
 import { midMountainElevation, resolveVillageElevation } from "@/lib/elevation";
 import { cn } from "@/lib/utils";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
@@ -572,17 +571,6 @@ export default function ResortDetail() {
             </motion.div>
           </PremiumGate>
         )}
-
-        {/* Standard feature · available without an account. */}
-          <div className="glass rounded-3xl p-5 md:p-8">
-            <div className="mb-4">
-              <p className="byline text-muted-foreground">{t("Alerts", "アラート")}</p>
-              <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">
-                {t("Personalised triggers", "パーソナライズされたトリガー")}
-              </h2>
-            </div>
-            <AlertSubscribeForm defaultRegion="yamanouchi" />
-          </div>
 
         {/* Webcams · positioned after the gated detailed conditions to
             match AU resort pages. */}

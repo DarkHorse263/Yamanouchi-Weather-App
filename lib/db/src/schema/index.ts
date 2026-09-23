@@ -3,6 +3,7 @@ export * from "./dining";
 export * from "./attractions";
 export * from "./users";
 export * from "./subscriptions";
+export * from "./billing";
 export * from "./alerts";
 export * from "./announcements";
 export * from "./newsletter";

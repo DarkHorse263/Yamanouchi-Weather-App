@@ -80,6 +80,7 @@ export function PremiumGate({ title, children }: PremiumGateProps) {
 }
 
 function isPreviewFlagSet(): boolean {
+  if (!(import.meta as any).env?.DEV) return false;
   if (typeof window === "undefined") return false;
   try {
     return window.localStorage.getItem("feelzlike.premium.preview") === "1";

@@ -60,7 +60,7 @@ export interface SubscriptionLike {
 export function effectiveTier(sub: SubscriptionLike | null | undefined): Tier {
   if (!sub) return "free";
   if (!ACTIVE_STATUSES.has(sub.status)) return "free";
-  if (sub.currentPeriodEnd && sub.currentPeriodEnd.getTime() < Date.now()) return "free";
+  if (sub.currentPeriodEnd && sub.currentPeriodEnd.getTime() <= Date.now()) return "free";
   if (sub.tier === "pro" || sub.tier === "team") return sub.tier;
   return "free";
 }

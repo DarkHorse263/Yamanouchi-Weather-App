@@ -1,5 +1,6 @@
 import { Router, type IRouter } from "express";
 import healthRouter from "./health";
+import billingRouter from "./billing";
 import snowRouter from "./snow";
 import placesRouter from "./places";
 import placesGoogleRouter from "./places-google";
@@ -28,6 +29,7 @@ import resendWebhookRouter from "./resend-webhook";
 import adminRouter from "./admin";
 
 const router: IRouter = Router();
+router.use(billingRouter);
 
 router.use(healthRouter);
 router.use(sentryTestRouter);

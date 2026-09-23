@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { useAuthAccount } from "@/components/auth/SignUpProvider";
 import { PremiumSubscribe } from "@/components/PremiumSubscribe";
+import { BillingControls } from "@/components/BillingControls";
 
 function SignOutButton({ className }: { className?: string }) {
   const { signOut } = useClerk();
@@ -268,7 +269,7 @@ export default function Premium() {
               <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                 pricing
               </p>
-              <h2 className="text-lg font-black text-slate-900 mt-1">premium plans · from december 2026</h2>
+              <h2 className="text-lg font-black text-slate-900 mt-1">premium plans · purchases not yet open</h2>
             </div>
           </div>
           
@@ -280,7 +281,7 @@ export default function Premium() {
               <p className="text-3xl font-black text-slate-900 mt-1">
                 $5.99 <span className="text-sm font-bold text-slate-500">aud / mo</span>
               </p>
-              <p className="text-xs text-slate-500 mt-2 font-medium">cancel anytime.</p>
+              <p className="text-xs text-slate-500 mt-2 font-medium">plus applicable tax calculated at checkout. cancel anytime.</p>
             </div>
             <div className="rounded-xl border-2 border-[#0055FF]/20 bg-[#0055FF]/5 p-5 relative overflow-hidden">
               <div className="absolute top-0 right-0 bg-[#0055FF] text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">
@@ -292,7 +293,7 @@ export default function Premium() {
               <p className="text-3xl font-black text-slate-900 mt-1">
                 $60 <span className="text-sm font-bold text-slate-500">aud / yr</span>
               </p>
-              <p className="text-xs text-slate-600 mt-2 font-medium">$5 / month, billed yearly.</p>
+              <p className="text-xs text-slate-600 mt-2 font-medium">AUD $5 / month equivalent, billed AUD $60 yearly, plus applicable tax calculated at checkout.</p>
             </div>
           </div>
           <p className="text-sm text-slate-500 mt-4 leading-relaxed font-medium">
@@ -300,6 +301,7 @@ export default function Premium() {
           </p>
         </section>
 
+        <BillingControls />
         <footer className="pt-8 pb-4 border-t border-white/20 mt-8 flex flex-col items-center justify-center text-center">
           <p className="text-xs font-bold text-white/60">
             © 2026 navigate work digital · feelzlike

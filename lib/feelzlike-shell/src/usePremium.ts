@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { usePremiumAccess } from "./PremiumAccess";
 
 /**
- * Premium subscription state. UI only for now · no payments wired.
+ * Premium presentation state. Paid access is supplied by the server-backed host.
  *
  * Three signals:
  *   - `isPremium`            true when the user has a paid sub OR the
@@ -33,6 +34,7 @@ const STORAGE_KEY = "feelzlike.premium.preview";
 import { DEFAULT_PROMO_STARTS_AT, DEFAULT_PROMO_ENDS_AT } from "@workspace/promo-constants";
 
 function readPreview(): boolean {
+  if (!(import.meta as any).env?.DEV) return false;
   if (typeof window === "undefined") return false;
   try {
     return window.localStorage.getItem(STORAGE_KEY) === "1";
@@ -131,6 +133,7 @@ export interface PremiumState {
 }
 
 export function usePremium(): PremiumState {
+  const access = usePremiumAccess();
   const [preview, setPreview] = useState<boolean>(() => readPreview());
   const [promo, setPromo] = useState(() => computePromoState());
 
@@ -148,7 +151,7 @@ export function usePremium(): PremiumState {
     };
   }, []);
 
-  const isPremium = preview || promo.isPromoPeriod;
+  const isPremium = preview || promo.isPromoPeriod || access.isPaid === true;
 
   return {
     isPremium,

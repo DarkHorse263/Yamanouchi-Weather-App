@@ -5,6 +5,29 @@
  * Yamanouchi Snow Intelligence Platform API
  * OpenAPI spec version: 0.1.0
  */
+export interface BillingStatus {
+  purchasesEnabled: boolean;
+  reason: string;
+  paid: boolean;
+  promo: boolean;
+}
+
+export type BillingCheckoutInputPlan = typeof BillingCheckoutInputPlan[keyof typeof BillingCheckoutInputPlan];
+
+
+export const BillingCheckoutInputPlan = {
+  monthly: 'monthly',
+  annual: 'annual',
+} as const;
+
+export interface BillingCheckoutInput {
+  plan: BillingCheckoutInputPlan;
+}
+
+export interface BillingRedirect {
+  url: string;
+}
+
 export interface AuthUser {
   id: string;
   /** @nullable */

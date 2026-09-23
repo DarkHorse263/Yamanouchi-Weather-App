@@ -38,6 +38,63 @@ tags:
   - name: webhooks
     description: Signed provider callbacks.
 paths:
+  /billing/status:
+    get:
+      operationId: getBillingStatus
+      tags: [Billing]
+      responses:
+        '200':
+          description: Server-verified billing state; query parameters never confer access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingStatus'
+        '401':
+          description: Authentication required
+  /billing/checkout:
+    post:
+      operationId: createBillingCheckout
+      tags: [Billing]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillingCheckoutInput'
+      responses:
+        '200':
+          description: Hosted Stripe checkout URL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingRedirect'
+        '400':
+          description: Invalid plan; customer IDs and price IDs are never accepted
+        '401':
+          description: Authentication required
+        '403':
+          description: Browser origin does not match the configured billing origin
+        '503':
+          description: Purchases disabled or billing unavailable
+  /billing/portal:
+    post:
+      operationId: createBillingPortal
+      tags: [Billing]
+      responses:
+        '200':
+          description: Portal for authenticated account only
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingRedirect'
+        '400':
+          description: No customer or return URL parameters accepted
+        '401':
+          description: Authentication required
+        '403':
+          description: Browser origin does not match the configured billing origin
+        '503':
+          description: Portal unavailable
   /healthz:
     get:
       operationId: healthCheck
@@ -1554,6 +1611,33 @@ components:
       schema:
         type: string
   schemas:
+    BillingStatus:
+      type: object
+      required: [purchasesEnabled, reason, paid, promo]
+      properties:
+        purchasesEnabled:
+          type: boolean
+        reason:
+          type: string
+        paid:
+          type: boolean
+        promo:
+          type: boolean
+    BillingCheckoutInput:
+      type: object
+      additionalProperties: false
+      required: [plan]
+      properties:
+        plan:
+          type: string
+          enum: [monthly, annual]
+    BillingRedirect:
+      type: object
+      required: [url]
+      properties:
+        url:
+          type: string
+          format: uri
     AuthUser:
       type: object
       required: [id, email, firstName, lastName, profileImageUrl]
