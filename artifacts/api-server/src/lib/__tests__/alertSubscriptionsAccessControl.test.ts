@@ -38,6 +38,9 @@ type AlertRow = {
   delivery: string;
   timezone: string;
   profileToken: string | null;
+  consentCapturedAt: Date | null;
+  consentPolicyVersion: string | null;
+  consentSurface: string | null;
   verifiedAt: Date | null;
   unsubscribedAt: Date | null;
   unsubscribeReason: string | null;
@@ -71,6 +74,9 @@ function freshRow(overrides: Partial<AlertRow> = {}): AlertRow {
     delivery: "email",
     timezone: "UTC",
     profileToken: null,
+    consentCapturedAt: null,
+    consentPolicyVersion: null,
+    consentSurface: null,
     verifiedAt: null,
     unsubscribedAt: null,
     unsubscribeReason: null,
@@ -227,6 +233,9 @@ function patchDatabase(t: TestContext, state: DbState): void {
           horizonHours: values.horizonHours as number,
           delivery: values.delivery as string,
           timezone: values.timezone as string,
+          consentCapturedAt: values.consentCapturedAt as Date,
+          consentPolicyVersion: values.consentPolicyVersion as string,
+          consentSurface: values.consentSurface as string,
         });
         return [{
           id: state.row.id,
@@ -585,6 +594,9 @@ test("POST subscribe resends a pending verification without changing saved value
   assert.equal(response.body.status, "verification_sent");
   assert.equal(response.body.emailDelivered, false);
   assert.deepEqual(state.row, before);
+  assert.equal(state.row!.consentCapturedAt, null);
+  assert.equal(state.row!.consentPolicyVersion, null);
+  assert.equal(state.row!.consentSurface, null);
   assert.equal(state.updatePayloads.length, 0);
   assert.equal(state.insertConflictTargets[0], alertSubscribersTable.email);
   assert.equal(emailOutput.length, 1);
@@ -604,6 +616,7 @@ test("POST subscribe creates a new pending row and sends its verification", asyn
   patchDatabase(t, state);
   const emailOutput = captureEmailOutput(t);
   const origin = await startServer(t);
+  const before = Date.now();
 
   const response = await request(origin, "/alerts/subscribe", {
     method: "POST",
@@ -620,10 +633,71 @@ test("POST subscribe creates a new pending row and sends its verification", asyn
   assert.equal(state.row.horizonHours, 72);
   assert.equal(state.row.delivery, "both");
   assert.equal(state.row.timezone, "Australia/Sydney");
+  assert.equal(state.row.consentCapturedAt instanceof Date, true);
+  assert.ok(state.row.consentCapturedAt!.getTime() >= before);
+  assert.ok(state.row.consentCapturedAt!.getTime() <= Date.now());
+  assert.equal(state.row.consentPolicyVersion, "2026-09-23");
+  assert.equal(state.row.consentSurface, "api:/alerts/subscribe");
   assert.equal(state.updatePayloads.length, 0);
   assert.equal(state.insertConflictTargets.length, 1);
   assert.equal(state.insertConflictTargets[0], alertSubscribersTable.email);
   assert.equal(emailOutput.length, 1);
+});
+
+test("POST subscribe requires explicit consent and records no inferred evidence", async (t) => {
+  const state: DbState = {
+    insertPayloads: [],
+    updatePayloads: [],
+    insertConflictTargets: [],
+    pushInsertCount: 0,
+    pushDeleteCount: 0,
+    transactionCount: 0,
+    rowLocks: [],
+  };
+  patchDatabase(t, state);
+  const emailOutput = captureEmailOutput(t);
+  const origin = await startServer(t);
+
+  const response = await request(origin, "/alerts/subscribe", {
+    method: "POST",
+    body: { ...subscribeBody("no-consent@example.com"), consent: false },
+  });
+
+  assert.equal(response.status, 400);
+  assert.equal(response.body.error, "CONSENT_REQUIRED");
+  assert.equal(state.row, undefined);
+  assert.equal(state.insertPayloads.length, 0);
+  assert.equal(emailOutput.length, 0);
+});
+
+test("tampered management token cannot read or change subscriber data", async (t) => {
+  const state: DbState = {
+    row: freshRow({ verifiedAt: new Date("2026-09-13T00:00:00.000Z") }),
+    insertPayloads: [],
+    updatePayloads: [],
+    insertConflictTargets: [],
+    pushInsertCount: 0,
+    pushDeleteCount: 0,
+    transactionCount: 0,
+    rowLocks: [],
+  };
+  patchDatabase(t, state);
+  const origin = await startServer(t);
+  const valid = issueToken(state.row!.id, "manage");
+  const tampered = `${valid.slice(0, -1)}${valid.endsWith("a") ? "b" : "a"}`;
+
+  const read = await request(origin, `/alerts/manage?token=${encodeURIComponent(tampered)}`);
+  const write = await request(origin, `/alerts/manage?token=${encodeURIComponent(tampered)}`, {
+    method: "PUT",
+    body: { ...manageBody(), regions: ["hakuba-valley"] },
+  });
+
+  assert.equal(read.status, 400);
+  assert.equal(read.body.error, "INVALID_TOKEN");
+  assert.equal(write.status, 400);
+  assert.equal(write.body.error, "INVALID_TOKEN");
+  assert.equal(state.row!.regions[0], "snowy-mountains");
+  assert.equal(state.updatePayloads.length, 0);
 });
 
 test("GET verify verifies a pending subscriber and mints a management token in a locked transaction", async (t) => {

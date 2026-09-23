@@ -21,3 +21,8 @@ The Express api-server is well-hardened in `app.ts`: helmet (CSP/frameguard inte
 **Why:** a later audit found runtime-reachable vulnerable dependencies despite the older blanket “dev-only” assessment. Scanner results and dependency reachability change over time.
 
 **How to apply:** revalidate classifications on each security pass. Public anon-key status does not prove database policies are safe; Supabase RLS and cross-user isolation require separate verification. A low finding count is not proof of absence of vulnerabilities.
+
+## International hosting
+Australian-only data residency is not a product requirement; the owner accepts North American production hosting for this worldwide service.
+**Why:** the owner explicitly confirmed international hosting is acceptable on 23 September 2026.
+**How to apply:** do not propose a regional database migration merely because the business is Australian. Disclose processors and cross-border handling accurately; deployment geography alone does not establish every processor's storage location.

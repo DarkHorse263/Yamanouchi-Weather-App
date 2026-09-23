@@ -2,7 +2,13 @@ import { Router, type IRouter } from "express";
 import { z } from "zod";
 import { db, alertSubscribersTable, engagementEventDailyTable } from "@workspace/db";
 import { eq, sql } from "drizzle-orm";
-import { issueToken, verifyToken, isTokenStillValid } from "../lib/alertTokens.js";
+import {
+  AlertTokenConfigurationError,
+  issueToken,
+  verifyToken,
+  isTokenStillValid,
+  type TokenVerifyResult,
+} from "../lib/alertTokens.js";
 import { sendEmail } from "../lib/emailSender.js";
 import { verificationEmail } from "../lib/emailTemplates.js";
 import { getAppPublicUrl } from "../lib/appUrl.js";
@@ -16,6 +22,11 @@ const MIN_THRESHOLD = 5;
 const MAX_THRESHOLD = 50;
 const MIN_HORIZON = 24;
 const MAX_HORIZON = 72;
+// Matches the currently published privacy policy's "last updated" date.
+// Change deliberately when that policy changes; never derive it from the
+// client, because these fields are server-owned evidence.
+const ALERT_CONSENT_POLICY_VERSION = "2026-09-23";
+const ALERT_CONSENT_SURFACE = "api:/alerts/subscribe";
 
 function isValidEmail(s: unknown): s is string {
   return typeof s === "string" && s.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
@@ -46,6 +57,19 @@ function asTimezone(v: unknown): string {
 }
 function normaliseEmail(s: string): string {
   return s.trim().toLowerCase();
+}
+
+function tokenFailureStatus(result: Extract<TokenVerifyResult, { ok: false }>): number {
+  return result.reason === "unavailable" ? 503 : 400;
+}
+
+function tokenFailureBody(result: Extract<TokenVerifyResult, { ok: false }>) {
+  return result.reason === "unavailable"
+    ? {
+        error: "ALERT_TOKEN_SERVICE_UNAVAILABLE",
+        message: "Alert links are temporarily unavailable. Please try again shortly.",
+      }
+    : { error: "INVALID_TOKEN", reason: result.reason };
 }
 
 async function recordAlertMetric(event: string): Promise<void> {
@@ -150,6 +174,9 @@ router.post("/alerts/subscribe", async (req, res): Promise<void> => {
     horizonHours: asHorizon(body["horizonHours"]),
     delivery: asDelivery(body["delivery"]),
     timezone: asTimezone(body["timezone"]),
+    consentCapturedAt: new Date(),
+    consentPolicyVersion: ALERT_CONSENT_POLICY_VERSION,
+    consentSurface: ALERT_CONSENT_SURFACE,
   };
 
   try {
@@ -215,6 +242,13 @@ router.post("/alerts/subscribe", async (req, res): Promise<void> => {
     });
   } catch (err) {
     console.error("[/alerts/subscribe] error:", err);
+    if (err instanceof AlertTokenConfigurationError) {
+      res.status(503).json({
+        error: err.code,
+        message: "Alert signup is temporarily unavailable. Please try again shortly.",
+      });
+      return;
+    }
     res.status(500).json({ error: "SUBSCRIBE_FAILED", message: "Could not save subscription. Try again shortly." });
   }
 });
@@ -224,7 +258,7 @@ router.get("/alerts/verify", async (req, res): Promise<void> => {
   const token = typeof req.query["token"] === "string" ? req.query["token"] : "";
   const result = verifyToken(token, "verify");
   if (!result.ok) {
-    res.status(400).json({ error: "INVALID_TOKEN", reason: result.reason });
+    res.status(tokenFailureStatus(result)).json(tokenFailureBody(result));
     return;
   }
 
@@ -273,6 +307,13 @@ router.get("/alerts/verify", async (req, res): Promise<void> => {
     });
   } catch (err) {
     console.error("[/alerts/verify] error:", err);
+    if (err instanceof AlertTokenConfigurationError) {
+      res.status(503).json({
+        error: err.code,
+        message: "Alert links are temporarily unavailable. Please try again shortly.",
+      });
+      return;
+    }
     res.status(500).json({ error: "VERIFY_FAILED" });
   }
 });
@@ -304,7 +345,7 @@ router.get("/alerts/manage", async (req, res): Promise<void> => {
   const token = typeof req.query["token"] === "string" ? req.query["token"] : "";
   const result = verifyToken(token, "manage");
   if (!result.ok) {
-    res.status(400).json({ error: "INVALID_TOKEN", reason: result.reason });
+    res.status(tokenFailureStatus(result)).json(tokenFailureBody(result));
     return;
   }
   try {
@@ -322,7 +363,7 @@ router.put("/alerts/manage", async (req, res): Promise<void> => {
   const token = typeof req.query["token"] === "string" ? req.query["token"] : "";
   const result = verifyToken(token, "manage");
   if (!result.ok) {
-    res.status(400).json({ error: "INVALID_TOKEN", reason: result.reason });
+    res.status(tokenFailureStatus(result)).json(tokenFailureBody(result));
     return;
   }
   const schema = AlertsManagePutBody.safeParse(req.body);
@@ -370,8 +411,15 @@ async function performUnsubscribe(
   reason: string | null,
 ): Promise<{ ok: true } | { ok: false; status: number; error: string; reason?: string }> {
   const r1 = verifyToken(token, "unsub");
+  if (!r1.ok && r1.reason === "unavailable") {
+    return { ok: false, status: 503, error: "ALERT_TOKEN_SERVICE_UNAVAILABLE" };
+  }
   const result = r1.ok ? r1 : verifyToken(token, "manage");
-  if (!result.ok) return { ok: false, status: 400, error: "INVALID_TOKEN", reason: result.reason };
+  if (!result.ok) {
+    return result.reason === "unavailable"
+      ? { ok: false, status: 503, error: "ALERT_TOKEN_SERVICE_UNAVAILABLE" }
+      : { ok: false, status: 400, error: "INVALID_TOKEN", reason: result.reason };
+  }
 
   return db.transaction(async (tx) => {
     // Take the same lock as verification before choosing the cutoff, so it

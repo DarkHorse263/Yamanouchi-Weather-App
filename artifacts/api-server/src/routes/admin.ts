@@ -5,6 +5,7 @@ import { getAuth, clerkClient } from "@clerk/express";
 import { requireAdminUser } from "../middlewares/requireAdminUser.js";
 import { loadPromoFunnel } from "../lib/adminPromoFunnel.js";
 import { resolveEmailDeliveryIncident } from "../lib/emailDeliveryIncidents.js";
+import { getAlertDeliveryReadiness } from "../lib/alertDeliveryReadiness.js";
 
 /**
  * Admin router · mounted at /api/admin/*. Every route here goes through
@@ -92,6 +93,15 @@ router.get("/me", async (req: Request, res: Response) => {
     console.error("[/admin/me] Clerk API error:", err);
     res.status(500).json({ error: "ADMIN_ME_FAILED" });
   }
+});
+
+// Configuration-only powder alert delivery status. This intentionally exposes
+// booleans and stable issue codes, never secret values. Provider acceptance and
+// the monitored reply inbox require a separate live/manual verification; this
+// endpoint does not send mail.
+router.get("/alert-readiness", (_req: Request, res: Response) => {
+  res.set("Cache-Control", "no-store");
+  res.json({ alertDelivery: getAlertDeliveryReadiness() });
 });
 
 router.get("/thredbo-lift-history", async (req: Request, res: Response) => {

@@ -40,3 +40,8 @@ saved preferences or reactivating delivery, and must not revive revoked links.
 All outbound email links (magic sign-in, alert verify/manage/unsubscribe) come from `getAppPublicUrl()` in api-server/src/lib/appUrl.ts.
 **Why:** Replit deployments ALSO expose REPLIT_DEV_DOMAIN, so the old dev-domain fallback sent real production visitors sign-in links to a dead *.replit.dev page — silent zero-signup failure discovered only when the owner clicked his own ad.
 **How to apply:** the helper now returns the canonical origin (PUBLIC_ORIGIN ?? feelzlike.com) whenever REPLIT_DEPLOYMENT is set; never reintroduce a dev-domain fallback that can run in a deployment, and verify a real emailed link after publishing auth/email changes.
+
+## Configuration evidence
+Do not equate a missing key in current workspace configuration with a missing key in an already-running published build.
+**Why:** configuration inspection reported no sending key while recent production logs showed successful daily-check mail through the same sender.
+**How to apply:** distinguish current configuration, deployed runtime readiness, provider acceptance, and inbox delivery. Check runtime evidence before replacing a working email connection or claiming delivery is disabled.

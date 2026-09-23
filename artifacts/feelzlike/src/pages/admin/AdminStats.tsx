@@ -28,6 +28,20 @@ interface StatsPayload {
   daily?: DailyPoint[];
 }
 
+interface AlertReadinessPayload {
+  alertDelivery: {
+    ready: boolean;
+    schedulerConfigured: boolean;
+    schedulerStarted: boolean;
+    emailConnectionConfigured: boolean;
+    senderIdentityConfigured: boolean;
+    senderConfigured: boolean;
+    tokenConfigured: boolean;
+    liveInboxVerification: "not_checked";
+    issues: string[];
+  };
+}
+
 interface EngagementPayload {
   visitors: { today: number; last7d: number; last30d: number; returning30d: number };
   pageViews: { last7d: number; last30d: number };
@@ -746,8 +760,90 @@ function DashboardLinks() {
   );
 }
 
+function AlertReadinessCard({ data }: { data: AlertReadinessPayload["alertDelivery"] }) {
+  const rows = [
+    {
+      label: "email provider connection",
+      ok: data.emailConnectionConfigured,
+      detail: data.emailConnectionConfigured
+        ? "configured"
+        : "missing · outbound email connection is not configured",
+    },
+    {
+      label: "branded sender identity",
+      ok: data.senderIdentityConfigured,
+      detail: data.senderIdentityConfigured
+        ? "configured"
+        : "missing · a production sender address is not configured",
+    },
+    {
+      label: "alert scheduler",
+      ok: data.schedulerConfigured && data.schedulerStarted,
+      detail: !data.schedulerConfigured
+        ? "not enabled · RUN_ALERT_CRON is not opted in"
+        : data.schedulerStarted
+          ? "configured and running"
+          : "configured but did not start",
+    },
+    {
+      label: "durable alert links",
+      ok: data.tokenConfigured,
+      detail: data.tokenConfigured
+        ? "secret configured"
+        : "missing · durable manage and unsubscribe links are unavailable",
+    },
+  ];
+
+  return (
+    <section
+      className={`rounded-lg border p-5 ${
+        data.ready ? "border-emerald-300 bg-emerald-50" : "border-amber-300 bg-amber-50"
+      }`}
+      aria-labelledby="alert-readiness-heading"
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h3 id="alert-readiness-heading" className="text-sm font-semibold lowercase">
+            powder alert delivery readiness
+          </h3>
+          <p className="mt-1 text-xs text-muted-foreground">
+            {data.ready
+              ? "configuration is ready for scheduled delivery"
+              : "live alert delivery is not ready"}
+          </p>
+        </div>
+        <span className={`text-xs font-semibold ${data.ready ? "text-emerald-800" : "text-amber-900"}`}>
+          {data.ready ? "ready" : "action needed"}
+        </span>
+      </div>
+      <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+        {rows.map((row) => (
+          <li key={row.label} className="flex items-start gap-2 rounded-md border border-black/10 bg-white/70 p-3">
+            {row.ok ? (
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" aria-hidden="true" />
+            ) : (
+              <X className="mt-0.5 h-4 w-4 shrink-0 text-rose-700" aria-hidden="true" />
+            )}
+            <div>
+              <div className="text-sm font-medium lowercase">{row.label}</div>
+              <div className="text-xs text-muted-foreground">{row.detail}</div>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-3 text-xs text-slate-700">
+        live inbox and sender acceptance: not verified by this check · no test email was sent
+      </p>
+    </section>
+  );
+}
+
 export default function AdminStats() {
   const stats = useAdminQuery<StatsPayload>("stats", "/stats");
+  const alertReadiness = useAdminQuery<AlertReadinessPayload>(
+    "alert-readiness",
+    "/alert-readiness",
+  );
   const signups = useAdminQuery<SignupsPayload>("signups", "/recent-signups");
   const emailIncidents = useAdminQuery<EmailIncidentsPayload>("email-incidents", "/email-incidents");
   const thredboReadinessFailures = useAdminQuery<ThredboReadinessFailuresPayload>(
@@ -766,6 +862,13 @@ export default function AdminStats() {
         <div className="text-sm text-rose-700">failed to load stats · {stats.error.message}</div>
       ) : stats.data ? (
         <div className="space-y-5">
+          {alertReadiness.data ? (
+            <AlertReadinessCard data={alertReadiness.data.alertDelivery} />
+          ) : alertReadiness.error ? (
+            <div className="rounded-lg border border-rose-300 bg-rose-50 p-5 text-sm text-rose-800">
+              couldn't check powder alert delivery readiness · {alertReadiness.error.message}
+            </div>
+          ) : null}
           {thredboReadinessFailures.data ? (
             <ThredboReadinessFailuresCard failures={thredboReadinessFailures.data.failures} />
           ) : thredboReadinessFailures.error ? (

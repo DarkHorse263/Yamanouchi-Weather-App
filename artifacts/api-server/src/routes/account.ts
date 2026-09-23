@@ -209,11 +209,10 @@ router.put("/account/alerts", requireAuth, async (req, res): Promise<void> => {
 //      and prevents the Clerk user from ever re-provisioning a new local row
 //      via requireAuth's JIT insert. If this step fails, abort — do NOT
 //      delete local data while a live Clerk identity remains.
-//   2. Delete local subscriber row (best-effort; orphaned subscribers are
-//      harmless and get no alert emails since no Clerk identity can auth).
-//   3. Delete the users row.
+//   2. Delete the local subscriber and users rows in one transaction, with one
+//      immediate retry for a transient DB failure.
 //
-// This order means a DB failure after step 1 leaves orphaned local data for
+// This order means a repeated DB failure after step 1 leaves orphaned local data for
 // a deleted Clerk identity, which is far safer than a live Clerk identity
 // pointing at a deleted local record (which requireAuth would JIT-reprovision).
 router.delete("/account", requireAuth, async (req, res): Promise<void> => {
@@ -243,14 +242,25 @@ router.delete("/account", requireAuth, async (req, res): Promise<void> => {
       return;
     }
 
-    // ── Steps 2 & 3: delete local data ────────────────────────────────────
-    // Best-effort at this point; Clerk identity is already gone.
-    if (user.email) {
-      await db
-        .delete(alertSubscribersTable)
-        .where(eq(alertSubscribersTable.email, user.email.trim().toLowerCase()));
+    // ── Steps 2 & 3: delete local data atomically ─────────────────────────
+    // Clerk identity is already gone. A transaction prevents a partial local
+    // cleanup (for example subscriber removed but user retained). The deletes
+    // are idempotent, so an immediate retry safely recovers a transient DB
+    // failure without weakening the Clerk-first authorization ordering.
+    const deleteLocalData = () => db.transaction(async (tx) => {
+      if (user.email) {
+        await tx
+          .delete(alertSubscribersTable)
+          .where(eq(alertSubscribersTable.email, user.email.trim().toLowerCase()));
+      }
+      await tx.delete(usersTable).where(eq(usersTable.id, user.id));
+    });
+    try {
+      await deleteLocalData();
+    } catch (firstLocalErr) {
+      console.error("[/account DELETE] local deletion failed; retrying once:", firstLocalErr);
+      await deleteLocalData();
     }
-    await db.delete(usersTable).where(eq(usersTable.id, user.id));
 
     // ── Step 4: deletion receipt (fire-and-forget) ────────────────────────
     // A durable "your account and data were deleted" record for the former

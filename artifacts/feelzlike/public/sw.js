@@ -76,7 +76,7 @@
 // snapshots so an old response shape cannot hide the new forecast labels.
 // v28: comparison ensemble now includes nullable apparent highs/lows + coverage.
 // v29: forecast responses include the mountain timezone for source-time display.
-const CACHE_VERSION = "v29";
+const CACHE_VERSION = "v30";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;

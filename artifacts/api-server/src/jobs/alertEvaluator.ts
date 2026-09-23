@@ -12,14 +12,14 @@
  *     forecast snow ≥ QUIET_HOURS_OVERRIDE_CM (you'd want to know about that).
  *
  * Run modes:
- *   - `startAlertCron()` schedules the job (every 3h) - called from app boot
- *     in production.
+ *   - `startAlertCron()` schedules a DB-claimed job (every 3h) and catches up
+ *     the latest missed bucket when an autoscale replica wakes.
  *   - `runAlertEvaluator()` runs the job once and is exposed via an admin
  *     endpoint for ad-hoc testing.
  */
 import cron, { type ScheduledTask } from "node-cron";
-import { db, alertSubscribersTable, dispatchedAlertsTable, pushSubscriptionsTable } from "@workspace/db";
-import { eq, and, isNull, isNotNull, gte, count } from "drizzle-orm";
+import { db, alertSubscribersTable, dispatchedAlertsTable, jobRunsTable, pushSubscriptionsTable } from "@workspace/db";
+import { eq, and, isNull, isNotNull, gte, count, lt, sql } from "drizzle-orm";
 import * as Sentry from "@sentry/node";
 import { getEnsembleForecast } from "../lib/ensemble-forecast.js";
 import { sendEmail } from "../lib/emailSender.js";
@@ -28,6 +28,12 @@ import { powderAlertEmail } from "../lib/emailTemplates.js";
 import { issueToken } from "../lib/alertTokens.js";
 import { getAppPublicUrl } from "../lib/appUrl.js";
 import { resolveCatalogueAlertTarget, type RegionId } from "../lib/regions.js";
+import {
+  ALERT_SCHEDULER_JOB_NAME,
+  alertRunKey,
+  assertAlertDeliveryConfigured,
+  markAlertSchedulerStarted,
+} from "../lib/alertDeliveryReadiness.js";
 
 const QUIET_HOURS_OVERRIDE_CM = 50;
 const PER_SUBSCRIBER_RATE_LIMIT_HOURS = 12;
@@ -303,6 +309,7 @@ async function claimDispatchSlot(values: {
 
 export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<EvaluatorReport> {
   const dryRun = opts?.dryRun === true;
+  if (!dryRun) assertAlertDeliveryConfigured();
   const startedAt = new Date();
   const report: EvaluatorReport = {
     startedAt: startedAt.toISOString(), finishedAt: "",
@@ -588,50 +595,155 @@ function isQuietHour(tz: string): boolean {
 }
 
 let cronTask: ScheduledTask | null = null;
+let sweepTimer: NodeJS.Timeout | null = null;
+let startupTimer: NodeJS.Timeout | null = null;
+let sweepRunning = false;
+let lastRequestWakeAt = 0;
+
+const SWEEP_INTERVAL_MS = 5 * 60_000;
+const REQUEST_WAKE_THROTTLE_MS = 60_000;
+const STARTUP_CATCHUP_DELAY_MS = 10_000;
+const STALE_CLAIM_MINUTES = 150;
+
+interface AlertRunClaim {
+  id: string;
+  startedAt: Date;
+}
+
+export async function claimAlertRun(
+  runKey: string,
+  staleMinutes: number = STALE_CLAIM_MINUTES,
+): Promise<AlertRunClaim | null> {
+  const staleBefore = new Date(Date.now() - staleMinutes * 60_000);
+  // Use an application timestamp (millisecond precision) as the claim token.
+  // A returned Postgres now() value may lose sub-millisecond precision in JS,
+  // which would make the ownership guard in finishAlertRun impossible to match.
+  const claimStartedAt = new Date();
+  const rows = await db
+    .insert(jobRunsTable)
+    .values({
+      jobName: ALERT_SCHEDULER_JOB_NAME,
+      runKey,
+      startedAt: claimStartedAt,
+    })
+    .onConflictDoUpdate({
+      target: [jobRunsTable.jobName, jobRunsTable.runKey],
+      set: {
+        startedAt: claimStartedAt,
+        finishedAt: null,
+        ok: null,
+        summary: null,
+      },
+      setWhere: and(
+        isNull(jobRunsTable.finishedAt),
+        lt(jobRunsTable.startedAt, staleBefore),
+      ),
+    })
+    .returning({
+      id: jobRunsTable.id,
+      startedAt: jobRunsTable.startedAt,
+    });
+  return rows[0] ?? null;
+}
+
+async function finishAlertRun(
+  claim: AlertRunClaim,
+  report: EvaluatorReport,
+): Promise<void> {
+  const ok = report.errors === 0;
+  await db
+    .update(jobRunsTable)
+    .set({
+      finishedAt: sql`now()`,
+      ok,
+      summary:
+        `sent=${report.alertsSent} checked=${report.subscribersChecked} errors=${report.errors}`,
+    })
+    .where(
+      and(
+        eq(jobRunsTable.id, claim.id),
+        eq(jobRunsTable.startedAt, claim.startedAt),
+        isNull(jobRunsTable.finishedAt),
+      ),
+    );
+}
+
+async function sweepDueAlertRun(): Promise<void> {
+  if (sweepRunning) return;
+  sweepRunning = true;
+  const runKey = alertRunKey();
+  try {
+    const claim = await claimAlertRun(runKey);
+    if (!claim) return;
+    console.log(`[alertEvaluator] claimed scheduler bucket ${runKey}`);
+    const report = await runAlertEvaluator();
+    await finishAlertRun(claim, report);
+    console.log(
+      `[alertEvaluator] run done: sent=${report.alertsSent} checked=${report.subscribersChecked} errors=${report.errors}`,
+    );
+  } catch (err) {
+    console.error("[alertEvaluator] claimed run failed:", err);
+    Sentry.captureException(err, {
+      tags: { component: "alert-evaluator-scheduler" },
+    });
+    // An unfinished claim is reclaimable after the staleness window.
+  } finally {
+    sweepRunning = false;
+  }
+}
+
+/**
+ * Give an autoscale request a bounded chance to recover the latest due bucket.
+ * Calls are process-throttled and the DB claim is authoritative across replicas.
+ */
+export function requestAlertSchedulerWake(nowMs: number = Date.now()): void {
+  if (!cronTask || nowMs - lastRequestWakeAt < REQUEST_WAKE_THROTTLE_MS) return;
+  lastRequestWakeAt = nowMs;
+  void sweepDueAlertRun().catch((err) => {
+    console.error("[alertEvaluator] request wake sweep failed:", err);
+  });
+}
 
 /**
  * Start the in-process alert evaluator cron.
  *
- * IMPORTANT — singleton semantics. The cron is OFF by default and only
- * starts when `RUN_ALERT_CRON=1` is set. This guarantees that scaling
- * the API to multiple replicas does NOT cause duplicate alert emails /
- * push notifications · only the replica(s) explicitly opted in via the
- * env var will tick.
- *
- * Recommended deployment patterns, in order of preference:
- *   1. Replit Scheduled Deployment hitting POST /api/internal/alerts/run
- *      every 3 hours. The web/API replicas all leave RUN_ALERT_CRON
- *      unset · zero risk of duplicates regardless of replica count.
- *   2. A single dedicated worker replica with RUN_ALERT_CRON=1 set,
- *      while the user-facing replicas leave it unset.
- *   3. Single-replica deployment (current default for Replit Autoscale
- *      with min=max=1) with RUN_ALERT_CRON=1 set on that one replica.
- *
- * Legacy kill switch ALERT_CRON_DISABLED=1 is still honoured for
- * backwards compatibility, but is now redundant since the default is
- * already off.
+ * The scheduler remains explicitly opt-in through RUN_ALERT_CRON=1. Every
+ * opted-in replica may sweep safely: job_runs atomically elects one runner for
+ * each existing UTC three-hour bucket, and a stale unfinished claim can be
+ * reclaimed. Startup, periodic, and request-wake sweeps only consider the
+ * latest bucket, so catch-up is bounded and never floods old alerts.
  */
 export function startAlertCron(): void {
-  if (cronTask) return;
+  if (cronTask || sweepTimer || startupTimer) return;
   if (process.env.ALERT_CRON_DISABLED === "1") {
     console.log("[alertEvaluator] ALERT_CRON_DISABLED=1 · cron not started");
     return;
   }
   if (process.env.RUN_ALERT_CRON !== "1") {
     console.log(
-      "[alertEvaluator] RUN_ALERT_CRON not set · cron not started on this replica. " +
-      "Set RUN_ALERT_CRON=1 on exactly one replica, or hit /api/internal/alerts/run from a Scheduled Deployment.",
+      "[alertEvaluator] RUN_ALERT_CRON not set · DB-claimed scheduler not started.",
     );
+    return;
+  }
+  try {
+    assertAlertDeliveryConfigured();
+  } catch (err) {
+    console.error("[alertEvaluator] scheduler configuration invalid:", err);
     return;
   }
   // Every 3 hours, on the hour.
   cronTask = cron.schedule("0 */3 * * *", () => {
-    runAlertEvaluator().then((r) => {
-      console.log(`[alertEvaluator] run done: sent=${r.alertsSent} checked=${r.subscribersChecked} errors=${r.errors}`);
-    }).catch((err) => {
-      console.error("[alertEvaluator] run failed:", err);
-      Sentry.captureException(err, { tags: { component: "alert-evaluator-cron" } });
-    });
+    void sweepDueAlertRun();
   });
-  console.log("[alertEvaluator] cron scheduled (every 3 hours, RUN_ALERT_CRON=1)");
+  sweepTimer = setInterval(() => void sweepDueAlertRun(), SWEEP_INTERVAL_MS);
+  sweepTimer.unref?.();
+  startupTimer = setTimeout(() => {
+    startupTimer = null;
+    void sweepDueAlertRun();
+  }, STARTUP_CATCHUP_DELAY_MS);
+  startupTimer.unref?.();
+  markAlertSchedulerStarted();
+  console.log(
+    "[alertEvaluator] scheduler on: every 3 hours + bounded wake catch-up, DB-claimed (job_runs)",
+  );
 }

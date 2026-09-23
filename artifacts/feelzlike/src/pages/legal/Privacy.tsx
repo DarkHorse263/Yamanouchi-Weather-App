@@ -3,12 +3,11 @@ import { LegalShell, Section } from "./LegalShell";
 /**
  * feelzlike Privacy Policy.
  *
- * Multi-country aware: written for AU (Privacy Act 1988 (Cth) + APPs),
- * JP (APPI), EU/UK (GDPR / UK GDPR) and California (CCPA/CPRA) visitors.
  * Substantively reflects the data the app actually collects today:
- *   - anonymous device-scoped analytics token (consent-gated)
- *   - Sentry crash reports (consent-gated)
+ *   - consent-mode analytics and first-party aggregate counters
+ *   - Sentry crash reports
  *   - email + push subscriptions for alerts (opt-in, double-opt-in for email)
+ *   - Clerk-backed accounts with a local profile row
  *   - account-free browsing of weather, transport and roads data
  *
  * NOTE FOR PUBLISHER: This is a working policy reviewed for accuracy
@@ -23,7 +22,7 @@ export default function Privacy() {
       title="Privacy Policy"
       description="feelzlike privacy policy. Explains what data we collect, why, where it goes, and the rights you have over it."
       path="/legal/privacy"
-      lastUpdated="27 July 2026"
+      lastUpdated="23 September 2026"
     >
       <p>
         feelzlike respects your privacy. This policy explains what we
@@ -64,12 +63,17 @@ export default function Privacy() {
             page, apply rate limits, and protect the Service from abuse.
           </li>
           <li>
-            <strong>Anonymous analytics</strong> (only if you accept
-            analytics in the cookie banner) · a random device-scoped
-            token, page paths, and aggregate usage measured with Google
-            Analytics 4, which does not store IP addresses; we also strip
-            query strings from page paths before they are sent. No name,
-            email, or precise location.
+            <strong>Analytics</strong> · Google Analytics 4 loads with
+            storage denied by default and may receive anonymous,
+            cookieless measurement pings before you accept analytics.
+            Accepting analytics enables full measurement, including a
+            random device-scoped identifier and returning-visitor
+            measurement. We also maintain first-party aggregate page and
+            visitor counts using coarse page labels and a one-way,
+            monthly rotating hash derived from network and browser data.
+            Query strings are stripped except for a closed list of
+            advertising campaign parameters. No name, email, precise
+            location or alert-link token is sent as analytics data.
           </li>
           <li>
             <strong>Crash reports</strong> · stack traces and the URL
@@ -83,14 +87,25 @@ export default function Privacy() {
           </li>
           <li>
             <strong>Email alert subscriptions</strong> · your email
-            address and the regions / mountains you chose to follow.
-            Used only to send the alerts you asked for and to let you
-            unsubscribe.
+            address; regions and mountains; snowfall threshold, forecast
+            horizon, delivery method and timezone; verification,
+            unsubscribe and delivery records; and, for new signups,
+            server-recorded consent time, policy version and signup
+            surface. Used to verify ownership, send the alerts you asked
+            for, prevent duplicate delivery and honour unsubscribe
+            requests.
           </li>
           <li>
             <strong>Push notifications</strong> · a browser push
             endpoint and the alerts you opted in to. Used only to push
             the notifications you asked for.
+          </li>
+          <li>
+            <strong>Accounts</strong> · Clerk stores the authentication
+            identity and manages sessions. Our database stores a linked
+            provider identifier, email address and account profile
+            preferences such as display name, home region and units.
+            Powder alerts remain available without an account.
           </li>
           <li>
             <strong>Approximate location</strong> (only if you allow
@@ -134,15 +149,21 @@ export default function Privacy() {
 
       <Section title="4 · Where your data is stored · sub-processors">
         <p>
-          feelzlike is a global service. To deliver it we use a small
-          number of carefully chosen sub-processors. Data may cross
-          borders for these purposes only.
+          To deliver the Service we use a small number of service
+          providers. They may process data in more than one country as
+          described in their own privacy notices.
         </p>
         <ul className="list-disc pl-6 space-y-2">
           <li>
-            <strong>Hosting &amp; database</strong> · Replit
-            Deployments and Replit-managed Postgres (regions hosted in
-            United States and other Replit regions).
+            <strong>Hosting &amp; database</strong> · Replit Deployments
+            and Replit-managed Postgres. Our production deployment is
+            configured in the North America region. That deployment
+            setting does not independently prove a fixed database
+            residency.
+          </li>
+          <li>
+            <strong>Authentication</strong> · Clerk, which stores account
+            identity data and manages sign-in sessions.
           </li>
           <li>
             <strong>Crash &amp; performance monitoring</strong> ·
@@ -151,12 +172,12 @@ export default function Privacy() {
           <li>
             <strong>Product analytics</strong> · Google Analytics 4
             (Google, United States), run in Google&apos;s Consent Mode.
-            If you decline analytics in the cookie banner, only an
-            anonymous, cookieless ping is sent · nothing is stored on
-            your device and you cannot be recognised across visits.
-            Full measurement (cookies, returning-visitor detection)
-            happens only after you accept. It does not store IP
-            addresses, and no name, email or precise location is sent.
+            Before analytics consent, measurement is limited to
+            cookieless pings with analytics storage denied. Full
+            measurement, including cookies and returning-visitor
+            detection, happens only after you accept. No name, email,
+            precise location or alert-link token is sent as analytics
+            data.
           </li>
           <li>
             <strong>Ad measurement</strong> · Meta Platforms (United
@@ -167,9 +188,9 @@ export default function Privacy() {
             never sent to it.
           </li>
           <li>
-            <strong>Email delivery</strong> · the transactional email
-            provider used for alert verification and unsubscribe
-            messages.
+            <strong>Email delivery</strong> · Resend, used for alert
+            verification, powder alerts, unsubscribe-related messages
+            and account deletion receipts.
           </li>
           <li>
             <strong>Mapping &amp; venue data</strong> · Google Maps and
@@ -183,13 +204,7 @@ export default function Privacy() {
             Agency. We pass anonymous lat / lng queries only.
           </li>
         </ul>
-        <p>
-          Where personal information leaves your country we rely on
-          standard contractual clauses (EU / UK), the OAIC&rsquo;s APP 8
-          framework (Australia) or your explicit consent (Japan, under
-          APPI Article 28). A current sub-processor list is available
-          on request.
-        </p>
+        <p>A current service-provider list is available on request.</p>
       </Section>
 
       <Section title="5 · We do not sell your data">
@@ -205,10 +220,11 @@ export default function Privacy() {
 
       <Section title="6 · Your rights · by country">
         <p>
-          You always have the right to access, correct or delete the
-          personal information we hold about you, withdraw consent for
-          analytics or alerts, and lodge a complaint with your local
-          regulator. Specific frameworks below.
+          Your privacy rights depend on where you live and may include
+          access, correction, deletion, restriction, portability,
+          objection and withdrawal of consent. The frameworks below may
+          apply; this summary is not a claim that every framework applies
+          to every visitor.
         </p>
         <ul className="list-disc pl-6 space-y-2">
           <li>
@@ -266,10 +282,6 @@ export default function Privacy() {
             </a>
             .
           </li>
-          <li>
-            <strong>Everywhere else</strong> · we will honour
-            equivalent requests in line with applicable local law.
-          </li>
         </ul>
         <p>
           To exercise any right, email{" "}
@@ -279,35 +291,26 @@ export default function Privacy() {
           >
             info@feelzlike.com
           </a>
-          . We respond within 30 days (Australia / EU / UK) or the
-          shorter period required by your local law.
+          . We will respond as required by the law that applies to your
+          request.
         </p>
       </Section>
 
       <Section title="7 · How long we keep it">
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Server access logs</strong> · up to 30 days, then
-            deleted or aggregated.
-          </li>
-          <li>
-            <strong>Crash reports</strong> · 90 days in Sentry, then
-            purged.
-          </li>
-          <li>
-            <strong>Anonymous analytics events</strong> · up to 13
-            months in aggregate form.
-          </li>
-          <li>
-            <strong>Email alert subscriptions</strong> · until you
-            unsubscribe (one-click in every email) or remove yourself
-            via the manage-subscriptions link.
-          </li>
-          <li>
-            <strong>Push subscriptions</strong> · until you revoke
-            permission in your browser or your endpoint expires.
-          </li>
-        </ul>
+        <p>
+          We keep personal information only while it is needed for the
+          purposes described above, to honour your choices, or to meet
+          applicable legal and security obligations. We do not state
+          fixed periods here where operational or provider settings have
+          not been verified.
+        </p>
+        <p>
+          You can delete a signed-in account from the account page.
+          Unsubscribing stops alert delivery. We may retain the minimum
+          subscription, consent and suppression record needed to prove
+          the request and avoid sending again. You can ask us to access
+          or delete information by emailing info@feelzlike.com.
+        </p>
       </Section>
 
       <Section title="8 · Children">

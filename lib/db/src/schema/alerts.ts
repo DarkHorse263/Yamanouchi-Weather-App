@@ -25,6 +25,12 @@ export const alertSubscribersTable = pgTable(
     delivery: text("delivery").notNull().default("email"), // 'email' | 'push' | 'both'
     timezone: text("timezone").notNull().default("UTC"),
     profileToken: text("profile_token"),
+    // Server-captured evidence for new explicit-consent signups. Nullable is
+    // intentional: existing rows predate evidence capture and must not be
+    // backfilled with consent that was not recorded at the time.
+    consentCapturedAt: timestamp("consent_captured_at", { withTimezone: true }),
+    consentPolicyVersion: text("consent_policy_version"),
+    consentSurface: text("consent_surface"),
     verifiedAt: timestamp("verified_at", { withTimezone: true }),
     unsubscribedAt: timestamp("unsubscribed_at", { withTimezone: true }),
     unsubscribeReason: text("unsubscribe_reason"),
@@ -116,6 +122,9 @@ export const insertAlertSubscriberSchema = createInsertSchema(alertSubscribersTa
   unsubscribedAt: true,
   unsubscribeReason: true,
   lastAlertedAt: true,
+  consentCapturedAt: true,
+  consentPolicyVersion: true,
+  consentSurface: true,
 });
 export type InsertAlertSubscriber = z.infer<typeof insertAlertSubscriberSchema>;
 export type AlertSubscriber = typeof alertSubscribersTable.$inferSelect;

@@ -17,7 +17,7 @@ import {
  * Engagement ping · POST /api/engagement/ping
  *
  * First-party, cookieless visitor + page-view counting so the owner's admin
- * dashboard shows TRUTHFUL totals (GA only counts consented visitors).
+ * dashboard has a provider-independent aggregate alongside GA Consent Mode.
  *
  * Privacy design (deliberate — see lib/db schema/engagement.ts):
  *   - body carries only { kind, page? }; no id, token or URL is stored

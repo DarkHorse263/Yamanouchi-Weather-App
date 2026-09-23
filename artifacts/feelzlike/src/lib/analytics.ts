@@ -7,10 +7,9 @@
  *   - Sentry breadcrumbs · free temporal context attached to every error
  *     report, and no PII leaving the page (we generate an anon profile token in
  *     localStorage; no email, no IP-derived data).
- *   - Google Analytics 4 (see lib/ga) · consent-gated product analytics. GA is
- *     only loaded once the visitor grants the `analytics` category, so the
- *     mirror inside track() is a no-op until then · nothing is sent for people
- *     who decline, and call sites never need to know GA exists.
+ *   - Google Analytics 4 (see lib/ga) · Consent Mode loads GA with storage
+ *     denied by default. Before consent, events can produce anonymous,
+ *     cookieless pings; granting analytics enables full measurement.
  *
  * Consent: this layer respects the `analytics` choice from `lib/consent`.
  * When the user hasn't opted in, breadcrumbs are still added (Sentry
@@ -104,10 +103,10 @@ export function track(name: string, options: TrackOptions = {}): void {
     data: options.data,
     timestamp: Date.now() / 1000,
   });
-  // Mirror to GA4. This is a no-op until the visitor has granted analytics
-  // consent (gtag isn't loaded before then), so there's nothing to gate here ·
-  // one track() call feeds both Sentry and GA. page_view is handled separately
-  // by gaPageView, and gaEvent skips it, so it is never double-counted.
+  // Mirror to GA4 under its current Consent Mode state. Before analytics
+  // consent this can emit only a cookieless ping; after consent it participates
+  // in full measurement. page_view is handled separately by gaPageView, and
+  // gaEvent skips it, so it is never double-counted.
   gaEvent(name, {
     ...(options.category ? { event_category: options.category } : {}),
     ...(options.data ?? {}),

@@ -12,30 +12,30 @@ import { createHmac, timingSafeEqual, randomBytes } from "node:crypto";
  * - `unsub` tokens never expire (one-click unsubscribe must always work)
  */
 
-const SECRET = (() => {
+const SECRET: string | null = (() => {
   const s = process.env.ALERT_TOKEN_SECRET;
   if (s && s.length >= 16) return s;
-  // Per-process random fallback. Used to throw in production to force the
-  // operator to set a stable secret · but that hard-fails the entire app
-  // boot (including the unrelated weather features) just because the alerts
-  // subsystem isn't fully configured. We now warn loudly instead, so the
-  // server still serves traffic while alert tokens issued by one instance
-  // won't validate on another or after a restart. Set ALERT_TOKEN_SECRET
-  // (>=16 chars, e.g. `openssl rand -base64 48`) before relying on alerts.
-  const fallback = randomBytes(32).toString("base64url");
   if (process.env.NODE_ENV === "production") {
     console.error(
-      "[alertTokens] ALERT_TOKEN_SECRET is missing or <16 chars in production · using ephemeral random secret. " +
-        "Alert/manage/unsubscribe links will NOT survive a restart and will NOT work across multiple instances. " +
-        "Set ALERT_TOKEN_SECRET (e.g. `openssl rand -base64 48`) in your deployment secrets to enable durable tokens.",
+      "[alertTokens] ALERT_TOKEN_SECRET is missing or <16 chars in production · alert token operations are disabled.",
     );
-  } else {
-    console.warn(
-      "[alertTokens] ALERT_TOKEN_SECRET not set · using ephemeral dev secret. Tokens will not survive a server restart.",
-    );
+    return null;
   }
+  const fallback = randomBytes(32).toString("base64url");
+  console.warn(
+    "[alertTokens] ALERT_TOKEN_SECRET not set · using ephemeral dev secret. Tokens will not survive a server restart.",
+  );
   return fallback;
 })();
+
+export class AlertTokenConfigurationError extends Error {
+  readonly code = "ALERT_TOKEN_SERVICE_UNAVAILABLE";
+
+  constructor() {
+    super("Alert token service is not configured.");
+    this.name = "AlertTokenConfigurationError";
+  }
+}
 
 export type TokenKind =
   | "verify"
@@ -71,6 +71,7 @@ function b64urlDecode(s: string): Buffer {
 }
 
 function sign(payloadB64: string): string {
+  if (!SECRET) throw new AlertTokenConfigurationError();
   return createHmac("sha256", SECRET).update(payloadB64).digest("base64url");
 }
 
@@ -86,9 +87,10 @@ export function issueToken(subscriberId: string, kind: TokenKind): string {
 
 export type TokenVerifyResult =
   | { ok: true; payload: TokenPayload }
-  | { ok: false; reason: "malformed" | "bad_signature" | "expired" | "wrong_kind" };
+  | { ok: false; reason: "malformed" | "bad_signature" | "expired" | "wrong_kind" | "unavailable" };
 
 export function verifyToken(token: string, expectedKind?: TokenKind): TokenVerifyResult {
+  if (!SECRET) return { ok: false, reason: "unavailable" };
   if (typeof token !== "string" || token.length === 0) return { ok: false, reason: "malformed" };
   const dot = token.indexOf(".");
   if (dot < 1 || dot === token.length - 1) return { ok: false, reason: "malformed" };

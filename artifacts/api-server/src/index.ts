@@ -24,13 +24,15 @@ if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
-  // Start the powder-alert cron evaluator (every 3h). Disabled by setting
-  // ALERT_CRON_DISABLED=1 - useful when running multiple workers in
-  // production where you want only one to own the schedule.
+  // Powder-alert scheduling is explicit opt-in (RUN_ALERT_CRON=1). Its
+  // job_runs claim makes multiple autoscale replicas safe.
   import("./jobs/alertEvaluator.js")
-    .then((m) => m.startAlertCron())
+    .then((m) => {
+      m.startAlertCron();
+      server.on("request", () => m.requestAlertSchedulerWake());
+    })
     .catch((err) => console.error("[boot] failed to start alert cron:", err));
   // Daily production smoke test (site up, canonicals intact, dead outbound
   // links) - emails the owner on failure. RUN_SMOKE_CRON=1 enables the

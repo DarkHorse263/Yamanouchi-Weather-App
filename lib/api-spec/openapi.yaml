@@ -260,7 +260,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
         "503":
-          description: Email delivery could not be checked or completed
+          description: Email delivery failed temporarily or alert token signing is unavailable
           content:
             application/json:
               schema:
@@ -296,6 +296,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Alert token service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 
   /alerts/manage:
     get:
@@ -317,6 +323,12 @@ paths:
                 $ref: "#/components/schemas/ManageResponse"
         "400":
           description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Alert token service is unavailable
           content:
             application/json:
               schema:
@@ -350,6 +362,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Alert token service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 
   /alerts/unsubscribe:
     post:
@@ -377,6 +395,12 @@ paths:
                 $ref: "#/components/schemas/GenericOkResponse"
         "400":
           description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Alert token service is unavailable
           content:
             application/json:
               schema:

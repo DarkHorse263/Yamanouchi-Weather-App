@@ -147,7 +147,8 @@ function disableFlag(id: string): string {
  * views manually via `gaPageView` · that lets us strip tokened querystrings and
  * avoids double-counting the landing page.
  *
- * IMPORTANT: callers MUST confirm `analytics` consent first · this does not.
+ * Call once for every visitor. Consent defaults are queued before config, so
+ * storage remains denied until the caller sends an explicit consent update.
  */
 export function loadGa(): boolean {
   if (typeof document === "undefined" || typeof window === "undefined") return false;
@@ -236,7 +237,8 @@ export function disableGa(): void {
 
 /**
  * Send a single GA4 page_view for `path` (an app-relative path with the query
- * string + hash already stripped by the caller). page_location is
+ * string + hash already stripped by the caller). Under denied consent this can
+ * produce a cookieless ping; full measurement requires consent. page_location is
  * origin + pathname + whitelisted campaign params only · never the raw href ·
  * so tokened alert URLs (?token=...) never reach GA while ad attribution
  * (utm_*, click ids) survives. No-op until gtag is initialised.
@@ -267,8 +269,8 @@ function normaliseEventName(name: string): string | null {
 /**
  * Send a GA4 custom event. `params` become event parameters · keep keys
  * snake_case, values primitive, and NEVER pass PII or tokened URLs. No-op until
- * gtag is initialised (i.e. until the visitor has granted `analytics` consent
- * and loadGa() has run), so callers don't need to check consent themselves.
+ * gtag is initialised. Consent Mode controls whether the event is a cookieless
+ * ping or part of full measurement, so callers do not gate it themselves.
  *
  * `page_view` is intentionally ignored here: route-change page views are sent by
  * gaPageView (which strips tokened querystrings), so forwarding a `page_view`

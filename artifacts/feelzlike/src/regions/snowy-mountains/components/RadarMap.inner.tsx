@@ -41,6 +41,12 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  isDuplicateInteractiveSource,
+  officialAgencyLabel,
+  radarPlaybackNotice,
+  rainViewerDescription,
+} from "./radarDisplay";
 
 interface RadarMapInnerProps {
   center?: { lat: number; lng: number };
@@ -1590,7 +1596,7 @@ export default function RadarMapInner({
   region = "snowy-mountains",
   location,
 }: RadarMapInnerProps) {
-  const { dataSaver } = useDataSaver();
+  const { dataSaver, setDataSaver } = useDataSaver();
   const { ref: activityRef, active: mediaActive } = useMediaActivity();
   // Data Saver deliberately requires a gesture before any radar provider,
   // basemap tile, or official image is contacted. This state is local to this
@@ -1610,9 +1616,16 @@ export default function RadarMapInner({
   // lead with the global Interactive radar. Region pages pass no `location`,
   // so effectiveOfficial/effectiveWindy collapse to the region config and
   // behaviour is unchanged.
-  const effectiveOfficial: OfficialRadarSource | null = location
+  const configuredOfficial: OfficialRadarSource | null = location
     ? location.official
     : regionCfg.official;
+  // Austria's configured "official" source is the same user-initiated Windy
+  // map already offered by the Windy tab. Do not present that duplicate as a
+  // national official radar.
+  const effectiveOfficial =
+    configuredOfficial && !isDuplicateInteractiveSource(configuredOfficial)
+      ? configuredOfficial
+      : null;
   const effectiveWindy: WindySource = location ? location.windy : regionCfg.windy;
   const showOfficialTab = effectiveOfficial != null;
   // Australian regions (and any covered /near-you point) lead with the Official
@@ -1748,6 +1761,19 @@ export default function RadarMapInner({
     ? radarFrames.length
     : manifest?.radar.past.length ?? 0;
   const isNowcast = frameIndex >= nowcastStart;
+  const hasRainViewerForecast =
+    !dataSaver && (manifest?.radar.nowcast.length ?? 0) > 0;
+  const [reducedMotion] = useState(() =>
+    typeof window !== "undefined" &&
+    !!window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+  const playbackNotice = radarPlaybackNotice({
+    dataSaver,
+    reducedMotion,
+    playing,
+    frameCount: radarFrames.length,
+  });
 
   // Animate radar at ~700ms per frame while precip is shown + playing.
   useEffect(() => {
@@ -1861,7 +1887,7 @@ export default function RadarMapInner({
   const country = REGION_COUNTRY[region];
   // The "official" tab shows a different national agency per country, so
   // label it honestly · a blanket "BOM" only holds for Australia.
-  const officialAgency = country === "AU" ? "BOM" : country === "JP" ? "JMA" : "MetService";
+  const officialAgency = officialAgencyLabel(effectiveOfficial);
   // One-line explainer for whichever tab is active · shown beside the tab
   // row on wider screens (the icons + labels carry it on mobile).
   const viewExplainer =
@@ -1996,6 +2022,7 @@ export default function RadarMapInner({
           official={effectiveOfficial}
           center={effectiveCenter}
           dataSaver={dataSaver}
+          onDisableDataSaver={() => setDataSaver(false)}
         />
       )}
 
@@ -2178,7 +2205,7 @@ export default function RadarMapInner({
             <LayerToggle
               icon={Radar}
               title="precip radar"
-              desc="live animated precipitation from rainviewer · past 2h + 30min nowcast."
+              desc={rainViewerDescription(hasRainViewerForecast, dataSaver)}
               active={showPrecip}
               onToggle={() => setShowPrecip((v) => !v)}
             />
@@ -2244,7 +2271,7 @@ export default function RadarMapInner({
           <button
             type="button"
             onClick={() => setPlaying((p) => !p)}
-            disabled={dataSaver || radarFrames.length === 0}
+            disabled={dataSaver || radarFrames.length < 2}
             className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-sky-500 text-white disabled:opacity-40"
             aria-label={playing ? "Pause radar animation" : "Play radar animation"}
           >
@@ -2269,6 +2296,20 @@ export default function RadarMapInner({
                       )
                     : "no frames"}
             </div>
+            {playbackNotice ? (
+              <div className="mt-1 flex items-center gap-2 text-[10px] font-semibold text-sky-200">
+                <span>{playbackNotice}</span>
+                {dataSaver && (
+                  <button
+                    type="button"
+                    onClick={() => setDataSaver(false)}
+                    className="underline decoration-sky-400/70 hover:text-white"
+                  >
+                    turn off data saver
+                  </button>
+                )}
+              </div>
+            ) : null}
             <input
               type="range"
               min={0}
@@ -2303,6 +2344,32 @@ function Switch({ on }: { on: boolean }) {
     >
       <span className={cn("h-3 w-3 rounded-full bg-white transition-transform", on ? "translate-x-3" : "translate-x-0")} />
     </span>
+  );
+}
+
+function OfficialPlaybackNotice({
+  notice,
+  dataSaver,
+  onDisableDataSaver,
+}: {
+  notice: string | null;
+  dataSaver: boolean;
+  onDisableDataSaver: () => void;
+}) {
+  if (!notice) return null;
+  return (
+    <div className="flex items-center gap-2 text-[10px] font-semibold text-slate-500">
+      <span>{notice}</span>
+      {dataSaver && (
+        <button
+          type="button"
+          onClick={onDisableDataSaver}
+          className="text-sky-700 underline decoration-sky-300 hover:text-sky-900"
+        >
+          turn off data saver
+        </button>
+      )}
+    </div>
   );
 }
 
@@ -2765,10 +2832,12 @@ function OfficialView({
   official,
   center,
   dataSaver,
+  onDisableDataSaver,
 }: {
   official: OfficialRadarSource;
   center: { lat: number; lng: number };
   dataSaver: boolean;
+  onDisableDataSaver: () => void;
 }) {
   const radarId = bomRadarId(official.imageUrl);
   if (radarId) {
@@ -2778,6 +2847,7 @@ function OfficialView({
         radarId={radarId}
         center={center}
         dataSaver={dataSaver}
+        onDisableDataSaver={onDisableDataSaver}
       />
     );
   }
@@ -2785,9 +2855,9 @@ function OfficialView({
   // layered-on-our-basemap pattern as the AU licensed feed. NZ (MetService)
   // stays link-out only.
   if (official.href.includes("jma.go.jp")) {
-    return <JmaOfficialView official={official} center={center} dataSaver={dataSaver} />;
+    return <JmaOfficialView official={official} center={center} dataSaver={dataSaver} onDisableDataSaver={onDisableDataSaver} />;
   }
-  return <OfficialStillView official={official} dataSaver={dataSaver} />;
+  return <OfficialStillView official={official} dataSaver={dataSaver} onDisableDataSaver={onDisableDataSaver} />;
 }
 
 // ─── WillyWeather licensed AU radar ─────────────────────────────────────
@@ -2820,11 +2890,13 @@ function WillyOfficialView({
   radarId,
   center,
   dataSaver,
+  onDisableDataSaver,
 }: {
   official: OfficialRadarSource;
   radarId: string;
   center: { lat: number; lng: number };
   dataSaver: boolean;
+  onDisableDataSaver: () => void;
 }) {
   const [data, setData] = useState<WillyRadarData | null>(null);
   // null = first fetch still in flight · true = WillyWeather unusable, fall
@@ -2836,6 +2908,11 @@ function WillyOfficialView({
     if (typeof window === "undefined" || !window.matchMedia) return true;
     return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   });
+  const [reducedMotion] = useState(() =>
+    typeof window !== "undefined" &&
+    !!window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
   // Discovery succeeded but the overlay PNGs themselves may fail to load
   // (CDN blip) · if EVERY frame errors we have no radar data, so fall back.
   const [failedFrames, setFailedFrames] = useState<Set<string>>(new Set());
@@ -2927,6 +3004,7 @@ function WillyOfficialView({
         official={official}
         radarId={radarId}
         dataSaver={dataSaver}
+        onDisableDataSaver={onDisableDataSaver}
       />
     );
   }
@@ -2952,6 +3030,12 @@ function WillyOfficialView({
   const delayed =
     newestDate !== null &&
     nowMs - newestDate.getTime() > FRAME_DELAYED_MIN * 60_000;
+  const playbackNotice = radarPlaybackNotice({
+    dataSaver,
+    reducedMotion,
+    playing,
+    frameCount: frames.length,
+  });
 
   return (
     <div className="absolute inset-0 flex flex-col bg-slate-100">
@@ -3082,6 +3166,11 @@ function WillyOfficialView({
                 : `Updated ${frameLocalTime(newestTs)} local · ${newestAge}`}
             </div>
           )}
+          <OfficialPlaybackNotice
+            notice={playbackNotice}
+            dataSaver={dataSaver}
+            onDisableDataSaver={onDisableDataSaver}
+          />
         </div>
         <a
           href={official.href}
@@ -3124,10 +3213,12 @@ function JmaOfficialView({
   official,
   center,
   dataSaver,
+  onDisableDataSaver,
 }: {
   official: OfficialRadarSource;
   center: { lat: number; lng: number };
   dataSaver: boolean;
+  onDisableDataSaver: () => void;
 }) {
   const [times, setTimes] = useState<JmaTimesData["times"] | null>(null);
   // null = first fetch still in flight · true = discovery unusable, fall
@@ -3139,6 +3230,11 @@ function JmaOfficialView({
     if (typeof window === "undefined" || !window.matchMedia) return true;
     return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   });
+  const [reducedMotion] = useState(() =>
+    typeof window !== "undefined" &&
+    !!window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
 
   // The background refresh must not yank a PAUSED user off the frame they
   // picked · only snap to the newest frame while the loop is playing (or on
@@ -3234,7 +3330,7 @@ function JmaOfficialView({
   }, [playing, active, frames.length]);
 
   if (failed) {
-    return <OfficialStillView official={official} dataSaver={dataSaver} />;
+    return <OfficialStillView official={official} dataSaver={dataSaver} onDisableDataSaver={onDisableDataSaver} />;
   }
   if (failed === null || !times) {
     return (
@@ -3253,6 +3349,12 @@ function JmaOfficialView({
   const delayed =
     newestDate !== null &&
     nowMs - newestDate.getTime() > FRAME_DELAYED_MIN * 60_000;
+  const playbackNotice = radarPlaybackNotice({
+    dataSaver,
+    reducedMotion,
+    playing,
+    frameCount: frames.length,
+  });
 
   return (
     <div className="absolute inset-0 flex flex-col bg-slate-100">
@@ -3362,6 +3464,11 @@ function JmaOfficialView({
                 : `Updated ${frameLocalTime(newestTs)} local · ${newestAge}`}
             </div>
           )}
+          <OfficialPlaybackNotice
+            notice={playbackNotice}
+            dataSaver={dataSaver}
+            onDisableDataSaver={onDisableDataSaver}
+          />
         </div>
         <a
           href={official.href}
@@ -3380,10 +3487,12 @@ function BomAnimatedOfficialView({
   official,
   radarId,
   dataSaver,
+  onDisableDataSaver,
 }: {
   official: OfficialRadarSource;
   radarId: string;
   dataSaver: boolean;
+  onDisableDataSaver: () => void;
 }) {
   const [frames, setFrames] = useState<BomFrame[]>([]);
   const [unavailable, setUnavailable] = useState(false);
@@ -3395,6 +3504,11 @@ function BomAnimatedOfficialView({
     if (typeof window === "undefined" || !window.matchMedia) return true;
     return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   });
+  const [reducedMotion] = useState(() =>
+    typeof window !== "undefined" &&
+    !!window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
   // Frame discovery only HEAD-confirms the files exist · the actual GETs can
   // still 403 (BOM rate-limiting our egress). If EVERY frame fails to load we
   // have no real radar data, so degrade to the still/link-out rather than
@@ -3485,7 +3599,7 @@ function BomAnimatedOfficialView({
   // keeps its own onError link-out ladder.
   const allFramesFailed = frames.length > 0 && failedFrames.size >= frames.length;
   if (unavailable || (!dataSaver && frames.length < 2) || allFramesFailed) {
-    return <OfficialStillView official={official} dataSaver={dataSaver} />;
+    return <OfficialStillView official={official} dataSaver={dataSaver} onDisableDataSaver={onDisableDataSaver} />;
   }
 
   const layerClass =
@@ -3500,6 +3614,12 @@ function BomAnimatedOfficialView({
   const delayed =
     newestDate !== null &&
     nowMs - newestDate.getTime() > FRAME_DELAYED_MIN * 60_000;
+  const playbackNotice = radarPlaybackNotice({
+    dataSaver,
+    reducedMotion,
+    playing,
+    frameCount: frames.length,
+  });
 
   return (
     <div className="absolute inset-0 flex flex-col bg-slate-100">
@@ -3603,7 +3723,7 @@ function BomAnimatedOfficialView({
         </div>
       </div>
 
-      <div className="absolute left-3 right-3 bottom-3 z-[1000] rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg px-3 py-2 flex items-center justify-between gap-3">
+      <div className="shrink-0 bg-white border-t border-slate-200 px-3 py-2 flex items-center justify-between gap-3">
         <div className="min-w-0">
           <div className="text-[11px] text-slate-600 font-medium truncate">
             Source · {official.attribution}
@@ -3620,6 +3740,11 @@ function BomAnimatedOfficialView({
                 : `Updated ${frameLocalTime(newestTs)} local · ${newestAge}`}
             </div>
           )}
+          <OfficialPlaybackNotice
+            notice={playbackNotice}
+            dataSaver={dataSaver}
+            onDisableDataSaver={onDisableDataSaver}
+          />
         </div>
         <a
           href={official.href}
@@ -3637,9 +3762,11 @@ function BomAnimatedOfficialView({
 function OfficialStillView({
   official,
   dataSaver,
+  onDisableDataSaver,
 }: {
   official: OfficialRadarSource;
   dataSaver: boolean;
+  onDisableDataSaver: () => void;
 }) {
   // Track upstream image failure (BOM/JMA blocks our request, gif 404,
   // network blip, etc.) so we can degrade gracefully to the same
@@ -3736,9 +3863,19 @@ function OfficialStillView({
           </div>
         )}
       </div>
-      <div className="absolute left-3 right-3 bottom-3 z-[1000] rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg px-3 py-2 flex items-center justify-between gap-3">
-        <div className="text-[11px] text-slate-600 font-medium truncate">
-          Source · {official.attribution}
+      <div className="shrink-0 bg-white border-t border-slate-200 px-3 py-2 flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <div className="text-[11px] text-slate-600 font-medium truncate">
+            Source · {official.attribution}
+          </div>
+          {dataSaver && official.imageUrl && (
+            <div className="flex items-center gap-2 text-[10px] font-semibold text-slate-500">
+              <span>latest image · data saver on</span>
+              <button type="button" onClick={onDisableDataSaver} className="text-sky-700 underline">
+                turn off data saver
+              </button>
+            </div>
+          )}
         </div>
         <a
           href={official.href}

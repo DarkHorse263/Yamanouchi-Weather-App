@@ -49,11 +49,25 @@ async function checkTokenNotRevoked(
  */
 const router: IRouter = Router();
 
+function rejectInvalidToken(
+  res: import("express").Response,
+  reason: "malformed" | "bad_signature" | "expired" | "wrong_kind" | "unavailable",
+): void {
+  if (reason === "unavailable") {
+    res.status(503).json({
+      error: "ALERT_TOKEN_SERVICE_UNAVAILABLE",
+      message: "Alert links are temporarily unavailable. Please try again shortly.",
+    });
+    return;
+  }
+  res.status(400).json({ error: "INVALID_TOKEN", reason });
+}
+
 router.post("/alerts/push/subscribe", async (req, res): Promise<void> => {
   const token = typeof req.query["token"] === "string" ? req.query["token"] : "";
   const result = verifyToken(token, "manage");
   if (!result.ok) {
-    res.status(400).json({ error: "INVALID_TOKEN", reason: result.reason });
+    rejectInvalidToken(res, result.reason);
     return;
   }
   const parsed = PushSubscribeBody.safeParse(req.body);
@@ -94,7 +108,7 @@ router.delete("/alerts/push/subscribe", async (req, res): Promise<void> => {
   const token = typeof req.query["token"] === "string" ? req.query["token"] : "";
   const result = verifyToken(token, "manage");
   if (!result.ok) {
-    res.status(400).json({ error: "INVALID_TOKEN", reason: result.reason });
+    rejectInvalidToken(res, result.reason);
     return;
   }
   const parsed = PushUnsubscribeBody.safeParse(req.body);
