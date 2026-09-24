@@ -119,14 +119,15 @@ export function accountDeletedEmail(): { subject: string; html: string; text: st
   return {
     subject: "your feelzlike account was deleted",
     html: brandedEmail({
-      preheader: "your account and data were deleted · this is your record.",
+      preheader: "your account and profile were deleted · this is your record.",
       heading: "account deleted",
       bodyHtml: `<p style="margin:0 0 16px 0;">this confirms your feelzlike account was deleted, along with your profile and any powder-alert subscription tied to this address.</p>
-        <p style="margin:0 0 16px 0;">you won't receive any more emails from us · this receipt is the last one.</p>
+        <p style="margin:0 0 16px 0;">minimal consent and suppression evidence is retained under our privacy policy to record your choices and prevent unwanted alerts. this does not mean provider logs or backups have been erased.</p>
+        <p style="margin:0 0 16px 0;">any linked Stripe subscriptions were canceled before account deletion. payment provider records are not erased and deletion does not issue a refund.</p>
         <p style="font-size:13px;color:#64748b;margin:0;">didn't do this? reply to this email or contact info@feelzlike.com straight away.</p>`,
       footerHtml: `feelzlike.com is still free to browse anytime · if you come back, signing in with the same email simply creates a fresh account.`,
     }),
-    text: `your feelzlike account was deleted\n\nthis confirms your account, profile and any powder-alert subscription tied to this address were deleted. you won't receive any more emails from us.\n\ndidn't do this? contact info@feelzlike.com straight away.`,
+    text: `your feelzlike account was deleted\n\nthis confirms your account, profile and any powder-alert subscription tied to this address were deleted. minimal consent and suppression evidence is retained under our privacy policy to record your choices and prevent unwanted alerts. this does not mean provider logs or backups have been erased.\n\nany linked Stripe subscriptions were canceled before account deletion. payment provider records are not erased and deletion does not issue a refund.\n\ndidn't do this? contact info@feelzlike.com straight away.`,
   };
 }
 

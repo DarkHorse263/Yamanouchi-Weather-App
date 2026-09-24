@@ -26,6 +26,12 @@ if (Number.isNaN(port) || port <= 0) {
 
 const server = app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
+  import("./jobs/subscriberRetention.js")
+    .then((m) => {
+      m.startSubscriberRetentionScheduler();
+      server.on("request", () => m.requestRetentionWake());
+    })
+    .catch(() => console.error("[boot] subscriber retention/recovery scheduler unavailable"));
   // Powder-alert scheduling is explicit opt-in (RUN_ALERT_CRON=1). Its
   // job_runs claim makes multiple autoscale replicas safe.
   import("./jobs/alertEvaluator.js")

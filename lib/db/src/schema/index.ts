@@ -15,3 +15,5 @@ export * from "./promo-funnel";
 export * from "./engagement";
 export * from "./email-delivery-incidents";
 export * from "./lift-history";
+export * from "./subscriber-retention";
+export * from "./account-deletions";

@@ -1,0 +1,23 @@
+# Account deletion recovery
+
+Owner-approved rule: unresolved deletion requests remain until successfully completed. The daily maintenance runner removes the Clerk ID, local user ID, email and safe error field from completed requests after 30 days. Non-identifying request counts, phases and timestamps remain for operations.
+
+The API saves intent before contacting Clerk. Authentication checks this intent before returning a local user or provisioning one, under the same principal-scoped advisory lock. A failed Clerk call leaves the request pending and blocks account use; it does not remove local data. A verified Clerk resource-not-found response is treated as success, including after a crash between Clerk deletion and saving progress.
+
+Recovery locks each request row across provider deletion and local cleanup. Local cleanup uses a savepoint and invokes `deleteAlertSubscriberForAccount` to preserve approved actual consent and suppression evidence. Local user removal and completion commit atomically. A failure retains a safe error code; raw provider/DB errors are not saved in recovery records.
+
+Before Clerk deletion, recovery locks billing operations, verifies customer ownership and live/test mode, expires open Stripe Checkout sessions and immediately cancels non-terminal Stripe subscriptions without requesting an immediate invoice or proration. Provider outages, ownership mismatches, or unsupported active external subscription providers fail closed with `BILLING_CANCELLATION_FAILED`; Clerk and local identity remain intact. This cancellation path does not enable the paywall or depend on purchase-enable flags. Checkout rechecks deletion intent inside its billing lock, including after customer creation commits.
+
+After successful cancellation, final local cleanup removes `billing_customers` ownership links before deleting the user, allowing the existing subscriptions cascade to remove local entitlement/history projections. Stripe customer/invoice/payment records, the native Stripe sync schema and the billing event deduplication ledger are not purged. No new financial-data retention period is asserted or approved by this work. Account deletion does not issue refunds; refund requests remain a separate support/provider process. Failed cancellations must not be bypassed by removing billing ownership manually.
+
+## Operator procedure
+
+- Open Admin → Stats → Account deletion recovery. The list refreshes every 30 seconds and shows up to 100 newest unresolved requests, without customer identifiers.
+- Use **Retry deletion** to retry a saved request. This does not create a new deletion request or change its identity. Completion removes it from the pending list; failure remains visible.
+- `GET /api/admin/account-deletions` and `POST /api/admin/account-deletions/:id/retry` share the admin origin and email-allowlist guards.
+- Maintenance calls `runAccountDeletionRecovery()` from `src/lib/accountDeletionRecovery.ts` before retention purge. It processes the 100 earliest eligible retry timestamps per pass. Failures advance `next_attempt_at` by exponential backoff (5 minutes through a 24-hour cap); outer transaction failures advance it by one hour. This prevents an old permanently failing batch from starving newer requests. The admin retry button deliberately bypasses this wait. Permanent provider failures require operator intervention; requests are never silently discarded.
+- If maintenance is not running, use the authenticated admin retry UI while investigating. Never manually drop a pending request merely to unblock sign-in.
+
+Deploy the additive `account_deletions` schema, including `next_attempt_at timestamptz NOT NULL DEFAULT now()`, before code. Missing schema causes auth/recovery to fail closed. There is no FK to the deleted user. No historical partial deletions can be reconstructed automatically: older failures had no durable intent and must be investigated using authorized support evidence, never guessed.
+
+Isolated workflow tests cover provider failure, missing identity after crash, local failure/retry, operation order, unknown phases and completed idempotency. `accountDeletionRecovery.postgres.test.ts` exercises the real recovery service using a generated, temporary PostgreSQL schema and fake Clerk operations: genuine SQL savepoint failure, outer transaction rollback after provider success, 404 recovery, idempotency and concurrent clients. Fixtures never read customer tables and are dropped afterward. Actual process termination and live Clerk lifecycle checks remain separate staging exercises; never run destructive tests against customers.

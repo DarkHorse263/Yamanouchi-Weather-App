@@ -1,4 +1,6 @@
 import { AdminLayout, AdminForbidden } from "./AdminLayout";
+import { AccountDeletionRecovery } from "./AccountDeletionRecovery";
+import { SubscriberRetention } from "./SubscriberRetention";
 import { adminFetch, useAdminQuery } from "./useAdminFetch";
 import { Check, ExternalLink, X } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -854,6 +856,8 @@ export default function AdminStats() {
 
   return (
     <AdminLayout active="stats">
+      <AccountDeletionRecovery />
+      <SubscriberRetention />
       {stats.error?.status === 403 || signups.error?.status === 403 ? (
         <AdminForbidden />
       ) : stats.isLoading ? (

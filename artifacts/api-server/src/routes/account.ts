@@ -2,10 +2,11 @@ import { Router, type IRouter, type Request, type Response } from "express";
 import { z } from "zod";
 import { db, usersTable, alertSubscribersTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
-import { getAuth, clerkClient } from "@clerk/express";
+import { getAuth } from "@clerk/express";
 import { isRegionId, normaliseAlertDestinations } from "../lib/regions.js";
 import { requireAuth } from "../middlewares/requireAuth.js";
 import { sendAccountDeletionReceipt } from "../lib/accountDeletionReceipt.js";
+import { requestAccountDeletion, recoverAccountDeletion } from "../lib/accountDeletionRecovery.js";
 
 /**
  * Clerk-authorised account surface for signed-in members. Backs /account:
@@ -202,19 +203,8 @@ router.put("/account/alerts", requireAuth, async (req, res): Promise<void> => {
 });
 
 // ─── DELETE /account ──────────────────────────────────────────────────────
-// Permanent self-serve deletion.
-//
-// ORDERING — security-critical:
-//   1. Delete the Clerk identity FIRST. This revokes all sessions server-side
-//      and prevents the Clerk user from ever re-provisioning a new local row
-//      via requireAuth's JIT insert. If this step fails, abort — do NOT
-//      delete local data while a live Clerk identity remains.
-//   2. Delete the local subscriber and users rows in one transaction, with one
-//      immediate retry for a transient DB failure.
-//
-// This order means a repeated DB failure after step 1 leaves orphaned local data for
-// a deleted Clerk identity, which is far safer than a live Clerk identity
-// pointing at a deleted local record (which requireAuth would JIT-reprovision).
+// Intent is durable BEFORE provider deletion. The recovery worker can resume
+// after a crash even if the requester can no longer authenticate.
 router.delete("/account", requireAuth, async (req, res): Promise<void> => {
   const user = requireUser(req, res);
   if (!user) return;
@@ -228,38 +218,15 @@ router.delete("/account", requireAuth, async (req, res): Promise<void> => {
   }
 
   try {
-    // ── Step 1: delete the Clerk identity (MUST succeed before local data) ──
-    try {
-      await clerkClient.users.deleteUser(clerkUserId);
-    } catch (clerkErr) {
-      // Fail the entire request so local data is NOT deleted while the
-      // Clerk identity is still live. The client can retry.
-      console.error("[/account DELETE] Clerk user deletion failed:", clerkErr);
-      res.status(500).json({
-        error: "ACCOUNT_DELETE_FAILED",
-        message: "Couldn't complete the account deletion · please try again.",
+    const intent = await requestAccountDeletion(clerkUserId, user.id, user.email);
+    let result = await recoverAccountDeletion(intent.id);
+    if (!result.complete) result = await recoverAccountDeletion(intent.id);
+    if (!result.complete) {
+      res.status(503).json({
+        error: "ACCOUNT_DELETE_PENDING",
+        message: "Your deletion request is saved. Cleanup is pending and will be retried automatically; support can track it.",
       });
       return;
-    }
-
-    // ── Steps 2 & 3: delete local data atomically ─────────────────────────
-    // Clerk identity is already gone. A transaction prevents a partial local
-    // cleanup (for example subscriber removed but user retained). The deletes
-    // are idempotent, so an immediate retry safely recovers a transient DB
-    // failure without weakening the Clerk-first authorization ordering.
-    const deleteLocalData = () => db.transaction(async (tx) => {
-      if (user.email) {
-        await tx
-          .delete(alertSubscribersTable)
-          .where(eq(alertSubscribersTable.email, user.email.trim().toLowerCase()));
-      }
-      await tx.delete(usersTable).where(eq(usersTable.id, user.id));
-    });
-    try {
-      await deleteLocalData();
-    } catch (firstLocalErr) {
-      console.error("[/account DELETE] local deletion failed; retrying once:", firstLocalErr);
-      await deleteLocalData();
     }
 
     // ── Step 4: deletion receipt (fire-and-forget) ────────────────────────
@@ -272,10 +239,10 @@ router.delete("/account", requireAuth, async (req, res): Promise<void> => {
 
     res.json({ ok: true });
   } catch (err) {
-    console.error("[/account DELETE] error after Clerk deletion:", err);
+    console.error("[/account DELETE] deletion could not finish");
     res.status(500).json({
-      error: "ACCOUNT_DELETE_PARTIAL",
-      message: "Your identity was deleted but some local data may remain · contact support if needed.",
+      error: "ACCOUNT_DELETE_UNAVAILABLE",
+      message: "Deletion could not finish. If your request was saved it will be retried automatically; contact support if needed.",
     });
   }
 });

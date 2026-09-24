@@ -18,6 +18,7 @@
  *     endpoint for ad-hoc testing.
  */
 import cron, { type ScheduledTask } from "node-cron";
+import { isSuppressed } from "../lib/subscriberRetention.js";
 import { db, alertSubscribersTable, dispatchedAlertsTable, jobRunsTable, pushSubscriptionsTable } from "@workspace/db";
 import { eq, and, isNull, isNotNull, gte, count, lt, sql } from "drizzle-orm";
 import * as Sentry from "@sentry/node";
@@ -373,6 +374,7 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
 
   for (const sub of active) {
     report.subscribersChecked++;
+    if (await isSuppressed(sub.email, "alerts")) continue;
 
     // Per-subscriber rate limit - last alert any region, in last 12h.
     if (sub.lastAlertedAt) {

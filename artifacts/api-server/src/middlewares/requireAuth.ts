@@ -1,6 +1,6 @@
 import { getAuth, clerkClient } from "@clerk/express";
-import { eq, and } from "drizzle-orm";
-import { db, usersTable } from "@workspace/db";
+import { eq, and, sql } from "drizzle-orm";
+import { db, usersTable, accountDeletionsTable } from "@workspace/db";
 import type { Request, Response, NextFunction } from "express";
 import type { User } from "@workspace/db";
 
@@ -197,7 +197,14 @@ export async function resolveDbUser(
 
 // ─── Real DB dependency implementation ───────────────────────────────────────
 
-function makeLiveDeps(): BridgeDeps {
+function makeLiveDeps(db: Pick<typeof import("@workspace/db").db, "select" | "insert" | "update">): BridgeDeps {
+  async function assertEmailNotPendingDeletion(email: string | null) {
+    if (!email) return;
+    const [pending] = await db.select({ id: accountDeletionsTable.id }).from(accountDeletionsTable)
+      .where(and(eq(accountDeletionsTable.email, email.trim().toLowerCase()),
+        sql`${accountDeletionsTable.completedAt} is null`)).limit(1);
+    if (pending) throw new Error("ACCOUNT_DELETION_REQUESTED");
+  }
   return {
     async findUserByProvider(authProvider, externalAuthId) {
       const [row] = await db
@@ -213,6 +220,7 @@ function makeLiveDeps(): BridgeDeps {
       return row;
     },
     async findUserByEmail(email) {
+      await assertEmailNotPendingDeletion(email);
       const [row] = await db
         .select()
         .from(usersTable)
@@ -221,6 +229,10 @@ function makeLiveDeps(): BridgeDeps {
       return row;
     },
     async updateUserToClerk(id, clerkUserId, emailBackfill) {
+      const [pending] = await db.select({ id: accountDeletionsTable.id }).from(accountDeletionsTable)
+        .where(and(eq(accountDeletionsTable.userId, id),
+          sql`${accountDeletionsTable.completedAt} is null`)).limit(1);
+      if (pending) throw new Error("ACCOUNT_DELETION_REQUESTED");
       await db
         .update(usersTable)
         .set({
@@ -233,6 +245,7 @@ function makeLiveDeps(): BridgeDeps {
         .where(eq(usersTable.id, id));
     },
     async insertNewClerkUser(clerkUserId, email) {
+      await assertEmailNotPendingDeletion(email);
       const [row] = await db
         .insert(usersTable)
         .values({
@@ -284,7 +297,16 @@ export async function requireAuth(
   }
 
   try {
-    const result = await resolveDbUser(clerkUserId, makeLiveDeps());
+    const result = await db.transaction(async (tx): Promise<ResolveResult> => {
+      await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${clerkUserId}))`);
+      const [deletion] = await tx.select({ id: accountDeletionsTable.id }).from(accountDeletionsTable)
+        .where(eq(accountDeletionsTable.clerkUserId, clerkUserId)).limit(1);
+      if (deletion) return {
+        ok: false, status: 403, error: "ACCOUNT_DELETION_REQUESTED",
+        message: "Account deletion has been requested. Contact support for its status.",
+      };
+      return resolveDbUser(clerkUserId, makeLiveDeps(tx));
+    });
     if (!result.ok) {
       res.status(result.status).json({
         error: result.error,
@@ -295,6 +317,13 @@ export async function requireAuth(
     req.dbUser = result.user;
     next();
   } catch (err) {
+    if (err instanceof Error && err.message === "ACCOUNT_DELETION_REQUESTED") {
+      res.status(403).json({
+        error: "ACCOUNT_DELETION_REQUESTED",
+        message: "Account deletion is pending. Contact support for its status.",
+      });
+      return;
+    }
     console.error("[requireAuth] error:", err);
     res.status(500).json({ error: "AUTH_CHECK_FAILED" });
   }

@@ -58,6 +58,7 @@ const HORIZONS: Array<{ value: 24 | 48 | 72; label: string }> = [
 export default function Account() {
   const { isAuthenticated, isLoading: authLoading, promptSignUp } = useAuthAccount();
   const [deleted, setDeleted] = useState(false);
+  const [deletionPending, setDeletionPending] = useState(false);
 
   // Signed-out visitors get the sign-up sheet · once, after auth resolves.
   // Skipped after a self-serve deletion so the confirmation isn't covered
@@ -88,7 +89,7 @@ export default function Account() {
         </div>
 
         {deleted ? (
-          <DeletedCard />
+          <DeletedCard pending={deletionPending} />
         ) : authLoading ? (
           <div className="flex items-center justify-center py-12">
             <Loader2 className="w-6 h-6 animate-spin text-sky-400" />
@@ -96,7 +97,7 @@ export default function Account() {
         ) : !isAuthenticated ? (
           <SignedOutCard onSignUp={() => promptSignUp({ feature: "account-page" })} />
         ) : (
-          <SignedInAccount onDeleted={() => setDeleted(true)} />
+          <SignedInAccount onDeleted={(pending = false) => { setDeletionPending(pending); setDeleted(true); }} />
         )}
       </div>
     </div>
@@ -128,7 +129,7 @@ function SignedOutCard({ onSignUp }: { onSignUp: () => void }) {
   );
 }
 
-function DeletedCard() {
+function DeletedCard({ pending }: { pending: boolean }) {
   return (
     <div className="rounded-2xl border border-border bg-white p-5">
       <div className="flex items-start gap-3">
@@ -136,11 +137,11 @@ function DeletedCard() {
           <CheckCircle2 className="w-5 h-5" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-bold text-foreground">your account is deleted</p>
+          <p className="text-sm font-bold text-foreground">{pending ? "your deletion request is saved" : "your account is deleted"}</p>
           <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
-            your details, sessions and powder-alert subscription are gone and
-            you're signed out. thanks for riding with us · you're welcome back
-            anytime.
+            {pending
+              ? "cleanup is still pending. your request will be retried automatically even after you sign out. you do not need to sign in or submit it again. contact info@feelzlike.com if you need its status."
+              : "your account, profile and powder-alert subscription have been removed. minimal consent and suppression evidence is retained under our privacy policy, so deletion does not accidentally restart email."}
           </p>
           <Link
             href="/"
@@ -154,7 +155,7 @@ function DeletedCard() {
   );
 }
 
-function SignedInAccount({ onDeleted }: { onDeleted: () => void }) {
+function SignedInAccount({ onDeleted }: { onDeleted: (pending?: boolean) => void }) {
   const { data, isLoading, isError, refetch } = useGetAccount({
     query: { queryKey: ["account"], retry: 1 },
   });
@@ -208,7 +209,7 @@ function SignedInAccount({ onDeleted }: { onDeleted: () => void }) {
   );
 }
 
-function DangerZoneCard({ email, onDeleted }: { email: string | null; onDeleted: () => void }) {
+function DangerZoneCard({ email, onDeleted }: { email: string | null; onDeleted: (pending?: boolean) => void }) {
   const [confirming, setConfirming] = useState(false);
   const [typed, setTyped] = useState("");
   const del = useDeleteAccount();
@@ -220,6 +221,7 @@ function DangerZoneCard({ email, onDeleted }: { email: string | null; onDeleted:
     if (!confirmed || del.isPending) return;
     try {
       await del.mutateAsync();
+      onDeleted();
       // Sign out via Clerk immediately after the server deletes the user so the
       // client session/cookie is cleared before the confirmation card renders.
       // The server also calls clerkClient.users.deleteUser, which invalidates all
@@ -232,9 +234,13 @@ function DangerZoneCard({ email, onDeleted }: { email: string | null; onDeleted:
         // because the session is already invalid. The UI will reflect the
         // signed-out state on the next Clerk state refresh regardless.
       }
-      onDeleted();
-    } catch {
-      /* surfaced below */
+    } catch (error) {
+      const code = (error as { data?: { error?: string } })?.data?.error;
+      if (code === "ACCOUNT_DELETE_PENDING") {
+        // Set confirmation BEFORE sign-out can unmount this component.
+        onDeleted(true);
+        try { await signOut(); } catch { /* Saved request does not depend on this browser session. */ }
+      }
     }
   };
 
@@ -246,7 +252,11 @@ function DangerZoneCard({ email, onDeleted }: { email: string | null; onDeleted:
       <p className="text-sm text-muted-foreground leading-relaxed">
         deleting your account removes your details, all sign-in sessions and
         the powder-alert subscription on {email ?? "your email"} · permanently.
-        there's no undo.
+        there's no undo. minimal consent and suppression evidence is kept under
+        our privacy policy. if cleanup cannot finish immediately, your saved
+        request is retried automatically, including after sign-out.
+        linked Stripe subscriptions are canceled before account deletion. payment
+        provider records are not erased and deletion does not issue a refund.
       </p>
 
       {!confirming ? (
@@ -273,7 +283,8 @@ function DangerZoneCard({ email, onDeleted }: { email: string | null; onDeleted:
           />
           {del.isError && (
             <p className="text-sm text-rose-700 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2">
-              couldn't delete your account · try again in a moment.
+              deletion could not finish. if your request was saved, it will be retried automatically.
+              contact info@feelzlike.com to confirm its status before submitting again.
             </p>
           )}
           <div className="flex items-center gap-2">

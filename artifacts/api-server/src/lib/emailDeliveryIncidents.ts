@@ -1,5 +1,6 @@
 import { and, desc, eq, isNull, sql } from "drizzle-orm";
-import { db, emailDeliveryIncidentsTable } from "@workspace/db";
+import { db, emailDeliveryIncidentsTable, subscriberSuppressionsTable } from "@workspace/db";
+import { suppressionKey } from "./subscriberRetention.js";
 
 export async function recordEmailDeliveryIncident(params: {
   providerEventId: string;
@@ -83,6 +84,12 @@ export async function resolveEmailDeliveryIncident(params: {
         resolvedAt: emailDeliveryIncidentsTable.resolvedAt,
         resolvedByEmail: emailDeliveryIncidentsTable.resolvedByEmail,
       });
+    if (resolved) {
+      await tx.delete(subscriberSuppressionsTable).where(and(
+        eq(subscriberSuppressionsTable.emailKey, suppressionKey(params.email)),
+        eq(subscriberSuppressionsTable.scope, "delivery"),
+      ));
+    }
     return resolved
       ? { kind: "resolved", incidentType: incident.type, incident: resolved }
       : { kind: "already_resolved" };

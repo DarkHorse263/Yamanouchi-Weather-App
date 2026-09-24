@@ -20,7 +20,12 @@ test("dispatches a branded deletion receipt to the former member", () => {
   assert.equal(sent?.tag, "account-deleted");
   assert.match(sent?.subject ?? "", /account was deleted/i);
   assert.match(sent?.html ?? "", /branding\/wordmark-inline\.png/);
-  assert.match(sent?.html ?? "", /account and data were deleted/i);
+  assert.match(sent?.html ?? "", /account and profile were deleted/i);
+  for (const copy of [sent?.html ?? "", sent?.text ?? ""]) {
+    assert.match(copy, /minimal consent and suppression evidence is retained/i);
+    assert.match(copy, /does not mean provider logs or backups have been erased/i);
+    assert.doesNotMatch(copy, /won't receive any more emails|account and data were deleted/i);
+  }
   assert.match(sent?.text ?? "", /powder-alert subscription/i);
 });
 

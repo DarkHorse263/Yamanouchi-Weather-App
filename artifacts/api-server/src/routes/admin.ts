@@ -6,6 +6,8 @@ import { requireAdminUser } from "../middlewares/requireAdminUser.js";
 import { loadPromoFunnel } from "../lib/adminPromoFunnel.js";
 import { resolveEmailDeliveryIncident } from "../lib/emailDeliveryIncidents.js";
 import { getAlertDeliveryReadiness } from "../lib/alertDeliveryReadiness.js";
+import accountDeletionsRouter from "./admin-account-deletions.js";
+import retentionRouter from "./admin-retention.js";
 
 /**
  * Admin router · mounted at /api/admin/*. Every route here goes through
@@ -73,6 +75,8 @@ router.use((req: Request, res: Response, next) => {
 // are rejected before the session cookie is even consulted (no auth oracle
 // for cross-site probes).
 router.use(requireAdminUser);
+router.use(accountDeletionsRouter);
+router.use("/retention", retentionRouter);
 
 // ── Identity probe ────────────────────────────────────────────────────────
 // Cheap GET so the admin SPA can detect "is the current user actually on the

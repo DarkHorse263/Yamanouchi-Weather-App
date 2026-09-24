@@ -1,5 +1,6 @@
 import { db, emailDeliveryIncidentsTable } from "@workspace/db";
 import { desc, eq } from "drizzle-orm";
+import { isSuppressed } from "./subscriberRetention.js";
 
 /**
  * Email sender. Uses Resend if `RESEND_API_KEY` is set; otherwise logs to
@@ -92,6 +93,9 @@ export async function sendEmail(args: SendArgs): Promise<SendResult> {
 
   const normalizedTo = args.to.trim().toLowerCase();
   try {
+    if (await isSuppressed(normalizedTo, "delivery")) {
+      return { delivered: false, provider: "resend", error: "known_delivery_incident:retained", permanent: true };
+    }
     const [incident] = await db
       .select({
         type: emailDeliveryIncidentsTable.type,

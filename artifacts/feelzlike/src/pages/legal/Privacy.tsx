@@ -22,7 +22,7 @@ export default function Privacy() {
       title="Privacy Policy"
       description="feelzlike privacy policy. Explains what data we collect, why, where it goes, and the rights you have over it."
       path="/legal/privacy"
-      lastUpdated="23 September 2026"
+      lastUpdated="24 September 2026"
     >
       <p>
         feelzlike respects your privacy. This policy explains what we
@@ -298,18 +298,64 @@ export default function Privacy() {
 
       <Section title="7 · How long we keep it">
         <p>
-          We keep personal information only while it is needed for the
-          purposes described above, to honour your choices, or to meet
-          applicable legal and security obligations. We do not state
-          fixed periods here where operational or provider settings have
-          not been verified.
+          The following periods apply to our app-controlled alert records.
+          Scheduled cleanup runs daily when the service is awake, with
+          catch-up after downtime, rather than guaranteeing removal at an
+          exact time.
         </p>
+        <ul className="list-disc pl-6 space-y-2">
+          <li>Unverified signups · 30 days from signup.</li>
+          <li>Active alert profiles · while you remain subscribed.</li>
+          <li>Unsubscribed profiles and preferences · 90 days after unsubscribe.</li>
+          <li>
+            Recorded consent evidence · while subscribed, then two years
+            after unsubscribe or account deletion. We do not invent
+            missing historical consent records. Expired unverified
+            signups are removed with their signup evidence.
+          </li>
+          <li>Alert dispatch logs · 90 days, or sooner when the associated profile is deleted.</li>
+          <li>Detailed bounce and complaint incidents · one year.</li>
+          <li>
+            Minimal suppression records · until explicitly cleared through
+            an authorized process. These use a keyed identifier for your
+            email address to honour unsubscribe requests and unresolved
+            delivery blocks after detailed records are removed. They are
+            not used to send marketing and are not anonymous data.
+          </li>
+        </ul>
         <p>
           You can delete a signed-in account from the account page.
-          Unsubscribing stops alert delivery. We may retain the minimum
-          subscription, consent and suppression record needed to prove
-          the request and avoid sending again. You can ask us to access
-          or delete information by emailing info@feelzlike.com.
+          This requests deletion of your Clerk identity, local account,
+          alert profile and linked push subscriptions. The limited consent
+          and suppression records described above remain separately.
+          If deletion cannot finish immediately, we keep a recovery record
+          and retry; operators can see and retry unresolved requests.
+          Identifying details in that recovery record are removed 30 days
+          after completion. Non-identifying operational counts and
+          timestamps may remain.
+        </p>
+        <p>
+          Where a billing account is linked, deletion first cancels
+          non-terminal subscriptions and closes open checkout sessions
+          before removing the sign-in identity and local billing ownership
+          link. It does not automatically issue a refund. Provider-held
+          customer, payment and invoice records, and billing event records,
+          are not purged under this alert-retention policy.
+        </p>
+        <p>
+          These periods do not control provider-held logs or backups.
+          Resend publishes 30-day email and log retention on its standard
+          plans and seven-day backup retention; enterprise arrangements
+          can differ. Clerk manages its own retention obligations.
+          Deleting an account here does not establish that every copy held
+          by a provider has been erased. Other technical, analytics and
+          crash-report data is subject to its applicable operational and
+          provider settings, not the alert periods above.
+        </p>
+        <p>
+          Unsubscribing stops alert delivery. You can ask us to access or
+          delete information, or review a retained suppression record,
+          by emailing info@feelzlike.com.
         </p>
       </Section>
 

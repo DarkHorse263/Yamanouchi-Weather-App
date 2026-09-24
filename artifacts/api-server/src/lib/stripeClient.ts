@@ -4,9 +4,9 @@ import Stripe from "stripe";
 let cachedSync: { key: string; sync: StripeSync } | undefined;
 
 /** Use the connected proxy; never read or hard-code connector API credentials. */
-export async function stripeRequest(path: string, body?: URLSearchParams, key?: string): Promise<any> {
+export async function stripeRequest(path: string, body?: URLSearchParams, key?: string, method?: "DELETE"): Promise<any> {
   const response = await new ReplitConnectors().proxy("stripe", path, {
-    method: body ? "POST" : "GET",
+    method: method ?? (body ? "POST" : "GET"),
     ...(body ? { body: body.toString(), headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       ...(key ? { "Idempotency-Key": key } : {}),

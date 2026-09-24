@@ -26,7 +26,7 @@ const [
 ]);
 
 const { issueToken, isTokenStillValid, verifyToken } = tokenModule;
-const { alertSubscribersTable, db } = dbModule;
+const { alertSubscribersTable, subscriberSuppressionsTable, db } = dbModule;
 
 type AlertRow = {
   id: string;
@@ -60,6 +60,8 @@ type DbState = {
   transactionCount: number;
   rowLocks: string[];
   lockScheduler?: LockScheduler;
+  retainedAlertBlock?: boolean;
+  advisoryLockCount?: number;
 };
 
 function freshRow(overrides: Partial<AlertRow> = {}): AlertRow {
@@ -156,10 +158,12 @@ function createLockScheduler(): LockScheduler {
 function queryChain<T>(
   getRows: () => T[],
   onLock: (mode: string) => void | Promise<void> = () => undefined,
+  onFrom: (table: unknown) => void = () => undefined,
 ): any {
   let lockReady: Promise<void> | undefined;
   const chain: any = {
     from(_table: unknown) {
+      onFrom(_table);
       return chain;
     },
     where(_condition: unknown) {
@@ -237,11 +241,7 @@ function patchDatabase(t: TestContext, state: DbState): void {
           consentPolicyVersion: values.consentPolicyVersion as string,
           consentSurface: values.consentSurface as string,
         });
-        return [{
-          id: state.row.id,
-          verifiedAt: state.row.verifiedAt,
-          unsubscribedAt: state.row.unsubscribedAt,
-        }];
+        return [state.row];
       },
     };
     return builder;
@@ -285,21 +285,32 @@ function patchDatabase(t: TestContext, state: DbState): void {
     state.transactionCount += 1;
     let transactionHasLock = false;
     const tx = {
-      select: (...selection: unknown[]) => queryChain(() => {
-        if (!state.row) return [];
-        if (selection.length > 0) {
-          return [{
-            id: state.row.id,
-            tokensInvalidatedAt: state.row.tokensInvalidatedAt,
-            unsubscribedAt: state.row.unsubscribedAt,
-          }];
-        }
-        return [state.row];
-      }, (mode) => {
-        transactionHasLock = true;
-        state.rowLocks.push(mode);
-        return state.lockScheduler?.acquire();
-      }),
+      execute: async () => {
+        state.advisoryLockCount = (state.advisoryLockCount ?? 0) + 1;
+        return { rows: [] };
+      },
+      select: (...selection: unknown[]) => {
+        let selectedTable: unknown;
+        return queryChain<AlertRow | { key: string } | Pick<AlertRow, "id" | "tokensInvalidatedAt" | "unsubscribedAt">>(() => {
+          if (selectedTable === subscriberSuppressionsTable) {
+            assert.ok(state.advisoryLockCount, "suppression lookup must follow the retention advisory lock");
+            return state.retainedAlertBlock ? [{ key: "fixture-retained-hmac" }] : [];
+          }
+          if (!state.row) return [];
+          if (selection.length > 0) {
+            return [{
+              id: state.row.id,
+              tokensInvalidatedAt: state.row.tokensInvalidatedAt,
+              unsubscribedAt: state.row.unsubscribedAt,
+            }];
+          }
+          return [state.row];
+        }, (mode) => {
+          transactionHasLock = true;
+          state.rowLocks.push(mode);
+          return state.lockScheduler?.acquire();
+        }, (table) => { selectedTable = table; });
+      },
       update: (_table: unknown) => {
         let values: Record<string, unknown> = {};
         const builder: any = {
@@ -331,6 +342,7 @@ function patchDatabase(t: TestContext, state: DbState): void {
         return builder;
       },
       insert: (_table: unknown) => {
+        if (_table === alertSubscribersTable) return target.insert!(_table);
         const builder: any = {
           values(_values: unknown) {
             state.pushInsertCount += 1;
@@ -529,6 +541,28 @@ test("POST subscribe rejects an existing verified row without email or writes", 
   assert.equal(state.insertConflictTargets[0], alertSubscribersTable.email);
 });
 
+test("POST subscribe refuses a retained block after profile deletion without inserting or emailing", async (t) => {
+  const state: DbState = {
+    retainedAlertBlock: true,
+    insertPayloads: [], updatePayloads: [], insertConflictTargets: [],
+    pushInsertCount: 0, pushDeleteCount: 0, transactionCount: 0, rowLocks: [],
+  };
+  patchDatabase(t, state);
+  const emailOutput = captureEmailOutput(t);
+  const origin = await startServer(t);
+  const response = await request(origin, "/alerts/subscribe", {
+    method: "POST", body: subscribeBody("previously-deleted@example.com"),
+  });
+  assert.equal(response.status, 409);
+  assert.equal(response.body.error, "SUBSCRIPTION_EXISTS");
+  assert.equal(state.row, undefined);
+  assert.equal(state.transactionCount, 1);
+  assert.equal(state.advisoryLockCount, 1);
+  assert.equal(state.insertPayloads.length, 0);
+  assert.equal(state.updatePayloads.length, 0);
+  assert.equal(emailOutput.length, 0);
+});
+
 test("POST subscribe rejects an unsubscribed row even when its token cutoff is absent", async (t) => {
   const state: DbState = {
     row: freshRow({
@@ -684,7 +718,10 @@ test("tampered management token cannot read or change subscriber data", async (t
   patchDatabase(t, state);
   const origin = await startServer(t);
   const valid = issueToken(state.row!.id, "manage");
-  const tampered = `${valid.slice(0, -1)}${valid.endsWith("a") ? "b" : "a"}`;
+  // Change significant signature bits, not the final base64url character's
+  // potentially unused padding bits (which can decode to the same signature).
+  const [payload, signature] = valid.split(".");
+  const tampered = `${payload}.${signature!.startsWith("a") ? "b" : "a"}${signature!.slice(1)}`;
 
   const read = await request(origin, `/alerts/manage?token=${encodeURIComponent(tampered)}`);
   const write = await request(origin, `/alerts/manage?token=${encodeURIComponent(tampered)}`, {

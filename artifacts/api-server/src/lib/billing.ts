@@ -38,6 +38,9 @@ export async function checkout(userId: string, plan: BillingPlan) {
     await client.query("BEGIN");
     // Serializes customer creation AND checkout creation across instances.
     await client.query("SELECT pg_advisory_xact_lock(hashtext($1))", [`billing:${userId}:${config.live}`]);
+    if ((await client.query("SELECT 1 FROM account_deletions WHERE user_id=$1 LIMIT 1", [userId])).rowCount) {
+      throw new Error("ACCOUNT_DELETION_REQUESTED");
+    }
     let { rows: [owner] } = await client.query(
       "SELECT customer_id FROM billing_customers WHERE user_id=$1 AND live=$2", [userId, config.live]);
     if (!owner) {
@@ -52,6 +55,9 @@ export async function checkout(userId: string, plan: BillingPlan) {
       await client.query("COMMIT");
       await client.query("BEGIN");
       await client.query("SELECT pg_advisory_xact_lock(hashtext($1))", [`billing:${userId}:${config.live}`]);
+      if ((await client.query("SELECT 1 FROM account_deletions WHERE user_id=$1 LIMIT 1", [userId])).rowCount) {
+        throw new Error("ACCOUNT_DELETION_REQUESTED");
+      }
     }
     const customer = await stripeRequest(`/v1/customers/${owner.customer_id}`);
     assertCustomerOwner(customer, userId, config.live);

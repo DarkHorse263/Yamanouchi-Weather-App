@@ -14,7 +14,9 @@ import { sql } from "drizzle-orm";
  * metadata preserves who removed the block and when. We
  * deliberately do NOT auto-unsubscribe a matching alert/newsletter subscriber
  * (a delivery incident should not silently change someone's saved opt-in).
- * Cleanup is a human decision made from the admin surface.
+ * Detail expires after one year. The retention transaction preserves the latest
+ * unresolved block separately using a pseudonymous identifier until authorized
+ * clearance; purging incident detail never silently permits delivery.
  */
 export const emailDeliveryIncidentsTable = pgTable(
   "email_delivery_incidents",

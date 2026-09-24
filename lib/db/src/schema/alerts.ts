@@ -9,9 +9,9 @@ import { z } from "zod/v4";
  * about this: one-click access from email links). If a subscriber later signs
  * in we link via `profileToken` so preferences can be merged.
  *
- * Soft-delete via `unsubscribedAt`. We never hard-delete because we want to
- * honour "do not re-subscribe with the same email after unsubscribe" without
- * letting that policy be bypassed by a trivial re-signup.
+ * Soft-delete via `unsubscribedAt`, then purge profiles after 90 days while
+ * retaining a pseudonymous suppression in subscriber_suppressions so a
+ * trivial re-signup cannot bypass unsubscribe.
  */
 export const alertSubscribersTable = pgTable(
   "alert_subscribers",
@@ -48,6 +48,7 @@ export const alertSubscribersTable = pgTable(
   (t) => [
     uniqueIndex("alert_subscribers_email_uidx").on(t.email),
     index("alert_subscribers_active_idx").on(t.verifiedAt, t.unsubscribedAt),
+    index("alert_subscribers_retention_idx").on(t.createdAt, t.unsubscribedAt),
   ],
 );
 
@@ -105,6 +106,7 @@ export const dispatchedAlertsTable = pgTable(
   (t) => [
     index("alert_dispatched_dedupe_idx").on(t.subscriberId, t.mountain, t.alertWindow),
     index("alert_dispatched_subscriber_recent_idx").on(t.subscriberId, t.sentAt),
+    index("alert_dispatched_retention_idx").on(t.sentAt),
     // DB-level dedupe: at most one successful dispatch per
     // (subscriber, alertWindow, delivery channel). Prevents duplicate sends
     // when two evaluator runs overlap (e.g. cron + manual /internal/run).

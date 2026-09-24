@@ -97,3 +97,4 @@
 - [feelzlike email incident resolution](feelzlike-email-incident-resolution.md) — webhook inserts and admin unblocks share a per-email transaction lock; latest incident alone controls suppression.
 - [feelzlike GitHub reconciliation](feelzlike-github-reconciliation.md) — GitHub connector API does not authenticate CLI pushes; use Replit Git Push after safe local ancestry reconciliation.
 - [feelzlike data saving](feelzlike-data-saving.md) — media consent is source-local; visibility gates downloads; blocked storage must still sync preferences; no attribution or hard byte-cap claims.
+- [feelzlike retention approval](feelzlike-retention-approval.md) — owner-approved lifecycle periods; suppression survives cleanup; provider retention is separate.

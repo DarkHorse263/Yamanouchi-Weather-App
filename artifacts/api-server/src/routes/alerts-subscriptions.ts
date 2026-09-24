@@ -13,6 +13,7 @@ import { sendEmail } from "../lib/emailSender.js";
 import { verificationEmail } from "../lib/emailTemplates.js";
 import { getAppPublicUrl } from "../lib/appUrl.js";
 import { normaliseAlertDestinations } from "../lib/regions.js";
+import { insertUnsuppressedSubscriber } from "../lib/subscriberRetention.js";
 
 const router: IRouter = Router();
 
@@ -183,15 +184,11 @@ router.post("/alerts/subscribe", async (req, res): Promise<void> => {
     // An email address is not proof of ownership. Never change an existing
     // row here, even while pending: a previously emailed link must not confirm
     // preferences silently replaced by a later anonymous request.
-    const inserted = await db
-      .insert(alertSubscribersTable)
-      .values(payload)
-      .onConflictDoNothing({ target: alertSubscribersTable.email })
-      .returning({
-        id: alertSubscribersTable.id,
-        verifiedAt: alertSubscribersTable.verifiedAt,
-        unsubscribedAt: alertSubscribersTable.unsubscribedAt,
-      });
+    const inserted = await insertUnsuppressedSubscriber(payload);
+    if (inserted === null) {
+      res.status(409).json({ error: "SUBSCRIPTION_EXISTS", message: "This address cannot be subscribed here. Contact support to review your email preferences." });
+      return;
+    }
     const row = inserted[0] ?? (await db.select()
       .from(alertSubscribersTable).where(eq(alertSubscribersTable.email, email)).limit(1))[0];
     if (!row) {
