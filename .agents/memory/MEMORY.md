@@ -1,4 +1,5 @@
 - [Stripe live onboarding](stripe-live-onboarding.md) — select the live account even if “Already installed”; sandbox installation cannot complete the live connection.
+- [Regional subscription pricing](feelzlike-regional-pricing.md) — deliberate local price points, not FX conversion; ski destination and later billing-address changes must not alter paid entitlement.
 - [feelzlike brand voice](feelzlike-brand-voice.md) — lowercase, middot · required (NOT forbidden), no em/en dashes, no emojis, DIN Pro, sky/blue.
 - [feelzlike snow-accent pink](feelzlike-snow-accent-color.md) — snow amounts+icons render #EC008C via --color-snow-accent; powder medals stay amber; detect via icon-identity locally / accent:"snow" in shared LiveConditions; band labels stay sky.
 - [feelzlike section tinting](feelzlike-section-tinting.md) — per-section accent (nav + home tiles) keyed by PATH not href in sectionAccents.ts; snow-pink + Today/primary-blue are invariants; home tiles need the --sa CSS-var trick for Tailwind JIT hover; hues now AA-on-white per bluebird palette.

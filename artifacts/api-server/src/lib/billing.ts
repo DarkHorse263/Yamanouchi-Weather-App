@@ -1,11 +1,11 @@
 import { createHash } from "node:crypto";
 import Stripe from "stripe";
 import { pool } from "@workspace/db";
-import { BILLING_PLANS, billingConfig, validatePrice, assertCustomerOwner, paidSubscription, type BillingPlan } from "./billing-policy";
+import { BILLING_CURRENCIES, BILLING_PLANS, approvedPriceIds, billingConfig, currencyForCountry, entitlementBillingConfig, isBillingCountry, priceEnv, subscriptionMatchesRegionalPolicy, validatePrice, assertCustomerOwner, paidSubscription, type BillingCurrency, type BillingPlan } from "./billing-policy";
 import { stripeRequest, getStripeSync } from "./stripeClient";
 
 const params = (values: Record<string, string>) => new URLSearchParams(values);
-const priceIds = () => Object.values(BILLING_PLANS).map(p => process.env[p.env]!);
+const priceIds = () => approvedPriceIds();
 const keyFor = (user: string) => createHash("sha256").update(user).digest("hex");
 
 export async function billingReady() {
@@ -25,14 +25,18 @@ export async function billingReady() {
     ["customer.subscription.created", "customer.subscription.updated", "customer.subscription.deleted"].every(type =>
       endpoint.enabled_events?.includes("*") || endpoint.enabled_events?.includes(type)));
   if (!webhook) throw new Error("BILLING_WEBHOOK_NOT_READY");
-  for (const plan of Object.keys(BILLING_PLANS) as BillingPlan[]) {
-    validatePrice(await stripeRequest(`/v1/prices/${process.env[BILLING_PLANS[plan].env]}`), plan, config.live);
+  for (const currency of Object.keys(BILLING_CURRENCIES) as BillingCurrency[]) {
+    for (const plan of Object.keys(BILLING_PLANS) as BillingPlan[]) {
+      validatePrice(await stripeRequest(`/v1/prices/${process.env[priceEnv(currency, plan)]}`), plan, currency, config.live);
+    }
   }
   return config;
 }
 
-export async function checkout(userId: string, plan: BillingPlan) {
+export async function checkout(userId: string, plan: BillingPlan, billingCountry: string) {
+  if (!isBillingCountry(billingCountry)) throw new Error("BILLING_COUNTRY_INVALID");
   const config = await billingReady();
+  const currency = currencyForCountry(billingCountry);
   const client = await pool.connect();
   try {
     await client.query("BEGIN");
@@ -72,13 +76,15 @@ export async function checkout(userId: string, plan: BillingPlan) {
     }
     const session = await stripeRequest("/v1/checkout/sessions", params({
       customer: owner.customer_id, mode: "subscription",
-      "line_items[0][price]": process.env[BILLING_PLANS[plan].env]!, "line_items[0][quantity]": "1",
+      "line_items[0][price]": process.env[priceEnv(currency, plan)]!, "line_items[0][quantity]": "1",
       "automatic_tax[enabled]": "true", "billing_address_collection": "required",
       "customer_update[address]": "auto",
       "subscription_data[metadata][feelzlike_user_id]": userId,
+      "subscription_data[metadata][feelzlike_billing_country]": billingCountry,
+      "subscription_data[metadata][feelzlike_billing_currency]": currency,
       success_url: `${config.origin}/account?checkout=returned`,
       cancel_url: `${config.origin}/premium?checkout=cancelled`,
-    }), `feelzlike-checkout-${config.live}-${keyFor(userId)}-${plan}-${Math.floor(Date.now() / 1800000)}`);
+    }), `feelzlike-checkout-${config.live}-${keyFor(userId)}-${plan}-${billingCountry}-${Math.floor(Date.now() / 1800000)}`);
     if (session.livemode !== config.live || !session.url?.startsWith("https://checkout.stripe.com/"))
       throw new Error("BILLING_CHECKOUT_INVALID");
     await client.query("COMMIT");
@@ -88,7 +94,7 @@ export async function checkout(userId: string, plan: BillingPlan) {
 }
 
 export async function portal(userId: string) {
-  const config = billingConfig();
+  const config = entitlementBillingConfig();
   const { rows: [owner] } = await pool.query(
     "SELECT customer_id FROM billing_customers WHERE user_id=$1 AND live=$2", [userId, config.live]);
   if (!owner) throw new Error("BILLING_NO_CUSTOMER");
@@ -108,7 +114,7 @@ export async function portal(userId: string) {
 export async function processBillingWebhook(raw: Buffer, signature: string, deps = {
   pool, stripeRequest, getStripeSync,
 }) {
-  const config = billingConfig();
+  const config = entitlementBillingConfig();
   const event = Stripe.webhooks.constructEvent(raw, signature, config.webhookSecret);
   if (event.livemode !== config.live || event.account) throw new Error("BILLING_EVENT_MODE");
   const sync = await deps.getStripeSync();
@@ -125,10 +131,12 @@ export async function processBillingWebhook(raw: Buffer, signature: string, deps
     const { rows: [owner] } = await client.query(
       "SELECT user_id FROM billing_customers WHERE customer_id=$1 AND live=$2", [customerId, config.live]);
     if (owner) {
-      assertCustomerOwner(await deps.stripeRequest(`/v1/customers/${customerId}`), owner.user_id, config.live);
+      const customer = await deps.stripeRequest(`/v1/customers/${customerId}`);
+      assertCustomerOwner(customer, owner.user_id, config.live);
       const sub = await deps.stripeRequest(`/v1/subscriptions/${object.id}`);
       if (sub.customer !== customerId || sub.livemode !== config.live) throw new Error("BILLING_SUBSCRIPTION_OWNERSHIP");
-      const entitled = paidSubscription(sub, priceIds(), config.live);
+      const entitled = paidSubscription(sub, priceIds(), config.live) &&
+        subscriptionMatchesRegionalPolicy(sub, owner.user_id);
       const item = sub.items.data[0];
       const start = item?.current_period_start ?? sub.current_period_start;
       const end = item?.current_period_end ?? sub.current_period_end;
@@ -149,15 +157,20 @@ export async function processBillingWebhook(raw: Buffer, signature: string, deps
 }
 
 export async function paidEntitlement(userId: string) {
-  const config = billingConfig();
-  const { rows } = await pool.query(`SELECT s.provider_sub_id FROM subscriptions s
+  const config = entitlementBillingConfig();
+  const { rows } = await pool.query(`SELECT s.provider_sub_id,s.provider_customer_id FROM subscriptions s
     JOIN billing_customers c ON c.user_id=s.user_id AND c.customer_id=s.provider_customer_id
     WHERE s.user_id=$1 AND c.live=$2 AND s.provider='stripe' AND s.tier='pro'
     AND s.status='active' AND s.current_period_end>NOW() AND s.metadata->>'verifiedWebhook'='true'`,
     [userId, config.live]);
   for (const row of rows) {
     const sub = await stripeRequest(`/v1/subscriptions/${row.provider_sub_id}`);
-    if (paidSubscription(sub, priceIds(), config.live))
+    const customerId = typeof sub.customer === "string" ? sub.customer : sub.customer.id;
+    if (customerId !== row.provider_customer_id) throw new Error("BILLING_SUBSCRIPTION_OWNERSHIP");
+    const customer = await stripeRequest(`/v1/customers/${customerId}`);
+    assertCustomerOwner(customer, userId, config.live);
+    if (paidSubscription(sub, priceIds(), config.live) &&
+        subscriptionMatchesRegionalPolicy(sub, userId))
       return { tier: "pro" as const, status: "active", currentPeriodEnd: new Date((sub.items.data[0].current_period_end ?? sub.current_period_end) * 1000) };
   }
   return null;

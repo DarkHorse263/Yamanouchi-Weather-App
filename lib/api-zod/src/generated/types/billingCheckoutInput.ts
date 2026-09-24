@@ -9,4 +9,9 @@ import type { BillingCheckoutInputPlan } from './billingCheckoutInputPlan';
 
 export interface BillingCheckoutInput {
   plan: BillingCheckoutInputPlan;
+  /**
+     * ISO 3166-1 alpha-2 country of the payment billing address. The server selects currency and price.
+     * @pattern ^[A-Z]{2}$
+     */
+  billingCountry: string;
 }

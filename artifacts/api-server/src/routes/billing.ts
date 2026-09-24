@@ -2,7 +2,7 @@ import { Router, type IRouter, type Request, type Response } from "express";
 import rateLimit from "express-rate-limit";
 import { requireAuth } from "../middlewares/requireAuth";
 import { checkout, portal, billingReady, paidEntitlement, processBillingWebhook } from "../lib/billing";
-import { parseBillingPlan } from "../lib/billing-policy";
+import { parseBillingSelection } from "../lib/billing-policy";
 import { resolvePromoSubscription } from "../lib/promo";
 import { CreateBillingCheckoutBody, GetBillingStatusResponse, CreateBillingCheckoutResponse, CreateBillingPortalResponse } from "@workspace/api-zod";
 
@@ -28,9 +28,9 @@ router.get("/billing/status", requireAuth, async (req, res) => {
 });
 router.post("/billing/checkout", limit, requireAuth, async (req, res) => {
   res.setHeader("Cache-Control", "no-store");
-  let plan;
-  try { plan = parseBillingPlan(req.body); CreateBillingCheckoutBody.parse(req.body); } catch { res.status(400).json({ error: "INVALID_PLAN" }); return; }
-  try { res.json(CreateBillingCheckoutResponse.parse({ url: await checkout(req.dbUser!.id, plan) })); }
+  let selection;
+  try { selection = parseBillingSelection(req.body); CreateBillingCheckoutBody.parse(req.body); } catch { res.status(400).json({ error: "INVALID_BILLING_SELECTION" }); return; }
+  try { res.json(CreateBillingCheckoutResponse.parse({ url: await checkout(req.dbUser!.id, selection.plan, selection.billingCountry) })); }
   catch (e) { res.status(503).json({ error: e instanceof Error && e.message.startsWith("BILLING_") ? e.message : "BILLING_UNAVAILABLE" }); }
 });
 router.post("/billing/portal", limit, requireAuth, async (req, res) => {

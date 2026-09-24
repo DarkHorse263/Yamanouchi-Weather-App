@@ -8,6 +8,7 @@ process.env.BILLING_ORIGIN = "https://billing.example.test";
 process.env.STRIPE_MODE = "test";
 process.env.STRIPE_MONTHLY_PRICE_ID = "price_month";
 process.env.STRIPE_ANNUAL_PRICE_ID = "price_year";
+process.env.STRIPE_EUR_MONTHLY_PRICE_ID = "price_EURmonth";
 process.env.STRIPE_WEBHOOK_SECRET = "whsec_unit_test_only";
 const { processBillingWebhook } = await import("../billing");
 
@@ -16,6 +17,7 @@ function harness() {
   let state: any;
   let canonical: any = { id: "sub_test", customer: "cus_test", livemode: false, status: "active",
     items: { data: [{ quantity: 1, price: { id: "price_month" }, current_period_end: Date.now() / 1000 + 3600 }] } };
+  let customer: any = { livemode: false, metadata: { feelzlike_user_id: "user_owner" } };
   const client = {
     release() {},
     async query(sql: string, values?: any[]) {
@@ -32,7 +34,7 @@ function harness() {
     pool: { connect: async () => client },
     getStripeSync: async () => ({ processWebhook: async () => {} }),
     stripeRequest: async (path: string) => path.startsWith("/v1/customers/")
-      ? { livemode: false, metadata: { feelzlike_user_id: "user_owner" } } : canonical,
+      ? customer : canonical,
   };
   async function deliver(id: string, status: string, created: number) {
     const payload = JSON.stringify({ id, type: "customer.subscription.updated", livemode: false, created,
@@ -41,7 +43,13 @@ function harness() {
     await processBillingWebhook(Buffer.from(payload), signature, deps);
   }
   return { deps, deliver, state: () => state, processed,
-    cancel: () => { canonical = { ...canonical, status: "canceled" }; } };
+    cancel: () => { canonical = { ...canonical, status: "canceled" }; },
+    regional: (selected: string, address: string) => {
+      canonical = { ...canonical,
+        metadata: { feelzlike_user_id: "user_owner", feelzlike_billing_country: selected, feelzlike_billing_currency: "EUR" },
+        items: { data: [{ ...canonical.items.data[0], price: { id: "price_EURmonth" } }] } };
+      customer = { ...customer, address: { country: address } };
+    } };
 }
 test("duplicate signed deliveries cannot apply the projection twice", async () => {
   const h = harness();
@@ -66,4 +74,10 @@ test("invalid signature never enters native sync or durable projection", async (
   await assert.rejects(processBillingWebhook(Buffer.from("{}"), "bad", h.deps));
   assert.equal(h.processed.size, 0);
   assert.equal(h.state(), undefined);
+});
+test("moving countries does not revoke a valid paid subscription", async () => {
+  const h = harness();
+  h.regional("DE", "FR");
+  await h.deliver("evt_customer_moved", "active", 40);
+  assert.equal(h.state()[1], "pro");
 });

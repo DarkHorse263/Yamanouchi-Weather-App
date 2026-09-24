@@ -16,8 +16,12 @@ export const GetBillingStatusResponse = zod.object({
 })
 
 
+export const createBillingCheckoutBodyBillingCountryRegExp = new RegExp('^[A-Z]{2}$');
+
+
 export const CreateBillingCheckoutBody = zod.object({
-  "plan": zod.enum(['monthly', 'annual'])
+  "plan": zod.enum(['monthly', 'annual']),
+  "billingCountry": zod.string().regex(createBillingCheckoutBodyBillingCountryRegExp).describe('ISO 3166-1 alpha-2 country of the payment billing address. The server selects currency and price.')
 })
 
 export const CreateBillingCheckoutResponse = zod.object({
