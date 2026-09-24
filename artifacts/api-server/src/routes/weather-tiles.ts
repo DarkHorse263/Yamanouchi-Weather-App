@@ -1,12 +1,7 @@
 import { Router } from "express";
+import { owmTile, validOwmTile } from "../lib/owm-client.js";
 
 const router = Router();
-const VALID_LAYERS = ["precipitation_new", "clouds_new", "temp_new", "wind_new", "snow"];
-
-function getOwmKey(): string {
-  return process.env.OWM_API_KEY || process.env.VITE_OWM_API_KEY || "";
-}
-
 const JAPAN_CITIES = [
   { key: "sapporo", name: "Sapporo", nameJa: "札幌", lat: 43.062, lng: 141.354 },
   { key: "asahikawa", name: "Asahikawa", nameJa: "旭川", lat: 43.771, lng: 142.365 },
@@ -136,21 +131,15 @@ router.get("/japan-temps", async (_req, res) => {
 
 router.get("/weather-tile/:layer/:z/:x/:y", async (req, res) => {
   const { layer, z, x, y } = req.params;
-  const key = getOwmKey();
-  if (!VALID_LAYERS.includes(layer) || !key) {
-    res.status(400).send("Invalid layer or missing key");
+  res.set("Cache-Control", "no-store");
+  if (!validOwmTile(layer, z, x, y)) {
+    res.status(400).send("Invalid tile");
     return;
   }
   try {
-    const url = `https://tile.openweathermap.org/map/${layer}/${z}/${x}/${y}.png?appid=${key}`;
-    const resp = await fetch(url);
-    if (!resp.ok) {
-      res.status(resp.status).send("Upstream error");
-      return;
-    }
+    const buf = await owmTile(layer, z, x, y);
     res.set("Content-Type", "image/png");
     res.set("Cache-Control", "public, max-age=300");
-    const buf = Buffer.from(await resp.arrayBuffer());
     res.send(buf);
   } catch {
     res.status(502).send("Tile fetch failed");

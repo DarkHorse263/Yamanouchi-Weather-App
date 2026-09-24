@@ -3,6 +3,7 @@ import { and, eq } from "drizzle-orm";
 import { db, jobRunsTable } from "@workspace/db";
 import { LruTtlCache } from "../lib/lru-cache.js";
 import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
+import { owmJson } from "../lib/owm-client.js";
 import { reconcileDryToWet } from "../lib/amedas.js";
 import { reconcileNzMetarDryToWet } from "../lib/metar-nz.js";
 import { publishedCatalogueRecords, travelRegions } from "@workspace/japan-ski-catalogue/public-runtime";
@@ -3242,15 +3243,8 @@ async function fetchPlaceNameFromOwm(
   lat: number,
   lon: number,
 ): Promise<string | null> {
-  const apiKey = process.env.OWM_API_KEY;
-  if (!apiKey) return null;
   try {
-    const res = await fetch(
-      `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${apiKey}`,
-      { signal: AbortSignal.timeout(6000) },
-    );
-    if (!res.ok) return null;
-    const arr: unknown = await res.json();
+    const arr: unknown = await owmJson("reverse", lat, lon);
     if (!Array.isArray(arr) || arr.length === 0) return null;
     const d = arr[0] as Record<string, unknown>;
     const str = (v: unknown): string => (typeof v === "string" ? v.trim() : "");
@@ -3259,8 +3253,7 @@ async function fetchPlaceNameFromOwm(
     const parts = [locality, region].filter(Boolean);
     if (parts.length > 0) return parts.join(", ");
     return locality || null;
-  } catch (err) {
-    console.warn("[local-weather] OWM reverse-geocode failed:", err);
+  } catch {
     return null;
   }
 }

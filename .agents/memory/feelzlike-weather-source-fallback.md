@@ -5,6 +5,22 @@ description: Non-BOM locations need a live forecast fallback; Open-Meteo periodi
 
 # feelzlike weather source resilience
 
+## OpenWeather account-wide quota
+
+All OpenWeather weather, geocoding and tile requests must share durable quota
+coordination. Never add a direct fetch that bypasses it; per-process limits are
+not sufficient. Preserve the reserved coordination state when adding job-history
+retention (an active provider cooldown must survive cleanup).
+
+**Why:** OpenWeather temporarily blocked the account in September 2026 after
+exceeding its 60-request/minute allowance. Fallback weather costs two calls per
+location and map tiles add bursts, multiplied across autoscale replicas.
+
+**How to apply:** keep a conservative shared rolling budget and durable rejection
+cooldown, fail closed on coordination failure, and use other sources/existing
+stale data. Development and production databases coordinate separately, so other
+deployments or services sharing the provider account still consume its quota.
+
 Every non-BOM location (all of Victoria's High Country, Tasmania, Japan, and the
 AU gateway towns) gets its forecast from a single live source. BOM-backed resorts
 (Thredbo, Perisher) are the only ones that survive a forecast-source outage on

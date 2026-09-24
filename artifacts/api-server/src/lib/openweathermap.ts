@@ -21,16 +21,12 @@
  * depth are not available from OWM 2.5 and are left undefined / 0.
  */
 
+import { owmJson } from "./owm-client.js";
+
 export interface OwmLocationInput {
   latitude: number;
   longitude: number;
   timezone?: string;
-}
-
-const OWM_BASE = "https://api.openweathermap.org/data/2.5";
-
-function apiKey(): string {
-  return process.env.OWM_API_KEY || process.env.VITE_OWM_API_KEY || "";
 }
 
 /** Map an OpenWeatherMap condition id to the nearest WMO code used by the
@@ -82,18 +78,6 @@ interface OwmForecastEntry {
   snow?: { "3h"?: number };
 }
 
-async function fetchJson(url: string, timeoutMs = 8000): Promise<any> {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    const res = await fetch(url, { signal: controller.signal });
-    if (!res.ok) throw new Error(`OpenWeatherMap error: ${res.status}`);
-    return await res.json();
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
 /**
  * Fetch OpenWeatherMap current + forecast and return an Open-Meteo-shaped
  * object (current / hourly / daily / utc_offset_seconds). Returns null if
@@ -102,18 +86,14 @@ async function fetchJson(url: string, timeoutMs = 8000): Promise<any> {
 export async function fetchOpenWeatherMapAsOpenMeteo(
   location: OwmLocationInput,
 ): Promise<any | null> {
-  const key = apiKey();
-  if (!key) return null;
-
   const { latitude, longitude } = location;
-  const common = `lat=${latitude}&lon=${longitude}&appid=${key}&units=metric`;
 
   let current: any;
   let forecast: any;
   try {
     [current, forecast] = await Promise.all([
-      fetchJson(`${OWM_BASE}/weather?${common}`),
-      fetchJson(`${OWM_BASE}/forecast?${common}`),
+      owmJson("weather", latitude, longitude),
+      owmJson("forecast", latitude, longitude),
     ]);
   } catch {
     return null;

@@ -116,7 +116,21 @@ function useJapanTemps(enabled: boolean) {
   );
 }
 
-function RadarOverlay({ host, frames }: { host: string; frames: { path: string; time: number }[] }) {
+const TILE_REQUEST_OPTIONS = {
+  updateWhenIdle: true,
+  updateWhenZooming: false,
+  keepBuffer: 1,
+};
+
+function RadarOverlay({
+  host,
+  frames,
+  onUnavailable,
+}: {
+  host: string;
+  frames: { path: string; time: number }[];
+  onUnavailable: () => void;
+}) {
   const map = useMap();
   const layersRef = useRef<L.TileLayer[]>([]);
   const animRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -127,7 +141,13 @@ function RadarOverlay({ host, frames }: { host: string; frames: { path: string; 
     layersRef.current.forEach(l => map.removeLayer(l));
     const newLayers = frames.map(f => {
       const url = `${host}${f.path}/256/{z}/{x}/{y}/6/1_1.png`;
-      const layer = L.tileLayer(url, { opacity: 0, zIndex: 10, tileSize: 256 });
+      const layer = L.tileLayer(url, {
+        ...TILE_REQUEST_OPTIONS,
+        opacity: 0,
+        zIndex: 10,
+        tileSize: 256,
+      });
+      layer.on("tileerror", onUnavailable);
       layer.addTo(map);
       return layer;
     });
@@ -136,8 +156,13 @@ function RadarOverlay({ host, frames }: { host: string; frames: { path: string; 
       newLayers[newLayers.length - 1].setOpacity(0.7);
     }
     setFrameIdx(frames.length - 1);
-    return () => { newLayers.forEach(l => map.removeLayer(l)); };
-  }, [map, host, frames]);
+    return () => {
+      newLayers.forEach(l => {
+        l.off("tileerror", onUnavailable);
+        map.removeLayer(l);
+      });
+    };
+  }, [map, host, frames, onUnavailable]);
 
   const showFrame = useCallback((idx: number) => {
     layersRef.current.forEach((l, i) => l.setOpacity(i === idx ? 0.7 : 0));
@@ -264,7 +289,13 @@ function createCityTempLabel(city: CityTemp, isJa: boolean, windLabel: string) {
   });
 }
 
-function OverlaySwitcher({ activeLayer }: { activeLayer: MapLayer }) {
+function OverlaySwitcher({
+  activeLayer,
+  onUnavailable,
+}: {
+  activeLayer: MapLayer;
+  onUnavailable: () => void;
+}) {
   const map = useMap();
   const owmRef = useRef<L.TileLayer | null>(null);
 
@@ -277,18 +308,20 @@ function OverlaySwitcher({ activeLayer }: { activeLayer: MapLayer }) {
     if (cfg) {
       const layer = L.tileLayer(
         `/api/weather-tile/${cfg.layer}/{z}/{x}/{y}`,
-        { opacity: cfg.opacity, zIndex: 10 }
+        { ...TILE_REQUEST_OPTIONS, opacity: cfg.opacity, zIndex: 10 }
       );
+      layer.on("tileerror", onUnavailable);
       layer.addTo(map);
       owmRef.current = layer;
     }
     return () => {
       if (owmRef.current) {
+        owmRef.current.off("tileerror", onUnavailable);
         map.removeLayer(owmRef.current);
         owmRef.current = null;
       }
     };
-  }, [map, activeLayer]);
+  }, [map, activeLayer, onUnavailable]);
 
   return null;
 }
@@ -321,14 +354,22 @@ export default function MapView() {
   const { dataSaver } = useDataSaver();
   const { ref: activityRef, active: mediaActive } = useMediaActivity();
   const [activeLayer, setActiveLayer] = useState<MapLayer>("radar");
+  const [overlayUnavailable, setOverlayUnavailable] = useState(false);
   const [mediaRequested, setMediaRequested] = useState(false);
   const tabs = isWinter ? WINTER_TABS : GREEN_TABS;
   const mediaReady = mediaActive && (!dataSaver || mediaRequested);
+  const handleOverlayUnavailable = useCallback(() => {
+    setOverlayUnavailable(true);
+  }, []);
 
   useEffect(() => {
     if (!isWinter && activeLayer === "snow") setActiveLayer("rain");
     if (isWinter && activeLayer === "rain") setActiveLayer("snow");
   }, [isWinter]);
+
+  useEffect(() => {
+    setOverlayUnavailable(false);
+  }, [activeLayer]);
 
   const japanTemps = useJapanTemps(mediaReady && activeLayer === "temp");
 
@@ -355,11 +396,15 @@ export default function MapView() {
           attributionControl={false}
         >
           <MapResizer />
-          <TileLayer url={BASE_TILE} />
-          <OverlaySwitcher activeLayer={activeLayer} />
+          <TileLayer url={BASE_TILE} {...TILE_REQUEST_OPTIONS} />
+          <OverlaySwitcher activeLayer={activeLayer} onUnavailable={handleOverlayUnavailable} />
           <ViewResetter activeLayer={activeLayer} />
           {activeLayer === "radar" && rv && frames.length > 0 && (
-            <RadarOverlay host={rv.host} frames={frames} />
+            <RadarOverlay
+              host={rv.host}
+              frames={frames}
+              onUnavailable={handleOverlayUnavailable}
+            />
           )}
           {showTemp && <TempZoomer />}
           {showTemp && cities.map(city => {
@@ -418,6 +463,19 @@ export default function MapView() {
               </button>
             </div>
           ) : null}
+        </div>
+      )}
+
+      {overlayUnavailable && (
+        <div
+          className="absolute top-28 left-1/2 -translate-x-1/2 z-20 max-w-[min(90%,24rem)] rounded-xl border border-amber-200 bg-amber-50/95 px-3 py-2 text-center text-xs font-medium text-amber-900 shadow-lg backdrop-blur"
+          role="status"
+          aria-live="polite"
+        >
+          {t(
+            "This weather overlay is unavailable right now. The base map is still available.",
+            "この天気オーバーレイは現在利用できません。ベースマップは引き続き利用できます。",
+          )}
         </div>
       )}
 
