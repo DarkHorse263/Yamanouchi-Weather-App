@@ -5,6 +5,20 @@ description: How feelzlike publishes (application router, config in .replit) and
 
 # feelzlike deployment topology
 
+**Production startup verification:** after adding server dependencies, test the
+built CommonJS entry point, not just TypeScript checks or the tsx dev server.
+Use an unused port and assert a fresh uptime so an existing process cannot give
+a false-positive health response.
+
+**Why:** a Stripe dependency passed compilation and development startup but
+crashed after CommonJS bundling because its module-relative resource URL was
+lost. Minified production logging truncated the useful stack; a local run of
+the production bundle revealed it.
+
+**How to apply:** preserve libraries' package-relative resource resolution when
+choosing bundle externals, and verify the exact production entry point after
+changing that boundary.
+
 - This repl deploys in **ARTIFACT mode** (pnpm workspace, target `autoscale`): each artifact's `.replit-artifact/artifact.toml` `[services.*.production]` controls the REAL build/run. Those files DO exist and ARE committed (publish detection reads the committed git tree). The `.replit` `[deployment].run` is **ignored**; `.replit` `[deployment].build` is only a repo-root **pre-build hook**. (Earlier note saying "no artifact.toml here" was WRONG.)
 - feelzlike artifact (`kind=web`): `serve = "static"`, `publicDir = artifacts/feelzlike/dist/public`, build = `pnpm --filter @workspace/feelzlike run build`, env `BASE_PATH=/`. The SPA ships as prebuilt static files (dist is gitignored but rebuilt at deploy by THIS build). api-server artifact (`kind=api`): build = `pnpm --filter @workspace/api-server run build`, run = `node artifacts/api-server/dist/index.cjs` (PORT 8080), startup probe **`path=/api/healthz`** (NOT `GET /`). The application router stitches them: static SPA at `/`, API at `/api`.
 - The `.replit` pre-build hook is `BASE_PATH=/yamanouchi/ ... pnpm --filter @workspace/yamanouchi run build && pnpm --filter @workspace/api-server run build`. The yamanouchi filter matches NO package (renamed to `@workspace/feelzlike`) → prints `No projects matched the filters` and **exits 0** — harmless stale no-op; the api-server half is redundant with its artifact.toml build. Don't "fix" this to chase a publish failure (same-day successes prove it isn't the cause), and do NOT graft `BASE_PATH=/yamanouchi/` onto a real feelzlike build — the SPA is served at root, asset paths must be `/…`.

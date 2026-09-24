@@ -64,7 +64,9 @@ async function buildAll() {
       "process.env.NODE_ENV": '"production"',
     },
     minify: true,
-    external: externals,
+    // Stripe sync locates its packaged resources via import.meta.url.
+    // Bundling it into CommonJS erases that URL and crashes at startup.
+    external: [...externals, "stripe-replit-sync"],
     logLevel: "info",
   });
 }
