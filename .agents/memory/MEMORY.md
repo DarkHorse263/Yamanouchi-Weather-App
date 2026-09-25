@@ -100,3 +100,4 @@
 - [feelzlike GitHub reconciliation](feelzlike-github-reconciliation.md) — GitHub connector API does not authenticate CLI pushes; use Replit Git Push after safe local ancestry reconciliation.
 - [feelzlike data saving](feelzlike-data-saving.md) — media consent is source-local; visibility gates downloads; blocked storage must still sync preferences; no attribution or hard byte-cap claims.
 - [feelzlike retention approval](feelzlike-retention-approval.md) — owner-approved lifecycle periods; suppression survives cleanup; provider retention is separate.
+- [Client environment exposure](feelzlike-client-env-exposure.md) — dynamic Vite env reads can embed unused prefixed secrets; allowlist public values and rotate previously exposed keys.

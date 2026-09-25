@@ -29,10 +29,15 @@ export const whistlerRegion: RegionConfig = {
     { path: "/mountain/blackcomb-mountain", label: "Blackcomb Mountain" },
   ],
   mountains: [
+    // Whistler Blackcomb's published mountain statistics give 675 m base and
+    // 2,182 m Whistler peak / 2,284 m highest lift-accessed terrain.
+    // https://www.whistlerblackcomb.com/the-mountain/about-the-mountain/mountain-info.aspx
     {
       id: "whistler-mountain",
       name: "Whistler Mountain",
       elevationM: 2182,
+      skiBaseElevationM: 675,
+      summitElevationM: 2182,
       lat: 50.0594,
       lng: -122.9575,
       blurb: "the original 1966 mountain · alpine bowls above a long peak-to-creek descent",
@@ -49,6 +54,8 @@ export const whistlerRegion: RegionConfig = {
       id: "blackcomb-mountain",
       name: "Blackcomb Mountain",
       elevationM: 2284,
+      skiBaseElevationM: 675,
+      summitElevationM: 2284,
       lat: 50.0900,
       lng: -122.8620,
       blurb: "the higher twin · glacier terrain, 7th Heaven and the Blackcomb Glacier run",

@@ -30,6 +30,10 @@ export const queenstownRegion: RegionConfig = {
       id: "coronet-peak",
       name: "Coronet Peak",
       elevationM: 1649,
+      // Skiable terrain 1,167–1,629 m; legacy 1,649 m pin is not the ski summit.
+      // https://www.skiresort.info/ski-resort/coronet-peak/
+      skiBaseElevationM: 1167,
+      summitElevationM: 1629,
       lat: -44.9206,
       lng: 168.7361,
       blurb: "closest to queenstown · early-season snowmaking and night skiing",
@@ -43,6 +47,9 @@ export const queenstownRegion: RegionConfig = {
       id: "the-remarkables",
       name: "The Remarkables",
       elevationM: 1943,
+      // https://www.skiresort.info/ski-resort/the-remarkables/ (1,610–1,943 m)
+      skiBaseElevationM: 1610,
+      summitElevationM: 1943,
       lat: -45.0556,
       lng: 168.8194,
       blurb: "higher, sheltered bowls across the lake · family and park terrain",

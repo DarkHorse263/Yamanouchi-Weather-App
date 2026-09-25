@@ -3,6 +3,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import ts from "typescript";
+import { createServer } from "vite";
 import { publishedCatalogueRecords as western } from "@workspace/western-us-ski-catalogue/public-runtime";
 import { publishedCatalogueRecords as canada } from "@workspace/canada-ski-catalogue/public-runtime";
 import { publishedCatalogueRecords as japan } from "@workspace/japan-ski-catalogue/public-runtime";
@@ -38,7 +39,7 @@ test("every catalogue base/top forecast uses midpoint and never falls below a kn
   assert.ok(checked > 200, "test the full published catalogue, not a handful of examples");
 });
 
-test("all authored base/summit forecasts agree with server summit-derived midpoint, not summit itself", () => {
+test("all authored ski bounds use midpoints and match server-derived heights when server height is a summit", () => {
   const regionDir = path.resolve(import.meta.dirname, "..");
   const weatherSource = readFileSync(path.resolve(regionDir, "../../../api-server/src/routes/weather.ts"), "utf8");
   const summitById = new Map([...weatherSource.matchAll(/\{\s*id:\s*"([^"]+)"[^\n]*?\belevation:\s*(\d+)/g)]
@@ -61,7 +62,9 @@ test("all authored base/summit forecasts agree with server summit-derived midpoi
           const forecast = snowForecastElevation(baseM, summitM);
           assert.ok(forecast != null && forecast >= baseM, `${filename}/${id.text}: below base`);
           const serverSummitM = summitById.get(id.text);
-          if (serverSummitM != null) {
+          // The server's legacy forecast query height may be a base/map pin,
+          // not a summit (e.g. Sandia Peak at 2,630 m).
+          if (serverSummitM != null && Math.abs(serverSummitM - summitM) <= 150) {
             const serverMid = snowForecastElevation(baseM, serverSummitM);
             assert.ok(serverMid != null && Math.abs(forecast - serverMid) <= 150,
               `${filename}/${id.text}: client midpoint differs from server-derived midpoint`);
@@ -74,4 +77,63 @@ test("all authored base/summit forecasts agree with server summit-derived midpoi
     inspect(source);
   }
   assert.ok(checked >= 40, `Expected all authored US base/summit pairs, got ${checked}`);
+});
+
+test("published registry passes strict village provenance and flagship snow requests use ski-area midpoints", async () => {
+  const root = path.resolve(import.meta.dirname, "../../..");
+  process.env.PORT ||= "23968";
+  process.env.BASE_PATH ||= "/";
+  // Middleware SSR transforms the actual registry without opening an app port.
+  const server = await createServer({
+    root,
+    configFile: path.join(root, "vite.config.ts"),
+    server: { middlewareMode: true },
+    appType: "custom",
+    logLevel: "error",
+  });
+  try {
+    const { REGIONS } = await server.ssrLoadModule("/src/regions/index.ts");
+    const expected: Record<string, [number, number, number]> = {
+      "snowy-mountains/thredbo": [1365, 2037, 1701],
+      "snowy-mountains/perisher": [1720, 2054, 1887],
+      "snowy-mountains/selwyn": [1492, 1614, 1553],
+      "snowy-mountains/charlottes-pass": [1765, 1954, 1860],
+      "whistler/whistler-mountain": [675, 2182, 1429],
+      "whistler/blackcomb-mountain": [675, 2284, 1480],
+      "victorias-high-country/mt-buller": [1375, 1805, 1590],
+      "queenstown/coronet-peak": [1167, 1629, 1398],
+      "queenstown/the-remarkables": [1610, 1943, 1777],
+      "wanaka/cardrona": [1260, 1894, 1577],
+      "okanagan/big-white": [1508, 2285, 1897],
+      "banff-lake-louise/mt-norquay": [1680, 2450, 2065],
+      "vail-valley/beaver-creek": [2255, 3488, 2872],
+      "albuquerque-sandia/sandia-peak": [2630, 3140, 2885],
+    };
+    for (const [key, [base, summit, requestM]] of Object.entries(expected)) {
+      const [regionId, mountainId] = key.split("/");
+      const mountain = REGIONS.find((region: { id: string }) => region.id === regionId)
+        ?.mountains?.find((candidate: { id: string }) => candidate.id === mountainId);
+      assert.ok(mountain, `${key}: missing from actual registry`);
+      assert.deepEqual([mountain.skiBaseElevationM, mountain.summitElevationM], [base, summit], key);
+      assert.equal(snowForecastElevation(
+        mountain.skiBaseElevationM ?? mountain.baseElevationM,
+        mountain.summitElevationM ?? mountain.elevationBands?.upperM,
+        mountain.elevationM,
+        mountain.elevationBands?.midM,
+      ), requestM, `${key}: /weather snowElevationM`);
+    }
+    for (const key of ["whistler/whistler-mountain", "victorias-high-country/mt-buller", "queenstown/coronet-peak"]) {
+      const [regionId, mountainId] = key.split("/");
+      const mountain = REGIONS.find((region: { id: string }) => region.id === regionId)
+        ?.mountains?.find((candidate: { id: string }) => candidate.id === mountainId);
+      assert.equal(mountain?.baseElevationM, undefined, `${key}: ski base must not invent a verified village elevation`);
+    }
+    assert.equal(REGIONS.find((region: { id: string }) => region.id === "snowy-mountains")
+      ?.mountains?.find((mountain: { id: string }) => mountain.id === "thredbo")?.baseElevationM, 1365);
+    assert.equal(REGIONS.find((region: { id: string }) => region.id === "vail-valley")
+      ?.mountains?.find((mountain: { id: string }) => mountain.id === "beaver-creek")?.baseElevationM, 2469,
+      "verified village base must not be overwritten with 2,255 m ski-area base");
+  } finally {
+    await server.close();
+  }
 });

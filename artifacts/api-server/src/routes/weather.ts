@@ -1,9 +1,10 @@
 import { Router, type IRouter } from "express";
 import { GetWeatherResponse, GetLocationWeatherResponse, GetLocationWeatherParams, GetResortSnowReportParams } from "@workspace/api-zod";
 import { getResortSnowReport } from "../lib/resortSnowReports";
-import { getEnsembleForecast } from "../lib/ensemble-forecast.js";
+import { getEnsembleForecast, publicEnsembleForecast } from "../lib/ensemble-forecast.js";
 import { locationMatchesRegion, parseRegionParam, RegionParamError } from "../lib/regions.js";
 import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
+import { requestHasEntitlement } from "../middlewares/require-entitlement.js";
 import { dailyConditionLabel } from "../lib/dailyConditionLabel.js";
 import { reconcileBomCondition } from "../lib/bom-obs.js";
 import { reconcileNzMetarDryToWet } from "../lib/metar-nz.js";
@@ -1549,6 +1550,14 @@ export async function fetchOpenMeteo(location: LocationConfig) {
 
 router.get("/weather", async (req, res) => {
   try {
+    res.setHeader("Cache-Control", "private, no-store");
+    let extended: boolean;
+    try {
+      extended = await requestHasEntitlement(req, "forecast.extended");
+    } catch {
+      res.status(503).json({ error: "ENTITLEMENT_CHECK_FAILED" });
+      return;
+    }
     const region = parseRegionParam(req.query["region"]);
     // Region is optional in the published API contract. Global and filtered
     // reads share the same per-location cache/coalescing path and bounded
@@ -1556,7 +1565,9 @@ router.get("/weather", async (req, res) => {
     const sources = region
       ? ALL_LOCATIONS.filter((loc) => locationMatchesRegion(loc.id, region))
       : ALL_LOCATIONS;
-    const locations = await fetchBulkWeatherCached(sources);
+    const locations = (await fetchBulkWeatherCached(sources)).map((location) =>
+      extended ? location : freeWeatherHorizon(location),
+    );
 
     const result = GetWeatherResponse.parse({
       locations,
@@ -1604,9 +1615,13 @@ export const BULK_WEATHER_CONCURRENCY = 4;
 // resort requests; same-key refreshes still share their in-flight promise.
 let activeWeatherFetches = 0;
 const pendingWeatherFetches: Array<() => void> = [];
+const MAX_PENDING_WEATHER_FETCHES = 48;
 
 async function withWeatherFetchSlot<T>(work: () => Promise<T>): Promise<T> {
   if (activeWeatherFetches >= BULK_WEATHER_CONCURRENCY) {
+    if (pendingWeatherFetches.length >= MAX_PENDING_WEATHER_FETCHES) {
+      throw new Error("Weather refresh capacity reached; please retry shortly");
+    }
     await new Promise<void>((resolve) => pendingWeatherFetches.push(resolve));
   }
   activeWeatherFetches++;
@@ -1657,15 +1672,130 @@ export function resetWeatherRuntimeForTests(): void {
 }
 
 /**
- * Optional on-mountain snow-outlook elevation, in metres. Lenient: an absent
- * or malformed value falls back to the village figure rather than 400-ing, so
- * the all-resorts dashboard (which never passes it) is unaffected.
+ * Only server-authored forecast heights may select a second snow forecast.
+ * Client input never becomes an upstream elevation or an unbounded cache key.
+ * Catalogue top/base are ski-area heights, not the village forecast elevation.
  */
-function parseSnowElevationParam(raw: unknown): number | undefined {
+const configuredSnowHeights = new Map<string, Set<number>>();
+function allowSnowHeight(id: string, height: number | undefined): void {
+  if (height == null || !Number.isFinite(height) || height <= 0) return;
+  const existing = configuredSnowHeights.get(id) ?? new Set<number>();
+  existing.add(Math.round(height));
+  configuredSnowHeights.set(id, existing);
+}
+function catalogueMid(base: number | undefined, top: number | undefined): number | undefined {
+  return base != null && top != null && top > base
+    ? Math.round(base + (top - base) / 2)
+    : undefined;
+}
+for (const record of [...publishedCatalogueRecords, ...publishedCanadaCatalogueRecords, ...publishedWesternUsCatalogueRecords]) {
+  allowSnowHeight(record.publicId, catalogueMid(record.baseElevationM, record.topElevationM));
+}
+// The general ski catalogue has no verified top; its forecast point is the
+// only server-published height. Do not infer a summit from a base or map pin.
+for (const record of publishedSkiCatalogueRecords) {
+  allowSnowHeight(record.publicId, record.forecastElevationM);
+}
+// Authored forecast heights not present in the published catalogues. These
+// must be updated alongside the corresponding authored resort elevations.
+for (const [id, height] of Object.entries({
+  "sandia-peak": 2885,
+  "banff-sunshine": 2430,
+  "mt-norquay": 2065,
+  "lake-louise-resort": 2337,
+  "bear-valley-mountain-resort": 2302,
+  "mt-bachelor": 2250,
+  "bear-mountain": 2431,
+  "snow-summit": 2317,
+  "beaver-mountain": 2442,
+  "cherry-peak": 1953,
+  alta: 2987,
+  snowbird: 2859,
+  "brighton-resort": 2935,
+  "solitude-mountain-resort": 2817,
+  "grand-targhee-resort": 2700,
+  "jackson-hole-mtn-resort": 2555,
+  "snow-king-mountain": 2141,
+  "jay-peak": 881,
+  "burke-mountain": 683,
+  "killington-resort": 824,
+  "pico-mountain": 910,
+  sugarbush: 862,
+  "mad-river-glen": 799,
+  "mammoth-mountain": 2896,
+  "june-mountain": 2688,
+  "mt-hutt": 1762,
+  "palisades-tahoe": 2324,
+  "northstar-california": 2277,
+  "sugar-bowl": 2326,
+  snowbasin: 2421,
+  "powder-mountain": 2488,
+  "nordic-valley": 1894,
+  "big-white": 1897,
+  silverstar: 1535,
+  "apex-resort": 1884,
+  "sun-peaks-resort": 1640,
+  "okemo-mountain-resort": 684,
+  "park-city-mountain": 2756,
+  "deer-valley-resort": 2460,
+  "revelstoke-mountain-resort": 1369,
+  "sundance-mountain-resort": 2187,
+  "perisher": 1887,
+  "thredbo": 1701,
+  "charlottes-pass": 1860,
+  selwyn: 1553,
+  "coronet-peak": 1398,
+  "the-remarkables": 1777,
+  heavenly: 2488,
+  kirkwood: 2682,
+  "homewood-mountain-resort": 2150,
+  "stratton-mountain-resort": 876,
+  "mount-snow": 838,
+  "bromley-mountain": 798,
+  "magic-mountain": 640,
+  "stowe-mountain-resort": 874,
+  "smugglers-notch": 712,
+  "breckenridge-resort": 3420,
+  "keystone-resort": 3140,
+  "copper-mountain-resort": 3205,
+  "arapahoe-basin": 3632,
+  loveland: 3557,
+  "vail-mountain": 3227,
+  "beaver-creek": 2872,
+  "cypress-mountain": 1132,
+  "grouse-mountain": 1050,
+  "mount-washington": 1336,
+  "mt-buller": 1590,
+  "falls-creek": 1640,
+  cardrona: 1577,
+  "treble-cone": 1610,
+  "whistler-mountain": 1429,
+  "blackcomb-mountain": 1480,
+  "lech-zuers-resort": 1950,
+  "st-anton-resort": 2058,
+})) allowSnowHeight(id, height);
+
+export function canonicalSnowElevation(location: LocationConfig, raw: unknown): number | undefined {
   if (raw == null) return undefined;
-  const v = Number(Array.isArray(raw) ? raw[0] : raw);
-  if (!Number.isFinite(v) || v < 1 || v > 9000) return undefined;
-  return Math.round(v);
+  if (typeof raw !== "string" || !/^[1-9]\d{0,3}$/.test(raw)) return undefined;
+  const height = Number(raw);
+  // A resort's already configured weather height is also a legitimate
+  // snow-outlook height, but needs no second Open-Meteo request.
+  if (height === location.elevation) return undefined;
+  return configuredSnowHeights.get(location.id)?.has(height) ? height : undefined;
+}
+
+/** Strip all day-eight-plus daily AND hourly fields before serializing a
+ * public response; never mutate the shared in-memory last-good cache. */
+export function freeWeatherHorizon<T>(payload: T): T {
+  const data = payload as { daily: Array<{ date: string }>; hourly: Array<{ time: string }> };
+  const firstSeven = data.daily.slice(0, 7);
+  const dates = new Set(firstSeven.map((day) => day.date));
+  return {
+    ...data,
+    daily: firstSeven,
+    hourly: data.hourly.filter((hour) => dates.has(hour.time.slice(0, 10))),
+  } as T;
 }
 
 async function getLocationWeatherCached(
@@ -1730,6 +1860,14 @@ async function getLocationWeatherCached(
 
 router.get("/weather/:locationId", async (req, res) => {
   try {
+    res.setHeader("Cache-Control", "private, no-store");
+    let extended: boolean;
+    try {
+      extended = await requestHasEntitlement(req, "forecast.extended");
+    } catch {
+      res.status(503).json({ error: "ENTITLEMENT_CHECK_FAILED" });
+      return;
+    }
     // Validate the path-param shape via the generated zod schema (regex
     // `^[a-z0-9-]+$`). The actual id->location resolution still happens
     // against LOCATIONS below, which is the source of truth.
@@ -1744,9 +1882,9 @@ router.get("/weather/:locationId", async (req, res) => {
       return;
     }
 
-    const snowElevationM = parseSnowElevationParam(req.query["snowElevationM"]);
+    const snowElevationM = canonicalSnowElevation(location, req.query["snowElevationM"]);
     const result = await getLocationWeatherCached(location, snowElevationM);
-    res.json(result);
+    res.json(extended ? result : freeWeatherHorizon(result));
   } catch (error) {
     res.status(500).json({
       error: "WEATHER_FETCH_ERROR",
@@ -1788,6 +1926,14 @@ router.get("/weather/:locationId/snow-report", async (req, res) => {
  */
 router.get("/forecast/:locationId", async (req, res) => {
   try {
+    res.setHeader("Cache-Control", "private, no-store");
+    let extended: boolean;
+    try {
+      extended = await requestHasEntitlement(req, "forecast.extended");
+    } catch {
+      res.status(503).json({ error: "ENTITLEMENT_CHECK_FAILED" });
+      return;
+    }
     const locationId = String(req.params.locationId ?? "");
     const location = resolveWeatherLocation(locationId);
     if (!location) {
@@ -1796,7 +1942,7 @@ router.get("/forecast/:locationId", async (req, res) => {
     }
     // Optional on-mountain elevation · keeps the ensemble snow cross-check at
     // the SAME height as the headline outlook so users don't see two numbers.
-    const elevationM = parseSnowElevationParam(req.query["elevationM"]);
+    const elevationM = canonicalSnowElevation(location, req.query["elevationM"]);
     const forecastElevation = elevationM ?? location.elevation;
     const ensemble = await getEnsembleForecast({
       latitude: location.latitude,
@@ -1814,14 +1960,11 @@ router.get("/forecast/:locationId", async (req, res) => {
       timezone: location.timezone ?? "Australia/Sydney",
       days: 7,
     });
-    // Provider results have their own bounded cache; keep response-shape updates
-    // and stale fallbacks from sticking in browsers for a full provider TTL.
-    res.setHeader("Cache-Control", "public, max-age=60");
     res.json({
       location: { id: location.id, name: location.name, elevation: location.elevation },
       forecastElevationM: forecastElevation,
       timezone: location.timezone ?? "Australia/Sydney",
-      ...ensemble,
+      ...(extended ? { ...ensemble, days: ensemble.days.slice(0, 7) } : publicEnsembleForecast(ensemble)),
     });
   } catch (error) {
     res.status(500).json({

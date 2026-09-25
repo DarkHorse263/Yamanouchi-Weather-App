@@ -38,10 +38,15 @@ export const okanaganRegion: RegionConfig = {
     { path: "/mountain/sun-peaks-resort", label: "Sun Peaks Resort" },
   ],
   mountains: [
+    // Skiable lower/upper bounds independently checked at
+    // skiresort.info/ski-resort/{big-white,silverstar,apex-mountain-resort,sun-peaks}/.
+    // These are ski-area bounds, not village elevations.
     {
       id: "big-white",
       name: "Big White Ski Resort",
       elevationM: 2319,
+      skiBaseElevationM: 1508,
+      summitElevationM: 2285,
       lat: 49.7220,
       lng: -118.9330,
       blurb: "bc's biggest ski-in village · dry interior snow and a large gladed high-alpine plateau above kelowna",
@@ -56,6 +61,8 @@ export const okanaganRegion: RegionConfig = {
       id: "silverstar",
       name: "SilverStar Mountain Resort",
       elevationM: 1915,
+      skiBaseElevationM: 1155,
+      summitElevationM: 1915,
       lat: 50.3611,
       lng: -119.0619,
       blurb: "victorian-themed ski-through village above vernon · gentle front side, steep powder gulch back bowls",
@@ -70,6 +77,8 @@ export const okanaganRegion: RegionConfig = {
       id: "apex-resort",
       name: "Apex Mountain Resort",
       elevationM: 2178,
+      skiBaseElevationM: 1575,
+      summitElevationM: 2193,
       lat: 49.3925,
       lng: -119.9036,
       blurb: "quiet, steep and uncrowded above penticton · long fall-line cruisers and the okanagan's driest snow",
@@ -84,6 +93,8 @@ export const okanaganRegion: RegionConfig = {
       id: "sun-peaks-resort",
       name: "Sun Peaks Resort",
       elevationM: 2080,
+      skiBaseElevationM: 1198,
+      summitElevationM: 2082,
       lat: 50.8833,
       lng: -119.8833,
       blurb: "canada's second-largest ski area · tod, sundance and morrisey linked by lift",

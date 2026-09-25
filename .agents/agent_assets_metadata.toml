@@ -1371,3 +1371,17 @@ mtime_ms = 1790298719142
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/55e82093-3a7a-444f-917c-5a121d1958d6/82b2e75d-15c8-4641-832c-0434471a5e6c"
 storage_version_token = "1790298899078188"
 content_type = "text/csv"
+
+[[outputs]]
+id = "XAgO4Un16XGCaUbHfn1Nd"
+uri = "file://exports/site-review-remediation.txt"
+type = "text"
+title = "Site review: fixes and remaining actions"
+description = "Item-by-item response to all 18 report recommendations, with verification and unresolved launch requirements."
+logical_id = "35856c49-c500-4b35-84aa-7d78f5b674ba"
+content_hash = "sha256:c9a29663ef36697f97990a4daa1df697078af015c6be742420cc7d9a91544c0e"
+size = 4219
+mtime_ms = 1790305867958
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/35856c49-c500-4b35-84aa-7d78f5b674ba/409ff3de-6a25-48b5-bf85-b3684394b667"
+storage_version_token = "1790305884499621"
+content_type = "text/plain"

@@ -1,10 +1,12 @@
 import { useMemo } from "react";
+import { useUser } from "@clerk/react";
 import { ArrowDown, ArrowUp, CloudSnow, Mountain, Snowflake, Wind } from "lucide-react";
 import {
   getGetElevationForecastQueryKey,
+  useGetBillingStatus,
   useGetElevationForecast,
 } from "@workspace/api-client-react";
-import { useLanguage } from "@workspace/feelzlike-shell";
+import { useLanguage, usePremiumAccess } from "@workspace/feelzlike-shell";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 type Units = ReturnType<typeof useUnits>;
@@ -42,7 +44,21 @@ export function ElevationBands({
 }: Props) {
   const { t } = useLanguage();
   const u = useUnits();
+  const access = usePremiumAccess();
+  const { user, isLoaded } = useUser();
+  // Shares the authenticated status query with SignUpProvider. Do not render
+  // a previously cached premium result after sign-out or entitlement loss.
+  const billing = useGetBillingStatus({ query: {
+    queryKey: ["/api/billing/status", user?.id],
+    enabled: !!user && isLoaded,
+    retry: false,
+  } });
+  const hasAccess = access.isPaid === true ||
+    (!billing.isError && billing.data?.promo === true);
   const enabled =
+    isLoaded &&
+    !!user &&
+    hasAccess &&
     typeof lat === "number" &&
     typeof lng === "number" &&
     typeof summitElevationM === "number" &&
@@ -64,7 +80,10 @@ export function ElevationBands({
   const q = useGetElevationForecast(params, {
     query: {
       enabled,
-      queryKey: getGetElevationForecastQueryKey(params),
+      // The server response is personalized; never reuse a previous
+      // account's premium query result across sign-out/sign-in transitions.
+      queryKey: [...getGetElevationForecastQueryKey(params), user?.id ?? "signed-out"],
+      retry: false,
     },
   });
 
@@ -73,6 +92,19 @@ export function ElevationBands({
   const midM = q.data?.forecast?.midLiftElevationM ?? null;
   const lowerM = q.data?.forecast?.lowerLiftElevationM ?? null;
 
+  if (!isLoaded || !access.isAuthenticated || !hasAccess || q.isError) {
+    return (
+      <section className="mt-4 rounded-2xl border border-border bg-white p-5 text-sm text-slate-700">
+        <p className="font-medium">{t("Elevation forecast", "標高別予報")}</p>
+        <p className="mt-2">
+          {q.isError && (q.error as { status?: number }).status !== 401 &&
+          (q.error as { status?: number }).status !== 402
+            ? t("Elevation forecast is temporarily unavailable.", "標高別予報は一時的に利用できません。")
+            : t("Sign in or check your premium access to view upper, mid and base conditions.", "山頂・中腹・ベースの予報を見るには、ログインまたはプレミアム利用状況をご確認ください。")}
+        </p>
+      </section>
+    );
+  }
   if (!enabled) return null;
   if (q.isLoading) return null;
   if (!q.data?.configured) return null;

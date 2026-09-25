@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useBaseTown, useRegion } from "@workspace/feelzlike-shell";
 import { writeLastTown } from "@/lib/favouriteRegion";
 import { TownHome } from "@/pages/region/TownHome";
-import { TownSubpageStub } from "@/pages/region/TownSubpageStub";
+import NotFound from "@/pages/not-found";
 import { TownStay } from "@/pages/town/TownStay";
 import { TownEat } from "@/pages/town/TownEat";
 import { TownExplore } from "@/pages/town/TownExplore";
@@ -61,7 +61,7 @@ export function TownLayout() {
   }, [townId, region.id, towns]);
 
   if (!townId || !towns.some((t) => t.id === townId)) {
-    return <Redirect to="/" />;
+    return <NotFound />;
   }
 
   // Sections with no content for this town are hidden from the nav; guard the
@@ -81,7 +81,7 @@ export function TownLayout() {
         </Route>
         {isMountainLinkLanding ? (
           <Route>
-            <Redirect to="/" />
+            <NotFound />
           </Route>
         ) : null}
         <Route path="/roads">
@@ -106,7 +106,7 @@ export function TownLayout() {
           {gate("/explore") ? <TownExplore /> : <Redirect to="/" />}
         </Route>
         <Route>
-          <TownSubpageStub title="Not found" titleJa="ページが見つかりません" />
+          <NotFound />
         </Route>
       </Switch>
     </WouterRouter>

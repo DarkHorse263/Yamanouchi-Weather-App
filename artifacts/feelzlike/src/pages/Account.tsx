@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { useClerk } from "@clerk/react";
@@ -28,6 +28,7 @@ import { ALERT_REGIONS } from "@/lib/alertRegions";
 import { RegionCountryPicker } from "@/components/RegionCountryPicker";
 import { CatalogueMountainPicker } from "@/components/CatalogueMountainPicker";
 import { BillingControls } from "@/components/BillingControls";
+import { PageMeta } from "@/lib/seo/PageMeta";
 
 function SignOutButton() {
   const { signOut } = useClerk();
@@ -48,7 +49,7 @@ function SignOutButton() {
  * powder-alert subscription tied to their email — all session-authorised,
  * no manage token needed.
  *
- * Signed-out visitors get the free sign-up sheet (soft gate), never an error.
+ * Signed-out visitors can sign in or open the free sign-up sheet.
  */
 
 const HORIZONS: Array<{ value: 24 | 48 | 72; label: string }> = [
@@ -62,17 +63,9 @@ export default function Account() {
   const [deleted, setDeleted] = useState(false);
   const [deletionPending, setDeletionPending] = useState(false);
 
-  // Signed-out visitors get the sign-up sheet · once, after auth resolves.
-  // Skipped after a self-serve deletion so the confirmation isn't covered
-  // by the sign-up sheet.
-  useEffect(() => {
-    if (!authLoading && !isAuthenticated && !deleted) {
-      promptSignUp({ feature: "account-page" });
-    }
-  }, [authLoading, isAuthenticated, promptSignUp, deleted]);
-
   return (
     <div className="min-h-screen bg-[#0055FF] pb-8 transition-colors duration-500">
+      <PageMeta title="your account" description="Manage your feelzlike account, preferences and powder alerts." path="/account" noIndex />
       <div className="max-w-3xl mx-auto px-4 md:px-8 py-6 md:py-10 space-y-6">
         <Link
           href="/"
@@ -118,13 +111,19 @@ function SignedOutCard({ onSignUp }: { onSignUp: () => void }) {
           <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
             sign in to manage your powder alerts, home region and units here.
           </p>
-          <button
-            type="button"
-            onClick={onSignUp}
-            className="mt-3 rounded-lg bg-primary text-primary-foreground font-bold text-sm px-4 py-2.5 hover:bg-primary/90 transition"
-          >
-            create free account
-          </button>
+           <div className="mt-3 flex flex-wrap items-center gap-3">
+             <Link href="/sign-in" data-testid="link-account-sign-in" className="rounded-lg bg-primary text-primary-foreground font-bold text-sm px-4 py-2.5 hover:bg-primary/90 transition">
+               sign in
+             </Link>
+             <button
+               type="button"
+               data-testid="button-account-sign-up"
+               onClick={onSignUp}
+               className="rounded-lg border border-border font-bold text-sm px-4 py-2.5 hover:bg-secondary transition"
+             >
+               create free account
+             </button>
+           </div>
         </div>
       </div>
     </div>

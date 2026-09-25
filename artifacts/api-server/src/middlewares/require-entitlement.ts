@@ -25,11 +25,20 @@ export function setSubscriptionResolver(fn: SubscriptionResolver): void {
   resolver = fn;
 }
 
+/** Use this for mixed free/premium responses (e.g. a seven-day free
+ * forecast). A resolver failure rejects: callers must fail closed, never
+ * respond with premium data on an error. app.ts wires the signed-in promo
+ * and verified paid-subscription resolver once for both this helper and
+ * requireEntitlement.
+ */
+export async function requestHasEntitlement(req: Request, ent: Entitlement): Promise<boolean> {
+  return hasEntitlement(await resolver(req), ent);
+}
+
 export function requireEntitlement(ent: Entitlement): RequestHandler {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const sub = await resolver(req);
-      if (hasEntitlement(sub, ent)) {
+      if (await requestHasEntitlement(req, ent)) {
         return next();
       }
       // Soft member gate: an anonymous visitor is asked to sign in (free
@@ -52,7 +61,7 @@ export function requireEntitlement(ent: Entitlement): RequestHandler {
         error: "PAYMENT_REQUIRED",
         message: `This feature requires an active subscription with the "${ent}" entitlement.`,
         entitlement: ent,
-        upgradeUrl: "/pricing",
+        upgradeUrl: "/premium",
       });
     } catch (err) {
       console.error("[entitlement] resolver error:", err);

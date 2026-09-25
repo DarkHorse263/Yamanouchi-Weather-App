@@ -1,6 +1,7 @@
-// Shared launch promo window constants for client and server.
-export const DEFAULT_PROMO_STARTS_AT = "2026-06-01";
-export const DEFAULT_PROMO_ENDS_AT = "2026-12-31";
+// One absolute Sydney window for both browser and server, regardless of host timezone.
+// Date-only environment overrides retain their existing local-day semantics.
+export const DEFAULT_PROMO_STARTS_AT = "2026-06-01T00:00:00.000+10:00";
+export const DEFAULT_PROMO_ENDS_AT = "2026-12-31T23:59:59.999+11:00";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Australian 2026 season closure policy

@@ -1,5 +1,6 @@
 import express, { type Express, type Request, type Response } from "express";
 import cors from "cors";
+import { isOriginAllowed } from "./lib/corsPolicy";
 import helmet from "helmet";
 import path from "path";
 import { readFileSync } from "fs";
@@ -111,6 +112,8 @@ app.use(helmet({
   contentSecurityPolicy: false,
   crossOriginEmbedderPolicy: false,
   frameguard: false,
+  // The production edge supplies HSTS; avoid two contradictory headers.
+  strictTransportSecurity: process.env.NODE_ENV === "production" ? false : undefined,
   // Helmet's default Referrer-Policy is `no-referrer`, which strips Referer
   // on same-origin GETs. The admin origin-pinning guard relies on Origin
   // OR Referer to detect same-origin browser fetches, so we relax to
@@ -133,29 +136,12 @@ app.set("trust proxy", Number.isFinite(trustProxyHops) ? trustProxyHops : 1);
 // domains (for in-workspace previews). Reflecting any origin with
 // credentials becomes a CSRF foot-gun the moment we add cookie auth. Any
 // request with no Origin header (server-to-server, curl, same-origin) passes.
-const ALLOWED_ORIGIN_PATTERNS: RegExp[] = [
-  /^https?:\/\/localhost(?::\d+)?$/,
-  /^https?:\/\/127\.0\.0\.1(?::\d+)?$/,
-  /\.replit\.app$/,
-  /\.replit\.dev$/,
-  /\.repl\.co$/,
-  // Production custom domain. Browsers send an Origin header on same-origin
-  // POST/PUT/DELETE (but not GET), so leaving this out breaks every mutation
-  // on the live site (e.g. admin dashboard deletes → INTERNAL_ERROR) while
-  // reads keep working · July 2026 incident.
-  /^https:\/\/(www\.)?feelzlike\.com$/,
-];
 const explicitAppUrl = (process.env.APP_PUBLIC_URL ?? "").replace(/\/$/, "");
-function isOriginAllowed(origin: string): boolean {
-  if (explicitAppUrl && origin === explicitAppUrl) return true;
-  return ALLOWED_ORIGIN_PATTERNS.some((re) => re.test(origin));
-}
 app.use(cors({
   origin: (origin, cb) => {
     // No Origin = same-origin / server-side - always allow.
     if (!origin) return cb(null, true);
-    if (isOriginAllowed(origin)) return cb(null, true);
-    return cb(new Error(`CORS: origin not allowed (${origin})`));
+    return cb(null, isOriginAllowed(origin, process.env.NODE_ENV === "production", explicitAppUrl));
   },
   // Credentials enabled so Clerk's session cookie is sent on cross-origin
   // requests from the SPA (preview iframe / *.replit.dev).

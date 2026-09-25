@@ -7,16 +7,8 @@ import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_1604
  *   Whitefish Mountain Resort → independent (widely described as "the
  *                                largest ski area in the country not on
  *                                Epic/Ikon/Indy") · confirmed live snow
- *                                report · ⚠️ no confirmed dedicated
- *                                official webcam URL — an official
- *                                Mountain Stats page exists, and
- *                                third-party aggregators reference a
- *                                Base Lodge Cam and South Summit Cam
- *                                sourced from the official site, but a
- *                                direct live webcam URL on
- *                                skiwhitefish.com could not be
- *                                independently confirmed, flagged as
- *                                unverified rather than guessed.
+ *                                report · official webcam hub listed in
+ *                                src/data/webcams.ts.
  *
  * Avalanche: Flathead Avalanche Center (flatheadavalanche.org) covers
  * Whitefish's backcountry — see RegionSources.tsx. Chain law: Montana
@@ -42,7 +34,7 @@ export const whitefishRegion: RegionConfig = {
       elevationM: 2078,
       lat: 48.4890,
       lng: -114.3670,
-      blurb: "Independent · known locally as \"Big Mountain\" · widely described as the largest US ski area not on Epic, Ikon, or Indy Pass · official 2025-26 closing day Apr 5 2026 per resort · ⚠️ no confirmed dedicated official webcam URL found in research, treat as unverified.",
+      blurb: "Independent · known locally as \"Big Mountain\" · widely described as the largest US ski area not on Epic, Ikon, or Indy Pass · official 2025-26 closing day Apr 5 2026 per resort.",
       websiteUrl: "https://skiwhitefish.com/",
       snowReportUrl: "https://skiwhitefish.com/snowreport/",
       expert_only: true,

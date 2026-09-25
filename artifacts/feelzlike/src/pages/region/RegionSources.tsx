@@ -1206,7 +1206,7 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
       title: "Resorts & lifts",
       titleJa: "スキー場・リフト",
       items: [
-        { label: "Whitefish Mountain Resort", detail: "independent · known locally as \"Big Mountain\" · the largest US ski area not on Epic/Ikon/Indy Pass · official 2025-26 closing day Apr 5 2026 per resort · ⚠️ no confirmed dedicated webcam URL", url: "https://skiwhitefish.com/" },
+        { label: "Whitefish Mountain Resort", detail: "independent · known locally as \"Big Mountain\" · the largest US ski area not on Epic/Ikon/Indy Pass · official 2025-26 closing day Apr 5 2026 per resort", url: "https://skiwhitefish.com/" },
       ],
     },
     FORECAST_ENSEMBLE,

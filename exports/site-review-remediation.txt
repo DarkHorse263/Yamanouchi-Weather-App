@@ -1,0 +1,37 @@
+feelzlike site review remediation
+25 September 2026
+
+Status: changes verified locally, NOT published. Purchases remain disabled.
+This is a review of the supplied findings, not a certification of site-wide security.
+
+Report action items:
+1. Premium API enforcement: implemented on elevation-forecast and mixed weather responses. Anonymous/free weather capped at seven days; signed-in promo/entitled users retain full existing horizon. Personalized responses bypass browser/service-worker caching. Forecast aliases and town ensemble also reviewed. Public roads and account-free alerts remain public. No carpark/disruption/offline-pack API product was invented.
+2. Elevations: corrected four Snowy Mountains forecast heights and sourced terrain bounds for 24 authored mountain records. Actual registry/provenance checks passed. Other authored records still lack independently established terrain bounds; no guessed elevations added.
+3. Cache abuse: only configured supported midpoints accepted; arbitrary elevations cannot produce unlimited weather/ensemble cache variants.
+4. Failure resilience: retained existing six-hour stale fallback and request coalescing, added bounded queue for misses. Cache is process-local, not persistent across replicas/restarts. No scheduled cache warmer added and no load sweep performed.
+5. Commercial Open-Meteo: unresolved owner licence/procurement requirement. Customer endpoint/key not configured. Do not interpret these fixes as permission for commercial use.
+6. Regional pricing: existing deliberate local prices preserved. Did NOT revoke access, refund or cancel customers based on billing address. Final paid-access/country policy remains a launch blocker covered by existing paid-access work.
+7. OWM key: restricted Vite client environment exposure. Rebuilt JS does not contain current OWM secret. Existing published/cached bundles may still expose the old key. Owner must rotate it and migrate to private OWM_API_KEY; server-only compatibility fallback retained meanwhile to avoid breaking weather.
+8. CORS: production permits exact owned/configured origins, not arbitrary Replit subdomains. Unknown origins receive no CORS permission instead of a 500.
+9. Billing: status rate-limited; readiness and entitlement lookups cached. Multi-replica cache invalidation still needs launch review.
+10. BILLING_ORIGIN: unset in inspected environment. Purchases remain off; signed-in checkout has NOT been verified. Must configure and verify before opening purchases.
+11. HTML headers: unresolved. Static HTML is served by the application router, not Express; API helmet changes cannot secure those responses. Requires a supported edge/header solution or separately reviewed serving-topology change. No unsupported .replit header settings or fake meta equivalents added.
+12. Invalid Stripe signatures return 400; genuine processing failures remain retryable.
+13. Client/server promo constants now use explicit Sydney instants.
+14. /pricing redirects to /premium in client routing; entitlement upgrade links use /premium. No edge-level 301 claim.
+15. Whitefish internal research note removed from visitor-facing copy/sources. Scoped regression/build check added; a global editorial lint/cleanup was not applied.
+16. Austria label fixed.
+17. Unknown page UI is noindex and displays not-found instead of silently redirecting home. Real edge HTTP 404 for unknown/asset-like paths remains unresolved.
+18. App-generated duplicate production HSTS removed; edge header retained.
+
+Other: signed-out account now has account-specific title/noindex and explicit sign-in action. Hosting-layer GAESA cookie flags were not changed.
+
+Verification:
+- Both package typechecks and production builds passed.
+- Targeted billing, promo, elevation/provenance, weather/cache, service-worker and CORS tests passed.
+- Rebuilt JavaScript checked for OWM secret presence without printing the secret: absent.
+- Workflows restarted and running.
+- Anonymous elevation API returned 401.
+- Mobile Thredbo page rendered normally; unknown-path not-found UI also inspected.
+- No purchases, checkout sessions or provider load tests performed.
+- Authenticated end-to-end checkout and post-publish verification remain outstanding.

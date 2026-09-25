@@ -38,3 +38,32 @@ test("slow forecast waits for labelled server data instead of a SW timeout cache
   resolve(new Response(JSON.stringify(body)));
   assert.deepEqual(await (await pending).json(), body);
 });
+
+test("personalized weather and elevation responses bypass service-worker cache", () => {
+  for (const endpoint of ["/api/weather", "/api/weather/perisher?snowElevationM=1887", "/api/elevation-forecast?lat=1", "/api/town-ensemble?lat=1&lng=1"]) {
+    const listeners: Record<string, (event: unknown) => void> = {};
+    vm.runInNewContext(source, {
+      self: {
+        location: { origin: "https://example.test" },
+        addEventListener: (name: string, handler: (event: unknown) => void) => { listeners[name] = handler; },
+      },
+      URL,
+      caches: { open: () => { throw new Error("personalized response was cached"); } },
+    });
+    let intercepted = false;
+    listeners.fetch({
+      request: new Request(`https://example.test${endpoint}`),
+      respondWith: () => { intercepted = true; },
+    });
+    assert.equal(intercepted, false, endpoint);
+  }
+});
+
+test("weather provider credential stays outside Vite's client env allowlist", () => {
+  const config = readFileSync(new URL("../../../vite.config.ts", import.meta.url), "utf8");
+  const envPrefix = config.match(/envPrefix:\s*\[([\s\S]*?)\]/)?.[1];
+  assert.ok(envPrefix, "Vite must declare a restricted client env allowlist");
+  assert.ok(envPrefix.includes("VITE_CLERK_PUBLISHABLE_KEY"));
+  assert.ok(!envPrefix.includes("VITE_OWM_API_KEY"));
+  assert.ok(!envPrefix.includes('"VITE_"'));
+});

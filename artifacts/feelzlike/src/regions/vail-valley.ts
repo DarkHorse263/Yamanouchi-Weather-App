@@ -51,6 +51,10 @@ export const vailValleyRegion: RegionConfig = {
       id: "beaver-creek",
       name: "Beaver Creek",
       elevationM: 3488,
+      // Skiable bounds 2,255–3,488 m: https://www.skiresort.info/ski-resort/beaver-creek/
+      // Verified Beaver Creek village/base-area 2,469 m stays separate.
+      skiBaseElevationM: 2255,
+      summitElevationM: 3488,
       lat: 39.6042,
       lng: -106.5165,
       blurb: "gated, upscale resort village · impeccably groomed cruisers",

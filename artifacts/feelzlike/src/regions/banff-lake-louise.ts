@@ -51,6 +51,11 @@ export const banffLakeLouiseRegion: RegionConfig = {
       id: "mt-norquay",
       name: "Mt. Norquay",
       elevationM: 2133,
+      // Official trail map lists 1,680 m base and 2,450 m top;
+      // 2,133 m is a legacy map/forecast pin, not its summit.
+      // https://banffnorquay.com/trail-map/
+      skiBaseElevationM: 1680,
+      summitElevationM: 2450,
       lat: 51.1990,
       lng: -115.5980,
       blurb: "the steep local hill 10 min above town · night skiing and the north american chair",

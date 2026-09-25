@@ -44,6 +44,9 @@ export const vancouverRegion: RegionConfig = {
       id: "cypress-mountain",
       name: "Cypress Mountain",
       elevationM: 1440,
+      // https://www.skiresort.info/ski-resort/cypress-mountain/ (824–1,440 m)
+      skiBaseElevationM: 824,
+      summitElevationM: 1440,
       lat: 49.3958,
       lng: -123.2039,
       blurb: "the biggest of the three north shore hills · 2010 olympic freestyle venue, city day skiing with night runs",
@@ -58,6 +61,9 @@ export const vancouverRegion: RegionConfig = {
       id: "grouse-mountain",
       name: "Grouse Mountain",
       elevationM: 1250,
+      // https://www.skiresort.info/ski-resort/grouse-mountain/ (850–1,250 m)
+      skiBaseElevationM: 850,
+      summitElevationM: 1250,
       lat: 49.3803,
       lng: -123.0827,
       blurb: "the peak of vancouver · a skyride straight up from the north shore to lit night runs above the city",
@@ -85,6 +91,9 @@ export const vancouverRegion: RegionConfig = {
       id: "mount-washington",
       name: "Mount Washington Alpine Resort",
       elevationM: 1588,
+      // https://www.skiresort.info/ski-resort/mount-washington/ (1,083–1,588 m)
+      skiBaseElevationM: 1083,
+      summitElevationM: 1588,
       lat: 49.7442,
       lng: -125.2947,
       blurb: "vancouver island's destination mountain · a huge maritime snowpack above the comox valley, reached by ferry or flight",

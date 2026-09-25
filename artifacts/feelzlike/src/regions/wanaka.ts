@@ -30,6 +30,9 @@ export const wanakaRegion: RegionConfig = {
       id: "cardrona",
       name: "Cardrona",
       elevationM: 1860,
+      // https://www.skiresort.info/ski-resort/cardrona/ (1,260–1,894 m ski area)
+      skiBaseElevationM: 1260,
+      summitElevationM: 1894,
       lat: -44.8741,
       lng: 168.9492,
       blurb: "wide sunny groomers · nz's biggest terrain parks and family base",
@@ -43,6 +46,9 @@ export const wanakaRegion: RegionConfig = {
       id: "treble-cone",
       name: "Treble Cone",
       elevationM: 2088,
+      // https://www.skiresort.info/ski-resort/treble-cone/ (1,260–1,960 m ski area)
+      skiBaseElevationM: 1260,
+      summitElevationM: 1960,
       lat: -44.6311,
       lng: 168.8978,
       blurb: "the steep one · big off-piste and the highest skiable terrain in the lakes",

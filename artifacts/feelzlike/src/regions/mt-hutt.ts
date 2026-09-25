@@ -28,6 +28,9 @@ export const mtHuttRegion: RegionConfig = {
       id: "mt-hutt",
       name: "Mt Hutt",
       elevationM: 2075,
+      // https://www.skiresort.info/ski-resort/mt-hutt/ (1,438–2,086 m ski area)
+      skiBaseElevationM: 1438,
+      summitElevationM: 2086,
       lat: -43.4707,
       lng: 171.5306,
       blurb: "canterbury's high-alpine basin · long season, closest big field to christchurch",

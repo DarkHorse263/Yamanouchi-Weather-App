@@ -1,5 +1,6 @@
 import { Router, type IRouter } from "express";
-import { getEnsembleForecast } from "../lib/ensemble-forecast.js";
+import { getEnsembleForecast, publicEnsembleForecast } from "../lib/ensemble-forecast.js";
+import { requestHasEntitlement } from "../middlewares/require-entitlement.js";
 
 const router: IRouter = Router();
 
@@ -25,6 +26,14 @@ const router: IRouter = Router();
  * `getEnsembleForecast` itself - we don't repeat the logic here.
  */
 router.get("/town-ensemble", async (req, res): Promise<void> => {
+  res.setHeader("Cache-Control", "private, no-store");
+  let extended: boolean;
+  try {
+    extended = await requestHasEntitlement(req, "forecast.extended");
+  } catch {
+    res.status(503).json({ error: "ENTITLEMENT_CHECK_FAILED" });
+    return;
+  }
   const lat = Number(req.query["lat"]);
   const lng = Number(req.query["lng"]);
   const elevation = req.query["elevation"] !== undefined
@@ -75,7 +84,7 @@ router.get("/town-ensemble", async (req, res): Promise<void> => {
       timezone,
       days: 7,
     });
-    res.json(ensemble);
+    res.json(extended ? { ...ensemble, days: ensemble.days.slice(0, 7) } : publicEnsembleForecast(ensemble));
   } catch (error) {
     res.status(500).json({
       error: "ENSEMBLE_FETCH_ERROR",

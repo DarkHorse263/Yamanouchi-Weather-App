@@ -86,7 +86,7 @@ export function RegionLayout() {
   const regionId = params.region;
   const region = regionId ? getRegion(regionId) : undefined;
 
-  if (!region) return <Redirect to="/" />;
+  if (!region) return <NotFound />;
 
   const hemisphere = region.hemisphere ?? "north";
   const routes: RegionRouter = REGION_ROUTERS[region.id] ?? {};
@@ -156,7 +156,7 @@ export function RegionLayout() {
         <Route path="/:town/:rest*" component={TownLayout} />
         <Route path="/:town" component={TownLayout} />
         <Route>
-          <Redirect to="/" />
+          <NotFound />
         </Route>
       </Switch>
     </AppShell>

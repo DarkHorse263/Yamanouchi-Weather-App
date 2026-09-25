@@ -13,6 +13,7 @@ import { ALERT_REGIONS, COUNTRY_REGION_TOTALS } from "@/lib/alertRegions";
 
 const COUNTRY_LABELS: Record<string, { en: string; ja: string }> = {
   AU: { en: "australia", ja: "オーストラリア" },
+  AT: { en: "austria", ja: "オーストリア" },
   JP: { en: "japan", ja: "日本" },
   NZ: { en: "new zealand", ja: "ニュージーランド" },
   CA: { en: "canada", ja: "カナダ" },

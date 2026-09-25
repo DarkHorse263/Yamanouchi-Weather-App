@@ -7,11 +7,31 @@ import { stripeRequest, getStripeSync } from "./stripeClient";
 const params = (values: Record<string, string>) => new URLSearchParams(values);
 const priceIds = () => approvedPriceIds();
 const keyFor = (user: string) => createHash("sha256").update(user).digest("hex");
+const READINESS_TTL_MS = 5 * 60_000;
+const ENTITLEMENT_TTL_MS = 60_000;
+type BillingConfig = ReturnType<typeof billingConfig>;
+let readinessCache: { key: string; until: number; result: Promise<BillingConfig> } | undefined;
+const entitlementCache = new Map<string, { until: number; result: Promise<Awaited<ReturnType<typeof lookupPaidEntitlement>>> }>();
+
+export class InvalidWebhookSignatureError extends Error {
+  constructor() { super("INVALID_WEBHOOK_SIGNATURE"); }
+}
 
 export async function billingReady() {
   if (process.env.BILLING_PURCHASES_ENABLED !== "true") throw new Error("BILLING_DISABLED");
   const config = billingConfig();
   if (process.env.BILLING_WEBHOOK_VERIFIED !== "true") throw new Error("BILLING_WEBHOOK_NOT_VERIFIED");
+  const key = JSON.stringify([config.origin, config.live, priceIds(), process.env.BILLING_WEBHOOK_VERIFIED]);
+  if (readinessCache?.key === key && readinessCache.until > Date.now()) return readinessCache.result;
+  const result = checkBillingReadiness(config);
+  readinessCache = { key, until: Date.now() + READINESS_TTL_MS, result };
+  result.catch(() => {
+    if (readinessCache?.result === result) readinessCache = undefined;
+  });
+  return result;
+}
+
+async function checkBillingReadiness(config: BillingConfig) {
   await getStripeSync(); // Proxy authorization alone cannot initialize native sync.
   await pool.query("SELECT event_id FROM billing_events LIMIT 0");
   await pool.query("SELECT id FROM stripe.subscriptions LIMIT 0");
@@ -115,7 +135,12 @@ export async function processBillingWebhook(raw: Buffer, signature: string, deps
   pool, stripeRequest, getStripeSync,
 }) {
   const config = entitlementBillingConfig();
-  const event = Stripe.webhooks.constructEvent(raw, signature, config.webhookSecret);
+  let event: Stripe.Event;
+  try { event = Stripe.webhooks.constructEvent(raw, signature, config.webhookSecret); }
+  catch (error) {
+    if (error instanceof Stripe.errors.StripeSignatureVerificationError) throw new InvalidWebhookSignatureError();
+    throw error;
+  }
   if (event.livemode !== config.live || event.account) throw new Error("BILLING_EVENT_MODE");
   const sync = await deps.getStripeSync();
   await sync.processWebhook(raw, signature);
@@ -152,12 +177,36 @@ export async function processBillingWebhook(raw: Buffer, signature: string, deps
           JSON.stringify({ live: config.live, verifiedWebhook: true, cancelAtPeriodEnd: !!sub.cancel_at_period_end })]);
     }
     await client.query("COMMIT");
+    if (owner) entitlementCache.delete(`${config.live}:${owner.user_id}`);
   } catch (error) { await client.query("ROLLBACK"); throw error; }
   finally { client.release(); }
 }
 
 export async function paidEntitlement(userId: string) {
   const config = entitlementBillingConfig();
+  const key = `${config.live}:${userId}`;
+  const cached = entitlementCache.get(key);
+  if (cached && cached.until > Date.now()) return cached.result;
+  if (entitlementCache.size >= 1000) {
+    for (const [id, entry] of entitlementCache) {
+      if (entry.until <= Date.now()) entitlementCache.delete(id);
+    }
+    if (entitlementCache.size >= 1000) entitlementCache.delete(entitlementCache.keys().next().value!);
+  }
+  const result = lookupPaidEntitlement(userId, config);
+  entitlementCache.set(key, { result, until: Date.now() + ENTITLEMENT_TTL_MS });
+  result.then(entitlement => {
+    const entry = entitlementCache.get(key);
+    if (entry?.result === result && entitlement?.currentPeriodEnd)
+      entry.until = Math.min(entry.until, entitlement.currentPeriodEnd.getTime());
+  }).catch(() => { /* Rejection is handled by the eviction below. */ });
+  result.catch(() => {
+    if (entitlementCache.get(key)?.result === result) entitlementCache.delete(key);
+  });
+  return result;
+}
+
+async function lookupPaidEntitlement(userId: string, config: ReturnType<typeof entitlementBillingConfig>) {
   const { rows } = await pool.query(`SELECT s.provider_sub_id,s.provider_customer_id FROM subscriptions s
     JOIN billing_customers c ON c.user_id=s.user_id AND c.customer_id=s.provider_customer_id
     WHERE s.user_id=$1 AND c.live=$2 AND s.provider='stripe' AND s.tier='pro'

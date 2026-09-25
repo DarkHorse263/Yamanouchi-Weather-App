@@ -1,5 +1,6 @@
 import { Router, type IRouter } from "express";
 import { getElevationForecast } from "../lib/openMeteoElevation";
+import { requireEntitlement } from "../middlewares/require-entitlement.js";
 
 const router: IRouter = Router();
 
@@ -17,7 +18,10 @@ const router: IRouter = Router();
  *   200 → { configured: true, forecast: ElevationForecast | null }
  *   400 → invalid query parameters
  */
-router.get("/elevation-forecast", async (req, res) => {
+router.get("/elevation-forecast", (_req, res, next) => {
+  res.setHeader("Cache-Control", "private, no-store");
+  next();
+}, requireEntitlement("forecast.peak"), async (req, res) => {
   const lat = Number(req.query["lat"]);
   const lng = Number(req.query["lng"]);
   const summitElevationM = Number(req.query["summitElevationM"]);
@@ -77,7 +81,6 @@ router.get("/elevation-forecast", async (req, res) => {
     elevationBands,
     name,
   });
-  res.setHeader("Cache-Control", "private, max-age=60");
   res.json({ configured: true, forecast });
 });
 

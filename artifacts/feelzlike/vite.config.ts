@@ -37,6 +37,32 @@ if (!isBuild && !process.env.BASE_PATH) {
 
 export default defineConfig({
   base: basePath,
+  // Dynamic import.meta.env reads in the affiliate/analytics clients cause
+  // Vite to embed *every* exposed VITE_ variable in the browser bundle.
+  // The existing OWM provider credential still has a VITE_ name but belongs
+  // only to api-server; publish only these explicitly client-facing values.
+  envPrefix: [
+    "VITE_CLERK_PUBLISHABLE_KEY",
+    "VITE_CLERK_PROXY_URL",
+    "VITE_SENTRY_DSN",
+    "VITE_VAPID_PUBLIC_KEY",
+    "VITE_API_BASE_URL",
+    "VITE_MAPBOX_TOKEN",
+    "VITE_PUBLIC_ORIGIN",
+    "VITE_GA_MEASUREMENT_ID",
+    "VITE_AWIN_PUBLISHER_ID",
+    "VITE_CJ_PUBLISHER_ID",
+    "VITE_META_PIXEL_ID",
+    "VITE_BOOKING_AFFILIATE_ID",
+    "VITE_AGODA_AFFILIATE_ID",
+    "VITE_EXPEDIA_AFFILIATE_ID",
+    "VITE_HOTELS_AFFILIATE_ID",
+    "VITE_TRIP_AFFILIATE_ID",
+    "VITE_AIRBNB_AFFILIATE_ID",
+    "VITE_JALAN_AFFILIATE_ID",
+    "VITE_RAKUTEN_AFFILIATE_ID",
+    "VITE_TRIPADVISOR_AFFILIATE_ID",
+  ],
   plugins: [
     react(),
     tailwindcss({ optimize: false }),

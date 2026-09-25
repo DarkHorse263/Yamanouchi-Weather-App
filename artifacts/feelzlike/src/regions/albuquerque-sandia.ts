@@ -66,6 +66,9 @@ export const albuquerqueSandiaRegion: RegionConfig = {
       name: "Sandia Peak Ski Area",
       elevationM: 2630,
       baseElevationM: 2630,
+      // https://www.skiresort.info/ski-resort/sandia-peak/ (2,630–3,140 m)
+      skiBaseElevationM: 2630,
+      summitElevationM: 3140,
       lat: 35.2062,
       lng: -106.4475,
       blurb: "Mountain Capital Partners \"Power Pass\" (Core tier, unlimited w/ Sipapu + Pajarito) · not on Epic/Ikon/Indy/Mountain Collective · ⚠️ VERIFY-STATUS RESORT: multi-year full closures 2021-23, reopened 2024 under MCP ownership, DID operate 2025-26 per a Jan 2026 KRQE report but with a delayed \"lift-related complication\" start — exact 2025-26 closing date and total operating days are unconfirmed by any dated source, treat as an open data gap · no confirmed live webcam found · base/summit elevation approximate (~8,629 ft / ~10,302 ft per skiresort.info, ~1,700 ft vertical per secondary sources) — no precise primary-source figure located.",

@@ -1,20 +1,21 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import rateLimit from "express-rate-limit";
 import { requireAuth } from "../middlewares/requireAuth";
-import { checkout, portal, billingReady, paidEntitlement, processBillingWebhook } from "../lib/billing";
+import { checkout, portal, billingReady, paidEntitlement, processBillingWebhook, InvalidWebhookSignatureError } from "../lib/billing";
 import { parseBillingSelection } from "../lib/billing-policy";
 import { resolvePromoSubscription } from "../lib/promo";
 import { CreateBillingCheckoutBody, GetBillingStatusResponse, CreateBillingCheckoutResponse, CreateBillingPortalResponse } from "@workspace/api-zod";
 
 const router: IRouter = Router();
 const limit = rateLimit({ windowMs: 60000, limit: 10 });
+const statusLimit = rateLimit({ windowMs: 60000, limit: 30 });
 router.use("/billing", (req, res, next) => {
   if (req.method === "POST" && req.get("origin") !== process.env.BILLING_ORIGIN) {
     res.status(403).json({ error: "BILLING_ORIGIN_REQUIRED" }); return;
   }
   next();
 });
-router.get("/billing/status", requireAuth, async (req, res) => {
+router.get("/billing/status", requireAuth, statusLimit, async (req, res) => {
   res.setHeader("Cache-Control", "no-store");
   let purchasesEnabled = false;
   let reason = "BILLING_DISABLED";
@@ -23,7 +24,9 @@ router.get("/billing/status", requireAuth, async (req, res) => {
   }
   const promo = resolvePromoSubscription(true);
   let paid = false;
-  try { paid = !!await paidEntitlement(req.dbUser!.id); } catch { /* Fail closed; promo remains independently valid. */ }
+  try { paid = !!await paidEntitlement(req.dbUser!.id); } catch {
+    res.status(503).json({ error: "BILLING_ENTITLEMENT_UNAVAILABLE" }); return;
+  }
   res.json(GetBillingStatusResponse.parse({ purchasesEnabled, reason, paid, promo: !!promo }));
 });
 router.post("/billing/checkout", limit, requireAuth, async (req, res) => {
@@ -45,6 +48,11 @@ export async function billingWebhook(req: Request, res: Response) {
     res.status(400).json({ error: "INVALID_WEBHOOK" }); return;
   }
   try { await processBillingWebhook(req.body, signature); res.json({ received: true }); }
-  catch { res.status(503).json({ error: "WEBHOOK_NOT_PROCESSED" }); }
+  catch (error) {
+    if (error instanceof InvalidWebhookSignatureError) {
+      res.status(400).json({ error: "INVALID_WEBHOOK_SIGNATURE" }); return;
+    }
+    res.status(503).json({ error: "WEBHOOK_NOT_PROCESSED" });
+  }
 }
 export default router;

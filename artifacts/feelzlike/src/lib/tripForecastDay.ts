@@ -9,14 +9,16 @@ export interface PlannerForecastDay {
   feelsLikeSources: string[];
   precipMean: number;
   snowMean: number;
-  snowSpread: number;
+  /** Model spread is available only with forecast.extended. */
+  snowSpread: number | null;
   sourcesCount: number;
   confidence: "high" | "medium" | "low";
 }
 
 /** Optional fields allow old cached responses to degrade to unavailable. */
 export type ForecastApiDay = Omit<PlannerForecastDay,
-  "feelsLikeMaxMean" | "feelsLikeMinMean" | "feelsLikeSources"> &
+  "feelsLikeMaxMean" | "feelsLikeMinMean" | "feelsLikeSources" | "snowSpread"> &
+  Partial<Pick<PlannerForecastDay, "snowSpread">> &
   Partial<Pick<PlannerForecastDay, "feelsLikeMaxMean" | "feelsLikeMinMean" | "feelsLikeSources">>;
 
 export function toPlannerDay(d: ForecastApiDay): PlannerForecastDay {
@@ -37,7 +39,8 @@ export function toPlannerDay(d: ForecastApiDay): PlannerForecastDay {
     feelsLikeSources: valid ? sources : [],
     precipMean: d.precipMean,
     snowMean: d.snowMean,
-    snowSpread: d.snowSpread,
+    snowSpread: typeof d.snowSpread === "number" && Number.isFinite(d.snowSpread)
+      ? d.snowSpread : null,
     sourcesCount: d.sourcesCount,
     confidence: d.confidence,
   };

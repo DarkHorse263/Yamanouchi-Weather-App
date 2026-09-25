@@ -44,6 +44,9 @@ export const powderHighwayRegion: RegionConfig = {
       id: "revelstoke-mountain-resort",
       name: "Revelstoke Mountain Resort",
       elevationM: 2225,
+      // https://www.skiresort.info/ski-resort/revelstoke-mountain-resort/ (512–2,225 m ski area)
+      skiBaseElevationM: 512,
+      summitElevationM: 2225,
       lat: 50.9581,
       lng: -118.1633,
       blurb: "north america's longest lift-served vertical · 1,713 m top to bottom on mt mackenzie",

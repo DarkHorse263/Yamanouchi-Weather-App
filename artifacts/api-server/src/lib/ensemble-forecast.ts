@@ -86,6 +86,22 @@ export interface EnsembleForecast {
   _stale?: { ageSeconds: number } | null;
 }
 
+/** Public comparison days retain useful means/confidence while keeping
+ * individual model breakdowns and spread (forecast.extended) private.
+ * This is a projection: never mutate the provider's shared cached result. */
+export function publicEnsembleForecast(data: EnsembleForecast) {
+  return {
+    ...data,
+    days: data.days.slice(0, 7).map((day) => {
+      const {
+        perSource, tempMaxSpread, tempMinSpread, precipSpread, snowSpread,
+        ...basicDay
+      } = day;
+      return basicDay;
+    }),
+  };
+}
+
 interface CacheEntry {
   data: EnsembleForecast;
   freshUntil: number; // serve straight from cache until this time

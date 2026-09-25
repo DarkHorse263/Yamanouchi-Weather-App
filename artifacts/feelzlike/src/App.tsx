@@ -261,6 +261,8 @@ function Router() {
       <Route path="/legal/terms" component={Terms} />
       <Route path="/premium" component={Premium} />
       <Route path="/premium/" component={Premium} />
+      <Route path="/pricing"><Redirect to="/premium" replace /></Route>
+      <Route path="/pricing/"><Redirect to="/premium" replace /></Route>
       <Route path="/account" component={Account} />
       <Route path="/account/" component={Account} />
       <Route path="/compare" component={TripPlanner} />

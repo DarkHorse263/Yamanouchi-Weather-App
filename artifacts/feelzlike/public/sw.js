@@ -76,7 +76,7 @@
 // snapshots so an old response shape cannot hide the new forecast labels.
 // v28: comparison ensemble now includes nullable apparent highs/lows + coverage.
 // v29: forecast responses include the mountain timezone for source-time display.
-const CACHE_VERSION = "v31";
+const CACHE_VERSION = "v32";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
@@ -298,6 +298,13 @@ self.addEventListener("fetch", (event) => {
   //     alert prefs, profile). A cached copy would survive sign-out and show
   //     stale prefs right after a save. Never cache.
   if (url.pathname.startsWith("/api/account")) return;
+
+  // Weather responses now depend on the signed-in user's subscription.
+  // Never let an earlier premium result outlive a sign-out in Cache Storage.
+  if (url.pathname === "/api/weather" ||
+      /^\/api\/weather\/[^/]+\/?$/.test(url.pathname) ||
+      url.pathname.startsWith("/api/elevation-forecast") ||
+      url.pathname.startsWith("/api/town-ensemble")) return;
 
   // Only the server may serve a last-good ensemble: it enforces the six-hour
   // limit and labels it with _stale. A SW timeout/offline cache hit has neither

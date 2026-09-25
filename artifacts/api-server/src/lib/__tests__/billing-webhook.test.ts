@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import Stripe from "stripe";
+import type { Request, Response } from "express";
 
 // Local unit fixtures only: no provider calls, database writes or live charges.
 process.env.DATABASE_URL ||= "postgresql://unused:unused@localhost/unused";
@@ -11,6 +12,30 @@ process.env.STRIPE_ANNUAL_PRICE_ID = "price_year";
 process.env.STRIPE_EUR_MONTHLY_PRICE_ID = "price_EURmonth";
 process.env.STRIPE_WEBHOOK_SECRET = "whsec_unit_test_only";
 const { processBillingWebhook } = await import("../billing");
+const { billingWebhook } = await import("../../routes/billing");
+
+async function webhookResponse(raw: Buffer, signature: string) {
+  let status = 200;
+  let body: any;
+  const res = {
+    status(code: number) { status = code; return this; },
+    json(value: unknown) { body = value; return this; },
+  } as unknown as Response;
+  await billingWebhook({ body: raw, headers: { "stripe-signature": signature } } as unknown as Request, res);
+  return { status, body };
+}
+
+test("bad webhook signature is a 400, while a valid but invalid-mode event is a processing 503", async () => {
+  assert.deepEqual(await webhookResponse(Buffer.from("{}"), "invalid"), {
+    status: 400, body: { error: "INVALID_WEBHOOK_SIGNATURE" },
+  });
+  const payload = JSON.stringify({ id: "evt_wrong_mode", type: "customer.subscription.updated", livemode: true,
+    data: { object: { id: "sub_test", customer: "cus_test" } } });
+  const signature = Stripe.webhooks.generateTestHeaderString({ payload, secret: process.env.STRIPE_WEBHOOK_SECRET! });
+  assert.deepEqual(await webhookResponse(Buffer.from(payload), signature), {
+    status: 503, body: { error: "WEBHOOK_NOT_PROCESSED" },
+  });
+});
 
 function harness() {
   const processed = new Set<string>();

@@ -22,7 +22,7 @@ import type { Request, Response } from "express";
 import { getAuth } from "@clerk/express";
 
 import { isPromoActive, resolvePromoSubscription, PROMO_ENDS_AT, PROMO_STARTS_AT } from "../promo";
-import { requireEntitlement, setSubscriptionResolver } from "../../middlewares/require-entitlement";
+import { requireEntitlement, requestHasEntitlement, setSubscriptionResolver } from "../../middlewares/require-entitlement";
 import { TIER_ENTITLEMENTS, type Entitlement } from "../entitlements";
 
 /**
@@ -33,24 +33,22 @@ import { TIER_ENTITLEMENTS, type Entitlement } from "../entitlements";
  */
 const CLERK_AUTH_BRAND = Symbol.for("@clerk/express.auth");
 
-// Fixed clocks around the default promo window (1 Jun 2026 → EOD 31 Dec 2026,
-// local time).
-const DURING_PROMO = new Date(2026, 6, 30, 12, 0, 0); // 30 Jul 2026
-const LAST_MOMENT = new Date(2026, 11, 31, 23, 59, 59, 999); // 31 Dec 2026 EOD
-const AFTER_PROMO = new Date(2027, 0, 1, 0, 0, 1); // 1 Jan 2027 00:00:01
-const BEFORE_PROMO = new Date(2026, 4, 31, 12, 0, 0); // 31 May 2026
+// Absolute instants: default window is Sydney local time on every host.
+const DURING_PROMO = new Date("2026-07-30T12:00:00+10:00");
+const LAST_MOMENT = new Date("2026-12-31T23:59:59.999+11:00");
+const AFTER_PROMO = new Date("2027-01-01T00:00:00+11:00");
+const BEFORE_PROMO = new Date("2026-05-31T23:59:59.999+10:00");
 
 describe("isPromoActive · default window boundaries", () => {
   test("sanity: default boundaries are the documented window", () => {
     assert.ok(PROMO_STARTS_AT && PROMO_ENDS_AT, "default promo boundaries must exist");
-    assert.equal(PROMO_STARTS_AT!.getFullYear(), 2026);
-    assert.equal(PROMO_ENDS_AT!.getFullYear(), 2026);
-    assert.equal(PROMO_ENDS_AT!.getMonth(), 11);
-    assert.equal(PROMO_ENDS_AT!.getDate(), 31);
+    assert.equal(PROMO_STARTS_AT!.toISOString(), "2026-05-31T14:00:00.000Z");
+    assert.equal(PROMO_ENDS_AT!.toISOString(), "2026-12-31T12:59:59.999Z");
   });
 
   test("inactive before the start, active during, active at the last ms of 31 dec", () => {
     assert.equal(isPromoActive(BEFORE_PROMO), false);
+    assert.equal(isPromoActive(new Date("2026-06-01T00:00:00+10:00")), true);
     assert.equal(isPromoActive(DURING_PROMO), true);
     assert.equal(isPromoActive(LAST_MOMENT), true);
   });
@@ -191,6 +189,15 @@ describe("requireEntitlement + promo resolver · during the promo", () => {
 });
 
 describe("requireEntitlement + promo resolver · after the promo ends", () => {
+  test("mixed-response helper permits promo members and denies free/anonymous extended forecasts", async () => {
+    setSubscriptionResolver(req => resolvePromoSubscription(!!getAuth(req).userId, DURING_PROMO));
+    assert.equal(await requestHasEntitlement(makeReq(true), "forecast.extended"), true);
+    assert.equal(await requestHasEntitlement(makeReq(false), "forecast.extended"), false);
+    setSubscriptionResolver(req => resolvePromoSubscription(!!getAuth(req).userId, AFTER_PROMO));
+    assert.equal(await requestHasEntitlement(makeReq(true), "forecast.extended"), false);
+    assert.equal(await requestHasEntitlement(makeReq(false), "forecast.basic"), true);
+  });
+
   test("anonymous visitor still gets 401 AUTH_REQUIRED (soft gate stays sign-up-first)", async () => {
     const { nextCalled, captured } = await runGate("alerts.snow", false, AFTER_PROMO);
     assert.equal(nextCalled, false);
@@ -206,6 +213,7 @@ describe("requireEntitlement + promo resolver · after the promo ends", () => {
       const body = captured.body as { error: string; upgradeUrl?: string };
       assert.equal(body.error, "PAYMENT_REQUIRED");
       assert.ok(body.upgradeUrl, "402 body must carry the upgrade URL");
+      assert.equal(body.upgradeUrl, "/premium");
     }
   });
 

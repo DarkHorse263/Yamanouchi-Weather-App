@@ -23,18 +23,22 @@ export const snowyMountainsRegion: RegionConfig = {
     { path: "/mountain/charlottes-pass", label: "Charlotte's Pass" },
   ],
   mountains: [
+    // Forecast bounds: Perisher official resort stats (perisher.com.au/resort-info/mountain-operations/resort-stats);
+    // Thredbo, Selwyn and Charlotte Pass ski-area bounds: skiresort.info/ski-resort/{thredbo,selwyn-snowfields,charlotte-pass}/.
+    // These ski-area lower heights are NOT a substitute for verified village elevations.
     // Terrain tags (Sprint 4.1) - sourced from official trail maps + AU resort positioning.
     // Perisher: largest in southern hemisphere, 4 connected resorts → covers everything.
-    { id: "perisher",        name: "Perisher",         elevationM: 2054, baseElevationM: 1720, lat: -36.3717, lng: 148.4086, blurb: "NSW · the big one (4 resorts)",              websiteUrl: "https://www.perisher.com.au", snowReportUrl: "https://www.perisher.com.au/reports-cams/reports/snow-report",       beginner_friendly: true, kids_lessons: true, terrain_park: true },
+    { id: "perisher",        name: "Perisher",         elevationM: 2054, baseElevationM: 1720, skiBaseElevationM: 1720, summitElevationM: 2054, lat: -36.3717, lng: 148.4086, blurb: "NSW · the big one (4 resorts)",              websiteUrl: "https://www.perisher.com.au", snowReportUrl: "https://www.perisher.com.au/reports-cams/reports/snow-report",       beginner_friendly: true, kids_lessons: true, terrain_park: true },
     // Thredbo: highest vertical in AU, advanced skiers' choice, has terrain_park + lift-served backcountry.
-    { id: "thredbo",         name: "Thredbo",          elevationM: 2037, baseElevationM: 1365, lat: -36.5054, lng: 148.3089, blurb: "NSW · the high one",                          websiteUrl: "https://www.thredbo.com.au", snowReportUrl: "https://www.thredbo.com.au/weather/weather-report/",        terrain_park: true, backcountry_access: true, kids_lessons: true, summerOpen: true },
+    { id: "thredbo",         name: "Thredbo",          elevationM: 2037, baseElevationM: 1365, skiBaseElevationM: 1365, summitElevationM: 2037, lat: -36.5054, lng: 148.3089, blurb: "NSW · the high one",                          websiteUrl: "https://www.thredbo.com.au", snowReportUrl: "https://www.thredbo.com.au/weather/weather-report/",        terrain_park: true, backcountry_access: true, kids_lessons: true, summerOpen: true },
     // Selwyn: explicitly family-beginner, no expert terrain.
-    { id: "selwyn",          name: "Selwyn",           elevationM: 1614, baseElevationM: 1492, lat: -35.8990, lng: 148.4860, blurb: "NSW · family beginner mountain",             websiteUrl: "https://www.selwynsnow.com.au", snowReportUrl: "https://selwynsnow.com.au/snow-and-weather/",     beginner_friendly: true, kids_lessons: true },
+    { id: "selwyn",          name: "Selwyn",           elevationM: 1614, baseElevationM: 1492, skiBaseElevationM: 1492, summitElevationM: 1614, lat: -35.8990, lng: 148.4860, blurb: "NSW · family beginner mountain",             websiteUrl: "https://www.selwynsnow.com.au", snowReportUrl: "https://selwynsnow.com.au/snow-and-weather/",     beginner_friendly: true, kids_lessons: true },
     // Charlotte's Pass: small ski-in village, mostly intermediate, kids' programs.
     // Day-trippable via the DayTripper package: park at Perisher Valley (or
     // take the Skitube from Bullocks Flat), then oversnow vehicle ~30-45 min
     // up to the village. Standard lift tickets are overnight-guests only.
-    { id: "charlottes-pass", name: "Charlotte's Pass", elevationM: 1837, baseElevationM: 1765, lat: -36.4314, lng: 148.3297, blurb: "NSW · ski-in village · day trip via oversnow from Perisher", websiteUrl: "https://www.charlottepass.com.au", snowReportUrl: "https://charlottepass.com.au/on-mountain/#Snow-Report", beginner_friendly: true, kids_lessons: true },
+    // The authored 1,837 m is a forecast/map height, not the ski area's summit (1,954 m).
+    { id: "charlottes-pass", name: "Charlotte's Pass", elevationM: 1837, baseElevationM: 1765, skiBaseElevationM: 1765, summitElevationM: 1954, lat: -36.4314, lng: 148.3297, blurb: "NSW · ski-in village · day trip via oversnow from Perisher", websiteUrl: "https://www.charlottepass.com.au", snowReportUrl: "https://charlottepass.com.au/on-mountain/#Snow-Report", beginner_friendly: true, kids_lessons: true },
   ],
   baseTowns: [
     {
