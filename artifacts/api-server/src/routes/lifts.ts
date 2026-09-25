@@ -472,7 +472,9 @@ async function getResortDataWithLive(now: Date = new Date()): Promise<ResortLift
     isAuSeasonClosureActive({ countryCode: "AU", locationId: "thredbo", now })
       ? Promise.resolve(null)
       : getThredboLiveLiftStatus(),
-    getPerisherLiveLiftStatus(),
+    isAuSeasonClosureActive({ countryCode: "AU", locationId: "perisher", now })
+      ? Promise.resolve(null)
+      : getPerisherLiveLiftStatus(),
     isAuSeasonClosureActive({ countryCode: "AU", locationId: "charlottes-pass", now })
       ? Promise.resolve(null)
       : getCharlottePassLiveLiftStatus(),

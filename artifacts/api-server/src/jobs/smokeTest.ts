@@ -384,16 +384,17 @@ async function checkSnowConsistency(failures: SmokeFailure[]): Promise<number> {
 // confirm live operations. This is worth warning about in-season, but does
 // NOT prove the operator feed is down: a fresh official report with zero
 // operating lifts can also legitimately yield liveStatusVerified:false.
-// Once the
-// dated 2026 closure policy is active, closed AU resorts are expected to
+// Once the dated 2026 snow-season closure policy is active, AU resorts are expected to
 // return an explicit closed state instead of a live-feed assertion.
 // Out of season the resort legitimately stops updating the feed, so ordinary
-// live-feed checks run only during June-September (Sydney time). The dated
-// policy closure is always checked through the end of 2026.
+// live-feed checks run only during June-September (Sydney time) while the
+// resort's snow season remains open. The dated policy closure is checked
+// through the end of 2026.
 
 /** AU season gate for the live-feed canaries (Jun-Sep, Sydney time). */
 export function isThredboFeedSeason(now: Date = new Date()): boolean {
-  return isSydneyLiftFeedSeason(now);
+  return isSydneyLiftFeedSeason(now) &&
+    !isAuSeasonClosureActive({ countryCode: "AU", locationId: "thredbo", now });
 }
 
 const LIVE_LIFT_FEED_CANARIES = [

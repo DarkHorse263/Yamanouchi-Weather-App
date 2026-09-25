@@ -120,7 +120,7 @@ export function buildMountainSummary(input: MountainSummaryInput): MountainSumma
   // 3 · dated closure beats any wind/lift interpretation. Forecast snow above
   // remains useful, but a closed resort must never sound skiable or live.
   if (input.closedForSeason) {
-    en.push(`lifts closed for the ${AU_SEASON_CLOSURE_POLICY.seasonYear} season`);
+    en.push(`${AU_SEASON_CLOSURE_POLICY.seasonYear} snow season ended; ski lifts are closed`);
     ja.push(`${AU_SEASON_CLOSURE_POLICY.seasonYear}年シーズンはリフト営業終了`);
   } else {
     // wind vs lifts · only when the wind read is actually notable, and

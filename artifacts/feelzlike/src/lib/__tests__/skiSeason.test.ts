@@ -110,15 +110,18 @@ test("AU closure policy: closed resorts are closed after the Sydney effective da
   }
 });
 
-test("AU closure policy: Perisher remains live-monitored", () => {
-  assert.equal(
-    isAuSeasonClosureActive({
-      countryCode: "AU",
-      locationId: "perisher",
-      now: new Date("2026-09-16T00:00:00Z"),
-    }),
-    false,
-  );
+test("AU closure policy: owner-confirmed Perisher closure begins Sep 26 Sydney", () => {
+  const closed = (now: string) => isAuSeasonClosureActive({
+    countryCode: "AU",
+    locationId: "perisher",
+    now: new Date(now),
+  });
+  assert.equal(closed("2026-09-16T00:00:00Z"), false);
+  assert.equal(closed("2026-09-25T13:59:59Z"), false);
+  assert.equal(closed("2026-09-25T14:00:00Z"), true);
+  assert.equal(closed("2026-09-25T22:00:00Z"), true); // Sep 26 morning Sydney
+  assert.equal(closed("2026-12-31T12:59:59Z"), true);
+  assert.equal(closed("2026-12-31T13:00:00Z"), false); // Jan 1, 2027 Sydney
 });
 
 test("AU closure policy: next season and non-AU resorts are unaffected", () => {
@@ -135,6 +138,14 @@ test("AU closure policy: next season and non-AU resorts are unaffected", () => {
       countryCode: "NZ",
       locationId: "coronet-peak",
       now: new Date("2026-09-16T00:00:00Z"),
+    }),
+    false,
+  );
+  assert.equal(
+    isAuSeasonClosureActive({
+      countryCode: "AU",
+      locationId: "perisher",
+      now: new Date("2027-09-26T00:00:00Z"),
     }),
     false,
   );

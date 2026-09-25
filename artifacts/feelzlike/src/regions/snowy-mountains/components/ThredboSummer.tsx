@@ -3,14 +3,13 @@ import { Mountain, Bike, MapPin, Calendar, ExternalLink, Cable } from "lucide-re
 
 /**
  * Thredbo summer-mode panel. Thredbo is the only Snowy Mountains resort
- * that operates year-round · the Kosciuszko Express chairlift runs through
- * summer to service Mt Kosciuszko walkers, the bike park is the largest in
- * Australia, and the toboggan slope and village amenities stay open.
+ * with year-round non-snow activities. Summer lift schedules vary and this
+ * panel never asserts that a chairlift is operating right now.
  *
  * Replaces the snow / lift-status panels on Thredbo's LocationDetail page
  * when the global season is "green". All facts here come from
  * thredbo.com.au · we don't try to duplicate their booking flow, just
- * surface what's open and link out for tickets and current hours.
+ * describe seasonal activities and link out for tickets and current hours.
  */
 export function ThredboSummer() {
   return (
@@ -28,7 +27,7 @@ export function ThredboSummer() {
             Open year-round
           </h2>
           <p className="text-sm text-muted-foreground mt-2 max-w-xl leading-relaxed">
-            Thredbo runs through the green season for chairlift-served walks to Mt Kosciuszko, downhill mountain biking and family activities in the village.
+            Thredbo offers green-season walks to Mt Kosciuszko, mountain biking and village activities. Check the operator for current dates, lift service and hours.
           </p>
         </div>
         <a
@@ -48,7 +47,7 @@ export function ThredboSummer() {
         <SummerCard
           icon={<Cable className="w-4 h-4 text-sky-500" />}
           title="Kosciuszko Express chairlift"
-          body="Lifts walkers to 1930 m for the Mt Kosciuszko summit return walk (13 km, 4-5 h). Daily through summer, weather permitting · check the operator for current hours and last-up times."
+          body="Seasonal chairlift access for Mt Kosciuszko walks (13 km summit return). Service and hours vary · check the operator before travelling."
         />
         <SummerCard
           icon={<MapPin className="w-4 h-4 text-emerald-500" />}
@@ -58,12 +57,12 @@ export function ThredboSummer() {
         <SummerCard
           icon={<Bike className="w-4 h-4 text-amber-500" />}
           title="Mountain bike park"
-          body="Largest gravity park in Australia · 30+ km of downhill and flow trails accessed by the Kosciuszko Express. Bike-haul tickets and rentals via Thredbo. Generally Dec-Apr, varies year-on-year."
+          body="Downhill and flow trails with seasonal bike-haul access. Tickets and rentals via Thredbo; dates and lift service vary year-on-year."
         />
         <SummerCard
           icon={<Calendar className="w-4 h-4 text-rose-500" />}
           title="Village & events"
-          body="Bobsled, mini-golf, leisure centre and chairlift sightseeing operate through summer. Check the resort calendar for Blues Festival, Trail Running, MTB events and family programs."
+          body="Bobsled, mini-golf, leisure centre and sightseeing are among Thredbo's non-snow activities. Check the resort calendar and opening hours before visiting."
         />
       </div>
     </motion.div>

@@ -369,7 +369,7 @@ function skiableNowDisplay(
       return {
         Icon: Info,
         label: t(
-          `Closed for ${AU_SEASON_CLOSURE_POLICY.seasonYear} season`,
+          `${AU_SEASON_CLOSURE_POLICY.seasonYear} snow season ended`,
           `${AU_SEASON_CLOSURE_POLICY.seasonYear}年シーズン終了`,
         ),
         tone: SKIABLE_NOW_TONES.slate,

@@ -77,7 +77,7 @@ test("closed-for-season narrative never presents wind as skiable or live", () =>
     snowNext24Cm: 8,
   });
   assert.ok(s);
-  assert.match(s.en, /lifts closed for the 2026 season/);
+  assert.match(s.en, /2026 snow season ended; ski lifts are closed/);
   assert.ok(!s.en.includes("chairs may hold"));
   assert.match(s.en, /models suggest ~8\.0 cm/);
 });

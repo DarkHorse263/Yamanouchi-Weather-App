@@ -147,11 +147,11 @@ const NON_OPERATING_COPY: Record<Exclude<OperationStatus, "operating">, {
 }> = {
   closed_for_season: {
     chip: {
-      en: `Closed for ${AU_SEASON_CLOSURE_POLICY.seasonYear} season`,
+      en: `${AU_SEASON_CLOSURE_POLICY.seasonYear} snow season ended`,
       ja: `${AU_SEASON_CLOSURE_POLICY.seasonYear}年シーズン終了`,
     },
     banner: {
-      en: `This resort is closed for the ${AU_SEASON_CLOSURE_POLICY.seasonYear} season. Weather forecasts and incoming snow remain available; the wind outlook below is not a live operating report.`,
+      en: `The ${AU_SEASON_CLOSURE_POLICY.seasonYear} snow season has ended here. Weather forecasts and incoming snow remain available; the wind outlook below is not a live operating report. Non-snow activities may operate separately: check the resort's official schedule.`,
       ja: `このリゾートは${AU_SEASON_CLOSURE_POLICY.seasonYear}年シーズン終了です。天気予報とこれからの降雪予報は引き続き表示されます。下記の風予測は運行情報ではありません。`,
     },
   },

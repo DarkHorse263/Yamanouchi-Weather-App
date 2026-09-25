@@ -484,7 +484,7 @@ export function TownHome() {
             </p>
             <p className="text-sm text-emerald-900 leading-snug">
               {t(
-                "Resorts and the snow forecast pause for green season. Switch the season pill back to winter once snow returns · or scroll on for stay, eat and explore.",
+                "Snow-season resort cards are hidden in green season. Weather remains available · scroll on for stay, eat and explore.",
                 "シーズンオフはスキー場と降雪予報を一時停止しています。雪が戻ったらシーズン切替を冬に戻してください。",
               )}
             </p>
@@ -496,7 +496,7 @@ export function TownHome() {
           <div className="flex items-center justify-between mb-4">
             <p className="text-[14px] font-bold lowercase text-[#0055FF]">
               {isGreen
-                ? t("Open in green season", "グリーンシーズン営業中")
+                ? t("Year-round mountain weather", "通年の山の天気")
                 : t("Weather in mountains", "山の天気")}
             </p>
             <p className="text-[12px] font-bold text-slate-500 lowercase">
@@ -506,7 +506,7 @@ export function TownHome() {
           {isGreen && (
             <p className="text-[13px] font-bold text-emerald-700/80 mb-4 leading-snug lowercase">
               {t(
-                "Other resorts pause for green season. Switch the season pill back to winter once snow returns.",
+                "These mountains offer non-snow activities year-round; check official schedules before visiting. Other resorts may also have non-snow activities.",
                 "他のスキー場はグリーンシーズン休業。雪が戻ったらシーズン切替を冬に戻してください。",
               )}
             </p>

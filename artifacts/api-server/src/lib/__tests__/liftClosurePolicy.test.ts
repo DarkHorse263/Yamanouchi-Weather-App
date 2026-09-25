@@ -24,13 +24,22 @@ test("lift API catalogue applies the 2026 AU closure to every covered Snowy reso
   }
 });
 
-test("lift API keeps Perisher on its live-season path as the policy exception", () => {
-  const resort = getResortData(new Date("2026-09-16T00:00:00Z")).find(
+test("lift API closes Perisher's snow season from Sep 26 Sydney, not before or in 2027", () => {
+  const perisherAt = (date: string) => getResortData(new Date(date)).find(
     (candidate) => candidate.locationId === "perisher",
   );
-  assert.ok(resort);
-  assert.equal(resort.seasonStatus, "late-season");
-  assert.equal(resort.liveStatusVerified, false);
+  const lastSnowDay = perisherAt("2026-09-25T13:59:59Z");
+  const ended = perisherAt("2026-09-25T14:00:00Z");
+  const nextSeason = perisherAt("2027-09-26T00:00:00Z");
+  assert.ok(lastSnowDay);
+  assert.ok(ended);
+  assert.ok(nextSeason);
+  assert.equal(lastSnowDay.seasonStatus, "late-season");
+  assert.equal(ended.seasonStatus, "closed");
+  assert.equal(ended.operatingHours, undefined);
+  assert.equal(ended.liveStatusVerified, false);
+  assert.equal(ended.lifts.every((lift) => lift.status === "closed"), true);
+  assert.equal(nextSeason.seasonStatus, "late-season");
 });
 
 test("lift API closure is inactive before the effective date and next season", () => {
@@ -54,7 +63,11 @@ test("smoke keeps checking policy-closed AU canaries through October and Decembe
   assert.equal(shouldCheckLiveLiftCanary(thredbo, new Date("2027-01-01T00:00:00Z")), false);
 
   const perisher = { id: "perisher", liveFeed: true } as const;
-  assert.equal(shouldCheckLiveLiftCanary(perisher, new Date("2026-10-01T00:00:00Z")), false);
+  assert.equal(shouldCheckLiveLiftCanary(perisher, new Date("2026-09-25T13:59:59Z")), true);
+  assert.equal(shouldCheckLiveLiftCanary(perisher, new Date("2026-09-25T14:00:00Z")), true);
+  assert.equal(shouldCheckLiveLiftCanary(perisher, new Date("2026-10-01T00:00:00Z")), true);
+  assert.equal(shouldCheckLiveLiftCanary(perisher, new Date("2027-01-01T00:00:00Z")), false);
+  assert.equal(shouldCheckLiveLiftCanary({ id: "selwyn", liveFeed: false }, new Date("2026-10-01T00:00:00Z")), true);
 });
 
 test("smoke rejects contradictory closed probes with open counts or open rows", () => {

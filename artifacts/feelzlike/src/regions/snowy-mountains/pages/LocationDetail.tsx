@@ -227,8 +227,8 @@ export default function LocationDetail() {
     liftData?.liveStatusVerified === true;
   // Snowy region opts in to season-aware UI · in summer the snow/lift
   // panels make no sense, so we hide them and surface alternative content
-  // (Thredbo is the only resort that operates year-round, so it gets a
-  // dedicated summer panel; the others just drop the lift card).
+  // (Thredbo has year-round non-snow activities, so it gets a dedicated
+  // summer panel; the other Snowy resorts just drop the lift card).
   const seasonCtx = useOptionalSeason();
   const isSummer = seasonCtx?.season === "green";
   const showLiftAndDials = !isSummer;
@@ -425,7 +425,7 @@ export default function LocationDetail() {
               <span className="byline text-white/80 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-white/10 border border-white/20">
                 <Clock className="w-3 h-3 text-white" />
                 <span className="text-white">
-                  Closed for {AU_SEASON_CLOSURE_POLICY.seasonYear} season
+                  {AU_SEASON_CLOSURE_POLICY.seasonYear} snow season ended
                 </span>
               </span>
             ) : AU_LIFT_HOURS[locationId] ? (
@@ -969,7 +969,7 @@ export default function LocationDetail() {
                     {liftData.seasonStatus === "pre-season"
                       ? "Pre-season · NSW lifts typically spin up early June"
                       : liftData.seasonStatus === "closed"
-                        ? "Off-season · NSW lifts close early October"
+                        ? "Snow season ended · check the official resort report"
                         : "No lifts reported open right now"}
                   </div>
                 )}
@@ -1064,7 +1064,7 @@ export default function LocationDetail() {
             <div className="min-w-0">
               <p className="text-sm text-white">
                 {closedForSeason
-                  ? `closed for the ${AU_SEASON_CLOSURE_POLICY.seasonYear} season · forecasts and incoming snow remain available.`
+                  ? `${AU_SEASON_CLOSURE_POLICY.seasonYear} snow season ended · forecasts and incoming snow remain available.`
                   : "verified live lift status is temporarily unavailable · today's open lifts and runs are best checked on the official report."}
               </p>
               <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-white/90 underline underline-offset-2 group-hover:text-white">

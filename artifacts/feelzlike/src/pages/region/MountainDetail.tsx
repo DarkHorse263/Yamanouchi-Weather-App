@@ -1087,7 +1087,7 @@ export function MountainDetail() {
               <div className="min-w-0">
                 <p className="text-sm text-white">
                   {t(
-                    `closed for the ${AU_SEASON_CLOSURE_POLICY.seasonYear} season · forecasts and incoming snow remain available.`,
+                    `${AU_SEASON_CLOSURE_POLICY.seasonYear} snow season ended · forecasts and incoming snow remain available.`,
                     `${AU_SEASON_CLOSURE_POLICY.seasonYear}年シーズン終了 · 天気予報とこれからの降雪予報は引き続き利用できます。`,
                   )}
                 </p>

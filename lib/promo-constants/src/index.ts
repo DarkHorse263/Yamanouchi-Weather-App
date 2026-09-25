@@ -6,17 +6,20 @@ export const DEFAULT_PROMO_ENDS_AT = "2026-12-31T23:59:59.999+11:00";
 // ─────────────────────────────────────────────────────────────────────────────
 // Australian 2026 season closure policy
 //
-// This is deliberately a dated, year-scoped policy rather than a permanent
-// country-season rule. It records the user's confirmed operational state as of
-// 16 September 2026 in Sydney, while keeping Perisher on its live feed.
+// This is deliberately a dated, year-scoped snow-season policy rather than a
+// permanent country closure. Other AU snow areas were confirmed closed from
+// 16 September 2026. Perisher was previously scheduled to finish on
+// 26 September, but the owner confirmed snow operations had already ended
+// on 25 September: close its 2026 snow season from 26 September Sydney time.
+// Year-round non-snow activities at Thredbo and Falls Creek are unaffected.
 // Callers pass a mountain/resort id (not a gateway town id).
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const AU_SEASON_CLOSURE_POLICY = Object.freeze({
   seasonYear: 2026,
   effectiveDateSydney: "2026-09-16",
+  perisherEffectiveDateSydney: "2026-09-26",
   countryCode: "AU",
-  exceptionLocationIds: Object.freeze(["perisher"] as const),
 });
 
 export interface AuSeasonClosureInput {
@@ -51,8 +54,8 @@ function sydneyCalendarDate(now: Date): { year: number; date: string } {
 
 /**
  * Whether a current AU mountain/resort is covered by the confirmed 2026
- * closure. Non-AU locations, Perisher, dates before the effective date and
- * later calendar years all return false.
+ * snow-season closure. Perisher has its own later 2026 end date; non-AU
+ * locations, dates before each effective date and later years return false.
  */
 export function isAuSeasonClosureActive({
   countryCode,
@@ -61,12 +64,12 @@ export function isAuSeasonClosureActive({
   seasonYear,
 }: AuSeasonClosureInput): boolean {
   if (countryCode !== AU_SEASON_CLOSURE_POLICY.countryCode) return false;
-  if (AU_SEASON_CLOSURE_POLICY.exceptionLocationIds.includes(locationId as "perisher")) {
-    return false;
-  }
 
   const local = sydneyCalendarDate(now);
   if (local.year !== AU_SEASON_CLOSURE_POLICY.seasonYear) return false;
   if (seasonYear != null && seasonYear !== AU_SEASON_CLOSURE_POLICY.seasonYear) return false;
-  return local.date >= AU_SEASON_CLOSURE_POLICY.effectiveDateSydney;
+  const effectiveDate = locationId === "perisher"
+    ? AU_SEASON_CLOSURE_POLICY.perisherEffectiveDateSydney
+    : AU_SEASON_CLOSURE_POLICY.effectiveDateSydney;
+  return local.date >= effectiveDate;
 }

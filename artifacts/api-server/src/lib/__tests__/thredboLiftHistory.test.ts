@@ -204,8 +204,20 @@ test("wind evidence is stored only when it is concurrent with the lift feed", ()
 
 test("history freshness ignores expected off-season inactivity", () => {
   assert.equal(
+    classifyThredboHistoryFreshness(new Date("2026-09-15T13:59:59Z"), null, null),
+    "scheduler-stopped",
+  );
+  assert.equal(
+    classifyThredboHistoryFreshness(new Date("2026-09-15T14:00:00Z"), null, null),
+    "off-season",
+  );
+  assert.equal(
     classifyThredboHistoryFreshness(new Date("2026-11-15T00:00:00Z"), null, null),
     "off-season",
+  );
+  assert.equal(
+    classifyThredboHistoryFreshness(new Date("2027-09-16T00:00:00Z"), null, null),
+    "scheduler-stopped",
   );
 });
 
