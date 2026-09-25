@@ -141,7 +141,7 @@ export function UserPrefsProvider({ children }: { children: ReactNode }) {
     : null;
   // A region changes the INITIAL default only. An explicit choice follows
   // the visitor from one ski region to the next (and survives reloads).
-  const routeCountry = ({ us: "US", au: "AU", nz: "NZ", jp: "JP", at: "AT" } as Record<string, string>)[path] ?? (regionCountry?.path === path ? regionCountry.country : undefined);
+  const routeCountry = ({ us: "US", au: "AU", nz: "NZ", jp: "JP", at: "AT" } as Record<string, string>)[path] ?? (regionCountry && regionCountry.path === path ? regionCountry.country : undefined);
   const units: UnitsPref = effectiveUnits(accountUnits, localUnits, routeCountry, localeDefaultUnits());
   const fromAccount = accountUnits != null && (accountUnits.unitsExplicit || accountUnits.units === "imperial");
 
