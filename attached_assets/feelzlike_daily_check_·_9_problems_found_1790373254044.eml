@@ -1,0 +1,266 @@
+Received: from MEYP282MB4154.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:171::11)
+ by SY5P282MB4686.AUSP282.PROD.OUTLOOK.COM with HTTPS; Fri, 25 Sep 2026
+ 19:59:57 +0000
+Received: from MEWP282CA0135.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:1d1::20)
+ by MEYP282MB4154.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:171::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.18; Fri, 25 Sep
+ 2026 19:59:54 +0000
+Received: from ML1PEPF0000F17A.ausprd01.prod.outlook.com
+ (2603:10c6:220:1d1:cafe::1e) by MEWP282CA0135.outlook.office365.com
+ (2603:10c6:220:1d1::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.19 via Frontend Transport; Fri,
+ 25 Sep 2026 19:59:54 +0000
+Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP is
+ 23.251.234.57) smtp.mailfrom=send.feelzlike.com; dkim=pass (signature was
+ verified) header.d=feelzlike.com;dkim=pass (signature was verified)
+ header.d=amazonses.com;dmarc=pass action=none
+ header.from=feelzlike.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of send.feelzlike.com
+ designates 23.251.234.57 as permitted sender)
+ receiver=protection.outlook.com; client-ip=23.251.234.57;
+ helo=e234-57.smtp-out.ap-northeast-1.amazonses.com; pr=C
+Received: from e234-57.smtp-out.ap-northeast-1.amazonses.com (23.251.234.57)
+ by ML1PEPF0000F17A.mail.protection.outlook.com (10.167.241.71) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.8
+ via Frontend Transport; Fri, 25 Sep 2026 19:59:53 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=resend;
+	d=feelzlike.com; t=1790366392;
+	h=From:To:Reply-To:Subject:Message-ID:Date:MIME-Version:Content-Type;
+	bh=pjRIVFkoCxVVWZZcFFN+Jjr1w6vrL3Ebg56EydYoI+s=;
+	b=dZcdnp7vkHRTYPiuebxIceKL9+kLQxt6T0Cw8Q2kSTiCsj6AVsD3R76aYA4mmaW3
+	XzI36SNdP/7gxOh4KaYaxFSOAUWGXA0gYFI9zO2Tvy6WNWAvZiUu83HaK7gtdBHOYCL
+	dsDU7oYysNSq9s7Yc2AFGW0kBCgHeGcqKIqrsP7w=
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=zh4gjftm6etwoq6afzugpky45synznly; d=amazonses.com; t=1790366392;
+	h=From:To:Reply-To:Subject:Message-ID:Date:MIME-Version:Content-Type:Feedback-ID;
+	bh=pjRIVFkoCxVVWZZcFFN+Jjr1w6vrL3Ebg56EydYoI+s=;
+	b=bSf273wC0QcyA0fXb+OlMLYGDq69mb0frY8/pVmjLqRFIBJ+uSo/lk9Vt4wBb2X/
+	Q8AuB+x1p8HhLFve4iJayekqETgbBNqeKXBDE/4Ww9GeMnd4sRSQ6neu6J58+WJyUFt
+	rh1uMy26hYJkTqkN05CZTuvmNNqxi4Y2vbTniX/U=
+From: feelzlike <info@feelzlike.com>
+To: james@navigatework.com.au
+Reply-To: info@feelzlike.com
+Subject: =?UTF-8?Q?feelzlike_daily_check_=C2=B7_9_problems_?=
+ =?UTF-8?Q?found?=
+Message-ID: <010601a0da271ea7-f6bae8fc-9a15-413a-9e17-bbb3b09ead2e-000000@ap-northeast-1.amazonses.com>
+Date: Fri, 25 Sep 2026 19:59:52 +0000
+Content-Type: multipart/alternative;
+ boundary="--_NmP-99c05fc3ba8aac5c-Part_1"
+Feedback-ID: :1.ap-northeast-1.rJqblb2iiX4g90ekhj071PGlKr4Rq1tDgsmgGXn+kyRER5FNqbzLLE2wvhuLcBtUCGkSbZuHyzEd23ZWQPLRCTbD+e6Y2o4Nmrd8W8/LZLhZGW2OiQrKc9JZLumem3RLOmQ9jDX7Ic1/Owf8jvk+NumZBEUfAbEdz+MOwk7cO9Vn62y/ZPOD8Ic+VjH+pyoh:1.ap-northeast-1.RirEgqlsQndpFdi8TUL4OAg2i1Pw380m+rTe2cbKEVU=:AmazonSES
+X-SES-Outgoing: 2026.09.25-23.251.234.57
+Return-Path: 010601a0da271ea7-f6bae8fc-9a15-413a-9e17-bbb3b09ead2e-000000@send.feelzlike.com
+X-MS-Exchange-Organization-ExpirationStartTime: 25 Sep 2026 19:59:54.1965
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: 86cd66f9-eb72-41e4-d51c-08df1b3f9125
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: febefc03-2be7-43ba-af66-5490103dee38:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: ML1PEPF0000F17A:EE_|MEYP282MB4154:EE_|SY5P282MB4686:EE_
+X-MS-Exchange-Organization-AuthSource: ML1PEPF0000F17A.ausprd01.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: 86cd66f9-eb72-41e4-d51c-08df1b3f9125
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:0;ARA:13230040|7049299003|3109299003|260918224100599003|260918215300599003|69100299015|32142699015|7149299003|10067099003|19002099009|4113699003|57112099003|4076899003|8096899003|5063699009|18002099003|13003099007|43062017;
+X-Forefront-Antispam-Report: CIP:23.251.234.57;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:e234-57.smtp-out.ap-northeast-1.amazonses.com;PTR:e234-57.smtp-out.ap-northeast-1.amazonses.com;CAT:NONE;SFS:(13230040)(7049299003)(3109299003)(260918224100599003)(260918215300599003)(69100299015)(32142699015)(7149299003)(10067099003)(19002099009)(4113699003)(57112099003)(4076899003)(8096899003)(5063699009)(18002099003)(13003099007)(43062017);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Sep 2026 19:59:53.9270
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 86cd66f9-eb72-41e4-d51c-08df1b3f9125
+X-MS-Exchange-CrossTenant-Id: febefc03-2be7-43ba-af66-5490103dee38
+X-MS-Exchange-CrossTenant-AuthSource: ML1PEPF0000F17A.ausprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MEYP282MB4154
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.3010362
+X-MS-Exchange-Processed-By-BccFoldering: 15.21.0451.014
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944506478)(944626604)(920097)(930201)(20251009189)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?QUkwM2FWTmlHZzFFKy9VNlZwdkY0UUZidzY1UVlheTFldGtjN2pVSU9sd2lH?=
+ =?utf-8?B?UzNBWVZCWVpIZFlKbHd3R09oM3hmS1Rwcis5NHJuYW8vemxGY2lGYWpnUFR1?=
+ =?utf-8?B?WkcyeXk3OFQrVFdwb0w1M0tlMGJ3K1ZaN0pDOWRkdXRnbkZxY1pxUzN2TTFr?=
+ =?utf-8?B?OE5uYmF5cEVTOC9sbkczSGVGMU0zWjZOTnlSU1Y0OXBsRW8xZC9WazFsV1ZX?=
+ =?utf-8?B?R0ZLVFFPNFk3UnM0a28vNGRRVGR2SkdOa0hpYTFYdDcvZ0NTM2dDVjZLY1U4?=
+ =?utf-8?B?NytoVDlIU1ZuKzFta011YVNvbDB5UzRpa3dtQzRrbGI2Y1U1VGhJbkVOcU9N?=
+ =?utf-8?B?Z0xZU0JMQXZ6bW9LTk9iaTRjMUMwMC9Ka081SlczaVlPaHhndVRDM2xZSUY2?=
+ =?utf-8?B?Q2JySGJxQ3d1SnE2UGNubDIwR1RkTzJSVVNTV2d6RndLK3NLWk5JdmQ1RXU1?=
+ =?utf-8?B?ZnE1emdlTXNMdDNuaWVUZXdTQnZ6ODVpdEhyUmlSMlZLc3lkUjliT0hUOVZW?=
+ =?utf-8?B?Vi8xU1ZQUDRPemw2d1JZWk5uc3Fsc2NVQVFEYjQ1cE9BbkV0M3pGYWx1UFBP?=
+ =?utf-8?B?WFhaakRseW0vMXZKaHBoZkZ4a2pHQ2FyZ2Z2MUpIV0xXM0ZNU3F4eFZEMmhv?=
+ =?utf-8?B?b2pnaDkvWUwxWVVSZUJrd2JTTlVvSHBkUE5KbS9xTVZYakVnMGdROWV4aDRI?=
+ =?utf-8?B?VjlnV2pYUUZxdmVCZW9JR1Y5VWpNTmZvek9obDZ1TlkxVnQ0TVJjZzBVKzRa?=
+ =?utf-8?B?THZrUW5hSmZwWUY3WU5nUWhtOXVmZ2FmSDA1Ukw1dExVblFhRGpxUEZTWVFp?=
+ =?utf-8?B?amNHUVNsWGUzeEI4bmF6eG5vNEY3K0tOQlRQRkVQU3p2N0ZtMXhLRzRoNk5G?=
+ =?utf-8?B?cENUTkVwVVJ6VUZXbFZ3em9QU20xSVVaVklHcVVzczRoRUdHcWJEYndMR3hj?=
+ =?utf-8?B?OEQzVTZWaXg1RVAxK2IvMWc4VGRiWEdrVWg1VmVzSHdVblByQlNmeFIxZFFl?=
+ =?utf-8?B?a3lReWF1bVdLUmZRd211WThpd3orUVRaRUc1VWxqbE9vOUR6c0d0MUFIQ3hR?=
+ =?utf-8?B?RTNZTlhzRk5kUVFCZXdpZ3FVb3R1VFhselRtQW1nd3hzajBERFNFL2x5Vmtj?=
+ =?utf-8?B?MkRzSzd0eVZsQUVXQUpPOVNQOURteXdmKzMrcVJtY2ljaUJyQnVvcFlCbnA1?=
+ =?utf-8?B?ZCtaRlZ0YzduNllKWHNXNGJWUXdUa21QazNUdGFMdi9BVS9oN3JDeHFpU2Q0?=
+ =?utf-8?B?eXdoNjdlb0pOZzAwWDBwWFhNSnA1NFFRbHliVFBScU0rcVJyS2JFcjJyZ09u?=
+ =?utf-8?B?UzhMZytST3lQQ2xZUzNaaUlaM29NelJZc3dXaXNha2ttVHdUSXpiS3ZBL2Ur?=
+ =?utf-8?B?MTF1U0Y4a3pQM3NrczFzdGV4WWhJZnM2dlpEVDhhaDlNR3ViRkNZZCtOcm9q?=
+ =?utf-8?B?WUFQVnc3TFUwL2hYakVYL0Q5NDd0eHJ2RlNqczI3akVaL1E5eUk5YTRwRUxK?=
+ =?utf-8?B?YUd5bUc4anZjbUt1aUNJYTJZeWZIMUFaUHdBRExWK0NsSUplRDk4V1YxcEpv?=
+ =?utf-8?B?dzBtemlPTklNVi8zVEp1NXcrUnpIUnF5RGRUSnJwY0dtQlYwaG9pL0JPWjIy?=
+ =?utf-8?B?Z1VQc1NTNHV3cFhzaGlNRUFPUW8xcnc3dHRoZEVCMm5MRWRLYmhhdm55S1pM?=
+ =?utf-8?B?TlE2b1J5QnBjMVdtc0ZwQ2IvbXNlRllJSmtYbXFJWUxQMy9DWjhiZ0RnPT0=?=
+MIME-Version: 1.0
+
+----_NmP-99c05fc3ba8aac5c-Part_1
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+this morning's automated check of feelzlike.com found 9 problems.
+
+headline vs elevation snow disagreement (3):
+  https://feelzlike.=
+com/api/weather/thredbo?snowElevationM=3D1737 - HTTP 200 (weather) / 401 =
+(elevation-forecast) for Thredbo
+  https://feelzlike.=
+com/api/weather/whakapapa?snowElevationM=3D1720 - HTTP 200 (weather) / 401 =
+(elevation-forecast) for Whakapapa
+  https://feelzlike.=
+com/api/weather/happo-one?snowElevationM=3D1556 - HTTP 200 (weather) / 401 =
+(elevation-forecast) for Hakuba Happo-One
+
+live lift feed silently off (1):
+  https://feelzlike.com/api/lift-status/perisher - liveStatusVerified=3Dfal=
+se, totalLifts=3D11 in-season - Perisher feed down/stale, page is silently =
+in no-live mode
+
+dead outbound links (4):
+  https://ridegmt.=
+com/route-108-mountain-road-shuttle/ - HTTP 404 (failed twice)
+  https://www.skiarlberg.at/en/st-anton/getting-here - HTTP 404 (failed =
+twice)
+  https://www.skiarlberg.at/en/st-anton/live-info/snow-report - HTTP=
+ 404 (failed twice)
+  https://www.stantonamarlberg.com/en/arrival - HTTP =
+404 (failed twice)
+
+unreachable outbound links (1):
+  https://www.nihonkotsu.co.jp/ - fetch failed (ECONNREFUSED) (failed =
+twice)
+
+
+----_NmP-99c05fc3ba8aac5c-Part_1
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html><html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><m=
+eta name=3D"viewport" content=3D"width=3Ddevice-width,initial-scale=3D1"><t=
+itle>daily site check =C2=B7 problems found</title></head>
+<body style=3D"margin:0;padding:0;background:#f0f6fc;font-family:-apple-sys=
+tem,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#=
+0a1628;">
+  <span style=3D"display:none!important;visibility:hidden;opacity:0;color:t=
+ransparent;height:0;width:0;font-size:1px;line-height:1px;">9 problems foun=
+d on feelzlike.com</span>
+  <table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" border=
+=3D"0" width=3D"100%" style=3D"background:#f0f6fc;padding:24px 0;">
+    <tr><td align=3D"center">
+      <table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" bord=
+er=3D"0" width=3D"560" style=3D"max-width:560px;background:#fff;border-radi=
+us:12px;overflow:hidden;box-shadow:0 1px 3px rgba(10,22,40,0.06);">
+        <tr><td align=3D"center" style=3D"background:#ffffff;padding:28px 3=
+2px 20px 32px;">
+          <img src=3D"https://feelzlike.com/branding/wordmark-inline.png" w=
+idth=3D"190" height=3D"46" alt=3D"feelzlike" style=3D"display:block;width:1=
+90px;height:auto;border:0;">
+          <div style=3D"font-family:-apple-system,BlinkMacSystemFont,'Segoe=
+ UI',Roboto,Helvetica,Arial,sans-serif;font-size:11px;color:#64748b;text-tr=
+ansform:lowercase;letter-spacing:0.14em;margin-top:10px;">real conditions f=
+or mountain travel</div>
+        </td></tr>
+        <tr><td style=3D"padding:0;font-size:0;line-height:0;">
+          <table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" =
+border=3D"0" width=3D"100%"><tr>
+            <td width=3D"70%" style=3D"height:4px;background:#0c75df;font-s=
+ize:0;line-height:0;">&nbsp;</td>
+            <td width=3D"30%" style=3D"height:4px;background:#ec008c;font-s=
+ize:0;line-height:0;">&nbsp;</td>
+          </tr></table>
+        </td></tr>
+        <tr><td style=3D"padding:32px;">
+          <h1 style=3D"font-family:-apple-system,BlinkMacSystemFont,'Segoe =
+UI',Roboto,Helvetica,Arial,sans-serif;font-size:22px;font-weight:800;color:=
+#0a1628;margin:0 0 16px 0;line-height:1.25;text-transform:lowercase;">daily=
+ site check =C2=B7 problems found</h1>
+          <div style=3D"font-size:15px;line-height:1.6;color:#334155;"><p>t=
+his morning's automated check of <strong>feelzlike.com</strong> found 9 pro=
+blems. everything else passed (2829 pages, 1188 outbound links checked).</p=
+><h3 style=3D"font-size:14px;text-transform:lowercase;margin:20px 0 8px 0;"=
+>headline vs elevation snow disagreement (3)</h3><ul style=3D"margin:0;padd=
+ing-left:18px;"><li style=3D"margin:4px 0;word-break:break-all;"><a href=3D=
+"https://feelzlike.com/api/weather/thredbo?snowElevationM=3D1737" style=3D"=
+color:#0c75df;">https://feelzlike.com/api/weather/thredbo?snowElevationM=3D=
+1737</a> - HTTP 200 (weather) / 401 (elevation-forecast) for Thredbo</li><l=
+i style=3D"margin:4px 0;word-break:break-all;"><a href=3D"https://feelzlike=
+.com/api/weather/whakapapa?snowElevationM=3D1720" style=3D"color:#0c75df;">=
+https://feelzlike.com/api/weather/whakapapa?snowElevationM=3D1720</a> - HTT=
+P 200 (weather) / 401 (elevation-forecast) for Whakapapa</li><li style=3D"m=
+argin:4px 0;word-break:break-all;"><a href=3D"https://feelzlike.com/api/wea=
+ther/happo-one?snowElevationM=3D1556" style=3D"color:#0c75df;">https://feel=
+zlike.com/api/weather/happo-one?snowElevationM=3D1556</a> - HTTP 200 (weath=
+er) / 401 (elevation-forecast) for Hakuba Happo-One</li></ul><h3 style=3D"f=
+ont-size:14px;text-transform:lowercase;margin:20px 0 8px 0;">live lift feed=
+ silently off (1)</h3><ul style=3D"margin:0;padding-left:18px;"><li style=
+=3D"margin:4px 0;word-break:break-all;"><a href=3D"https://feelzlike.com/ap=
+i/lift-status/perisher" style=3D"color:#0c75df;">https://feelzlike.com/api/=
+lift-status/perisher</a> - liveStatusVerified=3Dfalse, totalLifts=3D11 in-s=
+eason - Perisher feed down/stale, page is silently in no-live mode</li></ul=
+><h3 style=3D"font-size:14px;text-transform:lowercase;margin:20px 0 8px 0;"=
+>dead outbound links (4)</h3><ul style=3D"margin:0;padding-left:18px;"><li =
+style=3D"margin:4px 0;word-break:break-all;"><a href=3D"https://ridegmt.com=
+/route-108-mountain-road-shuttle/" style=3D"color:#0c75df;">https://ridegmt=
+.com/route-108-mountain-road-shuttle/</a> - HTTP 404 (failed twice) <span s=
+tyle=3D"color:#64748b;">=C2=B7 used in src/data/transport/stowe-smugglers-n=
+otch.ts</span></li><li style=3D"margin:4px 0;word-break:break-all;"><a href=
+=3D"https://www.skiarlberg.at/en/st-anton/getting-here" style=3D"color:#0c7=
+5df;">https://www.skiarlberg.at/en/st-anton/getting-here</a> - HTTP 404 (fa=
+iled twice) <span style=3D"color:#64748b;">=C2=B7 used in src/data/transpor=
+t/st-anton.ts</span></li><li style=3D"margin:4px 0;word-break:break-all;"><=
+a href=3D"https://www.skiarlberg.at/en/st-anton/live-info/snow-report" styl=
+e=3D"color:#0c75df;">https://www.skiarlberg.at/en/st-anton/live-info/snow-r=
+eport</a> - HTTP 404 (failed twice) <span style=3D"color:#64748b;">=C2=B7 u=
+sed in src/regions/st-anton.ts</span></li><li style=3D"margin:4px 0;word-br=
+eak:break-all;"><a href=3D"https://www.stantonamarlberg.com/en/arrival" sty=
+le=3D"color:#0c75df;">https://www.stantonamarlberg.com/en/arrival</a> - HTT=
+P 404 (failed twice) <span style=3D"color:#64748b;">=C2=B7 used in src/data=
+/transport/st-anton.ts</span></li></ul><h3 style=3D"font-size:14px;text-tra=
+nsform:lowercase;margin:20px 0 8px 0;">unreachable outbound links (1)</h3><=
+ul style=3D"margin:0;padding-left:18px;"><li style=3D"margin:4px 0;word-bre=
+ak:break-all;"><a href=3D"https://www.nihonkotsu.co.jp/" style=3D"color:#0c=
+75df;">https://www.nihonkotsu.co.jp/</a> - fetch failed (ECONNREFUSED) (fai=
+led twice) <span style=3D"color:#64748b;">=C2=B7 used in src/data/transport=
+/daisen.ts</span></li></ul><p style=3D"margin-top:20px;color:#64748b;font-s=
+ize:13px;">dead links usually mean a provider changed their website. fixing=
+ them is a data edit, not an outage - but pages not loading or api problems=
+ mean visitors are affected right now.</p></div>
+          <table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" =
+style=3D"margin:24px 0;">
+         <tr><td style=3D"border-radius:8px;background:#0c75df;">
+           <a href=3D"https://feelzlike.com/" style=3D"display:inline-block=
+;padding:14px 28px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',=
+Roboto,Helvetica,Arial,sans-serif;font-size:15px;font-weight:700;color:#fff=
+;text-decoration:none;letter-spacing:0.02em;">open feelzlike</a>
+         </td></tr>
+       </table>
+        </td></tr>
+        <tr><td style=3D"padding:20px 32px;border-top:1px solid #e2e8f0;fon=
+t-size:12px;color:#64748b;line-height:1.5;">
+          automated daily smoke test =C2=B7 sent only when something needs =
+attention =C2=B7 recipient is set by SMOKE_ALERT_EMAIL / ADMIN_EMAILS
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>=
+
+----_NmP-99c05fc3ba8aac5c-Part_1--
