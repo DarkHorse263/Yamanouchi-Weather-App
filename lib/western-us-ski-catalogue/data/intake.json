@@ -72,10 +72,10 @@
         "lng": -149.7447
       },
       "elevation": {
-        "baseM": 75,
-        "topM": 179
+        "baseM": 150,
+        "topM": 240
       },
-      "forecastElevationM": 75,
+      "forecastElevationM": 150,
       "evidence": [
         {
           "sourceUrl": "https://www.hilltopskiarea.org/hours-and-location",
@@ -85,7 +85,14 @@
             "identity",
             "operatingStatus",
             "officialUrl",
-            "coordinates",
+            "coordinates"
+          ]
+        },
+        {
+          "sourceUrl": "https://www.hilltopskiarea.org/the-mountain",
+          "checkedAt": "2026-09-25",
+          "quote": "Official Hilltop The Mountain page explicitly states Base 492 ft and Top 786 ft; converted at 0.3048 m/ft and rounded to 150 m and 240 m. Resort-operated source.",
+          "fields": [
             "elevation"
           ]
         }
@@ -210,10 +217,10 @@
         "lng": -145.7508
       },
       "elevation": {
-        "baseM": 15,
+        "baseM": 122,
         "topM": 366
       },
-      "forecastElevationM": 15,
+      "forecastElevationM": 122,
       "evidence": [
         {
           "sourceUrl": "https://www.mteyak.org/latest-info",
@@ -223,7 +230,14 @@
             "identity",
             "operatingStatus",
             "officialUrl",
-            "coordinates",
+            "coordinates"
+          ]
+        },
+        {
+          "sourceUrl": "https://www.mteyak.org/",
+          "checkedAt": "2026-09-25",
+          "quote": "Official Mt. Eyak Ski Area homepage states 400 ft base and 1200 ft top of single lift; converted at 0.3048 m/ft and rounded to 122 m and 366 m. Resort-operated source; preferred over third-party 412/1261 ft.",
+          "fields": [
             "elevation"
           ]
         }

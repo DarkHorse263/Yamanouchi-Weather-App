@@ -1357,3 +1357,17 @@ mtime_ms = 1789521112487
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/e1985979-9d55-453a-813c-16a561df5300/42b83406-16e7-44b7-ac7a-f6ae68bd9bfb"
 storage_version_token = "1789521135990430"
 content_type = "application/pdf"
+
+[[outputs]]
+id = "tM8bXQP9n4NRw9yhH-t6b"
+uri = "file://exports/elevation-reconciliation.csv"
+type = "table"
+title = "US and Canada elevation reconciliation"
+description = "All 374 mountains checked against the current runtime catalogue: 371 audit matches, two official-source corrections and one unresolved Powder King source conflict."
+logical_id = "55e82093-3a7a-444f-917c-5a121d1958d6"
+content_hash = "sha256:f52043609b68d58a8802f5615b188572609253b04472467b1dacbd54cb06ce76"
+size = 67890
+mtime_ms = 1790298719142
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/55e82093-3a7a-444f-917c-5a121d1958d6/82b2e75d-15c8-4641-832c-0434471a5e6c"
+storage_version_token = "1790298899078188"
+content_type = "text/csv"

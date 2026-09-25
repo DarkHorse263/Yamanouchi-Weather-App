@@ -40,7 +40,8 @@ export const parkCityRegion: RegionConfig = {
       id: "park-city-mountain",
       name: "Park City Mountain",
       elevationM: 2073,
-      skiBaseElevationM: 2073,
+      // The verified Park City Mountain base is 2,100m. The historical
+      // 2,073m value remains an unsourced map height, not a ski base.
       summitElevationM: 3056,
       lat: 40.6514,
       lng: -111.5080,

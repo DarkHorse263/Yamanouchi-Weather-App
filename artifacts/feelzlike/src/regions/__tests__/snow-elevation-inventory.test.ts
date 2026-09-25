@@ -9,6 +9,17 @@ import { publishedCatalogueRecords as japan } from "@workspace/japan-ski-catalog
 import { publishedRecords as general } from "@workspace/ski-catalogue/public-runtime";
 import { snowForecastElevation } from "../../lib/elevation";
 
+test("officially corrected Alaska hill elevations are projected into snow forecasts", () => {
+  const hilltop = western.find((record) => record.publicId === "hilltop-ski-area-and-bike-park");
+  const eyak = western.find((record) => record.publicId === "mt-eyak-ski-area");
+  assert.ok(hilltop);
+  assert.ok(eyak);
+  assert.deepEqual([hilltop.baseElevationM, hilltop.topElevationM, hilltop.forecastElevationM], [150, 240, 150]);
+  assert.deepEqual([eyak.baseElevationM, eyak.topElevationM, eyak.forecastElevationM], [122, 366, 122]);
+  assert.equal(snowForecastElevation(hilltop.baseElevationM, hilltop.topElevationM), 195);
+  assert.equal(snowForecastElevation(eyak.baseElevationM, eyak.topElevationM), 244);
+});
+
 test("every catalogue base/top forecast uses midpoint and never falls below a known base", () => {
   let checked = 0;
   for (const record of [...western, ...canada, ...japan]) {

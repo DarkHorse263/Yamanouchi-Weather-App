@@ -715,9 +715,9 @@
         "lat": 61.0984,
         "lng": -149.7447
       },
-      "forecastElevationM": 75,
-      "baseElevationM": 75,
-      "topElevationM": 179,
+      "forecastElevationM": 150,
+      "baseElevationM": 150,
+      "topElevationM": 240,
       "officialUrl": "https://www.hilltopskiarea.org/",
       "stateCode": "AK",
       "regionId": "girdwood",
@@ -790,8 +790,8 @@
         "lat": 60.5494,
         "lng": -145.7508
       },
-      "forecastElevationM": 15,
-      "baseElevationM": 15,
+      "forecastElevationM": 122,
+      "baseElevationM": 122,
       "topElevationM": 366,
       "officialUrl": "https://www.mteyak.org/",
       "stateCode": "AK",

@@ -36,6 +36,7 @@ export const vailValleyRegion: RegionConfig = {
       id: "vail-mountain",
       name: "Vail Mountain",
       elevationM: 3527,
+      summitElevationM: 3527,
       lat: 39.6061,
       lng: -106.3550,
       blurb: "the largest single ski mountain in Colorado · legendary Back Bowls",

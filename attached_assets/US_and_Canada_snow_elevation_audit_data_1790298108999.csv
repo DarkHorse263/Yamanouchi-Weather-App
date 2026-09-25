@@ -1,0 +1,375 @@
+country,region,mountain_id,name,data_source,issue,elevationM_in_app,snow_forecast_elevation_m_live,base_m,summit_m,server_elevation_m,map_pin_terrain_m,metres_below_base,suggested_snow_elevation_m
+US,bear-valley,bear-valley-mountain-resort,Bear Valley Mountain Resort,authored,Base entered as summit (authored),2012,1712,2012,2591,2591,2225,300,2302
+US,big-bear,bear-mountain,Bear Mountain,authored,Base entered as summit (authored),2176,1876,2176,2685,2685,2178,300,2430
+US,cache-valley,beaver-mountain,Beaver Mountain,authored,Base entered as summit (authored),2182,1882,2182,2701,2701,2412,300,2442
+US,cottonwood-canyons,alta,Alta,authored,Base entered as summit (authored),2600,2300,2600,3374,3374,2604,300,2987
+US,cottonwood-canyons,brighton-resort,Brighton,authored,Base entered as summit (authored),2669,2369,2669,3200,3200,2673,300,2934
+US,grand-targhee,grand-targhee-resort,Grand Targhee Resort,authored,Base entered as summit (authored),2393,2093,2393,3006,3006,2416,300,2700
+US,jackson-hole,jackson-hole-mtn-resort,Jackson Hole Mountain Resort,authored,Base entered as summit (authored),1924,1635,1924,3185,3185,1938,289,2554
+US,jackson-hole,snow-king-mountain,Snow King Mountain,authored,Base entered as summit (authored),1901,1616,1901,2380,2380,1906,285,2140
+US,jay-peak-nek,burke-mountain,Burke Mountain,authored,Base entered as summit (authored),369,314,369,996,996,398,55,682
+US,jay-peak-nek,jay-peak,Jay Peak,authored,Base entered as summit (authored),553,470,553,1209,1209,997,83,881
+US,killington-pico,killington-resort,Killington,authored,Base entered as summit (authored),355,302,355,1293,1293,1257,53,824
+US,killington-pico,pico-mountain,Pico Mountain,authored,Base entered as summit (authored),610,518,610,1209,1209,772,92,910
+US,mad-river-valley,mad-river-glen,Mad River Glen,authored,Base entered as summit (authored),488,415,488,1109,1109,570,73,798
+US,mad-river-valley,sugarbush,Sugarbush,authored,Base entered as summit (authored),480,408,480,1244,1244,870,72,862
+US,mammoth-lakes,mammoth-mountain,Mammoth Mountain,authored,Base entered as summit (authored),2423,2123,2423,3369,3369,3356,300,2896
+US,north-lake-tahoe,palisades-tahoe,Palisades Tahoe,authored,Base entered as summit (authored),1890,1606,1890,2758,2758,1900,284,2324
+US,north-lake-tahoe,sugar-bowl,Sugar Bowl,authored,Base entered as summit (authored),2098,1798,2098,2554,2554,2119,300,2326
+US,ogden-valley,nordic-valley,Nordic Valley,authored,Base entered as summit (authored),1635,1390,1635,2152,2152,1545,245,1894
+US,ogden-valley,snowbasin,Snowbasin,authored,Base entered as summit (authored),1925,1636,1925,2917,2917,1948,289,2421
+US,okemo,okemo-mountain-resort,Okemo Mountain Resort,authored,Base entered as summit (authored),349,297,349,1019,1019,399,52,684
+US,park-city,park-city-mountain,Park City Mountain,authored,Base entered as summit (authored),2073,1773,2100,3056,3056,2125,327,2578
+US,provo,sundance-mountain-resort,Sundance Mountain Resort,authored,Base entered as summit (authored),1859,1580,1859,2515,2515,2003,279,2187
+US,south-lake-tahoe,heavenly,Heavenly,authored,Base entered as summit (authored),1907,1621,1907,3068,3068,2023,286,2488
+US,south-lake-tahoe,homewood-mountain-resort,Homewood Mountain Resort,authored,Base entered as summit (authored),1899,1614,1899,2401,2401,2197,285,2150
+US,southern-vermont,bromley-mountain,Bromley Mountain,authored,Base entered as summit (authored),594,505,594,1001,1001,882,89,798
+US,southern-vermont,stratton-mountain-resort,Stratton,authored,Base entered as summit (authored),571,485,571,1181,1181,651,86,876
+US,stowe-smugglers-notch,smugglers-notch,Smugglers' Notch,authored,Base entered as summit (authored),314,270,314,1109,1109,416,44,712
+US,stowe-smugglers-notch,stowe-mountain-resort,Stowe Mountain Resort,authored,Base entered as summit (authored),408,347,408,1340,1340,480,61,874
+US,summit-county,breckenridge-resort,Breckenridge,authored,Base entered as summit (authored),2926,2626,2926,3914,3914,2961,300,3420
+US,summit-county,loveland,Loveland,authored,Base entered as summit (authored),3245,2945,3245,3868,3868,3321,300,3556
+US,bend,hoodoo-ski-area,Hoodoo Ski Area,catalogue,Forecast elevation = base (catalogue),1427,1213,1427,1737,1427,1428,214,1582
+US,big-bear,snow-valley-mountain-resort,Snow Valley Mountain Resort,catalogue,Forecast elevation = base (catalogue),2073,1773,2073,2393,2073,2048,300,2233
+US,bighorn-mountains,antelope-butte-mountain-recreation-area,Antelope Butte Mountain Recreation Area,catalogue,Forecast elevation = base (catalogue),2560,2260,2560,2865,2560,2581,300,2712
+US,boulder-front-range,echo-mountain,Echo Mountain,catalogue,Forecast elevation = base (catalogue),3063,2763,3063,3246,3063,3174,300,3154
+US,casper,hogadon-basin-ski-area,Hogadon Basin Ski Area,catalogue,Forecast elevation = base (catalogue),2256,1956,2256,2438,2256,2409,300,2347
+US,cloudcroft,ski-cloudcroft,Ski Cloudcroft,catalogue,Forecast elevation = base (catalogue),2560,2260,2560,2774,2560,2555,300,2667
+US,cordova,mt-eyak-ski-area,Mt. Eyak Ski Area,catalogue,Forecast elevation = base (catalogue),15,100,15,366,15,121,,190
+US,durango,silverton-mountain,Silverton Mountain,catalogue,Forecast elevation = base (catalogue),3170,2870,3170,4111,3170,3154,300,3640
+US,eastern-oregon,anthony-lakes-mountain-resort,Anthony Lakes Mountain Resort,catalogue,Forecast elevation = base (catalogue),2164,1864,2164,2438,2164,2182,300,2301
+US,fairbanks,moose-mountain-ski-resort,Moose Mountain Ski Resort,catalogue,Forecast elevation = base (catalogue),213,199,213,606,213,204,14,410
+US,fairbanks,ski-land,Ski Land,catalogue,Forecast elevation = base (catalogue),396,337,396,741,396,454,59,568
+US,fresno-china-peak,china-peak-mountain-resort,China Peak Mountain Resort,catalogue,Forecast elevation = base (catalogue),2149,1849,2149,2652,2149,2182,300,2400
+US,girdwood,arctic-valley-ski-area,Arctic Valley Ski Area,catalogue,Forecast elevation = base (catalogue),762,648,762,1188,762,814,114,975
+US,girdwood,hilltop-ski-area-and-bike-park,Hilltop Ski Area and Bike Park,catalogue,Forecast elevation = base (catalogue),75,103,75,179,75,285,,127
+US,glenwood-springs,sunlight-mountain-resort,Sunlight Mountain Resort,catalogue,Forecast elevation = base (catalogue),2403,2103,2403,3016,2403,2485,300,2710
+US,grand-mesa,powderhorn-mountain-resort,Powderhorn Mountain Resort,catalogue,Forecast elevation = base (catalogue),2499,2199,2499,3002,2499,2496,300,2750
+US,great-falls-showdown,showdown-montana,Showdown Montana,catalogue,Forecast elevation = base (catalogue),2073,1773,2073,2499,2073,2217,300,2286
+US,helena-great-divide,great-divide-ski-area,Great Divide Ski Area,catalogue,Forecast elevation = base (catalogue),1777,1510,1777,2234,1777,1820,267,2006
+US,idaho-falls-kelly-canyon,kelly-canyon-resort,Kelly Canyon Resort,catalogue,Forecast elevation = base (catalogue),1707,1451,1707,2012,1707,1804,256,1860
+US,kern-river,alta-sierra-ski-resort-and-terrain-park,Alta Sierra Ski Resort and Terrain Park,catalogue,Forecast elevation = base (catalogue),1981,1684,1981,2161,1981,2061,297,2071
+US,laramie-snowy-range,snowy-range-ski-area,Snowy Range Ski Area,catalogue,Forecast elevation = base (catalogue),2682,2382,2682,2945,2682,2780,300,2814
+US,las-vegas-lee-canyon,lee-canyon,Lee Canyon,catalogue,Forecast elevation = base (catalogue),2640,2340,2640,2856,2640,2647,300,2748
+US,libby-northwest-montana,turner-mountain-ski-area,Turner Mountain Ski Area,catalogue,Forecast elevation = base (catalogue),1171,995,1171,1814,1171,1410,176,1492
+US,los-alamos-pajarito,pajarito-mountain-ski-area,Pajarito Mountain Ski Area,catalogue,Forecast elevation = base (catalogue),2743,2443,2743,3182,2743,2816,300,2962
+US,missoula,montana-snowbowl,Montana Snowbowl,catalogue,Forecast elevation = base (catalogue),1524,1295,1524,2316,1524,1527,229,1920
+US,north-lake-tahoe,boreal-mountain-california,Boreal Mountain California,catalogue,Forecast elevation = base (catalogue),2195,1895,2195,2347,2195,2228,300,2271
+US,north-lake-tahoe,donner-ski-ranch,Donner Ski Ranch,catalogue,Forecast elevation = base (catalogue),2143,1843,2143,2442,2143,2150,300,2292
+US,north-lake-tahoe,granlibakken-tahoe-ski-snowboard-hill,Granlibakken Tahoe Ski & Snowboard Hill,catalogue,Forecast elevation = base (catalogue),1951,1658,1951,2015,1951,2016,293,1983
+US,north-lake-tahoe,soda-springs-mountain-resort,Soda Springs Mountain Resort,catalogue,Forecast elevation = base (catalogue),2042,1742,2042,2241,2042,2062,300,2142
+US,olympic-peninsula,hurricane-ridge-ski-snowboard-area,Hurricane Ridge Ski & Snowboard Area,catalogue,Forecast elevation = base (catalogue),1463,1244,1463,1676,1463,1606,219,1570
+US,pagosa-wolf-creek,wolf-creek-ski-area,Wolf Creek Ski Area,catalogue,Forecast elevation = base (catalogue),3139,2839,3139,3628,3139,3253,300,3384
+US,park-city,woodward-park-city,Woodward Park City,catalogue,Forecast elevation = base (catalogue),1981,1684,1981,2134,1981,1964,297,2058
+US,pinedale,white-pine-resort,White Pine Resort,catalogue,Forecast elevation = base (catalogue),2560,2260,2560,2896,2560,2573,300,2728
+US,pocatello-southeast-idaho,pebble-creek-ski-area,Pebble Creek Ski Area,catalogue,Forecast elevation = base (catalogue),1939,1648,1939,2609,1939,2028,291,2274
+US,red-river,red-river-ski-summer-area,Red River Ski & Summer Area,catalogue,Forecast elevation = base (catalogue),2667,2367,2667,3155,2667,2677,300,2911
+US,ruidoso,ski-apache,Ski Apache,catalogue,Forecast elevation = base (catalogue),2926,2626,2926,3475,2926,2987,300,3200
+US,salida-monarch,monarch-mountain,Monarch Mountain,catalogue,Forecast elevation = base (catalogue),3290,2990,3290,3630,3290,3304,300,3460
+US,san-gabriel-mountains,mt-baldy-resort,Mt Baldy Resort,catalogue,Forecast elevation = base (catalogue),1981,1684,1981,2621,1981,2018,297,2301
+US,silver-valley,lookout-pass-ski-and-recreation-area,Lookout Pass Ski and Recreation Area,catalogue,Forecast elevation = base (catalogue),1372,1166,1372,1875,1372,1450,206,1624
+US,silver-valley,silver-mountain-resort,Silver Mountain Resort,catalogue,Forecast elevation = base (catalogue),1250,1062,1250,1920,1250,695,188,1585
+US,sonora-dodge-ridge,dodge-ridge-mountain-resort,Dodge Ridge Mountain Resort,catalogue,Forecast elevation = base (catalogue),2012,1712,2012,2499,2012,1999,300,2256
+US,southern-idaho-magic-valley,pomerelle-mountain-resort,Pomerelle Mountain Resort,catalogue,Forecast elevation = base (catalogue),2366,2066,2366,2671,2366,2357,300,2518
+US,southern-oregon,mt-ashland-ski-area,Mt. Ashland Ski Area,catalogue,Forecast elevation = base (catalogue),1938,1647,1938,2296,1938,1991,291,2117
+US,southern-utah,brian-head-resort,Brian Head Resort,catalogue,Forecast elevation = base (catalogue),2926,2626,2926,3344,2926,2932,300,3135
+US,southwest-montana-discovery,discovery-ski-area,Discovery Ski Area,catalogue,Forecast elevation = base (catalogue),1759,1495,1759,2484,1759,2102,264,2122
+US,spokane,49-degrees-north-mountain-resort,49° North Mountain Resort,catalogue,Forecast elevation = base (catalogue),1195,1016,1195,1768,1195,1193,179,1482
+US,spokane,mt-spokane-ski-snowboard-park,Mt. Spokane Ski & Snowboard Park,catalogue,Forecast elevation = base (catalogue),1274,1083,1274,1793,1274,1346,191,1534
+US,summit-county,cooper,Cooper,catalogue,Forecast elevation = base (catalogue),3200,2900,3200,3566,3200,3216,300,3383
+US,sun-valley,soldier-mountain,Soldier Mountain,catalogue,Forecast elevation = base (catalogue),1754,1491,1754,2188,1754,1772,263,1971
+US,taos,sipapu-ski-summer-resort,Sipapu Ski & Summer Resort,catalogue,Forecast elevation = base (catalogue),2499,2199,2499,2821,2499,2544,300,2660
+US,tucson-mount-lemmon,mount-lemmon-ski-valley,Mount Lemmon Ski Valley,catalogue,Forecast elevation = base (catalogue),2529,2229,2529,2791,2529,2675,300,2660
+US,wenatchee,mission-ridge-ski-board-resort,Mission Ridge Ski & Board Resort,catalogue,Forecast elevation = base (catalogue),1399,1189,1399,2079,1399,1412,210,1739
+US,white-pass,white-pass-ski-area,White Pass Ski Area,catalogue,Forecast elevation = base (catalogue),1372,1166,1372,1981,1372,1363,206,1676
+US,whitefish,blacktail-mountain-ski-area,Blacktail Mountain Ski Area,catalogue,Forecast elevation = base (catalogue),1628,1384,1628,2067,1628,1998,244,1848
+US,willamette-pass,willamette-pass-resort,Willamette Pass Resort,catalogue,Forecast elevation = base (catalogue),1561,1327,1561,2036,1561,1567,234,1798
+US,wrightwood,mountain-high-resorts,Mountain High Resorts,catalogue,Forecast elevation = base (catalogue),2012,1712,2012,2500,2012,2106,300,2256
+US,yosemite,badger-pass-ski-area,Badger Pass Ski Area,catalogue,Forecast elevation = base (catalogue),2195,1895,2195,2377,2195,2208,300,2286
+CA,canada-british-columbia,manning-park-resort,Manning Park Resort,catalogue,Mid-mountain calc drops below base,1570,1334,1350,1789,1570,1447,16,1570
+CA,canada-manitoba,asessippi-ski-area-and-resort,Asessippi Ski Area & Resort,catalogue,Mid-mountain calc drops below base,518,440,457,579,518,442,17,518
+CA,canada-ontario,adanac-ski-hill,Adanac Ski Hill,catalogue,Mid-mountain calc drops below base,305,263,270,340,305,282,7,305
+CA,canada-ontario,bethany-ski-resort,Bethany Ski Resort,catalogue,Mid-mountain calc drops below base,318,273,274,362,318,292,1,318
+CA,canada-ontario,boler-mountain,Boler Mountain,catalogue,Mid-mountain calc drops below base,295,257,262,328,295,294,5,295
+CA,canada-ontario,chicopee,Chicopee,catalogue,Mid-mountain calc drops below base,342,291,314,370,342,344,23,342
+CA,canada-ontario,hockley-valley-resort,Hockley Valley Resort,catalogue,Mid-mountain calc drops below base,360,306,324,396,360,329,18,360
+CA,canada-ontario,horseshoe-resort,Horseshoe Resort,catalogue,Mid-mountain calc drops below base,356,303,309,402,356,312,6,356
+CA,canada-ontario,lakeridge-ski-resort,Lakeridge Ski Resort,catalogue,Mid-mountain calc drops below base,338,287,300,375,338,333,13,338
+CA,canada-ontario,mount-chinguacousy-ski-and-snowboard-hill,Mount Chinguacousy Ski and Snowboard Hill,catalogue,Mid-mountain calc drops below base,228,210,218,237,228,219,8,228
+CA,canada-ontario,mount-dufour-ski-area,Mount Dufour Ski Area,catalogue,Mid-mountain calc drops below base,363,309,314,412,363,438,5,363
+CA,canada-ontario,mount-jamieson-resort,Mount Jamieson Resort,catalogue,Mid-mountain calc drops below base,359,305,307,410,359,414,2,358
+CA,canada-ontario,sir-sam-s-ski-ride,Sir Sam's Ski / Ride,catalogue,Mid-mountain calc drops below base,404,343,360,447,404,334,17,404
+CA,canada-ontario,trestle-ridge-ski-hill,Trestle Ridge Ski Hill,catalogue,Mid-mountain calc drops below base,271,240,260,281,271,266,20,270
+CA,canada-saskatchewan,duck-mountain-ski-area,Duck Mountain Ski Area,catalogue,Mid-mountain calc drops below base,647,550,577,716,647,562,27,646
+CA,canada-saskatchewan,table-mountain-regional-park,Table Mountain Regional Park,catalogue,Mid-mountain calc drops below base,615,523,557,672,615,622,34,614
+CA,canada-saskatchewan,wapiti-valley-regional-park,Wapiti Valley Regional Park,catalogue,Mid-mountain calc drops below base,472,401,432,511,472,401,31,472
+US,albuquerque-sandia,sandia-peak,Sandia Peak Ski Area,authored,Mid-mountain calc drops below base,2630,2330,2630,,2630,3152,300,
+US,us-ct,mount-southington,Mount Southington Ski Area,catalogue,No base/summit data; uses map-pin elevation,60,100,,,60,62,,
+US,us-ct,powder-ridge-ct,Powder Ridge Mountain Park & Resort,catalogue,No base/summit data; uses map-pin elevation,116,131,,,116,118,,
+US,us-ct,ski-sundown,Ski Sundown,catalogue,No base/summit data; uses map-pin elevation,152,156,,,152,154,,
+US,us-ia,mt-crescent-ski-area,Mt. Crescent Ski Area,catalogue,No base/summit data; uses map-pin elevation,330,281,,,330,344,,
+US,us-ia,seven-oaks-recreation,Seven Oaks Recreation,catalogue,No base/summit data; uses map-pin elevation,264,235,,,264,272,,
+US,us-ia,sundown-mountain-resort,Sundown Mountain Resort,catalogue,No base/summit data; uses map-pin elevation,348,296,,,348,348,,
+US,us-il,chestnut-mountain-resort,Chestnut Mountain Resort,catalogue,No base/summit data; uses map-pin elevation,311,268,,,311,313,,
+US,us-il,villa-olivia,Villa Olivia,catalogue,No base/summit data; uses map-pin elevation,252,226,,,252,242,,
+US,us-in,paoli-peaks,Paoli Peaks,catalogue,No base/summit data; uses map-pin elevation,245,221,,,245,240,,
+US,us-in,perfect-north-slopes,Perfect North Slopes,catalogue,No base/summit data; uses map-pin elevation,156,159,,,156,154,,
+US,us-ma,blue-hills-ski-area,Blue Hills Ski Area,catalogue,No base/summit data; uses map-pin elevation,82,107,,,82,78,,
+US,us-ma,bousquet-mountain,Bousquet Mountain,catalogue,No base/summit data; uses map-pin elevation,342,291,,,342,340,,
+US,us-ma,nashoba-valley,Nashoba Valley Ski Area,catalogue,No base/summit data; uses map-pin elevation,60,100,,,60,61,,
+US,us-ma,otis-ridge,Otis Ridge Ski Area,catalogue,No base/summit data; uses map-pin elevation,379,322,,,379,381,,
+US,us-ma,ski-bradford,Ski Bradford,catalogue,No base/summit data; uses map-pin elevation,14,100,,,14,20,,
+US,us-ma,ski-ward,Ski Ward,catalogue,No base/summit data; uses map-pin elevation,106,124,,,106,110,,
+US,us-md,wisp-resort,Wisp Resort,catalogue,No base/summit data; uses map-pin elevation,771,655,,,771,774,,
+US,us-me,big-moose-mountain,Big Moose Mountain,catalogue,No base/summit data; uses map-pin elevation,513,436,,,513,527,,
+US,us-me,bigrock-mountain,BigRock Mountain,catalogue,No base/summit data; uses map-pin elevation,168,168,,,168,168,,
+US,us-me,black-mountain-of-maine,Black Mountain of Maine,catalogue,No base/summit data; uses map-pin elevation,292,254,,,292,300,,
+US,us-me,camden-snow-bowl,Camden Snow Bowl,catalogue,No base/summit data; uses map-pin elevation,70,100,,,70,77,,
+US,us-me,lost-valley,Lost Valley,catalogue,No base/summit data; uses map-pin elevation,117,132,,,117,120,,
+US,us-me,mount-abram,Mt. Abram,catalogue,No base/summit data; uses map-pin elevation,289,252,,,289,289,,
+US,us-me,pleasant-mountain,Pleasant Mountain,catalogue,No base/summit data; uses map-pin elevation,159,161,,,159,160,,
+US,us-me,titcomb-mountain,Titcomb Mountain,catalogue,No base/summit data; uses map-pin elevation,123,136,,,123,124,,
+US,us-mi,alpine-valley-mi,Alpine Valley Ski Area,catalogue,No base/summit data; uses map-pin elevation,280,246,,,280,280,,
+US,us-mi,big-powderhorn-mountain,Big Powderhorn Mountain Resort,catalogue,No base/summit data; uses map-pin elevation,453,385,,,453,425,,
+US,us-mi,bittersweet-ski-resort,Bittersweet Ski Resort,catalogue,No base/summit data; uses map-pin elevation,216,201,,,216,215,,
+US,us-mi,caberfae-peaks,Caberfae Peaks,catalogue,No base/summit data; uses map-pin elevation,375,319,,,375,368,,
+US,us-mi,cannonsburg-ski-area,Cannonsburg Ski Area,catalogue,No base/summit data; uses map-pin elevation,226,208,,,226,235,,
+US,us-mi,crystal-mountain-mi,Crystal Mountain Resort,catalogue,No base/summit data; uses map-pin elevation,297,258,,,297,311,,
+US,us-mi,hickory-hills,Hickory Hills Ski Area,catalogue,No base/summit data; uses map-pin elevation,187,181,,,187,190,,
+US,us-mi,marquette-mountain,Marquette Mountain Resort,catalogue,No base/summit data; uses map-pin elevation,183,178,,,183,181,,
+US,us-mi,mont-ripley,Mont Ripley Ski Area,catalogue,No base/summit data; uses map-pin elevation,242,219,,,242,249,,
+US,us-mi,mount-brighton,Mt Brighton,catalogue,No base/summit data; uses map-pin elevation,281,247,,,281,280,,
+US,us-mi,mount-holiday,Mt. Holiday,catalogue,No base/summit data; uses map-pin elevation,219,203,,,219,219,,
+US,us-mi,mount-holly,Mt. Holly Ski Resort,catalogue,No base/summit data; uses map-pin elevation,302,261,,,302,316,,
+US,us-mi,mount-mcsauba,Mt. McSauba Recreation Area,catalogue,No base/summit data; uses map-pin elevation,188,182,,,188,190,,
+US,us-mi,mount-zion-ski-hill,Mt. Zion Ski Hill,catalogue,No base/summit data; uses map-pin elevation,453,385,,,453,454,,
+US,us-mi,norway-mountain,Norway Mountain,catalogue,No base/summit data; uses map-pin elevation,364,309,,,364,364,,
+US,us-mi,otsego-resort,Otsego Resort,catalogue,No base/summit data; uses map-pin elevation,408,347,,,408,408,,
+US,us-mi,petoskey-winter-sports-park,Petoskey Winter Sports Park,catalogue,No base/summit data; uses map-pin elevation,222,205,,,222,221,,
+US,us-mi,pine-knob-ski-resort,Pine Knob Ski Resort,catalogue,No base/summit data; uses map-pin elevation,326,278,,,326,342,,
+US,us-mi,pine-mountain-resort-mi,Pine Mountain Resort,catalogue,No base/summit data; uses map-pin elevation,344,292,,,344,342,,
+US,us-mi,porcupine-mountains-ski-area,Porcupine Mountains Ski Area,catalogue,No base/summit data; uses map-pin elevation,199,189,,,199,200,,
+US,us-mi,shanty-creek-resorts,Shanty Creek Resorts,catalogue,No base/summit data; uses map-pin elevation,181,177,,,181,185,,
+US,us-mi,ski-brule,Ski Brule,catalogue,No base/summit data; uses map-pin elevation,501,426,,,501,502,,
+US,us-mi,snow-snake,Snow Snake Ski & Golf,catalogue,No base/summit data; uses map-pin elevation,349,297,,,349,358,,
+US,us-mi,snowriver-mountain-resort,Snowriver Mountain Resort,catalogue,No base/summit data; uses map-pin elevation,389,331,,,389,386,,
+US,us-mi,swiss-valley,Swiss Valley Ski & Snowboard Area,catalogue,No base/summit data; uses map-pin elevation,277,244,,,277,277,,
+US,us-mi,the-homestead-mi,The Homestead,catalogue,No base/summit data; uses map-pin elevation,182,177,,,182,174,,
+US,us-mi,timber-ridge-ski-area-mi,Timber Ridge Ski Area,catalogue,No base/summit data; uses map-pin elevation,248,224,,,248,249,,
+US,us-mi,treetops-resort,Treetops Resort,catalogue,No base/summit data; uses map-pin elevation,400,340,,,400,400,,
+US,us-mn,afton-alps-mn,Afton Alps,catalogue,No base/summit data; uses map-pin elevation,221,205,,,221,260,,
+US,us-mn,andes-tower-hills-mn,Andes Tower Hills,catalogue,No base/summit data; uses map-pin elevation,439,373,,,439,439,,
+US,us-mn,buck-hill-mn,Buck Hill,catalogue,No base/summit data; uses map-pin elevation,300,260,,,300,302,,
+US,us-mn,buena-vista-ski-area-mn,Buena Vista Ski Area,catalogue,No base/summit data; uses map-pin elevation,452,384,,,452,448,,
+US,us-mn,coffee-mill-ski-area-mn,Coffee Mill Ski Area,catalogue,No base/summit data; uses map-pin elevation,255,229,,,255,274,,
+US,us-mn,detroit-mountain-mn,Detroit Mountain Recreation Area,catalogue,No base/summit data; uses map-pin elevation,499,424,,,499,490,,
+US,us-mn,giants-ridge-mn,Giants Ridge,catalogue,No base/summit data; uses map-pin elevation,461,392,,,461,459,,
+US,us-mn,hyland-hills-ski-area-mn,Hyland Hills Ski Area,catalogue,No base/summit data; uses map-pin elevation,266,236,,,266,279,,
+US,us-mn,mount-kato-mn,Mount Kato,catalogue,No base/summit data; uses map-pin elevation,305,263,,,305,295,,
+US,us-mn,powder-ridge-mn,Powder Ridge,catalogue,No base/summit data; uses map-pin elevation,380,323,,,380,386,,
+US,us-mn,spirit-mountain-mn,Spirit Mountain,catalogue,No base/summit data; uses map-pin elevation,287,251,,,287,295,,
+US,us-mn,welch-village-mn,Welch Village,catalogue,No base/summit data; uses map-pin elevation,306,264,,,306,312,,
+US,us-mn,wild-mountain-mn,Wild Mountain,catalogue,No base/summit data; uses map-pin elevation,237,216,,,237,236,,
+US,us-nc,appalachian-ski-mountain,Appalachian Ski Mountain,catalogue,No base/summit data; uses map-pin elevation,1114,947,,,1114,1114,,
+US,us-nc,hatley-pointe,Hatley Pointe,catalogue,No base/summit data; uses map-pin elevation,1215,1033,,,1215,1248,,
+US,us-nh,black-mountain-nh,Black Mountain,catalogue,No base/summit data; uses map-pin elevation,384,326,,,384,392,,
+US,us-nh,crotched-mountain,Crotched Mountain,catalogue,No base/summit data; uses map-pin elevation,320,274,,,320,318,,
+US,us-nh,dartmouth-skiway,Dartmouth Skiway,catalogue,No base/summit data; uses map-pin elevation,294,256,,,294,289,,
+US,us-nh,king-pine,King Pine Ski Area,catalogue,No base/summit data; uses map-pin elevation,147,153,,,147,156,,
+US,us-nh,mount-sunapee,Mount Sunapee Resort,catalogue,No base/summit data; uses map-pin elevation,388,330,,,388,393,,
+US,us-nh,pats-peak,Pats Peak,catalogue,No base/summit data; uses map-pin elevation,174,172,,,174,175,,
+US,us-nh,ragged-mountain-nh,Ragged Mountain Resort,catalogue,No base/summit data; uses map-pin elevation,340,289,,,340,337,,
+US,us-nh,tenney-mountain,Tenney Mountain Resort,catalogue,No base/summit data; uses map-pin elevation,604,513,,,604,631,,
+US,us-nh,whaleback-mountain,Whaleback Mountain,catalogue,No base/summit data; uses map-pin elevation,348,296,,,348,347,,
+US,us-ny,bristol-mountain,Bristol Mountain,catalogue,No base/summit data; uses map-pin elevation,346,294,,,346,365,,
+US,us-ny,catamount-mountain-resort,Catamount Mountain Resort,catalogue,No base/summit data; uses map-pin elevation,322,275,,,322,314,,
+US,us-ny,greek-peak,Greek Peak Mountain Resort,catalogue,No base/summit data; uses map-pin elevation,410,348,,,410,411,,
+US,us-ny,holiday-mountain-ny,Holiday Mountain,catalogue,No base/summit data; uses map-pin elevation,448,381,,,448,469,,
+US,us-ny,holiday-valley,Holiday Valley,catalogue,No base/summit data; uses map-pin elevation,488,415,,,488,496,,
+US,us-ny,kissing-bridge,Kissing Bridge,catalogue,No base/summit data; uses map-pin elevation,375,319,,,375,380,,
+US,us-ny,labrador-mountain,Labrador Mountain,catalogue,No base/summit data; uses map-pin elevation,470,400,,,470,470,,
+US,us-ny,mccauley-mountain,McCauley Mountain Ski Area,catalogue,No base/summit data; uses map-pin elevation,530,450,,,530,532,,
+US,us-ny,mount-peter,Mount Peter Ski Area,catalogue,No base/summit data; uses map-pin elevation,210,197,,,210,221,,
+US,us-ny,peek-n-peak,Peek'n Peak Resort,catalogue,No base/summit data; uses map-pin elevation,430,366,,,430,431,,
+US,us-ny,plattekill-mountain,Plattekill Mountain,catalogue,No base/summit data; uses map-pin elevation,737,626,,,737,743,,
+US,us-ny,snow-ridge,Snow Ridge Ski Resort,catalogue,No base/summit data; uses map-pin elevation,581,494,,,581,588,,
+US,us-ny,song-mountain,Song Mountain,catalogue,No base/summit data; uses map-pin elevation,386,328,,,386,385,,
+US,us-ny,swain-resort,Swain Resort,catalogue,No base/summit data; uses map-pin elevation,556,473,,,556,568,,
+US,us-ny,thunder-ridge,Thunder Ridge Ski Area,catalogue,No base/summit data; uses map-pin elevation,193,185,,,193,207,,
+US,us-ny,titus-mountain,Titus Mountain Family Ski Center,catalogue,No base/summit data; uses map-pin elevation,166,166,,,166,169,,
+US,us-ny,west-mountain,West Mountain,catalogue,No base/summit data; uses map-pin elevation,104,123,,,104,107,,
+US,us-ny,willard-mountain,Willard Mountain,catalogue,No base/summit data; uses map-pin elevation,569,484,,,569,580,,
+US,us-oh,alpine-valley-ohio,Alpine Valley,catalogue,No base/summit data; uses map-pin elevation,348,296,,,348,348,,
+US,us-oh,boston-mills-brandywine,Boston Mills Brandywine,catalogue,No base/summit data; uses map-pin elevation,201,191,,,201,200,,
+US,us-oh,mad-river-mountain,Mad River Mountain,catalogue,No base/summit data; uses map-pin elevation,359,305,,,359,355,,
+US,us-oh,snow-trails,Snow Trails,catalogue,No base/summit data; uses map-pin elevation,376,320,,,376,380,,
+US,us-pa,bear-creek-mountain-resort-pa,Bear Creek Mountain Resort,catalogue,No base/summit data; uses map-pin elevation,217,202,,,217,212,,
+US,us-pa,big-boulder-pa,Big Boulder,catalogue,No base/summit data; uses map-pin elevation,582,495,,,582,584,,
+US,us-pa,boyce-park-ski-area-pa,Boyce Park Ski Area,catalogue,No base/summit data; uses map-pin elevation,350,298,,,350,348,,
+US,us-pa,elk-mountain-pa,Elk Mountain,catalogue,No base/summit data; uses map-pin elevation,491,417,,,491,490,,
+US,us-pa,hidden-valley-resort-pa,Hidden Valley Resort,catalogue,No base/summit data; uses map-pin elevation,788,670,,,788,795,,
+US,us-pa,jack-frost-pa,Jack Frost,catalogue,No base/summit data; uses map-pin elevation,489,416,,,489,500,,
+US,us-pa,laurel-mountain-ski-resort-pa,Laurel Mountain Ski Resort,catalogue,No base/summit data; uses map-pin elevation,760,646,,,760,752,,
+US,us-pa,liberty-mountain-resort-pa,Liberty Mountain Resort,catalogue,No base/summit data; uses map-pin elevation,258,231,,,258,247,,
+US,us-pa,montage-mountain-pa,Montage Mountain Resorts,catalogue,No base/summit data; uses map-pin elevation,602,512,,,602,599,,
+US,us-pa,mount-pleasant-of-edinboro,Mount Pleasant of Edinboro,catalogue,No base/summit data; uses map-pin elevation,427,363,,,427,434,,
+US,us-pa,roundtop-mountain-resort-pa,Roundtop Mountain Resort,catalogue,No base/summit data; uses map-pin elevation,293,255,,,293,286,,
+US,us-pa,ski-big-bear-pa,Ski Big Bear at Masthope Mountain,catalogue,No base/summit data; uses map-pin elevation,392,333,,,392,391,,
+US,us-pa,ski-sawmill-pa,Ski Sawmill Family Resort,catalogue,No base/summit data; uses map-pin elevation,506,430,,,506,506,,
+US,us-pa,spring-mountain-adventures-pa,Spring Mountain Adventures,catalogue,No base/summit data; uses map-pin elevation,62,100,,,62,64,,
+US,us-pa,tussey-mountain-pa,Tussey Mountain,catalogue,No base/summit data; uses map-pin elevation,461,392,,,461,434,,
+US,us-pa,whitetail-resort-pa,Whitetail Resort,catalogue,No base/summit data; uses map-pin elevation,262,233,,,262,287,,
+US,us-sd,great-bear-ski-valley,Great Bear Ski Valley,catalogue,No base/summit data; uses map-pin elevation,416,354,,,416,414,,
+US,us-tn,ober-mountain,Ober Mountain,catalogue,No base/summit data; uses map-pin elevation,408,347,,,408,409,,
+US,us-va,bryce-resort,Bryce Resort,catalogue,No base/summit data; uses map-pin elevation,383,326,,,383,379,,
+US,us-va,the-omni-homestead-ski-area,The Omni Homestead Ski Area,catalogue,No base/summit data; uses map-pin elevation,686,583,,,686,697,,
+US,us-vt,ascutney-outdoors,Ascutney Outdoors,catalogue,No base/summit data; uses map-pin elevation,328,280,,,328,310,,
+US,us-vt,bolton-valley,Bolton Valley Resort,catalogue,No base/summit data; uses map-pin elevation,647,550,,,647,642,,
+US,us-vt,cochrans-ski-area,Cochran's Ski Area,catalogue,No base/summit data; uses map-pin elevation,109,126,,,109,108,,
+US,us-vt,middlebury-snowbowl,Middlebury Snowbowl,catalogue,No base/summit data; uses map-pin elevation,558,474,,,558,556,,
+US,us-vt,saskadena-six,Saskadena Six,catalogue,No base/summit data; uses map-pin elevation,221,205,,,221,224,,
+US,us-wi,alpine-valley-resort-wi,Alpine Valley Resort,catalogue,No base/summit data; uses map-pin elevation,260,232,,,260,266,,
+US,us-wi,bruce-mound-wi,Bruce Mound Winter Sports Area,catalogue,No base/summit data; uses map-pin elevation,407,346,,,407,421,,
+US,us-wi,christie-mountain-wi,Christie Mountain,catalogue,No base/summit data; uses map-pin elevation,403,343,,,403,403,,
+US,us-wi,christmas-mountain-village-wi,Christmas Mountain Village,catalogue,No base/summit data; uses map-pin elevation,315,271,,,315,319,,
+US,us-wi,devils-head-resort-wi,Devil's Head Resort,catalogue,No base/summit data; uses map-pin elevation,282,247,,,282,287,,
+US,us-wi,little-switzerland-wi,Little Switzerland,catalogue,No base/summit data; uses map-pin elevation,333,283,,,333,332,,
+US,us-wi,mont-du-lac-resort-wi,Mont du Lac Resort,catalogue,No base/summit data; uses map-pin elevation,223,206,,,223,216,,
+US,us-wi,mount-ashwabay-wi,Mt. Ashwabay,catalogue,No base/summit data; uses map-pin elevation,404,343,,,404,406,,
+US,us-wi,mount-la-crosse-wi,Mt. La Crosse,catalogue,No base/summit data; uses map-pin elevation,205,193,,,205,209,,
+US,us-wi,mountain-top-at-grand-geneva-wi,The Mountain Top at Grand Geneva Resort,catalogue,No base/summit data; uses map-pin elevation,258,231,,,258,258,,
+US,us-wi,nordic-mountain-wi,Nordic Mountain,catalogue,No base/summit data; uses map-pin elevation,293,255,,,293,295,,
+US,us-wi,sunburst-winter-sports-park-wi,Sunburst Winter Sports Park,catalogue,No base/summit data; uses map-pin elevation,321,275,,,321,321,,
+US,us-wi,trollhaugen-wi,Trollhaugen,catalogue,No base/summit data; uses map-pin elevation,329,280,,,329,333,,
+US,us-wi,tyrol-basin-wi,Tyrol Basin,catalogue,No base/summit data; uses map-pin elevation,289,252,,,289,292,,
+US,us-wi,whitecap-mountains-resort-wi,Whitecap Mountains Resort,catalogue,No base/summit data; uses map-pin elevation,410,348,,,410,410,,
+US,us-wi,wilmot-mountain-wi,Wilmot Mountain,catalogue,No base/summit data; uses map-pin elevation,249,224,,,249,253,,
+US,us-wv,oglebay-ski-area,Oglebay Ski Area,catalogue,No base/summit data; uses map-pin elevation,343,292,,,343,343,,
+US,us-wv,winterplace-ski-resort,Winterplace Ski Resort,catalogue,No base/summit data; uses map-pin elevation,963,819,,,963,953,,
+CA,banff-lake-louise,banff-sunshine,Banff Sunshine Village,authored,OK,2730,2430,1660,,2730,2210,,2195
+CA,banff-lake-louise,lake-louise-resort,Lake Louise Ski Resort,authored,OK,2637,2337,1646,,2637,1659,,2142
+CA,canada-alberta,castle-mountain-resort,Castle Mountain Resort,catalogue,OK,1842,1566,1410,2273,1842,1406,,1842
+CA,canada-british-columbia,powder-king-mountain-resort,Powder King Mountain Resort,catalogue,OK,1553,1320,1267,1838,1553,963,,1552
+CA,canada-british-columbia,red-mountain-resort,RED Mountain Resort,catalogue,OK,1630,1386,1185,2075,1630,1858,,1630
+CA,canada-british-columbia,sasquatch-mountain-resort,Sasquatch Mountain Resort,catalogue,OK,1175,999,980,1370,1175,980,,1175
+CA,canada-british-columbia,shames-mountain,Shames Mountain,catalogue,OK,945,803,700,1189,945,743,,944
+CA,canada-manitoba,holiday-mountain-resort,Holiday Mountain Resort,catalogue,OK,328,280,274,381,328,484,,328
+CA,canada-manitoba,mystery-mountain-winter-park,Mystery Mountain Winter Park,catalogue,OK,243,220,205,281,243,237,,243
+CA,canada-new-brunswick,crabbe-mountain,Crabbe Mountain,catalogue,OK,269,238,147,390,269,371,,268
+CA,canada-new-brunswick,poley-mountain,Poley Mountain,catalogue,OK,177,174,76,277,177,134,,176
+CA,canada-new-brunswick,republik-nature,Républik Nature,catalogue,OK,244,221,150,338,244,150,,244
+CA,canada-new-brunswick,sugarloaf-provincial-park,Sugarloaf Provincial Park,catalogue,OK,121,135,42,199,121,101,,120
+CA,canada-newfoundland-labrador,smokey-mountain-ski-club,Smokey Mountain Ski Club,catalogue,OK,720,612,595,845,720,552,,720
+CA,canada-newfoundland-labrador,white-hills-resort,White Hills Resort,catalogue,OK,261,233,147,374,261,214,,260
+CA,canada-nova-scotia,cape-smokey,Cape Smokey,catalogue,OK,149,154,15,283,149,15,,149
+CA,canada-nova-scotia,ski-ben-eoin,Ski Ben Eoin,catalogue,OK,84,109,14,154,84,0,,84
+CA,canada-nova-scotia,ski-martock,Ski Martock,catalogue,OK,107,125,26,188,107,35,,107
+CA,canada-nova-scotia,ski-wentworth,Ski Wentworth,catalogue,OK,172,170,55,288,172,54,,172
+CA,canada-ontario,antoine-mountain,Antoine Mountain,catalogue,OK,270,239,174,366,270,255,,270
+CA,canada-ontario,batawa-ski-hill,Batawa Ski Hill,catalogue,OK,55,100,30,80,55,109,,55
+CA,canada-ontario,blue-mountain-resort,Blue Mountain Resort,catalogue,OK,340,289,230,450,340,347,,340
+CA,canada-ontario,brimacombe,Brimacombe,catalogue,OK,264,235,218,310,264,304,,264
+CA,canada-ontario,calabogie-peaks-resort,Calabogie Peaks Resort,catalogue,OK,273,241,154,392,273,303,,273
+CA,canada-ontario,dagmar-ski-resort,Dagmar Ski Resort,catalogue,OK,160,162,120,199,160,289,,160
+CA,canada-ontario,glen-eden,Glen Eden,catalogue,OK,284,249,248,320,284,268,,284
+CA,canada-ontario,hidden-valley-highlands-ski-area,Hidden Valley Highlands Ski Area,catalogue,OK,330,281,280,380,330,375,,330
+CA,canada-ontario,loch-lomond-ski-area,Loch Lomond Ski Area,catalogue,OK,341,290,251,430,341,253,,340
+CA,canada-ontario,mount-pakenham,Mount Pakenham,catalogue,OK,177,174,137,217,177,213,,177
+CA,canada-ontario,mount-st-louis-moonstone,Mount St. Louis Moonstone,catalogue,OK,292,254,215,368,292,239,,292
+CA,canada-ontario,searchmont-resort,Searchmont Resort,catalogue,OK,361,307,233,488,361,293,,360
+CA,canada-ontario,snow-valley-ski-resort,Snow Valley Ski Resort,catalogue,OK,278,245,235,320,278,244,,278
+CA,canada-ontario,uplands-ski-centre,Uplands Ski Centre,catalogue,OK,185,179,170,200,185,203,,185
+CA,canada-prince-edward-island,mark-arendz-provincial-ski-park-at-brookvale,Mark Arendz Provincial Ski Park at Brookvale,catalogue,OK,58,100,20,96,58,49,,58
+CA,canada-quebec,le-relais,Le Relais,catalogue,OK,317,272,205,429,317,220,,317
+CA,canada-quebec,massif-du-sud,Massif du Sud,catalogue,OK,715,608,515,915,715,523,,715
+CA,canada-quebec,mont-grand-fonds,Mont Grand-Fonds,catalogue,OK,568,483,400,735,568,393,,568
+CA,canada-quebec,mont-orford,Mont-Orford,catalogue,OK,584,496,317,850,584,378,,584
+CA,canada-quebec,owl-s-head,Owl’s Head,catalogue,OK,477,405,239,714,477,348,,476
+CA,canada-quebec,station-touristique-stoneham,Station touristique Stoneham,catalogue,OK,421,358,248,593,421,252,,420
+CA,canada-quebec,val-saint-come,Val Saint-Côme,catalogue,OK,450,382,300,600,450,315,,450
+CA,canmore,nakiska,Nakiska,authored,OK,2260,1960,,,2260,1523,,
+CA,jasper,marmot-basin,Marmot Basin,authored,OK,2612,2312,,,2612,1739,,
+CA,okanagan,apex-resort,Apex Mountain Resort,authored,OK,2178,1878,,,2178,1691,,
+CA,okanagan,big-white,Big White Ski Resort,authored,OK,2319,2019,,,2319,1792,,
+CA,powder-highway,fernie-alpine,Fernie Alpine Resort,authored,OK,2134,1834,,,2134,1076,,
+CA,powder-highway,kimberley-alpine,Kimberley Alpine Resort,authored,OK,1980,1683,,,1980,1295,,
+CA,powder-highway,revelstoke-mountain-resort,Revelstoke Mountain Resort,authored,OK,2225,1925,,,2225,515,,
+CA,quebec-charlevoix,mont-sainte-anne,Mont-Sainte-Anne,authored,OK,800,680,,,800,796,,
+CA,quebec-eastern-townships,bromont-resort,Ski Bromont,authored,OK,553,470,,,553,531,,
+CA,quebec-laurentians,tremblant,Tremblant,authored,OK,875,744,,,875,242,,
+CA,vancouver,cypress-mountain,Cypress Mountain,authored,OK,1440,1224,,,1440,921,,
+CA,vancouver,mount-seymour,Mt Seymour,authored,OK,1265,1075,,,1265,1053,,
+CA,whistler,whistler-mountain,Whistler Mountain,authored,OK,2182,1882,,,2182,2115,,
+US,angel-fire,angel-fire-resort,Angel Fire Resort,authored,OK,3254,2954,,,3254,2566,,
+US,aspen-snowmass,aspen-highlands,Aspen Highlands,authored,OK,3559,3259,,,3559,2804,,
+US,aspen-snowmass,snowmass,Snowmass,authored,OK,3813,3513,,,3813,2619,,
+US,bend,mt-bachelor,Mt. Bachelor,authored,OK,2763,2463,1737,,2763,2735,,2250
+US,berkshires,berkshire-east,Berkshire East,authored,OK,561,477,,,561,483,,
+US,berkshires,jiminy-peak,Jiminy Peak,authored,OK,725,616,,,725,413,,
+US,big-sky,big-sky-resort,Big Sky Resort,authored,OK,3403,3103,,,3403,2296,,
+US,black-hills,terry-peak,Terry Peak,authored,OK,2164,1864,,,2164,1975,,
+US,blue-ridge,wintergreen-resort,Wintergreen Resort,authored,OK,1071,910,,,1071,977,,
+US,boise,bogus-basin,Bogus Basin,authored,OK,2394,2094,,,2394,1894,,
+US,boulder-front-range,eldora-mountain-resort,Eldora Mountain Resort,authored,OK,2853,2553,,,2853,2868,,
+US,bozeman-bridger-bowl,bridger-bowl,Bridger Bowl,authored,OK,2682,2382,,,2682,1899,,
+US,canaan-valley,canaan-valley-resort,Canaan Valley Resort,authored,OK,1304,1108,,,1304,985,,
+US,carrabassett-valley,sugarloaf,Sugarloaf,authored,OK,1291,1097,,,1291,1277,,
+US,central-massachusetts,wachusett-mountain,Wachusett Mountain,authored,OK,612,520,,,612,601,,
+US,crested-butte,crested-butte-mountain-resort,Crested Butte Mountain Resort,authored,OK,3620,3320,,,3620,2865,,
+US,crystal-mountain,crystal-mountain,Crystal Mountain Resort,authored,OK,2138,1838,,,2138,1436,,
+US,donnelly-mccall,brundage-mountain,Brundage Mountain,authored,OK,2320,2020,,,2320,1853,,
+US,donnelly-mccall,tamarack-resort,Tamarack Resort,authored,OK,1490,1266,,,1490,1505,,
+US,durango,purgatory-resort,Purgatory Resort,authored,OK,3299,2999,,,3299,2731,,
+US,flagstaff,arizona-snowbowl,Arizona Snowbowl,authored,OK,3511,3211,,,3511,2864,,
+US,franconia-notch,cannon-mountain,Cannon Mountain,authored,OK,1244,1057,,,1244,1234,,
+US,franconia-notch,loon-mountain,Loon Mountain,authored,OK,930,790,,,930,901,,
+US,girdwood,alyeska-resort,Alyeska Resort,authored,OK,1201,1021,,,1201,121,,
+US,harbor-springs,boyne-highlands,The Highlands,authored,OK,404,343,,,404,229,,
+US,harbor-springs,boyne-mountain,Boyne Mountain,authored,OK,341,290,,,341,223,,
+US,harbor-springs,nubs-nob,Nub's Nob,authored,OK,408,347,,,408,306,,
+US,high-country,sugar-mountain,Sugar Mountain,authored,OK,1615,1373,,,1615,1435,,
+US,highmount,belleayre-mountain,Belleayre Mountain,authored,OK,1045,888,,,1045,685,,
+US,hunter,hunter-mountain,Hunter Mountain,authored,OK,975,829,,,975,801,,
+US,juneau,eaglecrest-ski-area,Eaglecrest Ski Area,authored,OK,820,697,,,820,584,,
+US,keweenaw-peninsula,mt-bohemia,Mt. Bohemia,authored,OK,457,388,,,457,342,,
+US,lake-placid,whiteface-mountain,Whiteface Mountain,authored,OK,1483,1261,,,1483,1464,,
+US,lake-tahoe-nevada,mt-rose-ski-tahoe,Mt. Rose Ski Tahoe,authored,OK,2956,2656,,,2956,2845,,
+US,lakes-region,gunstock-mountain-resort,Gunstock Mountain Resort,authored,OK,684,581,,,684,497,,
+US,laurel-highlands,seven-springs-mountain,Seven Springs Mountain Resort,authored,OK,913,776,,,913,757,,
+US,litchfield-hills,mohawk-mountain,Mohawk Mountain,authored,OK,488,415,,,488,414,,
+US,lutsen-north-shore,lutsen-mountains,Lutsen Mountains,authored,OK,514,437,,,514,372,,
+US,maggie-valley,cataloochee-ski-area,Cataloochee Ski Area,authored,OK,1646,1399,,,1646,1409,,
+US,mt-baker,mt-baker,Mt. Baker Ski Area,authored,OK,1515,1288,,,1515,1103,,
+US,mt-hood,mt-hood-meadows,Mt. Hood Meadows,authored,OK,2225,1925,,,2225,1619,,
+US,mt-hood,mt-hood-skibowl,Mt. Hood Skibowl,authored,OK,1554,1321,,,1554,1126,,
+US,mt-hood,timberline-lodge,Timberline Lodge,authored,OK,2603,2303,,,2603,1817,,
+US,newry-bethel,sunday-river,Sunday River,authored,OK,957,813,,,957,303,,
+US,north-creek,gore-mountain,Gore Mountain,authored,OK,1097,932,,,1097,604,,
+US,poconos,blue-mountain-pa,Blue Mountain Resort,authored,OK,489,416,,,489,388,,
+US,poconos,camelback-mountain,Camelback Mountain Resort,authored,OK,634,539,,,634,396,,
+US,poconos,shawnee-mountain,Shawnee Mountain Ski Area,authored,OK,411,349,,,411,96,,
+US,rangeley,saddleback-mountain,Saddleback Mountain,authored,OK,1256,1068,,,1256,1150,,
+US,red-lodge,red-lodge-mountain,Red Lodge Mountain,authored,OK,2870,2570,,,2870,2177,,
+US,sandpoint,schweitzer-mountain-resort,Schweitzer Mountain Resort,authored,OK,1951,1658,,,1951,1440,,
+US,santa-fe,ski-santa-fe,Ski Santa Fe,authored,OK,3681,3381,,,3681,3257,,
+US,shenandoah-valley,massanutten-resort,Massanutten Resort,authored,OK,870,740,,,870,492,,
+US,snoqualmie-pass,snoqualmie-pass,The Summit at Snoqualmie,authored,OK,1178,1001,,,1178,917,,
+US,snowshoe,snowshoe-mountain,Snowshoe Mountain,authored,OK,1478,1256,,,1478,1453,,
+US,steamboat,steamboat-resort,Steamboat Resort,authored,OK,3221,2921,,,3221,2110,,
+US,stevens-pass,stevens-pass,Stevens Pass Ski Area,authored,OK,1235,1050,,,1235,1247,,
+US,summit-county,copper-mountain-resort,Copper Mountain,authored,OK,2960,2660,,,3450,2966,,
+US,sun-valley,bald-mountain,Bald Mountain,authored,OK,2789,2489,,,2789,2761,,
+US,sun-valley,dollar-mountain,Dollar Mountain,authored,OK,2024,1724,,,2024,2001,,
+US,taos,taos-ski-valley,Taos Ski Valley,authored,OK,3804,3504,,,3804,2897,,
+US,telluride,telluride-ski-resort,Telluride Ski Resort,authored,OK,3815,3515,,,3815,2688,,
+US,vail-valley,vail-mountain,Vail Mountain,authored,OK,3527,3227,2475,,3527,3355,,3001
+US,vernon,mountain-creek-resort,Mountain Creek Resort,authored,OK,451,383,,,451,179,,
+US,waterville-valley,waterville-valley-resort,Waterville Valley Resort,authored,OK,1170,994,,,1170,469,,
+US,wausau,granite-peak,Granite Peak Ski Area,authored,OK,594,505,,,594,376,,
+US,white-mountains,attitash-mountain-resort,Attitash Mountain Resort,authored,OK,716,609,,,716,197,,
+US,white-mountains,cranmore-mountain,Cranmore Mountain,authored,OK,518,440,,,518,172,,
+US,white-mountains-az,sunrise-park-resort,Sunrise Park Resort,authored,OK,3330,3030,,,3330,2848,,
+US,whitefish,whitefish-mountain-resort,Whitefish Mountain Resort,authored,OK,2078,1778,,,2078,1550,,
+US,windham,windham-mountain,Windham Mountain Club,authored,OK,945,803,,,945,723,,
+US,winter-park,winter-park-resort,Winter Park Resort,authored,OK,3676,3376,,,3676,2772,,
+US,wisconsin-dells,cascade-mountain,Cascade Mountain,authored,OK,378,321,,,378,238,,
