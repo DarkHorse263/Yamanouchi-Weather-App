@@ -31,6 +31,7 @@ function mountainFor(record: PublicRuntimeCatalogueRecord): MountainLink {
     nameJa: record.nameJa,
     elevationM: record.forecastElevationM,
     baseElevationM: record.baseElevationM,
+    summitElevationM: record.topElevationM,
     lat: record.coordinates.lat,
     lng: record.coordinates.lng,
     websiteUrl: record.officialUrl,

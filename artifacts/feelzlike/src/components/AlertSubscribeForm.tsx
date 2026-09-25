@@ -9,6 +9,7 @@ import { pingAlertFunnel } from "@/lib/engagement";
 import { CatalogueMountainPicker } from "@/components/CatalogueMountainPicker";
 import { isAlertCatalogueMountain } from "@/lib/alertCatalogueMountains";
 import { ALERT_REGIONS } from "@/lib/alertRegions";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 /**
  * Powder-alert subscription form. Mounts inside any region's Alerts page.
@@ -31,6 +32,7 @@ interface Props {
 }
 
 export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
+  const u = useUnits();
   const { t } = useLanguage();
   const formId = useId();
   const browserTz = useMemo(() => {
@@ -199,7 +201,7 @@ export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
           <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
             <Snowflake className="w-3.5 h-3.5" /> {t("Threshold", "しきい値")}
           </span>
-          <span className="text-sm font-black text-primary tabular-nums">{threshold} cm</span>
+          <span className="text-sm font-black text-primary tabular-nums">{u.snow(threshold)}</span>
         </div>
         <input
           type="range"
@@ -209,10 +211,10 @@ export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
           value={threshold}
           onChange={(e) => setThreshold(Number(e.target.value))}
           className="mt-2 w-full accent-sky-500"
-          aria-label={t("Snowfall threshold in centimetres", "降雪量のしきい値")}
+          aria-label={t(`Snowfall threshold (${u.snowUnit})`, `降雪量のしきい値 (${u.snowUnit})`)}
         />
         <div className="flex justify-between text-[10px] text-muted-foreground font-bold uppercase tracking-wider mt-1">
-          <span>5cm</span><span>25cm</span><span>50cm</span>
+          <span>{u.snow(5)}</span><span>{u.snow(25)}</span><span>{u.snow(50)}</span>
         </div>
       </div>
 

@@ -12,9 +12,11 @@ import { cn } from "@/lib/utils";
 export function OfficialSiteLink({
   url,
   className,
+  onDark = false,
 }: {
   url: string;
   className?: string;
+  onDark?: boolean;
 }) {
   const { t } = useLanguage();
   let hostname = "";
@@ -29,13 +31,14 @@ export function OfficialSiteLink({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-blue-700 transition-colors",
+        "inline-flex items-center gap-1.5 text-xs font-medium transition-colors",
+        onDark ? "text-white hover:text-white/90" : "text-muted-foreground hover:text-blue-700",
         className,
       )}
     >
       <ExternalLink className="w-3 h-3" />
       {t("Official site", "公式サイト")}
-      <span className="text-muted-foreground/50">{hostname}</span>
+      <span className={onDark ? "text-white/85" : "text-muted-foreground/80"}>{hostname}</span>
     </a>
   );
 }

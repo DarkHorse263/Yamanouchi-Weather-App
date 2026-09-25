@@ -16,7 +16,9 @@ import { dailyConditionLabel } from "../dailyConditionLabel.js";
 
 test("no meaningful snow falls back to the code description", () => {
   assert.equal(dailyConditionLabel({ code: 2, snowfallCm: 0, rainMm: 0, fallback: "Partly cloudy" }), "Partly cloudy");
-  assert.equal(dailyConditionLabel({ code: 71, snowfallCm: 0.28, rainMm: 0, fallback: "Slight snow fall" }), "Slight snow fall");
+  assert.equal(dailyConditionLabel({ code: 71, snowfallCm: 0.28, rainMm: 0, fallback: "Slight snow fall" }), "Light snow");
+  assert.equal(dailyConditionLabel({ code: 73, snowfallCm: 0.1, rainMm: 0, fallback: "Moderate snow fall" }), "Light snow");
+  assert.equal(dailyConditionLabel({ code: 75, snowfallCm: 0, rainMm: 0, fallback: "Heavy snow fall" }), "Cloudy");
   assert.equal(dailyConditionLabel({ code: 3, snowfallCm: null, rainMm: null, fallback: "Overcast" }), "Overcast");
 });
 
@@ -26,7 +28,7 @@ test("rain-dominant day with trivial snow must not headline as snow", () => {
   // Non-snow code keeps its own fallback
   assert.equal(dailyConditionLabel({ code: 61, snowfallCm: 0.1, rainMm: 5.9, fallback: "Slight rain" }), "Slight rain");
   // Trivial rain doesn't trigger the demotion
-  assert.equal(dailyConditionLabel({ code: 71, snowfallCm: 0.14, rainMm: 1.2, fallback: "Slight snow fall" }), "Slight snow fall");
+  assert.equal(dailyConditionLabel({ code: 71, snowfallCm: 0.14, rainMm: 1.2, fallback: "Slight snow fall" }), "Light snow");
 });
 
 test("steady 17cm day is Heavy snow even when the moment-code said thunderstorm", () => {

@@ -28,6 +28,7 @@ import {
 } from "@workspace/feelzlike-shell";
 import { useGetWeather } from "@workspace/api-client-react";
 import { useTownWeather } from "@/lib/town-weather";
+import { CachedForecastNotice, StaleNotice } from "@/components/weather/WeatherSections";
 import { townNavHasContent } from "@/lib/navContent";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
@@ -348,13 +349,26 @@ export function TownHome() {
   }
 
   // Derive a single freshest timestamp from any of the live queries we
-  // actually use on this page. Town weather refreshes every ~10 min; mountain
-  // weather every ~15. Pick the genuinely newest by parsed epoch so a stale
-  // mountain payload doesn't mask a fresher town reading.
+  // actually use on this page. Exclude forecasts explicitly served stale so
+  // the page header never labels cached data as live.
+  type CachedLocationWeather = (typeof mountainsByDistance)[number]["entry"] & {
+    stale?: boolean;
+    staleAgeSeconds?: number;
+  };
+  const staleMountainForecasts = mountainsByDistance.filter(
+    ({ entry }) => (entry as CachedLocationWeather).stale === true,
+  );
+  const staleMountainAges = staleMountainForecasts
+    .map(({ entry }) => (entry as CachedLocationWeather).staleAgeSeconds)
+    .filter((age): age is number => typeof age === "number" && Number.isFinite(age));
+  const staleMountainAgeSeconds =
+    staleMountainAges.length > 0 ? Math.max(...staleMountainAges) : undefined;
   const lastUpdated = (() => {
     const candidates = [
-      (weatherQ.data as any)?.lastUpdated,
-      (townWeatherQ.data as any)?.current?.time,
+      ...mountainsByDistance
+        .filter(({ entry }) => (entry as CachedLocationWeather).stale !== true)
+        .map(({ entry }) => entry.lastUpdated),
+      townWeatherQ.data?._stale ? undefined : townWeatherQ.data?.current?.time,
     ].filter((v): v is string => typeof v === "string" && v.length > 0);
     if (candidates.length === 0) return null;
     return candidates.reduce((newest, ts) => {
@@ -497,6 +511,13 @@ export function TownHome() {
               )}
             </p>
           )}
+          {staleMountainForecasts.length > 0 && (
+            <CachedForecastNotice
+              ageSeconds={staleMountainAgeSeconds}
+              t={t}
+              plural
+            />
+          )}
           {weatherQ.isLoading && mountainsByDistance.length === 0 ? (
             <p className="text-sm font-bold text-slate-500 py-4 lowercase">{t("Loading…", "読込中…")}</p>
           ) : mountainsByDistance.length === 0 ? (
@@ -514,6 +535,9 @@ export function TownHome() {
           Secondary to the mountains, answers "what does it feel like here
           right now?". Now includes a direct link to the 7-day forecast. */}
       <section className="mt-6">
+        {townWeatherQ.data?._stale && (
+          <StaleNotice meta={townWeatherQ.data._stale} t={t} />
+        )}
         <TempInTownNow
           label={t("Temp in town now", "町の現在気温")}
           temperature={townWeatherQ.data?.current.temperature ?? null}

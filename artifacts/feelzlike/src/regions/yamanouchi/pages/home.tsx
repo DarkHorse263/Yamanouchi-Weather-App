@@ -375,13 +375,13 @@ export default function Home() {
       >
         <div className="grid grid-cols-4 divide-x divide-border">
           {[
-            { label: t("Avg Temp", "平均気温"),  value: data.avgTemp     != null ? `${data.avgTemp}°` : "-",  sub: "°C",   resort: null },
+            { label: t("Avg Temp", "平均気温"),  value: data.avgTemp     != null ? `${u.temp(data.avgTemp)}` : "-",  sub: u.tempUnit,   resort: null },
             { label: t("Avg Wind", "平均風速"),   value: data.avgWind     != null ? `${u.wind(data.avgWind)}`  : "-",  sub: u.windUnit, resort: null },
             // `bestResort` is the only resort-context object the dashboard
             // returns, so we tag both snow stats with it (the legacy
             // `topSnowResort` field was removed from the schema).
-            { label: t("New Snow", "新雪 24h"),   value: data.topSnow24h  != null ? `${data.topSnow24h}` : "-", sub: "cm",   resort: data.bestResort },
-            { label: t("Best Base", "最大積雪"),  value: data.bestBase    != null ? `${data.bestBase}`  : "-",  sub: "cm",   resort: data.bestResort },
+            { label: t("New Snow", "新雪 24h"),   value: data.topSnow24h  != null ? u.snowVal(data.topSnow24h) : "-", sub: u.snowUnit,   resort: data.bestResort },
+            { label: t("Best Base", "最大積雪"),  value: data.bestBase    != null ? u.snowVal(data.bestBase) : "-",  sub: u.snowUnit,   resort: data.bestResort },
           ].map(({ label, value, sub, resort }) => (
             <div key={label} className="px-2 py-4 text-center flex flex-col items-center justify-center">
               <p className="byline text-muted-foreground mb-1.5 leading-tight">{label}</p>
@@ -430,9 +430,9 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-2 gap-2">
               {[
-                { icon: Snowflake,            label: t("24h Snow", "24h降雪"), value: `${data.bestResort.snow24h ?? 0} cm`,    color: "text-snow-accent" },
-                { icon: Ruler,                label: t("Base", "積雪"),         value: `${data.bestResort.baseDepth ?? 0} cm`,  color: "text-snow-accent" },
-                { icon: ThermometerSnowflake, label: t("Temp", "気温"),         value: `${data.bestResort.temp ?? '--'}°C`,    color: "text-foreground" },
+                { icon: Snowflake,            label: t("24h Snow", "24h降雪"), value: u.snow(data.bestResort.snow24h ?? 0),    color: "text-snow-accent" },
+                { icon: Ruler,                label: t("Base", "積雪"),         value: u.snow(data.bestResort.baseDepth ?? 0),  color: "text-snow-accent" },
+                { icon: ThermometerSnowflake, label: t("Temp", "気温"),         value: `${data.bestResort.temp != null ? u.temp(data.bestResort.temp) : '--'}${u.tempUnit}`,    color: "text-foreground" },
                 { icon: Wind,                 label: t("Wind", "風速"),         value: `${data.bestResort.wind != null ? u.wind(data.bestResort.wind) : '--'} ${u.windUnit}`, color: "text-foreground" },
               ].map(({ icon: Icon, label, value, color }) => (
                 <div key={label} className="bg-secondary rounded-xl px-3 py-2.5">
@@ -465,22 +465,22 @@ export default function Home() {
                   <div className="pr-4 text-center">
                     <p className="byline text-muted-foreground mb-1">{t("New Snow", "新雪")}</p>
                     <p className="display-number text-lg text-snow-accent" data-numeric>
-                      {region.topSnow ?? 0}
-                      <span className="text-xs font-medium text-muted-foreground ml-0.5">cm</span>
+                      {u.snowVal(region.topSnow ?? 0)}
+                      <span className="text-xs font-medium text-muted-foreground ml-0.5">{u.snowUnit}</span>
                     </p>
                   </div>
                   <div className="px-4 text-center">
                     <p className="byline text-muted-foreground mb-1">{t("Best Base", "最大積雪")}</p>
                     <p className="display-number text-lg text-foreground" data-numeric>
-                      {region.bestBase ?? 0}
-                      <span className="text-xs font-medium text-muted-foreground ml-0.5">cm</span>
+                      {u.snowVal(region.bestBase ?? 0)}
+                      <span className="text-xs font-medium text-muted-foreground ml-0.5">{u.snowUnit}</span>
                     </p>
                   </div>
                   <div className="pl-4 text-center">
                     <p className="byline text-muted-foreground mb-1">{t("Avg Temp", "平均気温")}</p>
                     <p className="display-number text-lg text-foreground" data-numeric>
-                      {region.avgTemp != null ? region.avgTemp.toFixed(1) : '--'}
-                      <span className="text-xs font-medium text-muted-foreground ml-0.5">°C</span>
+                      {region.avgTemp != null ? u.temp(region.avgTemp) : '--'}
+                      <span className="text-xs font-medium text-muted-foreground ml-0.5">{u.tempUnit}</span>
                     </p>
                   </div>
                 </div>

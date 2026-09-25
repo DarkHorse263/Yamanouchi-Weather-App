@@ -17,7 +17,6 @@ import {
 import {
   uvBand,
   windBand,
-  visibilityKm,
   type TownWeatherCurrent,
   type TownWeatherDaily,
   type TownWeatherHourly,
@@ -45,30 +44,53 @@ export function StaleNotice({
   meta: TownWeatherStaleMeta;
   t: Translate;
 }) {
-  // Round to a friendly unit. <2min → "moments ago", <60min → "Xm ago",
-  // otherwise "Xh ago". Keeps the badge terse, matches brand voice.
+  return <CachedForecastNotice ageSeconds={meta.ageSeconds} t={t} />;
+}
+
+export function CachedForecastNotice({
+  ageSeconds,
+  t,
+  plural = false,
+}: {
+  ageSeconds: number | null | undefined;
+  t: Translate;
+  plural?: boolean;
+}) {
+  const hasAge = ageSeconds != null && Number.isFinite(ageSeconds);
   const ageLabel = (() => {
-    const s = meta.ageSeconds;
-    if (s === null) return t("recently", "最近");
-    if (s < 120) return t("moments ago", "ほんの少し前");
+    const s = ageSeconds;
+    if (s == null || !Number.isFinite(s)) return "";
+    if (s < 60) return t("less than a minute ago", "1分未満前");
     if (s < 3600) return t(`${Math.round(s / 60)}m ago`, `${Math.round(s / 60)}分前`);
     return t(`${Math.round(s / 3600)}h ago`, `${Math.round(s / 3600)}時間前`);
   })();
   return (
     <div
       role="status"
+      data-testid="status-cached-forecast"
       className="mt-5 rounded-2xl border border-amber-300/60 bg-amber-50 px-4 py-3 flex items-start gap-3"
     >
       <Cloud className="w-4 h-4 text-amber-700 mt-0.5 flex-shrink-0" strokeWidth={2} />
       <div className="text-xs leading-relaxed">
         <p className="font-semibold text-amber-900">
-          {t("Showing cached weather", "キャッシュ表示中")}
+          {plural
+            ? t("Some forecasts are cached", "一部の予報はキャッシュ表示中")
+            : t("Showing a cached forecast", "キャッシュされた予報を表示中")}
         </p>
         <p className="text-amber-800/90 mt-0.5">
-          {t(
-            `Live weather feed is having trouble · last good update ${ageLabel}.`,
-            `ライブ天気の取得に失敗しました · 最終取得は${ageLabel}。`,
-          )}
+          {hasAge
+            ? t(
+                plural
+                  ? `The oldest cached forecast is about ${ageLabel} old; a fresh forecast wasn't available for this request.`
+                  : `This forecast was last updated about ${ageLabel}; a fresh forecast wasn't available for this request.`,
+                plural
+                  ? `最も古いキャッシュ予報は約${ageLabel}です。今回の取得では新しい予報を取得できませんでした。`
+                  : `この予報の最終更新は約${ageLabel}です。今回の取得では新しい予報を取得できませんでした。`,
+              )
+            : t(
+                "A fresh forecast wasn't available for this request; the cached forecast's age is unknown.",
+                "今回の取得では新しい予報を取得できず、キャッシュ予報の経過時間は不明です。",
+              )}
         </p>
       </div>
     </div>
@@ -171,8 +193,8 @@ export function WeatherConditions({
       <Stat
         icon={Eye}
         label={t("Visibility", "視程")}
-        value={visibilityKm(current.visibility).split(" ")[0] ?? "-"}
-        unit="km"
+        value={current.visibility != null ? u.distanceKm(current.visibility / 1000).split(" ")[0] : "-"}
+        unit={u.units === "imperial" ? "mi" : "km"}
         hint=""
       />
       <Stat
@@ -240,7 +262,7 @@ export function ObservedSnowCard({
   const stationLine = [
     `JMA AMeDAS · ${obs.stationName}`,
     obs.stationElevationM !== null ? `${u.elev(obs.stationElevationM)}${u.elevUnit}` : null,
-    `${obs.distanceKm} km ${t("away", "先")}`,
+    `${u.distanceKm(obs.distanceKm)} ${t("away", "先")}`,
   ]
     .filter(Boolean)
     .join(" · ");

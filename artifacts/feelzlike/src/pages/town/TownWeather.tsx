@@ -76,7 +76,7 @@ export function TownWeather() {
           }
           badge={
             // Only claim "live" when we actually have a timestamped reading.
-            q.data?.current?.time
+            q.data?.current?.time && !q.data?._stale
               ? <LiveBadge tone="onDark" label={t("Live", "ライブ")} />
               : undefined
           }

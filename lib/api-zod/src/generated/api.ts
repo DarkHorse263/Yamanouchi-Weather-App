@@ -372,6 +372,7 @@ export const GetAccountResponse = zod.object({
   "profile": zod.object({
   "homeRegionId": zod.string().nullable().describe('Canonical region id (e.g. snowy-mountains) or null.'),
   "units": zod.enum(['metric', 'imperial']),
+  "unitsExplicit": zod.boolean().describe('Whether units were explicitly saved to the account. Legacy imperial values are always explicit.'),
   "displayName": zod.string().nullable()
 }),
   "subscription": zod.union([zod.object({
@@ -413,6 +414,7 @@ export const UpdateAccountProfileResponse = zod.object({
   "profile": zod.object({
   "homeRegionId": zod.string().nullable().describe('Canonical region id (e.g. snowy-mountains) or null.'),
   "units": zod.enum(['metric', 'imperial']),
+  "unitsExplicit": zod.boolean().describe('Whether units were explicitly saved to the account. Legacy imperial values are always explicit.'),
   "displayName": zod.string().nullable()
 })
 })
@@ -1252,7 +1254,7 @@ export const GetWeatherResponse = zod.object({
   "isDay": zod.boolean(),
   "snowDepth": zod.number().optional(),
   "precipitation": zod.number(),
-  "cloudCover": zod.number().int(),
+  "cloudCover": zod.number(),
   "visibility": zod.number().optional(),
   "pressure": zod.number().optional(),
   "dewpoint": zod.number().optional(),
@@ -1294,10 +1296,12 @@ export const GetWeatherResponse = zod.object({
   "windSpeed": zod.number(),
   "humidity": zod.number(),
   "feelsLike": zod.number().nullable(),
-  "cloudCover": zod.number().int().optional()
+  "cloudCover": zod.number().optional()
 })),
   "utcOffsetSeconds": zod.number().int().optional().describe('Location timezone offset from UTC, in seconds (e.g. 32400 for JST,\n39600 for AEDT). Open-Meteo returns hourly times as naive ISO\nstrings in this timezone, so clients need this offset to do\ntimezone-safe "is this hour past or future" comparisons regardless\nof the viewer\'s browser timezone.\n'),
-  "lastUpdated": zod.string()
+  "lastUpdated": zod.string(),
+  "stale": zod.boolean().optional().describe('True when the last successful forecast is being served after a failed refresh.'),
+  "staleAgeSeconds": zod.number().int().optional().describe('Age in seconds of the last successful forecast when stale is true.')
 })),
   "lastUpdated": zod.string()
 })
@@ -1346,7 +1350,7 @@ export const GetLocationWeatherResponse = zod.object({
   "isDay": zod.boolean(),
   "snowDepth": zod.number().optional(),
   "precipitation": zod.number(),
-  "cloudCover": zod.number().int(),
+  "cloudCover": zod.number(),
   "visibility": zod.number().optional(),
   "pressure": zod.number().optional(),
   "dewpoint": zod.number().optional(),
@@ -1388,10 +1392,12 @@ export const GetLocationWeatherResponse = zod.object({
   "windSpeed": zod.number(),
   "humidity": zod.number(),
   "feelsLike": zod.number().nullable(),
-  "cloudCover": zod.number().int().optional()
+  "cloudCover": zod.number().optional()
 })),
   "utcOffsetSeconds": zod.number().int().optional().describe('Location timezone offset from UTC, in seconds (e.g. 32400 for JST,\n39600 for AEDT). Open-Meteo returns hourly times as naive ISO\nstrings in this timezone, so clients need this offset to do\ntimezone-safe "is this hour past or future" comparisons regardless\nof the viewer\'s browser timezone.\n'),
-  "lastUpdated": zod.string()
+  "lastUpdated": zod.string(),
+  "stale": zod.boolean().optional().describe('True when the last successful forecast is being served after a failed refresh.'),
+  "staleAgeSeconds": zod.number().int().optional().describe('Age in seconds of the last successful forecast when stale is true.')
 })
 
 

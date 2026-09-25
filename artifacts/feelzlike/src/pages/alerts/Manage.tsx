@@ -3,6 +3,7 @@ import { useGetAlertPreferences, useUpdateAlertPreferences, useUnsubscribeFromAl
 import { Loader2, AlertTriangle, Save, Trash2, CheckCircle2, BellRing, BellOff } from "lucide-react";
 import { ensurePushSubscription, disablePushSubscription, pushSupportStatus, explainStatus } from "@/lib/pushSubscribe";
 import { CatalogueMountainPicker } from "@/components/CatalogueMountainPicker";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 /**
  * Subscription management page. Reached from the link in every alert email:
@@ -24,6 +25,7 @@ const HORIZONS: Array<{ value: 24 | 48 | 72; label: string }> = [
 ];
 
 export default function Manage() {
+  const u = useUnits();
   const params = new URLSearchParams(window.location.search);
   const token = params.get("token") ?? "";
 
@@ -177,7 +179,7 @@ export default function Manage() {
           />
         </Section>
 
-        <Section title="Snowfall threshold" trailing={<span className="text-sm font-black text-primary tabular-nums">{threshold} cm</span>}>
+        <Section title="Snowfall threshold" trailing={<span className="text-sm font-black text-primary tabular-nums">{u.snow(threshold)}</span>}>
           <input
             type="range" min={5} max={50} step={5} value={threshold}
             onChange={(e) => setThreshold(Number(e.target.value))}

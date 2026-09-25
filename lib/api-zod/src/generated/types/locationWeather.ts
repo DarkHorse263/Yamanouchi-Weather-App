@@ -24,4 +24,8 @@ export interface LocationWeather {
      */
   utcOffsetSeconds?: number;
   lastUpdated: string;
+  /** True when the last successful forecast is being served after a failed refresh. */
+  stale?: boolean;
+  /** Age in seconds of the last successful forecast when stale is true. */
+  staleAgeSeconds?: number;
 }

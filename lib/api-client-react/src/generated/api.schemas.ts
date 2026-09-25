@@ -552,6 +552,8 @@ export interface AccountProfile {
      */
   homeRegionId: string | null;
   units: AccountProfileUnits;
+  /** Whether units were explicitly saved to the account. Legacy imperial values are always explicit. */
+  unitsExplicit: boolean;
   /** @nullable */
   displayName: string | null;
 }
@@ -1229,6 +1231,10 @@ export interface LocationWeather {
      */
   utcOffsetSeconds?: number;
   lastUpdated: string;
+  /** True when the last successful forecast is being served after a failed refresh. */
+  stale?: boolean;
+  /** Age in seconds of the last successful forecast when stale is true. */
+  staleAgeSeconds?: number;
 }
 
 export interface WeatherResponse {

@@ -35,6 +35,8 @@ export const provoRegion: RegionConfig = {
       id: "sundance-mountain-resort",
       name: "Sundance Mountain Resort",
       elevationM: 1859,
+      skiBaseElevationM: 1859,
+      summitElevationM: 2515,
       lat: 40.3970,
       lng: -111.5847,
       blurb: "independent (no Ikon or Epic Pass) · Robert Redford's low-key resort in Provo Canyon",

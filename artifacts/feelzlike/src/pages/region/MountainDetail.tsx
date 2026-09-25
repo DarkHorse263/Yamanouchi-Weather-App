@@ -41,6 +41,7 @@ import {
   useGetResortSnowReport,
 } from "@workspace/api-client-react";
 import { ElevationBands } from "@/components/weather/ElevationBands";
+import { CachedForecastNotice } from "@/components/weather/WeatherSections";
 import { HourlyForecast } from "@/components/HourlyForecast";
 import { PremiumFeaturePrompt } from "@/components/PremiumFeaturePrompt";
 import { SnowmakingPanel } from "@/components/weather/SnowmakingPanel";
@@ -52,7 +53,7 @@ import { isAuSeasonClosureActive, AU_SEASON_CLOSURE_POLICY } from "@workspace/pr
 import { REGION_COUNTRY } from "@/regions";
 import { MountainWebcams } from "@/components/MountainWebcams";
 import { ForecastChart } from "@/components/weather/ForecastChart";
-import { midMountainElevation, resolveVillageElevation } from "@/lib/elevation";
+import { snowForecastElevation, resolveVillageElevation } from "@/lib/elevation";
 import { getLiftsForMountain } from "@/data/lifts";
 import { cn } from "@/lib/utils";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
@@ -132,14 +133,17 @@ export function MountainDetail() {
   );
   const elevLat = mountainCfg?.lat;
   const elevLng = mountainCfg?.lng;
-  const elevSummitM = mountainCfg?.elevationM;
+  const elevSummitM = mountainCfg?.summitElevationM ?? mountainCfg?.elevationBands?.upperM;
   const explicitElevationBands = mountainCfg?.elevationBands;
   const elevName = mountainCfg?.name;
   const websiteUrl = mountainCfg?.websiteUrl;
   const snowReportUrl = isWeatherOnly ? undefined : mountainCfg?.snowReportUrl;
-  const snowElevationM = elevSummitM != null
-    ? midMountainElevation(elevSummitM, explicitElevationBands?.midM)
-    : undefined;
+  const snowElevationM = snowForecastElevation(
+    mountainCfg?.skiBaseElevationM ?? mountainCfg?.baseElevationM,
+    elevSummitM,
+    mountainCfg?.elevationM,
+    explicitElevationBands?.midM,
+  );
 
   const q = useGetLocationWeather(
     locationId,
@@ -247,6 +251,7 @@ export function MountainDetail() {
   }
 
   const data = q.data as MountainWeather | undefined;
+  const isCachedForecast = data?.stale === true;
   const current = data?.current;
   const daily = data?.daily ?? [];
   const hourly = data?.hourly ?? [];
@@ -411,7 +416,7 @@ export function MountainDetail() {
           ? [{ label: t("Pressure", "気圧"), value: `${current.pressure} hPa`, icon: Gauge }]
           : []),
         ...(current.visibility != null && current.visibility !== 10000
-          ? [{ label: t("Visibility", "視界"), value: `${(current.visibility / 1000).toFixed(0)} km`, icon: Eye }]
+          ? [{ label: t("Visibility", "視界"), value: u.distanceKm(current.visibility / 1000), icon: Eye }]
           : []),
       ]
     : [];
@@ -463,6 +468,11 @@ export function MountainDetail() {
           ]),
         ]}
       />
+      {isCachedForecast && (
+        <div className="max-w-7xl mx-auto px-5 md:px-10">
+          <CachedForecastNotice ageSeconds={data?.staleAgeSeconds} t={t} />
+        </div>
+      )}
 
       {/* ─── Aurora hero (Perisher-style) ────────────────── */}
       <section className="relative overflow-hidden isolate">
@@ -502,13 +512,15 @@ export function MountainDetail() {
             className="flex flex-wrap items-center gap-x-3 gap-y-1.5"
           >
             <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-white/10 text-white border border-white/20">
-              {!isWeatherOnly && (
+              {!isWeatherOnly && !isCachedForecast && (
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
                   <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
                 </span>
               )}
-              {t(capabilityCopy.sourceBadge.en, capabilityCopy.sourceBadge.ja)}
+              {isCachedForecast
+                ? t("Cached", "キャッシュ")
+                : t(capabilityCopy.sourceBadge.en, capabilityCopy.sourceBadge.ja)}
             </span>
             <span className="byline text-white/70">
               {t("Source", "出典")} · {sourceLabel}
@@ -521,7 +533,8 @@ export function MountainDetail() {
             {websiteUrl && (
               <OfficialSiteLink
                 url={websiteUrl}
-                className="text-[11px] text-white/70 hover:text-white"
+                onDark
+                className="text-[11px]"
               />
             )}
             {observedTime && (
@@ -618,11 +631,7 @@ export function MountainDetail() {
               mountainCfg?.baseElevationM,
               elevSummitM,
             )}
-            midElevationM={
-              elevSummitM != null
-                ? midMountainElevation(elevSummitM, explicitElevationBands?.midM)
-                : undefined
-            }
+            midElevationM={snowElevationM}
           />
 
           {/* live cam thumbnail · a real look at the mountain right in the
@@ -724,7 +733,9 @@ export function MountainDetail() {
           {/* Scroll cue */}
           <div className="mt-6 md:mt-8 flex items-center gap-2 text-white/60">
             <span className="byline text-white/60">
-              {t(capabilityCopy.scrollCue.en, capabilityCopy.scrollCue.ja)}
+              {isCachedForecast
+                ? t("Conditions below", "以下に状況を表示")
+                : t(capabilityCopy.scrollCue.en, capabilityCopy.scrollCue.ja)}
             </span>
             <ArrowDown className="w-3 h-3" />
           </div>
@@ -794,6 +805,7 @@ export function MountainDetail() {
             tempC={current.temperature}
             humidity={current.humidity}
             hourly={hourly as any}
+            utcOffsetSeconds={(data as any).utcOffsetSeconds ?? 0}
           />
         )}
 
@@ -875,7 +887,7 @@ export function MountainDetail() {
                             <div
                               className="w-3 rounded-t-sm bg-snow-accent/80"
                               style={{ height: `${snow > 0 ? Math.max(8, snowH) : 0}%` }}
-                              title={`${snow.toFixed(1)} cm snow`}
+                              title={`${u.snow(snow, 1)} snow`}
                             />
                             <Snowflake className="w-3 h-3 text-snow-accent/80 mt-1" />
                           </div>
@@ -883,7 +895,7 @@ export function MountainDetail() {
                             <div
                               className="w-3 rounded-t-sm bg-blue-500/60"
                               style={{ height: `${rain > 0 ? Math.max(8, rainH) : 0}%` }}
-                              title={`${rain.toFixed(1)} mm rain`}
+                              title={`${u.rain(rain)} rain`}
                             />
                             <CloudRain className="w-3 h-3 text-blue-500/70 mt-1" />
                           </div>
@@ -893,7 +905,7 @@ export function MountainDetail() {
                             {snow > 0 ? `${u.snowVal(snow, snow >= 10 ? 0 : 1)}${u.snowUnit}` : "-"}
                           </span>
                           <span className="text-muted-foreground/50">/</span>
-                          <span className="font-medium text-blue-700">{rain > 0 ? `${rain.toFixed(rain >= 10 ? 0 : 1)}mm` : "-"}</span>
+                           <span className="font-medium text-blue-700">{rain > 0 ? u.rain(rain) : "-"}</span>
                         </div>
 
                         {day.windSpeedMax != null && (
@@ -1226,6 +1238,8 @@ type MountainWeather = {
     longitude?: number;
     description?: string;
   };
+  stale?: boolean;
+  staleAgeSeconds?: number;
   current: {
     temperature: number | null;
     feelsLike?: number | null;

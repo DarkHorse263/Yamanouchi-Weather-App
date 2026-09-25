@@ -14,6 +14,8 @@ export interface AccountProfile {
      */
   homeRegionId: string | null;
   units: AccountProfileUnits;
+  /** Whether units were explicitly saved to the account. Legacy imperial values are always explicit. */
+  unitsExplicit: boolean;
   /** @nullable */
   displayName: string | null;
 }

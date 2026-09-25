@@ -29,12 +29,13 @@ export interface MountainOutlookProps {
   /**
    * Display-edge unit hooks (member units preference). Canonical inputs stay
    * metric °C/cm; pass converters + a label to render °F/in for imperial
-   * members. Defaults preserve the metric presentation. Rain stays mm.
+    * members. Defaults preserve the metric presentation.
    */
   formatTemp?: (c: number) => number;
   tempUnitLabel?: string;
   formatSnowValue?: (cm: number) => string;
   snowUnitLabel?: string;
+  formatRain?: (mm: number) => string;
   formatWind?: (kmh: number) => number;
   windUnitLabel?: string;
   formatElevation?: (m: number) => number;
@@ -96,6 +97,7 @@ export function MountainOutlook({
   tempUnitLabel = "°C",
   formatSnowValue,
   snowUnitLabel = "cm",
+  formatRain,
   formatWind,
   windUnitLabel = "km/h",
   formatElevation,
@@ -106,6 +108,7 @@ export function MountainOutlook({
   const cvElev = formatElevation ?? ((m: number) => m);
   const cvSnow =
     formatSnowValue ?? ((cm: number) => cm.toFixed(cm >= 10 ? 0 : 1));
+  const cvRain = formatRain ?? ((mm: number) => `${mm.toFixed(1)} mm`);
   const days = rawDays.slice(0, maxDays);
   const headingText = heading ?? `${days.length}-day mountain forecast`;
   const maxSnow = Math.max(0.1, ...days.map((d) => Number(d.snowfallSum) || 0));
@@ -186,7 +189,7 @@ export function MountainOutlook({
                   <div
                     className="w-2.5 rounded-t-sm bg-slate-400/70"
                     style={{ height: `${rain > 0 ? Math.max(8, rainH) : 0}%` }}
-                    title={`${rain.toFixed(1)} mm rain`}
+                    title={`${cvRain(rain)} rain`}
                   />
                   <CloudRain className="w-2.5 h-2.5 text-slate-500/70 mt-0.5" />
                 </div>
@@ -194,7 +197,7 @@ export function MountainOutlook({
               <div className="flex items-center gap-1 text-[10px] tabular-nums text-muted-foreground/80 mt-0.5">
                 <span className="text-snow-accent">{snow > 0 ? `${cvSnow(snow)}${snowUnitLabel}` : "-"}</span>
                 <span className="text-muted-foreground/40">/</span>
-                <span className="text-slate-600">{rain > 0 ? `${rain.toFixed(rain >= 10 ? 0 : 1)}mm` : "-"}</span>
+                <span className="text-slate-600">{rain > 0 ? cvRain(rain) : "-"}</span>
               </div>
 
               {day.windSpeedMax != null && (

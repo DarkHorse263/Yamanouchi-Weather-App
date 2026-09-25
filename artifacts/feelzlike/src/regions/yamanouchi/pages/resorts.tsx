@@ -177,16 +177,16 @@ export default function Resorts() {
 
                         <div className="grid grid-cols-4 text-center">
                           <div>
-                            <p className="text-base font-black text-snow-accent">{resort.snow24h ?? 0}</p>
-                            <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wide">24h cm</p>
+                             <p className="text-base font-black text-snow-accent">{u.snowVal(resort.snow24h ?? 0)}</p>
+                             <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wide">24h {u.snowUnit}</p>
                           </div>
                           <div>
-                            <p className="text-base font-black text-snow-accent">{resort.baseDepth ?? 0}</p>
-                            <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wide">Base cm</p>
+                             <p className="text-base font-black text-snow-accent">{u.snowVal(resort.baseDepth ?? 0)}</p>
+                             <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wide">Base {u.snowUnit}</p>
                           </div>
                           <div>
-                            <p className="text-base font-black text-slate-700">{resort.temp ?? '-'}°</p>
-                            <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wide">Temp °C</p>
+                             <p className="text-base font-black text-slate-700">{resort.temp != null ? u.temp(resort.temp) : '-'}</p>
+                             <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wide">Temp {u.tempUnit}</p>
                           </div>
                           <div>
                             <p className="text-base font-black text-slate-500">{resort.wind != null ? u.wind(resort.wind) : '-'}</p>
@@ -207,7 +207,7 @@ export default function Resorts() {
                               <CalendarDays className="w-3 h-3" />
                               <span className="text-xs font-bold">{t("Tomorrow", "明日")}</span>
                             </div>
-                            <span className="text-xs font-black text-snow-accent">+{resort.snowTomorrow} cm</span>
+                             <span className="text-xs font-black text-snow-accent">+{u.snow(resort.snowTomorrow)}</span>
                           </div>
                         )}
 

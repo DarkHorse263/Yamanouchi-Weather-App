@@ -24,6 +24,27 @@ export function midMountainElevation(summitM: number, explicitMidM?: number): nu
   return Math.max(lower + 50, summit - midDrop);
 }
 
+/** Prefer a real base/summit midpoint. Base-only and pin-only sites must never be
+ * shifted below the elevation we know; elevationM must not be assumed a summit. */
+export function snowForecastElevation(
+  baseM?: number | null,
+  summitM?: number | null,
+  pinM?: number | null,
+  explicitMidM?: number | null,
+): number | undefined {
+  const valid = (height?: number | null): height is number =>
+    typeof height === "number" && Number.isFinite(height) && height > 0;
+  const base = valid(baseM) ? Math.round(baseM) : undefined;
+  const summit = valid(summitM) ? Math.round(summitM) : undefined;
+  if (summit != null) {
+    if (valid(explicitMidM) && (!base || explicitMidM >= base) && explicitMidM <= summit)
+      return Math.round(explicitMidM);
+    if (base != null && summit > base) return Math.round(base + (summit - base) / 2);
+    return Math.max(base ?? 0, midMountainElevation(summit));
+  }
+  return base ?? (valid(pinM) ? Math.round(pinM) : undefined);
+}
+
 /**
  * Base-area (lower band) elevation for a resort, in metres. Mirrors the
  * `lower` band in the api-server's `bandElevations()` exactly — the stand-in

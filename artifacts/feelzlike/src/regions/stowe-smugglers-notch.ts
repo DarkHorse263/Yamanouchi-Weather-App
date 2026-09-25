@@ -61,9 +61,11 @@ export const stoweSmugglersNotchRegion: RegionConfig = {
       // using the lower-bound estimate, flagged rather than guessed at the
       // higher figure. Summit (Mt. Mansfield) is unambiguous.
       elevationM: 408,
+      skiBaseElevationM: 408,
+      summitElevationM: 1340,
       lat: 44.5303,
       lng: -72.7883,
-      blurb: "Epic Pass · Vail's Northeast group with Mount Snow and Okemo · Vermont's highest peak (Mt. Mansfield, 4,395 ft) · confirmed 2025-26 season (opened Nov 21 2025, closed Apr 25 2026) · ⚠️ base elevation has conflicting figures across sources (1,340-2,035 ft), shown here as an approximate lower-bound estimate",
+      blurb: "Epic Pass · Vail's Northeast group with Mount Snow and Okemo · near Mt. Mansfield, Vermont's highest peak (4,395 ft). Check the resort for current season dates.",
       websiteUrl: "https://www.stowe.com/",
       snowReportUrl: "https://www.stowe.com/the-mountain/mountain-report.aspx",
       expert_only: false,
@@ -76,11 +78,13 @@ export const stoweSmugglersNotchRegion: RegionConfig = {
       id: "smugglers-notch",
       name: "Smugglers' Notch",
       elevationM: 314,
+      skiBaseElevationM: 314,
+      summitElevationM: 1109,
       lat: 44.5991,
       lng: -72.7864,
       // ⚠️ Mid-acquisition honesty gate: see region-file header comment
       // above. Reflects 2025-26 status only.
-      blurb: "Independent for the 2025-26 season · acquired by new ownership (Bear Den Partners) in February 2026, with a joint pass alongside Burke Mountain planned to start the 2026-27 season — not yet in effect this season · 2025-26 closing date not confirmed by the resort · family-oriented, known for not having snowmaking-dependent grooming culture like larger resorts",
+      blurb: "Family-oriented Vermont ski area with a distinctively laid-back mountain atmosphere. Check the resort for current passes and season dates.",
       websiteUrl: "https://www.smuggs.com/",
       beginner_friendly: true,
       kids_lessons: true,

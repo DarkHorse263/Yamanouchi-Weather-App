@@ -56,6 +56,8 @@ export const jayPeakNekRegion: RegionConfig = {
       id: "jay-peak",
       name: "Jay Peak",
       elevationM: 553,
+      skiBaseElevationM: 553,
+      summitElevationM: 1209,
       lat: 44.9241,
       lng: -72.5215,
       blurb: "Indy Pass · Vermont's northernmost major resort, known for the region's highest average natural snowfall · very late/approximate 2025-26 closing (among the last 6 New England areas still open per an Apr 20 2026 report) · opened Nov 22-23 2025, full operations from Nov 29",
@@ -73,6 +75,8 @@ export const jayPeakNekRegion: RegionConfig = {
       // lower-bound estimate, flagged rather than guessed at the higher
       // figure.
       elevationM: 369,
+      skiBaseElevationM: 369,
+      summitElevationM: 996,
       lat: 44.5876,
       lng: -71.9106,
       // ⚠️ Acquisition/pass status honesty gate — see region-file header

@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { X, BellRing, ArrowUpRight } from "lucide-react";
 import { useLanguage, useRegion } from "@workspace/feelzlike-shell";
 import { track } from "@/lib/analytics";
+import { useConsent } from "@/lib/consent";
 import { shouldCountImpression, IMPRESSION_MIN_RATIO } from "@/lib/promoImpression";
 import { pingAlertFunnel } from "@/lib/engagement";
 
@@ -74,7 +75,29 @@ export function AlertPromoBanner() {
   const { t } = useLanguage();
   const { region } = useRegion();
   const [dismissed, setDismissed] = useState(readDismissed);
-  const visible = !dismissed;
+  const { hasDecided } = useConsent();
+  const [installOpen, setInstallOpen] = useState(() =>
+    typeof document !== "undefined" && document.documentElement.dataset.installPromptOpen === "true",
+  );
+  // On mobile the install card owns this visit's attention. Don't show
+  // the powder prompt until a later page visit, and never while install or
+  // cookie consent is visible (including when storage is blocked).
+  const [laterVisit] = useState(() => {
+    try {
+      if (sessionStorage.getItem("feelzlike:alert-promo-visited") === "1") return true;
+      sessionStorage.setItem("feelzlike:alert-promo-visited", "1");
+    } catch {
+      return false;
+    }
+    return false;
+  });
+  useEffect(() => {
+    const update = () => setInstallOpen(document.documentElement.dataset.installPromptOpen === "true");
+    update();
+    window.addEventListener("feelzlike:install-prompt-change", update);
+    return () => window.removeEventListener("feelzlike:install-prompt-change", update);
+  }, []);
+  const visible = !dismissed && hasDecided && laterVisit && !installOpen;
 
   // Impression event · fired once per page view, but only when the banner
   // actually scrolls INTO VIEW (>=half visible). It used to fire on mount,

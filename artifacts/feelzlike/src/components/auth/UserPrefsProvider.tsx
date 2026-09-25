@@ -2,11 +2,13 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
 } from "react";
 import { useGetAccount } from "@workspace/api-client-react";
+import { useLocation } from "wouter";
 import { useAuthAccount } from "./AuthAccountContext";
 import {
   tempRounded,
@@ -18,18 +20,18 @@ import {
   elevationUnitLabel,
   windRounded,
   elevationRounded,
+  formatRain,
+  formatDistanceKm,
   type UnitsPref,
 } from "@/lib/unitsFormat";
-import { LOCAL_UNITS_KEY, readLocalUnits } from "./userPrefsStorage";
+import { LOCAL_UNITS_KEY, readStoredLocalUnits, localeDefaultUnits, effectiveUnits } from "./userPrefsStorage";
 
 /**
  * App-wide access to the signed-in member's saved preferences
  * (users.homeRegionId + users.units, edited on /account).
  *
- * - Anonymous visitors: the account query never fires (enabled gate) and
- *   units follow a lightweight LOCAL preference (localStorage) editable via
- *   the footer toggle · no account needed. Once signed in, the saved account
- *   preference always wins over the local toggle.
+ * - An explicitly saved account choice wins. Legacy implicit metric defaults
+ *   do not overwrite an explicit local choice or the viewed region's default.
  * - Query key is shared with the /account page ("account"), so a profile
  *   save there invalidates/refreshes here and the whole app flips at once.
  * - Components may call useUserPrefs()/useUnits() WITHOUT a provider (e.g.
@@ -52,9 +54,9 @@ export function useUserPrefs(): UserPrefs {
 interface UnitsControl {
   /** effective units currently in force (account wins over local) */
   units: UnitsPref;
-  /** true when the value comes from the signed-in account preference */
+  /** true when a known explicit account preference wins */
   fromAccount: boolean;
-  /** set the LOCAL (anonymous) preference · no-op display-wise while signed in */
+  /** set the LOCAL preference · no-op display-wise with an explicit account choice */
   setLocalUnits: (u: UnitsPref) => void;
 }
 
@@ -91,12 +93,27 @@ export function useUnits() {
       wind: (kmh: number | null | undefined) => windRounded(kmh, units),
       /** rounded converted elevation/height (m canonical) · null-safe */
       elev: (m: number | null | undefined) => elevationRounded(m, units),
+      rain: (mm: number | null | undefined) => formatRain(mm, units),
+      distanceKm: (km: number | null | undefined) => formatDistanceKm(km, units),
     }),
     [units],
   );
 }
 
 export function UserPrefsProvider({ children }: { children: ReactNode }) {
+  const [location] = useLocation();
+  const path = location.split("/").filter(Boolean)[0];
+  const [regionCountry, setRegionCountry] = useState<{ path: string; country: string | undefined }>();
+  useEffect(() => {
+    if (!path) return;
+    let active = true;
+    // Avoid importing the image-heavy region catalogue from the units hook:
+    // weather components also render server-side in isolation for tests.
+    void import("@/regions").then(({ REGION_COUNTRY }) => {
+      if (active) setRegionCountry({ path, country: REGION_COUNTRY[path] });
+    });
+    return () => { active = false; };
+  }, [path]);
   const { isAuthenticated } = useAuthAccount();
   const query = useGetAccount({
     query: {
@@ -109,7 +126,7 @@ export function UserPrefsProvider({ children }: { children: ReactNode }) {
   const profile = isAuthenticated ? (query.data?.profile ?? null) : null;
 
   // Local (anonymous) preference · persisted so the choice survives reloads.
-  const [localUnits, setLocalUnitsState] = useState<UnitsPref>(readLocalUnits);
+  const [localUnits, setLocalUnitsState] = useState<UnitsPref | null>(readStoredLocalUnits);
   const setLocalUnits = useCallback((u: UnitsPref) => {
     setLocalUnitsState(u);
     try {
@@ -119,13 +136,14 @@ export function UserPrefsProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  // Account preference wins once signed in; local toggle drives anonymous.
-  const accountUnits: UnitsPref | null = profile
-    ? profile.units === "imperial"
-      ? "imperial"
-      : "metric"
+  const accountUnits = profile
+    ? { units: profile.units === "imperial" ? "imperial" as const : "metric" as const, unitsExplicit: profile.unitsExplicit }
     : null;
-  const units: UnitsPref = accountUnits ?? localUnits;
+  // A region changes the INITIAL default only. An explicit choice follows
+  // the visitor from one ski region to the next (and survives reloads).
+  const routeCountry = ({ us: "US", au: "AU", nz: "NZ", jp: "JP", at: "AT" } as Record<string, string>)[path] ?? (regionCountry?.path === path ? regionCountry.country : undefined);
+  const units: UnitsPref = effectiveUnits(accountUnits, localUnits, routeCountry, localeDefaultUnits());
+  const fromAccount = accountUnits != null && (accountUnits.unitsExplicit || accountUnits.units === "imperial");
 
   const value = useMemo<UserPrefs>(
     () => ({
@@ -136,8 +154,8 @@ export function UserPrefsProvider({ children }: { children: ReactNode }) {
   );
 
   const control = useMemo<UnitsControl>(
-    () => ({ units, fromAccount: accountUnits !== null, setLocalUnits }),
-    [units, accountUnits, setLocalUnits],
+    () => ({ units, fromAccount: !!fromAccount, setLocalUnits }),
+    [units, fromAccount, setLocalUnits],
   );
 
   return (

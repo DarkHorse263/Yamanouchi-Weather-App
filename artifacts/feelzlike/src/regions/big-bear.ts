@@ -50,6 +50,8 @@ export const bigBearRegion: RegionConfig = {
       id: "bear-mountain",
       name: "Bear Mountain",
       elevationM: 2176,
+      skiBaseElevationM: 2176,
+      summitElevationM: 2685,
       lat: 34.2267,
       lng: -116.8602,
       // Closing-date conflict noted in blurb per the honesty-gate list —
@@ -64,6 +66,8 @@ export const bigBearRegion: RegionConfig = {
       id: "snow-summit",
       name: "Snow Summit",
       elevationM: 2134,
+      skiBaseElevationM: 2134,
+      summitElevationM: 2500,
       lat: 34.2286,
       lng: -116.8911,
       // Closing-date conflict — skiresort.info says April 6 2026, the

@@ -14,6 +14,8 @@ import {
   elevationRounded,
   windUnitLabel,
   elevationUnitLabel,
+  formatRain,
+  formatDistanceKm,
 } from "../unitsFormat.js";
 
 test("cToF converts correctly", () => {
@@ -58,6 +60,13 @@ test("unit labels", () => {
   assert.equal(windUnitLabel("imperial"), "mph");
   assert.equal(elevationUnitLabel("metric"), "m");
   assert.equal(elevationUnitLabel("imperial"), "ft");
+});
+
+test("liquid rain and visibility use inches and miles for imperial users", () => {
+  assert.equal(formatRain(25.4, "imperial"), "1.00 in");
+  assert.equal(formatRain(25.4, "metric"), "25.4 mm");
+  assert.equal(formatDistanceKm(1.609344, "imperial"), "1.0 mi");
+  assert.equal(formatDistanceKm(1.609344, "metric"), "1.6 km");
 });
 
 test("kmhToMph converts correctly", () => {

@@ -3,7 +3,8 @@ import { useRegion } from "@workspace/feelzlike-shell";
 import { useGetLocationWeather, useGetLocationWebcams, useGetLocationLiftStatus, useGetResortSnowReport } from "@workspace/api-client-react";
 import { MountainSnapshot } from "@workspace/feelzlike-dashboard";
 import { ElevationBands } from "@/components/weather/ElevationBands";
-import { midMountainElevation, resolveVillageElevation } from "@/lib/elevation";
+import { CachedForecastNotice } from "@/components/weather/WeatherSections";
+import { snowForecastElevation, resolveVillageElevation } from "@/lib/elevation";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { OfficialSiteLink } from "@/components/OfficialSiteLink";
@@ -155,9 +156,9 @@ export default function LocationDetail() {
   // Summit lives in the region config; everything else (temp, feels-like,
   // current conditions) stays at the village.
   const mountain = region.mountains?.find((m) => m.id === locationId);
-  const summitElevationM = mountain?.elevationM;
+  const summitElevationM = mountain?.summitElevationM;
   const mountainWebsiteUrl = mountain?.websiteUrl;
-  const snowElevationM = summitElevationM != null ? midMountainElevation(summitElevationM) : undefined;
+  const snowElevationM = snowForecastElevation(mountain?.skiBaseElevationM ?? mountain?.baseElevationM, summitElevationM, mountain?.elevationM);
 
   const { data: weatherData, isLoading: weatherLoading, error: weatherError, refetch: weatherRefetch } = useGetLocationWeather(
     locationId,
@@ -253,6 +254,12 @@ export default function LocationDetail() {
     );
 
   const { location, current, daily, hourly } = weatherData;
+  const weatherCacheMeta = weatherData as typeof weatherData & {
+    stale?: boolean;
+    staleAgeSeconds?: number;
+  };
+  const isCachedForecast = weatherCacheMeta.stale === true;
+  const staleAgeSeconds = weatherCacheMeta.staleAgeSeconds;
   const mountainCfg = region.mountains?.find((m) => m.id === locationId);
   const seoBaseTown =
     region.baseTowns?.find((bt) => bt.nearbyMountainIds?.includes(locationId)) ??
@@ -299,15 +306,15 @@ export default function LocationDetail() {
     ...(snow24h != null ? [{ label: "Snow next 24h", value: u.snow(snow24h, 1), icon: CloudSnow, hint: snowNext24SoWhat(snow24h)?.en ?? null }] : []),
     ...(current.dewpoint !== undefined ? [{ label: "Dew point", value: `${u.temp(current.dewpoint)}${u.tempUnit}`, icon: Droplets }] : []),
     ...(current.pressure !== undefined ? [{ label: "Pressure", value: `${current.pressure} hPa`, icon: Gauge }] : []),
-    ...(current.rainSince9am !== undefined ? [{ label: "Rain since 9am", value: `${current.rainSince9am} mm`, icon: CloudRain }] : []),
-    ...(current.visibility && current.visibility !== 10000 ? [{ label: "Visibility", value: `${(current.visibility / 1000).toFixed(0)} km`, icon: Eye }] : []),
+    ...(current.rainSince9am !== undefined ? [{ label: "Rain since 9am", value: u.rain(current.rainSince9am), icon: CloudRain }] : []),
+    ...(current.visibility && current.visibility !== 10000 ? [{ label: "Visibility", value: u.distanceKm(current.visibility / 1000), icon: Eye }] : []),
   ];
 
   return (
     <div className={`min-h-[100dvh] ${isSummer ? "bg-[#059669]" : "bg-[#0055FF]"} pb-8 transition-colors duration-500`}>
       <PageMeta
         title={`${location.name} - snow report, weather & lifts`}
-        description={`Live snow and weather for ${location.name} in ${region.name}: BOM observations, feelzlike temperature, snow depth, wind and webcams.`}
+        description={`${isCachedForecast ? "Cached snow and weather" : "Live snow and weather"} for ${location.name} in ${region.name}: BOM observations, feelzlike temperature, snow depth, wind and webcams.`}
         path={`/${region.id}/mountain/${locationId}`}
         jsonLd={[
           placeSchema({
@@ -329,6 +336,11 @@ export default function LocationDetail() {
           ]),
         ]}
       />
+      {isCachedForecast && (
+        <div className="max-w-7xl mx-auto px-5 md:px-10">
+          <CachedForecastNotice ageSeconds={staleAgeSeconds} t={(en) => en} />
+        </div>
+      )}
       {/* ─── Aurora fintech hero ────────────────── */}
       <section className="relative overflow-hidden isolate">
         {/* Aurora backdrop */}
@@ -375,11 +387,14 @@ export default function LocationDetail() {
             className="flex flex-wrap items-center gap-x-3 gap-y-1.5"
           >
             <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-white/10 text-white border border-white/20">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              </span>
+              {!isCachedForecast && (
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                </span>
+              )}
               {(() => {
+                if (isCachedForecast) return "Cached";
                 if (current.dataSource !== "BOM") return "Live";
                 const raw = current.bomStation?.trim();
                 // Treat empty / placeholder values as "no station name" rather
@@ -396,7 +411,8 @@ export default function LocationDetail() {
             {mountainWebsiteUrl && (
               <OfficialSiteLink
                 url={mountainWebsiteUrl}
-                className="text-[11px] text-white/70 hover:text-white"
+                onDark
+                className="text-[11px]"
               />
             )}
             {observedTime && (
@@ -652,6 +668,7 @@ export default function LocationDetail() {
             tempC={current.temperature}
             humidity={current.humidity}
             hourly={hourly}
+            utcOffsetSeconds={(weatherData as any).utcOffsetSeconds ?? 0}
           />
         )}
 
@@ -726,7 +743,7 @@ export default function LocationDetail() {
                           <div
                             className="w-3 rounded-t-sm bg-snow-accent/80"
                             style={{ height: `${snow > 0 ? Math.max(8, snowH) : 0}%` }}
-                            title={`${snow.toFixed(1)} cm snow`}
+                            title={`${u.snow(snow, 1)} snow`}
                           />
                           <Snowflake className="w-3 h-3 text-snow-accent/80 mt-1" />
                         </div>
@@ -734,15 +751,15 @@ export default function LocationDetail() {
                           <div
                             className="w-3 rounded-t-sm bg-blue-500/60"
                             style={{ height: `${rain > 0 ? Math.max(8, rainH) : 0}%` }}
-                            title={`${rain.toFixed(1)} mm rain`}
+                            title={`${u.rain(rain)} rain`}
                           />
                           <CloudRain className="w-3 h-3 text-blue-500/70 mt-1" />
                         </div>
                       </div>
                       <div className="flex items-center gap-1.5 text-xs tabular-nums text-foreground/80 mt-1">
-                        <span className="font-medium text-snow-accent">{snow > 0 ? `${snow.toFixed(snow >= 10 ? 0 : 1)}cm` : "-"}</span>
+                        <span className="font-medium text-snow-accent">{snow > 0 ? u.snow(snow, snow >= 10 ? 0 : 1) : "-"}</span>
                         <span className="text-muted-foreground/50">/</span>
-                        <span className="font-medium text-blue-700">{rain > 0 ? `${rain.toFixed(rain >= 10 ? 0 : 1)}mm` : "-"}</span>
+                        <span className="font-medium text-blue-700">{rain > 0 ? u.rain(rain) : "-"}</span>
                       </div>
 
                       {day.windSpeedMax != null && (
@@ -825,7 +842,7 @@ export default function LocationDetail() {
                     <div className="flex items-center justify-center gap-1 text-xs tabular-nums mt-1.5">
                       <Snowflake className="w-3 h-3 text-snow-accent/80" />
                       <span className="font-medium text-snow-accent">
-                        {snow > 0 ? `${snow.toFixed(snow >= 10 ? 0 : 1)}cm` : "-"}
+                         {snow > 0 ? u.snow(snow, snow >= 10 ? 0 : 1) : "-"}
                       </span>
                     </div>
                   </div>

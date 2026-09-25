@@ -15,6 +15,19 @@ export const cToF = (c: number): number => (c * 9) / 5 + 32;
 export const cmToIn = (cm: number): number => cm / 2.54;
 export const kmhToMph = (kmh: number): number => kmh / 1.609344;
 export const mToFt = (m: number): number => m * 3.28084;
+export const mmToIn = (mm: number): number => mm / 25.4;
+export const kmToMi = (km: number): number => km / 1.609344;
+
+/** Liquid precipitation is millimetres in the API, inches in imperial UI. */
+export function formatRain(mm: number | null | undefined, units: UnitsPref): string {
+  if (mm == null) return "-";
+  return units === "imperial" ? `${mmToIn(mm).toFixed(2)} in` : `${mm.toFixed(1)} mm`;
+}
+
+export function formatDistanceKm(km: number | null | undefined, units: UnitsPref): string {
+  if (km == null) return "-";
+  return units === "imperial" ? `${kmToMi(km).toFixed(1)} mi` : `${km.toFixed(1)} km`;
+}
 
 export function tempUnitLabel(units: UnitsPref): "°C" | "°F" {
   return units === "imperial" ? "°F" : "°C";

@@ -47,6 +47,8 @@ export const madRiverValleyRegion: RegionConfig = {
       id: "sugarbush",
       name: "Sugarbush",
       elevationM: 480,
+      skiBaseElevationM: 480,
+      summitElevationM: 1244,
       lat: 44.1358,
       lng: -72.9204,
       blurb: "Mountain Collective Pass · two connected peaks (Lincoln Peak 3,975 ft, Mt. Ellen 4,083 ft) with a 2,600 ft vertical drop · 2025-26 closing date not confirmed by the resort at time of writing (opening Nov 22 2025 at Lincoln Peak)",
@@ -62,6 +64,8 @@ export const madRiverValleyRegion: RegionConfig = {
       id: "mad-river-glen",
       name: "Mad River Glen",
       elevationM: 488,
+      skiBaseElevationM: 488,
+      summitElevationM: 1109,
       lat: 44.2001,
       lng: -72.9192,
       // ⚠️ Ski-only honesty gate — see region-file header comment above.

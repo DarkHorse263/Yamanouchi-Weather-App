@@ -27,10 +27,14 @@ export interface MountainLink {
   id: string;
   name: string;
   nameJa?: string;
-  /** Optional summit / upper-mountain elevation for card display and forecast bands */
+  /** Legacy display/map elevation; may be a base or a pin, NOT necessarily a summit. Never use for snow forecast derivation. */
   elevationM?: number;
-  /** Optional real resort village / base-area elevation */
+  /** Provenance-verified village/lower-resort elevation, guarded by the verified village inventory for authored regions. */
   baseElevationM?: number;
+  /** Ski-area lower forecast height, carried from the authored map/base record; NOT a verified village altitude. */
+  skiBaseElevationM?: number;
+  /** Verified upper resort elevation. Do not infer this from elevationM or a map pin. */
+  summitElevationM?: number;
   /**
    * Explicit forecast-band elevations for the rare resort whose published
    * lower/upper elevations and product-selected midpoint should not use the

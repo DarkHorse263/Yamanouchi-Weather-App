@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Snowflake } from "lucide-react";
 import { format, parseISO } from "date-fns";
 import { cn } from "@/lib/utils";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 import {
   getSnowmakingCapability,
   wetBulbC,
@@ -22,6 +23,7 @@ interface SnowmakingPanelProps {
   tempC: number | null | undefined;
   humidity: number | null | undefined;
   hourly?: SnowmakingHour[] | null;
+  utcOffsetSeconds?: number;
 }
 
 /**
@@ -31,13 +33,14 @@ interface SnowmakingPanelProps {
  * Renders null for any location without curated capability data, so it is
  * safe to mount unconditionally on the resort page.
  */
-export function SnowmakingPanel({ locationId, tempC, humidity, hourly }: SnowmakingPanelProps) {
+export function SnowmakingPanel({ locationId, tempC, humidity, hourly, utcOffsetSeconds = 0 }: SnowmakingPanelProps) {
+  const u = useUnits();
   const cap = getSnowmakingCapability(locationId);
   if (!cap) return null;
 
   const nowWb = wetBulbC(tempC, humidity);
   const nowViability = snowmakingViability(nowWb);
-  const win = bestSnowmakingWindow(hourly, 24);
+  const win = bestSnowmakingWindow(hourly, 24, utcOffsetSeconds);
 
   const isAllWeather = cap.type === "all-weather";
   // On an all-weather resort the live window describes the conventional guns
@@ -76,7 +79,7 @@ export function SnowmakingPanel({ locationId, tempC, humidity, hourly }: Snowmak
                 {a.name} · {a.system}
               </p>
               <p className="byline text-slate-700 mt-1 tabular-nums">
-                makes snow up to {a.maxTempC}°
+                makes snow up to {u.temp(a.maxTempC)}{u.tempUnit}
                 {a.outputM3PerDay != null ? ` · ${a.outputM3PerDay} m³ per day` : ""}
               </p>
             </div>
@@ -104,7 +107,7 @@ export function SnowmakingPanel({ locationId, tempC, humidity, hourly }: Snowmak
             </span>
             {nowWb != null && (
               <span className="text-xs text-slate-700 tabular-nums">
-                wet-bulb {nowWb}°
+                wet-bulb {u.temp(nowWb)}{u.tempUnit}
               </span>
             )}
           </div>
@@ -121,7 +124,7 @@ export function SnowmakingPanel({ locationId, tempC, humidity, hourly }: Snowmak
         {win && (
           <p className="text-xs text-slate-700 mt-3 pt-3 border-t border-slate-200 tabular-nums">
             {win.viableHours > 0
-              ? `best window · ${formatHour(win.atISO)} · wet-bulb ${win.wetBulbC}° · ${win.viableHours} of next 24h cold enough`
+              ? `best window · ${formatHour(win.atISO)} · wet-bulb ${u.temp(win.wetBulbC)}${u.tempUnit} · ${win.viableHours} of next 24h cold enough`
               : "too warm to make snow in the next 24 hours"}
           </p>
         )}

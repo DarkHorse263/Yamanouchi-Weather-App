@@ -50,8 +50,16 @@ function weatherPayload(location: NonNullable<ReturnType<typeof resolveWeatherLo
       precipitation: 1,
       cloudCover: 100,
     },
-    daily: [],
-    hourly: [],
+    daily: [{
+      date: "2026-09-24", maxTemp: 0, minTemp: -4, weatherCode: 71,
+      weatherDescription: "Light snow", precipitationSum: 0.3,
+      snowfallSum: 0.1, windSpeedMax: 10,
+    }],
+    hourly: [{
+      time: "2026-09-24T12:00", temperature: -2, weatherCode: 71,
+      weatherDescription: "Light snow", precipitation: 0.1,
+      windSpeed: 10, humidity: 90, feelsLike: -5, cloudCover: 73.5,
+    }],
     lastUpdated: new Date(0).toISOString(),
   };
 }
@@ -369,6 +377,60 @@ test("unfiltered bulk weather includes catalogue locations and is cached, coales
     assert.deepEqual(filteredBody.locations.map((item) => item.location.id), expectedRegionIds);
     assert.equal(calls, WEATHER_LOCATION_IDS.length, "region-filtered read did not share the bulk cache");
   } finally {
+    resetWeatherRuntimeForTests();
+    await new Promise<void>((resolve, reject) => server.close((error) => error ? reject(error) : resolve()));
+  }
+});
+
+test("decimal cloud readings pass validation, and failed refresh serves aged last-good forecast", async () => {
+  resetWeatherRuntimeForTests();
+  const originalNow = Date.now;
+  let now = originalNow();
+  Date.now = () => now;
+  let mode: "good" | "fail" | "empty" = "good";
+  setWeatherFetcherForTests(async (location) => {
+    if (mode === "fail") throw new Error("upstream offline");
+    const payload = weatherPayload(location);
+    payload.current.cloudCover = 73.5;
+    if (mode === "empty") payload.daily = [];
+    return payload;
+  });
+  const server = await startWeatherServer();
+  try {
+    const address = server.address();
+    assert.ok(address && typeof address !== "string");
+    const url = `http://127.0.0.1:${address.port}/weather/thredbo`;
+    const initial = await fetch(url);
+    assert.equal(initial.status, 200);
+    const initialData = await initial.json() as { current: { cloudCover: number }; stale?: boolean };
+    assert.equal(initialData.current.cloudCover, 73.5);
+    assert.notEqual(initialData.stale, true);
+    const jindabyne = await fetch(`http://127.0.0.1:${address.port}/weather/jindabyne`);
+    assert.equal(jindabyne.status, 200);
+    assert.equal((await jindabyne.json() as { current: { cloudCover: number } }).current.cloudCover, 73.5);
+
+    now += 11 * 60_000;
+    mode = "fail";
+    const fallback = await fetch(url);
+    assert.equal(fallback.status, 200);
+    const stale = await fallback.json() as { stale: boolean; staleAgeSeconds: number; current: { cloudCover: number } };
+    assert.equal(stale.stale, true);
+    assert.equal(stale.staleAgeSeconds, 11 * 60);
+    assert.equal(stale.current.cloudCover, 73.5);
+
+    now += 31_000;
+    mode = "empty";
+    const partial = await fetch(url);
+    assert.equal(partial.status, 200);
+    const partialData = await partial.json() as { stale: boolean; daily: unknown[] };
+    assert.equal(partialData.stale, true, "a partial forecast must not replace last-good");
+    assert.equal(partialData.daily.length, 1);
+
+    now += 7 * 60 * 60_000;
+    mode = "fail";
+    assert.equal((await fetch(url)).status, 500, "expired observations cannot be presented as current");
+  } finally {
+    Date.now = originalNow;
     resetWeatherRuntimeForTests();
     await new Promise<void>((resolve, reject) => server.close((error) => error ? reject(error) : resolve()));
   }

@@ -13,6 +13,7 @@ function mountainFor(record: WesternUsPublishedRecord): MountainLink {
     name: record.name,
     elevationM: record.forecastElevationM,
     baseElevationM: record.baseElevationM,
+    summitElevationM: record.topElevationM,
     lat: record.coordinates.lat,
     lng: record.coordinates.lng,
     websiteUrl: record.officialUrl,

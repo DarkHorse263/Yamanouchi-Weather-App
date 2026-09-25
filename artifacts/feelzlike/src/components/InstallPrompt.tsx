@@ -60,6 +60,15 @@ export function InstallPrompt() {
   const ja = useJapaneseUi();
 
   useEffect(() => {
+    document.documentElement.dataset.installPromptOpen = show ? "true" : "false";
+    window.dispatchEvent(new Event("feelzlike:install-prompt-change"));
+    return () => {
+      document.documentElement.dataset.installPromptOpen = "false";
+      window.dispatchEvent(new Event("feelzlike:install-prompt-change"));
+    };
+  }, [show]);
+
+  useEffect(() => {
     // Wait until the consent banner is out of the way so the two
     // bottom-anchored prompts never stack on a first visit.
     if (!hasDecided) return;

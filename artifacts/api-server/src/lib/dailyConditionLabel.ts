@@ -13,7 +13,8 @@
  * the label says so ("Rain · snow" / "Snow · rain") — rain on snow is the
  * single most important warning for skiers and must never be hidden behind
  * an optimistic snow label. Days without meaningful snow keep the code-based
- * fallback description.
+ * fallback description, except that measurable trace snow must never inherit
+ * a moderate/heavy snowfall label from a momentary WMO code.
  *
  * Water-equivalent conversion mirrors the client's dailyRainMm(): Open-Meteo
  * derives snowfall at ~0.7cm per 1mm of water, so snowCm / 0.7 = water mm.
@@ -35,6 +36,8 @@ export function dailyConditionLabel(opts: {
     // snow) can still carry a snow moment-code. Don't let "Slight snow"
     // headline a rain day.
     if (rain != null && rain >= 2 && opts.code != null && SNOW_CODES.has(opts.code)) return "Rain";
+    if (snow > 0 && opts.code != null && SNOW_CODES.has(opts.code)) return "Light snow";
+    if (snow === 0 && opts.code != null && SNOW_CODES.has(opts.code)) return rain != null && rain > 0 ? "Rain" : "Cloudy";
     return opts.fallback;
   }
   const snowWaterMm = snow / 0.7;

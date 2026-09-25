@@ -22,6 +22,8 @@ import {
 } from "@workspace/api-client-react";
 import type { AccountResponse } from "@workspace/api-client-react";
 import { useAuthAccount } from "@/components/auth/SignUpProvider";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
+import { profileUpdateInput } from "@/components/auth/userPrefsStorage";
 import { ALERT_REGIONS } from "@/lib/alertRegions";
 import { RegionCountryPicker } from "@/components/RegionCountryPicker";
 import { CatalogueMountainPicker } from "@/components/CatalogueMountainPicker";
@@ -156,6 +158,7 @@ function DeletedCard({ pending }: { pending: boolean }) {
 }
 
 function SignedInAccount({ onDeleted }: { onDeleted: (pending?: boolean) => void }) {
+  const activeUnits = useUnits().units;
   const { data, isLoading, isError, refetch } = useGetAccount({
     query: { queryKey: ["account"], retry: 1 },
   });
@@ -198,7 +201,7 @@ function SignedInAccount({ onDeleted }: { onDeleted: (pending?: boolean) => void
 
       <ProfileCard
         initialHomeRegionId={data.profile.homeRegionId}
-        initialUnits={data.profile.units === "imperial" ? "imperial" : "metric"}
+        initialUnits={activeUnits}
       />
       <BillingControls />
 
@@ -324,15 +327,22 @@ function ProfileCard({
 }) {
   const [homeRegionId, setHomeRegionId] = useState<string>(initialHomeRegionId ?? "");
   const [units, setUnits] = useState<"metric" | "imperial">(initialUnits);
+  const [unitsTouched, setUnitsTouched] = useState(false);
   const [savedAt, setSavedAt] = useState<number | null>(null);
   const update = useUpdateAccountProfile();
   const queryClient = useQueryClient();
 
-  const dirty = (homeRegionId || null) !== initialHomeRegionId || units !== initialUnits || savedAt !== null;
+  const dirty = (homeRegionId || null) !== initialHomeRegionId || unitsTouched || savedAt !== null;
 
   const handleSave = async () => {
     try {
-      await update.mutateAsync({ data: { homeRegionId: homeRegionId || null, units } });
+      const response = await update.mutateAsync({
+        data: profileUpdateInput(homeRegionId, units, unitsTouched),
+      });
+      queryClient.setQueryData<AccountResponse>(["account"], (previous) =>
+        previous ? { ...previous, profile: response.profile } : previous,
+      );
+      setUnitsTouched(false);
       setSavedAt(Date.now());
       // The app-wide UserPrefsProvider shares the "account" query · refresh it
       // so units / home region flip everywhere immediately, not on next load.
@@ -375,7 +385,7 @@ function ProfileCard({
             <button
               key={u}
               type="button"
-              onClick={() => setUnits(u)}
+              onClick={() => { setUnits(u); setUnitsTouched(true); }}
               aria-pressed={units === u}
               className={`rounded-lg px-2 py-2 text-xs font-bold border transition ${
                 units === u
@@ -418,6 +428,7 @@ function ProfileCard({
 type Subscription = AccountResponse["subscription"];
 
 function AlertsCard({ subscription, onChanged }: { subscription: Subscription; onChanged: () => void }) {
+  const u = useUnits();
   const update = useUpdateAccountAlerts();
   const sub = subscription && typeof subscription === "object" ? subscription : null;
 
@@ -510,7 +521,7 @@ function AlertsCard({ subscription, onChanged }: { subscription: Subscription; o
       <div>
         <div className="flex items-center justify-between mb-1.5">
           <p className="text-sm font-bold text-foreground">snowfall threshold</p>
-          <span className="text-sm font-black text-primary tabular-nums">{threshold} cm</span>
+          <span className="text-sm font-black text-primary tabular-nums">{u.snow(threshold)}</span>
         </div>
         <input
           type="range"

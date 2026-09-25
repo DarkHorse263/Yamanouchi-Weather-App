@@ -51,7 +51,7 @@ export const angelFireRegion: RegionConfig = {
       elevationM: 3254,
       lat: 36.3929,
       lng: -105.2853,
-      blurb: "Powder Alliance (3 reciprocal winter lift tickets) · own Winter Season Pass · base 8,600 ft / summit 10,677 ft / 2,077 ft vertical · New Mexico's only night skiing · confirmed season Dec 12 2025 - Mar 22 2026 · ⚠️ a secondary source claims Indy Pass affiliation too, unconfirmed on Indy Pass's own directory.",
+      blurb: "Powder Alliance (3 reciprocal winter lift tickets) · own Winter Season Pass · base 8,600 ft / summit 10,677 ft / 2,077 ft vertical · New Mexico's only night skiing. Check the resort for current pass benefits and operating dates.",
       websiteUrl: "https://www.angelfireresort.com/",
       snowReportUrl: "https://www.angelfireresort.com/weather/",
       terrain_park: true,

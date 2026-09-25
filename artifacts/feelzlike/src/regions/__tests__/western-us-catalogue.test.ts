@@ -4,6 +4,7 @@ import type { RegionConfig } from "@workspace/feelzlike-shell";
 import type { WesternUsPublishedRecord, WesternUsRegion } from "@workspace/western-us-ski-catalogue/public-runtime";
 import { mergeWesternUsCatalogueRegions } from "../western-us-catalogue";
 import { catalogueTownLandingModel, isCatalogueMountainLinkTown } from "../catalogue";
+import { snowForecastElevation } from "../../lib/elevation";
 
 const authored: RegionConfig = {
   id: "jackson-hole",
@@ -35,6 +36,7 @@ const published: WesternUsPublishedRecord = {
   name: "Fixture Mountain",
   coordinates: { lat: 43.5, lng: -110.8 },
   forecastElevationM: 2000,
+  baseElevationM: 2000,
   topElevationM: 2500,
   officialUrl: "https://example.com",
   stateCode: "WY",
@@ -106,6 +108,10 @@ test("generated Western catalogue towns are mountain-link landings, not town wea
     route: "/fixture-west/mountain/fixture-mountain",
   };
   const [region] = mergeWesternUsCatalogueRegions([], [generatedRecord], [generatedMetadata]);
+  const [mountain] = region.mountains ?? [];
+  assert.equal(mountain.baseElevationM, generatedRecord.baseElevationM);
+  assert.equal(mountain.summitElevationM, generatedRecord.topElevationM);
+  assert.equal(snowForecastElevation(mountain.baseElevationM, mountain.summitElevationM, mountain.elevationM), 2250);
   const town = region.baseTowns?.[0];
   assert.ok(town);
   assert.equal(isCatalogueMountainLinkTown(town), true);

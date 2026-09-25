@@ -254,7 +254,7 @@ export function HourlyForecast({
                 <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/70">
                   {tx("Skiable now", "今の滑走可否")}
                 </p>
-                <SkiableNowChip read={skiRead} t={tx} />
+                <SkiableNowChip read={skiRead} t={tx} snow={u.snow} />
               </div>
             )}
             {windows.length > 0 && (
@@ -360,6 +360,7 @@ const SKIABLE_NOW_TONES = {
 function skiableNowDisplay(
   read: SkiableNowRead,
   t: Tx,
+  snow: (cm: number) => string,
 ): { Icon: typeof Info; label: string; tone: string } {
   switch (read.kind) {
     case "off_season":
@@ -401,17 +402,17 @@ function skiableNowDisplay(
             label:
               read.baseSource === "reported"
                 ? t(
-                    `Base ${Math.round(read.baseCm)}cm · resort reported`,
-                    `積雪 ${Math.round(read.baseCm)}cm · リゾート報告`,
+                    `Base ${snow(read.baseCm)} · resort reported`,
+                    `積雪 ${snow(read.baseCm)} · リゾート報告`,
                   )
                 : read.baseSource === "course"
                   ? t(
-                      `Base ${Math.round(read.baseCm)}cm · independently measured`,
-                      `積雪 ${Math.round(read.baseCm)}cm · 公式観測`,
+                       `Base ${snow(read.baseCm)} · independently measured`,
+                       `積雪 ${snow(read.baseCm)} · 公式観測`,
                     )
                   : t(
-                      `Base ~${Math.round(read.baseCm)}cm · check resort`,
-                      `積雪 約${Math.round(read.baseCm)}cm · 要確認`,
+                       `Base ~${snow(read.baseCm)} · check resort`,
+                       `積雪 約${snow(read.baseCm)} · 要確認`,
                     ),
             tone: SKIABLE_NOW_TONES.sky,
           }
@@ -428,8 +429,8 @@ function skiableNowDisplay(
  * distinct from the powder-window badges so incoming snow is never mistaken for
  * a skiable mountain.
  */
-function SkiableNowChip({ read, t }: { read: SkiableNowRead; t: Tx }) {
-  const { Icon, label, tone } = skiableNowDisplay(read, t);
+function SkiableNowChip({ read, t, snow }: { read: SkiableNowRead; t: Tx; snow: (cm: number) => string }) {
+  const { Icon, label, tone } = skiableNowDisplay(read, t, snow);
   return (
     <span
       className={cn(

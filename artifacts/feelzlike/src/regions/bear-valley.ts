@@ -47,6 +47,8 @@ export const bearValleyRegion: RegionConfig = {
       id: "bear-valley-mountain-resort",
       name: "Bear Valley Mountain Resort",
       elevationM: 2012,
+      skiBaseElevationM: 2012,
+      summitElevationM: 2591,
       lat: 38.4706,
       lng: -120.0471,
       // Opening-date uncertainty flagged directly in copy — see the

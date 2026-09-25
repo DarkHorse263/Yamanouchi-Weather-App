@@ -38,6 +38,8 @@ export const okemoRegion: RegionConfig = {
       id: "okemo-mountain-resort",
       name: "Okemo Mountain Resort",
       elevationM: 349,
+      skiBaseElevationM: 349,
+      summitElevationM: 1019,
       lat: 43.4009,
       lng: -72.7168,
       blurb: "Epic Pass · Vail's Northeast group with Stowe and Mount Snow · celebrating its 70th season for 2025-26 · confirmed season (opened Nov 22 2025, closed Apr 19 2026)",

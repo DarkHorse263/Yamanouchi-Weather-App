@@ -11,6 +11,7 @@ import {
 } from "@workspace/feelzlike-dashboard";
 import { PremiumGate, useOptionalSeason } from "@workspace/feelzlike-shell";
 import { ElevationBands } from "@/components/weather/ElevationBands";
+import { CachedForecastNotice } from "@/components/weather/WeatherSections";
 import {
   Thermometer,
   Navigation,
@@ -44,7 +45,7 @@ import { isLiftSeasonOpen } from "@/lib/skiSeason";
 import { REGION_COUNTRY } from "@/regions";
 import { getLiftsForMountain } from "@/data/lifts";
 import { ForecastChart } from "@/components/weather/ForecastChart";
-import { midMountainElevation, resolveVillageElevation } from "@/lib/elevation";
+import { snowForecastElevation, resolveVillageElevation } from "@/lib/elevation";
 import { cn } from "@/lib/utils";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
 import MountainConditionsSummary from "@/components/weather/MountainConditionsSummary";
@@ -146,7 +147,7 @@ export default function ResortDetail() {
   const enabled = !!mountain;
   // Headline snow derived on-mountain (mid-mountain), not at the village -
   // temp / feels-like / current conditions stay at the village.
-  const snowElevationM = mountain?.elevationM != null ? midMountainElevation(mountain.elevationM) : undefined;
+  const snowElevationM = snowForecastElevation(mountain?.skiBaseElevationM ?? mountain?.baseElevationM, mountain?.summitElevationM, mountain?.elevationM);
   const { data, isLoading, error } = useGetLocationWeather(
     id as WeatherId,
     snowElevationM != null ? { snowElevationM } : undefined,
@@ -200,6 +201,12 @@ export default function ResortDetail() {
   }
 
   const { location, current, daily, hourly } = data;
+  const weatherCacheMeta = data as typeof data & {
+    stale?: boolean;
+    staleAgeSeconds?: number;
+  };
+  const isCachedForecast = weatherCacheMeta.stale === true;
+  const staleAgeSeconds = weatherCacheMeta.staleAgeSeconds;
   const observedAt = (data as any).lastUpdated as string | undefined;
   const isShigaSubArea = mountain?.parentId === "shiga-kogen";
   const profile: ResortProfile = {
@@ -235,13 +242,13 @@ export default function ResortDetail() {
       ? [{ label: t("Pressure", "気圧"), value: `${Math.round(current.pressure)} hPa`, icon: Gauge }]
       : []),
     ...(current.visibility && current.visibility !== 10000
-      ? [{ label: t("Visibility", "視程"), value: `${(current.visibility / 1000).toFixed(0)} km`, icon: Eye }]
+      ? [{ label: t("Visibility", "視程"), value: u.distanceKm(current.visibility / 1000), icon: Eye }]
       : []),
     ...(current.freezingLevel !== undefined
       ? [{ label: t("Freezing level", "凍結高度"), value: `${u.elev(current.freezingLevel)} ${u.elevUnit}`, icon: Snowflake }]
       : []),
     ...(dailyRainMm(daily?.[0]) != null
-      ? [{ label: t("Today rain", "本日降水"), value: `${dailyRainMm(daily?.[0])!.toFixed(1)} mm`, icon: CloudRain }]
+      ? [{ label: t("Today rain", "本日降水"), value: u.rain(dailyRainMm(daily?.[0])), icon: CloudRain }]
       : []),
   ];
 
@@ -282,7 +289,7 @@ export default function ResortDetail() {
     <div className={canvasClass}>
       <PageMeta
         title={`${location.name} - snow report, weather & lifts`}
-        description={`Live conditions at ${location.name} in ${region.name}: feelzlike temperature, snow depth, wind, a 6-day elevation forecast and lift-hold outlook.`}
+        description={`${isCachedForecast ? "Cached conditions" : "Live conditions"} at ${location.name} in ${region.name}: feelzlike temperature, snow depth, wind, a 6-day elevation forecast and lift-hold outlook.`}
         path={`/${region.id}/mountain/${id}`}
         jsonLd={[
           placeSchema({
@@ -325,7 +332,7 @@ export default function ResortDetail() {
         weatherDescription={current.weatherDescription}
         sourceLabel={`${t("Source", "出典")} · Open-Meteo + JMA models`}
         observedAt={observedAt}
-        scrollCue={t("Live conditions below", "ライブ状況は下へ")}
+        scrollCue={isCachedForecast ? t("Conditions below", "以下に状況を表示") : t("Live conditions below", "ライブ状況は下へ")}
         formatTemp={(c) => u.temp(c) ?? c}
         tempUnitLabel={u.tempUnit}
         formatElevation={(m) => u.elev(m) ?? m}
@@ -333,6 +340,9 @@ export default function ResortDetail() {
       />
 
       <div className="max-w-7xl mx-auto px-5 md:px-10 pb-16 space-y-5 md:space-y-6 -mt-2">
+        {isCachedForecast && (
+          <CachedForecastNotice ageSeconds={staleAgeSeconds} t={t} />
+        )}
         {/* Anonymous units toggle · reaches direct-landing SEO visitors who
             never see the home footer. Hidden for signed-in members. */}
         <div className="flex justify-end -mb-2">
@@ -385,7 +395,7 @@ export default function ResortDetail() {
           freezingLevelM={current.freezingLevel}
           villageElevationM={resolveVillageElevation(
             mountain?.baseElevationM,
-            mountain?.elevationM,
+            mountain?.summitElevationM,
           )}
           midElevationM={snowElevationM}
         />
@@ -435,6 +445,7 @@ export default function ResortDetail() {
               tempUnitLabel={u.tempUnit}
               formatSnowValue={(cm) => u.snowVal(cm, cm >= 10 ? 0 : 1)}
               snowUnitLabel={u.snowUnit}
+              formatRain={(mm) => u.rain(mm)}
               formatWind={(kmh) => u.wind(kmh) ?? kmh}
               windUnitLabel={u.windUnit}
               formatElevation={(m) => u.elev(m) ?? m}
@@ -455,7 +466,7 @@ export default function ResortDetail() {
             <ElevationBands
               lat={mountain.lat}
               lng={mountain.lng}
-              summitElevationM={mountain.elevationM}
+              summitElevationM={mountain.summitElevationM ?? mountain.elevationM}
               name={location.name}
             />
           </PremiumGate>

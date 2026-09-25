@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import type { RegionConfig } from "@workspace/feelzlike-shell";
 import { baseBandElevation, resolveVillageElevation } from "../../lib/elevation";
+import { snowForecastElevation } from "../../lib/elevation";
 import { UNKNOWN_AUTHORED_VILLAGE_ELEVATIONS } from "../authored-village-elevation-unknowns";
 import {
   applyVerifiedVillageElevations,
@@ -44,6 +45,27 @@ test("strict mode rejects a direct base elevation that differs from its source",
       ]),
     ], { strict: true }),
     /park-city\/park-city-mountain \(authored 2099, verified 2100\)/,
+  );
+});
+
+test("ski base remains separate from strictly verified village height at Park City", () => {
+  const [mountain] = applyVerifiedVillageElevations([
+    region("park-city", [{
+      id: "park-city-mountain", name: "Park City", elevationM: 2073,
+      skiBaseElevationM: 2073, summitElevationM: 3056, lat: 40.65, lng: -111.51,
+    }]),
+  ], { strict: true })[0].mountains!;
+  assert.equal(mountain.baseElevationM, 2100, "village sourced from provenance manifest");
+  assert.equal(mountain.skiBaseElevationM, 2073, "authored ski lower height remains distinct");
+  assert.equal(snowForecastElevation(mountain.skiBaseElevationM, mountain.summitElevationM), 2565);
+});
+
+test("an unsourced ski base cannot bypass the verified village inventory", () => {
+  assert.throws(
+    () => applyVerifiedVillageElevations([
+      region("fixture-region", [{ id: "new-mountain", name: "New", skiBaseElevationM: 700, summitElevationM: 1000 }]),
+    ], { strict: true }),
+    /Missing authored village elevations: fixture-region\/new-mountain/,
   );
 });
 

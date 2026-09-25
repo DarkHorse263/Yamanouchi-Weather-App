@@ -10,7 +10,7 @@
  * `error` entry · it never blanks the whole planner or fakes a forecast.
  */
 import { useQueries } from "@tanstack/react-query";
-import { midMountainElevation } from "@/lib/elevation";
+import { snowForecastElevation } from "@/lib/elevation";
 import { mountainKey, type CatalogMountain } from "@/lib/tripPlanner";
 import { tripForecastQuery, type PlannerForecastData } from "./tripForecastData";
 export type { PlannerForecastDay } from "./tripForecastDay";
@@ -30,9 +30,7 @@ export function useTripForecasts(
 ): Record<string, PlannerForecastEntry> {
   const results = useQueries({
     queries: mountains.map((m) => {
-      const elev = m.elevationM != null
-        ? midMountainElevation(m.elevationM, m.elevationBands?.midM)
-        : undefined;
+      const elev = snowForecastElevation(m.skiBaseElevationM ?? m.baseElevationM, m.summitElevationM, m.elevationM, m.elevationBands?.midM);
       const qs = elev != null ? `?elevationM=${elev}` : "";
       const url = `${import.meta.env.BASE_URL}api/forecast/${m.id}${qs}`;
       return {

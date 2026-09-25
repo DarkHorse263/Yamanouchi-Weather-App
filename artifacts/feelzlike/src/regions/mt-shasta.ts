@@ -54,7 +54,7 @@ export const mtShastaRegion: RegionConfig = {
       // rather than guessed; see header comment above.
       lat: 41.3208,
       lng: -122.2036,
-      blurb: "Indy Pass · California's northernmost ski area, on the south flank of Mt. Shasta · 2025-26 season closed early (Mar 2, 2026) due to lack of snow, 5 days short of the resort's 60-day guarantee — base/summit elevation unverified from an authoritative source",
+      blurb: "Indy Pass · California's northernmost ski area, on the south flank of Mt. Shasta. Check the resort for current conditions and season dates.",
       websiteUrl: "https://www.skipark.com/",
       snowReportUrl: "https://www.skipark.com/winter/conditions",
       beginner_friendly: true,

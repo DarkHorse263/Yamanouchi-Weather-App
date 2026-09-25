@@ -72,7 +72,7 @@ test("bestSnowmakingWindow picks the coldest hour and counts viable hours", () =
     { time: "2026-06-24T02:00", temperature: -9, humidity: 80 },  // coldest -> best
     { time: "2026-06-24T10:00", temperature: 8, humidity: 40 },   // too warm
   ];
-  const win = bestSnowmakingWindow(hours, 24);
+  const win = bestSnowmakingWindow(hours, 24, 10 * 3600, Date.parse("2026-06-23T07:00Z"));
   assert.ok(win);
   assert.equal(win!.atISO, "2026-06-24T02:00");
   assert.equal(win!.viability, "good");
@@ -83,25 +83,37 @@ test("bestSnowmakingWindow picks the coldest hour and counts viable hours", () =
 
 test("bestSnowmakingWindow skips hours missing temp or humidity", () => {
   const hours: SnowmakingHour[] = [
-    { time: "a", temperature: null, humidity: 80 },
-    { time: "b", temperature: -7, humidity: null },
-    { time: "c", temperature: -4, humidity: 75 },
+    { time: "2026-06-23T18:00", temperature: null, humidity: 80 },
+    { time: "2026-06-23T19:00", temperature: -7, humidity: null },
+    { time: "2026-06-23T20:00", temperature: -4, humidity: 75 },
   ];
-  const win = bestSnowmakingWindow(hours, 24);
+  const win = bestSnowmakingWindow(hours, 24, 10 * 3600, Date.parse("2026-06-23T07:00Z"));
   assert.ok(win);
   assert.equal(win!.scannedHours, 1);
-  assert.equal(win!.atISO, "c");
+  assert.equal(win!.atISO, "2026-06-23T20:00");
 });
 
 test("bestSnowmakingWindow honours the withinHours limit", () => {
   const hours: SnowmakingHour[] = [
-    { time: "near", temperature: -3, humidity: 70 },
-    { time: "later", temperature: -12, humidity: 85 },
+    { time: "2026-06-23T18:00", temperature: -3, humidity: 70 },
+    { time: "2026-06-23T20:00", temperature: -12, humidity: 85 },
   ];
-  const win = bestSnowmakingWindow(hours, 1);
+  const win = bestSnowmakingWindow(hours, 1, 10 * 3600, Date.parse("2026-06-23T07:50Z"));
   assert.ok(win);
-  assert.equal(win!.atISO, "near");
+  assert.equal(win!.atISO, "2026-06-23T18:00");
   assert.equal(win!.scannedHours, 1);
+});
+
+test("snowmaking window never selects an earlier local hour, including near midnight", () => {
+  const hours: SnowmakingHour[] = [
+    { time: "2026-06-23T05:00", temperature: -16, humidity: 70 },
+    { time: "2026-06-23T10:00", temperature: -4, humidity: 70 },
+    { time: "2026-06-24T01:00", temperature: -7, humidity: 70 },
+  ];
+  // 23 Jun 09:50 AEST; the cold 05:00 hour is over, 01:00 next day is upcoming.
+  const win = bestSnowmakingWindow(hours, 24, 10 * 3600, Date.parse("2026-06-22T23:50Z"));
+  assert.equal(win?.atISO, "2026-06-24T01:00");
+  assert.equal(win?.scannedHours, 2);
 });
 
 test("getSnowmakingCapability returns curated data for AU resorts", () => {

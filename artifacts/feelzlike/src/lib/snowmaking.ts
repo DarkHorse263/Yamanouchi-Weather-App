@@ -99,9 +99,17 @@ export interface SnowmakingWindow {
 export function bestSnowmakingWindow(
   hourly: SnowmakingHour[] | null | undefined,
   withinHours = 24,
+  utcOffsetSeconds = 0,
+  nowMs = Date.now(),
 ): SnowmakingWindow | null {
   if (!Array.isArray(hourly) || hourly.length === 0) return null;
-  const slice = hourly.slice(0, Math.max(1, withinHours));
+  // Open-Meteo's offset-free hourly timestamps are in the resort's local
+  // clock, not the visitor's timezone. Compare in that same clock and never
+  // nominate a past bucket as the "best" upcoming window.
+  const slice = hourly.filter((h) => {
+    const iso = /(?:Z|[+-]\d{2}:\d{2})$/.test(h.time) ? new Date(h.time).getTime() : Date.parse(`${h.time}Z`) - utcOffsetSeconds * 1000;
+    return Number.isFinite(iso) && iso >= nowMs && iso < nowMs + Math.max(1, withinHours) * 3_600_000;
+  });
   let best: { wb: number; at: string } | null = null;
   let viableHours = 0;
   let scannedHours = 0;

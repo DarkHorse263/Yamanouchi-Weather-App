@@ -4,7 +4,17 @@ description: headline snow is computed on-mountain (mid) with a labelled height;
 ---
 
 - Headline snow (snowfallNext24/48/72h) is derived at MID-MOUNTAIN, not the village, because competitors (snowbest / MetraWeather) forecast at mid-mountain and village snow materially understated what riders see. Temp / feels-like / current conditions stay at the village; ONLY the snow windows change elevation.
-- mid = `summit - min(300, round(summit*0.15))`. The frontend `midMountainElevation()` (artifacts/feelzlike/src/lib/elevation.ts) MUST mirror the server `bandElevations().mid` (artifacts/api-server/src/lib/openMeteoElevation.ts) exactly, or the snapshot's labelled height won't line up with the elevation-banded forecast's mid band.
+- A height called "elevation" is NOT necessarily a summit: authored US data often means base, and catalogue map pins mean ground height. Use a known base/summit midpoint; use the bounded summit-offset method only with a verified summit. Never subtract from a base or map pin.
+
+**Why:** treating base heights as summits put snow forecasts below the base lodge across many North American resorts. Elevation semantic identity matters more than matching two similarly named helper functions.
+
+**How to apply:** preserve explicit base/top provenance; unknown bounds stay unknown rather than inferred from a pin. A labelled snow outlook must follow the resolved API elevation, including fallback.
+
+**Provenance boundary:** verified village elevations and ski-area lower forecast heights are separate concepts, even when both are called "base". Do not satisfy a new snow midpoint requirement by assigning lower-mountain heights into the verified village inventory.
+
+**Why:** that inventory validates at registry initialization; conflating the concepts can pass TypeScript/build yet crash every page when the registry executes.
+
+**How to apply:** after changing catalogue elevation semantics, execute the full region registry through Vite SSR as well as unit tests, preserving its provenance validation.
 - `/weather/:id` accepts `snowElevationM` and does a SECOND snowfall-only Open-Meteo fetch at that elevation, then returns `snowfallOutlookElevationM` + `snowfallOutlookLevel` ("mid-mountain" | "village"). Elevation is part of the cache key.
 
 **Fail-soft rule:** if the 2nd fetch fails, fall back to village snow AND relabel the level as "village". Never present village snow as mountain.

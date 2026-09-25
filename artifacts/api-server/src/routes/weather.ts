@@ -546,7 +546,7 @@ const LOCATIONS: LocationConfig[] = [
   // src/regions/south-lake-tahoe.ts for the full honesty-gate note.
   { id: "heavenly",                  name: "Heavenly",                  latitude:  38.9353, longitude: -119.9400, elevation: 3068, description: "Epic Pass · straddles the CA/NV state line · 2025-26 closing date not confirmed by the resort.",                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
   { id: "kirkwood",                  name: "Kirkwood",                  latitude:  38.6840, longitude: -120.0664, elevation: 2987, description: "Epic Pass · one of the highest resort base elevations in the Tahoe region · 2025-26 closing date not confirmed.",       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
-  { id: "sierra-at-tahoe",           name: "Sierra-at-Tahoe",           latitude:  38.8002, longitude: -120.0806, elevation: 2699, description: "⚠️ Officially closed for the 2025/26 season per the resort's own hours-of-operation page — conditions data should be treated as unavailable.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "sierra-at-tahoe",           name: "Sierra-at-Tahoe",           latitude:  38.8002, longitude: -120.0806, elevation: 2699, description: "South Lake Tahoe-area ski resort; check the resort's official report for current operating status and conditions.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
   { id: "homewood-mountain-resort",  name: "Homewood Mountain Resort",  latitude:  39.0827, longitude: -120.1755, elevation: 2401, description: "Independent · West Shore lake views · reopened for 2025-26 after a full 2024-25 closure for redevelopment.",           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
   { id: "south-lake-tahoe-town",     name: "South Lake Tahoe",          latitude:  38.9399, longitude: -119.9772, elevation: 1907, description: "Lakefront city on the California side of the state line, gateway to Heavenly, Kirkwood, Sierra-at-Tahoe and Homewood.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
 
@@ -585,7 +585,7 @@ const LOCATIONS: LocationConfig[] = [
   // 2025-26 pending a Feb 2026 acquisition and a 2026-27 joint pass with
   // Burke Mountain — reflected as current-season-only, no live data
   // fabricated ahead of the pass change.
-  { id: "stowe-mountain-resort",     name: "Stowe Mountain Resort",     latitude:  44.5303, longitude: -72.7883, elevation: 1340, description: "Epic Pass · Vail's Northeast group with Mount Snow and Okemo · Vermont's highest peak (Mt. Mansfield) · confirmed 2025-26 season (opened Nov 21 2025, closed Apr 25 2026) · ⚠️ base elevation has conflicting figures across sources (1,340-2,035 ft).", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
+  { id: "stowe-mountain-resort",     name: "Stowe Mountain Resort",     latitude:  44.5303, longitude: -72.7883, elevation: 1340, description: "Ski area on Mount Mansfield in Vermont's Green Mountains; check the resort for current conditions and operating details.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "smugglers-notch",           name: "Smugglers' Notch",          latitude:  44.5991, longitude: -72.7864, elevation: 1109, description: "Independent for the 2025-26 season · acquired by new ownership (Bear Den Partners) in Feb 2026, with a joint pass alongside Burke Mountain planned for 2026-27 — not yet in effect · 2025-26 closing date not confirmed.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "stowe",                     name: "Stowe",                     latitude:  44.4654, longitude: -72.6874, elevation: 341,  description: "Classic Vermont mountain town along VT-108, the main gateway to Stowe Mountain Resort.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "jeffersonville",            name: "Jeffersonville",            latitude:  44.6511, longitude: -72.8298, elevation: 128,  description: "Small village on VT-108, the closest base town to Smugglers' Notch.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
@@ -593,7 +593,7 @@ const LOCATIONS: LocationConfig[] = [
   // Mad River Valley, VT · Mad River Glen is ski-only for 2025-26 (no
   // snowboarding) — same treatment as Alta/Deer Valley in the Utah pass.
   { id: "sugarbush",                 name: "Sugarbush",                 latitude:  44.1358, longitude: -72.9204, elevation: 1244, description: "Mountain Collective Pass · two connected peaks (Lincoln Peak, Mt. Ellen) with a 2,600 ft vertical drop · 2025-26 closing date not confirmed by the resort.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
-  { id: "mad-river-glen",            name: "Mad River Glen",            latitude:  44.2001, longitude: -72.9192, elevation: 1109, description: "⚠️ Ski-only for 2025-26 — snowboarding is not permitted · independent, co-operatively owned by its skiers · opened Dec 6 2025, closing date ~Apr 12 2026 is approximate/unconfirmed.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
+  { id: "mad-river-glen",            name: "Mad River Glen",            latitude:  44.2001, longitude: -72.9192, elevation: 1109, description: "A skier-owned cooperative in Vermont's Mad River Valley. Check the resort's current mountain information for its policies and operating status.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "warren",                    name: "Warren",                    latitude:  44.1195, longitude: -72.8626, elevation: 384,  description: "Small village along VT-100, the closest base town to Sugarbush.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "waitsfield",                name: "Waitsfield",                latitude:  44.1975, longitude: -72.8090, elevation: 320,  description: "Main commercial hub of the Mad River Valley along VT-100, the closest base town to Mad River Glen.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
 
@@ -604,7 +604,7 @@ const LOCATIONS: LocationConfig[] = [
   { id: "stratton-mountain-resort",  name: "Stratton",                  latitude:  43.1131, longitude: -72.9081, elevation: 1181, description: "Ikon Pass · gondola-served summit, one of southern Vermont's largest resorts · confirmed 2025-26 season (opened Nov 26 2025, closed Apr 12 2026).", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "mount-snow",                name: "Mount Snow",                latitude:  42.9601, longitude: -72.9201, elevation: 1097, description: "Epic Pass · Vail's Northeast group with Stowe and Okemo · popular with Boston/NYC day-trippers · 2025-26 closing date not confirmed by the resort.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "bromley-mountain",          name: "Bromley Mountain",          latitude:  43.2226, longitude: -72.9376, elevation: 1001, description: "Indy Pass (first season on Indy for 2025-26) · Vermont's highest base elevation (1,950 ft) · south-facing sun exposure · 2025-26 closing date not confirmed.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
-  { id: "magic-mountain",            name: "Magic Mountain",            latitude:  43.1706, longitude: -72.7534, elevation: 869,  description: "⚠️ Did NOT open for the 2025-26 season — the lowest snowfall in 20+ years produced the resort's first non-opening in over 20 years under Miller family ownership. Treat all current-season conditions data for this resort as unavailable.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
+  { id: "magic-mountain",            name: "Magic Mountain",            latitude:  43.1706, longitude: -72.7534, elevation: 869,  description: "Independent ski area in southern Vermont; confirm current operating status and mountain conditions with the resort before travel.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "stratton",                  name: "Stratton",                  latitude:  43.1334, longitude: -72.9298, elevation: 549,  description: "Small village closest to Stratton resort's base area.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "west-dover",                name: "West Dover",                latitude:  42.9709, longitude: -72.8265, elevation: 549,  description: "Village along VT-100, the main gateway to Mount Snow.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "peru-vt",                   name: "Peru",                      latitude:  43.2333, longitude: -72.8990, elevation: 555,  description: "Small hill town near Bromley and Magic Mountain.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
@@ -624,8 +624,8 @@ const LOCATIONS: LocationConfig[] = [
 
   // Jackson Hole, WY · first Wyoming region, America/Denver (shared with
   // Colorado/Utah). Elevation is SUMMIT (matches CO/UT/CA/VT convention).
-  { id: "jackson-hole-mtn-resort",   name: "Jackson Hole Mountain Resort", latitude: 43.5875, longitude: -110.8279, elevation: 3185, description: "Ikon Pass (Full only, excluded from Base) · legendary steep terrain off the Aerial Tram, 4,139 ft vertical · reservation system required for Ikon/Mountain Collective 2025-26 · ⚠️ no confirmed dedicated webcam URL.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
-  { id: "snow-king-mountain",        name: "Snow King Mountain",        latitude: 43.4783, longitude: -110.7581, elevation: 2380, description: "Indy Pass + Powder Alliance · Wyoming's original ski resort, in-town in Jackson with night skiing · official 2025-26 closing Mar 22 2026 per resort.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "jackson-hole-mtn-resort",   name: "Jackson Hole Mountain Resort", latitude: 43.5875, longitude: -110.8279, elevation: 3185, description: "Mountain resort near Teton Village, known for its Aerial Tram and steep terrain. Check the resort for current lift access, pass reservations, and camera availability.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "snow-king-mountain",        name: "Snow King Mountain",        latitude: 43.4783, longitude: -110.7581, elevation: 2380, description: "In-town mountain resort in Jackson, Wyoming, with skiing and night-skiing when scheduled. Check the resort for current hours, operations, and conditions.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
   { id: "jackson",                   name: "Jackson",                   latitude: 43.4799, longitude: -110.7624, elevation: 1902, description: "Historic town square and main gateway to the valley, home to Snow King Mountain and a short drive from Jackson Hole Mountain Resort.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
   { id: "teton-village",             name: "Teton Village",             latitude: 43.5881, longitude: -110.8273, elevation: 1925, description: "Base village at the foot of Jackson Hole Mountain Resort's Aerial Tram.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
 
@@ -638,7 +638,7 @@ const LOCATIONS: LocationConfig[] = [
   { id: "big-sky-town",              name: "Big Sky",                   latitude: 45.2849, longitude: -111.3806, elevation: 2286, description: "Base town for Big Sky Resort, midway between Bozeman and Yellowstone National Park's West Entrance.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
 
   // Bozeman / Bridger Bowl, MT.
-  { id: "bridger-bowl",              name: "Bridger Bowl",              latitude: 45.8266, longitude: -110.8988, elevation: 2682, description: "Independent nonprofit ski area · ⚠️ closed early for the 2025-26 season on Mar 22 2026 due to low snowfall (138\" season total), expected back to its normal schedule for 2026-27.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "bridger-bowl",              name: "Bridger Bowl",              latitude: 45.8266, longitude: -110.8988, elevation: 2682, description: "Community-supported nonprofit ski area near Bozeman, Montana; check the mountain report for current conditions and operations.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
   { id: "bozeman",                   name: "Bozeman",                   latitude: 45.6770, longitude: -111.0429, elevation: 1466, description: "University town and gateway to Bridger Bowl, about 16 miles north.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
 
   // Whitefish, MT · town id "whitefish-town" disambiguated from the resort.
@@ -646,11 +646,11 @@ const LOCATIONS: LocationConfig[] = [
   { id: "whitefish-town",            name: "Whitefish",                 latitude: 48.4111, longitude: -114.3376, elevation: 917,  description: "Lakeside base town for Whitefish Mountain Resort, near Glacier National Park.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
 
   // Red Lodge, MT · town id "red-lodge-town" disambiguated from the resort.
-  { id: "red-lodge-mountain",        name: "Red Lodge Mountain",        latitude: 45.1699, longitude: -109.4137, elevation: 2870, description: "Indy Pass member · ⚠️ 2025-26 closing date not confirmed by a dated primary source · no dedicated backcountry avalanche forecast authority covers the Beartooth/Red Lodge area.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "red-lodge-mountain",        name: "Red Lodge Mountain",        latitude: 45.1699, longitude: -109.4137, elevation: 2870, description: "Ski area in Montana's Beartooth Mountains. For off-piste travel, consult current local avalanche information and assess conditions independently; check the resort for operating details.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
   { id: "red-lodge-town",            name: "Red Lodge",                 latitude: 45.1863, longitude: -109.2468, elevation: 1740, description: "Historic base town for Red Lodge Mountain, gateway to the Beartooth Mountains (summer-only Beartooth Highway).", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
 
   // Taos, NM · town id "taos-ski-valley-town" disambiguated from the resort.
-  { id: "taos-ski-valley",           name: "Taos Ski Valley",           latitude: 36.5960, longitude: -105.4478, elevation: 3804, description: "Ikon Pass (Full, no blackouts) · independent ownership · sole access via NM-150, a narrow, steep, switchback road · ⚠️ closed early for 2025-26 on Mar 29 2026 due to unseasonably warm weather.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "taos-ski-valley",           name: "Taos Ski Valley",           latitude: 36.5960, longitude: -105.4478, elevation: 3804, description: "High-mountain resort reached via NM-150; check current road conditions and resort updates before traveling, especially in winter weather.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
   { id: "taos-ski-valley-town",      name: "Taos Ski Valley",           latitude: 36.5946, longitude: -105.4497, elevation: 2804, description: "Base village at the literal end of NM-150, directly at the foot of Taos Ski Valley.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
 
   // Angel Fire, NM.
@@ -658,11 +658,11 @@ const LOCATIONS: LocationConfig[] = [
   { id: "angel-fire",                name: "Angel Fire",                latitude: 36.3762, longitude: -105.2894, elevation: 2555, description: "Moreno Valley town near Wheeler Peak, gateway to Angel Fire Resort.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
 
   // Santa Fe area, NM.
-  { id: "ski-santa-fe",              name: "Ski Santa Fe",              latitude: 35.8000, longitude: -105.8000, elevation: 3681, description: "Independent · one of the highest-base-elevation resorts in the US · ⚠️ closed early for 2025-26 on Mar 22 2026 due to unseasonably warm, dry conditions.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "ski-santa-fe",              name: "Ski Santa Fe",              latitude: 35.8000, longitude: -105.8000, elevation: 3681, description: "Mountain resort in the Sangre de Cristo Mountains near Santa Fe; check the official report for current conditions and operations.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
   { id: "santa-fe",                  name: "Santa Fe",                  latitude: 35.6870, longitude: -105.9378, elevation: 2194, description: "New Mexico's state capital, roughly 30 minutes' drive from Ski Santa Fe.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
 
   // Albuquerque area, NM · Sandia Peak is a verify-status resort, see roads.ts.
-  { id: "sandia-peak",               name: "Sandia Peak Ski Area",      latitude: 35.2062, longitude: -106.4475, elevation: 2630, description: "Mountain Capital Partners \"Power Pass\" · ⚠️ verify-status resort: exact 2025-26 closing date and total operating days unconfirmed by any dated source found in research.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "sandia-peak",               name: "Sandia Peak Ski Area",      latitude: 35.2062, longitude: -106.4475, elevation: 2630, description: "Mountain ski area near Albuquerque; check the resort's current operating status and conditions before planning a visit.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
   { id: "albuquerque",               name: "Albuquerque",               latitude: 35.0844, longitude: -106.6504, elevation: 1619, description: "New Mexico's largest city, roughly 30-45 minutes' drive from Sandia Peak Ski Area.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
 
   // Michigan · all selected locations, including Keweenaw/Mt. Bohemia, are official Eastern Time (America/Detroit).
@@ -674,7 +674,7 @@ const LOCATIONS: LocationConfig[] = [
   { id: "mohawk", name: "Mohawk", latitude: 47.3308, longitude: -88.3743, elevation: 227, description: "Keweenaw Peninsula base town for Mt. Bohemia; official Eastern Time, not Central.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Detroit", region: "US" },
 
   // Pennsylvania · entire state uses America/New_York. Camelback affiliation intentionally remains ambiguous.
-  { id:"camelback-mountain",name:"Camelback Mountain Resort",latitude:41.052,longitude:-75.352,elevation:634,description:"⚠️ Vail/Epic ownership confirmed, but research also cites Ikon and Peak to Peak Pocono Pass; re-verify direct pass status.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US" },
+  { id:"camelback-mountain",name:"Camelback Mountain Resort",latitude:41.052,longitude:-75.352,elevation:634,description:"Four-season Pocono Mountains resort; check with the resort for current lift-ticket and pass options, hours, and conditions.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US" },
   { id:"blue-mountain-pa",name:"Blue Mountain Resort",latitude:40.810,longitude:-75.521,elevation:489,description:"Palmerton, PA · Ikon partner · Pennsylvania's 1,082 ft vertical-drop leader.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US" },
   { id:"shawnee-mountain",name:"Shawnee Mountain Ski Area",latitude:41.003,longitude:-75.116,elevation:411,description:"Independent · Indy Pass · likely no live webcam confirmed.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US" },
   { id:"tannersville",name:"Tannersville",latitude:41.040,longitude:-75.305,elevation:322,description:"Poconos base town for Camelback and nearby resorts.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US" },
@@ -691,83 +691,83 @@ const LOCATIONS: LocationConfig[] = [
   {id:"wachusett-mountain",name:"Wachusett Mountain",latitude:42.488,longitude:-71.887,elevation:612,description:"Independent “Boston's Mountain” day-trip and night-skiing destination; separate official webcam URL unconfirmed.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
   {id:"princeton-ma",name:"Princeton",latitude:42.473,longitude:-71.877,elevation:300,description:"Central Massachusetts base town at Wachusett.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
   // Minnesota · America/Chicago. Lutsen pass transition and Midwest-vertical claim are honesty-gated.
-  {id:"lutsen-mountains",name:"Lutsen Mountains",latitude:47.663,longitude:-90.714,elevation:514,description:"Indy Pass 2025-26 · ⚠️ confirmed Ikon move for 2026-27 · Minnesota’s largest ski area / 825-ft state-high vertical, not Midwest highest (Mt. Bohemia MI and Terry Peak SD exceed it).",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Chicago",region:"US"},
+  {id:"lutsen-mountains",name:"Lutsen Mountains",latitude:47.663,longitude:-90.714,elevation:514,description:"Minnesota's largest ski area, set above Lake Superior's North Shore; check the resort for current pass access, operations, and conditions.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Chicago",region:"US"},
   {id:"lutsen",name:"Lutsen",latitude:47.643,longitude:-90.714,elevation:198,description:"North Shore base town; Highway 61 can close in localized Lake Superior lake-effect snow.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Chicago",region:"US"},
   // Wisconsin · America/Chicago. Granite Peak pass transition and Cascade’s likely-broken Flash cam are honesty-gated.
-  {id:"granite-peak",name:"Granite Peak Ski Area",latitude:44.931,longitude:-89.688,elevation:594,description:"Midwest Family Ski Resorts / Charles Skinner Jr. (not Nash/Skyline) · Indy 2025-26 · ⚠️ confirmed Ikon move 2026-27.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Chicago",region:"US"},
+  {id:"granite-peak",name:"Granite Peak Ski Area",latitude:44.931,longitude:-89.688,elevation:594,description:"Ski area in Rib Mountain State Park near Wausau, Wisconsin; check the resort for current ticket and pass options, hours, and conditions.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Chicago",region:"US"},
   {id:"wausau-town",name:"Wausau",latitude:44.959,longitude:-89.630,elevation:365,description:"Rib Mountain base city for Granite Peak.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Chicago",region:"US"},
-  {id:"cascade-mountain",name:"Cascade Mountain",latitude:43.531,longitude:-89.395,elevation:378,description:"Independent Walz-family resort · no multi-resort pass (not Indy) · ⚠️ Adobe Flash webcam page is likely broken.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Chicago",region:"US"},
+  {id:"cascade-mountain",name:"Cascade Mountain",latitude:43.531,longitude:-89.395,elevation:378,description:"Ski area near Wisconsin Dells; check the resort's current mountain report for conditions and camera availability.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Chicago",region:"US"},
   {id:"portage",name:"Portage",latitude:43.539,longitude:-89.462,elevation:246,description:"Wisconsin Dells-area base town for Cascade Mountain.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Chicago",region:"US"},
 
   // West Virginia · America/New_York. Canaan Valley dates/pass details and some first-party conditions URLs remain honesty-gated.
-  {id:"snowshoe-mountain",name:"Snowshoe Mountain",latitude:38.41,longitude:-79.995,elevation:1478,description:"Ikon Pass / Alterra · Mid-Atlantic’s largest vertical (~1,500 ft) · snowmaking is central to operations · ⚠️ distinct first-party conditions URL not independently confirmed.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
+  {id:"snowshoe-mountain",name:"Snowshoe Mountain",latitude:38.41,longitude:-79.995,elevation:1478,description:"Mountain resort in West Virginia's Allegheny Mountains; check the resort's official report for current conditions and camera availability.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
   {id:"snowshoe-town",name:"Snowshoe",latitude:38.41,longitude:-79.995,elevation:1150,description:"Remote Cheat Mountain base community for Snowshoe Mountain.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
-  {id:"canaan-valley-resort",name:"Canaan Valley Resort",latitude:39.045,longitude:-79.46,elevation:1304,description:"West Virginia State Park system / state-owned resort · ⚠️ exact 2025–26 dates and current pass affiliation require direct confirmation.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
+  {id:"canaan-valley-resort",name:"Canaan Valley Resort",latitude:39.045,longitude:-79.46,elevation:1304,description:"State park resort in West Virginia's Canaan Valley; check the resort for current operating dates, ticket options, and conditions.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
   {id:"timberline-mountain",name:"Timberline Mountain",latitude:39.041,longitude:-79.438,elevation:1301,description:"Independent (not Indy, Epic or Ikon) · correctly grouped in Canaan Valley, not Snowshoe · core snowmaking operations.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
   {id:"canaan-valley-town",name:"Davis / Canaan Valley",latitude:39.105,longitude:-79.468,elevation:975,description:"Davis/Canaan Valley base area; Canaan Valley Resort and Timberline are only ~2–3 miles apart.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
   // North Carolina · America/New_York. Beech ski operations use beechmountainresort.com; unconfirmed live condition/webcam details remain gated.
-  {id:"sugar-mountain",name:"Sugar Mountain",latitude:36.13,longitude:-81.871,elevation:1615,description:"Independent (not Indy, Epic or Ikon) · heavy snowmaking reliance · ⚠️ dedicated live conditions URL not independently confirmed.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
-  {id:"beech-mountain",name:"Beech Mountain Resort",latitude:36.183,longitude:-81.874,elevation:1678,description:"Independent · use beechmountainresort.com (ski operations), not beechmtn.com tourism site · heavy snowmaking reliance · ⚠️ webcam live status needs in-season confirmation.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
+  {id:"sugar-mountain",name:"Sugar Mountain",latitude:36.13,longitude:-81.871,elevation:1615,description:"Ski resort in North Carolina's Blue Ridge Mountains; check the official mountain report for current conditions and camera availability.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
+  {id:"beech-mountain",name:"Beech Mountain Resort",latitude:36.183,longitude:-81.874,elevation:1678,description:"High-elevation ski resort in North Carolina; check the resort's official ski-area site for current operations, conditions, and camera availability.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
   {id:"banner-elk-beech-mountain",name:"Banner Elk / Beech Mountain",latitude:36.166,longitude:-81.872,elevation:1340,description:"High Country base towns serving Sugar Mountain and Beech Mountain.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
   {id:"cataloochee-ski-area",name:"Cataloochee Ski Area",latitude:35.562,longitude:-83.094,elevation:1646,description:"Indy Pass · independently owned · “First in Skiing in the South” · heavy snowmaking reliance.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
   {id:"maggie-valley-town",name:"Maggie Valley",latitude:35.519,longitude:-83.084,elevation:914,description:"Maggie Valley base town for Cataloochee Ski Area.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
   // Virginia · America/New_York. Wintergreen’s recent Indy affiliation and Massanutten webcam/closing-day uncertainty are honesty-gated.
   {id:"wintergreen-resort",name:"Wintergreen Resort",latitude:37.913,longitude:-78.945,elevation:1071,description:"Indy Pass (recent addition) · ownership history: James C. Justice II → EPR Properties → Pacific Group Resorts · heavy snowmaking reliance.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
   {id:"wintergreen-town",name:"Wintergreen",latitude:37.913,longitude:-78.945,elevation:920,description:"Blue Ridge base community for Wintergreen Resort.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
-  {id:"massanutten-resort",name:"Massanutten Resort",latitude:38.407,longitude:-78.738,elevation:870,description:"Indy Pass · four-season resort · heavy snowmaking reliance · ⚠️ exact 2025–26 closing day and dedicated first-party webcam URL unconfirmed.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
+  {id:"massanutten-resort",name:"Massanutten Resort",latitude:38.407,longitude:-78.738,elevation:870,description:"Four-season resort in Virginia's Shenandoah Valley; check the resort for current winter operating dates, conditions, and camera availability.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
   {id:"mcgaheysville",name:"McGaheysville",latitude:38.372,longitude:-78.73,elevation:470,description:"Shenandoah Valley base town for Massanutten Resort.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
   // Nevada · America/Los_Angeles. Sierra Avalanche Center coverage, including Diamond Peak, is material; camera live status is not asserted.
-  {id:"mt-rose-ski-tahoe",name:"Mt. Rose Ski Tahoe",latitude:39.315,longitude:-119.886,elevation:2956,description:"Independent · Tahoe’s highest base elevation (8,260 ft) · ⚠️ 2025–26 close-date sources conflict; official snow-report figure preferred.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Los_Angeles",region:"US"},
+  {id:"mt-rose-ski-tahoe",name:"Mt. Rose Ski Tahoe",latitude:39.315,longitude:-119.886,elevation:2956,description:"High-elevation ski area near Reno and Lake Tahoe; check the resort's snow report for current conditions and operating status.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Los_Angeles",region:"US"},
   {id:"diamond-peak",name:"Diamond Peak",latitude:39.254,longitude:-119.93,elevation:2603,description:"Independent; operated by Incline Village General Improvement District · Sierra Avalanche Center has a dedicated Diamond Peak page · actual 2025–26 close was March 29 after warm weather.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Los_Angeles",region:"US"},
   {id:"incline-village",name:"Incline Village",latitude:39.251,longitude:-119.952,elevation:1934,description:"Nevada-side Lake Tahoe base town; this region is distinct from existing California-side Tahoe coverage.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Los_Angeles",region:"US"},
   // Arizona · America/Phoenix. Arizona does not observe daylight saving time; America/Phoenix stays MST (UTC−7) year-round.
-  {id:"arizona-snowbowl",name:"Arizona Snowbowl",latitude:35.33,longitude:-111.709,elevation:3511,description:"Independent proprietary Power Pass · high-elevation, snowmaking-reliant operation · ⚠️ Upper Bowl has genuine informal avalanche-terrain risk despite no formal state forecast center.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Phoenix",region:"US"},
+  {id:"arizona-snowbowl",name:"Arizona Snowbowl",latitude:35.33,longitude:-111.709,elevation:3511,description:"High-elevation ski area on the San Francisco Peaks. Terrain outside managed runs can be hazardous; check current resort guidance and local avalanche information before venturing beyond marked terrain.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Phoenix",region:"US"},
   {id:"flagstaff-town",name:"Flagstaff",latitude:35.198,longitude:-111.651,elevation:2106,description:"Flagstaff base city for Arizona Snowbowl. America/Phoenix remains MST (UTC−7) year-round; Arizona does not observe DST.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Phoenix",region:"US"},
-  {id:"sunrise-park-resort",name:"Sunrise Park Resort",latitude:33.973,longitude:-109.563,elevation:3330,description:"White Mountain Apache Tribe-owned · Indy Pass · ⚠️ summit reports conflict (~10,924 vs 11,000 ft) and require direct resort confirmation; no confirmed webcam URL.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Phoenix",region:"US"},
+  {id:"sunrise-park-resort",name:"Sunrise Park Resort",latitude:33.973,longitude:-109.563,elevation:3330,description:"Resort owned by the White Mountain Apache Tribe in Arizona's White Mountains; check the resort for current operations, conditions, and camera availability.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Phoenix",region:"US"},
   {id:"greer-az",name:"Greer",latitude:34.01,longitude:-109.458,elevation:2520,description:"Greer base town for Sunrise Park. America/Phoenix remains MST (UTC−7) year-round; Arizona does not observe DST.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Phoenix",region:"US"},
   // South Dakota · America/Denver. Black Hills/Lead/Deadwood use Mountain Time, not South Dakota’s Central Time zone.
-  {id:"terry-peak",name:"Terry Peak",latitude:44.339,longitude:-103.85,elevation:2164,description:"Indy Pass · summit 7,100 ft / ~1,100-ft vertical · ⚠️ standalone conditions and confirmed live webcam URLs remain unresolved",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Denver",region:"US"},
+  {id:"terry-peak",name:"Terry Peak",latitude:44.339,longitude:-103.85,elevation:2164,description:"Ski area in the Black Hills of South Dakota; check the resort's current report for mountain conditions and camera availability.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Denver",region:"US"},
   {id:"lead-deadwood",name:"Lead / Deadwood",latitude:44.352,longitude:-103.765,elevation:1600,description:"Black Hills base towns are in Mountain Time (America/Denver), not Central Time.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Denver",region:"US"},
   // Alaska · America/Anchorage. Eaglecrest/Juneau travel is ferry/plane access to Juneau, not a contiguous-highway drive; CNFAIC/Turnagain risk is separately surfaced for Girdwood.
-  {id:"alyeska-resort",name:"Alyeska Resort",latitude:60.97,longitude:-149.09,elevation:1201,description:"Ikon Pass since 2023 · Pomeroy Lodging-owned · defining aerial tram · ⚠️ elevation/vertical figures vary depending on whether tram-served terrain is included.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Anchorage",region:"US"},
+  {id:"alyeska-resort",name:"Alyeska Resort",latitude:60.97,longitude:-149.09,elevation:1201,description:"Mountain resort in Girdwood, Alaska, with an aerial tram; check the resort's current report for conditions and lift operations.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Anchorage",region:"US"},
   {id:"girdwood-town",name:"Girdwood",latitude:60.942,longitude:-149.166,elevation:12,description:"Girdwood base community for Alyeska, reached from Anchorage via the Seward Highway; monitor avalanche-related closures.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Anchorage",region:"US"},
-  {id:"eaglecrest-ski-area",name:"Eaglecrest Ski Area",latitude:58.276,longitude:-134.528,elevation:820,description:"City and Borough of Juneau-owned · ⚠️ material operational risk: roughly $1M/year city subsidy, gondola cancelled May 2026, staff reductions and future beyond 2026–27 uncertain · no confirmed webcam feed.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Anchorage",region:"US"},
+  {id:"eaglecrest-ski-area",name:"Eaglecrest Ski Area",latitude:58.276,longitude:-134.528,elevation:820,description:"Municipal ski area near Juneau, Alaska; check with the operator for current operating status, access, and conditions before travel.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Anchorage",region:"US"},
   {id:"juneau-town",name:"Juneau",latitude:58.302,longitude:-134.42,elevation:17,description:"Juneau has no road connection to Alaska’s contiguous highway system; Eaglecrest access is by local road after arrival by ferry or plane.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/Anchorage",region:"US"},
   // Connecticut · America/New_York. Mohawk close date is not primary-source confirmed.
-  {id:"mohawk-mountain",name:"Mohawk Mountain",latitude:41.835,longitude:-73.286,elevation:488,description:"Indy Pass · 100% snowmaking · historically credited as the birthplace of modern snowmaking · ⚠️ 2025–26 closing date is not primary-source confirmed.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
+  {id:"mohawk-mountain",name:"Mohawk Mountain",latitude:41.835,longitude:-73.286,elevation:488,description:"Family-operated ski area in Connecticut's Litchfield Hills; check the resort for current conditions and operating details.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
   {id:"cornwall-ct",name:"Cornwall",latitude:41.833,longitude:-73.328,elevation:235,description:"Litchfield Hills base town for Mohawk Mountain.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
   // New Jersey · America/New_York. Mountain Creek is Snow Partners-owned, not Vail/Epic; conditions URL is not asserted.
   {id:"mountain-creek-resort",name:"Mountain Creek Resort",latitude:41.19,longitude:-74.503,elevation:451,description:"Independent Snow Partners ownership (acquired from Koffman family in 2018; formerly Snow Operating) · not Vail-owned and not Epic/Ikon/Indy · 100% snowmaking · limited confirmed webcam coverage.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
   {id:"vernon-nj",name:"Vernon",latitude:41.2,longitude:-74.484,elevation:170,description:"Vernon base town for Mountain Creek Resort.",bomStation:"",bomStationId:"",bomWmoId:0,timezone:"America/New_York",region:"US"},
   // Mt. Hood, OR · one base town (Government Camp) serving three resorts.
-  { id: "mt-hood-meadows",           name: "Mt. Hood Meadows",          latitude: 45.32889, longitude: -121.66250, elevation: 2225, description: "Indy Pass (2 days, select blackouts) + Indy+ Pass (2 days, no blackouts) · not on Epic/Ikon · ⚠️ exact 2025-26 opening/closing dates not confirmed by a dated primary source.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
-  { id: "timberline-lodge",          name: "Timberline Lodge",          latitude: 45.33111, longitude: -121.71000, elevation: 2603, description: "Mt. Hood Fusion Pass (bundled with Skibowl) · famous for near-year-round skiing via the Palmer Snowfield · ⚠️ vertical-drop figure is disputed across sources (resort's own 4,540 ft claim vs. ~3,590-3,690 ft per independent aggregators).", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "mt-hood-meadows",           name: "Mt. Hood Meadows",          latitude: 45.32889, longitude: -121.66250, elevation: 2225, description: "Ski area on Mount Hood's eastern slopes; check the resort for current conditions, operating dates, and pass access.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "timberline-lodge",          name: "Timberline Lodge",          latitude: 45.33111, longitude: -121.71000, elevation: 2603, description: "Historic lodge and ski area on Mount Hood, with seasonal operations on the Palmer Snowfield; check the resort for current access and conditions.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
   { id: "mt-hood-skibowl",           name: "Mt. Hood Skibowl",          latitude: 45.30189, longitude: -121.773212, elevation: 1554, description: "Mt. Hood Fusion Pass + Powder Alliance in its own right · America's largest lit night-skiing operation · confirmed live webcams (West Base, Upper Bowl, East Base).", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
   { id: "government-camp",           name: "Government Camp",           latitude: 45.30222, longitude: -121.75250, elevation: 1225, description: "Small mountain village on US-26, gateway to Timberline Lodge and Mt. Hood Skibowl; Mt. Hood Meadows is a short drive further up OR-35.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
 
   // Bend, OR.
-  { id: "mt-bachelor",               name: "Mt. Bachelor",              latitude: 43.9794, longitude: -121.6885, elevation: 2763, description: "Ikon Pass destination · 360°-skiable volcanic cone, one of the largest lift-served ski areas in the US by skiable acreage · ⚠️ avalanche forecasting here is from the smaller, volunteer-run Central Oregon Avalanche Center (COAC), not NWAC.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "mt-bachelor",               name: "Mt. Bachelor",              latitude: 43.9794, longitude: -121.6885, elevation: 2763, description: "Ski area on a volcanic cone near Bend, Oregon. Check the Central Oregon Avalanche Center and current local advisories before traveling in avalanche terrain.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
   { id: "bend",                      name: "Bend",                      latitude: 44.05806, longitude: -121.31528, elevation: 1104, description: "Central Oregon's largest city, roughly 30 minutes' drive from Mt. Bachelor via Cascade Lakes Highway/OR-372.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
 
   // Crystal Mountain, WA.
-  { id: "crystal-mountain",          name: "Crystal Mountain Resort",   latitude: 46.9280, longitude: -121.4749, elevation: 2138, description: "Ikon Pass (Full tier, no blackouts) · independent (Alterra-owned) · the largest ski area in Washington by vertical drop (3,100 ft) · ⚠️ SR-410 flood damage delayed the 2025-26 opening to approx. Dec 20-24, 2025; no confirmed season-closing date found.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "crystal-mountain",          name: "Crystal Mountain Resort",   latitude: 46.9280, longitude: -121.4749, elevation: 2138, description: "Mountain resort near Mount Rainier; check current road conditions and the resort's operating updates before traveling, especially during winter weather.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
   { id: "enumclaw",                  name: "Enumclaw",                  latitude: 47.20111, longitude: -121.99694, elevation: 339,  description: "Gateway town on SR-410, the primary access route to Crystal Mountain Resort.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
 
   // Snoqualmie Pass, WA · one resort with four connected sub-areas (Summit West/Central/East + Alpental).
-  { id: "snoqualmie-pass",           name: "The Summit at Snoqualmie",  latitude: 47.42400, longitude: -121.41600, elevation: 1178, description: "Ikon Pass (Full tier, no blackouts) · independent (Boyne Resorts-owned) · four base areas under one ticket (Summit West/Central/East + Alpental) · ⚠️ 2025-26 season opened Dec 23, 2025 with only Summit West running; other sub-areas' dates unconfirmed.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "snoqualmie-pass",           name: "The Summit at Snoqualmie",  latitude: 47.42400, longitude: -121.41600, elevation: 1178, description: "Four ski areas at Snoqualmie Pass—Summit West, Central, East, and Alpental; check the resort for area-specific opening status and conditions.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
   { id: "snoqualmie-pass-town",      name: "Snoqualmie Pass",           latitude: 47.39222, longitude: -121.40000, elevation: 917,  description: "Small community directly on I-90 at the pass summit, adjacent to all four Summit at Snoqualmie base areas.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
 
   // Stevens Pass, WA.
-  { id: "stevens-pass",              name: "Stevens Pass Ski Area",     latitude: 47.74472, longitude: -121.08889, elevation: 1235, description: "Vail Resorts' Epic Local Pass (no blackouts) · sole highway access via US-2 · ⚠️ Dec 2025 US-2 flood closure delayed the 2025-26 opening to Dec 29, 2025; elevation figures are inconsistent across sources.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "stevens-pass",              name: "Stevens Pass Ski Area",     latitude: 47.74472, longitude: -121.08889, elevation: 1235, description: "Mountain pass ski area reached via US-2; check current highway conditions and resort updates before travel, particularly during winter storms.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
   { id: "skykomish",                 name: "Skykomish",                 latitude: 47.71028, longitude: -121.35833, elevation: 299,  description: "Small town on US-2, roughly 20 minutes' drive from Stevens Pass Ski Area.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
 
   // Mt. Baker, WA.
-  { id: "mt-baker",                  name: "Mt. Baker Ski Area",        latitude: 48.861944, longitude: -121.653889, elevation: 1515, description: "Independent · no major-pass affiliation · holds the world record for most snowfall in a season (1,140 in., 1998-99, verified by NOAA) · confirmed 2025-26 season Dec 21, 2025 - Apr 19, 2026 · ⚠️ NO confirmed live webcam found.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "mt-baker",                  name: "Mt. Baker Ski Area",        latitude: 48.861944, longitude: -121.653889, elevation: 1515, description: "Independent ski area in the North Cascades; check the resort's report for current operations, conditions, and camera availability.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
   { id: "glacier",                   name: "Glacier",                   latitude: 48.88833, longitude: -121.93389, elevation: 285,  description: "Small town on SR-542 (Mt. Baker Highway), the sole access route to Mt. Baker Ski Area.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
 
   // Sun Valley, ID · one base town (Ketchum) serving two resorts. Mountain timezone.
   { id: "bald-mountain",             name: "Bald Mountain",             latitude: 43.65500, longitude: -114.40917, elevation: 2789, description: "Ikon Pass (Full tier, no blackouts) + Mountain Collective · the largest ski area in Idaho by vertical drop (3,400 ft) · confirmed 2025-26 season Dec 3, 2025 - Apr 12, 2026.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Boise", region: "US" },
-  { id: "dollar-mountain",           name: "Dollar Mountain",           latitude: 43.68306, longitude: -114.34694, elevation: 2024, description: "Ikon Pass (Full tier, no blackouts) + Mountain Collective, shared with Bald Mountain · beginner-oriented · ⚠️ season-closing date not separately confirmed.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Boise", region: "US" },
+  { id: "dollar-mountain",           name: "Dollar Mountain",           latitude: 43.68306, longitude: -114.34694, elevation: 2024, description: "Beginner-oriented ski area in Sun Valley, Idaho; check the resort for current access, hours, and conditions.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Boise", region: "US" },
   { id: "ketchum",                   name: "Ketchum",                   latitude: 43.68074, longitude: -114.36366, elevation: 1774, description: "Base town for the Sun Valley resort complex, adjacent to both Bald Mountain and Dollar Mountain via ID-75.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Boise", region: "US" },
 
   // Sandpoint, ID · Idaho Panhandle, PACIFIC timezone (not Mountain like the rest of Idaho).
@@ -775,48 +775,48 @@ const LOCATIONS: LocationConfig[] = [
   { id: "sandpoint",                 name: "Sandpoint",                 latitude: 48.28222, longitude: -116.56139, elevation: 648,  description: "Town on Lake Pend Oreille, roughly 30 minutes' drive from Schweitzer Mountain Resort.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
 
   // Boise, ID · Mountain timezone. No dedicated avalanche-forecast center covers this region (nearest SAC zones 56-61mi away).
-  { id: "bogus-basin",               name: "Bogus Basin",               latitude: 43.76468, longitude: -116.10329, elevation: 2394, description: "Nonprofit 501(c)(3), largest nonprofit ski area in the US · Powder Alliance/Freedom Pass · ⚠️ CLOSED EARLY for 2025-26 on Mar 22, 2026 due to unseasonably warm weather.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Boise", region: "US" },
+  { id: "bogus-basin",               name: "Bogus Basin",               latitude: 43.76468, longitude: -116.10329, elevation: 2394, description: "Nonprofit mountain recreation area near Boise; check the mountain report for current ski operations and conditions.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Boise", region: "US" },
   { id: "boise",                     name: "Boise",                     latitude: 43.61583, longitude: -116.20167, elevation: 824,  description: "Idaho's state capital, roughly 45 minutes' drive from Bogus Basin via Bogus Basin Road.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Boise", region: "US" },
 
   // Donnelly / McCall, ID · one base town (Donnelly) serving two resorts. Mountain timezone.
-  { id: "tamarack-resort",           name: "Tamarack Resort",           latitude: 44.671, longitude: -116.123, elevation: 1490, description: "Indy Pass (capped redemptions); joining Ikon as a Bonus Mountain from 2026-27 · confirmed 2025-26 season opened Dec 22, 2025 · ⚠️ ownership/financial status is a genuinely unresolved conflict in sources (see roads.ts / region file for detail) — not asserted as fact either way.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Boise", region: "US" },
+  { id: "tamarack-resort",           name: "Tamarack Resort",           latitude: 44.671, longitude: -116.123, elevation: 1490, description: "Mountain resort in Idaho's West Central Mountains; check with the resort for current pass access, operating details, and conditions.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Boise", region: "US" },
   { id: "brundage-mountain",         name: "Brundage Mountain",         latitude: 45.00500, longitude: -116.15500, elevation: 2320, description: "Indy Pass member · independent · 70 trails, 6 lifts, no night skiing.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Boise", region: "US" },
   { id: "donnelly",                  name: "Donnelly",                  latitude: 44.73028, longitude: -116.07444, elevation: 1500, description: "Valley County town on ID-55, roughly midway between Tamarack Resort and Brundage Mountain near McCall.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Boise", region: "US" },
 
   // New Hampshire · all locations use America/New_York. MWAC offers daily Presidential Range forecasts near Wildcat/Pinkham Notch; it is not an in-bounds resort condition feed.
   { id: "cranmore-mountain", name: "Cranmore Mountain", latitude: 44.0550, longitude: -71.1090, elevation: 518, description: "Ikon Pass Bonus Mountain (Full Pass only, 2 days with blackouts) · White Mountain Superpass · confirmed 2025-26 season Nov 28-29, 2025 - Apr 5, 2026.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
-  { id: "wildcat-mountain", name: "Wildcat Mountain", latitude: 44.2590, longitude: -71.2370, elevation: 1238, description: "Epic Pass · Vail Resorts-owned · confirmed 2025-26 season Nov 26, 2025 - Apr 12, 2026 · ⚠️ no distinct live official webcam URL confirmed.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
-  { id: "attitash-mountain-resort", name: "Attitash Mountain Resort", latitude: 44.0820, longitude: -71.2290, elevation: 716, description: "Epic Pass · Vail Resorts-owned · confirmed 2025-26 season Dec 6, 2025 - Apr 5, 2026 · ⚠️ no distinct first-party snow-report or live webcam URL confirmed.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
+  { id: "wildcat-mountain", name: "Wildcat Mountain", latitude: 44.2590, longitude: -71.2370, elevation: 1238, description: "Ski area facing Mount Washington in New Hampshire's White Mountains; check the resort's report for current conditions and camera availability.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
+  { id: "attitash-mountain-resort", name: "Attitash Mountain Resort", latitude: 44.0820, longitude: -71.2290, elevation: 716, description: "Ski area in New Hampshire's White Mountains; check the resort for current snow reports, operating details, and camera availability.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "north-conway", name: "North Conway", latitude: 44.0537, longitude: -71.1289, elevation: 159, description: "Mount Washington Valley base town for Cranmore, Attitash and Wildcat.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "cannon-mountain", name: "Cannon Mountain", latitude: 44.1569, longitude: -71.6980, elevation: 1244, description: "Indy Pass · the United States' only state-owned ski area · White Mountain Superpass · confirmed 2025-26 season Nov 22, 2025 - Apr 12, 2026.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "bretton-woods", name: "Bretton Woods", latitude: 44.2600, longitude: -71.4410, elevation: 945, description: "Independent Omni-owned resort · anchors the White Mountain Superpass · first NH resort to open in 2025-26 (Nov 15, 2025), closed by Apr 12, 2026.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "loon-mountain", name: "Loon Mountain", latitude: 44.0360, longitude: -71.6220, elevation: 930, description: "Boyne Resorts-owned · Ikon Pass (7 days Full / 5 days Base, Base blackouts) · confirmed 2025-26 season Nov 21, 2025 - approx. Apr 19, 2026.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "franconia", name: "Franconia", latitude: 44.2270, longitude: -71.7470, elevation: 274, description: "Franconia Notch gateway town for Cannon Mountain.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "bretton-woods-town", name: "Bretton Woods", latitude: 44.2580, longitude: -71.4410, elevation: 505, description: "Base village for Bretton Woods and a Franconia Notch lodging gateway.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
-  { id: "waterville-valley-resort", name: "Waterville Valley Resort", latitude: 43.9500, longitude: -71.5140, elevation: 1170, description: "Indy Pass (no blackouts on Indy Base) · White Mountain Superpass · confirmed 2025-26 opening weekend Nov 28-30, 2025 · ⚠️ closing date not confirmed.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
+  { id: "waterville-valley-resort", name: "Waterville Valley Resort", latitude: 43.9500, longitude: -71.5140, elevation: 1170, description: "Ski resort in New Hampshire's White Mountains; check the resort for current operating dates, ticket options, and conditions.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "waterville-valley-town", name: "Waterville Valley", latitude: 43.9500, longitude: -71.4990, elevation: 465, description: "Mountain base village reached from I-93 via NH-49.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "gunstock-mountain-resort", name: "Gunstock Mountain Resort", latitude: 43.5270, longitude: -71.3690, elevation: 684, description: "Belknap County-owned, no major-pass affiliation · confirmed 2025-26 season Dec 5, 2025 - Apr 30, 2026 · historical 2022 county-governance turmoil, operations have continued normally since.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "gilford", name: "Gilford", latitude: 43.5480, longitude: -71.4060, elevation: 174, description: "Lake Winnipesaukee-side base town for Gunstock Mountain Resort.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   // Maine · all locations use America/New_York. Maine has no dedicated avalanche forecasting or observation authority; do not infer MWAC coverage across the state line.
-  { id: "sugarloaf", name: "Sugarloaf", latitude: 45.031, longitude: -70.314, elevation: 1291, description: "Boyne Resorts-owned · Ikon Full 7 unrestricted / Base 5 days with blackouts · Boyne New England Pass · confirmed 2025-26 season Nov 21, 2025 - Apr 26, 2026 · ⚠️ webcam sub-URL was unconfirmed/404; official mountain report only.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
+  { id: "sugarloaf", name: "Sugarloaf", latitude: 45.031, longitude: -70.314, elevation: 1291, description: "Mountain resort in western Maine; check the official mountain report for current conditions and camera availability.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "carrabassett-valley-town", name: "Carrabassett Valley", latitude: 45.085, longitude: -70.265, elevation: 318, description: "Western Maine base town for Sugarloaf.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
-  { id: "sunday-river", name: "Sunday River", latitude: 44.473, longitude: -70.856, elevation: 957, description: "Boyne Resorts-owned · Ikon Full 7 unrestricted / Base 5 days with blackouts · Boyne New England Pass · confirmed 2025-26 season Nov 12-13, 2025 - Apr 18-19, 2026 · ⚠️ webcam sub-URL was unconfirmed/404; official mountain report only.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
+  { id: "sunday-river", name: "Sunday River", latitude: 44.473, longitude: -70.856, elevation: 957, description: "Mountain resort in western Maine; check the official mountain report for current conditions and camera availability.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "newry", name: "Newry", latitude: 44.499, longitude: -70.800, elevation: 259, description: "Western Maine base town for Sunday River's eight peaks.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   // HONESTY GATE: Saddleback closed 2015-2020 under prior ownership, reopened Dec 2020 under Arctaris and was SKI Magazine readers' #1 East resort for 2025. It is operating normally; exact 2025-26 closing date was not confirmed.
-  { id: "saddleback-mountain", name: "Saddleback Mountain", latitude: 44.936, longitude: -70.510, elevation: 1256, description: "Arctaris-owned independent · Indy Pass (no blackouts) · opened Dec 5, 2025 · ⚠️ exact 2025-26 closing date unconfirmed. Verified turnaround: reopened Dec 2020 after a five-year closure and named SKI Magazine readers' #1 East resort for 2025. Official webcam page exists; individual live stream URLs/status are unconfirmed.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
+  { id: "saddleback-mountain", name: "Saddleback Mountain", latitude: 44.936, longitude: -70.510, elevation: 1256, description: "Independent ski area in western Maine; check the resort for current conditions, operating details, and camera availability.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "rangeley", name: "Rangeley", latitude: 44.966, longitude: -70.644, elevation: 468, description: "Rangeley Lakes gateway town for Saddleback Mountain.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   // New York · all locations use America/New_York. No dedicated daily avalanche forecast authority exists; DEC issues only irregular Adirondack High Peaks backcountry advisories, not resort terrain bulletins.
-  { id: "whiteface-mountain", name: "Whiteface Mountain", latitude: 44.365, longitude: -73.902, elevation: 1483, description: "ORDA state-owned · shared SKI3 pass with Gore and Belleayre · new Mountain Collective partner for 2025-26 · opened Nov 15, 2025 · ⚠️ 2025-26 closing date and distinct live webcam URL unconfirmed. Advertised total vertical 3,430 ft includes hike-to Slides; lift-served vertical is ~3,166 ft.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
+  { id: "whiteface-mountain", name: "Whiteface Mountain", latitude: 44.365, longitude: -73.902, elevation: 1483, description: "State-operated ski area in the Adirondacks; some high-mountain terrain may require hiking access. Check current resort information for lift access, conditions, and camera availability.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "lake-placid", name: "Lake Placid", latitude: 44.279, longitude: -73.979, elevation: 549, description: "Olympic Adirondack base town for Whiteface Mountain.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "wilmington", name: "Wilmington", latitude: 44.387, longitude: -73.817, elevation: 373, description: "Whiteface Mountain's immediate Adirondack base town.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "gore-mountain", name: "Gore Mountain", latitude: 43.673, longitude: -74.016, elevation: 1097, description: "ORDA state-owned · shared SKI3 pass with Whiteface and Belleayre · Nov 21-22, 2025 - Apr 12-13, 2026 (one-day secondary-source discrepancy) · official Base Area Webcam confirmed.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "north-creek", name: "North Creek", latitude: 43.697, longitude: -73.985, elevation: 310, description: "Adirondack base town for Gore Mountain.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
-  { id: "hunter-mountain", name: "Hunter Mountain", latitude: 42.204, longitude: -74.225, elevation: 975, description: "Vail Resorts-owned · Epic Pass · opened Nov 22, 2025 · ⚠️ projected Apr 13, 2026 close is not resort-confirmed · official live camera page confirmed.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
+  { id: "hunter-mountain", name: "Hunter Mountain", latitude: 42.204, longitude: -74.225, elevation: 975, description: "Ski area in New York's Catskill Mountains; check the resort's report for current operations, conditions, and camera availability.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "hunter", name: "Hunter", latitude: 42.214, longitude: -74.213, elevation: 485, description: "Catskills base town for Hunter Mountain.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   // HONESTY GATE — WINDHAM: Officially left Ikon for 2025-26, first resort ever to leave the network. Private semi-private club with reported $175k-$200k memberships; 2025-26 public access is restricted/season-dependent. Official 1,600 ft vertical is disputed by community GPS/Google Earth estimates near 1,400-1,450 ft; neither is silently substituted.
-  { id: "windham-mountain", name: "Windham Mountain Club", latitude: 42.289, longitude: -74.257, elevation: 945, description: "Private semi-private club · officially exited Ikon for 2025-26 (first resort ever to leave); not Epic, Indy or Mountain Collective · reported $175k-$200k memberships and restricted public access — verify before travel. Official 1,600 ft vertical (1,500-3,100 ft) is disputed by community estimates of ~1,400-1,450 ft. Official camera URLs exist but live status is unconfirmed/offline reports. Nov 28, 2025 opening; projected Apr 13 close is unconfirmed.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
+  { id: "windham-mountain", name: "Windham Mountain Club", latitude: 42.289, longitude: -74.257, elevation: 945, description: "Private club in New York's Catskills; public access and availability can vary. Confirm membership, day-visit access, and current conditions directly with the club before making plans.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "windham", name: "Windham", latitude: 42.309, longitude: -74.251, elevation: 465, description: "Catskills base town; verify current Windham Mountain Club public access before travel.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
-  { id: "belleayre-mountain", name: "Belleayre Mountain", latitude: 42.139, longitude: -74.505, elevation: 1045, description: "ORDA state-owned · shared SKI3 pass with Whiteface and Gore · opened Nov 21-22, 2025 · ⚠️ projected Apr 13, 2026 close is not resort-confirmed · official webcam page confirmed.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
+  { id: "belleayre-mountain", name: "Belleayre Mountain", latitude: 42.139, longitude: -74.505, elevation: 1045, description: "State-operated ski area in New York's Catskills; check current resort information for operating details, conditions, and camera availability.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
   { id: "highmount", name: "Highmount", latitude: 42.147, longitude: -74.514, elevation: 536, description: "Catskills base settlement for Belleayre Mountain.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
 ];
 
@@ -1149,7 +1149,7 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
       ? Math.round(om.current.snow_depth * 100)
       : undefined,
     precipitation: om?.current?.precipitation ?? 0,
-    cloudCover: om?.current?.cloud_cover ?? 0,
+    cloudCover: Math.round(om?.current?.cloud_cover ?? 0),
     visibility: (() => { const v = safeParseFloat(bomVis); return v !== undefined ? v * 1000 : (om ? 10000 : undefined); })(),
     pressure: bomPressure ?? undefined,
     dewpoint: bomDewpoint ?? undefined,
@@ -1260,7 +1260,7 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
       windSpeed: om.hourly.wind_speed_10m[i],
       humidity: om.hourly.relative_humidity_2m[i],
       feelsLike: finiteNumberOrNull(om.hourly.apparent_temperature?.[i]),
-      cloudCover: om.hourly.cloud_cover[i],
+      cloudCover: Math.round(om.hourly.cloud_cover?.[i] ?? 0),
     };
   }) ?? []).filter((h: any): h is Record<string, unknown> => h !== null).filter((h: any) => {
     const localAsUtcMs = Date.parse(h.time + "Z");
@@ -1346,7 +1346,7 @@ function buildBomHourly(
       // Apparent temperature is independent observation data; an absent
       // provider value is unknown, not the measured air temperature.
       feelsLike: finiteNumberOrNull(reading.apparent_t ?? secReading?.apparent_t),
-      cloudCover: (reading.cloud_oktas ?? secReading?.cloud_oktas ?? 0) * 12.5
+      cloudCover: Math.round((reading.cloud_oktas ?? secReading?.cloud_oktas ?? 0) * 12.5)
     });
   }
 
@@ -1526,19 +1526,25 @@ export async function fetchOpenMeteo(location: LocationConfig) {
   // Bound the request: when Open-Meteo's gateway is degraded it can hang for
   // tens of seconds, which would stall the whole page before the
   // OpenWeatherMap fallback even gets a chance to run. Fail fast instead.
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 8000);
-  try {
-    const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
-      signal: controller.signal,
-    });
-    if (!response.ok) {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8000);
+    try {
+      const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
+        signal: controller.signal,
+      });
+      if (response.ok) return await response.json() as any;
+      // Never retry rate-limits: that amplifies a shared egress quota problem.
+      if (attempt === 0 && (response.status === 502 || response.status === 503 || response.status === 504)) {
+        await new Promise((resolve) => setTimeout(resolve, 250));
+        continue;
+      }
       throw new Error(`Open-Meteo API error: ${response.status}`);
+    } finally {
+      clearTimeout(timer);
     }
-    return await response.json() as any;
-  } finally {
-    clearTimeout(timer);
   }
+  throw new Error("Open-Meteo unavailable after retry");
 }
 
 router.get("/weather", async (req, res) => {
@@ -1577,8 +1583,10 @@ router.get("/weather", async (req, res) => {
 // the client a 500 that leaves it stuck on "Loading mountain conditions...".
 interface WeatherCacheEntry {
   data: unknown;
+  fetchedAt: number;
   freshUntil: number; // serve straight from cache until this time
   staleUntil: number; // still serveable as a fallback when upstreams fail
+  retryAfter?: number; // avoid repeatedly hammering a failed upstream for a stale key
 }
 const WEATHER_FRESH_MS = 10 * 60 * 1000; // 10 minutes
 const WEATHER_STALE_MS = 6 * 60 * 60 * 1000; // 6 hours
@@ -1591,6 +1599,24 @@ let weatherFetcher: (location: LocationConfig, snowElevationM?: number) => Promi
 // Open-Meteo/BOM. Cache hits and callers joining an in-flight key are cheap,
 // but use the same worker queue for deterministic pressure.
 export const BULK_WEATHER_CONCURRENCY = 4;
+// Request-local bulk workers alone do not bound concurrent visitors. Apply
+// the same ceiling across all weather routes in this process, including single
+// resort requests; same-key refreshes still share their in-flight promise.
+let activeWeatherFetches = 0;
+const pendingWeatherFetches: Array<() => void> = [];
+
+async function withWeatherFetchSlot<T>(work: () => Promise<T>): Promise<T> {
+  if (activeWeatherFetches >= BULK_WEATHER_CONCURRENCY) {
+    await new Promise<void>((resolve) => pendingWeatherFetches.push(resolve));
+  }
+  activeWeatherFetches++;
+  try {
+    return await work();
+  } finally {
+    activeWeatherFetches--;
+    pendingWeatherFetches.shift()?.();
+  }
+}
 
 async function fetchBulkWeatherCached(locations: readonly LocationConfig[]): Promise<unknown[]> {
   const results: Array<unknown | null> = new Array(locations.length).fill(null);
@@ -1652,17 +1678,32 @@ async function getLocationWeatherCached(
   const cacheKey = snowElevationM != null ? `${location.id}@${snowElevationM}` : location.id;
   const cached = weatherCache.get(cacheKey);
   if (cached && cached.freshUntil > now) return cached.data;
+  if (cached && cached.staleUntil > now && (cached.retryAfter ?? 0) > now) {
+    return {
+      ...(cached.data as Record<string, unknown>),
+      stale: true,
+      staleAgeSeconds: Math.max(0, Math.floor((now - cached.fetchedAt) / 1000)),
+    };
+  }
 
   // Coalesce concurrent refreshes for the same key into one upstream call.
   let inflight = weatherInflight.get(cacheKey);
   if (!inflight) {
     inflight = (async () => {
-      const weatherData = await weatherFetcher(location, snowElevationM);
+      const weatherData = await withWeatherFetchSlot(() => weatherFetcher(location, snowElevationM));
       const result = GetLocationWeatherResponse.parse(weatherData);
+      // BOM-only partial payloads are useful on a cold request, but must not
+      // replace an earlier complete forecast with an empty daily/hourly list.
+      if (cached && result.daily.length === 0 && cached.staleUntil > Date.now()) {
+        throw new Error("Forecast source returned no daily data");
+      }
+      if (result.daily.length === 0) return result;
+      const fetchedAt = Date.now();
       weatherCache.set(cacheKey, {
         data: result,
-        freshUntil: Date.now() + WEATHER_FRESH_MS,
-        staleUntil: Date.now() + WEATHER_STALE_MS,
+        fetchedAt,
+        freshUntil: fetchedAt + WEATHER_FRESH_MS,
+        staleUntil: fetchedAt + WEATHER_STALE_MS,
       });
       return result;
     })().finally(() => weatherInflight.delete(cacheKey));
@@ -1675,7 +1716,14 @@ async function getLocationWeatherCached(
     // On a failed refresh, serve the last good reading if it's still within
     // the stale window rather than failing the request outright.
     const fallback = weatherCache.get(cacheKey);
-    if (fallback && fallback.staleUntil > now) return fallback.data;
+    if (fallback && fallback.staleUntil > Date.now()) {
+      fallback.retryAfter = Date.now() + 30_000;
+      return {
+        ...(fallback.data as Record<string, unknown>),
+        stale: true,
+        staleAgeSeconds: Math.max(0, Math.floor((Date.now() - fallback.fetchedAt) / 1000)),
+      };
+    }
     throw err;
   }
 }

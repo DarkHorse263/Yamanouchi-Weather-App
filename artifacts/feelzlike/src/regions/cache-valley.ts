@@ -42,6 +42,8 @@ export const cacheValleyRegion: RegionConfig = {
       id: "beaver-mountain",
       name: "Beaver Mountain",
       elevationM: 2182,
+      skiBaseElevationM: 2182,
+      summitElevationM: 2701,
       lat: 41.9742,
       lng: -111.4547,
       blurb: "family-run since 1939, one of the oldest continuously-operated ski areas in the US · Indy Pass",
@@ -55,6 +57,8 @@ export const cacheValleyRegion: RegionConfig = {
       id: "cherry-peak",
       name: "Cherry Peak",
       elevationM: 1760,
+      skiBaseElevationM: 1760,
+      summitElevationM: 2146,
       lat: 41.9897,
       lng: -111.9250,
       // ⚠️ Opening date not officially confirmed by the resort for 2025-26

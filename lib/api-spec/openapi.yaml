@@ -2289,11 +2289,15 @@ components:
         units:
           type: string
           enum: [metric, imperial]
+        unitsExplicit:
+          type: boolean
+          description: Whether units were explicitly saved to the account. Legacy imperial values are always explicit.
         displayName:
           type: ["string", "null"]
       required:
         - homeRegionId
         - units
+        - unitsExplicit
         - displayName
 
     AccountResponse:
@@ -3026,7 +3030,7 @@ components:
         precipitation:
           type: number
         cloudCover:
-          type: integer
+          type: number
         visibility:
           type: number
         pressure:
@@ -3150,7 +3154,7 @@ components:
           type: number
           nullable: true
         cloudCover:
-          type: integer
+          type: number
       required:
         - time
         - temperature
@@ -3211,6 +3215,12 @@ components:
             of the viewer's browser timezone.
         lastUpdated:
           type: string
+        stale:
+          type: boolean
+          description: True when the last successful forecast is being served after a failed refresh.
+        staleAgeSeconds:
+          type: integer
+          description: Age in seconds of the last successful forecast when stale is true.
       required:
         - location
         - current

@@ -3,6 +3,7 @@ import { useSubscribeToAlerts } from "@workspace/api-client-react";
 import { Mail, Check, AlertCircle, Loader2, Sparkles } from "lucide-react";
 import { RegionCountryPicker } from "@/components/RegionCountryPicker";
 import { pingAlertFunnel } from "@/lib/engagement";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 /**
  * Powder-alert signup for the /premium hub. Alerts are a standard feature
@@ -18,6 +19,7 @@ import { pingAlertFunnel } from "@/lib/engagement";
 type Status = "idle" | "loading" | "sent" | "already" | "error";
 
 export function PremiumSubscribe() {
+  const u = useUnits();
   const [email, setEmail] = useState("");
   const [regions, setRegions] = useState<string[]>([]);
   // Explicit opt-in · matches the region powder-alerts form.
@@ -129,7 +131,7 @@ export function PremiumSubscribe() {
           className="mt-0.5 accent-primary"
         />
         <span>
-          yes · email me powder alerts when 15cm+ is forecast in the next 48hr.
+          yes · email me powder alerts when {u.snow(15)}+ is forecast in the next 48hr.
           unsubscribe anytime, one click.
         </span>
       </label>

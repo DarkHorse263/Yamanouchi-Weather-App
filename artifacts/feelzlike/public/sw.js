@@ -76,7 +76,7 @@
 // snapshots so an old response shape cannot hide the new forecast labels.
 // v28: comparison ensemble now includes nullable apparent highs/lows + coverage.
 // v29: forecast responses include the mountain timezone for source-time display.
-const CACHE_VERSION = "v30";
+const CACHE_VERSION = "v31";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
@@ -322,6 +322,13 @@ self.addEventListener("fetch", (event) => {
     url.pathname.startsWith("/api/places/details")
   ) {
     event.respondWith(networkFirst(request, DATA_CACHE, { cacheMode: "reload" }));
+    return;
+  }
+
+  // Forecast fallback belongs to the API, which bounds its age and labels it
+  // stale. An offline SW copy would silently bypass those guarantees.
+  if (/^\/api\/weather\/[^/]+\/?$/.test(url.pathname)) {
+    event.respondWith(fetch(request, { cache: "reload" }));
     return;
   }
 

@@ -1,4 +1,5 @@
 import type { RegionConfig } from "@workspace/feelzlike-shell";
+import { visitorCopy, visitorLabel } from "./public-copy";
 import { mergeJapanCatalogueRegions } from "./japan-catalogue";
 import { mergeSkiCatalogueRegions, SKI_CATALOGUE_REGION_COUNTRIES } from "./ski-catalogue";
 import { snowyMountainsRegion } from "./snowy-mountains";
@@ -292,7 +293,7 @@ const AUTHORED_REGIONS: RegionConfig[] = [
 ];
 
 // Catalogue projections are ordered deliberately: Japan first, then Canada.
-export const REGIONS: RegionConfig[] = mergeWesternUsCatalogueRegions(
+const UNSANITIZED_REGIONS: RegionConfig[] = mergeWesternUsCatalogueRegions(
   mergeSkiCatalogueRegions(
     mergeCanadaCatalogueRegions(mergeJapanCatalogueRegions(applyVerifiedVillageElevations(AUTHORED_REGIONS, {
       strict: true,
@@ -300,6 +301,27 @@ export const REGIONS: RegionConfig[] = mergeWesternUsCatalogueRegions(
     }))),
   ),
 );
+
+// Authored research notes and imported catalogue records remain available as
+// evidence in their source files. Only reviewed visitor copy leaves this
+// registry for cards, resort pages, navigation, and search.
+export const REGIONS: RegionConfig[] = UNSANITIZED_REGIONS.map((region) => ({
+  ...region,
+  mountains: region.mountains?.map((mountain) => ({
+    ...mountain,
+    blurb: visitorCopy(mountain.blurb),
+    blurbJa: visitorCopy(mountain.blurbJa, "ja"),
+  })),
+  baseTowns: region.baseTowns?.map((town) => ({
+    ...town,
+    blurb: visitorCopy(town.blurb),
+    blurbJa: visitorCopy(town.blurbJa, "ja"),
+  })),
+  tourismLinks: region.tourismLinks?.map((link) => ({
+    ...link,
+    label: visitorLabel(link.label),
+  })),
+}));
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
   REGIONS.map((r) => [r.id, r]),

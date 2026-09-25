@@ -5,6 +5,7 @@ import { Card, Badge, LoadingScreen, ErrorScreen } from "../components/ui-elemen
 import { BellRing, CloudLightning, Info } from "lucide-react";
 import { motion } from "framer-motion";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 function safeTime(raw: string | null | undefined): string {
   if (!raw) return "";
@@ -25,6 +26,7 @@ function safeDate(raw: string | null | undefined): string {
 }
 
 export default function Alerts() {
+  const u = useUnits();
   const { t } = useLanguage();
   const { data, isLoading, error } = useGetPowderAlerts(
     { region: "yamanouchi" },
@@ -100,7 +102,7 @@ export default function Alerts() {
                   {alert.expectedSnow && (
                     <div className="inline-flex items-center gap-2 bg-black/20 px-3 py-1.5 rounded-lg mt-2">
                       <span className="text-sm font-bold uppercase opacity-80">Expected:</span>
-                      <span className="font-black text-lg">{alert.expectedSnow} cm</span>
+                       <span className="font-black text-lg">{u.snow(alert.expectedSnow)}</span>
                     </div>
                   )}
                 </div>
@@ -145,13 +147,13 @@ export default function Alerts() {
                 {storm.totalSnow && (
                   <div>
                     <span className="text-xs font-bold uppercase text-muted-foreground block">Total</span>
-                    <span className="text-lg font-black text-foreground">{storm.totalSnow} cm</span>
+                     <span className="text-lg font-black text-foreground">{u.snow(storm.totalSnow)}</span>
                   </div>
                 )}
                 {storm.peakSnow24h && (
                   <div>
                     <span className="text-xs font-bold uppercase text-muted-foreground block">Peak 24h</span>
-                    <span className="text-lg font-black text-primary">{storm.peakSnow24h} cm</span>
+                     <span className="text-lg font-black text-primary">{u.snow(storm.peakSnow24h)}</span>
                   </div>
                 )}
               </div>

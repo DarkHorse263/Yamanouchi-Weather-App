@@ -1,12 +1,13 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import { z } from "zod";
 import { db, usersTable, alertSubscribersTable } from "@workspace/db";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { getAuth } from "@clerk/express";
 import { isRegionId, normaliseAlertDestinations } from "../lib/regions.js";
 import { requireAuth } from "../middlewares/requireAuth.js";
 import { sendAccountDeletionReceipt } from "../lib/accountDeletionReceipt.js";
 import { requestAccountDeletion, recoverAccountDeletion } from "../lib/accountDeletionRecovery.js";
+import { accountUnitsExplicit } from "../lib/accountUnitsPreference.js";
 
 /**
  * Clerk-authorised account surface for signed-in members. Backs /account:
@@ -48,6 +49,7 @@ function publicSubscriberShape(row: typeof alertSubscribersTable.$inferSelect) {
   };
 }
 
+
 async function loadSubscriberByEmail(email: string | null) {
   if (!email) return null;
   const rows = await db
@@ -76,6 +78,7 @@ router.get("/account", requireAuth, async (req, res): Promise<void> => {
       profile: {
         homeRegionId: row.homeRegionId,
         units: row.units === "imperial" ? "imperial" : "metric",
+        unitsExplicit: accountUnitsExplicit(row.units, row.metadata),
         displayName: row.displayName,
       },
       subscription: subscriber ? publicSubscriberShape(subscriber) : null,
@@ -111,7 +114,11 @@ router.put("/account/profile", requireAuth, async (req, res): Promise<void> => {
     }
     update.homeRegionId = body.homeRegionId ?? null;
   }
-  if (body.units) update.units = body.units;
+  if (body.units) {
+    update.units = body.units;
+    // Merge one key instead of replacing other metadata or changing DB schema.
+    update.metadata = sql`(CASE WHEN jsonb_typeof(${usersTable.metadata}) = 'object' THEN ${usersTable.metadata} ELSE '{}'::jsonb END) || '{"unitsPreferenceExplicit":true}'::jsonb`;
+  }
   try {
     if (Object.keys(update).length > 0) {
       await db.update(usersTable).set(update).where(eq(usersTable.id, user.id));
@@ -127,6 +134,7 @@ router.put("/account/profile", requireAuth, async (req, res): Promise<void> => {
       profile: {
         homeRegionId: row.homeRegionId,
         units: row.units === "imperial" ? "imperial" : "metric",
+        unitsExplicit: accountUnitsExplicit(row.units, row.metadata),
         displayName: row.displayName,
       },
     });
