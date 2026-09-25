@@ -3,21 +3,21 @@ import type { TransportProviderList } from "@/types/transport";
 /**
  * Stowe & Smugglers' Notch (Vermont, USA) transport providers.
  *
- * All operators verified against their official sites (Aug 2026). Phone
+ * Operators and routes checked against official destination/operator pages. Phone
  * numbers left `null` when not directly verifiable - we never guess.
  */
 export const STOWE_SMUGGLERS_NOTCH_TRANSPORT: TransportProviderList = [
   {
-    id: "us-gmt-mountain-road-shuttle",
+    id: "us-rct-mountain-road-shuttle",
     name: "Mountain Road Shuttle",
     type: "bus",
     leg: "to_mountain",
-    operator: "Green Mountain Transit (Route 108)",
+    operator: "Rural Community Transportation (RCT)",
     phone: null,
-    website: "https://ridegmt.com/route-108-mountain-road-shuttle/",
+    website: "https://gostowe.com/plan-your-visit/winter-shuttle",
     route_summary:
-      "Free winter shuttle up the Mountain Road from Stowe village to the Stowe Mountain Resort base areas - runs daily through the ski season.",
-    schedule_url: "https://ridegmt.com/route-108-mountain-road-shuttle/",
+      "Free seasonal shuttle along Mountain Road (Route 108) from Stowe village to Stowe Mountain Resort and Spruce Peak. Check the destination page for this winter's dates, schedule and service updates.",
+    schedule_url: "https://gostowe.com/plan-your-visit/winter-shuttle",
     featured: true,
     seasonality: "winter_only",
     regions: ["stowe-smugglers-notch"],

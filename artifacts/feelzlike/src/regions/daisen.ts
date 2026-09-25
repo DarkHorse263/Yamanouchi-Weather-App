@@ -81,7 +81,7 @@ export const daisenRegion: RegionConfig = {
     { category: "Tourism", categoryJa: "観光", label: "Daisen town tourism", labelJa: "大山町観光局", url: "https://tourismdaisen.com/" },
     { category: "Tourism", categoryJa: "観光", label: "Tottori official tourism", labelJa: "鳥取県公式観光サイト", url: "https://www.tottori-tour.jp/en/" },
     { category: "Transport", categoryJa: "交通", label: "JR West · trains", labelJa: "JR西日本 · 鉄道", url: "https://www.westjr.co.jp/global/en/" },
-    { category: "Transport", categoryJa: "交通", label: "Nihon Kotsu · buses", labelJa: "日本交通 · バス", url: "https://www.nihonkotsu.co.jp/" },
+    { category: "Transport", categoryJa: "交通", label: "Nihon Kotsu · Yonago buses", labelJa: "日本交通 · 米子地区路線バス", url: "https://nihonkotsu.jp/bus_local/yonago/index.html" },
   ],
   weatherSource: {
     label: "Open-Meteo + JMA",

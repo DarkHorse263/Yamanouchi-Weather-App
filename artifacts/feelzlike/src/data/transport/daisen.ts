@@ -30,11 +30,11 @@ export const DAISEN_TRANSPORT: TransportProviderList = [
     leg: "to_mountain",
     operator: "Nihon Kotsu (日本交通)",
     phone: null,
-    website: "https://www.nihonkotsu.co.jp/",
+    website: "https://nihonkotsu.jp/bus_local/yonago/index.html",
     route_summary:
-      "Route bus from JR Yonago Station to the Daisenji stop at the base of the Daisen White Resort lifts in about 50 minutes, several departures a day with extra winter services in season. The resort changed operators after the 2025-26 season · confirm the current winter timetable before travelling.",
+      "Nihon Kotsu's Yonago-area Daisen route serves JR Yonago Station and the Daisenji stop near Daisen White Resort. Check the operator's current timetable and seasonal changes before travelling; the resort changed operators after the 2025-26 season.",
     route_summary_local:
-      "JR米子駅からだいせんホワイトリゾートのリフト乗り場下・大山寺バス停まで約50分の路線バス、1日数便でシーズン中は増便あり。スキー場は2025-26シーズン後に運営が変わったため、冬季ダイヤは事前に確認を。",
+      "日本交通の米子地区・大山線はJR米子駅とだいせんホワイトリゾート近くの大山寺バス停を結びます。スキー場は2025-26シーズン後に運営が変わったため、運行ダイヤや季節運行は日本交通の公式サイトで事前に確認を。",
     regions: ["daisen"],
     mountains_served: ["daisen-white-resort"],
   },

@@ -53,7 +53,7 @@ test("St Anton live resort data remains official-link only", () => {
   const region = read("src/regions/st-anton.ts");
   const transport = read("src/data/transport/st-anton.ts");
   assert.match(region, /liftStatusUrl: "https:\/\/www\.skiarlberg\.at\//);
-  assert.match(region, /snowReportUrl: "https:\/\/www\.skiarlberg\.at\//);
+  assert.match(region, /snowReportUrl: "https:\/\/www\.stantonamarlberg\.com\/en\/weather-report"/);
   assert.match(region, /dataAvailable: false,/);
   assert.match(region, /https:\/\/lawine\.tirol\.gv\.at\//);
   assert.match(transport, /Official St Anton arrival links/);

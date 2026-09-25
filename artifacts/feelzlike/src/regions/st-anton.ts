@@ -41,7 +41,7 @@ export const stAntonRegion: RegionConfig = {
       blurb: "A representative St Anton forecast from the village at 1,304 m toward Valluga at 2,811 m. This view is St Anton-specific and does not claim conditions across the wider Ski Arlberg network.",
       websiteUrl: "https://www.skiarlberg.at/en/st-anton/winter/ski-region",
       liftStatusUrl: "https://www.skiarlberg.at/en/st-anton/live-info/cable-cars-lifts",
-      snowReportUrl: "https://www.skiarlberg.at/en/st-anton/live-info/snow-report",
+      snowReportUrl: "https://www.stantonamarlberg.com/en/weather-report",
       beginner_friendly: true,
       kids_lessons: true,
     },
@@ -61,15 +61,15 @@ export const stAntonRegion: RegionConfig = {
   tourismLinks: [
     { category: "Resort information", label: "Ski Arlberg · St Anton ski region", url: "https://www.skiarlberg.at/en/st-anton/winter/ski-region" },
     { category: "Lifts & status", label: "Ski Arlberg · St Anton lifts and cable cars", url: "https://www.skiarlberg.at/en/st-anton/live-info/cable-cars-lifts" },
-    { category: "Snow report", label: "Ski Arlberg · St Anton snow report", url: "https://www.skiarlberg.at/en/st-anton/live-info/snow-report" },
+    { category: "Snow report", label: "St Anton am Arlberg · official weather report", url: "https://www.stantonamarlberg.com/en/weather-report" },
     { category: "Webcams", label: "St Anton am Arlberg · official webcams", url: "https://www.stantonamarlberg.com/en/webcams" },
-    { category: "Road report", label: "St Anton am Arlberg · arrival information", url: "https://www.stantonamarlberg.com/en/arrival" },
+    { category: "Road report", label: "St Anton am Arlberg · arrival information", url: "https://www.stantonamarlberg.com/en/the-region-st-anton-am-arlberg/travel" },
     { category: "Avalanche bulletin", label: "Tyrol · official Avalanche Bulletin", url: "https://lawine.tirol.gv.at/" },
   ],
   weatherSource: { label: "Open-Meteo + OpenWeatherMap fallback" },
   roadsSource: {
     label: "St Anton am Arlberg · official arrival information",
-    url: "https://www.stantonamarlberg.com/en/arrival",
+    url: "https://www.stantonamarlberg.com/en/the-region-st-anton-am-arlberg/travel",
     dataAvailable: false,
   },
 };

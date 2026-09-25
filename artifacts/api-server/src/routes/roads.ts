@@ -3269,7 +3269,7 @@ router.get("/road-conditions", async (req, res) => {
           : "We do not yet pull live road data for Lech Zürs. Check the official Lech Zürs road report before departure for the current approach status. The approach via Warth is described by the destination as summer-only; do not use it for winter travel unless current official guidance confirms it.";
       liveTrafficUrl =
         region === "st-anton"
-          ? "https://www.stantonamarlberg.com/en/arrival"
+          ? "https://www.stantonamarlberg.com/en/the-region-st-anton-am-arlberg/travel"
           : "https://www.lechzuers.com/en/live-infos/road-report";
     } else if (isCA) {
       // No live Canadian road feed is wired yet · say so plainly rather than

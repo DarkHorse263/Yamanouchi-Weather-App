@@ -40,7 +40,6 @@ import { isAuSeasonClosureActive } from "@workspace/promo-constants";
 import { sendEmail } from "../lib/emailSender.js";
 import { brandedEmail } from "../lib/emailTemplates.js";
 import externalLinks from "../data/external-links.json";
-import { bandElevations } from "../lib/openMeteoElevation.js";
 import {
   isSydneyLiftFeedSeason,
   shouldCheckLiveLiftCanary,
@@ -80,18 +79,16 @@ const WEATHER_CANARIES = [
   { id: "alta", country: "US" },
 ];
 
-// Headline-vs-elevation snow consistency canaries. Guards the Whakapapa
-// July 2026 class of bug: /api/weather's day-0 snowfallSum (freezing-level
-// partitioned at mid-mountain, snowElevationM=midMountainElevation(summit),
-// exactly what the resort pages request) silently disagreeing with the
-// Elevation forecast's mid band for the same day. summitM mirrors each
-// resort's registry elevationM on the client (the value the pages pass to
-// both endpoints); lat/lng mirror the api-server LOCATIONS entries.
-const SNOW_CONSISTENCY_CANARIES = [
-  { id: "thredbo", name: "Thredbo", lat: -36.5054, lng: 148.3089, summitM: 2037 },
-  { id: "whakapapa", name: "Whakapapa", lat: -39.2547, lng: 175.5619, summitM: 2020 },
-  { id: "happo-one", name: "Hakuba Happo-One", lat: 36.6968, lng: 137.8380, summitM: 1831 },
-];
+// Public weather canaries at server-supported snow heights. Thredbo's
+// forecast is already at 1737m; Whakapapa/Happo-One use their on-mountain
+// registry heights (2020/1831m). The old derived mids (1720/1556m) are
+// NOT allowed snowElevationM overrides and silently select registry weather.
+// Compare the matching elevation band only when the premium route is open.
+export const SNOW_CONSISTENCY_CANARIES = [
+  { id: "thredbo", name: "Thredbo", lat: -36.5054, lng: 148.3089, summitM: 2037, snowM: 1737, band: "mid" },
+  { id: "whakapapa", name: "Whakapapa", lat: -39.2547, lng: 175.5619, summitM: 2020, snowM: 2020, band: "upper" },
+  { id: "happo-one", name: "Hakuba Happo-One", lat: 36.6968, lng: 137.8380, summitM: 1831, snowM: 1831, band: "upper" },
+] as const;
 
 // Both figures derive from Open-Meteo hourly precip + freezing level at the
 // same elevation, but through two separate requests (the elevation forecast
@@ -308,56 +305,70 @@ async function checkApi(failures: SmokeFailure[]): Promise<number> {
   return passed;
 }
 
-/**
- * Compare /api/weather day-0 snowfallSum (requested at mid-mountain, the way
- * the resort pages do) against the elevation forecast's mid band for the
- * same date. Missing data on either side is fail-soft (checkApi already
- * flags dead endpoints); only a confident two-stories divergence fails.
- */
+type SnowCanary = (typeof SNOW_CONSISTENCY_CANARIES)[number];
+type SnowWeather = {
+  current?: { snowfallOutlookElevationM?: number };
+  daily?: { date?: string; snowfallSum?: number | null }[];
+};
+type SnowElevation = {
+  error?: string;
+  entitlement?: string;
+  forecast?: { days?: { date?: string; bands?: { mid?: { snowfallCm?: number | null }; upper?: { snowfallCm?: number | null } } }[] } | null;
+};
+
+/** A structured anonymous premium gate is healthy, not a snow disagreement.
+ * All other non-200 responses (including unrelated 401s) still fail. */
+export function classifySnowConsistency(
+  canary: SnowCanary,
+  weatherStatus: number,
+  weather: SnowWeather,
+  elevationStatus: number,
+  elevation: SnowElevation,
+): string | null {
+  if (weatherStatus !== 200 || !weather.daily?.[0]?.date || !weather.current) {
+    return `HTTP ${weatherStatus} (weather), no usable weather data for ${canary.name}`;
+  }
+  if (weather.current.snowfallOutlookElevationM !== canary.snowM) {
+    return `${canary.name}: weather snow resolved at ${weather.current.snowfallOutlookElevationM ?? "unknown"}m, expected ${canary.snowM}m`;
+  }
+  if (elevationStatus === 401 && elevation.error === "AUTH_REQUIRED" && elevation.entitlement === "forecast.peak") {
+    return null; // The public premium endpoint is deliberately protected.
+  }
+  if (elevationStatus !== 200) {
+    return `HTTP ${weatherStatus} (weather) / ${elevationStatus} (elevation-forecast) for ${canary.name}`;
+  }
+  const day0 = weather.daily[0];
+  const headlineCm = day0?.snowfallSum;
+  const elevDay = elevation.forecast?.days?.find((d) => d.date === day0?.date);
+  const bandCm = elevDay?.bands?.[canary.band]?.snowfallCm;
+  if (!day0?.date || typeof headlineCm !== "number" || typeof bandCm !== "number") {
+    // Missing figures cannot establish a two-stories divergence.
+    return null;
+  }
+  const diff = Math.abs(headlineCm - bandCm);
+  const tolerance = Math.max(SNOW_TOLERANCE_MIN_CM, SNOW_TOLERANCE_FRACTION * Math.max(headlineCm, bandCm));
+  return diff > tolerance
+    ? `${canary.name} ${day0.date}: headline snow ${headlineCm}cm vs elevation ${canary.band} band ${bandCm}cm (diff ${Math.round(diff * 10) / 10}cm > tolerance ${Math.round(tolerance * 10) / 10}cm) - two snow stories at ${canary.snowM}m`
+    : null;
+}
+
+/** Check public weather and the premium endpoint without borrowing a user's
+ * credentials or creating any alternate route around the entitlement gate. */
 async function checkSnowConsistency(failures: SmokeFailure[]): Promise<number> {
   let passed = 0;
   for (const c of SNOW_CONSISTENCY_CANARIES) {
-    const mid = bandElevations(c.summitM).mid;
-    const weatherUrl = `${ORIGIN}/api/weather/${c.id}?snowElevationM=${mid}`;
+    const weatherUrl = `${ORIGIN}/api/weather/${c.id}?snowElevationM=${c.snowM}`;
     const elevUrl = `${ORIGIN}/api/elevation-forecast?lat=${c.lat}&lng=${c.lng}&summitElevationM=${c.summitM}&name=${encodeURIComponent(c.name)}`;
     try {
       const [wRes, eRes] = await Promise.all([
         fetchRaw(weatherUrl, PAGE_TIMEOUT_MS),
         fetchRaw(elevUrl, PAGE_TIMEOUT_MS),
       ]);
-      if (!wRes.ok || !eRes.ok) {
-        failures.push({
-          check: "snow consistency",
-          url: weatherUrl,
-          detail: `HTTP ${wRes.status} (weather) / ${eRes.status} (elevation-forecast) for ${c.name}`,
-        });
-        continue;
-      }
-      const weather = (await wRes.json()) as { daily?: { date?: string; snowfallSum?: number | null }[] };
-      const elev = (await eRes.json()) as {
-        forecast?: { days?: { date?: string; bands?: { mid?: { snowfallCm?: number | null } } }[] } | null;
-      };
-      const day0 = weather.daily?.[0];
-      const headlineCm = typeof day0?.snowfallSum === "number" ? day0.snowfallSum : null;
-      const elevDay = elev.forecast?.days?.find((d) => d.date === day0?.date);
-      const midCm = typeof elevDay?.bands?.mid?.snowfallCm === "number" ? elevDay.bands.mid.snowfallCm : null;
-      if (headlineCm == null || midCm == null || !day0?.date) {
-        // One side has no confident figure (fallback path, no matching date):
-        // nothing to compare, and checkApi covers outright endpoint failures.
-        passed++;
-        continue;
-      }
-      const diff = Math.abs(headlineCm - midCm);
-      const tolerance = Math.max(SNOW_TOLERANCE_MIN_CM, SNOW_TOLERANCE_FRACTION * Math.max(headlineCm, midCm));
-      if (diff > tolerance) {
-        failures.push({
-          check: "snow consistency",
-          url: weatherUrl,
-          detail: `${c.name} ${day0.date}: headline snow ${headlineCm}cm vs elevation mid band ${midCm}cm (diff ${Math.round(diff * 10) / 10}cm > tolerance ${Math.round(tolerance * 10) / 10}cm) - two snow stories on the same page`,
-        });
-      } else {
-        passed++;
-      }
+      const weather = (await wRes.json().catch(() => ({}))) as SnowWeather;
+      const elev = (await eRes.json().catch(() => ({}))) as SnowElevation;
+      const detail = classifySnowConsistency(c, wRes.status, weather, eRes.status, elev);
+      if (detail) failures.push({ check: "snow consistency", url: weatherUrl, detail });
+      else passed++;
     } catch (err) {
       failures.push({ check: "snow consistency", url: weatherUrl, detail: `${errMessage(err)} (${c.name})` });
     }
@@ -369,13 +380,11 @@ async function checkSnowConsistency(failures: SmokeFailure[]): Promise<number> {
 // Live lift feed canaries
 // ---------------------------------------------------------------------------
 
-// Live lift feeds fail SOFT by design (feed down/stale -> the
-// page honestly drops to "no live status"), which makes an outage invisible:
-// nothing errors, the flagship live feature is just quietly off. In-season,
-// /api/lift-status/thredbo answering liveStatusVerified:false means the feed
-// has been unfetchable or its `updated` stamp is >24h old - by the time the
-// daily run sees false, the outage is already sustained (the server keeps a
-// 30-min serve-stale window, so a momentary blip still reads true). Once the
+// Live lift status fails soft: an unverified response means the page cannot
+// confirm live operations. This is worth warning about in-season, but does
+// NOT prove the operator feed is down: a fresh official report with zero
+// operating lifts can also legitimately yield liveStatusVerified:false.
+// Once the
 // dated 2026 closure policy is active, closed AU resorts are expected to
 // return an explicit closed state instead of a live-feed assertion.
 // Out of season the resort legitimately stops updating the feed, so ordinary
@@ -395,6 +404,13 @@ const LIVE_LIFT_FEED_CANARIES = [
   // still probed so a stale API snapshot cannot masquerade as current data.
   { id: "selwyn", name: "Selwyn", liveFeed: false },
 ] as const;
+export function unverifiedLiftFeedDetail(
+  name: string,
+  liveStatusVerified: boolean | undefined,
+  totalLifts: number | undefined,
+): string {
+  return `liveStatusVerified=${String(liveStatusVerified)}, totalLifts=${String(totalLifts)} in-season - ${name} live lift status unavailable/unverified; current operations cannot be confirmed from this response (a fresh report with no operating lifts can also produce this state)`;
+}
 const API_CHECK_TOTAL =
   2 +
   WEATHER_CANARIES.length +
@@ -491,7 +507,7 @@ async function checkLiveLiftFeeds(failures: SmokeFailure[], now: Date = new Date
       if (json.liveStatusVerified === true && Number(json.totalLifts) > 0) return { ok: true, detail: "live" };
       return {
         ok: false,
-        detail: `liveStatusVerified=${String(json.liveStatusVerified)}, totalLifts=${String(json.totalLifts)} in-season - ${canary.name} feed down/stale, page is silently in no-live mode`,
+        detail: unverifiedLiftFeedDetail(canary.name, json.liveStatusVerified, json.totalLifts),
       };
     };
 
@@ -627,7 +643,7 @@ function ownerEmail(): string | null {
   return admins[0] ?? null;
 }
 
-function failureEmail(report: SmokeReport): { subject: string; html: string; text: string } {
+export function failureEmail(report: SmokeReport): { subject: string; html: string; text: string } {
   const n = report.failures.length;
   const subject = `feelzlike daily check · ${n} problem${n === 1 ? "" : "s"} found`;
 
@@ -644,7 +660,7 @@ function failureEmail(report: SmokeReport): { subject: string; html: string; tex
     canonical: "pages serving the wrong content",
     api: "weather api problems",
     "snow consistency": "headline vs elevation snow disagreement",
-    "live lift feed": "live lift feed silently off",
+    "live lift feed": "live lift status unavailable/unverified",
     "lift history collection": "Thredbo lift history collection",
     "dead link": "dead outbound links",
     "unreachable link": "unreachable outbound links",
