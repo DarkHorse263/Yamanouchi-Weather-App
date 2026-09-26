@@ -42,6 +42,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
+  distinctRadarFrames,
   isDuplicateInteractiveSource,
   officialAgencyLabel,
   radarPlaybackNotice,
@@ -2913,6 +2914,15 @@ function WillyOfficialView({
     !!window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches,
   );
+  // Turning off Data Saver is an explicit consent to fetch the full loop.
+  // Without this transition the component stayed paused forever after its
+  // initial one-frame mount, even on phones without reduced-motion enabled.
+  const wasDataSaver = useRef(dataSaver);
+  useEffect(() => {
+    if (dataSaver) setPlaying(false);
+    else if (wasDataSaver.current) setPlaying(!reducedMotion);
+    wasDataSaver.current = dataSaver;
+  }, [dataSaver, reducedMotion]);
   // Discovery succeeded but the overlay PNGs themselves may fail to load
   // (CDN blip) · if EVERY frame errors we have no radar data, so fall back.
   const [failedFrames, setFailedFrames] = useState<Set<string>>(new Set());
@@ -2932,15 +2942,17 @@ function WillyOfficialView({
         if (!res.ok) throw new Error(`willy ${res.status}`);
         const next = (await res.json()) as WillyRadarData;
         if (cancelled) return;
+        const distinct = Array.isArray(next.frames)
+          ? distinctRadarFrames(next.frames)
+          : [];
         if (
           !next.provider ||
-          !Array.isArray(next.frames) ||
-          next.frames.length < (dataSaver ? 1 : 2)
+          distinct.length < (dataSaver ? 1 : 2)
         ) {
           setFailed(true);
           return;
         }
-        const frames = dataSaver ? next.frames.slice(-1) : next.frames;
+        const frames = dataSaver ? distinct.slice(-1) : distinct;
         setData({ ...next, frames });
         setActive(frames.length - 1);
         setFailedFrames(new Set());
@@ -2972,10 +2984,6 @@ function WillyOfficialView({
     };
   }, [center.lat, center.lng, dataSaver]);
   useForegroundRefresh(() => loadRef.current(), 90_000, true);
-
-  useEffect(() => {
-    if (dataSaver) setPlaying(false);
-  }, [dataSaver]);
 
   // Tick for the "x min ago" freshness readout.
   const [nowMs, setNowMs] = useState(() => Date.now());
@@ -3495,7 +3503,9 @@ function BomAnimatedOfficialView({
   onDisableDataSaver: () => void;
 }) {
   const [frames, setFrames] = useState<BomFrame[]>([]);
-  const [unavailable, setUnavailable] = useState(false);
+  // Don't mount the fallback still (and request another BOM asset) while
+  // frame discovery is pending; BOM rate-limits the shared egress.
+  const [unavailable, setUnavailable] = useState<boolean | null>(null);
   const [active, setActive] = useState(0);
   // Respect reduced-motion: discover the frames either way, but start paused so
   // the radar doesn't auto-loop for users who've asked the OS to limit motion.
@@ -3509,6 +3519,12 @@ function BomAnimatedOfficialView({
     !!window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches,
   );
+  const wasDataSaver = useRef(dataSaver);
+  useEffect(() => {
+    if (dataSaver) setPlaying(false);
+    else if (wasDataSaver.current) setPlaying(!reducedMotion);
+    wasDataSaver.current = dataSaver;
+  }, [dataSaver, reducedMotion]);
   // Frame discovery only HEAD-confirms the files exist · the actual GETs can
   // still 403 (BOM rate-limiting our egress). If EVERY frame fails to load we
   // have no real radar data, so degrade to the still/link-out rather than
@@ -3536,7 +3552,7 @@ function BomAnimatedOfficialView({
         });
         if (!res.ok) throw new Error(`frames ${res.status}`);
         const data = (await res.json()) as { frames?: BomFrame[] };
-        const next = data.frames ?? [];
+        const next = distinctRadarFrames(data.frames ?? []);
         if (cancelled) return;
         if (next.length < (dataSaver ? 1 : 2)) {
           setUnavailable(true);
@@ -3571,10 +3587,6 @@ function BomAnimatedOfficialView({
   // newest frame instead of waiting up to 5 min for the next interval tick.
   useForegroundRefresh(() => framesLoadRef.current(), 90_000, true);
 
-  useEffect(() => {
-    if (dataSaver) setPlaying(false);
-  }, [dataSaver]);
-
   // Tick every 30s so the "x min ago" freshness readout stays honest while
   // the tab sits open (the frame list itself refreshes on its own interval).
   const [nowMs, setNowMs] = useState(() => Date.now());
@@ -3598,8 +3610,11 @@ function BomAnimatedOfficialView({
   // failed to load) show the single still so the tab is never blank · the still
   // keeps its own onError link-out ladder.
   const allFramesFailed = frames.length > 0 && failedFrames.size >= frames.length;
-  if (unavailable || (!dataSaver && frames.length < 2) || allFramesFailed) {
+  if (unavailable === true || allFramesFailed) {
     return <OfficialStillView official={official} dataSaver={dataSaver} onDisableDataSaver={onDisableDataSaver} />;
+  }
+  if (unavailable === null) {
+    return <div className="absolute inset-0 grid place-items-center bg-slate-100" aria-label="Loading radar frames"><Loader2 className="w-6 h-6 animate-spin text-slate-400" /></div>;
   }
 
   const layerClass =
@@ -3848,8 +3863,9 @@ function OfficialStillView({
               {official.label}
             </p>
             <p className="text-xs text-slate-500 mb-4">
-              This source can't be embedded directly. Open it in a new tab to
-              see the official live radar.
+              {official.imageUrl
+                ? "Radar imagery is unavailable here right now. Open the source to check the latest radar."
+                : "This source can't be embedded directly. Open it in a new tab to see the official radar."}
             </p>
             <a
               href={official.href}
@@ -3868,6 +3884,13 @@ function OfficialStillView({
           <div className="text-[11px] text-slate-600 font-medium truncate">
             Source · {official.attribution}
           </div>
+          {official.imageUrl && !dataSaver && (
+            <div className="text-[11px] font-semibold text-amber-700">
+              {src && !imgFailed
+                ? "Single still image · animation unavailable (not enough distinct frames or feed unavailable)"
+                : "Radar image unavailable · check the source"}
+            </div>
+          )}
           {dataSaver && official.imageUrl && (
             <div className="flex items-center gap-2 text-[10px] font-semibold text-slate-500">
               <span>latest image · data saver on</span>

@@ -106,6 +106,7 @@ export async function fetchOpenWeatherMapAsOpenMeteo(
   const curWeatherId = current?.weather?.[0]?.id ?? 800;
   const curIcon: string = current?.weather?.[0]?.icon ?? "01d";
   const curCurrent = {
+    time: Number.isFinite(current?.dt) ? toLocalNaiveISO(current.dt, offsetSec) : null,
     temperature_2m: current?.main?.temp ?? null,
     apparent_temperature: current?.main?.feels_like ?? null,
     relative_humidity_2m: current?.main?.humidity ?? null,
@@ -117,6 +118,8 @@ export async function fetchOpenWeatherMapAsOpenMeteo(
     // omits it from the payload); a hardcoded 0 would falsely assert "no snow".
     snow_depth: null,
     precipitation: (current?.rain?.["1h"] ?? 0) + (current?.snow?.["1h"] ?? 0),
+    rain: current?.rain?.["1h"] ?? 0,
+    snowfall: current?.snow?.["1h"] != null ? current.snow["1h"] * 0.7 : 0,
     cloud_cover: current?.clouds?.all ?? 0,
     // freezing_level_height intentionally omitted (not available from OWM 2.5)
   };

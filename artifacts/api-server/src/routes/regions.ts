@@ -3,6 +3,7 @@ import { and, eq } from "drizzle-orm";
 import { db, jobRunsTable } from "@workspace/db";
 import { LruTtlCache } from "../lib/lru-cache.js";
 import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
+import { precipitationAwareCode } from "../lib/currentCondition.js";
 import { owmJson } from "../lib/owm-client.js";
 import { reconcileDryToWet } from "../lib/amedas.js";
 import { reconcileNzMetarDryToWet } from "../lib/metar-nz.js";
@@ -2620,9 +2621,9 @@ async function parseHeadline(r: RegionConfig, d: any): Promise<HeadlineReading |
     // ── Open-Meteo returns naive local time + utc_offset_seconds; build proper ISO UTC
     const utcOffsetSec = Number.isFinite(d.utc_offset_seconds) ? Number(d.utc_offset_seconds) : 0;
     const toIsoUtc = (localStr: string | undefined): string => {
-      if (!localStr) return new Date().toISOString();
+      if (!localStr) return "";
       const epochAsIfUtc = new Date(`${localStr}Z`).getTime();
-      if (Number.isNaN(epochAsIfUtc)) return new Date().toISOString();
+      if (Number.isNaN(epochAsIfUtc)) return "";
       return new Date(epochAsIfUtc - utcOffsetSec * 1000).toISOString();
     };
 
@@ -3138,20 +3139,23 @@ async function fetchLocalCurrentFromOpenMeteo(
     const daily = d.daily ?? {};
     const todayMaxRaw = numOrNull(Array.isArray(daily.temperature_2m_max) ? daily.temperature_2m_max[0] : null);
     const todayMinRaw = numOrNull(Array.isArray(daily.temperature_2m_min) ? daily.temperature_2m_min[0] : null);
+    const precipMm = numOrNull(cur.precipitation);
+    const snowfallCm = numOrNull(cur.snowfall);
+    const code = precipitationAwareCode(numOrNull(cur.weather_code), precipMm, snowfallCm);
     const base: LocalCurrent = {
       tempC: Math.round(tempC),
       feelsLikeC: feelsLikeC != null ? Math.round(feelsLikeC) : Math.round(tempC),
       windKph: windKph != null ? Math.round(windKph) : 0,
       windDirection: compass(cur.wind_direction_10m),
       windDirectionDeg: numOrNull(cur.wind_direction_10m),
-      description: describe(cur.weather_code),
-      weatherCode: numOrNull(cur.weather_code),
+      description: describe(code ?? undefined),
+      weatherCode: code,
       isDay: cur.is_day === 1,
       todayMaxC: todayMaxRaw != null ? Math.round(todayMaxRaw) : null,
       todayMinC: todayMinRaw != null ? Math.round(todayMinRaw) : null,
       // Open-Meteo: current.precipitation is mm, current.snowfall is cm.
-      precipMm: numOrNull(cur.precipitation) != null ? Math.round(Number(cur.precipitation) * 10) / 10 : null,
-      snowfallCm: numOrNull(cur.snowfall) != null ? Math.round(Number(cur.snowfall) * 10) / 10 : null,
+      precipMm: precipMm != null ? Math.round(precipMm * 10) / 10 : null,
+      snowfallCm: snowfallCm != null ? Math.round(snowfallCm * 10) / 10 : null,
       observedAt: toIsoUtc(cur.time),
       source: "Open-Meteo",
     };
@@ -3186,22 +3190,27 @@ async function fetchLocalCurrentFromOwm(
     const daily = om.daily ?? {};
     const todayMaxRaw = numOrNull(Array.isArray(daily.temperature_2m_max) ? daily.temperature_2m_max[0] : null);
     const todayMinRaw = numOrNull(Array.isArray(daily.temperature_2m_min) ? daily.temperature_2m_min[0] : null);
+    const precipMm = numOrNull(cur.precipitation);
+    const snowfallCm = numOrNull(cur.snowfall);
+    const code = precipitationAwareCode(numOrNull(cur.weather_code), precipMm, snowfallCm);
     const base: LocalCurrent = {
       tempC: Math.round(tempC),
       feelsLikeC: feelsLikeC != null ? Math.round(feelsLikeC) : Math.round(tempC),
       windKph: windKph != null ? Math.round(windKph) : 0,
       windDirection: compass(cur.wind_direction_10m),
       windDirectionDeg: numOrNull(cur.wind_direction_10m),
-      description: describe(cur.weather_code),
-      weatherCode: numOrNull(cur.weather_code),
+      description: describe(code ?? undefined),
+      weatherCode: code,
       isDay: cur.is_day === 1,
       todayMaxC: todayMaxRaw != null ? Math.round(todayMaxRaw) : null,
       todayMinC: todayMinRaw != null ? Math.round(todayMinRaw) : null,
       // OWM reshaper exposes current.precipitation (mm liquid-equivalent);
       // it has no separate snow-cm field, so snowfallCm stays null on this path.
-      precipMm: numOrNull(cur.precipitation) != null ? Math.round(Number(cur.precipitation) * 10) / 10 : null,
-      snowfallCm: numOrNull(cur.snowfall) != null ? Math.round(Number(cur.snowfall) * 10) / 10 : null,
-      observedAt: new Date().toISOString(),
+      precipMm: precipMm != null ? Math.round(precipMm * 10) / 10 : null,
+      snowfallCm: snowfallCm != null ? Math.round(snowfallCm * 10) / 10 : null,
+      observedAt: typeof cur.time === "string" && Number.isFinite(om.utc_offset_seconds)
+        ? new Date(new Date(`${cur.time}Z`).getTime() - om.utc_offset_seconds * 1000).toISOString()
+        : "",
       source: "OpenWeatherMap",
     };
     // No grid elevation on the OWM path; reconcile by distance alone.

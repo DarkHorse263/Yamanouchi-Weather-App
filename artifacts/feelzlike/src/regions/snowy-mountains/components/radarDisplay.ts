@@ -65,6 +65,23 @@ export function radarPlaybackNotice({
   return null;
 }
 
+/** A loop requires distinct observations AND distinct images; duplicate
+ * timestamps or URLs must never be presented as an animation. */
+export function distinctRadarFrames<T extends { ts: string; url: string }>(
+  frames: T[],
+): T[] {
+  const timestamps = new Set<string>();
+  const urls = new Set<string>();
+  return frames.filter((frame) => {
+    if (!frame || typeof frame.ts !== "string" || typeof frame.url !== "string" ||
+        !/^\d{12}$/.test(frame.ts) || !frame.url ||
+        timestamps.has(frame.ts) || urls.has(frame.url)) return false;
+    timestamps.add(frame.ts);
+    urls.add(frame.url);
+    return true;
+  });
+}
+
 function safeHostname(href: string): string {
   try {
     return new URL(href).hostname;

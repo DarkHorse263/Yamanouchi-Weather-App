@@ -76,7 +76,9 @@
 // snapshots so an old response shape cannot hide the new forecast labels.
 // v28: comparison ensemble now includes nullable apparent highs/lows + coverage.
 // v29: forecast responses include the mountain timezone for source-time display.
-const CACHE_VERSION = "v32";
+// v33: live local/town condition responses must not silently fall back to
+// unbounded SW cache after a failed request; the server already labels stale.
+const CACHE_VERSION = "v33";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
@@ -345,15 +347,18 @@ self.addEventListener("fetch", (event) => {
   //     /api/weather/:id/snow-report (resort-reported base) - if that endpoint
   //     ever moves off this prefix it must be added here explicitly or
   //     installed PWAs will serve stale reports from the catch-all SWR.
-  //     /api/town-weather is listed explicitly: it does NOT share the
-  //     /api/weather prefix and used to fall into the catch-all SWR.
+  //     Visitor local/town weather below goes network-only; the server is
+  //     responsible for bounded, labelled serve-stale responses.
+  if (url.pathname.startsWith("/api/local-weather") || url.pathname.startsWith("/api/town-weather")) {
+    // Only the server may serve stale weather: it bounds and labels the age.
+    event.respondWith(fetch(request, { cache: "reload" }));
+    return;
+  }
   if (
     url.pathname.startsWith("/api/weather") ||
     url.pathname.startsWith("/api/elevation-forecast") ||
-    url.pathname.startsWith("/api/town-weather") ||
     url.pathname.startsWith("/api/today") ||
     url.pathname.startsWith("/api/road") ||
-    url.pathname.startsWith("/api/local-weather") ||
     url.pathname.startsWith("/api/vic-emergency-incidents") ||
     url.pathname.startsWith("/api/lift-status")
   ) {

@@ -298,6 +298,7 @@ export function WeatherHourly({
   t,
   nowCode,
   nowIsDay,
+  currentTime,
 }: {
   hourly: TownWeatherHourly[];
   t: Translate;
@@ -306,6 +307,8 @@ export function WeatherHourly({
   nowCode?: number | null;
   /** Current isDay flag · keeps the "Now" icon's day/night variant in step with the hero. */
   nowIsDay?: boolean;
+  /** Same local wall-clock basis as hourly.time; absent for unknown/stale current. */
+  currentTime?: string | null;
 }) {
   const u = useUnits();
   if (hourly.length === 0) return null;
@@ -331,7 +334,13 @@ export function WeatherHourly({
       <div className="mt-4 -mx-2 overflow-x-auto">
         <div className="flex gap-1 min-w-full px-2">
           {hourly.map((h, i) => {
-            const isNow = i === 0;
+            // OWM fallback starts its 3-hour forecast at a future bucket.
+            // A future hour is never "Now", nor should its icon be overwritten
+            // by the unrelated current-condition code.
+            const currentMs = currentTime ? Date.parse(`${currentTime.replace(/Z$/, "")}Z`) : NaN;
+            const hourMs = Date.parse(`${h.time.replace(/Z$/, "")}Z`);
+            const isNow = i === 0 && Number.isFinite(currentMs) &&
+              Number.isFinite(hourMs) && currentMs >= hourMs && currentMs - hourMs < 60 * 60 * 1000;
             const cellCode = isNow && nowCode != null ? nowCode : h.weatherCode;
             // Pass precip signals for marginal-drizzle suppression on forecast
             // hours only — the "Now" cell is authoritative current conditions and
@@ -353,7 +362,7 @@ export function WeatherHourly({
             return (
               <div key={h.time} className="flex flex-col items-center min-w-[60px] flex-1">
                 <p className="text-xs text-slate-700 mb-1">
-                  {fmtHour(h.time, i)}
+                  {fmtHour(h.time, isNow)}
                 </p>
                 <Icon className={`w-4 h-4 ${Icon === Snowflake ? "text-snow-accent" : "text-primary/80"}`} strokeWidth={1.5} />
                 <p className="text-xs font-medium text-foreground mt-1">
@@ -634,8 +643,8 @@ function fmtTime(iso: string | null): string {
   return `${m[1]}:${m[2]}`;
 }
 
-function fmtHour(iso: string, idx: number): string {
-  if (idx === 0) return "Now";
+function fmtHour(iso: string, isNow: boolean): string {
+  if (isNow) return "Now";
   const m = iso.match(/T(\d{2}):/);
   return m ? `${m[1]}h` : "";
 }

@@ -1,11 +1,23 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  distinctRadarFrames,
   isDuplicateInteractiveSource,
   officialAgencyLabel,
   radarPlaybackNotice,
   rainViewerDescription,
 } from "../radarDisplay";
+
+test("radar playback rejects repeated observations or repeated images", () => {
+  const frames = [
+    { ts: "202607120200", url: "https://example.com/one.png" },
+    { ts: "202607120205", url: "https://example.com/one.png" },
+    { ts: "202607120200", url: "https://example.com/two.png" },
+    { ts: "202607120210", url: "https://example.com/three.png" },
+  ];
+  assert.deepEqual(distinctRadarFrames(frames), [frames[0], frames[3]]);
+  assert.equal(distinctRadarFrames(frames.slice(0, 3)).length, 1);
+});
 
 test("labels official radar from its actual source", () => {
   const source = (href: string, attribution: string) => ({

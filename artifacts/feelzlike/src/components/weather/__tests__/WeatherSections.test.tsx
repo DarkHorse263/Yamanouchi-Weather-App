@@ -91,6 +91,27 @@ test("hourly weather labels the feelzlike reading separately", () => {
   assert.match(html, /min-w-\[60px\]/);
 });
 
+test("a future forecast bucket never claims to be Now", () => {
+  const hour = {
+    time: "2026-09-27T09:00", temperature: 15, feelsLike: 13,
+    precipitationProbability: 0, precipitation: 0, snowfall: 0,
+    snowDepth: null, weatherCode: 3, windSpeed: 10, uvIndex: null,
+  };
+  const future = renderToStaticMarkup(
+    <WeatherHourly hourly={[hour]} t={(en) => en} nowCode={61} currentTime="2026-09-27T06:10" />,
+  );
+  assert.doesNotMatch(future, />Now</);
+  assert.match(future, />09h</);
+  const present = renderToStaticMarkup(
+    <WeatherHourly hourly={[{ ...hour, time: "2026-09-27T06:00" }]} t={(en) => en} nowCode={61} currentTime="2026-09-27T06:10" />,
+  );
+  assert.match(present, />Now</);
+  const nextHour = renderToStaticMarkup(
+    <WeatherHourly hourly={[{ ...hour, time: "2026-09-27T07:00" }]} t={(en) => en} nowCode={61} currentTime="2026-09-27T06:50" />,
+  );
+  assert.doesNotMatch(nextHour, />Now</);
+});
+
 test("hourly weather does not turn missing actual temperatures into zero-degree bars", () => {
   const html = renderToStaticMarkup(
     <WeatherHourly

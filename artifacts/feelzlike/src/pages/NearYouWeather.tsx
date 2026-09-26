@@ -28,6 +28,7 @@ import { track } from "@/lib/analytics";
 import { isStandaloneMode } from "@/lib/registerSW";
 import { PlaceSearch } from "@/components/home/PlaceSearch";
 import { precipSummary } from "@/lib/precip";
+import { modelAgeMinutes, townCurrentAgeMinutes } from "@/lib/weatherFreshness";
 
 // This page renders OUTSIDE the RegionLayout (no LanguageProvider), so it is
 // English-only · matching the landing page. The shared weather sections take a
@@ -142,7 +143,7 @@ function localToHeroCurrent(c: LocalCurrent): TownWeatherCurrent {
     dewpoint: null,
     // Surface provenance only when it's a real observation, not a model source
     // ("Open-Meteo"/"OpenWeatherMap"). Lets WeatherHero show the "observed" tag.
-    observationSource: c.source && c.source.startsWith("JMA AMeDAS") ? c.source : null,
+    observationSource: c.source && /^(JMA AMeDAS|METAR)/.test(c.source) ? c.source : null,
   };
 }
 
@@ -314,7 +315,7 @@ export default function NearYouWeather() {
     >
       <PageMeta
         title={placeName ? placeName.toLowerCase() : "your current location"}
-        description="live conditions, hourly and 7-day forecast plus radar for wherever you are right now."
+        description="local model conditions, hourly and 7-day forecast plus radar for wherever you are right now."
         path="/near-you"
         noIndex
       />
@@ -348,7 +349,7 @@ export default function NearYouWeather() {
             <p className="text-[14px] leading-snug text-slate-600">
               {phase === "unavailable"
                 ? "we couldn't get your location just now"
-                : "see live conditions and radar right where you are"}
+                : "see local weather and radar right where you are"}
             </p>
             <button
               type="button"
@@ -421,11 +422,16 @@ export default function NearYouWeather() {
                 below only needs coords, so it always renders regardless. */}
             {(() => {
               const full = weather.data;
-              const heroCurrent: TownWeatherCurrent | null = full
+              const fullAge = full ? townCurrentAgeMinutes(full.current.time, full.utcOffsetSeconds) : null;
+              const localAge = modelAgeMinutes(localCurrent?.observedAt);
+              const useFull = !!full && !full._stale && (fullAge == null || fullAge <= 90) &&
+                (localAge == null || fullAge == null || fullAge <= localAge + 10);
+              const heroCurrent: TownWeatherCurrent | null = useFull
                 ? full.current
                 : localCurrent
                   ? localToHeroCurrent(localCurrent)
-                  : null;
+                  : full?.current ?? null;
+              const heroAge = useFull ? fullAge : localCurrent ? localAge : fullAge;
 
               if (heroCurrent) {
                 // Precip amount comes from whatever current powers the hero · the
@@ -439,11 +445,24 @@ export default function NearYouWeather() {
                 return (
                   <>
                     {full?._stale && <StaleNotice meta={full._stale} t={t} />}
+                    {heroAge != null && heroAge > 90 && (
+                      <p role="status" className="mt-3 text-sm text-amber-100">
+                        latest model conditions are about {Math.round(heroAge / 60)}h old — not a live observation
+                      </p>
+                    )}
+                    {heroAge == null && !heroCurrent.observationSource && (
+                      <p role="status" className="mt-3 text-sm text-amber-100">
+                        model update time unavailable — freshness unknown
+                      </p>
+                    )}
                     <WeatherHero
                       current={heroCurrent}
                       town={placeName ?? "your location"}
                       placeLabel="your location"
                     />
+                    {!heroCurrent.observationSource && (
+                      <p className="mt-2 text-xs text-white/85">model conditions · not a surface observation</p>
+                    )}
                     {precip ? (
                       <p className={`mt-2 text-[13px] font-medium tabular-nums ${precip.tone}`}>
                         {precip.label}
@@ -453,13 +472,13 @@ export default function NearYouWeather() {
                       <>
                         <WeatherConditions current={full.current} t={t} />
                         <WeatherToday daily={full.daily[0]} t={t} />
-                        <WeatherHourly hourly={full.hourly} t={t} nowCode={heroCurrent.weatherCode} nowIsDay={heroCurrent.isDay} />
+                        <WeatherHourly hourly={full.hourly} t={t} nowCode={full.current.weatherCode} nowIsDay={full.current.isDay} currentTime={full._stale || (fullAge != null && fullAge > 90) ? null : full.current.time} />
                         <WeatherOutlook days={full.daily.slice(1, 7)} t={t} />
                       </>
                     ) : weather.isError ? (
                       <WeatherNotice
                         title="extended forecast unavailable right now"
-                        body="the live weather feed is being slow, so the hourly and 7-day forecast couldn't load. current conditions and radar are up to date."
+                        body="the weather feed is being slow, so the hourly and 7-day forecast couldn't load. local model conditions and radar remain available."
                         isFetching={weather.isFetching}
                         onRetry={() => weather.refetch()}
                       />
@@ -486,7 +505,7 @@ export default function NearYouWeather() {
               // Conditions failed entirely · the radar below still renders.
               return (
                 <WeatherNotice
-                  title="live conditions unavailable right now"
+                  title="local conditions unavailable right now"
                   body="the weather feed is being slow, so we couldn't load current conditions. the live radar below is still up to date."
                   isFetching={weather.isFetching}
                   onRetry={() => {

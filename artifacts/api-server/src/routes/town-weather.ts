@@ -8,6 +8,7 @@ import {
 import { reconcileNzMetarDryToWet, isInNewZealand } from "../lib/metar-nz.js";
 import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
 import { dailyConditionLabel } from "../lib/dailyConditionLabel.js";
+import { precipitationAwareCode } from "../lib/currentCondition.js";
 
 const router: IRouter = Router();
 
@@ -222,8 +223,8 @@ async function buildTownPayload(d: OmShaped, lat: number, lng: number) {
       rain: numOrNull(cur["rain"]),
       showers: numOrNull(cur["showers"]),
       snowfall: numOrNull(cur["snowfall"]), // cm in last hour
-      weatherCode: numOrNull(cur["weather_code"]),
-      weatherDescription: describe(numOrNull(cur["weather_code"])),
+      weatherCode: precipitationAwareCode(numOrNull(cur["weather_code"]), numOrNull(cur["precipitation"]), numOrNull(cur["snowfall"])),
+      weatherDescription: describe(precipitationAwareCode(numOrNull(cur["weather_code"]), numOrNull(cur["precipitation"]), numOrNull(cur["snowfall"]))),
       cloudCover: numOrNull(cur["cloud_cover"]),
       pressure: numOrNull(cur["pressure_msl"]),
       windSpeed: numOrNull(cur["wind_speed_10m"]),
@@ -324,7 +325,7 @@ function pickHourly(h: { time: string[]; [k: string]: unknown }): Array<Record<s
     snowfall: numOrNull(arr("snowfall")[i]),
     // Open-Meteo snow_depth is metres; serve CM (app-wide canonical unit).
     snowDepth: (() => { const m = numOrNull(arr("snow_depth")[i]); return m == null ? null : Math.round(m * 100); })(),
-    weatherCode: numOrNull(arr("weather_code")[i]),
+    weatherCode: precipitationAwareCode(numOrNull(arr("weather_code")[i]), numOrNull(arr("precipitation")[i]), numOrNull(arr("snowfall")[i])),
     windSpeed: numOrNull(arr("wind_speed_10m")[i]),
     uvIndex: numOrNull(arr("uv_index")[i]),
   }));

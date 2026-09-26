@@ -26,6 +26,7 @@ import { classifyRegionProximity } from "@/lib/regionProximity";
 import { NearYouRegionRow, type SuggestedRegion } from "./NearYouRegionRow";
 import { PlaceSearch } from "./PlaceSearch";
 import { precipSummary } from "@/lib/precip";
+import { modelAgeMinutes } from "@/lib/weatherFreshness";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 // ── server payload (GET /api/local-weather) ────────────────────────
@@ -366,6 +367,7 @@ export function NearYou() {
   const local = localQuery.data?.current ?? null;
   const placeName = localQuery.data?.place?.name ?? null;
   const precip = precipSummary(local);
+  const modelAge = modelAgeMinutes(local?.observedAt);
   const Icon = local ? weatherIcon(local.weatherCode, local.isDay) : Cloud;
   const skeleton =
     phase === "checking" ||
@@ -440,7 +442,7 @@ export function NearYou() {
                 <p className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-sky-700">
                   {suggested.distanceKm != null && !isFar
                     ? "your nearest live region \u00b7 see conditions"
-                    : "see live conditions"}
+                    : "see local weather"}
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                 </p>
               </div>
@@ -490,13 +492,22 @@ export function NearYou() {
                   </span>
                 </div>
                 <p className="mt-1 text-[13px] leading-snug text-slate-600">
-                  {local.description.toLowerCase()} &middot; actually {u.temp(local.tempC)}{u.tempUnit}
+                  {local.description.toLowerCase()} &middot; temperature {u.temp(local.tempC)}{u.tempUnit}
                   {local.windKph > 0 ? (
                     <>
                       {" "}
                       &middot; wind {u.wind(local.windKph)} {u.windUnit} {local.windDirection.toLowerCase()}
                     </>
                   ) : null}
+                </p>
+                <p className="mt-1 text-[11px] text-slate-600">
+                  {modelAge != null && modelAge > 90
+                    ? `model update about ${Math.round(modelAge / 60)}h old · not live`
+                    : local.source.startsWith("JMA AMeDAS") || local.source.startsWith("METAR")
+                      ? `observed · ${local.source}`
+                      : modelAge == null
+                        ? "model conditions · update time unknown"
+                        : "model conditions · not a surface observation"}
                 </p>
                 {precip ? (
                   <p className={`mt-0.5 text-[12px] font-medium tabular-nums ${precip.tone}`}>
@@ -533,7 +544,7 @@ export function NearYou() {
                 </p>
               ) : heroHidden ? (
                 <p className="text-[13px] leading-snug text-slate-600">
-                  see live conditions right where you are
+                  see local weather right where you are
                 </p>
               ) : null}
               {phase === "unavailable" ? (
@@ -562,7 +573,7 @@ export function NearYou() {
             <div className="mt-3">
               <p className="text-[13px] font-semibold leading-snug text-slate-700">
                 no problem &middot; search your town in the box above for its
-                live conditions
+                local conditions
               </p>
               <p className="mt-1.5 text-[12px] leading-snug text-slate-500">
                 already turned location back on? tap try again. still blocked?
