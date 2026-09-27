@@ -6,6 +6,7 @@ import { requireAdminUser } from "../middlewares/requireAdminUser.js";
 import { loadPromoFunnel } from "../lib/adminPromoFunnel.js";
 import { resolveEmailDeliveryIncident } from "../lib/emailDeliveryIncidents.js";
 import { getAlertDeliveryReadiness } from "../lib/alertDeliveryReadiness.js";
+import { getAdminPowderTestStatus, PowderTestError, sendAdminPowderTest } from "../lib/adminPowderTestEmail.js";
 import accountDeletionsRouter from "./admin-account-deletions.js";
 import retentionRouter from "./admin-retention.js";
 
@@ -106,6 +107,40 @@ router.get("/me", async (req: Request, res: Response) => {
 router.get("/alert-readiness", (_req: Request, res: Response) => {
   res.set("Cache-Control", "no-store");
   res.json({ alertDelivery: getAlertDeliveryReadiness() });
+});
+
+router.post("/powder-test-email", async (req: Request, res: Response) => {
+  res.set("Cache-Control", "no-store");
+  if (req.body && (typeof req.body !== "object" || Array.isArray(req.body) || Object.keys(req.body).length)) {
+    res.status(400).json({ error: "TEST_EMAIL_TAKES_NO_INPUT" });
+    return;
+  }
+  try {
+    const admin = res.locals.adminUser as { userId: string; email: string; emailVerified: boolean };
+    res.json(await sendAdminPowderTest(admin));
+  } catch (err) {
+    if (err instanceof PowderTestError) res.status(err.status).json({ error: err.code });
+    else {
+      console.error("[admin/powder-test-email] send failed", err);
+      res.status(502).json({ error: "TEST_EMAIL_SEND_FAILED" });
+    }
+  }
+});
+
+router.post("/powder-test-email/status", async (req: Request, res: Response) => {
+  res.set("Cache-Control", "no-store");
+  try {
+    const token = req.body && typeof req.body === "object" && !Array.isArray(req.body) &&
+      Object.keys(req.body).length === 1 && typeof req.body.token === "string" ? req.body.token : "";
+    const admin = res.locals.adminUser as { userId: string; email: string; emailVerified: boolean };
+    res.json(await getAdminPowderTestStatus(token, admin));
+  } catch (err) {
+    if (err instanceof PowderTestError) res.status(err.status).json({ error: err.code });
+    else {
+      console.error("[admin/powder-test-email] status failed", err);
+      res.status(502).json({ error: "TEST_STATUS_FAILED" });
+    }
+  }
 });
 
 router.get("/thredbo-lift-history", async (req: Request, res: Response) => {

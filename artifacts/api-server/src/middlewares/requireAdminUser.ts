@@ -44,9 +44,8 @@ export async function requireAdminUser(
     // Load the user from the Clerk API so the email is server-authoritative
     // and cannot be forged by a session-claim manipulation.
     const clerkUser = await clerkClient.users.getUser(clerkUserId);
-    const email = (
-      clerkUser.emailAddresses.find((e) => e.id === clerkUser.primaryEmailAddressId)?.emailAddress ?? ""
-    ).toLowerCase().trim();
+    const primaryEmail = clerkUser.emailAddresses.find((e) => e.id === clerkUser.primaryEmailAddressId);
+    const email = (primaryEmail?.emailAddress ?? "").toLowerCase().trim();
 
     const allow = getAdminEmails();
     if (!email || !allow.has(email)) {
@@ -54,7 +53,7 @@ export async function requireAdminUser(
       return;
     }
 
-    res.locals.adminUser = { userId: clerkUserId, email };
+    res.locals.adminUser = { userId: clerkUserId, email, emailVerified: primaryEmail?.verification?.status === "verified" };
     next();
   } catch (err) {
     console.error("[requireAdminUser] Clerk API error:", err);

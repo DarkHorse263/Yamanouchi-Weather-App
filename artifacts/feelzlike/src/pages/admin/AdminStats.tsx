@@ -4,6 +4,8 @@ import { SubscriberRetention } from "./SubscriberRetention";
 import { adminFetch, useAdminQuery } from "./useAdminFetch";
 import { Check, ExternalLink, X } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useRef, useState } from "react";
+import { useUser } from "@clerk/react";
 
 interface SubsBucket {
   total: number;
@@ -763,6 +765,54 @@ function DashboardLinks() {
 }
 
 function AlertReadinessCard({ data }: { data: AlertReadinessPayload["alertDelivery"] }) {
+  type TestReceipt = { recipient: string; statusToken: string; retryAfter: string };
+  const { user } = useUser();
+  const email = user?.primaryEmailAddress?.emailAddress?.trim().toLowerCase() ?? "";
+  const ownerKey = user?.id && email ? `${user.id}:${email}` : "";
+  const ownerRef = useRef(ownerKey);
+  ownerRef.current = ownerKey;
+  const [stored, setStored] = useState<{ ownerKey: string; receipt: TestReceipt } | null>(null);
+  const [latest, setLatest] = useState<{ ownerKey: string; receipt: TestReceipt } | null>(null);
+  useEffect(() => {
+    setLatest(null);
+    setStored(null);
+    try {
+      const raw = sessionStorage.getItem("admin-powder-test-email");
+      if (!raw) return;
+      const parsed = JSON.parse(raw) as { ownerKey?: unknown; receipt?: Partial<TestReceipt> };
+      if (ownerKey && parsed.ownerKey === ownerKey &&
+          parsed.receipt?.recipient?.trim().toLowerCase() === email &&
+          typeof parsed.receipt.statusToken === "string" && typeof parsed.receipt.retryAfter === "string") {
+        setStored({ ownerKey, receipt: parsed.receipt as TestReceipt });
+      } else {
+        sessionStorage.removeItem("admin-powder-test-email");
+      }
+    } catch {
+      // Storage may be disabled. The test still works in memory.
+      try { sessionStorage.removeItem("admin-powder-test-email"); } catch { /* denied */ }
+    }
+  }, [ownerKey, email]);
+  const test = ownerKey && latest?.ownerKey === ownerKey ? latest.receipt
+    : ownerKey && stored?.ownerKey === ownerKey ? stored.receipt : null;
+  const sendTest = useMutation({
+    mutationFn: (_ownerKey: string) => adminFetch<{ recipient: string; accepted: true; statusToken: string; retryAfter: string }>(
+      "/powder-test-email", { method: "POST", body: "{}" },
+    ),
+    onSuccess: (result, requestedOwner) => {
+      if (!requestedOwner || requestedOwner !== ownerRef.current || result.recipient.trim().toLowerCase() !== email) return;
+      const item = { ownerKey: requestedOwner, receipt: result };
+      setLatest(item);
+      checkStatus.reset();
+      try { sessionStorage.setItem("admin-powder-test-email", JSON.stringify(item)); } catch { /* denied */ }
+    },
+  });
+  const checkStatus = useMutation({
+    mutationFn: ({ token }: { token: string; ownerKey: string }) => adminFetch<{ status: "delivered" | "bounced" | "complained" | "failed" | "pending"; providerEvent: string }>(
+      "/powder-test-email/status", { method: "POST", body: JSON.stringify({ token }) },
+    ),
+  });
+  const statusForCurrentTest = test && checkStatus.variables?.ownerKey === ownerKey &&
+    checkStatus.variables.token === test.statusToken;
   const rows = [
     {
       label: "email provider connection",
@@ -834,8 +884,38 @@ function AlertReadinessCard({ data }: { data: AlertReadinessPayload["alertDelive
         ))}
       </ul>
       <p className="mt-3 text-xs text-slate-700">
-        live inbox and sender acceptance: not verified by this check · no test email was sent
+        configuration only · live inbox delivery is not verified by this check
       </p>
+      <div className="mt-4 border-t border-black/10 pt-4 text-sm">
+        <p className="font-semibold">send a test powder email</p>
+        <p className="mt-1 text-xs text-slate-700">
+          Manual test only · sends a clearly marked synthetic sample using the powder alert template
+          to your signed-in admin email. It is not a live forecast and does not change subscriptions,
+          alert schedules or send to subscribers. Provider acceptance is not inbox delivery.
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <button type="button" disabled={sendTest.isPending || !ownerKey}
+            onClick={() => sendTest.mutate(ownerKey)}
+            className="rounded bg-[#0055FF] px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700 disabled:opacity-50">
+            {sendTest.isPending ? "sending…" : "send test to my admin email"}
+          </button>
+          {test && <button type="button" disabled={checkStatus.isPending}
+            onClick={() => checkStatus.mutate({ token: test.statusToken, ownerKey })}
+            className="rounded border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold hover:bg-slate-50 disabled:opacity-50">
+            {checkStatus.isPending ? "checking…" : "check provider delivery"}
+          </button>}
+        </div>
+        {sendTest.isError && <p role="alert" className="mt-2 text-xs text-rose-700">test email failed · {(sendTest.error as Error).message}</p>}
+        {test && <p className="mt-2 text-xs text-slate-700">
+          Provider accepted test for {test.recipient} · this does not confirm inbox delivery.
+          One test per UTC day (next bucket {new Date(test.retryAfter).toLocaleString()}).
+        </p>}
+        {statusForCurrentTest && checkStatus.data && <p className="mt-2 text-xs text-slate-700">
+          Provider reports: <strong>{checkStatus.data.status}</strong> ({checkStatus.data.providerEvent}).
+          {checkStatus.data.status === "delivered" ? " Provider-reported delivery does not prove a human saw it; check your inbox manually." : ""}
+        </p>}
+        {statusForCurrentTest && checkStatus.isError && <p role="alert" className="mt-2 text-xs text-rose-700">delivery check failed · {(checkStatus.error as Error).message}</p>}
+      </div>
     </section>
   );
 }

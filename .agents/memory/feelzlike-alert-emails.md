@@ -42,6 +42,10 @@ All outbound email links (magic sign-in, alert verify/manage/unsubscribe) come f
 **How to apply:** the helper now returns the canonical origin (PUBLIC_ORIGIN ?? feelzlike.com) whenever REPLIT_DEPLOYMENT is set; never reintroduce a dev-domain fallback that can run in a deployment, and verify a real emailed link after publishing auth/email changes.
 
 ## Configuration evidence
+Delivery-test controls must remain separate from subscriber evaluation and real-alert deduplication.
+**Why:** a synthetic test must never notify other subscribers or consume the owner's next genuine alert.
+**How to apply:** target only the authenticated admin's verified email; distinguish provider acceptance, provider delivery, and human inbox confirmation. A send-only Resend key can send successfully while refusing delivery-status lookup, so report that limitation rather than claiming delivery failed.
+
 Do not equate a missing key in current workspace configuration with a missing key in an already-running published build.
 **Why:** configuration inspection reported no sending key while recent production logs showed successful daily-check mail through the same sender.
 **How to apply:** distinguish current configuration, deployed runtime readiness, provider acceptance, and inbox delivery. Check runtime evidence before replacing a working email connection or claiming delivery is disabled.

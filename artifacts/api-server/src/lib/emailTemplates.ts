@@ -143,11 +143,16 @@ export function powderAlertEmail(opts: {
   topMountain: AlertEmailMountain;
   otherMountains: AlertEmailMountain[];
   todaysCallUrl: string;
-  manageUrl: string;
-  unsubscribeUrl: string;
+  manageUrl?: string;
+  unsubscribeUrl?: string;
+  testMode?: boolean;
 }): { subject: string; html: string; text: string } {
-  const { topMountain, otherMountains, todaysCallUrl, manageUrl, unsubscribeUrl } = opts;
-  const subject = `${topMountain.name} powder alert · ${topMountain.snowfallCm}cm forecast`;
+  const { topMountain, otherMountains, todaysCallUrl, manageUrl, unsubscribeUrl, testMode = false } = opts;
+  if (!testMode && (!manageUrl || !unsubscribeUrl)) {
+    throw new Error("Live powder alerts require manage and unsubscribe links");
+  }
+  const notice = "TEST SAMPLE ONLY · synthetic conditions, not a live forecast or subscription alert.";
+  const subject = `${testMode ? "[TEST SAMPLE] " : ""}${topMountain.name} powder alert · ${topMountain.snowfallCm}cm forecast`;
   const otherList = otherMountains.length > 0
     ? `<h3 style="font-family:${FONT_STACK};font-size:15px;font-weight:800;color:${BRAND_NAVY};margin:24px 0 8px 0;text-transform:lowercase;">also worth a look</h3>
        <ul style="margin:0;padding:0 0 0 20px;font-size:14px;color:#334155;line-height:1.8;">
@@ -159,16 +164,17 @@ export function powderAlertEmail(opts: {
   return {
     subject,
     html: brandedEmail({
-      preheader: `${topMountain.snowfallCm}cm forecast at ${topMountain.name} · open to see your full picture.`,
-      heading: `powder incoming at ${topMountain.name}`,
+      preheader: testMode ? notice : `${topMountain.snowfallCm}cm forecast at ${topMountain.name} · open to see your full picture.`,
+      heading: `${testMode ? "test sample · " : ""}powder incoming at ${topMountain.name}`,
       bodyHtml: `
+        ${testMode ? `<p style="font-weight:800;color:#b91c1c;margin:0 0 16px 0;">${notice}</p>` : ""}
         <p style="font-size:18px;font-weight:700;color:${BRAND_NAVY};margin:0 0 8px 0;"><span style="color:${BRAND_PINK};">${topMountain.snowfallCm}cm</span> forecast in your alert window.</p>
         <p style="margin:0 0 16px 0;">${topMountain.windKph != null ? `wind ${topMountain.windKph} km/h. ` : ""}${topMountain.driveMins != null ? `${topMountain.driveMins} min from your saved town.` : ""}</p>
         ${otherList}`,
       ctaLabel: "see today's call",
       ctaUrl: todaysCallUrl,
-      footerHtml: `<a href="${manageUrl}" style="color:${BRAND_BLUE};text-decoration:none;">manage your alert preferences</a> · <a href="${unsubscribeUrl}" style="color:#64748b;text-decoration:underline;">unsubscribe in one click</a>`,
+      footerHtml: testMode ? "Admin-only test sample · no subscription was created or changed. No unsubscribe or manage link applies." : `<a href="${manageUrl}" style="color:${BRAND_BLUE};text-decoration:none;">manage your alert preferences</a> · <a href="${unsubscribeUrl}" style="color:#64748b;text-decoration:underline;">unsubscribe in one click</a>`,
     }),
-    text: `powder incoming at ${topMountain.name}\n\n${topMountain.snowfallCm}cm forecast in your alert window.\n\nsee today's call: ${todaysCallUrl}\n\nmanage preferences: ${manageUrl}\nunsubscribe: ${unsubscribeUrl}`,
+    text: `${testMode ? `${notice}\n\n` : ""}powder incoming at ${topMountain.name}\n\n${topMountain.snowfallCm}cm forecast in your alert window.\n\nsee today's call: ${todaysCallUrl}\n\n${testMode ? "Admin-only test sample. No subscription was created or changed; no manage or unsubscribe link applies." : `manage preferences: ${manageUrl}\nunsubscribe: ${unsubscribeUrl}`}`,
   };
 }
