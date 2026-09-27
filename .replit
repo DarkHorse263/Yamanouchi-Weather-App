@@ -44,6 +44,9 @@ ALERT_FROM_EMAIL = "feelzlike <info@feelzlike.com>"
 [userenv.development]
 ALLOW_UNAUTH_CRON = "1"
 
+[userenv.production]
+RUN_ALERT_CRON = "1"
+
 [[ports]]
 localPort = 8080
 externalPort = 8080
