@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>feelzlike · weather provider checklist</title>
+<style>
+@page{size:A4;margin:16mm 17mm}
+*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;color:#14233b;font-size:10.3pt;line-height:1.42;margin:0}
+.page{break-after:page}.page:last-child{break-after:auto}
+header{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #0055ff;padding-bottom:9px;margin-bottom:18px}
+.brand{font-size:22pt;font-weight:800;letter-spacing:-1px;color:#0055ff}.tag{font-size:9pt;color:#475569}
+h1{font-size:24pt;line-height:1.1;margin:0 0 12px;letter-spacing:-.6px}h2{font-size:14pt;color:#0055ff;margin:19px 0 7px}h3{font-size:11pt;margin:12px 0 5px}p{margin:6px 0 9px}
+a{color:#0044cc;overflow-wrap:anywhere}ul{list-style:none;padding:0;margin:7px 0}
+li{position:relative;padding-left:19px;margin:7px 0}li:before{content:"";position:absolute;left:0;top:4px;width:10px;height:10px;border:1.3px solid #334155}
+.note{border-left:4px solid #0055ff;padding:8px 12px;background:#f1f5f9;margin:12px 0}.small{font-size:9pt;color:#475569}
+.line{border-bottom:1px solid #94a3b8;height:24px}.foot{margin-top:17px;border-top:1px solid #cbd5e1;padding-top:7px;font-size:8pt;color:#475569}
+table{width:100%;border-collapse:collapse;font-size:9pt;margin:10px 0}td,th{border:1px solid #cbd5e1;padding:8px;text-align:left;vertical-align:top}th{background:#0055ff;color:white}
+.email{border:1px solid #94a3b8;padding:12px;font-size:10pt}.pill{font-size:9pt;font-weight:bold;color:#0055ff}
+</style></head><body>
+<section class="page">
+<header><span class="brand">feelzlike</span><span class="tag">owner reference · 1 of 3</span></header>
+<h1>weather permissions<br>weekend checklist</h1>
+<p>For feelzlike.com ahead of Australian campaigns promoting ski travel to Japan, the USA and Canada.</p>
+<div class="note"><strong>The goal:</strong> document permission for each active source, then configure and verify the authorised feeds before launching the campaign. A working API key is not proof of permission. A free-to-use website can still be a commercial product.</div>
+<h2>1 · Open-Meteo: arrange commercial access</h2>
+<p><strong>Why:</strong> the app uses the public forecast API. Open-Meteo’s free service is restricted to non-commercial use, including restrictions on commercial products and promotional activities.</p>
+<ul>
+<li>Open <a href="https://open-meteo.com/en/pricing">open-meteo.com/en/pricing</a> and review the current plans.</li>
+<li>Confirm the plan covers public forecast display, processed snow estimates, opt-in powder emails, affiliate links and intended monetisation.</li>
+<li>Check the monthly request allowance. Ask how requests with multiple locations, variables and forecast days are counted. Do not estimate usage from visitor numbers alone.</li>
+<li>Subscribe to the appropriate commercial plan. Save the invoice, plan name, included products and terms.</li>
+<li>Keep the new API key in your provider account until the secure-entry step. Do not paste it into chat, email or this document.</li>
+</ul>
+<p><strong>Plan guidance:</strong> Standard appears suitable for the forecast endpoints identified so far, subject to usage. Open-Meteo’s separate historical, climate and ensemble APIs require Professional or higher. The app’s “ensemble” feature name alone does not mean it uses that separate product. Confirm endpoint coverage before paying for an upgrade.</p>
+<p class="small">Terms: <a href="https://open-meteo.com/en/terms">open-meteo.com/en/terms</a> · Prices and limits can change; confirm at checkout.</p>
+<h2>2 · WillyWeather: confirm existing coverage</h2>
+<p><strong>Why:</strong> feelzlike uses its keyed Australian radar service. Existing access may already be suitable; do not buy a duplicate subscription.</p>
+<ul>
+<li>Check your existing agreement, or contact WillyWeather through your API account.</li>
+<li>Get confirmation for public radar display on feelzlike.com, commercial use, server-side caching/proxying and any screenshots used in advertising or press.</li>
+<li>Record required attribution, allowed caching period, request charges, usage limits and any domain restrictions.</li>
+<li>Save the agreement or written reply, including the date and any conditions.</li>
+</ul>
+<p class="small">API information: <a href="https://www.willyweather.com.au/info/api.html">willyweather.com.au/info/api.html</a></p>
+<div class="foot">Working reference based on the source review accompanying this checklist, not legal clearance. Check current terms and product-specific exceptions. No subscription, permission request or configuration change is made by this document.</div>
+</section>
+<section class="page">
+<header><span class="brand">feelzlike</span><span class="tag">provider decisions · 2 of 3</span></header>
+<h1>resolve the remaining sources</h1>
+<h2>3 · RainViewer: permission or replacement</h2>
+<p>The app contains a RainViewer radar integration. Its public API is aimed at personal, educational and small community use; commercial arrangements are handled separately. Do not assume free access covers feelzlike.</p>
+<ul>
+<li>Contact RainViewer about commercial website use, caching, expected traffic and attribution.</li>
+<li>Ask for written permission and any fees or limits. Record whether promotional screenshots are covered.</li>
+<li>If suitable permission is not available, tell the agent to disable or replace this source before the commercial launch, including fallback paths.</li>
+</ul>
+<p class="small">Official reference: <a href="https://www.rainviewer.com/api.html">rainviewer.com/api.html</a></p>
+<h2>4 · BOM: check exact products, not blanket access</h2>
+<p>feelzlike directly retrieves some BOM observations and radar images, separately from WillyWeather. BOM rights vary by product. Where no applicable licence is stated, commercial reuse needs permission; specialised products may require a data agreement.</p>
+<ul>
+<li>Ask the agent for the exact BOM product/feed list to include with the enquiry.</li>
+<li>Use the BOM contact form to ask about commercial display, automated retrieval, processing, caching and radar-image reuse for those products.</li>
+<li>Save the applicable licence or written permission and required attribution for each product.</li>
+<li>If unresolved, approve replacement with authorised data or clearly labelled official link-outs. A WillyWeather agreement does not automatically cover separate BOM requests.</li>
+</ul>
+<p class="small"><a href="https://www.bom.gov.au/copyright">BOM copyright and product conditions</a> · <a href="https://www.bom.gov.au/contact?select_a_topic=Enquiry">BOM contact form</a></p>
+<h2>5 · OpenWeather: confirm plan and secure the key</h2>
+<p>The app uses OpenWeather for fallback weather and map products. Commercial use is permitted under applicable plan conditions, but product access, attribution and limits still need checking.</p>
+<ul>
+<li>Record the current plan and confirm it includes the weather, forecast, geocoding and map products actually used.</li>
+<li>Check display, processing and email use against the applicable licence; keep a copy.</li>
+<li>Coordinate key rotation with the agent. A previous security review identified a browser-exposure risk. Configure and verify a replacement server-only key before retiring the old key, unless urgent revocation is required.</li>
+</ul>
+<p class="small">Official reference: <a href="https://openweathermap.org/faq">openweathermap.org/faq</a></p>
+<div class="note"><strong>No purchase needed now:</strong> MET Norway and JMA publish reusable data under public licences, subject to attribution and other conditions. The agent must check product-specific exceptions and access rules. Weather Unlocked has no active integration identified, so do not buy a plan for the current app.</div>
+<div class="foot">Public-data references: <a href="https://docs.api.met.no/doc/License.html">MET Norway licensing</a> · <a href="https://www.jma.go.jp/jma/en/copyright.html">JMA terms</a>. This checklist concerns weather data; it does not clear unrelated photos, webcams, logos or resort content for advertising.</div>
+</section>
+<section class="page">
+<header><span class="brand">feelzlike</span><span class="tag">enquiry and handover · 3 of 3</span></header>
+<h1>keep the evidence · hand it over</h1>
+<h2>copy-and-send provider enquiry</h2>
+<div class="email">
+<strong>Subject: Commercial data permission for feelzlike.com</strong>
+<p>We operate feelzlike.com, a public mountain-weather and ski-trip planning website. We plan to advertise to Australians travelling to Japan, the USA and Canada. The site includes affiliate links and may carry advertising or subscriptions.</p>
+<p>We display forecasts and/or radar, process weather data into snow estimates, and send opt-in powder-alert emails. Our implementation uses server-side caching and, where applicable, a proxy. We may include screenshots of the service in advertising and press materials.</p>
+<p>Please confirm which plan or agreement covers the relevant products, public display, derived information and email use. Please also confirm attribution requirements, caching/retention limits, redistribution restrictions, usage charges and whether promotional screenshots require separate permission.</p>
+<p>We can provide the exact product URLs and expected request volumes. Please reply with the applicable terms and any conditions we must meet.</p>
+</div>
+<h2>save this for each provider</h2>
+<ul>
+<li>Provider and account/plan name; do not include passwords or API keys.</li>
+<li>Invoice or subscription confirmation, licence/terms link and a saved copy.</li>
+<li>Written permission, covered products, approved domains and use cases.</li>
+<li>Attribution wording, caching limits, request allowance and renewal date.</li>
+</ul>
+<table>
+<tr><th>Provider</th><th>Decision / evidence saved</th><th>Next action</th></tr>
+<tr><td>Open-Meteo</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>WillyWeather</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>RainViewer</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>BOM</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>OpenWeather</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</table>
+<h2>agent handover and launch checks</h2>
+<ul>
+<li>Share confirmations and non-secret terms. Enter keys only through the secure secrets form when requested.</li>
+<li>Agent checks endpoint coverage, configures commercial access, rotates exposed keys and updates attribution. Unauthorised sources and fallback paths are disabled or replaced.</li>
+<li>Agent tests forecasts, radar and powder-email inputs without mass-querying providers; checks for exposed secrets and verifies usage controls.</li>
+<li>You publish the completed changes. Agent verifies the live configuration and source behaviour; purchase alone is not deployment.</li>
+<li>Review the launch checklist together before approving ad spend or sending press releases. Retain unresolved items explicitly rather than assuming approval.</li>
+</ul>
+<div class="foot">Weekend outcome: commercial access arranged or requested, evidence retained, and a clear decision for every uncertain source. External replies may take longer; campaign material can be prepared meanwhile.</div>
+</section></body></html>
