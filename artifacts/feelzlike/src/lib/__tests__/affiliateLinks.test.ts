@@ -128,6 +128,15 @@ function test(name: string, fn: () => void): void {
 
 process.stdout.write("\naffiliateLinks.ts\n");
 
+test("retired AU Expedia curated links cannot be revived by explicit affiliate IDs", () => {
+  const links = buildBookingLinks({
+    ...auStayNoLinks,
+    booking_links: { expedia: "https://www.expedia.com.au/Hotel-Search?destination=Test" },
+  }, { discoverAll: true, idsOverride: { expedia: "OLD-ID" } });
+  assert.equal(links.expedia, undefined);
+  assert.ok(links.hotels_com);
+});
+
 // ── 1. Default mode: curated-only ────────────────────────────────────────────
 
 test("DEFAULT: stay with no curated booking_links shows only `official` (from website)", () => {
@@ -169,13 +178,14 @@ test("DEFAULT: JP stay with curated rakuten shows rakuten + official only", () =
 test("DISCOVER: AU stay → every AU provider produces an https URL", () => {
   const links = buildBookingLinks(auStayNoLinks, { discoverAll: true });
   const expectedAU: Provider[] = [
-    "booking_com", "agoda", "expedia", "hotels_com",
+    "booking_com", "agoda", "hotels_com",
     "trip_com", "airbnb", "tripadvisor", "official",
   ];
   for (const p of expectedAU) {
     assert.ok(links[p], `expected URL for ${p} on AU stay in discoverAll, got ${links[p]}`);
     assert.match(links[p]!, /^https:\/\//);
   }
+  assert.equal(links.expedia, undefined, "closed AU programme must not be promoted");
 });
 
 test("DISCOVER: JP stay → every JP provider including jalan + rakuten", () => {
@@ -194,7 +204,7 @@ test("DISCOVER: search URL contains property name + town label", () => {
   const links = buildBookingLinks(auStayNoLinks, { discoverAll: true });
   const name = encodeURIComponent("Banjo Paterson Inn");
   const town = encodeURIComponent("Jindabyne");
-  for (const p of ["booking_com", "agoda", "expedia", "hotels_com", "trip_com", "airbnb"] as Provider[]) {
+  for (const p of ["booking_com", "agoda", "hotels_com", "trip_com", "airbnb"] as Provider[]) {
     assert.ok(
       links[p]!.includes(name) || links[p]!.includes("Banjo+Paterson+Inn"),
       `${p} URL missing property name: ${links[p]}`,
@@ -251,7 +261,7 @@ test("Per-provider affiliate keys: cid, affcid, allianceid, c", () => {
     },
   });
   assert.match(links.agoda!, /[?&]cid=AGD-99(?:&|$)/);
-  assert.match(links.expedia!, /[?&]affcid=EXP-1(?:&|$)/);
+  assert.equal(links.expedia, undefined);
   assert.match(links.hotels_com!, /[?&]affcid=HC-1(?:&|$)/);
   assert.match(links.trip_com!, /[?&]allianceid=TC-1(?:&|$)/);
   assert.match(links.airbnb!, /[?&]c=AB-1(?:&|$)/);
@@ -270,7 +280,7 @@ test("No affiliate ID → no affiliate-param leakage", () => {
   const links = buildBookingLinks(auStayNoLinks, { discoverAll: true });
   assert.doesNotMatch(links.booking_com!, /[?&]aid=/);
   assert.doesNotMatch(links.agoda!, /[?&]cid=/);
-  assert.doesNotMatch(links.expedia!, /[?&]affcid=/);
+  assert.equal(links.expedia, undefined);
 });
 
 test("Curated URL with PRE-EXISTING aid → not double-written", () => {

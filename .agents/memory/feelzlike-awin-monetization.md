@@ -5,6 +5,11 @@ description: How feelzlike earns — Awin (auto-convert) powers Europcar; CJ (pe
 
 # feelzlike Awin affiliate monetization
 
+## Programme closure overrides older Expedia notes below
+Do not restore the Expedia AU Awin placement (including NZ stays) or Hotels.com AU Awin conversion. Preserve Hotels.com's separate CJ arrangement and Europcar's Awin integration.
+**Why:** authenticated Awin programme notices supplied by the owner state that Expedia AU and Hotels.com AU close on 30 October 2026 and require removal of their tracking links and promotional content. The owner authorised early removal. These notices do not establish closure of Hotels.com CJ.
+**How to apply:** treat older statements below about Expedia Awin earning as historical. International direct Expedia links can remain untracked. Keep both brands excluded from Awin auto-conversion, including plain-link fallbacks. Do not infer CJ account approval/status from code alone.
+
 feelzlike monetizes via the **Awin** affiliate network using the **auto-convert** model (not manual per-link deep links).
 
 ## WHICH system actually powers the live booking links (read this first)

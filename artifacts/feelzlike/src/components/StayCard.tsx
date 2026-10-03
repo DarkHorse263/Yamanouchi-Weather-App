@@ -312,6 +312,7 @@ function BookingButtons({ stay, variant = "card" }: BookingButtonsProps) {
           <a
             key={id}
             href={href}
+            data-awinignore={id === "hotels_com" || id === "expedia" ? "true" : undefined}
             target="_blank"
             rel="noopener noreferrer sponsored"
             onClick={() => {

@@ -76,6 +76,7 @@ export function StayPlatformBar({
             <a
               key={p.id}
               href={href}
+              data-awinignore={p.id === "hotels" || p.id === "expedia" ? "true" : undefined}
               target="_blank"
               rel="noopener noreferrer sponsored"
               onClick={() => trackBook(p.id)}
@@ -98,6 +99,7 @@ export function StayPlatformBar({
           <a
             key={p.id}
             href={href}
+            data-awinignore={p.id === "hotels" || p.id === "expedia" ? "true" : undefined}
             target="_blank"
             rel="noopener noreferrer sponsored"
             title={p.label}
@@ -119,6 +121,7 @@ export function StayPlatformBar({
         <a
           key={p.id}
           href={href}
+          data-awinignore={p.id === "hotels" || p.id === "expedia" ? "true" : undefined}
           target="_blank"
           rel="noopener noreferrer sponsored"
           onClick={() => trackBook(p.id)}

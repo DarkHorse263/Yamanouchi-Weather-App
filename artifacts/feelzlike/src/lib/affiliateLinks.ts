@@ -322,6 +322,8 @@ export function buildBookingLinks(
 
   const out: Partial<Record<Provider, string>> = {};
   for (const provider of PROVIDERS) {
+    // Retire the AU placement even when stale curated data or an ID is supplied.
+    if (provider === "expedia" && stay.country === "AU") continue;
     if (!PROVIDER_COUNTRIES[provider].includes(stay.country)) continue;
 
     const curated = curatedUrlFor(stay, provider);

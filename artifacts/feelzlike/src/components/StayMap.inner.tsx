@@ -209,12 +209,12 @@ const POPOVER_PROVIDER_ORDER: readonly Provider[] = [
   "rakuten",
 ];
 
-function primaryBookingHref(stay: Stay): { href: string; label: string } | null {
+function primaryBookingHref(stay: Stay): { href: string; label: string; ignoreAwin?: boolean } | null {
   const links = buildBookingLinks(stay);
   for (const id of POPOVER_PROVIDER_ORDER) {
     const url = links[id];
     if (typeof url === "string" && url.length > 0) {
-      return { href: url, label: PROVIDER_LABELS[id] };
+      return { href: url, label: PROVIDER_LABELS[id], ignoreAwin: id === "hotels_com" || id === "expedia" };
     }
   }
   if (links.official) return { href: links.official, label: PROVIDER_LABELS.official };
@@ -459,6 +459,7 @@ export default function StayMapInner({
                     {primary ? (
                       <a
                         href={primary.href}
+                        data-awinignore={primary.ignoreAwin ? "true" : undefined}
                         target="_blank"
                         rel="noopener noreferrer sponsored"
                         aria-label={`Book ${stay.name} on ${primary.label}`}

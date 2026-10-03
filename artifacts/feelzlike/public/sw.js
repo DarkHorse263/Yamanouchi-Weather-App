@@ -78,7 +78,7 @@
 // v29: forecast responses include the mountain timezone for source-time display.
 // v33: live local/town condition responses must not silently fall back to
 // unbounded SW cache after a failed request; the server already labels stale.
-const CACHE_VERSION = "v33";
+const CACHE_VERSION = "v34";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;

@@ -197,6 +197,7 @@ export function TownStay() {
               <li key={p.id}>
                 <a
                   href={href}
+                  data-awinignore={p.id === "hotels" || p.id === "expedia" ? "true" : undefined}
                   target="_blank"
                   rel="noopener noreferrer sponsored"
                   data-platform={p.id satisfies StayPlatformId}
