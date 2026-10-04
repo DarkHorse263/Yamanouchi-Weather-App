@@ -1,6 +1,9 @@
 import type { ComponentType } from "react";
+import { hasMixedSky } from "@/lib/mixedSky";
 import {
   Cloud,
+  CloudSun,
+  CloudMoon,
   CloudRain,
   CloudSnow,
   Snowflake,
@@ -605,6 +608,7 @@ export function pickIcon(
   precipThresholdMm: number = MARGINAL_PRECIP_THRESHOLD,
 ): ComponentType<{ className?: string; strokeWidth?: number }> {
   if (code === null) return Cloud;
+  if (hasMixedSky(code, precipProbability)) return isDay ? CloudSun : CloudMoon;
   if (code === 0 || code === 1) return isDay ? Sun : Cloud;
   if (code === 2 || code === 3 || code === 45 || code === 48) return Cloud;
   if (code >= 51 && code <= 67) {

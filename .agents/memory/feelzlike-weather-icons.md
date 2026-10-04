@@ -11,6 +11,15 @@ Snow weather codes (WMO 71-77 snowfall + snow grains, 85-86 snow showers) must r
 
 ## DAILY weather_code is "most severe of day" - reconcile with snowfall
 
+## Local mixed-condition presentation
+
+The owner wants a sun-and-cloud icon when local forecasts mix sunshine and
+possible rain, rather than an unqualified sun.
+**Why:** the sunny icon beside a continuing rain chance looked contradictory.
+**How to apply:** preserve the distinction between current conditions and future
+rain risk. Do not turn an actually rainy or snowy period into a sunny-breaks
+icon just because some other hours are dry.
+
 Open-Meteo's **daily** `weather_code` is the single most-severe condition of the day, so thunderstorm (>=95) and rain (61-67, 80-82) codes OUTRANK snow even on a day that is mostly snow - producing a thunderstorm/rain icon on a heavy-snow day (e.g. a sub-zero 22cm day). On a ski page snow is the headline, so DAILY forecast cards should reclassify the *display* code to snow when a meaningful amount of snow (>= ~1cm) is forecast on a wet/stormy-coded day. Trace amounts (<1cm) on a real storm day are deliberately NOT reclassified, and days already coded as snow stay snow regardless of amount.
 
 **Why:** a lightning bolt hides a powder day, the most decision-relevant signal for skiers.
