@@ -1,0 +1,486 @@
+{
+  "description": "Observed official directory entries only. Pagination and duplicate POIs unresolved. Directory state is not proof of resort jurisdiction. No feed/elevation/operating status verified.",
+  "entries": [
+    {
+      "sourceName": "Axamer Lizum",
+      "directoryState": "Tyrol",
+      "sourceUrl": "https://www.tyrol.com/activities/sport/skiing/ski-resorts",
+      "detailUrl": "https://www.tyrol.com/activities/sport/skiing/ski-resorts/axamer-lizum-ski-resort",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Bergeralm Steinach am Brenner",
+      "directoryState": "Tyrol",
+      "sourceUrl": "https://www.tyrol.com/activities/sport/skiing/ski-resorts",
+      "detailUrl": "https://www.tyrol.com/activities/sport/skiing/ski-resorts/bergeralm-ski-resort",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Berwang Ski Resort",
+      "directoryState": "Tyrol",
+      "sourceUrl": "https://www.tyrol.com/activities/sport/skiing/ski-resorts",
+      "detailUrl": "https://www.tyrol.com/activities/sport/skiing/ski-resorts/berwang-ski-resort",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Burglift ski resort in Stans",
+      "directoryState": "Tyrol",
+      "sourceUrl": "https://www.tyrol.com/activities/sport/skiing/ski-resorts",
+      "detailUrl": "https://www.tyrol.com/activities/sport/skiing/ski-resorts/burglift-ski-resort-in-stans",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Christlum ski resort in Achenkirch",
+      "directoryState": "Tyrol",
+      "sourceUrl": "https://www.tyrol.com/activities/sport/skiing/ski-resorts",
+      "detailUrl": "https://www.tyrol.com/activities/sport/skiing/ski-resorts/christlum-ski-resort-in-achenkirch",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Ehrwalder Almbahn ski resort",
+      "directoryState": "Tyrol",
+      "sourceUrl": "https://www.tyrol.com/activities/sport/skiing/ski-resorts",
+      "detailUrl": "https://www.tyrol.com/activities/sport/skiing/ski-resorts/ehrwalder-almbahn-ski-resort",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Ski lift Kirchenlandl",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Gesaeuse/Plan-your-holidays/Ideas-for-excursions/Ski-lift-Kirchenlandl_isd_276942",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Kluglifte Hebalm",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Suedsteiermark/Holiday/day-trips/Kluglifte-Hebalm_isd_311228",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Tockneralmlifte",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Murau/Plan-your-holidays/Excursion-destinations/Tockneralmlifte_isd_4163045",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Ski - Waldheimat Hauereck",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Oststeiermark/Plan-your-holiday/Excursion-destinations/Ski-Waldheimat-Hauereck_isd_304843",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Skiarea Modriach - Winkel",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Region-Graz/Vacation-planning/Trip-destination/Skiarea-Modriach-Winkel_isd_292673",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Hauser Kaibling",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Schladming-Dachstein/Vacation-planning/Excursion-destinations/Hauser-Kaibling_isd_69954780",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Family ski lift Schöder",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Murau/Plan-your-holidays/Excursion-destinations/Family-ski-lift-Schoder_isd_4167774",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Skiarea Salzstiegl",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Region-Graz/Vacation-planning/Trip-destination/Skiarea-Salzstiegl_isd_292184",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Ski resort Grebenzen",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Murau/Plan-your-holidays/Excursion-destinations/Ski-resort-Grebenzen_isd_6076021",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Familyskimountain St. Jakob imm Walde",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Oststeiermark/Plan-your-holiday/Excursion-destinations/Familyskimountain-St.Jakob-imm-Walde_isd_305296",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Eichfeldlift",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Hochsteiermark/Plan-your-holiday/Excursion-destinations/Eichfeldlift_isd_286539",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Seeberglift",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Hochsteiermark/Plan-your-holiday/Excursion-destinations/Seeberglift_isd_281269",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Ski Action & Fun in Schladming",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts/Ski-Action-Fun-in-Schladming_a_3762704",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Skiing holidays in the ski areas \"Schneebärenland\"",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts/Skiing-holidays-in-the-ski-areas-Schneebarenland_a_3762702",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Ski & Spa Kreischberg",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts/Ski-Spa-Kreischberg_a_3762703",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": ">\\  Ski holiday offers",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-holiday-offers",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": ">XXL Funslope Hauser Kaibling",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Schladming-Dachstein/Vacation-planning/Excursion-destinations/XXL-Funslope-Hauser-Kaibling_isd_69952569",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": ">Hopsi Children's Winter Wonderland",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Schladming-Dachstein/Vacation-planning/Excursion-destinations/Hopsi-Children-s-Winter-Wonderland_isd_70504706",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": ">Cross-Ride-Track Riesneralm",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Schladming-Dachstein/Vacation-planning/Excursion-destinations/Cross-Ride-Track-Riesneralm_isd_69954830",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": ">Crosspark Reiteralm",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Schladming-Dachstein/Vacation-planning/Excursion-destinations/Crosspark-Reiteralm_isd_69952623",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": ">The Gallic ski village Galsterberg",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Schladming-Dachstein/Vacation-planning/Excursion-destinations/The-Gallic-ski-village-Galsterberg_isd_69950049",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": ">Funslope Hochwurzen",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Schladming-Dachstein/Vacation-planning/Excursion-destinations/Funslope-Hochwurzen_isd_69955618",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": ">Funcross Planai",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Schladming-Dachstein/Vacation-planning/Excursion-destinations/Funcross-Planai_isd_69955014",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": ">Dinopark at the Kreischberg in winter",
+      "directoryState": "Styria",
+      "sourceUrl": "https://www.steiermark.com/en/Styria/Active-holidays-in-nature/Skiing/Ski-resorts",
+      "detailUrl": "https://www.steiermark.com/en/Murau/Plan-your-holidays/Excursion-destinations/Dinopark-at-the-Kreischberg-in-winter_isd_6821820",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Brandtner Schilifte",
+      "directoryState": "Upper Austria",
+      "sourceUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria.html",
+      "detailUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria/oesterreich-poi/detail/201615/brandtner-schilifte.html",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Dachstein Krippenstein",
+      "directoryState": "Upper Austria",
+      "sourceUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria.html",
+      "detailUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria/oesterreich-poi/detail/105011/dachstein-krippenstein.html",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Family ski resort Feuerkogel",
+      "directoryState": "Upper Austria",
+      "sourceUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria.html",
+      "detailUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria/oesterreich-poi/detail/430003371/family-ski-resort-feuerkogel.html",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Family ski resort Kasberg",
+      "directoryState": "Upper Austria",
+      "sourceUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria.html",
+      "detailUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria/oesterreich-poi/detail/200876/family-ski-resort-kasberg.html",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Feuerkogel plateau",
+      "directoryState": "Upper Austria",
+      "sourceUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria.html",
+      "detailUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria/oesterreich-poi/detail/430024029/feuerkogel-plateau.html",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Forsteralm ski area - Gaflenz",
+      "directoryState": "Upper Austria",
+      "sourceUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria.html",
+      "detailUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria/oesterreich-poi/detail/201805/forsteralm-ski-area-gaflenz.html",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Hansberglifte family ski area - St. Johann/Wimberg",
+      "directoryState": "Upper Austria",
+      "sourceUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria.html",
+      "detailUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria/oesterreich-poi/detail/202976/hansberglifte-family-ski-area-st-johann-wimberg.html",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Hochficht ski area - skiing fun for the whole family",
+      "directoryState": "Upper Austria",
+      "sourceUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria.html",
+      "detailUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria/oesterreich-poi/detail/430009937/hochficht-ski-area-skiing-fun-for-the-whole-family.html",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Hochplett Ski Lifts - Oberaschau",
+      "directoryState": "Upper Austria",
+      "sourceUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria.html",
+      "detailUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria/oesterreich-poi/detail/200541/hochplett-ski-lifts-oberaschau.html",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Hotz ski lift in Oberweng",
+      "directoryState": "Upper Austria",
+      "sourceUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria.html",
+      "detailUrl": "https://www.upperaustria.com/en/activities/ski-resorts-and-cross-country-skiing/all-ski-resorts-in-upper-austria/oesterreich-poi/detail/430001415/hotz-ski-lift-in-oberweng.html",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Kötschach-Mauthen",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Klippitztörl",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Emberger Alm",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Grossglockner/ Heiligenblut",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Nassfeld-Pressegger See",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Turracher Höhe",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Simonhöhe",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Katschberg",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Petzen",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Hochrindl/Sirnitz",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Goldeck",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Mölltaler Gletscher",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Rosental - Skigebiet Bodental",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Gitschtal/ Weissbriach",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Dreiländereck",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Gerlitzen Alpe",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Bad Kleinkirchheim",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Weinebene",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Flattnitz",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Ankogel/Mallnitz",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Weissensee",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Heidi-Alm Skipark/Falkert",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    },
+    {
+      "sourceName": "Koralpe",
+      "directoryState": "Carinthia",
+      "sourceUrl": "https://www.visitcarinthia.at/ski",
+      "verification": "official-directory-listed-not-runtime-ready",
+      "retrievedAt": "2026-10-04"
+    }
+  ]
+}

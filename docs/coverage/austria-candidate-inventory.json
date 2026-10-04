@@ -1,0 +1,2672 @@
+{
+  "description": "Unverified discovery leads, NOT an active resort count or production catalogue. Secondary source may contain closed areas, networks, aliases and omissions. Do not import into runtime.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+  "attribution": "Names/localities extracted from Wikipedia, List of ski areas in Austria, CC BY-SA; https://creativecommons.org/licenses/by-sa/4.0/. Parsing and reconciliation annotations added. Elevations and lift counts deliberately not imported.",
+  "retrievedAt": "2026-10-04",
+  "candidates": [
+    {
+      "id": "at-candidate-001",
+      "state": "Kärnten",
+      "sourceName": "Ankogel-Mallnitz",
+      "sourceLocalities": "Mallnitz",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-002",
+      "state": "Kärnten",
+      "sourceName": "Bad Kleinkirchheim",
+      "sourceLocalities": "Bad Kleinkirchheim",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-003",
+      "state": "Kärnten",
+      "sourceName": "Dreiländereck Bergbahnen",
+      "sourceLocalities": "Arnoldstein",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-004",
+      "state": "Kärnten",
+      "sourceName": "Emberger Alm",
+      "sourceLocalities": "Berg im Drautal",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-005",
+      "state": "Kärnten",
+      "sourceName": "Falkert",
+      "sourceLocalities": "Falkert",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-006",
+      "state": "Kärnten",
+      "sourceName": "Flattnitz",
+      "sourceLocalities": "Glödnitz, Metnitz",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-007",
+      "state": "Kärnten",
+      "sourceName": "Gerlitzen",
+      "sourceLocalities": "Annenheim, Sattendorf",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-008",
+      "state": "Kärnten",
+      "sourceName": "Gitschtal",
+      "sourceLocalities": "Weißbriach",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-009",
+      "state": "Kärnten",
+      "sourceName": "Goldeck",
+      "sourceLocalities": "Spittal an der Drau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-010",
+      "state": "Kärnten",
+      "sourceName": "Großglockner Heiligenblut",
+      "sourceLocalities": "Heiligenblut",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-011",
+      "state": "Kärnten",
+      "sourceName": "Innerkrems-Schönfeld-Karneralm",
+      "sourceLocalities": "Kremsbrücke, Ramingstein S",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-012",
+      "state": "Kärnten",
+      "sourceName": "Katschberg-Aineck",
+      "sourceLocalities": "Rennweg, St. Margarethen im Lungau S",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-013",
+      "state": "Kärnten",
+      "sourceName": "Klippitztörl",
+      "sourceLocalities": "Klippitztörl",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-014",
+      "state": "Kärnten",
+      "sourceName": "Koralpe-Schiregion Süd",
+      "sourceLocalities": "St. Stefan im Lavanttal, Wolfsberg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-015",
+      "state": "Kärnten",
+      "sourceName": "Kötschach-Mauthen",
+      "sourceLocalities": "Kötschach-Mauthen",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-016",
+      "state": "Kärnten",
+      "sourceName": "Mölltaler Gletscher",
+      "sourceLocalities": "Flattach",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-017",
+      "state": "Kärnten",
+      "sourceName": "Nassfeld",
+      "sourceLocalities": "Hermagor",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-018",
+      "state": "Kärnten",
+      "sourceName": "Petzen",
+      "sourceLocalities": "Feistritz ob Bleiburg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-019",
+      "state": "Kärnten",
+      "sourceName": "Simonhöhe",
+      "sourceLocalities": "St. Urban",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-020",
+      "state": "Kärnten",
+      "sourceName": "Sirnitz- Hochrindl",
+      "sourceLocalities": "Sirnitz",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-021",
+      "state": "Kärnten",
+      "sourceName": "Turracher Höhe",
+      "sourceLocalities": "Reichenau, Turrach St",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-022",
+      "state": "Kärnten",
+      "sourceName": "Verditz-Gerlitzen",
+      "sourceLocalities": "Afritz",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-023",
+      "state": "Kärnten",
+      "sourceName": "Weinebene",
+      "sourceLocalities": "St. Gertraud, Deutschlandsberg St",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-024",
+      "state": "Kärnten",
+      "sourceName": "Weißensee",
+      "sourceLocalities": "Weißensee",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-025",
+      "state": "Niederösterreich",
+      "sourceName": "Aichelberglifte",
+      "sourceLocalities": "Karlstift",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-026",
+      "state": "Niederösterreich",
+      "sourceName": "Annaberg",
+      "sourceLocalities": "Annaberg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-027",
+      "state": "Niederösterreich",
+      "sourceName": "Arabichl",
+      "sourceLocalities": "Kirchberg am Wechsel",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-028",
+      "state": "Niederösterreich",
+      "sourceName": "Arralifte",
+      "sourceLocalities": "Harmanschlag",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-029",
+      "state": "Niederösterreich",
+      "sourceName": "Eibllifte",
+      "sourceLocalities": "Türnitz",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-030",
+      "state": "Niederösterreich",
+      "sourceName": "Enne",
+      "sourceLocalities": "Schwarzenbach an der Pielach",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-031",
+      "state": "Niederösterreich",
+      "sourceName": "Furtnerlifte",
+      "sourceLocalities": "Rohr im Gebirge",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-032",
+      "state": "Niederösterreich",
+      "sourceName": "Gemeindealpe",
+      "sourceLocalities": "Mitterbach",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-033",
+      "state": "Niederösterreich",
+      "sourceName": "Hirschenkogel",
+      "sourceLocalities": "Semmering",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-034",
+      "state": "Niederösterreich",
+      "sourceName": "Hochbärneck",
+      "sourceLocalities": "Sankt Anton an der Jeßnitz",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-035",
+      "state": "Niederösterreich",
+      "sourceName": "Hochkar",
+      "sourceLocalities": "Göstling an der Ybbs",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-036",
+      "state": "Niederösterreich",
+      "sourceName": "Jauerling",
+      "sourceLocalities": "Oberndorf am Jauerling",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-037",
+      "state": "Niederösterreich",
+      "sourceName": "Königsberg",
+      "sourceLocalities": "Hollenstein an der Ybbs",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-038",
+      "state": "Niederösterreich",
+      "sourceName": "Losenheim",
+      "sourceLocalities": "Puchberg am Schneeberg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-039",
+      "state": "Niederösterreich",
+      "sourceName": "Maiszinken",
+      "sourceLocalities": "Lunz am See",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-040",
+      "state": "Niederösterreich",
+      "sourceName": "Mönichkirchen-Mariensee",
+      "sourceLocalities": "Mönichkirchen",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-041",
+      "state": "Niederösterreich",
+      "sourceName": "Ötscherlifte",
+      "sourceLocalities": "Lackenhof",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-042",
+      "state": "Niederösterreich",
+      "sourceName": "Raxalpe",
+      "sourceLocalities": "Reichenau an der Rax",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-043",
+      "state": "Niederösterreich",
+      "sourceName": "Sonnwendstein- Maria Schutz",
+      "sourceLocalities": "Schottwien",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-044",
+      "state": "Niederösterreich",
+      "sourceName": "Steinberglift",
+      "sourceLocalities": "Neusiedl an der Zaya",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-045",
+      "state": "Niederösterreich",
+      "sourceName": "Unterberg",
+      "sourceLocalities": "Pernitz",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-046",
+      "state": "Niederösterreich",
+      "sourceName": "Wechsel",
+      "sourceLocalities": "St. Corona am Wechsel",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-047",
+      "state": "Oberösterreich",
+      "sourceName": "Feuerkogel",
+      "sourceLocalities": "Ebensee am Traunsee",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-048",
+      "state": "Oberösterreich",
+      "sourceName": "Forsteralm",
+      "sourceLocalities": "Gaflenz",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-049",
+      "state": "Oberösterreich",
+      "sourceName": "Freistadt",
+      "sourceLocalities": "Freistadt",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-050",
+      "state": "Oberösterreich",
+      "sourceName": "Glasenberg",
+      "sourceLocalities": "Maria Neustift",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-051",
+      "state": "Oberösterreich",
+      "sourceName": "Gosau",
+      "sourceLocalities": "Gosau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-052",
+      "state": "Oberösterreich",
+      "sourceName": "Hansberg",
+      "sourceLocalities": "Sankt Johann am Wimberg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-053",
+      "state": "Oberösterreich",
+      "sourceName": "Hinterstoder",
+      "sourceLocalities": "Hinterstoder",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-054",
+      "state": "Oberösterreich",
+      "sourceName": "Hochficht- Böhmerwald",
+      "sourceLocalities": "Klaffer am Hochficht",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-055",
+      "state": "Oberösterreich",
+      "sourceName": "Hochlecken",
+      "sourceLocalities": "Neukirchen",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-056",
+      "state": "Oberösterreich",
+      "sourceName": "Hohe Dirn",
+      "sourceLocalities": "Losenstein",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-057",
+      "state": "Oberösterreich",
+      "sourceName": "Kasberg",
+      "sourceLocalities": "Grünau im Almtal",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-058",
+      "state": "Oberösterreich",
+      "sourceName": "Katrinalm",
+      "sourceLocalities": "Bad Ischl",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-059",
+      "state": "Oberösterreich",
+      "sourceName": "Kirchschlag",
+      "sourceLocalities": "Kirchschlag bei Linz",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-060",
+      "state": "Oberösterreich",
+      "sourceName": "Königswiesen",
+      "sourceLocalities": "Königswiesen",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-061",
+      "state": "Oberösterreich",
+      "sourceName": "Krippenstein-Obertraun",
+      "sourceLocalities": "Obertraun",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-062",
+      "state": "Oberösterreich",
+      "sourceName": "Pyhrn-Priel",
+      "sourceLocalities": "Spital am Pyhrn",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-063",
+      "state": "Oberösterreich",
+      "sourceName": "Sandl- Viehberg",
+      "sourceLocalities": "Sandl",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-064",
+      "state": "Oberösterreich",
+      "sourceName": "Sternsteinlifte",
+      "sourceLocalities": "Bad Leonfelden",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-065",
+      "state": "Oberösterreich",
+      "sourceName": "Wurzeralm",
+      "sourceLocalities": "Spital am Pyhrn",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-066",
+      "state": "Oberösterreich",
+      "sourceName": "Zwieselalm",
+      "sourceLocalities": "Gosau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-067",
+      "state": "Salzburg",
+      "sourceName": "Abtenau im Lammertal",
+      "sourceLocalities": "Abtenau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-068",
+      "state": "Salzburg",
+      "sourceName": "Buchberg",
+      "sourceLocalities": "Goldegg im Pongau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-069",
+      "state": "Salzburg",
+      "sourceName": "Dachstein West",
+      "sourceLocalities": "Annaberg-Lungötz, Rußbach am Paß Gschütt (mit Gosau,OÖ)",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-070",
+      "state": "Salzburg",
+      "sourceName": "Dorfgastein-Großarl",
+      "sourceLocalities": "Dorfgastein, Großarl",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-071",
+      "state": "Salzburg",
+      "sourceName": "Dürrnberg",
+      "sourceLocalities": "Hallein",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-072",
+      "state": "Salzburg",
+      "sourceName": "Fageralm",
+      "sourceLocalities": "Forstau, Radstadt",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-073",
+      "state": "Salzburg",
+      "sourceName": "Fanningberg",
+      "sourceLocalities": "Mariapfarr",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-074",
+      "state": "Salzburg",
+      "sourceName": "Filzmoos Roßbrand/Großberg",
+      "sourceLocalities": "Filzmoos",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-075",
+      "state": "Salzburg",
+      "sourceName": "Flachau snow space",
+      "sourceLocalities": "Flachau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-076",
+      "state": "Salzburg",
+      "sourceName": "Flachauwinkl–Kleinarl Shuttleberg",
+      "sourceLocalities": "Kleinarl, Flachauwinkl",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-077",
+      "state": "Salzburg",
+      "sourceName": "Gaißau–Hintersee",
+      "sourceLocalities": "Krispl",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-078",
+      "state": "Salzburg",
+      "sourceName": "Graukogel",
+      "sourceLocalities": "Bad Gastein",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-079",
+      "state": "Salzburg",
+      "sourceName": "Großeck–Speiereck",
+      "sourceLocalities": "Mauterndorf, St. Michael im Lungau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-080",
+      "state": "Salzburg",
+      "sourceName": "Hahnbaumlifte St. Johann",
+      "sourceLocalities": "St. Johann im Pongau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-081",
+      "state": "Salzburg",
+      "sourceName": "Hochkönigs Winterreich",
+      "sourceLocalities": "Mühlbach am Hochkönig, Dienten, Maria Alm (mit Hintermoos und Hinterthal)",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-082",
+      "state": "Salzburg",
+      "sourceName": "Kitzsteinhorn-Kaprun",
+      "sourceLocalities": "Kaprun",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-083",
+      "state": "Salzburg",
+      "sourceName": "Loferer Alm",
+      "sourceLocalities": "Lofer",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-084",
+      "state": "Salzburg",
+      "sourceName": "Maiskogel",
+      "sourceLocalities": "Kaprun",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-085",
+      "state": "Salzburg",
+      "sourceName": "Monte Populo",
+      "sourceLocalities": "Eben im Pongau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-086",
+      "state": "Salzburg",
+      "sourceName": "Obertauern",
+      "sourceLocalities": "Obertauern",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-087",
+      "state": "Salzburg",
+      "sourceName": "Postalm Arena am Wolfgangsee",
+      "sourceLocalities": "Strobl",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-088",
+      "state": "Salzburg",
+      "sourceName": "Radstadt–Altenmarkt Schischaukel",
+      "sourceLocalities": "Radstadt, Altenmarkt",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-089",
+      "state": "Salzburg",
+      "sourceName": "Rauriser Hochalmbahnen",
+      "sourceLocalities": "Rauris",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-090",
+      "state": "Salzburg",
+      "sourceName": "Saalbach Hinterglemm Leogang Fieberbrunn",
+      "sourceLocalities": "Saalbach-Hinterglemm, Leogang, Fieberbrunn T",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-091",
+      "state": "Salzburg",
+      "sourceName": "St. Johann- Alpendorf",
+      "sourceLocalities": "St. Johann im Pongau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-092",
+      "state": "Salzburg",
+      "sourceName": "St. Martin im Lammertal",
+      "sourceLocalities": "St. Martin am Tennengebirge",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-093",
+      "state": "Salzburg",
+      "sourceName": "Schloßalm–Angertal–Stubnerkogel",
+      "sourceLocalities": "Bad Gastein, Bad Hofgastein",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-094",
+      "state": "Salzburg",
+      "sourceName": "Schmittenhöhe",
+      "sourceLocalities": "Zell am See",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-095",
+      "state": "Salzburg",
+      "sourceName": "Sportgastein",
+      "sourceLocalities": "Sportgastein",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-096",
+      "state": "Salzburg",
+      "sourceName": "Wagrain",
+      "sourceLocalities": "Wagrain",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-097",
+      "state": "Salzburg",
+      "sourceName": "Weißsee–Gletscherwelt",
+      "sourceLocalities": "Uttendorf",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-098",
+      "state": "Salzburg",
+      "sourceName": "Werfenweng",
+      "sourceLocalities": "Werfenweng",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-099",
+      "state": "Salzburg",
+      "sourceName": "Wildkogel",
+      "sourceLocalities": "Neukirchen am Großvenediger",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-100",
+      "state": "Salzburg",
+      "sourceName": "Zauchensee–Flachauwinkel Skiparadies",
+      "sourceLocalities": "Altenmarkt-Zauchensee, Flachauwinkl",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-101",
+      "state": "Salzburg",
+      "sourceName": "Zillertal Arena",
+      "sourceLocalities": "Krimml, Wald im Pinzgau, Gerlos T (mit dem Zillertal)",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-102",
+      "state": "Salzburg",
+      "sourceName": "Zwölferhorn",
+      "sourceLocalities": "St.Gilgen am Wolfgangsee",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-103",
+      "state": "Styria",
+      "sourceName": "Aflenzer Bürgeralm",
+      "sourceLocalities": "Aflenz Kurort",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-104",
+      "state": "Styria",
+      "sourceName": "Alpl",
+      "sourceLocalities": "Krieglach",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-105",
+      "state": "Styria",
+      "sourceName": "Brunnalm-Hohe Veitsch",
+      "sourceLocalities": "Veitsch",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-106",
+      "state": "Styria",
+      "sourceName": "Dockneralm",
+      "sourceLocalities": "Krakaudorf",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-107",
+      "state": "Styria",
+      "sourceName": "Elfenberg",
+      "sourceLocalities": "Mautern in Steiermark",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-108",
+      "state": "Styria",
+      "sourceName": "Feichteck-Brandlucken",
+      "sourceLocalities": "St. Kathrein am Offenegg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-109",
+      "state": "Styria",
+      "sourceName": "Gaaler Lifte",
+      "sourceLocalities": "Gaal, Knittelfeld",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-110",
+      "state": "Styria",
+      "sourceName": "Gaberl-Stubalpe",
+      "sourceLocalities": "Salla",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-111",
+      "state": "Styria",
+      "sourceName": "Galsterbergalm",
+      "sourceLocalities": "Pruggern",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-112",
+      "state": "Styria",
+      "sourceName": "Grebenzen",
+      "sourceLocalities": "Sankt Lambrecht",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-113",
+      "state": "Styria",
+      "sourceName": "Gruber Lifte",
+      "sourceLocalities": "Steinhaus am Semmering",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-114",
+      "state": "Styria",
+      "sourceName": "Hauereck",
+      "sourceLocalities": "St. Kathrein am Hauenstein",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-115",
+      "state": "Styria",
+      "sourceName": "Hauser Kaibling",
+      "sourceLocalities": "Haus im Ennstal",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-116",
+      "state": "Styria",
+      "sourceName": "Hebalm (2015 aufgelassen)",
+      "sourceLocalities": "Pack",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-117",
+      "state": "Styria",
+      "sourceName": "Hebalm-Kluglifte",
+      "sourceLocalities": "Deutschlandsberg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-118",
+      "state": "Styria",
+      "sourceName": "Hirschegg",
+      "sourceLocalities": "Hirschegg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-119",
+      "state": "Styria",
+      "sourceName": "Hohentauern",
+      "sourceLocalities": "Hohentauern",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-120",
+      "state": "Styria",
+      "sourceName": "Kaiserau",
+      "sourceLocalities": "Rottenmann, Admont",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-121",
+      "state": "Styria",
+      "sourceName": "Kleinlobming",
+      "sourceLocalities": "Knittelfeld",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-122",
+      "state": "Styria",
+      "sourceName": "Kreischberg",
+      "sourceLocalities": "St. Georgen ob Murau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-123",
+      "state": "Styria",
+      "sourceName": "Lachtal",
+      "sourceLocalities": "Schönberg-Lachtal, Judenburg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-124",
+      "state": "Styria",
+      "sourceName": "Lammeralm",
+      "sourceLocalities": "Langenwang",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-125",
+      "state": "Styria",
+      "sourceName": "Loser-Altaussee",
+      "sourceLocalities": "Altaussee",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-126",
+      "state": "Styria",
+      "sourceName": "Mariazeller Land",
+      "sourceLocalities": "Mariazell",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-127",
+      "state": "Styria",
+      "sourceName": "Modriach-Winkel",
+      "sourceLocalities": "Modriach",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-128",
+      "state": "Styria",
+      "sourceName": "Mönichwald- Hochwechsel",
+      "sourceLocalities": "Mönichwald",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-129",
+      "state": "Styria",
+      "sourceName": "Murauer Frauenalpe, (seit 2016/17 nicht geöffnet)",
+      "sourceLocalities": "Murau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-130",
+      "state": "Styria",
+      "sourceName": "Niederalpl",
+      "sourceLocalities": "Mürzsteg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-131",
+      "state": "Styria",
+      "sourceName": "Oberes Murtal-Spitzerlift",
+      "sourceLocalities": "St. Lorenzen bei Knittelfeld",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-132",
+      "state": "Styria",
+      "sourceName": "Parfußwirt",
+      "sourceLocalities": "Trahütten, Deutschlandsberg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-133",
+      "state": "Styria",
+      "sourceName": "Planai– Hochwurzen",
+      "sourceLocalities": "Schladming",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-134",
+      "state": "Styria",
+      "sourceName": "Planneralm Snowvally",
+      "sourceLocalities": "Donnersbach, Irdning",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-135",
+      "state": "Styria",
+      "sourceName": "Präbichl",
+      "sourceLocalities": "Vordernberg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-136",
+      "state": "Styria",
+      "sourceName": "Schigebiet Ramsau- Dachsteingletscher",
+      "sourceLocalities": "Ramsau am Dachstein",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-137",
+      "state": "Styria",
+      "sourceName": "Reiteralm",
+      "sourceLocalities": "Pichl-Gleiming",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-138",
+      "state": "Styria",
+      "sourceName": "Rieseralm",
+      "sourceLocalities": "Obdach",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-139",
+      "state": "Styria",
+      "sourceName": "Riesneralm",
+      "sourceLocalities": "Donnersbachwald",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-140",
+      "state": "Styria",
+      "sourceName": "Salzstiegl",
+      "sourceLocalities": "Hirschegg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-141",
+      "state": "Styria",
+      "sourceName": "St. Jakob im Walde",
+      "sourceLocalities": "St. Jakob im Walde",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-142",
+      "state": "Styria",
+      "sourceName": "Schöckl",
+      "sourceLocalities": "Sankt Radegund bei Graz",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-143",
+      "state": "Styria",
+      "sourceName": "Seewiesen-Seeberg",
+      "sourceLocalities": "Seewiesen",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-144",
+      "state": "Styria",
+      "sourceName": "Sommeralm-Holzmeister",
+      "sourceLocalities": "Breitenau am Hochlantsch",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-145",
+      "state": "Styria",
+      "sourceName": "Sommeralm-Pirstingerkogel",
+      "sourceLocalities": "Fladnitz an der Teichalm",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-146",
+      "state": "Styria",
+      "sourceName": "Sonnberglifte",
+      "sourceLocalities": "Wald am Schoberpass",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-147",
+      "state": "Styria",
+      "sourceName": "Stoderzinken",
+      "sourceLocalities": "Gröbming",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-148",
+      "state": "Styria",
+      "sourceName": "Strallegg",
+      "sourceLocalities": "Strallegg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-149",
+      "state": "Styria",
+      "sourceName": "Stuhleck",
+      "sourceLocalities": "Spital am Semmering",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-150",
+      "state": "Styria",
+      "sourceName": "Tauplitzalm",
+      "sourceLocalities": "Tauplitz, Bad Mitterndorf",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-151",
+      "state": "Styria",
+      "sourceName": "Teichalm",
+      "sourceLocalities": "Fladnitz an der Teichalm",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-152",
+      "state": "Styria",
+      "sourceName": "Tonnerhütte",
+      "sourceLocalities": "Mühlen",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-153",
+      "state": "Styria",
+      "sourceName": "Turnau-Schwabenberarena",
+      "sourceLocalities": "Turnau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-154",
+      "state": "Styria",
+      "sourceName": "Wenigzell",
+      "sourceLocalities": "Wenigzell",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-155",
+      "state": "Styria",
+      "sourceName": "Wimmerlift",
+      "sourceLocalities": "Hart-Purgstall, Gleisdorf",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-156",
+      "state": "Tyrol",
+      "sourceName": "Achensee-Maurach",
+      "sourceLocalities": "Maurach",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-157",
+      "state": "Tyrol",
+      "sourceName": "Achensee-Pertisau",
+      "sourceLocalities": "Pertisau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-158",
+      "state": "Tyrol",
+      "sourceName": "Alpbachtal-Wildschönau",
+      "sourceLocalities": "Alpbach, Reith im Alpbachtal, Inneralpbach, Wildschönau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-159",
+      "state": "Tyrol",
+      "sourceName": "Axamer Lizum",
+      "sourceLocalities": "Axams",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-160",
+      "state": "Tyrol",
+      "sourceName": "Bergeralm",
+      "sourceLocalities": "Steinach am Brenner",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-161",
+      "state": "Tyrol",
+      "sourceName": "Berwang",
+      "sourceLocalities": "Berwang",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-162",
+      "state": "Tyrol",
+      "sourceName": "Biberwier-Marienberg",
+      "sourceLocalities": "Lermoos",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-163",
+      "state": "Tyrol",
+      "sourceName": "Brunnalm",
+      "sourceLocalities": "St. Jakob in Defereggen",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-164",
+      "state": "Tyrol",
+      "sourceName": "Christlum",
+      "sourceLocalities": "Achenkirch am Achensee",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-165",
+      "state": "Tyrol",
+      "sourceName": "Dias Alpe",
+      "sourceLocalities": "Kappl",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-166",
+      "state": "Tyrol",
+      "sourceName": "Ehrwalder Alm",
+      "sourceLocalities": "Ehrwald",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-167",
+      "state": "Tyrol",
+      "sourceName": "Elferlifte Neustift",
+      "sourceLocalities": "Neustift im Stubaital",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-168",
+      "state": "Tyrol",
+      "sourceName": "Fendels- Ried im Oberinntal- Prutz- Faggen",
+      "sourceLocalities": "Ried im Oberinntal",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-169",
+      "state": "Tyrol",
+      "sourceName": "Fügen-Spieljoch",
+      "sourceLocalities": "Fügen",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-170",
+      "state": "Tyrol",
+      "sourceName": "Füssener Jöchle-Grän",
+      "sourceLocalities": "Grän-Haldensee",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-171",
+      "state": "Tyrol",
+      "sourceName": "Glungezer",
+      "sourceLocalities": "Tulfes",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-172",
+      "state": "Tyrol",
+      "sourceName": "Grubigstein",
+      "sourceLocalities": "Lermoos",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-173",
+      "state": "Tyrol",
+      "sourceName": "Hintertux Glacier",
+      "sourceLocalities": "Hintertux",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-174",
+      "state": "Tyrol",
+      "sourceName": "Hochfügen-Hochzillertal",
+      "sourceLocalities": "Hochfügen, Kaltenbach",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-175",
+      "state": "Tyrol",
+      "sourceName": "Hochimst",
+      "sourceLocalities": "Imst",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-176",
+      "state": "Tyrol",
+      "sourceName": "Hochoetz",
+      "sourceLocalities": "Oetz in Tirol",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-177",
+      "state": "Tyrol",
+      "sourceName": "Hochpustertal",
+      "sourceLocalities": "Sillian",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-178",
+      "state": "Tyrol",
+      "sourceName": "Hochzeiger",
+      "sourceLocalities": "Jerzens im Pitztal",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-179",
+      "state": "Tyrol",
+      "sourceName": "Höfener Alm-Hahnenkamm",
+      "sourceLocalities": "Höfen bei Reutte",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-180",
+      "state": "Tyrol",
+      "sourceName": "Kals am Großglockner",
+      "sourceLocalities": "Kals am Großglockner",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-181",
+      "state": "Tyrol",
+      "sourceName": "Kaunertal Gletscher",
+      "sourceLocalities": "Kaunertal- Feichten, Fendels",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-182",
+      "state": "Tyrol",
+      "sourceName": "Kellerjoch",
+      "sourceLocalities": "Schwaz",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-183",
+      "state": "Tyrol",
+      "sourceName": "Kirchdorf",
+      "sourceLocalities": "Kirchdorf in Tirol",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-184",
+      "state": "Tyrol",
+      "sourceName": "Kitzbühel",
+      "sourceLocalities": "Kitzbühel, Kirchberg, Aurach, Jochberg, Reith, Mittersill,S Hollersbach S",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-185",
+      "state": "Tyrol",
+      "sourceName": "Kössen",
+      "sourceLocalities": "Kössen,S Hollersbach S",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-186",
+      "state": "Tyrol",
+      "sourceName": "Kössen",
+      "sourceLocalities": "Kössen im Kaiserwinkl",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-187",
+      "state": "Tyrol",
+      "sourceName": "Kramsach",
+      "sourceLocalities": "Kramsach",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-188",
+      "state": "Tyrol",
+      "sourceName": "Kühtai",
+      "sourceLocalities": "Kühtai in Tirol",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-189",
+      "state": "Tyrol",
+      "sourceName": "Leutasch",
+      "sourceLocalities": "Weidach",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-190",
+      "state": "Tyrol",
+      "sourceName": "Matreier Goldried",
+      "sourceLocalities": "Matrei in Osttirol",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-191",
+      "state": "Tyrol",
+      "sourceName": "Mutterer Alm",
+      "sourceLocalities": "Mutters",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-192",
+      "state": "Tyrol",
+      "sourceName": "Naturpark Lechtal",
+      "sourceLocalities": "Bach, Bschlabs, Elbigenalp, Elmen, Forchach, Gramais, Häselgehr, Hinterhornbach, Holzgau, Kaisers, Pfaffler, Stanzach, Steeg, Vorderhornbach",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-193",
+      "state": "Tyrol",
+      "sourceName": "Nauders",
+      "sourceLocalities": "Nauders am Reschenpass",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-194",
+      "state": "Tyrol",
+      "sourceName": "Nesselwängle",
+      "sourceLocalities": "Nesselwängle",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-195",
+      "state": "Tyrol",
+      "sourceName": "Nordpark",
+      "sourceLocalities": "Innsbruck",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-196",
+      "state": "Tyrol",
+      "sourceName": "Obergurgl-Hochgurgl",
+      "sourceLocalities": "Obergurgl",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-197",
+      "state": "Tyrol",
+      "sourceName": "Oberperfuss- Rangger Köpfl",
+      "sourceLocalities": "Oberperfuss",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-198",
+      "state": "Tyrol",
+      "sourceName": "Obertilliach-Golzentipp",
+      "sourceLocalities": "Obertilliach",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-199",
+      "state": "Tyrol",
+      "sourceName": "Patscherkofel",
+      "sourceLocalities": "Igls",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-200",
+      "state": "Tyrol",
+      "sourceName": "Pillersee",
+      "sourceLocalities": "St. Ulrich am Pillersee, Hochfilzen",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-201",
+      "state": "Tyrol",
+      "sourceName": "Pitztal Gletscher & Rifflsee",
+      "sourceLocalities": "St. Leonhard im Pitztal",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-202",
+      "state": "Tyrol",
+      "sourceName": "Rohnenlifte",
+      "sourceLocalities": "Zöblen",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-203",
+      "state": "Tyrol",
+      "sourceName": "Saalbach Hinterglemm Leogang Fieberbrunn",
+      "sourceLocalities": "Saalbach Hinterglemm,S Leogang,S Fieberbrunn",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-204",
+      "state": "Tyrol",
+      "sourceName": "St. Johann in Tirol",
+      "sourceLocalities": "St. Johann in Tirol, Oberndorf in Tirol",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-205",
+      "state": "Tyrol",
+      "sourceName": "Sattelberg",
+      "sourceLocalities": "Gries am Brenner",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-206",
+      "state": "Tyrol",
+      "sourceName": "Schattwald- Zöblen",
+      "sourceLocalities": "Schattwald",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-207",
+      "state": "Tyrol",
+      "sourceName": "Schlick 2000",
+      "sourceLocalities": "Fulpmes",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-208",
+      "state": "Tyrol",
+      "sourceName": "See",
+      "sourceLocalities": "See",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-209",
+      "state": "Tyrol",
+      "sourceName": "Seefeld- Gschwandtkopf",
+      "sourceLocalities": "Seefeld, Telfs",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-210",
+      "state": "Tyrol",
+      "sourceName": "Seefeld-Rosshütte",
+      "sourceLocalities": "Seefeld",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-211",
+      "state": "Tyrol",
+      "sourceName": "Serfaus–Fiss–Ladis",
+      "sourceLocalities": "Serfaus, Fiss, Ladis",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-212",
+      "state": "Tyrol",
+      "sourceName": "Ski Arlberg",
+      "sourceLocalities": "St. Anton am Arlberg, St. Christoph am Arlberg, Pettneu am Arlberg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false,
+      "reconciliation": "shared-network-not-an-additional-resort",
+      "existingRegionIds": [
+        "lech-zuers",
+        "st-anton"
+      ],
+      "note": "Network listed in two states; current authored views cover only part. See arlberg-reconciliation.md."
+    },
+    {
+      "id": "at-candidate-213",
+      "state": "Tyrol",
+      "sourceName": "Serleslifte",
+      "sourceLocalities": "Mieders",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-214",
+      "state": "Tyrol",
+      "sourceName": "Silvretta Arena",
+      "sourceLocalities": "Ischgl, Samnaun ( Schweiz)",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-215",
+      "state": "Tyrol",
+      "sourceName": "Silvrettapark",
+      "sourceLocalities": "Galtür",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-216",
+      "state": "Tyrol",
+      "sourceName": "Sölden",
+      "sourceLocalities": "Sölden, Hochsölden",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-217",
+      "state": "Tyrol",
+      "sourceName": "Steinplatte",
+      "sourceLocalities": "Waidring",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-218",
+      "state": "Tyrol",
+      "sourceName": "Stubaier Gletscher",
+      "sourceLocalities": "Neustift im Stubaital",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-219",
+      "state": "Tyrol",
+      "sourceName": "Tiroler Zugspitzbahn",
+      "sourceLocalities": "Ehrwald",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-220",
+      "state": "Tyrol",
+      "sourceName": "Venetregion",
+      "sourceLocalities": "Landeck, Zams, Fließ",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-221",
+      "state": "Tyrol",
+      "sourceName": "Vent",
+      "sourceLocalities": "Vent",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-222",
+      "state": "Tyrol",
+      "sourceName": "Wilder Kaiser – Brixental",
+      "sourceLocalities": "Brixen im Thale, Ellmau, Going, Hopfgarten im Brixental, Itter, Kelchsau, Scheffau am Wilden Kaiser, Söll, Westendorf",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-223",
+      "state": "Tyrol",
+      "sourceName": "Zahmer Kaiser",
+      "sourceLocalities": "Walchsee im Kaiserwinkl",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-224",
+      "state": "Tyrol",
+      "sourceName": "Zettersfeld-Hochstein",
+      "sourceLocalities": "Lienz",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-225",
+      "state": "Tyrol",
+      "sourceName": "Zillertal 3000",
+      "sourceLocalities": "Mayrhofen, Finkenberg, Lanersbach, Vorderlanersbach",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-226",
+      "state": "Tyrol",
+      "sourceName": "Zillertal-Rastkogel-Eggalm",
+      "sourceLocalities": "Tux",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-227",
+      "state": "Tyrol",
+      "sourceName": "Zillertal Arena",
+      "sourceLocalities": "Zell am Ziller, Gerlos, Krimml,S Wald im Pinzgau S",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-228",
+      "state": "Vorarlberg",
+      "sourceName": "Alberschwende",
+      "sourceLocalities": "Alberschwende",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-229",
+      "state": "Vorarlberg",
+      "sourceName": "Andelsbuch",
+      "sourceLocalities": "Andelsbuch, Bezau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-230",
+      "state": "Vorarlberg",
+      "sourceName": "Bödele-Hochälpele",
+      "sourceLocalities": "Schwarzenberg, Dornbirn",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-231",
+      "state": "Vorarlberg",
+      "sourceName": "Brandnertal",
+      "sourceLocalities": "Brand",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-232",
+      "state": "Vorarlberg",
+      "sourceName": "Damüls-Mellau",
+      "sourceLocalities": "Au, Damüls, Mellau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-233",
+      "state": "Vorarlberg",
+      "sourceName": "Diedamskopf",
+      "sourceLocalities": "Schoppernau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-234",
+      "state": "Vorarlberg",
+      "sourceName": "Fontanella-Faschina",
+      "sourceLocalities": "Fontanella",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-235",
+      "state": "Vorarlberg",
+      "sourceName": "Fellhorn/Kanzelwand",
+      "sourceLocalities": "Riezlern, Oberstdorf im Allgäu",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-236",
+      "state": "Vorarlberg",
+      "sourceName": "Frastanz - Gurtis",
+      "sourceLocalities": "Frastanz",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-237",
+      "state": "Vorarlberg",
+      "sourceName": "Gargellen",
+      "sourceLocalities": "Gargellen",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-238",
+      "state": "Vorarlberg",
+      "sourceName": "Golm",
+      "sourceLocalities": "Tschagguns, Vandans, Matschwitz",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-239",
+      "state": "Vorarlberg",
+      "sourceName": "Grabs-Tschagguns",
+      "sourceLocalities": "Tschagguns",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-240",
+      "state": "Vorarlberg",
+      "sourceName": "Hirschberg",
+      "sourceLocalities": "Bizau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-241",
+      "state": "Vorarlberg",
+      "sourceName": "Hittisberg",
+      "sourceLocalities": "Hittisau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-242",
+      "state": "Vorarlberg",
+      "sourceName": "Hochhäderich",
+      "sourceLocalities": "Hittisau",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-243",
+      "state": "Vorarlberg",
+      "sourceName": "Hochlitten Riefensberg",
+      "sourceLocalities": "Riefensberg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-244",
+      "state": "Vorarlberg",
+      "sourceName": "Hohenems - Schuttannen",
+      "sourceLocalities": "Hohenems",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-245",
+      "state": "Vorarlberg",
+      "sourceName": "Kleinwalsertal",
+      "sourceLocalities": "Riezlern, Hirschegg, Mittelberg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-246",
+      "state": "Vorarlberg",
+      "sourceName": "Kristberg-Silbertal",
+      "sourceLocalities": "Silbertal im Montafon",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-247",
+      "state": "Vorarlberg",
+      "sourceName": "Luggi-Leitner",
+      "sourceLocalities": "Möggers",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-248",
+      "state": "Vorarlberg",
+      "sourceName": "Laterns-Gapfohl",
+      "sourceLocalities": "Laterns, Innerlaterns",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-249",
+      "state": "Vorarlberg",
+      "sourceName": "Muttersberg",
+      "sourceLocalities": "Bludenz",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-250",
+      "state": "Vorarlberg",
+      "sourceName": "Pfänder",
+      "sourceLocalities": "Bregenz",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-251",
+      "state": "Vorarlberg",
+      "sourceName": "Raggal",
+      "sourceLocalities": "Raggal",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-252",
+      "state": "Vorarlberg",
+      "sourceName": "Schetteregg",
+      "sourceLocalities": "Egg im Bregenzerwald",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-253",
+      "state": "Vorarlberg",
+      "sourceName": "Schneiderkopf-Buch",
+      "sourceLocalities": "Buch",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-254",
+      "state": "Vorarlberg",
+      "sourceName": "Sibratsgfäll-Krähenberg",
+      "sourceLocalities": "Sibratsgfäll, Bregenzerwald",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-255",
+      "state": "Vorarlberg",
+      "sourceName": "Silvretta Montafon",
+      "sourceLocalities": "Schruns, Silbertal, St. Gallenkirch, Gaschurn",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-256",
+      "state": "Vorarlberg",
+      "sourceName": "Ski Arlberg",
+      "sourceLocalities": "Lech, Schröcken, Stuben, Warth, Zürs",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false,
+      "reconciliation": "shared-network-not-an-additional-resort",
+      "existingRegionIds": [
+        "lech-zuers",
+        "st-anton"
+      ],
+      "note": "Network listed in two states; current authored views cover only part. See arlberg-reconciliation.md."
+    },
+    {
+      "id": "at-candidate-257",
+      "state": "Vorarlberg",
+      "sourceName": "Sonnenkopf",
+      "sourceLocalities": "Wald am Arlberg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-258",
+      "state": "Vorarlberg",
+      "sourceName": "Sonntag",
+      "sourceLocalities": "Sonntag",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-259",
+      "state": "Vorarlberg",
+      "sourceName": "Sulzberg",
+      "sourceLocalities": "Sulzberg",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-260",
+      "state": "Vorarlberg",
+      "sourceName": "Übersaxen - Gröllerkopf",
+      "sourceLocalities": "Übersaxen",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-261",
+      "state": "Vorarlberg",
+      "sourceName": "Wald am Arlberg",
+      "sourceLocalities": "Wald am Arlberg, Innerwald",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-262",
+      "state": "Vorarlberg",
+      "sourceName": "Walmendingerhorn-Ifen-Heuberg Arena",
+      "sourceLocalities": "Riezlern",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-263",
+      "state": "Vorarlberg",
+      "sourceName": "Zwischenwasser - Furx",
+      "sourceLocalities": "Zwischenwasser",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-264",
+      "state": "Vienna",
+      "sourceName": "Dollwiese",
+      "sourceLocalities": "1130 Wien",
+      "verification": "unverified-secondary-lead",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    },
+    {
+      "id": "at-candidate-265",
+      "state": "Vienna",
+      "sourceName": "Hohe-Wand-Wiese",
+      "sourceLocalities": "1140 Wien",
+      "verification": "officially-described-synthetic-teaching-slope",
+      "disposition": "exclude-from-snow-resort-rollout",
+      "evidenceUrl": "https://www.wien.gv.at/freizeit/skifahren-hohewandwiese",
+      "sourceUrl": "https://en.wikipedia.org/wiki/List_of_ski_areas_in_Austria",
+      "retrievedAt": "2026-10-04",
+      "published": false
+    }
+  ]
+}
