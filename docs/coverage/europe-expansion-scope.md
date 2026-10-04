@@ -3,6 +3,27 @@
 Prepared 4 October 2026. Research and recommendations only; no new regions
 implemented or approved for publication in this pass.
 
+## Owner priority: Austria first
+
+The owner subsequently instructed: "Let's finish Austria before we start any
+other countries/regions." The new-country proposals below are deferred,
+not the active work order. Do not begin their further research or implementation
+until Austria is finished or the owner changes this instruction.
+
+The next Austria-only scoping step is a nationwide coverage inventory, not
+just the previously suggested Sölden/Ischgl/SkiWelt shortlist. Reconcile
+official resort identities against current coverage, distinguish connected
+networks from individual areas, and record every gap or exclusion explicitly.
+Then work through Austrian regions in verified batches, including remaining
+Arlberg gaps, without equating a handful of flagship destinations with
+national completeness.
+
+Completion requires an accounted-for national inventory and working,
+verified coverage for the agreed inclusion set: village/mountain weather,
+terrain elevations, transport, discovery, alerts and routes, with honest
+official link-outs wherever licensed and timestamped live data is unavailable.
+Unresolved items must be reported rather than silently omitted.
+
 ## Austria status
 
 Current authored coverage: Lech Zürs and St Anton am Arlberg, with two
