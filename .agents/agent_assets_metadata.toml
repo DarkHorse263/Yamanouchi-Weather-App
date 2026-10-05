@@ -1399,3 +1399,31 @@ mtime_ms = 1790892174772
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/03e8d98f-303e-4fab-80c7-9527fa6b475d/d04aa25c-46df-49f0-a097-eaee15350c86"
 storage_version_token = "1790892190753344"
 content_type = "application/pdf"
+
+[[outputs]]
+id = "GRZryDGdvPIVgvrzCasUW"
+uri = "file://exports/facebook-cover/feelzlike-facebook-cover.png"
+type = "image"
+title = "Updated Facebook cover · desktop + mobile"
+description = "1640 × 720 PNG featuring the current feelzlike homepage in desktop and mobile layouts, matching your existing side-by-side cover."
+logical_id = "6e97d1b2-a697-4acb-975f-b0111ad33ca3"
+content_hash = "sha256:62009c1e59903790aad198805fe2dd50fa535fb0d45e622b42de0809415addac"
+size = 168354
+mtime_ms = 1791158902676
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/6e97d1b2-a697-4acb-975f-b0111ad33ca3/5bfc7537-0e82-42a4-8ac3-faf43d5ecd55"
+storage_version_token = "1791158928130825"
+content_type = "image/png"
+
+[[outputs]]
+id = "WemX5b-63xV946s7bVtyZ"
+uri = "file://exports/facebook-cover/feelzlike-facebook-cover.jpg"
+type = "image"
+title = "Facebook cover · JPG version"
+description = "High-quality JPG alternative for uploading to Facebook."
+logical_id = "9e9f7a8b-5c2e-4169-96d2-588bba91dd65"
+content_hash = "sha256:515dfca92ac140dd1e40c0dc3b7881b0fae1bb02803c0c5c164fa04555fe3ddc"
+size = 235245
+mtime_ms = 1791158902716
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/9e9f7a8b-5c2e-4169-96d2-588bba91dd65/7daf7d18-536a-4852-9476-4735679aaf41"
+storage_version_token = "1791158929768716"
+content_type = "image/jpeg"
