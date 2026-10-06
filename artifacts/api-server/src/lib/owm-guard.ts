@@ -5,9 +5,12 @@
  * No DDL is needed; missing/unavailable storage fails closed.
  */
 export const OWM_BUDGET = 40;
+// A conservative rolling 32 UTC-day budget covers any monthly reset date.
+// Reserve 5% for account activity outside this app. Counts start on rollout.
+export const OWM_MONTHLY_BUDGET = 950_000;
 export const OWM_WINDOW_MS = 60_000;
 export const OWM_STATE_JOB = "openweather-quota-v1";
-const OWM_LAYERS = ["precipitation_new", "clouds_new", "temp_new", "wind_new", "snow"];
+const OWM_LAYERS = ["precipitation_new", "clouds_new", "temp_new", "wind_new"];
 export function validOwmTile(layer: string, z: string, x: string, y: string): boolean {
   if (!OWM_LAYERS.includes(layer) || ![z, x, y].every(v => /^(0|[1-9]\d{0,5})$/.test(v))) return false;
   const zoom = Number(z);
@@ -21,7 +24,19 @@ interface Client {
   query(sql: string, params?: unknown[]): Promise<{ rows: any[] }>;
   release(error?: boolean): void;
 }
-interface State { admissions: number[]; blockedUntil: number }
+interface State { admissions: number[]; blockedUntil: number; days?: Record<string, number> }
+
+export function monthlyAdmissions(days: Record<string, number> | undefined, now: number) {
+  const today = Math.floor(now / 86_400_000);
+  const retained: Record<string, number> = {};
+  for (const [day, count] of Object.entries(days ?? {})) {
+    if (!/^\d+$/.test(day) || !Number.isSafeInteger(count) || count < 0 || Number(day) > today) {
+      throw new Error("Invalid quota history");
+    }
+    if (Number(day) >= today - 31) retained[day] = count;
+  }
+  return { today: String(today), days: retained, total: Object.values(retained).reduce((a, b) => a + b, 0) };
+}
 
 export function postgresQuotaStore(connect: () => Promise<Client>): QuotaStore {
   async function update(cooldown?: number): Promise<boolean> {
@@ -57,8 +72,13 @@ export function postgresQuotaStore(connect: () => Promise<Client>): QuotaStore {
         throw new Error("Invalid quota state");
       }
       state.admissions = state.admissions.filter(t => t > now - OWM_WINDOW_MS);
-      const allowed = cooldown === undefined && state.blockedUntil <= now && state.admissions.length < OWM_BUDGET;
-      if (allowed) state.admissions.push(now);
+      const monthly = monthlyAdmissions(state.days, now);
+      state.days = monthly.days;
+      const allowed = cooldown === undefined && state.blockedUntil <= now && state.admissions.length < OWM_BUDGET && monthly.total < OWM_MONTHLY_BUDGET;
+      if (allowed) {
+        state.admissions.push(now);
+        state.days[monthly.today] = (state.days[monthly.today] ?? 0) + 1;
+      }
       if (cooldown !== undefined) state.blockedUntil = Math.max(state.blockedUntil, now + cooldown);
       await client.query(`UPDATE job_runs SET summary=$2, started_at=clock_timestamp(),
         finished_at=clock_timestamp(), ok=true WHERE job_name=$1 AND run_key='global'`,

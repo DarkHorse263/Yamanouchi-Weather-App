@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { OpenWeatherAttribution } from "@workspace/feelzlike-shell";
 import { ChevronDown, Shield } from "lucide-react";
 import { useAuth } from "@clerk/react";
 import { useUnitsControl } from "@/components/auth/UserPrefsProvider";
@@ -130,6 +131,7 @@ export function HomeFooter() {
           </a>
         </p>
       </div>
+      <div className="px-4 py-3"><OpenWeatherAttribution /></div>
     </footer>
   );
 }

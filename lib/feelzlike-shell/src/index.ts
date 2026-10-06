@@ -1,3 +1,4 @@
+export { OpenWeatherAttribution } from "./OpenWeatherAttribution";
 export type {
   RegionConfig,
   NavItem,

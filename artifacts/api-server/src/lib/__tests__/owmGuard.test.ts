@@ -1,11 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { OpenWeatherGuard, postgresQuotaStore, cooldownMs, validOwmTile } from "../owm-guard.js";
+import { OpenWeatherGuard, postgresQuotaStore, cooldownMs, validOwmTile, monthlyAdmissions, OWM_MONTHLY_BUDGET } from "../owm-guard.js";
 
 // Mock PostgreSQL transaction/row locking, shared by independent store instances.
-function database() {
-  let summary = '{"admissions":[],"blockedUntil":0}';
+function database(initial = '{"admissions":[],"blockedUntil":0}') {
+  let summary = initial;
   let time = 100_000;
   let tail = Promise.resolve();
   let failed = false;
@@ -36,6 +36,30 @@ function database() {
 }
 const target = (id = 0) => new URL(`https://api.openweathermap.org/data/2.5/weather?lat=${id}&appid=not-a-real-key`);
 const jsonFetch: typeof fetch = async () => new Response('{"weather":[]}');
+
+test("monthly budget is shared across replicas, survives minute reset, and recovers after retention", async () => {
+  const db = database(JSON.stringify({ admissions: [], blockedUntil: 0, days: { "0": OWM_MONTHLY_BUDGET - 1 } }));
+  const a = postgresQuotaStore(db.connect);
+  const b = postgresQuotaStore(db.connect);
+  const results = await Promise.all([a.admit(), b.admit()]);
+  assert.equal(results.filter(Boolean).length, 1);
+  db.advance(60_001);
+  assert.equal(await b.admit(), false);
+  await a.cooldown(60_000);
+  db.advance(60_001);
+  assert.equal(await a.admit(), false);
+  db.advance(32 * 86_400_000);
+  assert.equal(await b.admit(), true);
+});
+
+test("monthly accounting retains 32 UTC days and rejects corrupt counts", () => {
+  const result = monthlyAdmissions({ "0": 10, "1": 20, "31": 30 }, 32 * 86_400_000);
+  assert.equal(result.total, 50);
+  assert.deepEqual(result.days, { "1": 20, "31": 30 });
+  assert.throws(() => monthlyAdmissions({ "0": -1 }, 100_000));
+  assert.throws(() => monthlyAdmissions({ "2": 1 }, 100_000));
+  assert.equal(monthlyAdmissions(undefined, 100_000).total, 0);
+});
 
 test("two independent PostgreSQL stores enforce one rolling budget, including boundary", async () => {
   const db = database();
@@ -151,7 +175,8 @@ test("Retry-After dates, malformed values and bounds", () => {
 });
 
 test("tile layer/zoom/coordinates reject abuse before upstream admission", () => {
-  assert.ok(validOwmTile("snow", "0", "0", "0"));
+  assert.equal(validOwmTile("snow", "0", "0", "0"), false);
+  assert.ok(validOwmTile("clouds_new", "0", "0", "0"));
   assert.ok(validOwmTile("temp_new", "12", "4095", "4095"));
   for (const args of [
     ["other", "1", "0", "0"], ["snow", "13", "0", "0"],

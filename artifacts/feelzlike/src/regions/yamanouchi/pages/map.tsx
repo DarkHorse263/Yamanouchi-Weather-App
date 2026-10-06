@@ -1,4 +1,4 @@
-import { useLanguage } from "@workspace/feelzlike-shell";
+import { useLanguage, OpenWeatherAttribution } from "@workspace/feelzlike-shell";
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -15,13 +15,12 @@ function MapResizer() {
   return null;
 }
 
-type MapLayer = "radar" | "clouds" | "temp" | "snow" | "rain";
+type MapLayer = "radar" | "clouds" | "temp" | "rain";
 
 const WINTER_TABS: { key: MapLayer; label: string; labelJa: string }[] = [
   { key: "radar",  label: "Radar",     labelJa: "レーダー" },
   { key: "clouds", label: "Clouds",    labelJa: "雲" },
   { key: "temp",   label: "Temp (°C)", labelJa: "気温 (°C)" },
-  { key: "snow",   label: "Snow",      labelJa: "積雪" },
 ];
 
 const GREEN_TABS: { key: MapLayer; label: string; labelJa: string }[] = [
@@ -214,7 +213,6 @@ function RadarOverlay({
 const OWM_LAYERS: Record<string, { layer: string; opacity: number }> = {
   clouds: { layer: "clouds_new", opacity: 0.7 },
   temp:   { layer: "temp_new",   opacity: 0.35 },
-  snow:   { layer: "snow",       opacity: 0.8 },
   rain:   { layer: "precipitation_new", opacity: 0.7 },
 };
 
@@ -363,9 +361,8 @@ export default function MapView() {
   }, []);
 
   useEffect(() => {
-    if (!isWinter && activeLayer === "snow") setActiveLayer("rain");
-    if (isWinter && activeLayer === "rain") setActiveLayer("snow");
-  }, [isWinter]);
+    if (isWinter && activeLayer === "rain") setActiveLayer("radar");
+  }, [isWinter, activeLayer]);
 
   useEffect(() => {
     setOverlayUnavailable(false);
@@ -512,7 +509,8 @@ export default function MapView() {
       </div>
 
       <div className="absolute bottom-20 md:bottom-4 right-4 z-20 bg-white/90 backdrop-blur text-slate-500 text-[10px] font-medium px-2.5 py-1.5 rounded-lg shadow-md">
-        {t("OpenStreetMap · RainViewer · OWM", "OpenStreetMap · RainViewer · OWM")}
+        {t("OpenStreetMap · RainViewer", "OpenStreetMap · RainViewer")}
+        {OWM_LAYERS[activeLayer] && <OpenWeatherAttribution />}
       </div>
     </div>
   );

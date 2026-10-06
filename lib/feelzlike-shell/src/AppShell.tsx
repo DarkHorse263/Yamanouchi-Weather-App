@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { OpenWeatherAttribution } from "./OpenWeatherAttribution";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, Leaf, Snowflake, ArrowLeft, Lock, ChevronDown, Compass, Gauge } from "lucide-react";
@@ -468,6 +469,7 @@ export function AppShell({
             {children}
           </motion.div>
         </AnimatePresence>
+        <div className="px-4 py-3"><OpenWeatherAttribution /></div>
       </main>
 
       {/* Mobile bottom nav: grouped Plan + Travel menu + top/bottom items */}
