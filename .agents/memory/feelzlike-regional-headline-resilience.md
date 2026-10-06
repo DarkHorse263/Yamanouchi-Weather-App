@@ -8,3 +8,7 @@ Regional overview weather must not rely on an in-process cache alone. Keep a cro
 **Why:** Autoscale cold starts can coincide with primary-provider throttling. Per-request concurrency limits prevent a stampede but cannot preserve coverage by themselves, and serial upstream timeouts can outlive the UI deadline.
 
 **How to apply:** Bound primary batch concurrency and every retry delay, cap the overall overview response wait, release failed batches promptly, and monitor the shared snapshot as the controlled “new replica plus primary outage” scenario.
+
+Shared backups must merge partial replica results under a cross-replica lock, retaining newer per-region readings and their original expiry. A bounded save should precede returning newly refreshed headlines.
+
+**Why:** The daily check saw healthy live headlines but no usable outage backup. Delayed persistence and whole-snapshot overwrites are confirmed race risks, although unavailable historical logs prevented proving which caused that incident. Do not extend the stale window just to silence the check.

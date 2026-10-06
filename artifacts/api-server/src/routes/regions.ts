@@ -1,6 +1,7 @@
 import { fetchOpenMeteo } from "../lib/openMeteoClient";
 import { Router, type IRouter } from "express";
-import { and, eq } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
+import { mergeHeadlineEntries } from "../lib/headlineSnapshot.js";
 import { db, jobRunsTable } from "@workspace/db";
 import { LruTtlCache } from "../lib/lru-cache.js";
 import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
@@ -2480,6 +2481,7 @@ async function hydrateSharedSnapshot(): Promise<number> {
   sharedSnapshotHydration = (async () => {
     try {
       const snapshot = await readSharedSnapshot();
+      sharedSnapshotHydrated = true;
       const now = Date.now();
       let loaded = 0;
       for (const [id, entry] of snapshot?.entries ?? []) {
@@ -2495,7 +2497,6 @@ async function hydrateSharedSnapshot(): Promise<number> {
       console.warn("[regions] shared snapshot hydration failed:", err);
       return 0;
     } finally {
-      sharedSnapshotHydrated = true;
       sharedSnapshotHydration = null;
     }
   })();
@@ -2503,15 +2504,29 @@ async function hydrateSharedSnapshot(): Promise<number> {
 }
 
 async function persistSharedSnapshot(): Promise<void> {
-  if (sharedSnapshotPersisting) return sharedSnapshotPersisting;
+  // A caller arriving during a write must save again after it: the cache may
+  // have received the final batch while that earlier write was in progress.
+  if (sharedSnapshotPersisting) {
+    await sharedSnapshotPersisting;
+    return persistSharedSnapshot();
+  }
   const now = new Date();
   const snapshot: SharedHeadlineSnapshot = {
     version: 1,
     savedAt: now.toISOString(),
     entries: [...cache.entries()],
   };
-  sharedSnapshotPersisting = db
-    .insert(jobRunsTable)
+  sharedSnapshotPersisting = db.transaction(async (tx) => {
+    await tx.execute(sql`SET LOCAL statement_timeout = '2000ms'`);
+    await tx.execute(sql`SET LOCAL lock_timeout = '1000ms'`);
+    // Serialize read/merge/write across autoscale replicas, including first insert.
+    await tx.execute(sql`SELECT pg_advisory_xact_lock(hashtext('regional-headline-snapshot'))`);
+    const rows = await tx.select({ summary: jobRunsTable.summary }).from(jobRunsTable)
+      .where(and(eq(jobRunsTable.jobName, SHARED_SNAPSHOT_JOB), eq(jobRunsTable.runKey, SHARED_SNAPSHOT_KEY))).limit(1);
+    snapshot.entries = mergeHeadlineEntries(
+      parseSharedSnapshot(rows[0]?.summary ?? null)?.entries ?? [], snapshot.entries, Date.now(),
+    );
+    await tx.insert(jobRunsTable)
     .values({
       jobName: SHARED_SNAPSHOT_JOB,
       runKey: SHARED_SNAPSHOT_KEY,
@@ -2528,7 +2543,8 @@ async function persistSharedSnapshot(): Promise<void> {
         ok: true,
         summary: JSON.stringify(snapshot),
       },
-    })
+    });
+  })
     .then(() => undefined)
     .catch((err) => {
       console.warn("[regions] shared snapshot persist failed:", err);
@@ -2911,6 +2927,15 @@ router.get("/regions", async (_req, res) => {
       loadRegionHeadlines(ALL_REGIONS),
       REGIONS_RESPONSE_DEADLINE_MS,
     );
+    // Do not expose freshly loaded headlines ahead of their outage backup.
+    // Bound the wait so database trouble cannot pin the public response.
+    if (sharedSnapshotPersistTimer || sharedSnapshotPersisting) {
+      if (sharedSnapshotPersistTimer) {
+        clearTimeout(sharedSnapshotPersistTimer);
+        sharedSnapshotPersistTimer = null;
+      }
+      await resolveWithinDeadline(undefined, persistSharedSnapshot(), 1000);
+    }
     const regions: RegionPayload[] = ALL_REGIONS.map((r, i) => {
       const { lat, lon, model, timezone, ...rest } = r;
       void lat; void lon; void model; void timezone;

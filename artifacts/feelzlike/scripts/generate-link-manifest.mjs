@@ -59,6 +59,8 @@ const URL_RE = /https?:\/\/[A-Za-z0-9][A-Za-z0-9./_%~#?&=+-]*/g;
 
 function* walk(dir) {
   for (const name of readdirSync(dir)) {
+    // Test fixtures are not visitor-facing links.
+    if (name === "__tests__" || /\.(test|spec)\.[cm]?[jt]sx?$/.test(name)) continue;
     const p = join(dir, name);
     const st = statSync(p);
     if (st.isDirectory()) yield* walk(p);

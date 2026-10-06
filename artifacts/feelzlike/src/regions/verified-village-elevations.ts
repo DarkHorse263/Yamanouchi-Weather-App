@@ -88,10 +88,10 @@ export const VERIFIED_AUTHORED_VILLAGE_ELEVATIONS = {
     verifiedAt: "2026-08-29",
   },
   "banff-lake-louise/banff-sunshine": {
-    elevationM: 1660,
-    sourceUrl: "https://www.skibanff.com/explore/news-blog/sunshine-village-by-the-numbers",
-    citation: "Sunshine Village's official resort statistics state a base elevation of 1,660 m.",
-    verifiedAt: "2026-08-29",
+    elevationM: 1658,
+    sourceUrl: "https://www.skibig3.com/ski/resorts/banff-sunshine",
+    citation: "SkiBig3's Banff Sunshine mountain statistics list a base elevation of 5,440 ft (1,658 m).",
+    verifiedAt: "2026-10-07",
   },
   "banff-lake-louise/mt-norquay": {
     elevationM: 1680,

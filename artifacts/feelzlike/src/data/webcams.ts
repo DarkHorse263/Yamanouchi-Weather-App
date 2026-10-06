@@ -462,9 +462,9 @@ const CANADA: Record<string, MountainWebcam[]> = {
       name: "Sunshine Village webcams",
       description: "Official cams on the Continental Divide.",
       embedType: "external",
-      pageUrl: "https://www.skibanff.com/webcams",
+      pageUrl: "https://www.skibanff.com/the-mountain/mountain-report/webcams",
       source: "Banff Sunshine Village",
-      verifiedAt: CA_VERIFIED,
+      verifiedAt: "2026-10-07",
     },
   ],
   "mt-norquay": [
