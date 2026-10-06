@@ -1427,3 +1427,17 @@ mtime_ms = 1791158902716
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/9e9f7a8b-5c2e-4169-96d2-588bba91dd65/7daf7d18-536a-4852-9476-4735679aaf41"
 storage_version_token = "1791158929768716"
 content_type = "image/jpeg"
+
+[[outputs]]
+id = "GpxZ2_je45XspdGu67Bja"
+uri = "file://exports/feelzlike-japan-meta-setup-guide.pdf"
+type = "pdf"
+title = "feelzlike · Japan Meta campaign setup guide"
+description = "Six-page printable guide with country targeting, budgets, ad copy, tracking instructions and a pre-launch weather-permissions checklist."
+logical_id = "4ad27541-aea4-446b-8905-493e08dab338"
+content_hash = "sha256:00dc4a2adb7b56beb20bc8799366456f4936ede4739f98c5e3c31b23158fe4ff"
+size = 168630
+mtime_ms = 1791255975698
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/4ad27541-aea4-446b-8905-493e08dab338/08cadeb1-65b2-493b-b90e-d5a76113a47e"
+storage_version_token = "1791255991826304"
+content_type = "application/pdf"
