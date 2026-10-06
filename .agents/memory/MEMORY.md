@@ -103,3 +103,4 @@
 - [feelzlike retention approval](feelzlike-retention-approval.md) — owner-approved lifecycle periods; suppression survives cleanup; provider retention is separate.
 - [Client environment exposure](feelzlike-client-env-exposure.md) — dynamic Vite env reads can embed unused prefixed secrets; allowlist public values and rotate previously exposed keys.
 - [Paid Open-Meteo](feelzlike-paid-open-meteo.md) — commercial subscription confirmed; no free-API fallback, server-only credentials, and separate clearance for other providers.
+- [OpenWeather licence](feelzlike-openweather-license.md) — owner has Free; commercial use is not automatically prohibited, but attribution, ODbL and API limits still apply.
