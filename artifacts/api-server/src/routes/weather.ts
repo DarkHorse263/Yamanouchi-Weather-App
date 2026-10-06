@@ -1,3 +1,4 @@
+import { fetchOpenMeteo as fetchPaidOpenMeteo } from "../lib/openMeteoClient";
 import { Router, type IRouter } from "express";
 import { GetWeatherResponse, GetLocationWeatherResponse, GetLocationWeatherParams, GetResortSnowReportParams } from "@workspace/api-zod";
 import { getResortSnowReport } from "../lib/resortSnowReports";
@@ -1531,7 +1532,7 @@ export async function fetchOpenMeteo(location: LocationConfig) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 8000);
     try {
-      const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
+      const response = await fetchPaidOpenMeteo(`https://api.open-meteo.com/v1/forecast?${params}`, {
         signal: controller.signal,
       });
       if (response.ok) return await response.json() as any;

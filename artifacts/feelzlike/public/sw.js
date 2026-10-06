@@ -78,7 +78,7 @@
 // v29: forecast responses include the mountain timezone for source-time display.
 // v33: live local/town condition responses must not silently fall back to
 // unbounded SW cache after a failed request; the server already labels stale.
-const CACHE_VERSION = "v35";
+const CACHE_VERSION = "v36";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
@@ -300,6 +300,8 @@ self.addEventListener("fetch", (event) => {
   //     alert prefs, profile). A cached copy would survive sign-out and show
   //     stale prefs right after a save. Never cache.
   if (url.pathname.startsWith("/api/account")) return;
+  // Point probes are cached briefly by the server, never by the PWA.
+  if (url.pathname.startsWith("/api/weather-probe")) return;
 
   // Weather responses now depend on the signed-in user's subscription.
   // Never let an earlier premium result outlive a sign-out in Cache Storage.

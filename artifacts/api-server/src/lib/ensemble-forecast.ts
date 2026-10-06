@@ -1,3 +1,4 @@
+import { fetchOpenMeteo } from "./openMeteoClient";
 /**
  * Ensemble forecast service.
  *
@@ -196,7 +197,7 @@ async function fetchOpenMeteoMulti(q: EnsembleQuery): Promise<{
   const perModel: Record<string, OpenMeteoModelDaily> = {};
 
   try {
-    const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
+    const res = await fetchOpenMeteo(`https://api.open-meteo.com/v1/forecast?${params}`, {
       signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
     });
     if (!res.ok) throw new Error(`Open-Meteo ${res.status}`);

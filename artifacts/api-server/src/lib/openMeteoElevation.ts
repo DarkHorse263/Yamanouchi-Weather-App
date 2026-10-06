@@ -1,3 +1,4 @@
+import { fetchOpenMeteo } from "./openMeteoClient";
 import { LruTtlCache } from "./lru-cache";
 import { dailyConditionLabel } from "./dailyConditionLabel.js";
 
@@ -156,7 +157,7 @@ async function fetchAtElevation(
   }
 
   const url = `https://api.open-meteo.com/v1/forecast?${params}`;
-  const res = await fetch(url, { signal, headers: { Accept: "application/json" } });
+  const res = await fetchOpenMeteo(url, { signal, headers: { Accept: "application/json" } });
   if (!res.ok) {
     console.warn(`[openMeteoElevation] upstream ${res.status} for ${lat},${lng}@${elevationM}m`);
     return null;

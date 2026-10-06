@@ -1,3 +1,4 @@
+import { fetchOpenMeteo } from "../lib/openMeteoClient";
 import { Router } from "express";
 import { owmTile, validOwmTile } from "../lib/owm-client.js";
 
@@ -100,7 +101,7 @@ router.get("/japan-temps", async (_req, res) => {
     const lngs = JAPAN_CITIES.map(c => c.lng).join(",");
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lngs}&current=temperature_2m,weather_code,wind_speed_10m&timezone=Asia/Tokyo`;
 
-    const resp = await fetch(url);
+    const resp = await fetchOpenMeteo(url, { signal: AbortSignal.timeout(10000) });
     if (!resp.ok) throw new Error(`Open-Meteo ${resp.status}`);
     const raw = await resp.json();
 

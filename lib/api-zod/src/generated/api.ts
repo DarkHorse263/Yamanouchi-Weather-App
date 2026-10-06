@@ -8,6 +8,31 @@
 import * as zod from 'zod';
 
 
+/**
+ * @summary Bounded one-day map-point weather readout
+ */
+export const getWeatherProbeQueryLatitudeMin = -90;
+export const getWeatherProbeQueryLatitudeMax = 90;
+
+export const getWeatherProbeQueryLongitudeMin = -180;
+export const getWeatherProbeQueryLongitudeMax = 180;
+
+
+
+export const GetWeatherProbeQueryParams = zod.object({
+  "latitude": zod.coerce.number().min(getWeatherProbeQueryLatitudeMin).max(getWeatherProbeQueryLatitudeMax),
+  "longitude": zod.coerce.number().min(getWeatherProbeQueryLongitudeMin).max(getWeatherProbeQueryLongitudeMax),
+  "metric": zod.coerce.boolean()
+})
+
+export const GetWeatherProbeResponse = zod.object({
+  "current": zod.record(zod.string(), zod.unknown()).optional(),
+  "current_units": zod.record(zod.string(), zod.unknown()).optional(),
+  "daily": zod.record(zod.string(), zod.unknown()).optional(),
+  "daily_units": zod.record(zod.string(), zod.unknown()).optional()
+})
+
+
 export const GetBillingStatusResponse = zod.object({
   "purchasesEnabled": zod.boolean(),
   "reason": zod.string(),

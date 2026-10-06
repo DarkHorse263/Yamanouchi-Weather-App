@@ -2057,6 +2057,35 @@ export type AuthorizationSessionHeaderParameter = string;
 
 export type RegionFilterParameter = RegionId;
 
+export type GetWeatherProbeParams = {
+/**
+ * @minimum -90
+ * @maximum 90
+ */
+latitude: number;
+/**
+ * @minimum -180
+ * @maximum 180
+ */
+longitude: number;
+metric: boolean;
+};
+
+export type GetWeatherProbe200Current = { [key: string]: unknown };
+
+export type GetWeatherProbe200CurrentUnits = { [key: string]: unknown };
+
+export type GetWeatherProbe200Daily = { [key: string]: unknown };
+
+export type GetWeatherProbe200DailyUnits = { [key: string]: unknown };
+
+export type GetWeatherProbe200 = {
+  current?: GetWeatherProbe200Current;
+  current_units?: GetWeatherProbe200CurrentUnits;
+  daily?: GetWeatherProbe200Daily;
+  daily_units?: GetWeatherProbe200DailyUnits;
+};
+
 export type ReceiveResendWebhookBody = { [key: string]: unknown };
 
 export type ReceiveResendWebhook200 = { [key: string]: unknown };

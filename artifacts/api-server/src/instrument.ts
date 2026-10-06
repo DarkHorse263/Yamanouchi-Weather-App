@@ -5,6 +5,7 @@
  * modules and you lose request tracing + breadcrumbs.
  */
 import * as Sentry from "@sentry/node";
+import { redactWeatherCredentials } from "./lib/redactWeatherCredentials";
 
 const rawDsn = process.env["SENTRY_DSN_API"];
 const environment = process.env["NODE_ENV"] ?? "development";
@@ -37,6 +38,10 @@ if (isValidSentryDsn(rawDsn)) {
     // Default ignores noisy stack traces from health probes and rate-limit hits.
     ignoreErrors: ["RATE_LIMITED"],
     initialScope: { tags: { service: "feelzlike-api" } },
+    beforeSend: (event) => redactWeatherCredentials(event),
+    beforeSendTransaction: (event) => redactWeatherCredentials(event),
+    beforeSendSpan: (span) => redactWeatherCredentials(span),
+    beforeBreadcrumb: (breadcrumb) => redactWeatherCredentials(breadcrumb),
   });
   // eslint-disable-next-line no-console
   console.log(`[sentry] initialised (env=${environment})`);

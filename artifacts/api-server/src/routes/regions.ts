@@ -1,3 +1,4 @@
+import { fetchOpenMeteo } from "../lib/openMeteoClient";
 import { Router, type IRouter } from "express";
 import { and, eq } from "drizzle-orm";
 import { db, jobRunsTable } from "@workspace/db";
@@ -2733,7 +2734,7 @@ async function fetchHeadlineBatch(regions: RegionConfig[]): Promise<Array<Headli
     for (let attempt = 0; attempt <= HEADLINE_BATCH_RETRIES; attempt++) {
       try {
       cacheStats.upstreamCalls++;
-      const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
+      const res = await fetchOpenMeteo(`https://api.open-meteo.com/v1/forecast?${params}`, {
         signal: AbortSignal.timeout(8000),
         headers: {
           "User-Agent": "feelzlike/1.0 (mountain-weather-pwa; contact: info@feelzlike.com)",
@@ -3115,7 +3116,7 @@ async function fetchLocalCurrentFromOpenMeteo(
     timezone: "auto",
   });
   try {
-    const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
+      const res = await fetchOpenMeteo(`https://api.open-meteo.com/v1/forecast?${params}`, {
       signal: AbortSignal.timeout(8000),
       headers: {
         "User-Agent": "feelzlike/1.0 (mountain-weather-pwa; contact: info@feelzlike.com)",

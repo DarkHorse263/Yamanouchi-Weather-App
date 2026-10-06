@@ -74,7 +74,7 @@ test("actual ensemble request keeps apparent extrema synchronized and isolates m
 
   try {
     const forecast = await getEnsembleForecast(baseQuery);
-    const openMeteoUrl = requested.find((url) => url.hostname === "api.open-meteo.com");
+    const openMeteoUrl = requested.find((url) => url.hostname === "customer-api.open-meteo.com");
     assert.ok(openMeteoUrl);
     assert.equal(openMeteoUrl.searchParams.get("latitude"), String(baseQuery.latitude));
     assert.equal(openMeteoUrl.searchParams.get("longitude"), String(baseQuery.longitude));
@@ -116,7 +116,7 @@ test("MET-only fallback keeps air/snow behavior and reports no apparent extrema"
   const query = { ...baseQuery, latitude: 39.614, region: "OTHER" as const, days: 1 };
   globalThis.fetch = (async (input: string | URL | Request) => {
     const url = new URL(String(input));
-    if (url.hostname === "api.open-meteo.com") return response({}, false);
+    if (url.hostname === "customer-api.open-meteo.com") return response({}, false);
     return response({
       properties: {
         timeseries: metSeriesForLocalDay().map((point: any) => ({

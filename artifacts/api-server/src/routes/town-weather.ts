@@ -1,3 +1,4 @@
+import { fetchOpenMeteo } from "../lib/openMeteoClient";
 import { Router, type IRouter } from "express";
 import {
   reconcileDryToWet,
@@ -164,7 +165,7 @@ router.get("/town-weather", async (req, res) => {
   };
 
   try {
-    const upstream = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
+    const upstream = await fetchOpenMeteo(`https://api.open-meteo.com/v1/forecast?${params}`, {
       signal: AbortSignal.timeout(8000),
       headers: {
         "User-Agent": "feelzlike/1.0 (mountain-weather-pwa; contact: info@feelzlike.com)",

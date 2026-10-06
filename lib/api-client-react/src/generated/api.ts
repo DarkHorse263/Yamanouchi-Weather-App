@@ -67,6 +67,8 @@ import type {
   GetRoadConditionsParams,
   GetVicEmergencyIncidentsParams,
   GetWeatherParams,
+  GetWeatherProbe200,
+  GetWeatherProbeParams,
   GetWebcamsParams,
   HealthStatus,
   LiftStatusResponse,
@@ -125,6 +127,114 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   }
   return result;
 };
+
+export const getGetWeatherProbeUrl = (params: GetWeatherProbeParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : String(value))
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/api/weather-probe?${stringifiedParams}` : `/api/weather-probe`
+}
+
+/**
+ * @summary Bounded one-day map-point weather readout
+ */
+export const getWeatherProbe = async (params: GetWeatherProbeParams, options?: Parameters<typeof customFetch>[1]): Promise<GetWeatherProbe200> => {
+
+  return customFetch<GetWeatherProbe200>(getGetWeatherProbeUrl(params),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetWeatherProbeQueryKey = (params?: GetWeatherProbeParams,) => {
+    return [
+    `/api/weather-probe`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getGetWeatherProbeQueryOptions = <TData = Awaited<ReturnType<typeof getWeatherProbe>>, TError = ErrorType<void>>(params: GetWeatherProbeParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWeatherProbe>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetWeatherProbeQueryKey(params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getWeatherProbe>>> = ({ signal }) => getWeatherProbe(params, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getWeatherProbe>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetWeatherProbeQueryResult = NonNullable<Awaited<ReturnType<typeof getWeatherProbe>>>
+export type GetWeatherProbeQueryError = ErrorType<void>
+
+
+export function useGetWeatherProbe<TData = Awaited<ReturnType<typeof getWeatherProbe>>, TError = ErrorType<void>>(
+ params: GetWeatherProbeParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWeatherProbe>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getWeatherProbe>>,
+          TError,
+          Awaited<ReturnType<typeof getWeatherProbe>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetWeatherProbe<TData = Awaited<ReturnType<typeof getWeatherProbe>>, TError = ErrorType<void>>(
+ params: GetWeatherProbeParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWeatherProbe>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getWeatherProbe>>,
+          TError,
+          Awaited<ReturnType<typeof getWeatherProbe>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetWeatherProbe<TData = Awaited<ReturnType<typeof getWeatherProbe>>, TError = ErrorType<void>>(
+ params: GetWeatherProbeParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWeatherProbe>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Bounded one-day map-point weather readout
+ */
+
+export function useGetWeatherProbe<TData = Awaited<ReturnType<typeof getWeatherProbe>>, TError = ErrorType<void>>(
+ params: GetWeatherProbeParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWeatherProbe>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetWeatherProbeQueryOptions(params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
 
 export const getGetBillingStatusUrl = () => {
 

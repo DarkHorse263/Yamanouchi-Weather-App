@@ -1815,17 +1815,11 @@ export default function RadarMapInner({
     const controller = new AbortController();
     setProbeLoading(true);
     setProbeError(null);
-    const u = new URL("https://api.open-meteo.com/v1/forecast");
+    const u = new URL(`${import.meta.env.BASE_URL}api/weather-probe`, window.location.origin);
     u.searchParams.set("latitude", probe.lat.toFixed(4));
     u.searchParams.set("longitude", probe.lng.toFixed(4));
-    u.searchParams.set("current", "temperature_2m,wind_speed_10m,wind_direction_10m");
-    u.searchParams.set("daily", "snowfall_sum,precipitation_probability_max");
-    u.searchParams.set("forecast_days", "1");
-    u.searchParams.set("timezone", "auto");
-    u.searchParams.set("temperature_unit", metric ? "celsius" : "fahrenheit");
-    u.searchParams.set("wind_speed_unit", metric ? "kmh" : "mph");
-    u.searchParams.set("precipitation_unit", metric ? "mm" : "inch");
-    fetch(u.toString(), { signal: controller.signal })
+    u.searchParams.set("metric", String(metric));
+    fetch(u.toString(), { signal: controller.signal, cache: "no-store" })
       .then((r) => {
         if (!r.ok) throw new Error(`open-meteo ${r.status}`);
         return r.json();

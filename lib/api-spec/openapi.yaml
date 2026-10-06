@@ -38,6 +38,41 @@ tags:
   - name: webhooks
     description: Signed provider callbacks.
 paths:
+  /weather-probe:
+    get:
+      operationId: getWeatherProbe
+      summary: Bounded one-day map-point weather readout
+      parameters:
+        - in: query
+          name: latitude
+          required: true
+          schema: { type: number, minimum: -90, maximum: 90 }
+        - in: query
+          name: longitude
+          required: true
+          schema: { type: number, minimum: -180, maximum: 180 }
+        - in: query
+          name: metric
+          required: true
+          schema: { type: boolean }
+      responses:
+        "200":
+          description: Current weather, one-day totals and units
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  current: { type: object, additionalProperties: true }
+                  current_units: { type: object, additionalProperties: true }
+                  daily: { type: object, additionalProperties: true }
+                  daily_units: { type: object, additionalProperties: true }
+        "400":
+          description: Invalid coordinates or units
+        "429":
+          description: Rate limited
+        "503":
+          description: Weather provider unavailable
   /billing/status:
     get:
       operationId: getBillingStatus

@@ -1,3 +1,4 @@
+import { fetchOpenMeteo } from "./openMeteoClient";
 /**
  * Weather Service - fetches live data from Open-Meteo using the JMA Seamless model.
  * Open-Meteo is free, requires no API key, and uses Japan Meteorological Agency (JMA)
@@ -131,7 +132,7 @@ async function fetchMountainOutlook(coord: typeof MOUNTAIN_OUTLOOK_COORDS[0]): P
     models: "jma_seamless",
   });
 
-  const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
+  const res = await fetchOpenMeteo(`https://api.open-meteo.com/v1/forecast?${params}`, {
     signal: AbortSignal.timeout(8000),
   });
   if (!res.ok) throw new Error(`Open-Meteo ${res.status} for ${coord.region}`);
@@ -193,7 +194,7 @@ async function fetchTownWeather(coord: typeof TOWN_COORDS[0]): Promise<TownWeath
     models: "jma_seamless",
   });
 
-  const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
+  const res = await fetchOpenMeteo(`https://api.open-meteo.com/v1/forecast?${params}`, {
     signal: AbortSignal.timeout(8000),
   });
   if (!res.ok) throw new Error(`Open-Meteo ${res.status} for ${coord.location}`);
@@ -249,7 +250,7 @@ async function fetchRegionWeather(coord: (typeof REGION_COORDS)[0]): Promise<Reg
   });
 
   const url = `https://api.open-meteo.com/v1/forecast?${params}`;
-  const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+  const res = await fetchOpenMeteo(url, { signal: AbortSignal.timeout(8000) });
   if (!res.ok) throw new Error(`Open-Meteo ${res.status} for ${coord.label}`);
 
   const d = (await res.json()) as {
