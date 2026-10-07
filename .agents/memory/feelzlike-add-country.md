@@ -53,13 +53,12 @@ sync set; a full monorepo typecheck is the only reliable way to surface them
 
 ## Validation gotchas
 
-- `pnpm run typecheck` (root) SHORT-CIRCUITS on a PRE-EXISTING, unrelated failure
-  in `lib/integrations-anthropic-ai` ("Cannot find type definition file for
-  'node'"). The `&&` chain means your artifact typechecks never run. To validate
-  your own changes: `tsc --build lib/api-zod lib/api-client-react lib/feelzlike-shell`
-  (rebuild decls after codegen), then typecheck artifacts directly with
-  `pnpm --filter @workspace/api-server run typecheck` and
-  `pnpm --filter @workspace/feelzlike run typecheck`.
+- Use the root `pnpm typecheck`; do not bypass it based on the historical
+  Anthropic library failure, which is resolved.
+  **Why:** library failures short-circuit the leaf checks, so an apparently
+  isolated dependency problem can conceal unrelated application errors.
+  **How to apply:** fix shared-package failures and run the root check through
+  all leaves; rebuild generated declarations after codegen.
 - `FALLBACK_REGIONS` in components/home/CountryPicker.tsx is a DELIBERATELY PARTIAL degraded-mode
   safety net (shown only when `/api/regions` fails). It does not list every
   region — do not "fix" it to be exhaustive.
