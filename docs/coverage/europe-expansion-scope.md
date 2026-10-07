@@ -1,26 +1,41 @@
-# European expansion: initial scope
+# European expansion: approved scope and initial research
 
-Prepared 4 October 2026. Research and recommendations only; no new regions
-implemented or approved for publication in this pass.
+Initial research prepared 4 October 2026. Scope updated 7 October 2026.
+This document does not assert implementation or publication of new regions.
 
-## Updated owner priority: France and Italy meeting pilots
+## Current owner scope: Europe-wide
+
+The owner selected a wider European rollout and defined the additional countries
+as "Any with ski resorts and mountains". The requested completion target is
+31 October 2026. This is a target, not an established delivery commitment.
+
+This supersedes the Austria-first restriction and the subsequent pilot-only
+priority. France and Italy remain the first implementation batches for partner
+demonstrations; Austria, Switzerland and the rest of eligible Europe remain
+in scope. Do not wait for nationwide Austria completion to begin other countries.
+
+See `europe-country-ledger.csv` for the initial country discovery checklist and
+`europe-rollout-readiness.md` for inclusion and completion gates. A country in
+that ledger is a research obligation, not proof of an operating ski resort.
+
+## Earlier decision, retained for context
 
 On 7 October 2026 the owner approved temporarily prioritising Tignes–Val d’Isère
 in France and Val Gardena / Seiser Alm plus Alta Badia in Italy, with partner
 presentation material, before returning to nationwide Austria completion.
-Switzerland remains deferred. This changes implementation order, not the
-verification, data-permission or separate publication gates below.
+That temporary ordering has now been broadened as described above. Verification,
+data-permission and separate publication gates still apply.
 
 The pilots are approved scope, not implemented coverage. Meeting material
 must distinguish existing app features from these planned additions.
 
-## Original priority, to resume after the named pilots
+## Superseded Austria-first priority
 
 The owner subsequently instructed: "Let's finish Austria before we start any
-other countries/regions." That order resumes after the approved France and
-Italy pilots. The Switzerland proposal below remains deferred.
+other countries/regions." The current Europe-wide instruction replaces that
+restriction. The Austrian national inventory remains required.
 
-The next Austria-only scoping step is a nationwide coverage inventory, not
+The Austrian scoping requirement is a nationwide coverage inventory, not
 just the previously suggested Sölden/Ischgl/SkiWelt shortlist. Reconcile
 official resort identities against current coverage, distinguish connected
 networks from individual areas, and record every gap or exclusion explicitly.

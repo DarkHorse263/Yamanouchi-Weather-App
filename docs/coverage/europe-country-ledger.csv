@@ -1,0 +1,52 @@
+country_code,country,research_group,inventory_status,runtime_status,evidence_note
+FR,France,first_batch,partial_research,not_implemented,Tignes official network page checked; national inventory unresolved
+IT,Italy,first_batch,partial_research,not_implemented,Dolomiti official directory checked; national inventory unresolved
+AT,Austria,alpine,partial_research,partial_authored_coverage,Existing 265 discovery records are not a verified national inventory
+CH,Switzerland,alpine,partial_research,not_implemented,Jungfrau pilot research exists; national inventory unresolved
+DE,Germany,central_europe,not_started,not_audited,Verify official winter and mountain destination inventories
+LI,Liechtenstein,alpine,not_started,not_audited,Verify official winter and mountain destination inventories
+AD,Andorra,iberia,not_started,not_audited,Reconcile connected areas and separate resort identities
+ES,Spain,iberia,not_started,not_audited,Include eligible areas outside the Pyrenees
+PT,Portugal,iberia,not_started,not_audited,Verify current facilities and mountain destinations
+NO,Norway,nordic,not_started,not_audited,Reconcile alpine areas and other mountain destinations
+SE,Sweden,nordic,not_started,not_audited,Include smaller areas rather than only flagship resorts
+FI,Finland,nordic,not_started,not_audited,Low terrain height alone does not exclude a genuine ski area
+IS,Iceland,nordic,not_started,not_audited,Verify current facilities and winter access
+DK,Denmark,nordic,not_started,not_audited,Distinguish outdoor snow from synthetic and indoor facilities
+GB,United Kingdom,britain_ireland,not_started,not_audited,Research Scotland England Wales and Northern Ireland separately
+IE,Ireland,britain_ireland,not_started,not_audited,Assess mountain destinations; do not invent downhill ski coverage
+CZ,Czechia,central_europe,not_started,not_audited,Verify official regional inventories and smaller areas
+SK,Slovakia,central_europe,not_started,not_audited,Verify official regional inventories and smaller areas
+PL,Poland,central_europe,not_started,not_audited,Verify official regional inventories and smaller areas
+SI,Slovenia,central_europe,not_started,not_audited,Separate connected and cross-border ski areas
+HU,Hungary,central_europe,not_started,not_audited,Verify operating identities rather than historical lists
+RO,Romania,balkans,not_started,not_audited,Verify official regional inventories and mountain destinations
+BG,Bulgaria,balkans,not_started,not_audited,Verify official regional inventories and mountain destinations
+HR,Croatia,balkans,not_started,not_audited,Verify seasonal operation and mountain destinations
+BA,Bosnia and Herzegovina,balkans,not_started,not_audited,Verify current operators and access guidance
+RS,Serbia,balkans,not_started,not_audited,Verify current operators and access guidance
+ME,Montenegro,balkans,not_started,not_audited,Verify current operators and access guidance
+MK,North Macedonia,balkans,not_started,not_audited,Verify current operators and access guidance
+AL,Albania,balkans,not_started,not_audited,Distinguish ski touring destinations from lift-served resorts
+XK,Kosovo,balkans,not_started,not_audited,Operational discovery code only; verify sources and current access
+GR,Greece,balkans,not_started,not_audited,Verify official regional inventories and smaller areas
+EE,Estonia,baltic,not_started,not_audited,Distinguish alpine and Nordic-only facilities
+LV,Latvia,baltic,not_started,not_audited,Low terrain height alone does not exclude a genuine ski area
+LT,Lithuania,baltic,not_started,not_audited,Distinguish outdoor and indoor snow facilities
+BE,Belgium,low_countries,not_started,not_audited,Distinguish natural snow areas from synthetic or indoor facilities
+NL,Netherlands,low_countries,not_started,not_audited,Assess facility types; no fabricated mountain forecasts
+LU,Luxembourg,small_country_review,not_started,not_audited,Determine eligibility explicitly; absence of research is not exclusion
+BY,Belarus,eastern_europe,not_started,not_audited,Check current operation and official travel advice separately
+UA,Ukraine,eastern_europe,not_started,not_audited,Current access and safety require specific review; listing is not endorsement
+MD,Moldova,eastern_europe,not_started,not_audited,Determine eligibility explicitly; absence of research is not exclusion
+MT,Malta,small_country_review,not_started,not_audited,Determine eligibility explicitly; absence of research is not exclusion
+MC,Monaco,small_country_review,not_started,not_audited,Do not attribute nearby French ski areas to Monaco
+SM,San Marino,small_country_review,not_started,not_audited,Assess mountain destination eligibility separately from ski facilities
+VA,Vatican City,small_country_review,not_started,not_audited,Determine eligibility explicitly rather than adding a stub country page
+CY,Cyprus,boundary_review,not_started,not_audited,Included in European-market discovery; verify destination geography
+TR,Türkiye,boundary_review,not_started,not_audited,Record Europe or Asia geography per destination
+GE,Georgia,boundary_review,not_started,not_audited,Caucasus boundary and destination scope require explicit treatment
+AM,Armenia,boundary_review,not_started,not_audited,European-market candidate; do not misstate physical geography
+AZ,Azerbaijan,boundary_review,not_started,not_audited,Caucasus boundary and destination scope require explicit treatment
+RU,Russia,boundary_review,not_started,not_audited,Separate European and Asian destinations; review current travel and service restrictions
+KZ,Kazakhstan,boundary_review,not_started,not_audited,Transcontinental discovery candidate; do not label Asian resorts geographically European

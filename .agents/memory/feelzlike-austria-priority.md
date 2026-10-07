@@ -1,17 +1,18 @@
 ---
-name: European pilot priority
+name: Europe-wide coverage scope
 description: Owner's sequencing instruction for country coverage expansion.
 ---
 
-The original instruction was: "Let's finish Austria before we start any other countries/regions."
+The owner superseded the Austria-first rule and the limited France/Italy
+pilot scope: include "Any with ski resorts and mountains" across Europe.
+France and Italy remain useful first batches for partner demonstrations,
+not the boundary of the authorised expansion. Switzerland is no longer deferred.
 
-The owner subsequently approved a temporary exception: prioritise France
-(Tignes–Val d’Isère) and Italy (Val Gardena / Seiser Alm and Alta Badia)
-pilots and partner presentation material, then return to nationwide Austria
-completion. Switzerland remains deferred.
+**Why:** the owner explicitly selected a wider European rollout rather than
+only Austria, France, Italy and Switzerland.
 
-**Why:** the owner approved changing the order to support upcoming partner meetings.
-
-**How to apply:** this authorises the named pilots before Austria is complete,
-not nationwide France/Italy coverage or a public launch before verification
-and permission checks. Resume the original Austria-first sequence afterwards.
+**How to apply:** account for eligible destinations country by country, including
+small areas and mountain destinations, rather than calling flagship coverage
+complete. Research candidates are not verified runtime coverage. Keep gaps,
+geographic boundary cases and permission blockers explicit. Do not revive
+the previous Austria-first restriction or silently narrow the scope to pilots.

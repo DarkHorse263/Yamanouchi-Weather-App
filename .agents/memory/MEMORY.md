@@ -1,4 +1,4 @@
-- [European pilot priority](feelzlike-austria-priority.md) — approved France/Italy meeting pilots before returning to Austria; Switzerland remains deferred.
+- [Europe-wide coverage](feelzlike-austria-priority.md) — all European countries with ski resorts or mountains; supersedes Austria-first and pilot-only scope.
 - [Stripe live onboarding](stripe-live-onboarding.md) — select the live account even if “Already installed”; sandbox installation cannot complete the live connection.
 - [Regional subscription pricing](feelzlike-regional-pricing.md) — deliberate local price points, not FX conversion; ski destination and later billing-address changes must not alter paid entitlement.
 - [feelzlike brand voice](feelzlike-brand-voice.md) — lowercase, middot · required (NOT forbidden), no em/en dashes, no emojis, DIN Pro, sky/blue.
