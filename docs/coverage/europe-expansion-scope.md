@@ -3,12 +3,22 @@
 Prepared 4 October 2026. Research and recommendations only; no new regions
 implemented or approved for publication in this pass.
 
-## Owner priority: Austria first
+## Updated owner priority: France and Italy meeting pilots
+
+On 7 October 2026 the owner approved temporarily prioritising Tignes–Val d’Isère
+in France and Val Gardena / Seiser Alm plus Alta Badia in Italy, with partner
+presentation material, before returning to nationwide Austria completion.
+Switzerland remains deferred. This changes implementation order, not the
+verification, data-permission or separate publication gates below.
+
+The pilots are approved scope, not implemented coverage. Meeting material
+must distinguish existing app features from these planned additions.
+
+## Original priority, to resume after the named pilots
 
 The owner subsequently instructed: "Let's finish Austria before we start any
-other countries/regions." The new-country proposals below are deferred,
-not the active work order. Do not begin their further research or implementation
-until Austria is finished or the owner changes this instruction.
+other countries/regions." That order resumes after the approved France and
+Italy pilots. The Switzerland proposal below remains deferred.
 
 The next Austria-only scoping step is a nationwide coverage inventory, not
 just the previously suggested Sölden/Ischgl/SkiWelt shortlist. Reconcile
