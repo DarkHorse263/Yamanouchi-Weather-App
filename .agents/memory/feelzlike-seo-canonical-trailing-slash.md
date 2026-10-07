@@ -5,6 +5,17 @@ description: Why every sitemap+canonical source must emit trailing-slash URLs, w
 
 # feelzlike SEO canonical / trailing-slash
 
+Production now uses a dedicated page server rather than edge-static rewrites.
+The trailing-slash canonical rule below still applies. The historical edge
+rewrite instructions below must not be restored.
+
+**Why:** the owner-approved server topology is required for real HTML security
+headers and HTTP 404 responses.
+
+**How to apply:** use the shared exact page-route manifest and prerendered files;
+see docs/production-page-serving.md. API-side HTML fallback rules do not control
+the separate web service.
+
 The prod host serves prerendered pages as directories (`<path>/index.html`) and
 301-redirects every non-root path to its trailing-slash form (`/au` -> `/au/`).
 Root `/` is the ONLY non-slash 200. If the sitemap or any canonical points at the

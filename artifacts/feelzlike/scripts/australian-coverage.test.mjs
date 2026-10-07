@@ -63,21 +63,14 @@ test("closed Mount Buffalo stays out of published routes and weather", () => {
   assert.doesNotMatch(sitemap, /\/mountain\/mount-buffalo\//);
 });
 
-test("every new mountain rewrite precedes the SPA catch-all", () => {
-  const artifact = readFileSync(
-    join(root, ".replit-artifact/artifact.toml"),
-    "utf8",
-  );
-  const catchAll = artifact.lastIndexOf('from = "/*"');
-  assert.ok(catchAll > 0, "SPA catch-all is present");
+test("every new mountain has an exact production page route", async () => {
+  const { pageRoutes } = await import("./build-page-routes.mjs");
   for (const route of [
     "/victorias-high-country/mountain/mt-baw-baw/",
     "/tasmania/mountain/mount-mawson/",
     "/australian-capital-territory/mountain/corin-forest/",
   ]) {
-    const routeIndex = artifact.indexOf(`from = "${route}"`);
-    assert.ok(routeIndex >= 0, `${route} rewrite is present`);
-    assert.ok(routeIndex < catchAll, `${route} rewrite precedes catch-all`);
+    assert.ok(pageRoutes.routes.includes(route.replace(/\/$/, "")), `${route} is registered`);
   }
 });
 

@@ -23,9 +23,6 @@
  * then update artifact.toml with the fresh block and re-publish.
  */
 
-import { readFileSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
 import {
   REGIONS,
   regionFeatures,
@@ -80,14 +77,7 @@ lines.push(`to = "/index.html"`);
 
 const output = lines.join("\n") + "\n";
 if (process.argv.includes("--write-artifact")) {
-  const here = dirname(fileURLToPath(import.meta.url));
-  const artifactPath = join(here, "..", ".replit-artifact", "artifact.toml");
-  const artifact = readFileSync(artifactPath, "utf8");
-  const marker = "[[services.production.rewrites]]";
-  const start = artifact.indexOf(marker);
-  if (start === -1) throw new Error(`[rewrites] no production rewrite block found in ${artifactPath}`);
-  writeFileSync(artifactPath, `${artifact.slice(0, start)}${output}`);
-  console.error(`[rewrites] wrote ${legacyRewrites.length} legacy routes + ${paths.length} prerendered routes + 1 catch-all to ${artifactPath}`);
+  throw new Error("Static rewrites are retired: production uses serve-pages.mjs and build-page-routes.mjs. Do not restore a static SPA catch-all.");
 } else {
   process.stdout.write(output);
   console.error(`[rewrites] ${legacyRewrites.length} legacy routes + ${paths.length} prerendered routes + 1 catch-all`);

@@ -68,13 +68,12 @@ test("Austria's seven-day API horizon cannot unlock the 14-day mountain panel", 
   assert.match(mountainDetail, /\{supportsExtended14DayOutlook && \(/);
 });
 
-test("Austria sitemap and rewrites include every pilot route before catch-all", () => {
+test("Austria sitemap and production page routes include every pilot route", async () => {
+  const { pageRoutes } = await import("./build-page-routes.mjs");
   const sitemap = read("public/sitemap.xml");
-  const artifact = read(".replit-artifact/artifact.toml");
   const countrySnapshot = read("dist/public/at/index.html");
   const mountainSnapshot = read("dist/public/st-anton/mountains/index.html");
   const roadsSnapshot = read("dist/public/st-anton/st-anton/roads/index.html");
-  const catchAll = artifact.lastIndexOf('from = "/*"');
   assert.match(countrySnapshot, /<title>Austria · resort town weather · feelzlike<\/title>/);
   assert.match(
     countrySnapshot,
@@ -103,8 +102,6 @@ test("Austria sitemap and rewrites include every pilot route before catch-all", 
     "/st-anton/mountain/st-anton-resort/",
   ]) {
     assert.ok(sitemap.includes(`https://feelzlike.com${route}`), `${route} missing from sitemap`);
-    const rewriteAt = artifact.indexOf(`from = "${route}"`);
-    assert.ok(rewriteAt >= 0, `${route} rewrite missing`);
-    assert.ok(rewriteAt < catchAll, `${route} rewrite must precede SPA catch-all`);
+    assert.ok(pageRoutes.routes.includes(route.replace(/\/$/, "")), `${route} route missing`);
   }
 });

@@ -56,10 +56,18 @@ Sentry uses THREE separate secrets (all currently set as global secrets):
 
 **Why it matters:** runtime error capture is driven entirely by the two DSNs and keeps working even when the auth token is invalid. So "Sentry is broken in the build log" does NOT mean error monitoring is down — capture is live; only symbolication (readable stack traces) + clean build logs depend on a valid `SENTRY_AUTH_TOKEN`. The token's org/project are pinned in `vite.config.ts` (org `navigate-work-digital`, project `javascript-react`) — a refreshed token must belong to that org. Org-level auth tokens are pre-scoped for sourcemap upload.
 
-# Web-page (HTML) security headers can't be set from app code in prod
+# HTML protection must be enforced by the page-serving service
 
-Under the application router the platform edge serves ALL static HTML (index.html, prerendered snapshots, SPA fallback) and proxies only `/api/*` to Express. So `app.ts` helmet headers appear on `/api/*` responses but NOT on any HTML document (curl-verified: HTML carries only platform HSTS; `/api` carries nosniff + referrer-policy + a 2nd HSTS). `[[deployment.responseHeaders]]` applies to STATIC deployments, not this autoscale/application-router topology.
+Keep production HTML behind the dedicated page server, not an edge-static SPA
+catch-all. The owner approved that topology change. API helmet settings still
+cannot protect documents served by a separate service.
 
-**Why:** Express never serves the HTML in prod, so it cannot add headers to it. The only browser-honored HTML-level mitigation is `<meta name="referrer" content="strict-origin-when-cross-origin">` in `index.html` (added). `X-Content-Type-Options`, `Permissions-Policy`, and `X-Frame-Options` have **no meta equivalent** — they must be real HTTP headers from whatever serves the HTML.
+**Why:** The former static artifact bypassed Express entirely: API headers
+looked correct while HTML lacked them, and invalid URLs returned HTTP 200.
+Restoring static serving would silently undo both protections.
 
-**How to apply:** don't try to "fix" HTML security headers by editing helmet/app.ts — it has zero effect on prod HTML. Adding the rest requires routing HTML through the app/server (a risky topology change on this live novice-owned site) or a supported edge header mechanism. CSP + frameguard are intentionally OFF (embed-widget use case; inline Vite bundles need a nonce) — do NOT add a meta CSP blindly or it can break the app.
+**How to apply:** Verify the live response after an owner publish, not only the
+development preview. Preserve the deliberate CSP/frameguard exception for the
+embed use case; do not add a restrictive policy without auditing authentication,
+maps and embeds. Runtime configuration and verification steps are documented in
+docs/production-page-serving.md.
