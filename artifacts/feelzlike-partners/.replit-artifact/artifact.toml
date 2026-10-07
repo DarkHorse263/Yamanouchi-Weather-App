@@ -1,0 +1,28 @@
+kind = "slides"
+previewPath = "/feelzlike-partners/"
+title = "feelzlike · partner presentation"
+description = "Eight-slide partner presentation for 8 October 2026, covering current product features, planned European pilots and proposed partnerships."
+version = "1.0.0"
+id = "artifacts/feelzlike-partners"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/feelzlike-partners/" ]
+localPort = 20048
+
+[services.development]
+run = "pnpm --filter @workspace/feelzlike-partners run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/feelzlike-partners", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/feelzlike-partners/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20048"
+BASE_PATH = "/feelzlike-partners/"
