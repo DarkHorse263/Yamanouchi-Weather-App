@@ -1080,7 +1080,7 @@ export function MountainDetail() {
             that has no data. */}
         <OfficialAvalancheBulletin
           country={REGION_COUNTRY[region.id]}
-          province={catalogueRecord?.stateOrProvince ?? (region.id === "st-anton" ? "Tyrol" : "")}
+          province={catalogueRecord?.stateOrProvince ?? (region.id === "st-anton" ? "Tyrol" : region.id === "lech-zuers" ? "Vorarlberg" : "")}
         />
 
         {/* FREE · one-tap official lift report · kept OUTSIDE the premium

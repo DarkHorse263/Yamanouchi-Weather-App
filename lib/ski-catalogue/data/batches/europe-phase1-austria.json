@@ -1,0 +1,3960 @@
+{
+  "batchVersion": 1,
+  "batchId": "europe-phase1-austria",
+  "records": [
+    {
+      "recordId": "eu-at-warth-schroecken",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "warth-schroecken",
+        "name": "Warth-Schröcken",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.2558,
+        "lng": 10.1826
+      },
+      "elevations": {
+        "baseM": 1260,
+        "topM": 2050,
+        "forecastM": 1507
+      },
+      "locality": {
+        "regionId": "warth-schroecken",
+        "regionName": "Warth-Schröcken",
+        "stateOrProvince": "Vorarlberg",
+        "localityId": "warth",
+        "localityName": "Warth"
+      },
+      "officialUrl": "https://www.warth-schroecken.at/en",
+      "liftNetwork": "Ski Arlberg",
+      "snowForecastMidM": 1655,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.warth-schroecken.at/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Warth-Schröcken.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "warth-schroecken",
+                "name": "Warth-Schröcken",
+                "aliases": []
+              },
+              "citation": "Official site for Warth-Schröcken, the resort serving Warth."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.warth-schroecken.at/en",
+              "citation": "Official website for Warth-Schröcken."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "warth-schroecken",
+                "regionName": "Warth-Schröcken",
+                "stateOrProvince": "Vorarlberg",
+                "localityId": "warth",
+                "localityName": "Warth"
+              },
+              "citation": "Warth-Schröcken is accessed from Warth (Vorarlberg, Austria), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.warth-schroecken.at/de/winter/skigebiet/skigebiet-warth-schroecken.html",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Skigebiet Warth-Schröcken Öffnungs & Betriebszeiten Wintersaison 2026/27: 4. Dezember 2026 bis 11. April 2027",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Warth-Schröcken: Skigebiet Warth-Schröcken Öffnungs & Betriebszeiten Wintersaison 2026/27: 4. Dezember 2026 bis 11. April 2027"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.2558&mlon=10.1826#map=15/47.2558/10.1826",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (manual village-centre point, Warth am Arlberg).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.2558,
+                "lng": 10.1826
+              },
+              "citation": "Map marker at 47.2558, 10.1826."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.2558,10.1826",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1507,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1507 m at 47.2558, 10.1826."
+            }
+          ]
+        },
+        {
+          "url": "https://www.au-schoppernau.at/en/activity/ski-area-warth-schroecken-ski-arlberg",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1260 m, top 2050 m. Warth-Schröcken sector lies between about 1,300 and 2,050 m (Saloberkopf); official site gives 1,260 m as the lowest point.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1260,
+              "citation": "Published base elevation 1260 m and top elevation 2050 m for Warth-Schröcken."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-ischgl-silvretta-arena",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "ischgl-silvretta-arena",
+        "name": "Ischgl (Silvretta Arena)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.012,
+        "lng": 10.2913
+      },
+      "elevations": {
+        "baseM": 1360,
+        "topM": 2872,
+        "forecastM": 1375
+      },
+      "locality": {
+        "regionId": "paznaun",
+        "regionName": "Paznaun · Ischgl",
+        "stateOrProvince": "Tyrol",
+        "localityId": "ischgl",
+        "localityName": "Ischgl"
+      },
+      "officialUrl": "https://www.ischgl.com/en",
+      "liftNetwork": "Silvretta Arena",
+      "snowForecastMidM": 2116,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.ischgl.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Ischgl (Silvretta Arena).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "ischgl-silvretta-arena",
+                "name": "Ischgl (Silvretta Arena)",
+                "aliases": []
+              },
+              "citation": "Official site for Ischgl (Silvretta Arena), the resort serving Ischgl."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.ischgl.com/en",
+              "citation": "Official website for Ischgl (Silvretta Arena)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "paznaun",
+                "regionName": "Paznaun · Ischgl",
+                "stateOrProvince": "Tyrol",
+                "localityId": "ischgl",
+                "localityName": "Ischgl"
+              },
+              "citation": "Ischgl (Silvretta Arena) is accessed from Ischgl (Tyrol, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Ischgl (Silvretta Arena) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Paznaun-Ischgl Tirol in Österreich Ab 26. November startet Ischgl mit dem legendären Opening-Wochenende in die Skisaison 2026/27.)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.tirol.at/ischgl",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Paznaun-Ischgl Tirol in Österreich Ab 26. November startet Ischgl mit dem legendären Opening-Wochenende in die Skisaison 2026/27.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.012&mlon=10.2913#map=15/47.012/10.2913",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Ischgl' (village, relation/77050)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.012,
+                "lng": 10.2913
+              },
+              "citation": "Map marker at 47.012, 10.2913."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.012,10.2913",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1375,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1375 m at 47.012, 10.2913."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/ischgl-samnaun-silvretta-arena/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1360 m, top 2872 m. skiresort.info / skiresort.com listing: Ischgl (Silvretta Arena) 1360–2872 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1360,
+              "citation": "Published base elevation 1360 m and top elevation 2872 m for Ischgl (Silvretta Arena)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-galtur-silvapark",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "galtur-silvapark",
+        "name": "Galtür Silvapark",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.9667,
+        "lng": 10.1833
+      },
+      "elevations": {
+        "baseM": 1600,
+        "topM": 2300,
+        "forecastM": 1590
+      },
+      "locality": {
+        "regionId": "paznaun",
+        "regionName": "Paznaun · Ischgl",
+        "stateOrProvince": "Tyrol",
+        "localityId": "galtur",
+        "localityName": "Galtür"
+      },
+      "officialUrl": "https://www.galtuer.com/en",
+      "liftNetwork": "Silvretta Card",
+      "snowForecastMidM": 1950,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.galtuer.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Galtür Silvapark.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "galtur-silvapark",
+                "name": "Galtür Silvapark",
+                "aliases": []
+              },
+              "citation": "Official site for Galtür Silvapark, the resort serving Galtür."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.galtuer.com/en",
+              "citation": "Official website for Galtür Silvapark."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "paznaun",
+                "regionName": "Paznaun · Ischgl",
+                "stateOrProvince": "Tyrol",
+                "localityId": "galtur",
+                "localityName": "Galtür"
+              },
+              "citation": "Galtür Silvapark is accessed from Galtür (Tyrol, Austria), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.galtuer.com/en/winter/operating-times-prices/skipass-prices-silvapark",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski pass prices and operating times at Silvapark Galtür - 2026/27 winter season: 4 December 2026 to 11 April 2027",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Galtür Silvapark: Ski pass prices and operating times at Silvapark Galtür - 2026/27 winter season: 4 December 2026 to 11 April 2027"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.9667&mlon=10.1833#map=15/46.9667/10.1833",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (GeoNames populated-place point via Open-Meteo geocoding).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.9667,
+                "lng": 10.1833
+              },
+              "citation": "Map marker at 46.9667, 10.1833."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.9667,10.1833",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1590,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1590 m at 46.9667, 10.1833."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/galtuer-silvapark/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1600 m, top 2300 m. skiresort.info / skiresort.com listing: Galtür Silvapark 1600–2300 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1600,
+              "citation": "Published base elevation 1600 m and top elevation 2300 m for Galtür Silvapark."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-see-im-paznaun",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "see-im-paznaun",
+        "name": "See im Paznaun",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.0833,
+        "lng": 10.4667
+      },
+      "elevations": {
+        "baseM": 1040,
+        "topM": 2570,
+        "forecastM": 1033
+      },
+      "locality": {
+        "regionId": "paznaun",
+        "regionName": "Paznaun · Ischgl",
+        "stateOrProvince": "Tyrol",
+        "localityId": "see",
+        "localityName": "See"
+      },
+      "officialUrl": "https://www.see.at/en",
+      "liftNetwork": "Silvretta Card",
+      "snowForecastMidM": 1805,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.see.at/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for See im Paznaun.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "see-im-paznaun",
+                "name": "See im Paznaun",
+                "aliases": []
+              },
+              "citation": "Official site for See im Paznaun, the resort serving See."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.see.at/en",
+              "citation": "Official website for See im Paznaun."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "paznaun",
+                "regionName": "Paznaun · Ischgl",
+                "stateOrProvince": "Tyrol",
+                "localityId": "see",
+                "localityName": "See"
+              },
+              "citation": "See im Paznaun is accessed from See (Tyrol, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official See im Paznaun site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Schneebericht See Geplanter Saisonstart: 4. Dez. 2026)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.at/skigebiet/see/schneebericht/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Schneebericht See Geplanter Saisonstart: 4. Dez. 2026",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.0833&mlon=10.4667#map=15/47.0833/10.4667",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'See' (village, relation/77071)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.0833,
+                "lng": 10.4667
+              },
+              "citation": "Map marker at 47.0833, 10.4667."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.0833,10.4667",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1033,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1033 m at 47.0833, 10.4667."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/see/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1040 m, top 2570 m. skiresort.info / skiresort.com listing: See im Paznaun 1040–2570 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1040,
+              "citation": "Published base elevation 1040 m and top elevation 2570 m for See im Paznaun."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-soelden",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "soelden",
+        "name": "Sölden",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.9666,
+        "lng": 11.0073
+      },
+      "elevations": {
+        "baseM": 1350,
+        "topM": 3340,
+        "forecastM": 1363
+      },
+      "locality": {
+        "regionId": "oetztal",
+        "regionName": "Ötztal",
+        "stateOrProvince": "Tyrol",
+        "localityId": "solden",
+        "localityName": "Sölden"
+      },
+      "officialUrl": "https://www.soelden.com/en",
+      "liftNetwork": "Ötztal",
+      "snowForecastMidM": 2345,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.soelden.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Sölden.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "soelden",
+                "name": "Sölden",
+                "aliases": []
+              },
+              "citation": "Official site for Sölden, the resort serving Sölden."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.soelden.com/en",
+              "citation": "Official website for Sölden."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "oetztal",
+                "regionName": "Ötztal",
+                "stateOrProvince": "Tyrol",
+                "localityId": "solden",
+                "localityName": "Sölden"
+              },
+              "citation": "Sölden is accessed from Sölden (Tyrol, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Sölden site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Sölden ski season opening 2026: Glacier Openings starting in ... In Sölden, the 2026–27 ski season will begin in early October on the Rettenbach and Tiefenbach )."
+            }
+          ]
+        },
+        {
+          "url": "https://www.alpenparks.at/en/blog/skiopening-soelden-gletscher_m2455",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Sölden ski season opening 2026: Glacier Openings starting in ... In Sölden, the 2026–27 ski season will begin in early October on the Rettenbach and Tiefenbach glaciers, about six weeks before the res",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.9666&mlon=11.0073#map=15/46.9666/11.0073",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Sölden' (town, relation/77772)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.9666,
+                "lng": 11.0073
+              },
+              "citation": "Map marker at 46.9666, 11.0073."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.9666,11.0073",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1363,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1363 m at 46.9666, 11.0073."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/soelden/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1350 m, top 3340 m. skiresort.info / skiresort.com listing: Sölden 1350–3340 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1350,
+              "citation": "Published base elevation 1350 m and top elevation 3340 m for Sölden."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-obergurgl-hochgurgl",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "obergurgl-hochgurgl",
+        "name": "Obergurgl-Hochgurgl",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.8712,
+        "lng": 11.0282
+      },
+      "elevations": {
+        "baseM": 1793,
+        "topM": 3030,
+        "forecastM": 1917
+      },
+      "locality": {
+        "regionId": "oetztal",
+        "regionName": "Ötztal",
+        "stateOrProvince": "Tyrol",
+        "localityId": "obergurgl",
+        "localityName": "Obergurgl"
+      },
+      "officialUrl": "https://www.obergurgl.com/en",
+      "liftNetwork": "Ötztal",
+      "snowForecastMidM": 2412,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.obergurgl.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Obergurgl-Hochgurgl.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "obergurgl-hochgurgl",
+                "name": "Obergurgl-Hochgurgl",
+                "aliases": []
+              },
+              "citation": "Official site for Obergurgl-Hochgurgl, the resort serving Obergurgl."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.obergurgl.com/en",
+              "citation": "Official website for Obergurgl-Hochgurgl."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "oetztal",
+                "regionName": "Ötztal",
+                "stateOrProvince": "Tyrol",
+                "localityId": "obergurgl",
+                "localityName": "Obergurgl"
+              },
+              "citation": "Obergurgl-Hochgurgl is accessed from Obergurgl (Tyrol, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Obergurgl-Hochgurgl site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Skigebiet-Information Obergurgl-Hochgurgl Die Saison 2026/27 läuft von 18.11.2026 bis 18.04.2027.)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.obergurgl-hochgurgl.at/de/skigebiets-information-obergurgl-hochgurgl.php",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Skigebiet-Information Obergurgl-Hochgurgl Die Saison 2026/27 läuft von 18.11.2026 bis 18.04.2027.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.8712&mlon=11.0282#map=15/46.8712/11.0282",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Obergurgl' (village, node/240059372)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.8712,
+                "lng": 11.0282
+              },
+              "citation": "Map marker at 46.8712, 11.0282."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.8712,11.0282",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1917,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1917 m at 46.8712, 11.0282."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/gurgl-obergurgl-hochgurgl/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1793 m, top 3030 m. skiresort.info / skiresort.com listing: Obergurgl-Hochgurgl 1793–3030 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1793,
+              "citation": "Published base elevation 1793 m and top elevation 3030 m for Obergurgl-Hochgurgl."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-serfaus-fiss-ladis",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "serfaus-fiss-ladis",
+        "name": "Serfaus-Fiss-Ladis",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.0375,
+        "lng": 10.6103
+      },
+      "elevations": {
+        "baseM": 1200,
+        "topM": 2828,
+        "forecastM": 1434
+      },
+      "locality": {
+        "regionId": "serfaus-fiss-ladis",
+        "regionName": "Serfaus-Fiss-Ladis",
+        "stateOrProvince": "Tyrol",
+        "localityId": "serfaus",
+        "localityName": "Serfaus"
+      },
+      "officialUrl": "https://www.serfaus-fiss-ladis.at/en",
+      "liftNetwork": "Serfaus-Fiss-Ladis",
+      "snowForecastMidM": 2014,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.serfaus-fiss-ladis.at/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Serfaus-Fiss-Ladis.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "serfaus-fiss-ladis",
+                "name": "Serfaus-Fiss-Ladis",
+                "aliases": []
+              },
+              "citation": "Official site for Serfaus-Fiss-Ladis, the resort serving Serfaus."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.serfaus-fiss-ladis.at/en",
+              "citation": "Official website for Serfaus-Fiss-Ladis."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "serfaus-fiss-ladis",
+                "regionName": "Serfaus-Fiss-Ladis",
+                "stateOrProvince": "Tyrol",
+                "localityId": "serfaus",
+                "localityName": "Serfaus"
+              },
+              "citation": "Serfaus-Fiss-Ladis is accessed from Serfaus (Tyrol, Austria), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.serfaus-fiss-ladis.at/en/winter-holiday/season-times-opening-hours",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Winter Season Dates 2026/27 Serfaus-Fiss-Ladis Snow start: Fri. 04/12/2026 to Fri. 18/12/2026",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Serfaus-Fiss-Ladis: Winter Season Dates 2026/27 Serfaus-Fiss-Ladis Snow start: Fri. 04/12/2026 to Fri. 18/12/2026"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.0375&mlon=10.6103#map=15/47.0375/10.6103",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Serfaus' (village, relation/77075)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.0375,
+                "lng": 10.6103
+              },
+              "citation": "Map marker at 47.0375, 10.6103."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.0375,10.6103",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1434,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1434 m at 47.0375, 10.6103."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/serfaus-fiss-ladis/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1200 m, top 2828 m. skiresort.info / skiresort.com listing: Serfaus-Fiss-Ladis 1200–2828 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1200,
+              "citation": "Published base elevation 1200 m and top elevation 2828 m for Serfaus-Fiss-Ladis."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-pitztal-glacier-rifflsee",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "pitztal-glacier-rifflsee",
+        "name": "Pitztal Glacier & Rifflsee",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.9686,
+        "lng": 10.8709
+      },
+      "elevations": {
+        "baseM": 2685,
+        "topM": 3440,
+        "forecastM": 1678
+      },
+      "locality": {
+        "regionId": "pitztal",
+        "regionName": "Pitztal",
+        "stateOrProvince": "Tyrol",
+        "localityId": "mandarfen",
+        "localityName": "Mandarfen"
+      },
+      "officialUrl": "https://www.pitztal.com/en",
+      "liftNetwork": "Pitztal",
+      "snowForecastMidM": 3062,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.pitztal.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Pitztal Glacier & Rifflsee.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "pitztal-glacier-rifflsee",
+                "name": "Pitztal Glacier & Rifflsee",
+                "aliases": []
+              },
+              "citation": "Official site for Pitztal Glacier & Rifflsee, the resort serving Mandarfen."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.pitztal.com/en",
+              "citation": "Official website for Pitztal Glacier & Rifflsee."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "pitztal",
+                "regionName": "Pitztal",
+                "stateOrProvince": "Tyrol",
+                "localityId": "mandarfen",
+                "localityName": "Mandarfen"
+              },
+              "citation": "Pitztal Glacier & Rifflsee is accessed from Mandarfen (Tyrol, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Pitztal Glacier & Rifflsee site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Official: the 2026/27 winter season starts 26 September 2026 (Pitztal Glacier 26 Sep 2026 – 2 May 2027))."
+            }
+          ]
+        },
+        {
+          "url": "https://www.pitztaler-gletscher.at/statusbericht",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Official: the 2026/27 winter season starts 26 September 2026 (Pitztal Glacier 26 Sep 2026 – 2 May 2027)",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.9686&mlon=10.8709#map=15/46.9686/10.8709",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Mandarfen' (hamlet, node/318993774)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.9686,
+                "lng": 10.8709
+              },
+              "citation": "Map marker at 46.9686, 10.8709."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.9686,10.8709",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1678,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1678 m at 46.9686, 10.8709."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/pitztal-glacier-pitztaler-gletscher/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 2685 m, top 3440 m. skiresort.info / skiresort.com listing: Pitztal Glacier & Rifflsee 2685–3440 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 2685,
+              "citation": "Published base elevation 2685 m and top elevation 3440 m for Pitztal Glacier & Rifflsee."
+            }
+          ]
+        }
+      ],
+      "reviewNote": "Village point is below the lift base (valley-gondola or glacier resort). Village weather stays at the town; snow forecast uses the base–top midpoint."
+    },
+    {
+      "recordId": "eu-at-kaunertal-glacier",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "kaunertal-glacier",
+        "name": "Kaunertal Glacier",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.029,
+        "lng": 10.746
+      },
+      "elevations": {
+        "baseM": 2150,
+        "topM": 3113,
+        "forecastM": 1289
+      },
+      "locality": {
+        "regionId": "kaunertal",
+        "regionName": "Kaunertal",
+        "stateOrProvince": "Tyrol",
+        "localityId": "feichten",
+        "localityName": "Feichten"
+      },
+      "officialUrl": "https://www.kaunertaler-gletscher.at/en",
+      "liftNetwork": "Kaunertal",
+      "snowForecastMidM": 2632,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.kaunertaler-gletscher.at/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Kaunertal Glacier.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "kaunertal-glacier",
+                "name": "Kaunertal Glacier",
+                "aliases": []
+              },
+              "citation": "Official site for Kaunertal Glacier, the resort serving Feichten."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.kaunertaler-gletscher.at/en",
+              "citation": "Official website for Kaunertal Glacier."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "kaunertal",
+                "regionName": "Kaunertal",
+                "stateOrProvince": "Tyrol",
+                "localityId": "feichten",
+                "localityName": "Feichten"
+              },
+              "citation": "Kaunertal Glacier is accessed from Feichten (Tyrol, Austria), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.kaunertaler-gletscher.at/en/kaunertal-glacier/service-und-informations/opening-hours.html",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Opening hours Kaunertal Glacier - 2026/2027 winter season at the Kaunertal Glacier: September 26, 2026 – May 17, 2027",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Kaunertal Glacier: Opening hours Kaunertal Glacier - 2026/2027 winter season at the Kaunertal Glacier: September 26, 2026 – May 17, 2027"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.029&mlon=10.746#map=15/47.029/10.746",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Feichten, Kaunertal' (village, node/292204515)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.029,
+                "lng": 10.746
+              },
+              "citation": "Map marker at 47.029, 10.746."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.029,10.746",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1289,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1289 m at 47.029, 10.746."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/kaunertal-glacier-kaunertaler-gletscher/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 2150 m, top 3113 m. skiresort.info / skiresort.com listing: Kaunertal Glacier 2150–3113 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 2150,
+              "citation": "Published base elevation 2150 m and top elevation 3113 m for Kaunertal Glacier."
+            }
+          ]
+        }
+      ],
+      "reviewNote": "Village point is below the lift base (valley-gondola or glacier resort). Village weather stays at the town; snow forecast uses the base–top midpoint."
+    },
+    {
+      "recordId": "eu-at-nordkette-innsbruck",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "nordkette-innsbruck",
+        "name": "Nordkette Innsbruck",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.2654,
+        "lng": 11.3928
+      },
+      "elevations": {
+        "baseM": 860,
+        "topM": 2256,
+        "forecastM": 580
+      },
+      "locality": {
+        "regionId": "innsbruck",
+        "regionName": "Innsbruck",
+        "stateOrProvince": "Tyrol",
+        "localityId": "innsbruck",
+        "localityName": "Innsbruck"
+      },
+      "officialUrl": "https://www.nordkette.com/en",
+      "liftNetwork": "Ski plus City",
+      "snowForecastMidM": 1558,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.nordkette.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Nordkette Innsbruck.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "nordkette-innsbruck",
+                "name": "Nordkette Innsbruck",
+                "aliases": []
+              },
+              "citation": "Official site for Nordkette Innsbruck, the resort serving Innsbruck."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.nordkette.com/en",
+              "citation": "Official website for Nordkette Innsbruck."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "innsbruck",
+                "regionName": "Innsbruck",
+                "stateOrProvince": "Tyrol",
+                "localityId": "innsbruck",
+                "localityName": "Innsbruck"
+              },
+              "citation": "Nordkette Innsbruck is accessed from Innsbruck (Tyrol, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Nordkette Innsbruck site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Nordkette – Innsbruck - Skiresort.info Current season: 2026-12-19 - 2027-04-25)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/nordkette-innsbruck/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Nordkette – Innsbruck - Skiresort.info Current season: 2026-12-19 - 2027-04-25",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.2654&mlon=11.3928#map=15/47.2654/11.3928",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Innsbruck' (city, relation/4835169)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.2654,
+                "lng": 11.3928
+              },
+              "citation": "Map marker at 47.2654, 11.3928."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.2654,11.3928",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 580,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 580 m at 47.2654, 11.3928."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/nordkette-innsbruck/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 860 m, top 2256 m. skiresort.info / skiresort.com listing: Nordkette Innsbruck 860–2256 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 860,
+              "citation": "Published base elevation 860 m and top elevation 2256 m for Nordkette Innsbruck."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-axamer-lizum",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "axamer-lizum",
+        "name": "Axamer Lizum",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.2308,
+        "lng": 11.2793
+      },
+      "elevations": {
+        "baseM": 1560,
+        "topM": 2340,
+        "forecastM": 875
+      },
+      "locality": {
+        "regionId": "innsbruck",
+        "regionName": "Innsbruck",
+        "stateOrProvince": "Tyrol",
+        "localityId": "axams",
+        "localityName": "Axams"
+      },
+      "officialUrl": "https://www.axamer-lizum.at/en",
+      "liftNetwork": "Ski plus City",
+      "snowForecastMidM": 1950,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.axamer-lizum.at/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Axamer Lizum.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "axamer-lizum",
+                "name": "Axamer Lizum",
+                "aliases": []
+              },
+              "citation": "Official site for Axamer Lizum, the resort serving Axams."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.axamer-lizum.at/en",
+              "citation": "Official website for Axamer Lizum."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "innsbruck",
+                "regionName": "Innsbruck",
+                "stateOrProvince": "Tyrol",
+                "localityId": "axams",
+                "localityName": "Axams"
+              },
+              "citation": "Axamer Lizum is accessed from Axams (Tyrol, Austria), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.axamer-lizum.at/?lang=en",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Official: winter season starts end of November depending on snow and runs to early April (2026/27 projected 28 Nov 2026 – 11 Apr 2027 per snowstash)",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Axamer Lizum: Official: winter season starts end of November depending on snow and runs to early April (2026/27 projected 28 Nov 2026 – 11 Apr 2027 per snowstash)"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.2308&mlon=11.2793#map=15/47.2308/11.2793",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Axams' (village, relation/943282)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.2308,
+                "lng": 11.2793
+              },
+              "citation": "Map marker at 47.2308, 11.2793."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.2308,11.2793",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 875,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 875 m at 47.2308, 11.2793."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/axamer-lizum/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1560 m, top 2340 m. skiresort.info / skiresort.com listing: Axamer Lizum 1560–2340 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1560,
+              "citation": "Published base elevation 1560 m and top elevation 2340 m for Axamer Lizum."
+            }
+          ]
+        }
+      ],
+      "reviewNote": "Village point is below the lift base (valley-gondola or glacier resort). Village weather stays at the town; snow forecast uses the base–top midpoint."
+    },
+    {
+      "recordId": "eu-at-patscherkofel",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "patscherkofel",
+        "name": "Patscherkofel",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.231,
+        "lng": 11.4079
+      },
+      "elevations": {
+        "baseM": 1009,
+        "topM": 1965,
+        "forecastM": 868
+      },
+      "locality": {
+        "regionId": "innsbruck",
+        "regionName": "Innsbruck",
+        "stateOrProvince": "Tyrol",
+        "localityId": "igls",
+        "localityName": "Igls"
+      },
+      "officialUrl": "https://www.patscherkofelbahn.at/en",
+      "liftNetwork": "Ski plus City",
+      "snowForecastMidM": 1487,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.patscherkofelbahn.at/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Patscherkofel.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "patscherkofel",
+                "name": "Patscherkofel",
+                "aliases": []
+              },
+              "citation": "Official site for Patscherkofel, the resort serving Igls."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.patscherkofelbahn.at/en",
+              "citation": "Official website for Patscherkofel."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "innsbruck",
+                "regionName": "Innsbruck",
+                "stateOrProvince": "Tyrol",
+                "localityId": "igls",
+                "localityName": "Igls"
+              },
+              "citation": "Patscherkofel is accessed from Igls (Tyrol, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Patscherkofel site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Tirol tourism: season start Dec 2026, season end 29 March 2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.tirol.at/aktivitaeten/sport/skifahren/skigebiete/skigebiet-patscherkofel",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Tirol tourism: season start Dec 2026, season end 29 March 2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.231&mlon=11.4079#map=15/47.231/11.4079",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Igls' (suburb, relation/19639250)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.231,
+                "lng": 11.4079
+              },
+              "citation": "Map marker at 47.231, 11.4079."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.231,11.4079",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 868,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 868 m at 47.231, 11.4079."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/patscherkofel-innsbruck-igls/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1009 m, top 1965 m. skiresort.info / skiresort.com listing: Patscherkofel 1009–1965 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1009,
+              "citation": "Published base elevation 1009 m and top elevation 1965 m for Patscherkofel."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-stubai-glacier",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "stubai-glacier",
+        "name": "Stubai Glacier",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.1106,
+        "lng": 11.3076
+      },
+      "elevations": {
+        "baseM": 1695,
+        "topM": 3210,
+        "forecastM": 987
+      },
+      "locality": {
+        "regionId": "stubai",
+        "regionName": "Stubai Valley",
+        "stateOrProvince": "Tyrol",
+        "localityId": "neustift-im-stubaital",
+        "localityName": "Neustift im Stubaital"
+      },
+      "officialUrl": "https://www.stubaier-gletscher.com/en",
+      "liftNetwork": "Ski plus City",
+      "snowForecastMidM": 2452,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.stubaier-gletscher.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Stubai Glacier.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "stubai-glacier",
+                "name": "Stubai Glacier",
+                "aliases": []
+              },
+              "citation": "Official site for Stubai Glacier, the resort serving Neustift im Stubaital."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.stubaier-gletscher.com/en",
+              "citation": "Official website for Stubai Glacier."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "stubai",
+                "regionName": "Stubai Valley",
+                "stateOrProvince": "Tyrol",
+                "localityId": "neustift-im-stubaital",
+                "localityName": "Neustift im Stubaital"
+              },
+              "citation": "Stubai Glacier is accessed from Neustift im Stubaital (Tyrol, Austria), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.stubaier-gletscher.com/en/winter/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Skiing at Stubai Glacier 2026/27 Ski Resort in Tyrol Dear guests, our ski season begins on 9 October 2026.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Stubai Glacier: Skiing at Stubai Glacier 2026/27 Ski Resort in Tyrol Dear guests, our ski season begins on 9 October 2026."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.1106&mlon=11.3076#map=15/47.1106/11.3076",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Neustift im Stubaital' (village, relation/78144)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.1106,
+                "lng": 11.3076
+              },
+              "citation": "Map marker at 47.1106, 11.3076."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.1106,11.3076",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 987,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 987 m at 47.1106, 11.3076."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/stubai-glacier-stubaier-gletscher/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1695 m, top 3210 m. skiresort.info / skiresort.com listing: Stubai Glacier 1695–3210 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1695,
+              "citation": "Published base elevation 1695 m and top elevation 3210 m for Stubai Glacier."
+            }
+          ]
+        }
+      ],
+      "reviewNote": "Village point is below the lift base (valley-gondola or glacier resort). Village weather stays at the town; snow forecast uses the base–top midpoint."
+    },
+    {
+      "recordId": "eu-at-kuhtai",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "kuhtai",
+        "name": "Kühtai",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.2136,
+        "lng": 11.0234
+      },
+      "elevations": {
+        "baseM": 1938,
+        "topM": 2520,
+        "forecastM": 2022
+      },
+      "locality": {
+        "regionId": "kuehtai",
+        "regionName": "Kühtai",
+        "stateOrProvince": "Tyrol",
+        "localityId": "kuhtai",
+        "localityName": "Kühtai"
+      },
+      "officialUrl": "https://www.kuehtai.info/en",
+      "liftNetwork": "Ski plus City",
+      "snowForecastMidM": 2229,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.kuehtai.info/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Kühtai.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "kuhtai",
+                "name": "Kühtai",
+                "aliases": []
+              },
+              "citation": "Official site for Kühtai, the resort serving Kühtai."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.kuehtai.info/en",
+              "citation": "Official website for Kühtai."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "kuehtai",
+                "regionName": "Kühtai",
+                "stateOrProvince": "Tyrol",
+                "localityId": "kuhtai",
+                "localityName": "Kühtai"
+              },
+              "citation": "Kühtai is accessed from Kühtai (Tyrol, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Kühtai site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Questions and answers Ski School Kühtai Winter season 2026/27: 28.11.2026 - 09.04.2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.schischule-kuehtai.at/en/info-vouchers/frequently-asked-questions/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Questions and answers Ski School Kühtai Winter season 2026/27: 28.11.2026 - 09.04.2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.2136&mlon=11.0234#map=15/47.2136/11.0234",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Kühtai' (village, node/62644020)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.2136,
+                "lng": 11.0234
+              },
+              "citation": "Map marker at 47.2136, 11.0234."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.2136,11.0234",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 2022,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 2022 m at 47.2136, 11.0234."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/kuehtai/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1938 m, top 2520 m. skiresort.info / skiresort.com listing: Kühtai 1938–2520 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1938,
+              "citation": "Published base elevation 1938 m and top elevation 2520 m for Kühtai."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-mayrhofen",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "mayrhofen",
+        "name": "Mayrhofen (Penken-Ahorn)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.1671,
+        "lng": 11.8642
+      },
+      "elevations": {
+        "baseM": 630,
+        "topM": 2500,
+        "forecastM": 638
+      },
+      "locality": {
+        "regionId": "zillertal",
+        "regionName": "Zillertal",
+        "stateOrProvince": "Tyrol",
+        "localityId": "mayrhofen",
+        "localityName": "Mayrhofen"
+      },
+      "officialUrl": "https://www.mayrhofner-bergbahnen.com/",
+      "liftNetwork": "Zillertal Superskipass",
+      "snowForecastMidM": 1565,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.mayrhofner-bergbahnen.com/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Mayrhofen (Penken-Ahorn).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "mayrhofen",
+                "name": "Mayrhofen (Penken-Ahorn)",
+                "aliases": []
+              },
+              "citation": "Official site for Mayrhofen (Penken-Ahorn), the resort serving Mayrhofen."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.mayrhofner-bergbahnen.com/",
+              "citation": "Official website for Mayrhofen (Penken-Ahorn)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "zillertal",
+                "regionName": "Zillertal",
+                "stateOrProvince": "Tyrol",
+                "localityId": "mayrhofen",
+                "localityName": "Mayrhofen"
+              },
+              "citation": "Mayrhofen (Penken-Ahorn) is accessed from Mayrhofen (Tyrol, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Mayrhofen (Penken-Ahorn) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (When do Ski Resorts in Austria open? 2026/27 Dates - Snowscape Mayrhofen 4 December 2026)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.snowscape.co.uk/austria-ski-blog/full-article/?p=when-do-austria-ski-resorts-open-dates",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: When do Ski Resorts in Austria open? 2026/27 Dates - Snowscape Mayrhofen 4 December 2026",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.1671&mlon=11.8642#map=15/47.1671/11.8642",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Mayrhofen' (town, relation/80064)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.1671,
+                "lng": 11.8642
+              },
+              "citation": "Map marker at 47.1671, 11.8642."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.1671,11.8642",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 638,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 638 m at 47.1671, 11.8642."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/mayrhofen-penken-ahorn-rastkogel-eggalm-mountopolis/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 630 m, top 2500 m. skiresort.info / skiresort.com listing: Mayrhofen (Penken-Ahorn) 630–2500 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 630,
+              "citation": "Published base elevation 630 m and top elevation 2500 m for Mayrhofen (Penken-Ahorn)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-hintertux-glacier",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "hintertux-glacier",
+        "name": "Hintertux Glacier",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.115,
+        "lng": 11.6825
+      },
+      "elevations": {
+        "baseM": 1500,
+        "topM": 3250,
+        "forecastM": 1496
+      },
+      "locality": {
+        "regionId": "zillertal",
+        "regionName": "Zillertal",
+        "stateOrProvince": "Tyrol",
+        "localityId": "hintertux",
+        "localityName": "Hintertux"
+      },
+      "officialUrl": "https://www.hintertuxergletscher.at/en",
+      "liftNetwork": "Zillertal Superskipass",
+      "snowForecastMidM": 2375,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.hintertuxergletscher.at/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Hintertux Glacier.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "hintertux-glacier",
+                "name": "Hintertux Glacier",
+                "aliases": []
+              },
+              "citation": "Official site for Hintertux Glacier, the resort serving Hintertux."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.hintertuxergletscher.at/en",
+              "citation": "Official website for Hintertux Glacier."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "zillertal",
+                "regionName": "Zillertal",
+                "stateOrProvince": "Tyrol",
+                "localityId": "hintertux",
+                "localityName": "Hintertux"
+              },
+              "citation": "Hintertux Glacier is accessed from Hintertux (Tyrol, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Hintertux Glacier site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Hintertux Glacier (Hintertuxer Gletscher) - Skiresort.info Current season: 2026-10-02 - 2027-07-18)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/hintertux-glacier-hintertuxer-gletscher/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Hintertux Glacier (Hintertuxer Gletscher) - Skiresort.info Current season: 2026-10-02 - 2027-07-18",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.115&mlon=11.6825#map=15/47.115/11.6825",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Hintertux' (village, node/321007835)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.115,
+                "lng": 11.6825
+              },
+              "citation": "Map marker at 47.115, 11.6825."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.115,11.6825",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1496,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1496 m at 47.115, 11.6825."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Hintertux_Glacier",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1500 m, top 3250 m. Wikipedia ski-area infobox: Hintertux Glacier 1500–3250 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1500,
+              "citation": "Published base elevation 1500 m and top elevation 3250 m for Hintertux Glacier."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-zillertal-arena",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "zillertal-arena",
+        "name": "Zillertal Arena",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.2336,
+        "lng": 11.882
+      },
+      "elevations": {
+        "baseM": 580,
+        "topM": 2500,
+        "forecastM": 578
+      },
+      "locality": {
+        "regionId": "zillertal",
+        "regionName": "Zillertal",
+        "stateOrProvince": "Tyrol",
+        "localityId": "zell-am-ziller",
+        "localityName": "Zell am Ziller"
+      },
+      "officialUrl": "https://www.zillertalarena.com/en",
+      "liftNetwork": "Zillertal Superskipass",
+      "snowForecastMidM": 1540,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.zillertalarena.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Zillertal Arena.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "zillertal-arena",
+                "name": "Zillertal Arena",
+                "aliases": []
+              },
+              "citation": "Official site for Zillertal Arena, the resort serving Zell am Ziller."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.zillertalarena.com/en",
+              "citation": "Official website for Zillertal Arena."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "zillertal",
+                "regionName": "Zillertal",
+                "stateOrProvince": "Tyrol",
+                "localityId": "zell-am-ziller",
+                "localityName": "Zell am Ziller"
+              },
+              "citation": "Zillertal Arena is accessed from Zell am Ziller (Tyrol, Austria), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.zillertalarena.com/winter/skigebiet/betriebszeiten/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Zillertal Arena Öffnungszeiten & Betriebszeiten Winter Die Wintersaison in der Zillertal Arena startet am 04. Dezember 2026 und lädt bis zum 11. April 2027 zu unvergesslichem Winterspaß ein.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Zillertal Arena: Zillertal Arena Öffnungszeiten & Betriebszeiten Winter Die Wintersaison in der Zillertal Arena startet am 04. Dezember 2026 und lädt bis zum 11. April 2027 zu unvergesslichem Winterspaß ein."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.2336&mlon=11.882#map=15/47.2336/11.882",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Zell am Ziller' (town, relation/80186)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.2336,
+                "lng": 11.882
+              },
+              "citation": "Map marker at 47.2336, 11.882."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.2336,11.882",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 578,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 578 m at 47.2336, 11.882."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/zillertal-arena-zell-am-ziller-gerlos-koenigsleiten-hochkrimml/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 580 m, top 2500 m. skiresort.info / skiresort.com listing: Zillertal Arena 580–2500 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 580,
+              "citation": "Published base elevation 580 m and top elevation 2500 m for Zillertal Arena."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-hochzillertal-hochfugen",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "hochzillertal-hochfugen",
+        "name": "Hochzillertal-Hochfügen",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.2908,
+        "lng": 11.8744
+      },
+      "elevations": {
+        "baseM": 600,
+        "topM": 2378,
+        "forecastM": 553
+      },
+      "locality": {
+        "regionId": "zillertal",
+        "regionName": "Zillertal",
+        "stateOrProvince": "Tyrol",
+        "localityId": "kaltenbach",
+        "localityName": "Kaltenbach"
+      },
+      "officialUrl": "https://www.hochzillertal.com/en",
+      "liftNetwork": "Zillertal Superskipass",
+      "snowForecastMidM": 1489,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.hochzillertal.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Hochzillertal-Hochfügen.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "hochzillertal-hochfugen",
+                "name": "Hochzillertal-Hochfügen",
+                "aliases": []
+              },
+              "citation": "Official site for Hochzillertal-Hochfügen, the resort serving Kaltenbach."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.hochzillertal.com/en",
+              "citation": "Official website for Hochzillertal-Hochfügen."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "zillertal",
+                "regionName": "Zillertal",
+                "stateOrProvince": "Tyrol",
+                "localityId": "kaltenbach",
+                "localityName": "Kaltenbach"
+              },
+              "citation": "Hochzillertal-Hochfügen is accessed from Kaltenbach (Tyrol, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Hochzillertal-Hochfügen site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Offene Skigebiete Hochzillertal-Hochfügen 2026/2027 - Skiinfo.de Hochfügen 04. Dez ... Hochzillertal 05. Dez)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiinfo.de/hochzillertal-hochfuegen/offene-skigebiete",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Offene Skigebiete Hochzillertal-Hochfügen 2026/2027 - Skiinfo.de Hochfügen 04. Dez ... Hochzillertal 05. Dez",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.2908&mlon=11.8744#map=15/47.2908/11.8744",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Kaltenbach' (village, relation/83149)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.2908,
+                "lng": 11.8744
+              },
+              "citation": "Map marker at 47.2908, 11.8744."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.2908,11.8744",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 553,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 553 m at 47.2908, 11.8744."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.info/ski-resort/kaltenbach-hochzillertalhochfuegen-ski-optimal/test-result/size/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 600 m, top 2378 m. skiresort.info / skiresort.com listing: Hochzillertal-Hochfügen 600–2378 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 600,
+              "citation": "Published base elevation 600 m and top elevation 2378 m for Hochzillertal-Hochfügen."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-kitzbuehel-kitzski",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "kitzbuehel-kitzski",
+        "name": "Kitzbühel (KitzSki)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.4464,
+        "lng": 12.3911
+      },
+      "elevations": {
+        "baseM": 800,
+        "topM": 2000,
+        "forecastM": 764
+      },
+      "locality": {
+        "regionId": "kitzbuehel",
+        "regionName": "Kitzbühel Alps",
+        "stateOrProvince": "Tyrol",
+        "localityId": "kitzbuhel",
+        "localityName": "Kitzbühel"
+      },
+      "officialUrl": "https://www.kitzski.at/en",
+      "liftNetwork": "KitzSki",
+      "snowForecastMidM": 1400,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.kitzski.at/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Kitzbühel (KitzSki).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "kitzbuehel-kitzski",
+                "name": "Kitzbühel (KitzSki)",
+                "aliases": []
+              },
+              "citation": "Official site for Kitzbühel (KitzSki), the resort serving Kitzbühel."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.kitzski.at/en",
+              "citation": "Official website for Kitzbühel (KitzSki)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "kitzbuehel",
+                "regionName": "Kitzbühel Alps",
+                "stateOrProvince": "Tyrol",
+                "localityId": "kitzbuhel",
+                "localityName": "Kitzbühel"
+              },
+              "citation": "Kitzbühel (KitzSki) is accessed from Kitzbühel (Tyrol, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Kitzbühel (KitzSki) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (KitzSki Season Pass 2026/27 KitzSki is planning to start the season on 6 November 2026 at Resterkogel .)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.schlosshotel-kitzbuehel.com/en/blog/winter/kitzski-saisonpass-2026-27",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: KitzSki Season Pass 2026/27 KitzSki is planning to start the season on 6 November 2026 at Resterkogel .",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.4464&mlon=12.3911#map=15/47.4464/12.3911",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Kitzbühel' (town, relation/85657)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.4464,
+                "lng": 12.3911
+              },
+              "citation": "Map marker at 47.4464, 12.3911."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.4464,12.3911",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 764,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 764 m at 47.4464, 12.3911."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/kitzski-kitzbuehel-kirchberg/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 800 m, top 2000 m. skiresort.info / skiresort.com listing: Kitzbühel (KitzSki) 800–2000 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 800,
+              "citation": "Published base elevation 800 m and top elevation 2000 m for Kitzbühel (KitzSki)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-skiwelt-wilder-kaiser-brixental",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "skiwelt-wilder-kaiser-brixental",
+        "name": "SkiWelt Wilder Kaiser-Brixental",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.5137,
+        "lng": 12.3025
+      },
+      "elevations": {
+        "baseM": 620,
+        "topM": 1869,
+        "forecastM": 799
+      },
+      "locality": {
+        "regionId": "kitzbuehel",
+        "regionName": "Kitzbühel Alps",
+        "stateOrProvince": "Tyrol",
+        "localityId": "ellmau",
+        "localityName": "Ellmau"
+      },
+      "officialUrl": "https://www.skiwelt.at/en",
+      "liftNetwork": "SkiWelt",
+      "snowForecastMidM": 1244,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.skiwelt.at/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for SkiWelt Wilder Kaiser-Brixental.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "skiwelt-wilder-kaiser-brixental",
+                "name": "SkiWelt Wilder Kaiser-Brixental",
+                "aliases": []
+              },
+              "citation": "Official site for SkiWelt Wilder Kaiser-Brixental, the resort serving Ellmau."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.skiwelt.at/en",
+              "citation": "Official website for SkiWelt Wilder Kaiser-Brixental."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "kitzbuehel",
+                "regionName": "Kitzbühel Alps",
+                "stateOrProvince": "Tyrol",
+                "localityId": "ellmau",
+                "localityName": "Ellmau"
+              },
+              "citation": "SkiWelt Wilder Kaiser-Brixental is accessed from Ellmau (Tyrol, Austria), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiwelt.at/en/skiwelt-wilder-kaiser-brixental.html",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: www.skiwelt.at · en · skiwelt-wilder-kaiser-brixentalSkiWelt area All information, news, shop etc. 5 December 2026 to 29 March 2027 (SKIWELT ELLMAU open until 4 April 2027) Season tickets on pre-sale from 26 September",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for SkiWelt Wilder Kaiser-Brixental: www.skiwelt.at · en · skiwelt-wilder-kaiser-brixentalSkiWelt area All information, news, shop etc. 5 December 2026 to 29 March 2027 (SKIWELT ELLMAU open until 4 April 2027) Season tickets on pre-sale "
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.5137&mlon=12.3025#map=15/47.5137/12.3025",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Ellmau' (village, relation/946759)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.5137,
+                "lng": 12.3025
+              },
+              "citation": "Map marker at 47.5137, 12.3025."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.5137,12.3025",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 799,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 799 m at 47.5137, 12.3025."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/skiwelt-wilder-kaiser-brixental/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 620 m, top 1869 m. skiresort.info / skiresort.com listing: SkiWelt Wilder Kaiser-Brixental 620–1869 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 620,
+              "citation": "Published base elevation 620 m and top elevation 1869 m for SkiWelt Wilder Kaiser-Brixental."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-st-johann-in-tirol",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "st-johann-in-tirol",
+        "name": "St. Johann in Tirol",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.5224,
+        "lng": 12.4287
+      },
+      "elevations": {
+        "baseM": 659,
+        "topM": 1604,
+        "forecastM": 660
+      },
+      "locality": {
+        "regionId": "kitzbuehel",
+        "regionName": "Kitzbühel Alps",
+        "stateOrProvince": "Tyrol",
+        "localityId": "st-johann-in-tirol",
+        "localityName": "St. Johann in Tirol"
+      },
+      "officialUrl": "https://www.bergbahnen-stjohann.at/en",
+      "liftNetwork": "Kitzbüheler Alpen AllStarCard",
+      "snowForecastMidM": 1132,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.bergbahnen-stjohann.at/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for St. Johann in Tirol.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "st-johann-in-tirol",
+                "name": "St. Johann in Tirol",
+                "aliases": []
+              },
+              "citation": "Official site for St. Johann in Tirol, the resort serving St. Johann in Tirol."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.bergbahnen-stjohann.at/en",
+              "citation": "Official website for St. Johann in Tirol."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "kitzbuehel",
+                "regionName": "Kitzbühel Alps",
+                "stateOrProvince": "Tyrol",
+                "localityId": "st-johann-in-tirol",
+                "localityName": "St. Johann in Tirol"
+              },
+              "citation": "St. Johann in Tirol is accessed from St. Johann in Tirol (Tyrol, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official St. Johann in Tirol site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (www.skiinfo.de · tirol · saisoneroeffnung-skigebieteSkisaison Tirol 2026/2027 Saisoneröffnung & Skiopening-Termine... St. Johann in Tirol 28. Nov ... - Geplante)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiinfo.de/tirol/saisoneroeffnung-skigebiete",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: www.skiinfo.de · tirol · saisoneroeffnung-skigebieteSkisaison Tirol 2026/2027 Saisoneröffnung & Skiopening-Termine... St. Johann in Tirol 28. Nov ... - Geplanter Saisonstart",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.5224&mlon=12.4287#map=15/47.5224/12.4287",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'St. Johann in Tirol' (town, relation/85659)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.5224,
+                "lng": 12.4287
+              },
+              "citation": "Map marker at 47.5224, 12.4287."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.5224,12.4287",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 660,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 660 m at 47.5224, 12.4287."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.info/ski-resort/st-johann-in-tirol-oberndorf-harschbichl/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 659 m, top 1604 m. skiresort.info / skiresort.com listing: St. Johann in Tirol 659–1604 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 659,
+              "citation": "Published base elevation 659 m and top elevation 1604 m for St. Johann in Tirol."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-ski-juwel-alpbachtal-wildschonau",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "ski-juwel-alpbachtal-wildschonau",
+        "name": "Ski Juwel Alpbachtal Wildschönau",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.3988,
+        "lng": 11.9435
+      },
+      "elevations": {
+        "baseM": 830,
+        "topM": 2030,
+        "forecastM": 973
+      },
+      "locality": {
+        "regionId": "ski-juwel",
+        "regionName": "Alpbachtal",
+        "stateOrProvince": "Tyrol",
+        "localityId": "alpbach",
+        "localityName": "Alpbach"
+      },
+      "officialUrl": "https://www.skijuwel.com/en",
+      "liftNetwork": "Ski Juwel",
+      "snowForecastMidM": 1430,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.skijuwel.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Ski Juwel Alpbachtal Wildschönau.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "ski-juwel-alpbachtal-wildschonau",
+                "name": "Ski Juwel Alpbachtal Wildschönau",
+                "aliases": []
+              },
+              "citation": "Official site for Ski Juwel Alpbachtal Wildschönau, the resort serving Alpbach."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.skijuwel.com/en",
+              "citation": "Official website for Ski Juwel Alpbachtal Wildschönau."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "ski-juwel",
+                "regionName": "Alpbachtal",
+                "stateOrProvince": "Tyrol",
+                "localityId": "alpbach",
+                "localityName": "Alpbach"
+              },
+              "citation": "Ski Juwel Alpbachtal Wildschönau is accessed from Alpbach (Tyrol, Austria), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skijuwel.com/de/winter/tickets-und-preise",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Official: winter season 2026/27 starts 4 December 2026",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Ski Juwel Alpbachtal Wildschönau: Official: winter season 2026/27 starts 4 December 2026"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.3988&mlon=11.9435#map=15/47.3988/11.9435",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Alpbach' (village, relation/554947)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.3988,
+                "lng": 11.9435
+              },
+              "citation": "Map marker at 47.3988, 11.9435."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.3988,11.9435",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 973,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 973 m at 47.3988, 11.9435."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/ski-juwel-alpbachtal-wildschoenau/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 830 m, top 2030 m. skiresort.info / skiresort.com listing: Ski Juwel Alpbachtal Wildschönau 830–2030 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 830,
+              "citation": "Published base elevation 830 m and top elevation 2030 m for Ski Juwel Alpbachtal Wildschönau."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-skicircus-saalbach-hinterglemm-leogang-fieberbrunn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "skicircus-saalbach-hinterglemm-leogang-fieberbrunn",
+        "name": "Skicircus Saalbach Hinterglemm Leogang Fieberbrunn",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.3915,
+        "lng": 12.6364
+      },
+      "elevations": {
+        "baseM": 830,
+        "topM": 2096,
+        "forecastM": 1008
+      },
+      "locality": {
+        "regionId": "saalbach",
+        "regionName": "Saalbach Hinterglemm Leogang Fieberbrunn",
+        "stateOrProvince": "Salzburg",
+        "localityId": "saalbach",
+        "localityName": "Saalbach"
+      },
+      "officialUrl": "https://www.saalbach.com/en",
+      "liftNetwork": "Skicircus",
+      "snowForecastMidM": 1463,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.saalbach.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Skicircus Saalbach Hinterglemm Leogang Fieberbrunn.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "skicircus-saalbach-hinterglemm-leogang-fieberbrunn",
+                "name": "Skicircus Saalbach Hinterglemm Leogang Fieberbrunn",
+                "aliases": []
+              },
+              "citation": "Official site for Skicircus Saalbach Hinterglemm Leogang Fieberbrunn, the resort serving Saalbach."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.saalbach.com/en",
+              "citation": "Official website for Skicircus Saalbach Hinterglemm Leogang Fieberbrunn."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "saalbach",
+                "regionName": "Saalbach Hinterglemm Leogang Fieberbrunn",
+                "stateOrProvince": "Salzburg",
+                "localityId": "saalbach",
+                "localityName": "Saalbach"
+              },
+              "citation": "Skicircus Saalbach Hinterglemm Leogang Fieberbrunn is accessed from Saalbach (Salzburg, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Skicircus Saalbach Hinterglemm Leogang Fieberbrunn site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Saalbach Hinterglemm Leogang Fieberbrunn (Skicircus) Current season: 2026-11-27 - 2027-04-04)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/saalbach-hinterglemm-leogang-fieberbrunn-skicircus/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Saalbach Hinterglemm Leogang Fieberbrunn (Skicircus) Current season: 2026-11-27 - 2027-04-04",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.3915&mlon=12.6364#map=15/47.3915/12.6364",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Saalbach' (village, node/240047212)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.3915,
+                "lng": 12.6364
+              },
+              "citation": "Map marker at 47.3915, 12.6364."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.3915,12.6364",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1008,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1008 m at 47.3915, 12.6364."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/saalbach-hinterglemm-leogang-fieberbrunn-skicircus/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 830 m, top 2096 m. skiresort.info / skiresort.com listing: Skicircus Saalbach Hinterglemm Leogang Fieberbrunn 830–2096 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 830,
+              "citation": "Published base elevation 830 m and top elevation 2096 m for Skicircus Saalbach Hinterglemm Leogang Fieberbrunn."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-schmittenhohe",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "schmittenhohe",
+        "name": "Schmittenhöhe",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.324,
+        "lng": 12.7963
+      },
+      "elevations": {
+        "baseM": 760,
+        "topM": 2000,
+        "forecastM": 771
+      },
+      "locality": {
+        "regionId": "zell-am-see-kaprun",
+        "regionName": "Zell am See-Kaprun",
+        "stateOrProvince": "Salzburg",
+        "localityId": "zell-am-see",
+        "localityName": "Zell am See"
+      },
+      "officialUrl": "https://www.schmitten.at/en",
+      "liftNetwork": "Zell am See-Kaprun",
+      "snowForecastMidM": 1380,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.schmitten.at/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Schmittenhöhe.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "schmittenhohe",
+                "name": "Schmittenhöhe",
+                "aliases": []
+              },
+              "citation": "Official site for Schmittenhöhe, the resort serving Zell am See."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.schmitten.at/en",
+              "citation": "Official website for Schmittenhöhe."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "zell-am-see-kaprun",
+                "regionName": "Zell am See-Kaprun",
+                "stateOrProvince": "Salzburg",
+                "localityId": "zell-am-see",
+                "localityName": "Zell am See"
+              },
+              "citation": "Schmittenhöhe is accessed from Zell am See (Salzburg, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Schmittenhöhe site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Wintersaisonstart 2026/27 - green.schmitten.at Ab dem Saisonbeginn am 4. Dezember 2026 heißt es wieder: Rein in die Seilbahn, raus aus dem)."
+            }
+          ]
+        },
+        {
+          "url": "https://green.schmitten.at/de/Wintersaisonstart-2026/27-auf-der-Schmittenhoehe-in-Zell-am-See_bba_6385",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Wintersaisonstart 2026/27 - green.schmitten.at Ab dem Saisonbeginn am 4. Dezember 2026 heißt es wieder: Rein in die Seilbahn, raus aus dem",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.324&mlon=12.7963#map=15/47.324/12.7963",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Zell am See' (town, relation/945962)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.324,
+                "lng": 12.7963
+              },
+              "citation": "Map marker at 47.324, 12.7963."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.324,12.7963",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 771,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 771 m at 47.324, 12.7963."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/schmittenhoehe-zell-am-see/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 760 m, top 2000 m. skiresort.info / skiresort.com listing: Schmittenhöhe 760–2000 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 760,
+              "citation": "Published base elevation 760 m and top elevation 2000 m for Schmittenhöhe."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-kitzsteinhorn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "kitzsteinhorn",
+        "name": "Kitzsteinhorn",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.2714,
+        "lng": 12.7574
+      },
+      "elevations": {
+        "baseM": 768,
+        "topM": 3029,
+        "forecastM": 773
+      },
+      "locality": {
+        "regionId": "zell-am-see-kaprun",
+        "regionName": "Zell am See-Kaprun",
+        "stateOrProvince": "Salzburg",
+        "localityId": "kaprun",
+        "localityName": "Kaprun"
+      },
+      "officialUrl": "https://www.kitzsteinhorn.at/en",
+      "liftNetwork": "Zell am See-Kaprun",
+      "snowForecastMidM": 1898,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.kitzsteinhorn.at/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Kitzsteinhorn.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "kitzsteinhorn",
+                "name": "Kitzsteinhorn",
+                "aliases": []
+              },
+              "citation": "Official site for Kitzsteinhorn, the resort serving Kaprun."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.kitzsteinhorn.at/en",
+              "citation": "Official website for Kitzsteinhorn."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "zell-am-see-kaprun",
+                "regionName": "Zell am See-Kaprun",
+                "stateOrProvince": "Salzburg",
+                "localityId": "kaprun",
+                "localityName": "Kaprun"
+              },
+              "citation": "Kitzsteinhorn is accessed from Kaprun (Salzburg, Austria), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.kitzsteinhorn.at/en/service/backstage/press/winter-2025-26-pr15634",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Winter 2026/27 - Kitzsteinhorn, Zell am See-Kaprun At the high-alpine Kitzsteinhorn glacier ski resort, winter sports en",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Kitzsteinhorn: Winter 2026/27 - Kitzsteinhorn, Zell am See-Kaprun At the high-alpine Kitzsteinhorn glacier ski resort, winter sports en"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.2714&mlon=12.7574#map=15/47.2714/12.7574",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Kaprun' (village, relation/945977)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.2714,
+                "lng": 12.7574
+              },
+              "citation": "Map marker at 47.2714, 12.7574."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.2714,12.7574",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 773,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 773 m at 47.2714, 12.7574."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/kitzsteinhorn-maiskogel-kaprun/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 768 m, top 3029 m. skiresort.info / skiresort.com listing: Kitzsteinhorn 768–3029 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 768,
+              "citation": "Published base elevation 768 m and top elevation 3029 m for Kitzsteinhorn."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-snow-space-salzburg",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "snow-space-salzburg",
+        "name": "Snow Space Salzburg (Flachau-Wagrain-St. Johann)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.3441,
+        "lng": 13.3915
+      },
+      "elevations": {
+        "baseM": 740,
+        "topM": 1980,
+        "forecastM": 908
+      },
+      "locality": {
+        "regionId": "ski-amade",
+        "regionName": "Ski amadé",
+        "stateOrProvince": "Salzburg",
+        "localityId": "flachau",
+        "localityName": "Flachau"
+      },
+      "officialUrl": "https://www.snow-space.com/en",
+      "liftNetwork": "Ski amadé",
+      "snowForecastMidM": 1360,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.snow-space.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Snow Space Salzburg (Flachau-Wagrain-St. Johann).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "snow-space-salzburg",
+                "name": "Snow Space Salzburg (Flachau-Wagrain-St. Johann)",
+                "aliases": []
+              },
+              "citation": "Official site for Snow Space Salzburg (Flachau-Wagrain-St. Johann), the resort serving Flachau."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.snow-space.com/en",
+              "citation": "Official website for Snow Space Salzburg (Flachau-Wagrain-St. Johann)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "ski-amade",
+                "regionName": "Ski amadé",
+                "stateOrProvince": "Salzburg",
+                "localityId": "flachau",
+                "localityName": "Flachau"
+              },
+              "citation": "Snow Space Salzburg (Flachau-Wagrain-St. Johann) is accessed from Flachau (Salzburg, Austria), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.snow-space.com/en/winter",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: www.snow-space.com · en · winterWinter holidays in Salzburg - Ski resort Snow Space in Austria The planned season start is 28 November 2026 . The continuous 12-peak ski connection is scheduled to open from 5 December 2026 , with the final",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Snow Space Salzburg (Flachau-Wagrain-St. Johann): www.snow-space.com · en · winterWinter holidays in Salzburg - Ski resort Snow Space in Austria The planned season start is 28 November 2026 . The continuous 12-peak ski connection is scheduled to open"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.3441&mlon=13.3915#map=15/47.3441/13.3915",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (GeoNames populated-place point via Open-Meteo geocoding).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.3441,
+                "lng": 13.3915
+              },
+              "citation": "Map marker at 47.3441, 13.3915."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.3441,13.3915",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 908,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 908 m at 47.3441, 13.3915."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/snow-space-salzburg-flachau-wagrain-st-johann-alpendorf/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 740 m, top 1980 m. skiresort.info / skiresort.com listing: Snow Space Salzburg (Flachau-Wagrain-St. Johann) 740–1980 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 740,
+              "citation": "Published base elevation 740 m and top elevation 1980 m for Snow Space Salzburg (Flachau-Wagrain-St. Johann)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-obertauern",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "obertauern",
+        "name": "Obertauern",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.2494,
+        "lng": 13.557
+      },
+      "elevations": {
+        "baseM": 1630,
+        "topM": 2313,
+        "forecastM": 1758
+      },
+      "locality": {
+        "regionId": "ski-amade",
+        "regionName": "Ski amadé",
+        "stateOrProvince": "Salzburg",
+        "localityId": "obertauern",
+        "localityName": "Obertauern"
+      },
+      "officialUrl": "https://www.obertauern.com/en",
+      "liftNetwork": "Ski amadé",
+      "snowForecastMidM": 1972,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.obertauern.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Obertauern.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "obertauern",
+                "name": "Obertauern",
+                "aliases": []
+              },
+              "citation": "Official site for Obertauern, the resort serving Obertauern."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.obertauern.com/en",
+              "citation": "Official website for Obertauern."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "ski-amade",
+                "regionName": "Ski amadé",
+                "stateOrProvince": "Salzburg",
+                "localityId": "obertauern",
+                "localityName": "Obertauern"
+              },
+              "citation": "Obertauern is accessed from Obertauern (Salzburg, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Obertauern site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Obertauern Ski Opening 2026/27 Start the Ski Season with Valamar Obertauern’s 2026/27 ski season is planned to begin with partial lift operat)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.valamar.com/en/obertauern-ski-opening",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Obertauern Ski Opening 2026/27 Start the Ski Season with Valamar Obertauern’s 2026/27 ski season is planned to begin with partial lift operat",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.2494&mlon=13.557#map=15/47.2494/13.557",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Obertauern' (village, node/491993485)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.2494,
+                "lng": 13.557
+              },
+              "citation": "Map marker at 47.2494, 13.557."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.2494,13.557",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1758,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1758 m at 47.2494, 13.557."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/obertauern/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1630 m, top 2313 m. skiresort.info / skiresort.com listing: Obertauern 1630–2313 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1630,
+              "citation": "Published base elevation 1630 m and top elevation 2313 m for Obertauern."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-bad-gastein",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "bad-gastein",
+        "name": "Bad Gastein (Ski amadé Gastein)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.1155,
+        "lng": 13.1347
+      },
+      "elevations": {
+        "baseM": 1079,
+        "topM": 2246,
+        "forecastM": 1014
+      },
+      "locality": {
+        "regionId": "ski-amade",
+        "regionName": "Ski amadé",
+        "stateOrProvince": "Salzburg",
+        "localityId": "bad-gastein",
+        "localityName": "Bad Gastein"
+      },
+      "officialUrl": "https://www.skigastein.com/en",
+      "liftNetwork": "Ski amadé",
+      "snowForecastMidM": 1662,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.skigastein.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Bad Gastein (Ski amadé Gastein).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "bad-gastein",
+                "name": "Bad Gastein (Ski amadé Gastein)",
+                "aliases": []
+              },
+              "citation": "Official site for Bad Gastein (Ski amadé Gastein), the resort serving Bad Gastein."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.skigastein.com/en",
+              "citation": "Official website for Bad Gastein (Ski amadé Gastein)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "ski-amade",
+                "regionName": "Ski amadé",
+                "stateOrProvince": "Salzburg",
+                "localityId": "bad-gastein",
+                "localityName": "Bad Gastein"
+              },
+              "citation": "Bad Gastein (Ski amadé Gastein) is accessed from Bad Gastein (Salzburg, Austria), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skigastein.com/tickets-lifte/betriebszeiten-lifte/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski Gastein lift times: Schlossalm–Angertal–Stubnerkogel link 11 Dec 2026 to 4 Apr 2027; Stubnerkogel from 27.11.2026",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Bad Gastein (Ski amadé Gastein): Ski Gastein lift times: Schlossalm–Angertal–Stubnerkogel link 11 Dec 2026 to 4 Apr 2027; Stubnerkogel from 27.11.2026"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.1155&mlon=13.1347#map=15/47.1155/13.1347",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (GeoNames populated-place point via Open-Meteo geocoding).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.1155,
+                "lng": 13.1347
+              },
+              "citation": "Map marker at 47.1155, 13.1347."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.1155,13.1347",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1014,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1014 m at 47.1155, 13.1347."
+            }
+          ]
+        },
+        {
+          "url": "https://www.visitaustria.info/en/salzburgerland/bad-gastein/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1079 m, top 2246 m. Bad Gastein home mountains: Graukogel valley station 1,079 m (skiresort.info) and Stubnerkogel 2,246 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1079,
+              "citation": "Published base elevation 1079 m and top elevation 2246 m for Bad Gastein (Ski amadé Gastein)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-planai-hochwurzen",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "planai-hochwurzen",
+        "name": "Planai-Hochwurzen (Schladming)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.394,
+        "lng": 13.6868
+      },
+      "elevations": {
+        "baseM": 750,
+        "topM": 1894,
+        "forecastM": 736
+      },
+      "locality": {
+        "regionId": "schladming",
+        "regionName": "Schladming-Dachstein",
+        "stateOrProvince": "Styria",
+        "localityId": "schladming",
+        "localityName": "Schladming"
+      },
+      "officialUrl": "https://www.planai.at/en",
+      "liftNetwork": "Ski amadé",
+      "snowForecastMidM": 1322,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.planai.at/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Planai-Hochwurzen (Schladming).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "planai-hochwurzen",
+                "name": "Planai-Hochwurzen (Schladming)",
+                "aliases": []
+              },
+              "citation": "Official site for Planai-Hochwurzen (Schladming), the resort serving Schladming."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.planai.at/en",
+              "citation": "Official website for Planai-Hochwurzen (Schladming)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "schladming",
+                "regionName": "Schladming-Dachstein",
+                "stateOrProvince": "Styria",
+                "localityId": "schladming",
+                "localityName": "Schladming"
+              },
+              "citation": "Planai-Hochwurzen (Schladming) is accessed from Schladming (Styria, Austria), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.planai.at/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: planai.at A season opener in a class of its own: on 11 and 12 December 2026 , Helene Fischer and her band will kick off the ski season at the Planai Stadium .",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Planai-Hochwurzen (Schladming): planai.at A season opener in a class of its own: on 11 and 12 December 2026 , Helene Fischer and her band will kick off the ski season at the Planai Stadium ."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.394&mlon=13.6868#map=15/47.394/13.6868",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Schladming' (town, relation/3851162)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.394,
+                "lng": 13.6868
+              },
+              "citation": "Map marker at 47.394, 13.6868."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.394,13.6868",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 736,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 736 m at 47.394, 13.6868."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Planai",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 750 m, top 1894 m. Wikipedia ski-area infobox: Planai-Hochwurzen (Schladming) 750–1894 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 750,
+              "citation": "Published base elevation 750 m and top elevation 1894 m for Planai-Hochwurzen (Schladming)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-silvretta-montafon",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "silvretta-montafon",
+        "name": "Silvretta Montafon",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.0802,
+        "lng": 9.9197
+      },
+      "elevations": {
+        "baseM": 700,
+        "topM": 2430,
+        "forecastM": 692
+      },
+      "locality": {
+        "regionId": "montafon",
+        "regionName": "Montafon",
+        "stateOrProvince": "Vorarlberg",
+        "localityId": "schruns",
+        "localityName": "Schruns"
+      },
+      "officialUrl": "https://www.silvretta-montafon.at/en",
+      "liftNetwork": "Montafon Brandnertal",
+      "snowForecastMidM": 1565,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.silvretta-montafon.at/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Silvretta Montafon.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "silvretta-montafon",
+                "name": "Silvretta Montafon",
+                "aliases": []
+              },
+              "citation": "Official site for Silvretta Montafon, the resort serving Schruns."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.silvretta-montafon.at/en",
+              "citation": "Official website for Silvretta Montafon."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "montafon",
+                "regionName": "Montafon",
+                "stateOrProvince": "Vorarlberg",
+                "localityId": "schruns",
+                "localityName": "Schruns"
+              },
+              "citation": "Silvretta Montafon is accessed from Schruns (Vorarlberg, Austria), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.silvretta-montafon.at/en/info-service/opening-times",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Silvretta Montafon mountain railway operating hours Winter & Winter season from 27 November 2026 to 11 April 2027",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Silvretta Montafon: Silvretta Montafon mountain railway operating hours Winter & Winter season from 27 November 2026 to 11 April 2027"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.0802&mlon=9.9197#map=15/47.0802/9.9197",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Schruns' (village, relation/76734)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.0802,
+                "lng": 9.9197
+              },
+              "citation": "Map marker at 47.0802, 9.9197."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.0802,9.9197",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 692,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 692 m at 47.0802, 9.9197."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/silvretta-montafon/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 700 m, top 2430 m. skiresort.info / skiresort.com listing: Silvretta Montafon 700–2430 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 700,
+              "citation": "Published base elevation 700 m and top elevation 2430 m for Silvretta Montafon."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-nassfeld",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "nassfeld",
+        "name": "Nassfeld",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.6268,
+        "lng": 13.3702
+      },
+      "elevations": {
+        "baseM": 600,
+        "topM": 2002,
+        "forecastM": 600
+      },
+      "locality": {
+        "regionId": "carinthia",
+        "regionName": "Carinthia",
+        "stateOrProvince": "Carinthia",
+        "localityId": "hermagor",
+        "localityName": "Hermagor"
+      },
+      "officialUrl": "https://www.nassfeld.at/en",
+      "liftNetwork": "TopSkiPass Kärnten",
+      "snowForecastMidM": 1301,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.nassfeld.at/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Nassfeld.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "nassfeld",
+                "name": "Nassfeld",
+                "aliases": []
+              },
+              "citation": "Official site for Nassfeld, the resort serving Hermagor."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.nassfeld.at/en",
+              "citation": "Official website for Nassfeld."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "carinthia",
+                "regionName": "Carinthia",
+                "stateOrProvince": "Carinthia",
+                "localityId": "hermagor",
+                "localityName": "Hermagor"
+              },
+              "citation": "Nassfeld is accessed from Hermagor (Carinthia, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Nassfeld site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Nassfeld – Hermagor Current season: 2026-12-05 - 2027-04-11)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/nassfeld-hermagor/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Nassfeld – Hermagor Current season: 2026-12-05 - 2027-04-11",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.6268&mlon=13.3702#map=15/46.6268/13.3702",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Hermagor' (town, node/185503543)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.6268,
+                "lng": 13.3702
+              },
+              "citation": "Map marker at 46.6268, 13.3702."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.6268,13.3702",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 600,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 600 m at 46.6268, 13.3702."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/nassfeld-hermagor/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 600 m, top 2002 m. skiresort.info / skiresort.com listing: Nassfeld 600–2002 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 600,
+              "citation": "Published base elevation 600 m and top elevation 2002 m for Nassfeld."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-at-bad-kleinkirchheim",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "bad-kleinkirchheim",
+        "name": "Bad Kleinkirchheim",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.8144,
+        "lng": 13.7984
+      },
+      "elevations": {
+        "baseM": 1087,
+        "topM": 2055,
+        "forecastM": 1083
+      },
+      "locality": {
+        "regionId": "carinthia",
+        "regionName": "Carinthia",
+        "stateOrProvince": "Carinthia",
+        "localityId": "bad-kleinkirchheim",
+        "localityName": "Bad Kleinkirchheim"
+      },
+      "officialUrl": "https://www.badkleinkirchheim.at/en",
+      "liftNetwork": "TopSkiPass Kärnten",
+      "snowForecastMidM": 1571,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.badkleinkirchheim.at/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Bad Kleinkirchheim.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "bad-kleinkirchheim",
+                "name": "Bad Kleinkirchheim",
+                "aliases": []
+              },
+              "citation": "Official site for Bad Kleinkirchheim, the resort serving Bad Kleinkirchheim."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.badkleinkirchheim.at/en",
+              "citation": "Official website for Bad Kleinkirchheim."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "carinthia",
+                "regionName": "Carinthia",
+                "stateOrProvince": "Carinthia",
+                "localityId": "bad-kleinkirchheim",
+                "localityName": "Bad Kleinkirchheim"
+              },
+              "citation": "Bad Kleinkirchheim is accessed from Bad Kleinkirchheim (Carinthia, Austria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Bad Kleinkirchheim site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski-Opening - Bad Kleinkirchheimer Bergbahnen – 23. Dezember 2026 haben wir gleich zwei Spar-Angebote für Dich.)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.badkleinkirchheim.com/ski-opening/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski-Opening - Bad Kleinkirchheimer Bergbahnen – 23. Dezember 2026 haben wir gleich zwei Spar-Angebote für Dich.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.8144&mlon=13.7984#map=15/46.8144/13.7984",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Bad Kleinkirchheim' (village, relation/414250)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.8144,
+                "lng": 13.7984
+              },
+              "citation": "Map marker at 46.8144, 13.7984."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.8144,13.7984",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1083,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1083 m at 46.8144, 13.7984."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/bad-kleinkirchheim/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1087 m, top 2055 m. skiresort.info / skiresort.com listing: Bad Kleinkirchheim 1087–2055 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1087,
+              "citation": "Published base elevation 1087 m and top elevation 2055 m for Bad Kleinkirchheim."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

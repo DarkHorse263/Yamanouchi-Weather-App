@@ -1,0 +1,2595 @@
+{
+  "batchVersion": 1,
+  "batchId": "europe-phase4-italy",
+  "records": [
+    {
+      "recordId": "eu-it-val-gardena",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "val-gardena",
+        "name": "Val Gardena",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.5552,
+        "lng": 11.7601
+      },
+      "elevations": {
+        "baseM": 1236,
+        "topM": 2518,
+        "forecastM": 1570
+      },
+      "locality": {
+        "regionId": "val-gardena",
+        "regionName": "Val Gardena · Alta Badia",
+        "stateOrProvince": "South Tyrol",
+        "localityId": "selva-di-val-gardena",
+        "localityName": "Selva di Val Gardena"
+      },
+      "officialUrl": "https://www.valgardena.it/en",
+      "liftNetwork": "Dolomiti Superski",
+      "snowForecastMidM": 1877,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.valgardena.it/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Val Gardena.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "val-gardena",
+                "name": "Val Gardena",
+                "aliases": []
+              },
+              "citation": "Official site for Val Gardena, the resort serving Selva di Val Gardena."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.valgardena.it/en",
+              "citation": "Official website for Val Gardena."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "val-gardena",
+                "regionName": "Val Gardena · Alta Badia",
+                "stateOrProvince": "South Tyrol",
+                "localityId": "selva-di-val-gardena",
+                "localityName": "Selva di Val Gardena"
+              },
+              "citation": "Val Gardena is accessed from Selva di Val Gardena (South Tyrol, Italy), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.valgardena.it/en/news-val-gardena/detail/winter-opening-in-val-gardena/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Winter Opening in Val Gardena The lifts in Val Gardena and the Sellaronda will open on 4 December 2026 and are scheduled to remain in operation until 4 April 2027.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Val Gardena: Winter Opening in Val Gardena The lifts in Val Gardena and the Sellaronda will open on 4 December 2026 and are scheduled to remain in operation until 4 April 2027."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.5552&mlon=11.7601#map=15/46.5552/11.7601",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Selva di Val Gardena' (village, relation/47242)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.5552,
+                "lng": 11.7601
+              },
+              "citation": "Map marker at 46.5552, 11.7601."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.5552,11.7601",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1570,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1570 m at 46.5552, 11.7601."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/val-gardena-groeden/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1236 m, top 2518 m. skiresort.info / skiresort.com listing: Val Gardena 1236–2518 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1236,
+              "citation": "Published base elevation 1236 m and top elevation 2518 m for Val Gardena."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-alta-badia",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "alta-badia",
+        "name": "Alta Badia",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.5496,
+        "lng": 11.874
+      },
+      "elevations": {
+        "baseM": 1324,
+        "topM": 2778,
+        "forecastM": 1534
+      },
+      "locality": {
+        "regionId": "val-gardena",
+        "regionName": "Val Gardena · Alta Badia",
+        "stateOrProvince": "South Tyrol",
+        "localityId": "corvara-in-badia",
+        "localityName": "Corvara in Badia"
+      },
+      "officialUrl": "https://www.altabadia.org/en",
+      "liftNetwork": "Dolomiti Superski",
+      "snowForecastMidM": 2051,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.altabadia.org/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Alta Badia.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "alta-badia",
+                "name": "Alta Badia",
+                "aliases": []
+              },
+              "citation": "Official site for Alta Badia, the resort serving Corvara in Badia."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.altabadia.org/en",
+              "citation": "Official website for Alta Badia."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "val-gardena",
+                "regionName": "Val Gardena · Alta Badia",
+                "stateOrProvince": "South Tyrol",
+                "localityId": "corvara-in-badia",
+                "localityName": "Corvara in Badia"
+              },
+              "citation": "Alta Badia is accessed from Corvara in Badia (South Tyrol, Italy), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Alta Badia site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Alta Badia skiing area The season ended on April 7, 2026 - the 2026/2027 ski season will start on December 4.)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.alta-badia.org/en/leisure-activities/winter-sports/alta-badia-skiing-area/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Alta Badia skiing area The season ended on April 7, 2026 - the 2026/2027 ski season will start on December 4.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.5496&mlon=11.874#map=15/46.5496/11.874",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Corvara in Badia' (village, relation/47252)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.5496,
+                "lng": 11.874
+              },
+              "citation": "Map marker at 46.5496, 11.874."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.5496,11.874",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1534,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1534 m at 46.5496, 11.874."
+            }
+          ]
+        },
+        {
+          "url": "https://www.alta-badia.org/en/leisure-activities/winter-sports/alta-badia-skiing-area.html",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1324 m, top 2778 m. Alta Badia official: ski region between 1,324 and 2,778 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1324,
+              "citation": "Published base elevation 1324 m and top elevation 2778 m for Alta Badia."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-kronplatz",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "kronplatz",
+        "name": "Kronplatz (Plan de Corones)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.7963,
+        "lng": 11.9355
+      },
+      "elevations": {
+        "baseM": 973,
+        "topM": 2275,
+        "forecastM": 834
+      },
+      "locality": {
+        "regionId": "kronplatz",
+        "regionName": "Kronplatz · Alta Pusteria",
+        "stateOrProvince": "South Tyrol",
+        "localityId": "brunico",
+        "localityName": "Brunico"
+      },
+      "officialUrl": "https://www.kronplatz.com/en",
+      "liftNetwork": "Dolomiti Superski",
+      "snowForecastMidM": 1624,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.kronplatz.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Kronplatz (Plan de Corones).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "kronplatz",
+                "name": "Kronplatz (Plan de Corones)",
+                "aliases": []
+              },
+              "citation": "Official site for Kronplatz (Plan de Corones), the resort serving Brunico."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.kronplatz.com/en",
+              "citation": "Official website for Kronplatz (Plan de Corones)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "kronplatz",
+                "regionName": "Kronplatz · Alta Pusteria",
+                "stateOrProvince": "South Tyrol",
+                "localityId": "brunico",
+                "localityName": "Brunico"
+              },
+              "citation": "Kronplatz (Plan de Corones) is accessed from Brunico (South Tyrol, Italy), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Kronplatz (Plan de Corones) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Kronplatz Ski Area: Slopes, Lifts and Getting There The 2026/27 calendar published by the ski area runs from 28 November 2026 to 11 April 2027.)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.ledolomiti.it/en/ski-areas/kronplatz",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Kronplatz Ski Area: Slopes, Lifts and Getting There The 2026/27 calendar published by the ski area runs from 28 November 2026 to 11 April 2027.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.7963&mlon=11.9355#map=15/46.7963/11.9355",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Brunico' (town, relation/47317)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.7963,
+                "lng": 11.9355
+              },
+              "citation": "Map marker at 46.7963, 11.9355."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.7963,11.9355",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 834,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 834 m at 46.7963, 11.9355."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/kronplatz-plan-de-corones/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 973 m, top 2275 m. skiresort.info / skiresort.com listing: Kronplatz (Plan de Corones) 973–2275 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 973,
+              "citation": "Published base elevation 973 m and top elevation 2275 m for Kronplatz (Plan de Corones)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-3-zinnen-dolomites",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "3-zinnen-dolomites",
+        "name": "3 Zinnen Dolomites",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.7324,
+        "lng": 12.2785
+      },
+      "elevations": {
+        "baseM": 1130,
+        "topM": 2225,
+        "forecastM": 1176
+      },
+      "locality": {
+        "regionId": "kronplatz",
+        "regionName": "Kronplatz · Alta Pusteria",
+        "stateOrProvince": "South Tyrol",
+        "localityId": "san-candido",
+        "localityName": "San Candido"
+      },
+      "officialUrl": "https://www.dreizinnen.com/en",
+      "liftNetwork": "Dolomiti Superski",
+      "snowForecastMidM": 1678,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.dreizinnen.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for 3 Zinnen Dolomites.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "3-zinnen-dolomites",
+                "name": "3 Zinnen Dolomites",
+                "aliases": []
+              },
+              "citation": "Official site for 3 Zinnen Dolomites, the resort serving San Candido."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.dreizinnen.com/en",
+              "citation": "Official website for 3 Zinnen Dolomites."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "kronplatz",
+                "regionName": "Kronplatz · Alta Pusteria",
+                "stateOrProvince": "South Tyrol",
+                "localityId": "san-candido",
+                "localityName": "San Candido"
+              },
+              "citation": "3 Zinnen Dolomites is accessed from San Candido (South Tyrol, Italy), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.dreizinnen.com/en/skiing",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Skiing with Dolomites views 3 Zinnen Dolomites - Drei Zinnen Ski area open from 28 November 2026 to 04 April 2027",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for 3 Zinnen Dolomites: Skiing with Dolomites views 3 Zinnen Dolomites - Drei Zinnen Ski area open from 28 November 2026 to 04 April 2027"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.7324&mlon=12.2785#map=15/46.7324/12.2785",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (GeoNames populated-place point via Open-Meteo geocoding).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.7324,
+                "lng": 12.2785
+              },
+              "citation": "Map marker at 46.7324, 12.2785."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.7324,12.2785",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1176,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1176 m at 46.7324, 12.2785."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/3-zinnen-dolomites-helm-stiergarten-rotwand-kreuzbergpass/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1130 m, top 2225 m. skiresort.info / skiresort.com listing: 3 Zinnen Dolomites 1130–2225 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1130,
+              "citation": "Published base elevation 1130 m and top elevation 2225 m for 3 Zinnen Dolomites."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-cortina-d-ampezzo",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "cortina-d-ampezzo",
+        "name": "Cortina d'Ampezzo",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.5685,
+        "lng": 12.1323
+      },
+      "elevations": {
+        "baseM": 1224,
+        "topM": 2930,
+        "forecastM": 1543
+      },
+      "locality": {
+        "regionId": "cortina",
+        "regionName": "Cortina d'Ampezzo",
+        "stateOrProvince": "Veneto",
+        "localityId": "cortina-d-ampezzo",
+        "localityName": "Cortina d'Ampezzo"
+      },
+      "officialUrl": "https://www.dolomiti.org/en/cortina",
+      "liftNetwork": "Dolomiti Superski",
+      "snowForecastMidM": 2077,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.dolomiti.org/en/cortina",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Cortina d'Ampezzo.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "cortina-d-ampezzo",
+                "name": "Cortina d'Ampezzo",
+                "aliases": []
+              },
+              "citation": "Official site for Cortina d'Ampezzo, the resort serving Cortina d'Ampezzo."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.dolomiti.org/en/cortina",
+              "citation": "Official website for Cortina d'Ampezzo."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "cortina",
+                "regionName": "Cortina d'Ampezzo",
+                "stateOrProvince": "Veneto",
+                "localityId": "cortina-d-ampezzo",
+                "localityName": "Cortina d'Ampezzo"
+              },
+              "citation": "Cortina d'Ampezzo is accessed from Cortina d'Ampezzo (Veneto, Italy), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Cortina d'Ampezzo site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (cortinadampezzo.it › en › news-enWinter 2026/27 in Cortina d’Ampezzo The first resorts and slopes are expected to open between late November and early)."
+            }
+          ]
+        },
+        {
+          "url": "https://cortinadampezzo.it/en/news-en/winter-2026-27-in-cortina-dampezzo/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: cortinadampezzo.it › en › news-enWinter 2026/27 in Cortina d’Ampezzo The first resorts and slopes are expected to open between late November and early",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.5685&mlon=12.1323#map=15/46.5685/12.1323",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Cortina d'Ampezzo' (city, relation/47235)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.5685,
+                "lng": 12.1323
+              },
+              "citation": "Map marker at 46.5685, 12.1323."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.5685,12.1323",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1543,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1543 m at 46.5685, 12.1323."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Cortina_d%27Ampezzo",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1224 m, top 2930 m. Wikipedia ski-area infobox: Cortina d'Ampezzo 1224–2930 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1224,
+              "citation": "Published base elevation 1224 m and top elevation 2930 m for Cortina d'Ampezzo."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-arabba-marmolada",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "arabba-marmolada",
+        "name": "Arabba-Marmolada",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.4972,
+        "lng": 11.8741
+      },
+      "elevations": {
+        "baseM": 1446,
+        "topM": 3269,
+        "forecastM": 1603
+      },
+      "locality": {
+        "regionId": "cortina",
+        "regionName": "Cortina d'Ampezzo",
+        "stateOrProvince": "Veneto",
+        "localityId": "arabba",
+        "localityName": "Arabba"
+      },
+      "officialUrl": "https://www.arabba.it/en",
+      "liftNetwork": "Dolomiti Superski",
+      "snowForecastMidM": 2358,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.arabba.it/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Arabba-Marmolada.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "arabba-marmolada",
+                "name": "Arabba-Marmolada",
+                "aliases": []
+              },
+              "citation": "Official site for Arabba-Marmolada, the resort serving Arabba."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.arabba.it/en",
+              "citation": "Official website for Arabba-Marmolada."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "cortina",
+                "regionName": "Cortina d'Ampezzo",
+                "stateOrProvince": "Veneto",
+                "localityId": "arabba",
+                "localityName": "Arabba"
+              },
+              "citation": "Arabba-Marmolada is accessed from Arabba (Veneto, Italy), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Arabba-Marmolada site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Arabba/Marmolada Current season: 2026-11-28 - 2027-04-18)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/arabba-marmolada/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Arabba/Marmolada Current season: 2026-11-28 - 2027-04-18",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.4972&mlon=11.8741#map=15/46.4972/11.8741",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Arabba' (village, node/304300272)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.4972,
+                "lng": 11.8741
+              },
+              "citation": "Map marker at 46.4972, 11.8741."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.4972,11.8741",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1603,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1603 m at 46.4972, 11.8741."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/arabba-marmolada/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1446 m, top 3269 m. skiresort.info / skiresort.com listing: Arabba-Marmolada 1446–3269 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1446,
+              "citation": "Published base elevation 1446 m and top elevation 3269 m for Arabba-Marmolada."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-val-di-fassa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "val-di-fassa",
+        "name": "Val di Fassa (Canazei-Belvedere)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.4769,
+        "lng": 11.7711
+      },
+      "elevations": {
+        "baseM": 1460,
+        "topM": 2485,
+        "forecastM": 1462
+      },
+      "locality": {
+        "regionId": "val-di-fassa",
+        "regionName": "Val di Fassa",
+        "stateOrProvince": "Trentino",
+        "localityId": "canazei",
+        "localityName": "Canazei"
+      },
+      "officialUrl": "https://www.fassa.com/en",
+      "liftNetwork": "Dolomiti Superski",
+      "snowForecastMidM": 1972,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.fassa.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Val di Fassa (Canazei-Belvedere).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "val-di-fassa",
+                "name": "Val di Fassa (Canazei-Belvedere)",
+                "aliases": []
+              },
+              "citation": "Official site for Val di Fassa (Canazei-Belvedere), the resort serving Canazei."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.fassa.com/en",
+              "citation": "Official website for Val di Fassa (Canazei-Belvedere)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "val-di-fassa",
+                "regionName": "Val di Fassa",
+                "stateOrProvince": "Trentino",
+                "localityId": "canazei",
+                "localityName": "Canazei"
+              },
+              "citation": "Val di Fassa (Canazei-Belvedere) is accessed from Canazei (Trentino, Italy), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.fassa.com/en/ski-lifts-slopes/ski-areas/belvedere-col-rodella",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Val di Fassa official: Belvedere–Col Rodella ski area open from 4 December 2026 to 4 April 2027",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Val di Fassa (Canazei-Belvedere): Val di Fassa official: Belvedere–Col Rodella ski area open from 4 December 2026 to 4 April 2027"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.4769&mlon=11.7711#map=15/46.4769/11.7711",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Canazei' (village, relation/47202)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.4769,
+                "lng": 11.7711
+              },
+              "citation": "Map marker at 46.4769, 11.7711."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.4769,11.7711",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1462,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1462 m at 46.4769, 11.7711."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiset.co.uk/ski-resort/canazei-val-di-fassa",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1460 m, top 2485 m. Canazei base about 1,460 m (EU-DEM at the village lift point); Col Rodella about 2,485 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1460,
+              "citation": "Published base elevation 1460 m and top elevation 2485 m for Val di Fassa (Canazei-Belvedere)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-san-martino-di-castrozza",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "san-martino-di-castrozza",
+        "name": "San Martino di Castrozza",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.2623,
+        "lng": 11.8028
+      },
+      "elevations": {
+        "baseM": 1404,
+        "topM": 2357,
+        "forecastM": 1473
+      },
+      "locality": {
+        "regionId": "val-di-fassa",
+        "regionName": "Val di Fassa",
+        "stateOrProvince": "Trentino",
+        "localityId": "san-martino-di-castrozza",
+        "localityName": "San Martino di Castrozza"
+      },
+      "officialUrl": "https://www.sanmartino.com/en",
+      "liftNetwork": "Dolomiti Superski",
+      "snowForecastMidM": 1880,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.sanmartino.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for San Martino di Castrozza.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "san-martino-di-castrozza",
+                "name": "San Martino di Castrozza",
+                "aliases": []
+              },
+              "citation": "Official site for San Martino di Castrozza, the resort serving San Martino di Castrozza."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.sanmartino.com/en",
+              "citation": "Official website for San Martino di Castrozza."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "val-di-fassa",
+                "regionName": "Val di Fassa",
+                "stateOrProvince": "Trentino",
+                "localityId": "san-martino-di-castrozza",
+                "localityName": "San Martino di Castrozza"
+              },
+              "citation": "San Martino di Castrozza is accessed from San Martino di Castrozza (Trentino, Italy), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official San Martino di Castrozza site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (San Martino di Castrozza - Trentino - Italy PLEASE NOTE: THE SAN MARTINO DI CASTROZZA SKIING AREA IS CURRENTLY CLOSED AND REOPENS FOR THE 2026/27 WINTER SEASON.)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.trentino.com/en/leisure-activities/winter-sports/skiing-areas-in-trentino/ski-area-san-martino-di-castrozza/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: San Martino di Castrozza - Trentino - Italy PLEASE NOTE: THE SAN MARTINO DI CASTROZZA SKIING AREA IS CURRENTLY CLOSED AND REOPENS FOR THE 2026/27 WINTER SEASON.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.2623&mlon=11.8028#map=15/46.2623/11.8028",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'San Martino di Castrozza' (village, relation/6668800)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.2623,
+                "lng": 11.8028
+              },
+              "citation": "Map marker at 46.2623, 11.8028."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.2623,11.8028",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1473,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1473 m at 46.2623, 11.8028."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/san-martino-di-castrozza/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1404 m, top 2357 m. skiresort.info / skiresort.com listing: San Martino di Castrozza 1404–2357 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1404,
+              "citation": "Published base elevation 1404 m and top elevation 2357 m for San Martino di Castrozza."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-madonna-di-campiglio",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "madonna-di-campiglio",
+        "name": "Madonna di Campiglio",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.227,
+        "lng": 10.827
+      },
+      "elevations": {
+        "baseM": 1550,
+        "topM": 2504,
+        "forecastM": 1498
+      },
+      "locality": {
+        "regionId": "madonna-di-campiglio",
+        "regionName": "Madonna di Campiglio · Val di Sole",
+        "stateOrProvince": "Trentino",
+        "localityId": "madonna-di-campiglio",
+        "localityName": "Madonna di Campiglio"
+      },
+      "officialUrl": "https://www.campigliodolomiti.it/en",
+      "liftNetwork": "Skirama Dolomiti Adamello Brenta",
+      "snowForecastMidM": 2027,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.campigliodolomiti.it/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Madonna di Campiglio.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "madonna-di-campiglio",
+                "name": "Madonna di Campiglio",
+                "aliases": []
+              },
+              "citation": "Official site for Madonna di Campiglio, the resort serving Madonna di Campiglio."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.campigliodolomiti.it/en",
+              "citation": "Official website for Madonna di Campiglio."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "madonna-di-campiglio",
+                "regionName": "Madonna di Campiglio · Val di Sole",
+                "stateOrProvince": "Trentino",
+                "localityId": "madonna-di-campiglio",
+                "localityName": "Madonna di Campiglio"
+              },
+              "citation": "Madonna di Campiglio is accessed from Madonna di Campiglio (Trentino, Italy), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Madonna di Campiglio site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort opening dates 2026/27 - Rent and Go Madonna di Campiglio Noleggio del Brenta Campiglio Nord 21 November 2026)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.rentandgo.it/en/news/ski-resort-opening-dates-2026-27",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort opening dates 2026/27 - Rent and Go Madonna di Campiglio Noleggio del Brenta Campiglio Nord 21 November 2026",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.227&mlon=10.827#map=15/46.227/10.827",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Madonna di Campiglio' (village, node/1796357582)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.227,
+                "lng": 10.827
+              },
+              "citation": "Map marker at 46.227, 10.827."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.227,10.827",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1498,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1498 m at 46.227, 10.827."
+            }
+          ]
+        },
+        {
+          "url": "https://www.alps2alps.com/wiki/resorts/madonna-di-campiglio/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1550 m, top 2504 m. Madonna di Campiglio village 1,550 m; skiing up to 2,504 m (Grostè).",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1550,
+              "citation": "Published base elevation 1550 m and top elevation 2504 m for Madonna di Campiglio."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-folgarida-marilleva",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "folgarida-marilleva",
+        "name": "Folgarida-Marilleva",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.3024,
+        "lng": 10.8101
+      },
+      "elevations": {
+        "baseM": 1300,
+        "topM": 2180,
+        "forecastM": 1428
+      },
+      "locality": {
+        "regionId": "madonna-di-campiglio",
+        "regionName": "Madonna di Campiglio · Val di Sole",
+        "stateOrProvince": "Trentino",
+        "localityId": "marilleva",
+        "localityName": "Marilleva"
+      },
+      "officialUrl": "https://www.valdisole.net/en",
+      "liftNetwork": "Skirama Dolomiti Adamello Brenta",
+      "snowForecastMidM": 1740,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.valdisole.net/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Folgarida-Marilleva.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "folgarida-marilleva",
+                "name": "Folgarida-Marilleva",
+                "aliases": []
+              },
+              "citation": "Official site for Folgarida-Marilleva, the resort serving Marilleva."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.valdisole.net/en",
+              "citation": "Official website for Folgarida-Marilleva."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "madonna-di-campiglio",
+                "regionName": "Madonna di Campiglio · Val di Sole",
+                "stateOrProvince": "Trentino",
+                "localityId": "marilleva",
+                "localityName": "Marilleva"
+              },
+              "citation": "Folgarida-Marilleva is accessed from Marilleva (Trentino, Italy), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Folgarida-Marilleva site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (lgarida Marilleva skiing area - Trentino - Italy PLEASE NOTE: THE FOLGARIDA MARILLEVA SKIING AREA IS CURRENTLY CLOSED AND REOPENS FOR THE 2026/27 WINTER SEASON.)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.trentino.com/en/leisure-activities/winter-sports/skiing-areas-in-trentino/folgarida-marilleva-skiing-area/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: lgarida Marilleva skiing area - Trentino - Italy PLEASE NOTE: THE FOLGARIDA MARILLEVA SKIING AREA IS CURRENTLY CLOSED AND REOPENS FOR THE 2026/27 WINTER SEASON.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.3024&mlon=10.8101#map=15/46.3024/10.8101",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Marilleva 1400' (hamlet, node/331259364)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.3024,
+                "lng": 10.8101
+              },
+              "citation": "Map marker at 46.3024, 10.8101."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.3024,10.8101",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1428,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1428 m at 46.3024, 10.8101."
+            }
+          ]
+        },
+        {
+          "url": "https://www.snowtrex.ie/italy/folgarida/ski-area.html",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1300 m, top 2180 m. Folgarida–Marilleva pass area between 1,300 and 2,180 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1300,
+              "citation": "Published base elevation 1300 m and top elevation 2180 m for Folgarida-Marilleva."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-pontedilegno-tonale",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "pontedilegno-tonale",
+        "name": "Pontedilegno-Tonale",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.2594,
+        "lng": 10.5849
+      },
+      "elevations": {
+        "baseM": 1121,
+        "topM": 3000,
+        "forecastM": 1884
+      },
+      "locality": {
+        "regionId": "madonna-di-campiglio",
+        "regionName": "Madonna di Campiglio · Val di Sole",
+        "stateOrProvince": "Trentino",
+        "localityId": "passo-del-tonale",
+        "localityName": "Passo del Tonale"
+      },
+      "officialUrl": "https://www.pontedilegnotonale.com/en",
+      "liftNetwork": "Adamello Ski",
+      "snowForecastMidM": 2060,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.pontedilegnotonale.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Pontedilegno-Tonale.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "pontedilegno-tonale",
+                "name": "Pontedilegno-Tonale",
+                "aliases": []
+              },
+              "citation": "Official site for Pontedilegno-Tonale, the resort serving Passo del Tonale."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.pontedilegnotonale.com/en",
+              "citation": "Official website for Pontedilegno-Tonale."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "madonna-di-campiglio",
+                "regionName": "Madonna di Campiglio · Val di Sole",
+                "stateOrProvince": "Trentino",
+                "localityId": "passo-del-tonale",
+                "localityName": "Passo del Tonale"
+              },
+              "citation": "Pontedilegno-Tonale is accessed from Passo del Tonale (Trentino, Italy), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.pontedilegnotonale.com/en/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Home Ponte di Legno Tonale Winter season 2026/2027 skipass prices are now available online.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Pontedilegno-Tonale: Home Ponte di Legno Tonale Winter season 2026/2027 skipass prices are now available online."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.2594&mlon=10.5849#map=15/46.2594/10.5849",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Passo del Tonale' (hamlet, node/6660281744)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.2594,
+                "lng": 10.5849
+              },
+              "citation": "Map marker at 46.2594, 10.5849."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.2594,10.5849",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1884,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1884 m at 46.2594, 10.5849."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/ponte-di-legno-tonale-presena-glacier-temu-pontedilegno-tonale/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1121 m, top 3000 m. skiresort.info / skiresort.com listing: Pontedilegno-Tonale 1121–3000 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1121,
+              "citation": "Published base elevation 1121 m and top elevation 3000 m for Pontedilegno-Tonale."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-livigno",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "livigno",
+        "name": "Livigno",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.5382,
+        "lng": 10.136
+      },
+      "elevations": {
+        "baseM": 1816,
+        "topM": 2798,
+        "forecastM": 1821
+      },
+      "locality": {
+        "regionId": "alta-valtellina",
+        "regionName": "Livigno · Bormio",
+        "stateOrProvince": "Lombardy",
+        "localityId": "livigno",
+        "localityName": "Livigno"
+      },
+      "officialUrl": "https://www.livigno.eu/en",
+      "liftNetwork": "Livigno",
+      "snowForecastMidM": 2307,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.livigno.eu/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Livigno.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "livigno",
+                "name": "Livigno",
+                "aliases": []
+              },
+              "citation": "Official site for Livigno, the resort serving Livigno."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.livigno.eu/en",
+              "citation": "Official website for Livigno."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "alta-valtellina",
+                "regionName": "Livigno · Bormio",
+                "stateOrProvince": "Lombardy",
+                "localityId": "livigno",
+                "localityName": "Livigno"
+              },
+              "citation": "Livigno is accessed from Livigno (Lombardy, Italy), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Livigno site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (LIVIGNO’S 2026/27 WINTER SEASON KICKS OFF ON NOVEMBER 28 ... Livigno is preparing to kick off the 2026/27 winter season on Novem)."
+            }
+          ]
+        },
+        {
+          "url": "https://blog.livigno.eu/en/livignos-2026/27-winter-season-kicks-off-on-november-28-bringing-innovation-high-quality-experiences-and-olympic-spirit",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: LIVIGNO’S 2026/27 WINTER SEASON KICKS OFF ON NOVEMBER 28 ... Livigno is preparing to kick off the 2026/27 winter season on Novem",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.5382&mlon=10.136#map=15/46.5382/10.136",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Livigno' (town, relation/47273)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.5382,
+                "lng": 10.136
+              },
+              "citation": "Map marker at 46.5382, 10.136."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.5382,10.136",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1821,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1821 m at 46.5382, 10.136."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/livigno/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1816 m, top 2798 m. skiresort.info / skiresort.com listing: Livigno 1816–2798 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1816,
+              "citation": "Published base elevation 1816 m and top elevation 2798 m for Livigno."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-bormio",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "bormio",
+        "name": "Bormio",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.4677,
+        "lng": 10.3775
+      },
+      "elevations": {
+        "baseM": 1200,
+        "topM": 3017,
+        "forecastM": 1225
+      },
+      "locality": {
+        "regionId": "alta-valtellina",
+        "regionName": "Livigno · Bormio",
+        "stateOrProvince": "Lombardy",
+        "localityId": "bormio",
+        "localityName": "Bormio"
+      },
+      "officialUrl": "https://www.bormioski.eu/",
+      "liftNetwork": "Alta Valtellina",
+      "snowForecastMidM": 2108,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.bormioski.eu/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Bormio.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "bormio",
+                "name": "Bormio",
+                "aliases": []
+              },
+              "citation": "Official site for Bormio, the resort serving Bormio."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.bormioski.eu/",
+              "citation": "Official website for Bormio."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "alta-valtellina",
+                "regionName": "Livigno · Bormio",
+                "stateOrProvince": "Lombardy",
+                "localityId": "bormio",
+                "localityName": "Bormio"
+              },
+              "citation": "Bormio is accessed from Bormio (Lombardy, Italy), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.bormioski.eu/en/calendar/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Events' calendar & News of Bormio Ski 2024/2025 - 4 December 2026 Opening of the winter season at Bormio Ski Area",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Bormio: Events' calendar & News of Bormio Ski 2024/2025 - 4 December 2026 Opening of the winter season at Bormio Ski Area"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.4677&mlon=10.3775#map=15/46.4677/10.3775",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Bormio' (town, relation/47222)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.4677,
+                "lng": 10.3775
+              },
+              "citation": "Map marker at 46.4677, 10.3775."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.4677,10.3775",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1225,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1225 m at 46.4677, 10.3775."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/bormio-cima-bianca/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1200 m, top 3017 m. skiresort.info / skiresort.com listing: Bormio 1200–3017 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1200,
+              "citation": "Published base elevation 1200 m and top elevation 3017 m for Bormio."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-breuil-cervinia",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "breuil-cervinia",
+        "name": "Breuil-Cervinia",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.9356,
+        "lng": 7.6304
+      },
+      "elevations": {
+        "baseM": 2050,
+        "topM": 3480,
+        "forecastM": 2005
+      },
+      "locality": {
+        "regionId": "cervinia",
+        "regionName": "Cervinia · Valtournenche",
+        "stateOrProvince": "Aosta Valley",
+        "localityId": "breuil-cervinia",
+        "localityName": "Breuil-Cervinia"
+      },
+      "officialUrl": "https://www.cervinia.it/en",
+      "liftNetwork": "Matterhorn Ski Paradise",
+      "snowForecastMidM": 2765,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.cervinia.it/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Breuil-Cervinia.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "breuil-cervinia",
+                "name": "Breuil-Cervinia",
+                "aliases": []
+              },
+              "citation": "Official site for Breuil-Cervinia, the resort serving Breuil-Cervinia."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.cervinia.it/en",
+              "citation": "Official website for Breuil-Cervinia."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "cervinia",
+                "regionName": "Cervinia · Valtournenche",
+                "stateOrProvince": "Aosta Valley",
+                "localityId": "breuil-cervinia",
+                "localityName": "Breuil-Cervinia"
+              },
+              "citation": "Breuil-Cervinia is accessed from Breuil-Cervinia (Aosta Valley, Italy), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Breuil-Cervinia site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Breuil-Cervinia Ski Holidays 2026/27, Ski Resort Guide WeSki The glacier ensures a generous season from late October through early May, with summer)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.weski.com/ski-resorts/italy/cervinia",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Breuil-Cervinia Ski Holidays 2026/27, Ski Resort Guide WeSki The glacier ensures a generous season from late October through early May, with summer",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.9356&mlon=7.6304#map=15/45.9356/7.6304",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Breuil-Cervinia' (village, node/253338916)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.9356,
+                "lng": 7.6304
+              },
+              "citation": "Map marker at 45.9356, 7.6304."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.9356,7.6304",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 2005,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 2005 m at 45.9356, 7.6304."
+            }
+          ]
+        },
+        {
+          "url": "https://www.lovevda.it/en/database/5/downhill-skiing/breuil-cervinia/bontadini/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 2050 m, top 3480 m. Aosta Valley tourism: run from 3,480 m to the 2,050 m of Cervinia.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 2050,
+              "citation": "Published base elevation 2050 m and top elevation 3480 m for Breuil-Cervinia."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-courmayeur",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "courmayeur",
+        "name": "Courmayeur",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.7966,
+        "lng": 6.9689
+      },
+      "elevations": {
+        "baseM": 1370,
+        "topM": 3466,
+        "forecastM": 1215
+      },
+      "locality": {
+        "regionId": "courmayeur",
+        "regionName": "Courmayeur · La Thuile",
+        "stateOrProvince": "Aosta Valley",
+        "localityId": "courmayeur",
+        "localityName": "Courmayeur"
+      },
+      "officialUrl": "https://www.courmayeur-montblanc.com/en",
+      "liftNetwork": "Courmayeur Mont Blanc",
+      "snowForecastMidM": 2418,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.courmayeur-montblanc.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Courmayeur.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "courmayeur",
+                "name": "Courmayeur",
+                "aliases": []
+              },
+              "citation": "Official site for Courmayeur, the resort serving Courmayeur."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.courmayeur-montblanc.com/en",
+              "citation": "Official website for Courmayeur."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "courmayeur",
+                "regionName": "Courmayeur · La Thuile",
+                "stateOrProvince": "Aosta Valley",
+                "localityId": "courmayeur",
+                "localityName": "Courmayeur"
+              },
+              "citation": "Courmayeur is accessed from Courmayeur (Aosta Valley, Italy), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Courmayeur site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Courmayeur Snow Report: Is It Open Today? - SnowVerdict Courmayeur has announced 28 Nov as opening day for 2026/27; the season runs until 11 Apr. (season dates )."
+            }
+          ]
+        },
+        {
+          "url": "https://snowverdict.com/italy/courmayeur/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Courmayeur Snow Report: Is It Open Today? - SnowVerdict Courmayeur has announced 28 Nov as opening day for 2026/27; the season runs until 11 Apr. (season dates checked 11 Sep 2026)",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.7966&mlon=6.9689#map=15/45.7966/6.9689",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (GeoNames populated-place point via Open-Meteo geocoding).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.7966,
+                "lng": 6.9689
+              },
+              "citation": "Map marker at 45.7966, 6.9689."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.7966,6.9689",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1215,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1215 m at 45.7966, 6.9689."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/monte-bianco-courmayeur/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1370 m, top 3466 m. skiresort.info / skiresort.com listing: Courmayeur 1370–3466 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1370,
+              "citation": "Published base elevation 1370 m and top elevation 3466 m for Courmayeur."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-la-thuile",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "la-thuile",
+        "name": "La Thuile",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.7137,
+        "lng": 6.951
+      },
+      "elevations": {
+        "baseM": 1441,
+        "topM": 2641,
+        "forecastM": 1464
+      },
+      "locality": {
+        "regionId": "courmayeur",
+        "regionName": "Courmayeur · La Thuile",
+        "stateOrProvince": "Aosta Valley",
+        "localityId": "la-thuile",
+        "localityName": "La Thuile"
+      },
+      "officialUrl": "https://www.lathuile.it/en",
+      "liftNetwork": "Espace San Bernardo",
+      "snowForecastMidM": 2041,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.lathuile.it/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for La Thuile.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "la-thuile",
+                "name": "La Thuile",
+                "aliases": []
+              },
+              "citation": "Official site for La Thuile, the resort serving La Thuile."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.lathuile.it/en",
+              "citation": "Official website for La Thuile."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "courmayeur",
+                "regionName": "Courmayeur · La Thuile",
+                "stateOrProvince": "Aosta Valley",
+                "localityId": "la-thuile",
+                "localityName": "La Thuile"
+              },
+              "citation": "La Thuile is accessed from La Thuile (Aosta Valley, Italy), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.lathuile.it/en/slopes-and-lifts",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Slopes and ski lifts in la Thuile - Aosta Valley Opening of the ski area: 28 November 2026 Closing of the ski area: 11 April 2027",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for La Thuile: Slopes and ski lifts in la Thuile - Aosta Valley Opening of the ski area: 28 November 2026 Closing of the ski area: 11 April 2027"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.7137&mlon=6.951#map=15/45.7137/6.951",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (GeoNames populated-place point via Open-Meteo geocoding).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.7137,
+                "lng": 6.951
+              },
+              "citation": "Map marker at 45.7137, 6.951."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.7137,6.951",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1464,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1464 m at 45.7137, 6.951."
+            }
+          ]
+        },
+        {
+          "url": "https://funivie.it/en/resorts/la-thuile/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1441 m, top 2641 m. La Thuile altitude 1,441–2,641 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1441,
+              "citation": "Published base elevation 1441 m and top elevation 2641 m for La Thuile."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-champoluc",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "champoluc",
+        "name": "Champoluc (Monterosa Ski)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.8316,
+        "lng": 7.726
+      },
+      "elevations": {
+        "baseM": 1568,
+        "topM": 2727,
+        "forecastM": 1561
+      },
+      "locality": {
+        "regionId": "monterosa",
+        "regionName": "Monterosa Ski",
+        "stateOrProvince": "Aosta Valley",
+        "localityId": "champoluc",
+        "localityName": "Champoluc"
+      },
+      "officialUrl": "https://www.monterosaski.com/en",
+      "liftNetwork": "Monterosa Ski",
+      "snowForecastMidM": 2148,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.monterosaski.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Champoluc (Monterosa Ski).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "champoluc",
+                "name": "Champoluc (Monterosa Ski)",
+                "aliases": []
+              },
+              "citation": "Official site for Champoluc (Monterosa Ski), the resort serving Champoluc."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.monterosaski.com/en",
+              "citation": "Official website for Champoluc (Monterosa Ski)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "monterosa",
+                "regionName": "Monterosa Ski",
+                "stateOrProvince": "Aosta Valley",
+                "localityId": "champoluc",
+                "localityName": "Champoluc"
+              },
+              "citation": "Champoluc (Monterosa Ski) is accessed from Champoluc (Aosta Valley, Italy), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Champoluc (Monterosa Ski) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski lift opening dates in Italy, winter 2026/27 - Funivie.it Monterosa Ski (3 valleys) (Champoluc, Gressoney, Alagna) 28 November 2026 11 April 2027 mon)."
+            }
+          ]
+        },
+        {
+          "url": "https://funivie.it/en/articles/apertura-impianti-2026-date-comprensori/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski lift opening dates in Italy, winter 2026/27 - Funivie.it Monterosa Ski (3 valleys) (Champoluc, Gressoney, Alagna) 28 November 2026 11 April 2027 mon",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.8316&mlon=7.726#map=15/45.8316/7.726",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Champoluc' (village, node/347555891)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.8316,
+                "lng": 7.726
+              },
+              "citation": "Map marker at 45.8316, 7.726."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.8316,7.726",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1561,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1561 m at 45.8316, 7.726."
+            }
+          ]
+        },
+        {
+          "url": "https://www.alpematch.com/locations/champoluc",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1568 m, top 2727 m. Champoluc village 1,568 m; highest point reached from Champoluc lifts is Colle della Bettaforca 2,727 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1568,
+              "citation": "Published base elevation 1568 m and top elevation 2727 m for Champoluc (Monterosa Ski)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-alagna-valsesia",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "alagna-valsesia",
+        "name": "Alagna Valsesia (Monterosa Ski)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.8512,
+        "lng": 7.9372
+      },
+      "elevations": {
+        "baseM": 1212,
+        "topM": 3275,
+        "forecastM": 1173
+      },
+      "locality": {
+        "regionId": "monterosa",
+        "regionName": "Monterosa Ski",
+        "stateOrProvince": "Piedmont",
+        "localityId": "alagna-valsesia",
+        "localityName": "Alagna Valsesia"
+      },
+      "officialUrl": "https://www.monterosaski.com/en",
+      "liftNetwork": "Monterosa Ski",
+      "snowForecastMidM": 2244,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.monterosaski.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Alagna Valsesia (Monterosa Ski).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "alagna-valsesia",
+                "name": "Alagna Valsesia (Monterosa Ski)",
+                "aliases": []
+              },
+              "citation": "Official site for Alagna Valsesia (Monterosa Ski), the resort serving Alagna Valsesia."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.monterosaski.com/en",
+              "citation": "Official website for Alagna Valsesia (Monterosa Ski)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "monterosa",
+                "regionName": "Monterosa Ski",
+                "stateOrProvince": "Piedmont",
+                "localityId": "alagna-valsesia",
+                "localityName": "Alagna Valsesia"
+              },
+              "citation": "Alagna Valsesia (Monterosa Ski) is accessed from Alagna Valsesia (Piedmont, Italy), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Alagna Valsesia (Monterosa Ski) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Winter 2026/2027 - Monterosa Ski opening dates From Saturday, November 28, 2026, to Sunday, April 11, 2027 , snow con)."
+            }
+          ]
+        },
+        {
+          "url": "https://monterosaski.eu/en/experiences/monterosa-ski-opening-dates-winter-29318",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Winter 2026/2027 - Monterosa Ski opening dates From Saturday, November 28, 2026, to Sunday, April 11, 2027 , snow con",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.8512&mlon=7.9372#map=15/45.8512/7.9372",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Alagna Valsesia' (village, relation/46347)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.8512,
+                "lng": 7.9372
+              },
+              "citation": "Map marker at 45.8512, 7.9372."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.8512,7.9372",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1173,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1173 m at 45.8512, 7.9372."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skilife.ski/en/alagna-valsesia/ski-map/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1212 m, top 3275 m. Alagna lifts run from the 1,212 m town to 3,275 m Punta Indren.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1212,
+              "citation": "Published base elevation 1212 m and top elevation 3275 m for Alagna Valsesia (Monterosa Ski)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-pila",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "pila",
+        "name": "Pila",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.6873,
+        "lng": 7.3108
+      },
+      "elevations": {
+        "baseM": 1540,
+        "topM": 2740,
+        "forecastM": 1789
+      },
+      "locality": {
+        "regionId": "pila",
+        "regionName": "Pila · Aosta",
+        "stateOrProvince": "Aosta Valley",
+        "localityId": "pila",
+        "localityName": "Pila"
+      },
+      "officialUrl": "https://www.pila.it/en",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 2140,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.pila.it/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Pila.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "pila",
+                "name": "Pila",
+                "aliases": []
+              },
+              "citation": "Official site for Pila, the resort serving Pila."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.pila.it/en",
+              "citation": "Official website for Pila."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "pila",
+                "regionName": "Pila · Aosta",
+                "stateOrProvince": "Aosta Valley",
+                "localityId": "pila",
+                "localityName": "Pila"
+              },
+              "citation": "Pila is accessed from Pila (Aosta Valley, Italy), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Pila site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (- Buy your lift tickets and skipasses ... We look forward to welcoming you back for the next winter season, scheduled to open on Saturday, 28 November 2026 and )."
+            }
+          ]
+        },
+        {
+          "url": "https://pila.skiperformance.com/en/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: - Buy your lift tickets and skipasses ... We look forward to welcoming you back for the next winter season, scheduled to open on Saturday, 28 November 2026 and close on Sunday, 11 April 2027, snow conditions permitting.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.6873&mlon=7.3108#map=15/45.6873/7.3108",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Pila, Gressan' (village, node/564536298)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.6873,
+                "lng": 7.3108
+              },
+              "citation": "Map marker at 45.6873, 7.3108."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.6873,7.3108",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1789,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1789 m at 45.6873, 7.3108."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/pila/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1540 m, top 2740 m. Pila 1,540 m to 2,740 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1540,
+              "citation": "Published base elevation 1540 m and top elevation 2740 m for Pila."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-sestriere",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "sestriere",
+        "name": "Sestriere",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 44.9585,
+        "lng": 6.8787
+      },
+      "elevations": {
+        "baseM": 2035,
+        "topM": 2823,
+        "forecastM": 2039
+      },
+      "locality": {
+        "regionId": "via-lattea",
+        "regionName": "Via Lattea",
+        "stateOrProvince": "Piedmont",
+        "localityId": "sestriere",
+        "localityName": "Sestriere"
+      },
+      "officialUrl": "https://www.vialattea.it/en",
+      "liftNetwork": "Via Lattea",
+      "snowForecastMidM": 2429,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.vialattea.it/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Sestriere.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "sestriere",
+                "name": "Sestriere",
+                "aliases": []
+              },
+              "citation": "Official site for Sestriere, the resort serving Sestriere."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.vialattea.it/en",
+              "citation": "Official website for Sestriere."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "via-lattea",
+                "regionName": "Via Lattea",
+                "stateOrProvince": "Piedmont",
+                "localityId": "sestriere",
+                "localityName": "Sestriere"
+              },
+              "citation": "Sestriere is accessed from Sestriere (Piedmont, Italy), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Sestriere site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (2026/2027 Ski Season in Vialattea (Sestriere - Sauze d'Oulx) Opening 11/28/2026 ... 04/18/2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.esquiades.com/en/skiresort/opening-closing-dates-vialattea-sestriere/231/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: 2026/2027 Ski Season in Vialattea (Sestriere - Sauze d'Oulx) Opening 11/28/2026 ... 04/18/2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.9585&mlon=6.8787#map=15/44.9585/6.8787",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Sestriere' (village, relation/43872)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.9585,
+                "lng": 6.8787
+              },
+              "citation": "Map marker at 44.9585, 6.8787."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=44.9585,6.8787",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 2039,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 2039 m at 44.9585, 6.8787."
+            }
+          ]
+        },
+        {
+          "url": "https://skitheworld.net.au/western-europe/italy/sestriere",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 2035 m, top 2823 m. Sestriere resort 2,035 m, top 2,823 m (Monte Motta).",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 2035,
+              "citation": "Published base elevation 2035 m and top elevation 2823 m for Sestriere."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-it-sauze-d-oulx",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "sauze-d-oulx",
+        "name": "Sauze d'Oulx",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.027,
+        "lng": 6.8583
+      },
+      "elevations": {
+        "baseM": 1509,
+        "topM": 2507,
+        "forecastM": 1512
+      },
+      "locality": {
+        "regionId": "via-lattea",
+        "regionName": "Via Lattea",
+        "stateOrProvince": "Piedmont",
+        "localityId": "sauze-d-oulx",
+        "localityName": "Sauze d'Oulx"
+      },
+      "officialUrl": "https://www.vialattea.it/en",
+      "liftNetwork": "Via Lattea",
+      "snowForecastMidM": 2008,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.vialattea.it/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Sauze d'Oulx.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "sauze-d-oulx",
+                "name": "Sauze d'Oulx",
+                "aliases": []
+              },
+              "citation": "Official site for Sauze d'Oulx, the resort serving Sauze d'Oulx."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.vialattea.it/en",
+              "citation": "Official website for Sauze d'Oulx."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "via-lattea",
+                "regionName": "Via Lattea",
+                "stateOrProvince": "Piedmont",
+                "localityId": "sauze-d-oulx",
+                "localityName": "Sauze d'Oulx"
+              },
+              "citation": "Sauze d'Oulx is accessed from Sauze d'Oulx (Piedmont, Italy), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Sauze d'Oulx site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski Pass Prices - Sauze d'Oulx & Vialattea ski area 2026-2027 The lift opening dates are from the 5th Dec 2026 until the 11th April 2027 (conditions permitting))."
+            }
+          ]
+        },
+        {
+          "url": "https://www.lovesauze.com/ski-snowboard-sauze-doulx/ski-pass-lift-ticket-prices/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski Pass Prices - Sauze d'Oulx & Vialattea ski area 2026-2027 The lift opening dates are from the 5th Dec 2026 until the 11th April 2027 (conditions permitting).",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.027&mlon=6.8583#map=15/45.027/6.8583",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Sauze d'Oulx' (village, relation/44028)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.027,
+                "lng": 6.8583
+              },
+              "citation": "Map marker at 45.027, 6.8583."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.027,6.8583",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1512,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1512 m at 45.027, 6.8583."
+            }
+          ]
+        },
+        {
+          "url": "https://www.villagesitaly.com/villages/sauze-doulx/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1509 m, top 2507 m. Sauze d'Oulx village 1,509 m; Sportinia 2,137 m below Monte Triplex 2,507 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1509,
+              "citation": "Published base elevation 1509 m and top elevation 2507 m for Sauze d'Oulx."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

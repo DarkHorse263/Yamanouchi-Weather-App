@@ -9,6 +9,12 @@ export function avalancheBulletinFor(country: string | undefined, province = "")
   if ((country === "AT" && /tyrol|tirol/.test(area)) ||
       (country === "IT" && /south tyrol|südtirol|alto adige|trentino/.test(area))) return alpine;
   switch (country) {
+    case "AT":
+      if (/vorarlberg/.test(area)) return { label: "Vorarlberg avalanche service", url: "https://warnung.vorarlberg.at/vtgdb/dist/index.html#//lwd_lagebericht_en.html", area: "Vorarlberg" };
+      if (/salzburg/.test(area)) return { label: "Salzburg avalanche service", url: "https://lawine.salzburg.at/", area: "Salzburg" };
+      if (/carinthia|kärnten|kaernten/.test(area)) return { label: "Carinthia avalanche service", url: "https://lawinenwarndienst.ktn.gv.at/", area: "Carinthia" };
+      if (/styria|steiermark/.test(area)) return { label: "Styria avalanche service", url: "https://lawine-steiermark.at/", area: "Styria" };
+      return undefined;
     case "CH": return { label: "SLF avalanche bulletin", url: "https://www.slf.ch/en/avalanche-bulletin-and-snow-situation/", area: "Swiss bulletin regions" };
     case "FR": return { label: "Météo-France mountain bulletins", url: "https://meteofrance.com/meteo-montagne", area: "select your massif and avalanche bulletin" };
     case "IT": return { label: "AINEVA avalanche bulletins", url: "https://aineva.it/en/", area: "select the relevant regional bulletin" };

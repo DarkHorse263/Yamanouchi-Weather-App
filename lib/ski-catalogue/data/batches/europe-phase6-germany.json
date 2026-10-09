@@ -1,0 +1,869 @@
+{
+  "batchVersion": 1,
+  "batchId": "europe-phase6-germany",
+  "records": [
+    {
+      "recordId": "eu-de-garmisch-classic",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Germany",
+      "countryCode": "DE",
+      "timezone": "Europe/Berlin",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "garmisch-classic",
+        "name": "Garmisch-Classic",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.4924,
+        "lng": 11.0963
+      },
+      "elevations": {
+        "baseM": 740,
+        "topM": 2050,
+        "forecastM": 705
+      },
+      "locality": {
+        "regionId": "garmisch",
+        "regionName": "Garmisch-Partenkirchen",
+        "stateOrProvince": "Bavaria",
+        "localityId": "garmisch-partenkirchen",
+        "localityName": "Garmisch-Partenkirchen"
+      },
+      "officialUrl": "https://zugspitze.de/en",
+      "liftNetwork": "Zugspitze region",
+      "snowForecastMidM": 1395,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://zugspitze.de/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Garmisch-Classic.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "garmisch-classic",
+                "name": "Garmisch-Classic",
+                "aliases": []
+              },
+              "citation": "Official site for Garmisch-Classic, the resort serving Garmisch-Partenkirchen."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://zugspitze.de/en",
+              "citation": "Official website for Garmisch-Classic."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "garmisch",
+                "regionName": "Garmisch-Partenkirchen",
+                "stateOrProvince": "Bavaria",
+                "localityId": "garmisch-partenkirchen",
+                "localityName": "Garmisch-Partenkirchen"
+              },
+              "citation": "Garmisch-Classic is accessed from Garmisch-Partenkirchen (Bavaria, Germany), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Garmisch-Classic site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (www.skiresort.com · en · ski-resortSki resort Garmisch-Classic – Garmisch-Partenkirchen Current season: 2026-12-12 - 2027-03-29)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/garmisch-classic-garmisch-partenkirchen/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: www.skiresort.com · en · ski-resortSki resort Garmisch-Classic – Garmisch-Partenkirchen Current season: 2026-12-12 - 2027-03-29",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.4924&mlon=11.0963#map=15/47.4924/11.0963",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Garmisch-Partenkirchen' (town, relation/939334)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.4924,
+                "lng": 11.0963
+              },
+              "citation": "Map marker at 47.4924, 11.0963."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.4924,11.0963",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 705,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 705 m at 47.4924, 11.0963."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/garmisch-classic-garmisch-partenkirchen/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 740 m, top 2050 m. skiresort.info / skiresort.com listing: Garmisch-Classic 740–2050 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 740,
+              "citation": "Published base elevation 740 m and top elevation 2050 m for Garmisch-Classic."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-de-zugspitze-glacier",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Germany",
+      "countryCode": "DE",
+      "timezone": "Europe/Berlin",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "zugspitze-glacier",
+        "name": "Zugspitze Glacier",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.4061,
+        "lng": 10.9903
+      },
+      "elevations": {
+        "baseM": 2000,
+        "topM": 2650,
+        "forecastM": 2327
+      },
+      "locality": {
+        "regionId": "garmisch",
+        "regionName": "Garmisch-Partenkirchen",
+        "stateOrProvince": "Bavaria",
+        "localityId": "garmisch-partenkirchen",
+        "localityName": "Garmisch-Partenkirchen"
+      },
+      "officialUrl": "https://zugspitze.de/en",
+      "liftNetwork": "Zugspitze region",
+      "snowForecastMidM": 2325,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://zugspitze.de/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Zugspitze Glacier.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "zugspitze-glacier",
+                "name": "Zugspitze Glacier",
+                "aliases": []
+              },
+              "citation": "Official site for Zugspitze Glacier, the resort serving Garmisch-Partenkirchen."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://zugspitze.de/en",
+              "citation": "Official website for Zugspitze Glacier."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "garmisch",
+                "regionName": "Garmisch-Partenkirchen",
+                "stateOrProvince": "Bavaria",
+                "localityId": "garmisch-partenkirchen",
+                "localityName": "Garmisch-Partenkirchen"
+              },
+              "citation": "Zugspitze Glacier is accessed from Garmisch-Partenkirchen (Bavaria, Germany), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://zugspitze.de/en/Service-information/Opening-hours-timetables",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Official: ski season at Zugspitze expected 27.11.2026 to 02.05.2027",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Zugspitze Glacier: Official: ski season at Zugspitze expected 27.11.2026 to 02.05.2027"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.4061&mlon=10.9903#map=15/47.4061/10.9903",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Zugspitzplatt' (locality, node/476771385)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.4061,
+                "lng": 10.9903
+              },
+              "citation": "Map marker at 47.4061, 10.9903."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.4061,10.9903",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 2327,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 2327 m at 47.4061, 10.9903."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/zugspitze/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 2000 m, top 2650 m. skiresort.info / skiresort.com listing: Zugspitze Glacier 2000–2650 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 2000,
+              "citation": "Published base elevation 2000 m and top elevation 2650 m for Zugspitze Glacier."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-de-fellhorn-kanzelwand",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Germany",
+      "countryCode": "DE",
+      "timezone": "Europe/Berlin",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "fellhorn-kanzelwand",
+        "name": "Fellhorn-Kanzelwand",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.3709,
+        "lng": 10.3119
+      },
+      "elevations": {
+        "baseM": 920,
+        "topM": 1967,
+        "forecastM": 1149
+      },
+      "locality": {
+        "regionId": "oberstdorf",
+        "regionName": "Oberstdorf · Allgäu",
+        "stateOrProvince": "Bavaria",
+        "localityId": "oberstdorf",
+        "localityName": "Oberstdorf"
+      },
+      "officialUrl": "https://www.ok-bergbahnen.com/en",
+      "liftNetwork": "OK Bergbahnen",
+      "snowForecastMidM": 1444,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.ok-bergbahnen.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Fellhorn-Kanzelwand.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "fellhorn-kanzelwand",
+                "name": "Fellhorn-Kanzelwand",
+                "aliases": []
+              },
+              "citation": "Official site for Fellhorn-Kanzelwand, the resort serving Oberstdorf."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.ok-bergbahnen.com/en",
+              "citation": "Official website for Fellhorn-Kanzelwand."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "oberstdorf",
+                "regionName": "Oberstdorf · Allgäu",
+                "stateOrProvince": "Bavaria",
+                "localityId": "oberstdorf",
+                "localityName": "Oberstdorf"
+              },
+              "citation": "Fellhorn-Kanzelwand is accessed from Oberstdorf (Bavaria, Germany), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Fellhorn-Kanzelwand site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Fellhorn/Kanzelwand – Oberstdorf/Riezlern - Skiresort.info Current season: 2026-12-04 - 2027-04-04)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/fellhorn-kanzelwand-oberstdorf-riezlern/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Fellhorn/Kanzelwand – Oberstdorf/Riezlern - Skiresort.info Current season: 2026-12-04 - 2027-04-04",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.3709&mlon=10.3119#map=15/47.3709/10.3119",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Oberstdorf' (city, relation/958128)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.3709,
+                "lng": 10.3119
+              },
+              "citation": "Map marker at 47.3709, 10.3119."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.3709,10.3119",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1149,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1149 m at 47.3709, 10.3119."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/fellhorn-kanzelwand-oberstdorf-riezlern/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 920 m, top 1967 m. skiresort.info / skiresort.com listing: Fellhorn-Kanzelwand 920–1967 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 920,
+              "citation": "Published base elevation 920 m and top elevation 1967 m for Fellhorn-Kanzelwand."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-de-nebelhorn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Germany",
+      "countryCode": "DE",
+      "timezone": "Europe/Berlin",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "nebelhorn",
+        "name": "Nebelhorn",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.3709,
+        "lng": 10.3119
+      },
+      "elevations": {
+        "baseM": 828,
+        "topM": 2224,
+        "forecastM": 1149
+      },
+      "locality": {
+        "regionId": "oberstdorf",
+        "regionName": "Oberstdorf · Allgäu",
+        "stateOrProvince": "Bavaria",
+        "localityId": "oberstdorf",
+        "localityName": "Oberstdorf"
+      },
+      "officialUrl": "https://www.ok-bergbahnen.com/en",
+      "liftNetwork": "OK Bergbahnen",
+      "snowForecastMidM": 1526,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.ok-bergbahnen.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Nebelhorn.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "nebelhorn",
+                "name": "Nebelhorn",
+                "aliases": []
+              },
+              "citation": "Official site for Nebelhorn, the resort serving Oberstdorf."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.ok-bergbahnen.com/en",
+              "citation": "Official website for Nebelhorn."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "oberstdorf",
+                "regionName": "Oberstdorf · Allgäu",
+                "stateOrProvince": "Bavaria",
+                "localityId": "oberstdorf",
+                "localityName": "Oberstdorf"
+              },
+              "citation": "Nebelhorn is accessed from Oberstdorf (Bavaria, Germany), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Nebelhorn site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (www.skiinfo.de · allgaeu · saisoneroeffnung-skigebieteSkisaison Allgäu 2026/2027 Saisoneröffnung & Skiopening-Termine Oberstdorf - Nebelhorn 12. Dez)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiinfo.de/allgaeu/saisoneroeffnung-skigebiete",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: www.skiinfo.de · allgaeu · saisoneroeffnung-skigebieteSkisaison Allgäu 2026/2027 Saisoneröffnung & Skiopening-Termine Oberstdorf - Nebelhorn 12. Dez",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.3709&mlon=10.3119#map=15/47.3709/10.3119",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Oberstdorf' (city, relation/958128)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.3709,
+                "lng": 10.3119
+              },
+              "citation": "Map marker at 47.3709, 10.3119."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.3709,10.3119",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1149,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1149 m at 47.3709, 10.3119."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/nebelhorn-oberstdorf/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 828 m, top 2224 m. skiresort.info / skiresort.com listing: Nebelhorn 828–2224 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 828,
+              "citation": "Published base elevation 828 m and top elevation 2224 m for Nebelhorn."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-de-jenner",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Germany",
+      "countryCode": "DE",
+      "timezone": "Europe/Berlin",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "jenner",
+        "name": "Jenner",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.6055,
+        "lng": 12.9847
+      },
+      "elevations": {
+        "baseM": 1530,
+        "topM": 1800,
+        "forecastM": 589
+      },
+      "locality": {
+        "regionId": "berchtesgaden",
+        "regionName": "Berchtesgaden",
+        "stateOrProvince": "Bavaria",
+        "localityId": "schonau-am-konigssee",
+        "localityName": "Schönau am Königssee"
+      },
+      "officialUrl": "https://www.jennerbahn.de/en",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 1665,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.jennerbahn.de/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Jenner.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "jenner",
+                "name": "Jenner",
+                "aliases": []
+              },
+              "citation": "Official site for Jenner, the resort serving Schönau am Königssee."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.jennerbahn.de/en",
+              "citation": "Official website for Jenner."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "berchtesgaden",
+                "regionName": "Berchtesgaden",
+                "stateOrProvince": "Bavaria",
+                "localityId": "schonau-am-konigssee",
+                "localityName": "Schönau am Königssee"
+              },
+              "citation": "Jenner is accessed from Schönau am Königssee (Bavaria, Germany), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Jenner site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Germany Ski Resort Projected Opening Dates The 2026/27 Ski season in the Germany starts from 2026/11/21. ... Jenner Dec 05)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.onthesnow.co.uk/germany/projected-openings",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Germany Ski Resort Projected Opening Dates The 2026/27 Ski season in the Germany starts from 2026/11/21. ... Jenner Dec 05",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.6055&mlon=12.9847#map=15/47.6055/12.9847",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Schönau am Königssee' (village, relation/941800)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.6055,
+                "lng": 12.9847
+              },
+              "citation": "Map marker at 47.6055, 12.9847."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.6055,12.9847",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 589,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 589 m at 47.6055, 12.9847."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/jenner-schoenau-am-koenigssee/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1530 m, top 1800 m. skiresort.info / skiresort.com listing: Jenner 1530–1800 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1530,
+              "citation": "Published base elevation 1530 m and top elevation 1800 m for Jenner."
+            }
+          ]
+        }
+      ],
+      "reviewNote": "Village point is below the lift base (valley-gondola or glacier resort). Village weather stays at the town; snow forecast uses the base–top midpoint."
+    },
+    {
+      "recordId": "eu-de-feldberg",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Germany",
+      "countryCode": "DE",
+      "timezone": "Europe/Berlin",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "feldberg",
+        "name": "Feldberg",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 47.8577,
+        "lng": 8.0379
+      },
+      "elevations": {
+        "baseM": 950,
+        "topM": 1450,
+        "forecastM": 1262
+      },
+      "locality": {
+        "regionId": "black-forest",
+        "regionName": "Black Forest",
+        "stateOrProvince": "Baden-Württemberg",
+        "localityId": "feldberg",
+        "localityName": "Feldberg"
+      },
+      "officialUrl": "https://www.liftverbund-feldberg.de/en",
+      "liftNetwork": "Liftverbund Feldberg",
+      "snowForecastMidM": 1200,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.liftverbund-feldberg.de/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Feldberg.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "feldberg",
+                "name": "Feldberg",
+                "aliases": []
+              },
+              "citation": "Official site for Feldberg, the resort serving Feldberg."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.liftverbund-feldberg.de/en",
+              "citation": "Official website for Feldberg."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "black-forest",
+                "regionName": "Black Forest",
+                "stateOrProvince": "Baden-Württemberg",
+                "localityId": "feldberg",
+                "localityName": "Feldberg"
+              },
+              "citation": "Feldberg is accessed from Feldberg (Baden-Württemberg, Germany), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Feldberg site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Feldberg Liftverbund published 2026–2027 ticket prices, opening 28 Nov 2026, closing 21 Mar 2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiinfo.de/schwarzwald/liftverbund-feldberg/skipaesse",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Feldberg Liftverbund published 2026–2027 ticket prices, opening 28 Nov 2026, closing 21 Mar 2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.8577&mlon=8.0379#map=15/47.8577/8.0379",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Feldberg Ort, Feldberg (Schwarzwald)' (village, relation/324934)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.8577,
+                "lng": 8.0379
+              },
+              "citation": "Map marker at 47.8577, 8.0379."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=47.8577,8.0379",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1262,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1262 m at 47.8577, 8.0379."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.info/ski-resort/feldberg-seebuck-grafenmatt-fahl/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 950 m, top 1450 m. skiresort.info / skiresort.com listing: Feldberg 950–1450 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 950,
+              "citation": "Published base elevation 950 m and top elevation 1450 m for Feldberg."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-de-winterberg-skiliftkarussell",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Germany",
+      "countryCode": "DE",
+      "timezone": "Europe/Berlin",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "winterberg-skiliftkarussell",
+        "name": "Winterberg Skiliftkarussell",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 51.1933,
+        "lng": 8.5334
+      },
+      "elevations": {
+        "baseM": 630,
+        "topM": 820,
+        "forecastM": 672
+      },
+      "locality": {
+        "regionId": "sauerland",
+        "regionName": "Sauerland",
+        "stateOrProvince": "North Rhine-Westphalia",
+        "localityId": "winterberg",
+        "localityName": "Winterberg"
+      },
+      "officialUrl": "https://www.skiliftkarussell.de/en",
+      "liftNetwork": "Skiliftkarussell",
+      "snowForecastMidM": 725,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.skiliftkarussell.de/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Winterberg Skiliftkarussell.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "winterberg-skiliftkarussell",
+                "name": "Winterberg Skiliftkarussell",
+                "aliases": []
+              },
+              "citation": "Official site for Winterberg Skiliftkarussell, the resort serving Winterberg."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.skiliftkarussell.de/en",
+              "citation": "Official website for Winterberg Skiliftkarussell."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "sauerland",
+                "regionName": "Sauerland",
+                "stateOrProvince": "North Rhine-Westphalia",
+                "localityId": "winterberg",
+                "localityName": "Winterberg"
+              },
+              "citation": "Winterberg Skiliftkarussell is accessed from Winterberg (North Rhine-Westphalia, Germany), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Winterberg Skiliftkarussell site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Winterberg (Skiliftkarussell) Current season: 2026-11-27 - 2027-04-11)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/winterberg-skiliftkarussell/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Winterberg (Skiliftkarussell) Current season: 2026-11-27 - 2027-04-11",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=51.1933&mlon=8.5334#map=15/51.1933/8.5334",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Winterberg' (town, relation/157414)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 51.1933,
+                "lng": 8.5334
+              },
+              "citation": "Map marker at 51.1933, 8.5334."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=51.1933,8.5334",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 672,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 672 m at 51.1933, 8.5334."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/winterberg-skiliftkarussell/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 630 m, top 820 m. skiresort.info / skiresort.com listing: Winterberg Skiliftkarussell 630–820 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 630,
+              "citation": "Published base elevation 630 m and top elevation 820 m for Winterberg Skiliftkarussell."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

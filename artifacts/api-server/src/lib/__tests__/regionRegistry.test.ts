@@ -147,7 +147,9 @@ test("catalogue alerts use the same runtime metadata and route as weather pages"
       {
         latitude: weather.latitude,
         longitude: weather.longitude,
-        elevation: weather.elevation,
+        elevation: record.baseElevationM != null && "summitElevationM" in record && typeof record.summitElevationM === "number" && record.summitElevationM > record.baseElevationM
+          ? Math.round((record.baseElevationM + record.summitElevationM) / 2)
+          : weather.elevation,
         timezone: weather.timezone,
       },
     );

@@ -1,0 +1,4198 @@
+{
+  "batchVersion": 1,
+  "batchId": "europe-phase2-france",
+  "records": [
+    {
+      "recordId": "eu-fr-courchevel",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "courchevel",
+        "name": "Courchevel",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.4141,
+        "lng": 6.635
+      },
+      "elevations": {
+        "baseM": 1100,
+        "topM": 2738,
+        "forecastM": 1771
+      },
+      "locality": {
+        "regionId": "les-3-vallees",
+        "regionName": "Les 3 Vallées",
+        "stateOrProvince": "Savoie",
+        "localityId": "courchevel",
+        "localityName": "Courchevel"
+      },
+      "officialUrl": "https://www.courchevel.com/en",
+      "liftNetwork": "Les 3 Vallées",
+      "snowForecastMidM": 1919,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.courchevel.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Courchevel.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "courchevel",
+                "name": "Courchevel",
+                "aliases": []
+              },
+              "citation": "Official site for Courchevel, the resort serving Courchevel."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.courchevel.com/en",
+              "citation": "Official website for Courchevel."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "les-3-vallees",
+                "regionName": "Les 3 Vallées",
+                "stateOrProvince": "Savoie",
+                "localityId": "courchevel",
+                "localityName": "Courchevel"
+              },
+              "citation": "Courchevel is accessed from Courchevel (Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Courchevel site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (courchevel.rentals › blog › ski-season-dates-courchevelCourchevel Ski Season Dates 2026-2027 Opening & Closing The full Three Valleys link runs from 5 December,)."
+            }
+          ]
+        },
+        {
+          "url": "https://courchevel.rentals/blog/ski-season-dates-courchevel",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: courchevel.rentals › blog › ski-season-dates-courchevelCourchevel Ski Season Dates 2026-2027 Opening & Closing The full Three Valleys link runs from 5 December, and Moriond and La Tania close a week ea",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.4141&mlon=6.635#map=15/45.4141/6.635",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Courchevel 1850' (village, relation/6838449)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.4141,
+                "lng": 6.635
+              },
+              "citation": "Map marker at 45.4141, 6.635."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.4141,6.635",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1771,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1771 m at 45.4141, 6.635."
+            }
+          ]
+        },
+        {
+          "url": "https://www.onthesnow.co.uk/northern-alps/courchevel/ski-resort",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1100 m, top 2738 m. Courchevel sector 1,100 m base to 2,738 m (Saulire); 3,230 m is the 3 Vallées network top.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1100,
+              "citation": "Published base elevation 1100 m and top elevation 2738 m for Courchevel."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-meribel",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "meribel",
+        "name": "Méribel",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.4165,
+        "lng": 6.5651
+      },
+      "elevations": {
+        "baseM": 1450,
+        "topM": 2952,
+        "forecastM": 1418
+      },
+      "locality": {
+        "regionId": "les-3-vallees",
+        "regionName": "Les 3 Vallées",
+        "stateOrProvince": "Savoie",
+        "localityId": "meribel",
+        "localityName": "Méribel"
+      },
+      "officialUrl": "https://www.meribel.net/en",
+      "liftNetwork": "Les 3 Vallées",
+      "snowForecastMidM": 2201,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.meribel.net/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Méribel.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "meribel",
+                "name": "Méribel",
+                "aliases": []
+              },
+              "citation": "Official site for Méribel, the resort serving Méribel."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.meribel.net/en",
+              "citation": "Official website for Méribel."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "les-3-vallees",
+                "regionName": "Les 3 Vallées",
+                "stateOrProvince": "Savoie",
+                "localityId": "meribel",
+                "localityName": "Méribel"
+              },
+              "citation": "Méribel is accessed from Méribel (Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Méribel site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Frequently Asked Questions of the ski area of Méribel ... The Méribel ski area is open for the 2026/2027 winter season from 5 December 2026 to 18 April 2027 .)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skipass-meribel.com/en/faq",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Frequently Asked Questions of the ski area of Méribel ... The Méribel ski area is open for the 2026/2027 winter season from 5 December 2026 to 18 April 2027 .",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.4165&mlon=6.5651#map=15/45.4165/6.5651",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Méribel, Les Allues' (hamlet, node/324040090)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.4165,
+                "lng": 6.5651
+              },
+              "citation": "Map marker at 45.4165, 6.5651."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.4165,6.5651",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1418,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1418 m at 45.4165, 6.5651."
+            }
+          ]
+        },
+        {
+          "url": "https://www.inthesnow.com/resort/meribel/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1450 m, top 2952 m. Méribel sector 1,450 m (Méribel Centre) to 2,952 m (Mont Vallon).",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1450,
+              "citation": "Published base elevation 1450 m and top elevation 2952 m for Méribel."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-val-thorens",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "val-thorens",
+        "name": "Val Thorens",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.2979,
+        "lng": 6.5823
+      },
+      "elevations": {
+        "baseM": 1825,
+        "topM": 3230,
+        "forecastM": 2315
+      },
+      "locality": {
+        "regionId": "les-3-vallees",
+        "regionName": "Les 3 Vallées",
+        "stateOrProvince": "Savoie",
+        "localityId": "val-thorens",
+        "localityName": "Val Thorens"
+      },
+      "officialUrl": "https://www.valthorens.com/",
+      "liftNetwork": "Les 3 Vallées",
+      "snowForecastMidM": 2528,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.valthorens.com/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Val Thorens.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "val-thorens",
+                "name": "Val Thorens",
+                "aliases": []
+              },
+              "citation": "Official site for Val Thorens, the resort serving Val Thorens."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.valthorens.com/",
+              "citation": "Official website for Val Thorens."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "les-3-vallees",
+                "regionName": "Les 3 Vallées",
+                "stateOrProvince": "Savoie",
+                "localityId": "val-thorens",
+                "localityName": "Val Thorens"
+              },
+              "citation": "Val Thorens is accessed from Val Thorens (Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Val Thorens site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Opening dates of the stations 2026 2027 - Ecole de Ski Internationale For the winter season 2026-2027, the opening of the Val Thorens – Orelle resort is schedul)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.ecoledeski.fr/en/news/ski-resort-opening-dates-2026/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Opening dates of the stations 2026 2027 - Ecole de Ski Internationale For the winter season 2026-2027, the opening of the Val Thorens – Orelle resort is scheduled for November 21, 2026.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.2979&mlon=6.5823#map=15/45.2979/6.5823",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Val Thorens' (village, node/2376164369)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.2979,
+                "lng": 6.5823
+              },
+              "citation": "Map marker at 45.2979, 6.5823."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.2979,6.5823",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 2315,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 2315 m at 45.2979, 6.5823."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Val_Thorens",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1825 m, top 3230 m. Val Thorens–Orelle sector 1,825 m to 3,230 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1825,
+              "citation": "Published base elevation 1825 m and top elevation 3230 m for Val Thorens."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-les-menuires",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "les-menuires",
+        "name": "Les Menuires",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.3243,
+        "lng": 6.5389
+      },
+      "elevations": {
+        "baseM": 1450,
+        "topM": 2850,
+        "forecastM": 1820
+      },
+      "locality": {
+        "regionId": "les-3-vallees",
+        "regionName": "Les 3 Vallées",
+        "stateOrProvince": "Savoie",
+        "localityId": "les-menuires",
+        "localityName": "Les Menuires"
+      },
+      "officialUrl": "https://www.lesmenuires.com/en",
+      "liftNetwork": "Les 3 Vallées",
+      "snowForecastMidM": 2150,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.lesmenuires.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Les Menuires.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "les-menuires",
+                "name": "Les Menuires",
+                "aliases": []
+              },
+              "citation": "Official site for Les Menuires, the resort serving Les Menuires."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.lesmenuires.com/en",
+              "citation": "Official website for Les Menuires."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "les-3-vallees",
+                "regionName": "Les 3 Vallées",
+                "stateOrProvince": "Savoie",
+                "localityId": "les-menuires",
+                "localityName": "Les Menuires"
+              },
+              "citation": "Les Menuires is accessed from Les Menuires (Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Les Menuires site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Opening dates & station hours - Les Menuires - Les Menuires: from 5 December 2026 to 18 April 2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skipass-lesmenuires.com/en/faqdates-opening",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Opening dates & station hours - Les Menuires - Les Menuires: from 5 December 2026 to 18 April 2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.3243&mlon=6.5389#map=15/45.3243/6.5389",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Les Menuires' (village, node/254018469)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.3243,
+                "lng": 6.5389
+              },
+              "citation": "Map marker at 45.3243, 6.5389."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.3243,6.5389",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1820,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1820 m at 45.3243, 6.5389."
+            }
+          ]
+        },
+        {
+          "url": "https://www.onthesnow.co.uk/northern-alps/les-menuires/ski-resort",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1450 m, top 2850 m. Les Menuires sector 1,450 m base to 2,850 m summit.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1450,
+              "citation": "Published base elevation 1450 m and top elevation 2850 m for Les Menuires."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-val-d-isere",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "val-d-isere",
+        "name": "Val d'Isère",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.4496,
+        "lng": 6.9787
+      },
+      "elevations": {
+        "baseM": 1785,
+        "topM": 3197,
+        "forecastM": 1830
+      },
+      "locality": {
+        "regionId": "espace-killy",
+        "regionName": "Val d'Isère · Tignes",
+        "stateOrProvince": "Savoie",
+        "localityId": "val-d-isere",
+        "localityName": "Val-d'Isère"
+      },
+      "officialUrl": "https://www.valdisere.com/en",
+      "liftNetwork": "Tignes-Val d'Isère",
+      "snowForecastMidM": 2491,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.valdisere.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Val d'Isère.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "val-d-isere",
+                "name": "Val d'Isère",
+                "aliases": []
+              },
+              "citation": "Official site for Val d'Isère, the resort serving Val-d'Isère."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.valdisere.com/en",
+              "citation": "Official website for Val d'Isère."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "espace-killy",
+                "regionName": "Val d'Isère · Tignes",
+                "stateOrProvince": "Savoie",
+                "localityId": "val-d-isere",
+                "localityName": "Val-d'Isère"
+              },
+              "citation": "Val d'Isère is accessed from Val-d'Isère (Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Val d'Isère site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (France Ski Resort Opening Dates 2026/27 - Alpy.com Val d’Isère (1,850m, skiing up to around 3,450m via the Pissaillas glacier) opens its season on 28 No)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.alpy.com/blog/france-ski-resort-opening-dates-2026-27/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: France Ski Resort Opening Dates 2026/27 - Alpy.com Val d’Isère (1,850m, skiing up to around 3,450m via the Pissaillas glacier) opens its season on 28 No",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.4496&mlon=6.9787#map=15/45.4496/6.9787",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Val-d'Isère' (village, relation/133944)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.4496,
+                "lng": 6.9787
+              },
+              "citation": "Map marker at 45.4496, 6.9787."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.4496,6.9787",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1830,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1830 m at 45.4496, 6.9787."
+            }
+          ]
+        },
+        {
+          "url": "https://www.valdisere.ski/en/top-picks-pisaillas",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1785 m, top 3197 m. Val d'Isère sector 1,785 m (La Daille) to 3,197 m (Les Montets drag, highest point in Val d'Isère, official lift company); 3,456 m is Tignes Grande Motte.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1785,
+              "citation": "Published base elevation 1785 m and top elevation 3197 m for Val d'Isère."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-tignes",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "tignes",
+        "name": "Tignes",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.4697,
+        "lng": 6.9076
+      },
+      "elevations": {
+        "baseM": 1550,
+        "topM": 3456,
+        "forecastM": 2082
+      },
+      "locality": {
+        "regionId": "espace-killy",
+        "regionName": "Val d'Isère · Tignes",
+        "stateOrProvince": "Savoie",
+        "localityId": "tignes",
+        "localityName": "Tignes"
+      },
+      "officialUrl": "https://en.tignes.net",
+      "liftNetwork": "Tignes-Val d'Isère",
+      "snowForecastMidM": 2503,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://en.tignes.net",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Tignes.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "tignes",
+                "name": "Tignes",
+                "aliases": []
+              },
+              "citation": "Official site for Tignes, the resort serving Tignes."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://en.tignes.net",
+              "citation": "Official website for Tignes."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "espace-killy",
+                "regionName": "Val d'Isère · Tignes",
+                "stateOrProvince": "Savoie",
+                "localityId": "tignes",
+                "localityName": "Tignes"
+              },
+              "citation": "Tignes is accessed from Tignes (Savoie, France), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://en.tignes.net/skiing/ski-pass-you-need",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski Pass : Enjoy Reduced rates for Seniors & Children in ... From 21 to 27 November 2026 ... From 12 December 2026 to 23 April 2027",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Tignes: Ski Pass : Enjoy Reduced rates for Seniors & Children in ... From 21 to 27 November 2026 ... From 12 December 2026 to 23 April 2027"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.4697&mlon=6.9076#map=15/45.4697/6.9076",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Tignes' (village, relation/133881)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.4697,
+                "lng": 6.9076
+              },
+              "citation": "Map marker at 45.4697, 6.9076."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.4697,6.9076",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 2082,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 2082 m at 45.4697, 6.9076."
+            }
+          ]
+        },
+        {
+          "url": "https://www.tripadvisor.com/Attraction_Review-g196714-d7724481-Reviews",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1550 m, top 3456 m. Tignes sector 1,550 m (Les Brévières) to 3,456 m (Grande Motte glacier).",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1550,
+              "citation": "Published base elevation 1550 m and top elevation 3456 m for Tignes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-les-arcs",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "les-arcs",
+        "name": "Les Arcs",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.5734,
+        "lng": 6.7788
+      },
+      "elevations": {
+        "baseM": 1250,
+        "topM": 3250,
+        "forecastM": 1708
+      },
+      "locality": {
+        "regionId": "paradiski",
+        "regionName": "Paradiski",
+        "stateOrProvince": "Savoie",
+        "localityId": "bourg-saint-maurice",
+        "localityName": "Bourg-Saint-Maurice"
+      },
+      "officialUrl": "https://www.lesarcs.com/en",
+      "liftNetwork": "Paradiski",
+      "snowForecastMidM": 2250,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.lesarcs.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Les Arcs.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "les-arcs",
+                "name": "Les Arcs",
+                "aliases": []
+              },
+              "citation": "Official site for Les Arcs, the resort serving Bourg-Saint-Maurice."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.lesarcs.com/en",
+              "citation": "Official website for Les Arcs."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "paradiski",
+                "regionName": "Paradiski",
+                "stateOrProvince": "Savoie",
+                "localityId": "bourg-saint-maurice",
+                "localityName": "Bourg-Saint-Maurice"
+              },
+              "citation": "Les Arcs is accessed from Bourg-Saint-Maurice (Savoie, France), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.lesarcs.com/en/live-les-arcs",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Live from Les Arcs The Les Arcs / Peisey-Vallandry ski area will be open from 12 December 2026 to 24 April 2027.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Les Arcs: Live from Les Arcs The Les Arcs / Peisey-Vallandry ski area will be open from 12 December 2026 to 24 April 2027."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.5734&mlon=6.7788#map=15/45.5734/6.7788",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Arc 1800' (village, node/548638117)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.5734,
+                "lng": 6.7788
+              },
+              "citation": "Map marker at 45.5734, 6.7788."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.5734,6.7788",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1708,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1708 m at 45.5734, 6.7788."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Les_Arcs",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1250 m, top 3250 m. Wikipedia ski-area infobox: Les Arcs 1250–3250 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1250,
+              "citation": "Published base elevation 1250 m and top elevation 3250 m for Les Arcs."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-la-plagne",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "la-plagne",
+        "name": "La Plagne",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.5059,
+        "lng": 6.6744
+      },
+      "elevations": {
+        "baseM": 1250,
+        "topM": 3250,
+        "forecastM": 1982
+      },
+      "locality": {
+        "regionId": "paradiski",
+        "regionName": "Paradiski",
+        "stateOrProvince": "Savoie",
+        "localityId": "la-plagne",
+        "localityName": "La Plagne"
+      },
+      "officialUrl": "https://www.la-plagne.com/",
+      "liftNetwork": "Paradiski",
+      "snowForecastMidM": 2250,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.la-plagne.com/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for La Plagne.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "la-plagne",
+                "name": "La Plagne",
+                "aliases": []
+              },
+              "citation": "Official site for La Plagne, the resort serving La Plagne."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.la-plagne.com/",
+              "citation": "Official website for La Plagne."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "paradiski",
+                "regionName": "Paradiski",
+                "stateOrProvince": "Savoie",
+                "localityId": "la-plagne",
+                "localityName": "La Plagne"
+              },
+              "citation": "La Plagne is accessed from La Plagne (Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official La Plagne site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort opening : Open ski slopes ## Resort opening for the 2026-2027 winter season December 12 to April 24)."
+            }
+          ]
+        },
+        {
+          "url": "https://en.la-plagne.com/discover/our-opening-information",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort opening : Open ski slopes ## Resort opening for the 2026-2027 winter season December 12 to April 24",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.5059&mlon=6.6744#map=15/45.5059/6.6744",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Plagne Centre' (hamlet, node/25946493)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.5059,
+                "lng": 6.6744
+              },
+              "citation": "Map marker at 45.5059, 6.6744."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.5059,6.6744",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1982,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1982 m at 45.5059, 6.6744."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/La_Plagne",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1250 m, top 3250 m. Wikipedia ski-area infobox: La Plagne 1250–3250 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1250,
+              "citation": "Published base elevation 1250 m and top elevation 3250 m for La Plagne."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-sainte-foy-tarentaise",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "sainte-foy-tarentaise",
+        "name": "Sainte-Foy-Tarentaise",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.5904,
+        "lng": 6.8849
+      },
+      "elevations": {
+        "baseM": 1550,
+        "topM": 2622,
+        "forecastM": 1066
+      },
+      "locality": {
+        "regionId": "haute-tarentaise",
+        "regionName": "Haute Tarentaise",
+        "stateOrProvince": "Savoie",
+        "localityId": "sainte-foy-tarentaise",
+        "localityName": "Sainte-Foy-Tarentaise"
+      },
+      "officialUrl": "https://www.saintefoy-tarentaise.com/en",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 2086,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.saintefoy-tarentaise.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Sainte-Foy-Tarentaise.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "sainte-foy-tarentaise",
+                "name": "Sainte-Foy-Tarentaise",
+                "aliases": []
+              },
+              "citation": "Official site for Sainte-Foy-Tarentaise, the resort serving Sainte-Foy-Tarentaise."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.saintefoy-tarentaise.com/en",
+              "citation": "Official website for Sainte-Foy-Tarentaise."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "haute-tarentaise",
+                "regionName": "Haute Tarentaise",
+                "stateOrProvince": "Savoie",
+                "localityId": "sainte-foy-tarentaise",
+                "localityName": "Sainte-Foy-Tarentaise"
+              },
+              "citation": "Sainte-Foy-Tarentaise is accessed from Sainte-Foy-Tarentaise (Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Sainte-Foy-Tarentaise site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Info Sainte-Foy-Tarentaise : actualités, météo, faits divers, ... La saison de ski alpin 2026/2027 devrait débuter le 21 novembre en Savoie.)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.ledauphine.com/c/savoie/73232-sainte-foy-tarentaise",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Info Sainte-Foy-Tarentaise : actualités, météo, faits divers, ... La saison de ski alpin 2026/2027 devrait débuter le 21 novembre en Savoie.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.5904&mlon=6.8849#map=15/45.5904/6.8849",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Sainte-Foy-Tarentaise' (village, relation/133875)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.5904,
+                "lng": 6.8849
+              },
+              "citation": "Map marker at 45.5904, 6.8849."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.5904,6.8849",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1066,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1066 m at 45.5904, 6.8849."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Sainte-Foy-Tarentaise",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1550 m, top 2622 m. Wikipedia ski-area infobox: Sainte-Foy-Tarentaise 1550–2622 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1550,
+              "citation": "Published base elevation 1550 m and top elevation 2622 m for Sainte-Foy-Tarentaise."
+            }
+          ]
+        }
+      ],
+      "reviewNote": "Village point is below the lift base (valley-gondola or glacier resort). Village weather stays at the town; snow forecast uses the base–top midpoint."
+    },
+    {
+      "recordId": "eu-fr-la-rosiere",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "la-rosiere",
+        "name": "La Rosière",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.6121,
+        "lng": 6.8458
+      },
+      "elevations": {
+        "baseM": 1176,
+        "topM": 2800,
+        "forecastM": 1158
+      },
+      "locality": {
+        "regionId": "haute-tarentaise",
+        "regionName": "Haute Tarentaise",
+        "stateOrProvince": "Savoie",
+        "localityId": "montvalezan",
+        "localityName": "Montvalezan"
+      },
+      "officialUrl": "https://www.larosiere.net/en",
+      "liftNetwork": "Espace San Bernardo",
+      "snowForecastMidM": 1988,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.larosiere.net/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for La Rosière.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "la-rosiere",
+                "name": "La Rosière",
+                "aliases": []
+              },
+              "citation": "Official site for La Rosière, the resort serving Montvalezan."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.larosiere.net/en",
+              "citation": "Official website for La Rosière."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "haute-tarentaise",
+                "regionName": "Haute Tarentaise",
+                "stateOrProvince": "Savoie",
+                "localityId": "montvalezan",
+                "localityName": "Montvalezan"
+              },
+              "citation": "La Rosière is accessed from Montvalezan (Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official La Rosière site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (La Rosière ski area - Espace San Bernardo FROM 12 DECEMBER 2026 TO 17 APRIL 2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.larosiere.ski/en/domain/la-rosiere",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: La Rosière ski area - Espace San Bernardo FROM 12 DECEMBER 2026 TO 17 APRIL 2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.6121&mlon=6.8458#map=15/45.6121/6.8458",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Montvalezan' (village, relation/133463)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.6121,
+                "lng": 6.8458
+              },
+              "citation": "Map marker at 45.6121, 6.8458."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.6121,6.8458",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1158,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1158 m at 45.6121, 6.8458."
+            }
+          ]
+        },
+        {
+          "url": "https://www.larosiere.net/en/the-ski-area/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1176 m, top 2800 m. La Rosière official ski-area altitude 1,176 m to 2,800 m (Mont Valaisan).",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1176,
+              "citation": "Published base elevation 1176 m and top elevation 2800 m for La Rosière."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-chamonix",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "chamonix",
+        "name": "Chamonix (Brévent-Flégère)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.9231,
+        "lng": 6.87
+      },
+      "elevations": {
+        "baseM": 1030,
+        "topM": 2525,
+        "forecastM": 1039
+      },
+      "locality": {
+        "regionId": "chamonix",
+        "regionName": "Chamonix Mont-Blanc",
+        "stateOrProvince": "Haute-Savoie",
+        "localityId": "chamonix",
+        "localityName": "Chamonix"
+      },
+      "officialUrl": "https://en.chamonix.com/",
+      "liftNetwork": "Chamonix Le Pass",
+      "snowForecastMidM": 1778,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://en.chamonix.com/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Chamonix (Brévent-Flégère).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "chamonix",
+                "name": "Chamonix (Brévent-Flégère)",
+                "aliases": []
+              },
+              "citation": "Official site for Chamonix (Brévent-Flégère), the resort serving Chamonix."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://en.chamonix.com/",
+              "citation": "Official website for Chamonix (Brévent-Flégère)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "chamonix",
+                "regionName": "Chamonix Mont-Blanc",
+                "stateOrProvince": "Haute-Savoie",
+                "localityId": "chamonix",
+                "localityName": "Chamonix"
+              },
+              "citation": "Chamonix (Brévent-Flégère) is accessed from Chamonix (Haute-Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Chamonix (Brévent-Flégère) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Season dates in Chamonix The whole resort is set to open on 19 December 2026.)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.seechamonix.com/lifts/dates/season-dates-for-chamonix-valley-lifts",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Season dates in Chamonix The whole resort is set to open on 19 December 2026.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.9231&mlon=6.87#map=15/45.9231/6.87",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Chamonix' (town, relation/104836)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.9231,
+                "lng": 6.87
+              },
+              "citation": "Map marker at 45.9231, 6.87."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.9231,6.87",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1039,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1039 m at 45.9231, 6.87."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/brevent-flegere-chamonix/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1030 m, top 2525 m. skiresort.info / skiresort.com listing: Chamonix (Brévent-Flégère) 1030–2525 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1030,
+              "citation": "Published base elevation 1030 m and top elevation 2525 m for Chamonix (Brévent-Flégère)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-grands-montets",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "grands-montets",
+        "name": "Grands Montets (Argentière)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.9838,
+        "lng": 6.9299
+      },
+      "elevations": {
+        "baseM": 1252,
+        "topM": 2765,
+        "forecastM": 1260
+      },
+      "locality": {
+        "regionId": "chamonix",
+        "regionName": "Chamonix Mont-Blanc",
+        "stateOrProvince": "Haute-Savoie",
+        "localityId": "argentiere",
+        "localityName": "Argentière"
+      },
+      "officialUrl": "https://www.montblancnaturalresort.com/en",
+      "liftNetwork": "Chamonix Le Pass",
+      "snowForecastMidM": 2008,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.montblancnaturalresort.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Grands Montets (Argentière).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "grands-montets",
+                "name": "Grands Montets (Argentière)",
+                "aliases": []
+              },
+              "citation": "Official site for Grands Montets (Argentière), the resort serving Argentière."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.montblancnaturalresort.com/en",
+              "citation": "Official website for Grands Montets (Argentière)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "chamonix",
+                "regionName": "Chamonix Mont-Blanc",
+                "stateOrProvince": "Haute-Savoie",
+                "localityId": "argentiere",
+                "localityName": "Argentière"
+              },
+              "citation": "Grands Montets (Argentière) is accessed from Argentière (Haute-Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Grands Montets (Argentière) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Plan Your Ski Trip to Chamonix 2026/27 - Skibex The 2026/27 season runs from late November 2026 (first high areas) to early May 2027 at Grands Montets.)."
+            }
+          ]
+        },
+        {
+          "url": "https://skibex.fr/resources/plan-your-trip/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Plan Your Ski Trip to Chamonix 2026/27 - Skibex The 2026/27 season runs from late November 2026 (first high areas) to early May 2027 at Grands Montets.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.9838&mlon=6.9299#map=15/45.9838/6.9299",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Argentière' (village, node/285882627)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.9838,
+                "lng": 6.9299
+              },
+              "citation": "Map marker at 45.9838, 6.9299."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.9838,6.9299",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1260,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1260 m at 45.9838, 6.9299."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/grands-montets-argentiere-chamonix/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1252 m, top 2765 m. skiresort.info / skiresort.com listing: Grands Montets (Argentière) 1252–2765 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1252,
+              "citation": "Published base elevation 1252 m and top elevation 2765 m for Grands Montets (Argentière)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-les-houches",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "les-houches",
+        "name": "Les Houches",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.8915,
+        "lng": 6.7991
+      },
+      "elevations": {
+        "baseM": 1000,
+        "topM": 1900,
+        "forecastM": 1005
+      },
+      "locality": {
+        "regionId": "chamonix",
+        "regionName": "Chamonix Mont-Blanc",
+        "stateOrProvince": "Haute-Savoie",
+        "localityId": "les-houches",
+        "localityName": "Les Houches"
+      },
+      "officialUrl": "https://www.leshouches.com/en",
+      "liftNetwork": "Chamonix Le Pass",
+      "snowForecastMidM": 1450,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.leshouches.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Les Houches.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "les-houches",
+                "name": "Les Houches",
+                "aliases": []
+              },
+              "citation": "Official site for Les Houches, the resort serving Les Houches."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.leshouches.com/en",
+              "citation": "Official website for Les Houches."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "chamonix",
+                "regionName": "Chamonix Mont-Blanc",
+                "stateOrProvince": "Haute-Savoie",
+                "localityId": "les-houches",
+                "localityName": "Les Houches"
+              },
+              "citation": "Les Houches is accessed from Les Houches (Haute-Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Les Houches site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Chamonix Lifts Opening Dates and Times and Resorts Timetables From 19 December 2026 to 5 February 2027 08:45 16:15 16:15 16:30 Continuous)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.chamonix.net/english/lift-systems/dates-times",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Chamonix Lifts Opening Dates and Times and Resorts Timetables From 19 December 2026 to 5 February 2027 08:45 16:15 16:15 16:30 Continuous",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.8915&mlon=6.7991#map=15/45.8915/6.7991",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Les Houches' (village, relation/104826)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.8915,
+                "lng": 6.7991
+              },
+              "citation": "Map marker at 45.8915, 6.7991."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.8915,6.7991",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1005,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1005 m at 45.8915, 6.7991."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/les-houches-saint-gervais-prarion-bellevue-chamonix/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1000 m, top 1900 m. skiresort.info / skiresort.com listing: Les Houches 1000–1900 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1000,
+              "citation": "Published base elevation 1000 m and top elevation 1900 m for Les Houches."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-megeve",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "megeve",
+        "name": "Megève",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.8567,
+        "lng": 6.6179
+      },
+      "elevations": {
+        "baseM": 850,
+        "topM": 2353,
+        "forecastM": 1105
+      },
+      "locality": {
+        "regionId": "evasion-mont-blanc",
+        "regionName": "Megève · Saint-Gervais",
+        "stateOrProvince": "Haute-Savoie",
+        "localityId": "megeve",
+        "localityName": "Megève"
+      },
+      "officialUrl": "https://megeve.com/en",
+      "liftNetwork": "Les Portes du Mont-Blanc / Evasion Mont-Blanc",
+      "snowForecastMidM": 1602,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://megeve.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Megève.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "megeve",
+                "name": "Megève",
+                "aliases": []
+              },
+              "citation": "Official site for Megève, the resort serving Megève."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://megeve.com/en",
+              "citation": "Official website for Megève."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "evasion-mont-blanc",
+                "regionName": "Megève · Saint-Gervais",
+                "stateOrProvince": "Haute-Savoie",
+                "localityId": "megeve",
+                "localityName": "Megève"
+              },
+              "citation": "Megève is accessed from Megève (Haute-Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Megève site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (forfait.megeve.com · hiver · dates-douvertureDates d'ouverture du domaine skiable de Megève - Megeve hiver week-end du 5 – 6 décembre 2026)."
+            }
+          ]
+        },
+        {
+          "url": "https://forfait.megeve.com/hiver/dates-douverture/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: forfait.megeve.com · hiver · dates-douvertureDates d'ouverture du domaine skiable de Megève - Megeve hiver week-end du 5 – 6 décembre 2026",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.8567&mlon=6.6179#map=15/45.8567/6.6179",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Megève' (village, relation/75312)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.8567,
+                "lng": 6.6179
+              },
+              "citation": "Map marker at 45.8567, 6.6179."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.8567,6.6179",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1105,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1105 m at 45.8567, 6.6179."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/megeve-saint-gervais/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 850 m, top 2353 m. skiresort.info / skiresort.com listing: Megève 850–2353 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 850,
+              "citation": "Published base elevation 850 m and top elevation 2353 m for Megève."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-saint-gervais-mont-blanc",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "saint-gervais-mont-blanc",
+        "name": "Saint-Gervais Mont-Blanc",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.8929,
+        "lng": 6.7113
+      },
+      "elevations": {
+        "baseM": 1400,
+        "topM": 2353,
+        "forecastM": 807
+      },
+      "locality": {
+        "regionId": "evasion-mont-blanc",
+        "regionName": "Megève · Saint-Gervais",
+        "stateOrProvince": "Haute-Savoie",
+        "localityId": "saint-gervais-les-bains",
+        "localityName": "Saint-Gervais-les-Bains"
+      },
+      "officialUrl": "https://www.saintgervais.com/en",
+      "liftNetwork": "Evasion Mont-Blanc",
+      "snowForecastMidM": 1876,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.saintgervais.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Saint-Gervais Mont-Blanc.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "saint-gervais-mont-blanc",
+                "name": "Saint-Gervais Mont-Blanc",
+                "aliases": []
+              },
+              "citation": "Official site for Saint-Gervais Mont-Blanc, the resort serving Saint-Gervais-les-Bains."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.saintgervais.com/en",
+              "citation": "Official website for Saint-Gervais Mont-Blanc."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "evasion-mont-blanc",
+                "regionName": "Megève · Saint-Gervais",
+                "stateOrProvince": "Haute-Savoie",
+                "localityId": "saint-gervais-les-bains",
+                "localityName": "Saint-Gervais-les-Bains"
+              },
+              "citation": "Saint-Gervais Mont-Blanc is accessed from Saint-Gervais-les-Bains (Haute-Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Saint-Gervais Mont-Blanc site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Evasion Mont-Blanc ski resort From 12 December 2026 until 4 April 2027 - Open everyday)."
+            }
+          ]
+        },
+        {
+          "url": "https://tourism.saintgervais.com/i-want-to/an-activity/evasion-mont-blanc-ski-resort-saint-gervais-les-bains-en-4359378/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Evasion Mont-Blanc ski resort From 12 December 2026 until 4 April 2027 - Open everyday",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.8929&mlon=6.7113#map=15/45.8929/6.7113",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Saint-Gervais-les-Bains' (village, relation/104744)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.8929,
+                "lng": 6.7113
+              },
+              "citation": "Map marker at 45.8929, 6.7113."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.8929,6.7113",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 807,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 807 m at 45.8929, 6.7113."
+            }
+          ]
+        },
+        {
+          "url": "https://www.heidi.com/ski/france/saint-gervais",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1400 m, top 2353 m. Saint-Gervais skiing from Le Bettex 1,400 m via Mont d'Arbois 1,840 m to a top of 2,353 m; the village (850 m) is reached by gondola.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1400,
+              "citation": "Published base elevation 1400 m and top elevation 2353 m for Saint-Gervais Mont-Blanc."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-avoriaz",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "avoriaz",
+        "name": "Avoriaz",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.1925,
+        "lng": 6.7703
+      },
+      "elevations": {
+        "baseM": 1100,
+        "topM": 2466,
+        "forecastM": 1822
+      },
+      "locality": {
+        "regionId": "portes-du-soleil",
+        "regionName": "Portes du Soleil",
+        "stateOrProvince": "Haute-Savoie",
+        "localityId": "avoriaz",
+        "localityName": "Avoriaz"
+      },
+      "officialUrl": "https://www.avoriaz.com/en",
+      "liftNetwork": "Portes du Soleil",
+      "snowForecastMidM": 1783,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.avoriaz.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Avoriaz.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "avoriaz",
+                "name": "Avoriaz",
+                "aliases": []
+              },
+              "citation": "Official site for Avoriaz, the resort serving Avoriaz."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.avoriaz.com/en",
+              "citation": "Official website for Avoriaz."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "portes-du-soleil",
+                "regionName": "Portes du Soleil",
+                "stateOrProvince": "Haute-Savoie",
+                "localityId": "avoriaz",
+                "localityName": "Avoriaz"
+              },
+              "citation": "Avoriaz is accessed from Avoriaz (Haute-Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Avoriaz site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (2026/2027 Ski Season in Avoriaz - esquiades.com Closed Opening 11/28/2026 ... 04/18/2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.esquiades.com/en/skiresort/opening-closing-dates-avoriaz/150/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: 2026/2027 Ski Season in Avoriaz - esquiades.com Closed Opening 11/28/2026 ... 04/18/2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.1925&mlon=6.7703#map=15/46.1925/6.7703",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Avoriaz' (village, node/307509261)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.1925,
+                "lng": 6.7703
+              },
+              "citation": "Map marker at 46.1925, 6.7703."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.1925,6.7703",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1822,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1822 m at 46.1925, 6.7703."
+            }
+          ]
+        },
+        {
+          "url": "https://www.weski.com/ski-resorts/france/avoriaz",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1100 m, top 2466 m. Avoriaz sector 1,100 m to 2,466 m summit.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1100,
+              "citation": "Published base elevation 1100 m and top elevation 2466 m for Avoriaz."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-morzine",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "morzine",
+        "name": "Morzine",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.18,
+        "lng": 6.7091
+      },
+      "elevations": {
+        "baseM": 1000,
+        "topM": 2019,
+        "forecastM": 973
+      },
+      "locality": {
+        "regionId": "portes-du-soleil",
+        "regionName": "Portes du Soleil",
+        "stateOrProvince": "Haute-Savoie",
+        "localityId": "morzine",
+        "localityName": "Morzine"
+      },
+      "officialUrl": "https://en.morzine-avoriaz.com",
+      "liftNetwork": "Portes du Soleil",
+      "snowForecastMidM": 1510,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://en.morzine-avoriaz.com",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Morzine.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "morzine",
+                "name": "Morzine",
+                "aliases": []
+              },
+              "citation": "Official site for Morzine, the resort serving Morzine."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://en.morzine-avoriaz.com",
+              "citation": "Official website for Morzine."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "portes-du-soleil",
+                "regionName": "Portes du Soleil",
+                "stateOrProvince": "Haute-Savoie",
+                "localityId": "morzine",
+                "localityName": "Morzine"
+              },
+              "citation": "Morzine is accessed from Morzine (Haute-Savoie, France), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://en.morzine-avoriaz.com/app/uploads/2026/08/dp-hiver-2027-gb-web.pdf",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: REPORT FEATURE IDEAS BOOKLET - en.morzine-avoriaz.com Les Gets ski area: from 19 December 2026 to",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Morzine: REPORT FEATURE IDEAS BOOKLET - en.morzine-avoriaz.com Les Gets ski area: from 19 December 2026 to"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.18&mlon=6.7091#map=15/46.18/6.7091",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Morzine' (village, relation/104928)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.18,
+                "lng": 6.7091
+              },
+              "citation": "Map marker at 46.18, 6.7091."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.18,6.7091",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 973,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 973 m at 46.18, 6.7091."
+            }
+          ]
+        },
+        {
+          "url": "https://www.alps2alps.com/wiki/resorts/morzine/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1000 m, top 2019 m. Morzine home sectors Pléney, Nyon and Chamossière 1,000–2,019 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1000,
+              "citation": "Published base elevation 1000 m and top elevation 2019 m for Morzine."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-les-gets",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "les-gets",
+        "name": "Les Gets",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.1551,
+        "lng": 6.6633
+      },
+      "elevations": {
+        "baseM": 1172,
+        "topM": 2002,
+        "forecastM": 1160
+      },
+      "locality": {
+        "regionId": "portes-du-soleil",
+        "regionName": "Portes du Soleil",
+        "stateOrProvince": "Haute-Savoie",
+        "localityId": "les-gets",
+        "localityName": "Les Gets"
+      },
+      "officialUrl": "https://www.lesgets.com/en",
+      "liftNetwork": "Portes du Soleil",
+      "snowForecastMidM": 1587,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.lesgets.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Les Gets.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "les-gets",
+                "name": "Les Gets",
+                "aliases": []
+              },
+              "citation": "Official site for Les Gets, the resort serving Les Gets."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.lesgets.com/en",
+              "citation": "Official website for Les Gets."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "portes-du-soleil",
+                "regionName": "Portes du Soleil",
+                "stateOrProvince": "Haute-Savoie",
+                "localityId": "les-gets",
+                "localityName": "Les Gets"
+              },
+              "citation": "Les Gets is accessed from Les Gets (Haute-Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Les Gets site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (New European ski lodges and hotels opening this winter Les Gets plans a partial opening on 12 December 2026, subject to snow conditions, followed by full openin)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.euronews.com/2026/10/06/new-european-ski-lodges-and-hotels-opening-in-winter-2026-2027",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: New European ski lodges and hotels opening this winter Les Gets plans a partial opening on 12 December 2026, subject to snow conditions, followed by full opening on 19 December 2026.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.1551&mlon=6.6633#map=15/46.1551/6.6633",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Les Gets' (village, relation/109476)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.1551,
+                "lng": 6.6633
+              },
+              "citation": "Map marker at 46.1551, 6.6633."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.1551,6.6633",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1160,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1160 m at 46.1551, 6.6633."
+            }
+          ]
+        },
+        {
+          "url": "https://www.seemorzine.com/ski-area/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1172 m, top 2002 m. Les Gets village base 1,172 m; highest lift on the shared Les Gets–Morzine area is Chamossière 2,002 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1172,
+              "citation": "Published base elevation 1172 m and top elevation 2002 m for Les Gets."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-chatel",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "chatel",
+        "name": "Châtel",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.2672,
+        "lng": 6.8413
+      },
+      "elevations": {
+        "baseM": 1200,
+        "topM": 2200,
+        "forecastM": 1191
+      },
+      "locality": {
+        "regionId": "portes-du-soleil",
+        "regionName": "Portes du Soleil",
+        "stateOrProvince": "Haute-Savoie",
+        "localityId": "chatel",
+        "localityName": "Châtel"
+      },
+      "officialUrl": "https://www.chatel.com/en",
+      "liftNetwork": "Portes du Soleil",
+      "snowForecastMidM": 1700,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.chatel.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Châtel.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "chatel",
+                "name": "Châtel",
+                "aliases": []
+              },
+              "citation": "Official site for Châtel, the resort serving Châtel."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.chatel.com/en",
+              "citation": "Official website for Châtel."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "portes-du-soleil",
+                "regionName": "Portes du Soleil",
+                "stateOrProvince": "Haute-Savoie",
+                "localityId": "chatel",
+                "localityName": "Châtel"
+              },
+              "citation": "Châtel is accessed from Châtel (Haute-Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Châtel site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (en.chatelreservation.com · holiday-in-chatel-mustHoliday in Chatel: Must-See Events and Activities - From 19 December 2026: full opening of the Châtel ski area)."
+            }
+          ]
+        },
+        {
+          "url": "https://en.chatelreservation.com/holiday-in-chatel-must-see-events-and-activities.html",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: en.chatelreservation.com · holiday-in-chatel-mustHoliday in Chatel: Must-See Events and Activities - From 19 December 2026: full opening of the Châtel ski area",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.2672&mlon=6.8413#map=15/46.2672/6.8413",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Châtel' (village, relation/104981)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.2672,
+                "lng": 6.8413
+              },
+              "citation": "Map marker at 46.2672, 6.8413."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.2672,6.8413",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1191,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1191 m at 46.2672, 6.8413."
+            }
+          ]
+        },
+        {
+          "url": "https://www.melbtravel.com/winter-chatel-france-ski-resort/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1200 m, top 2200 m. Châtel village base 1,200 m, lifts up to about 2,200 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1200,
+              "citation": "Published base elevation 1200 m and top elevation 2200 m for Châtel."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-flaine",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "flaine",
+        "name": "Flaine",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.0069,
+        "lng": 6.6904
+      },
+      "elevations": {
+        "baseM": 1600,
+        "topM": 2500,
+        "forecastM": 1645
+      },
+      "locality": {
+        "regionId": "grand-massif",
+        "regionName": "Grand Massif",
+        "stateOrProvince": "Haute-Savoie",
+        "localityId": "flaine",
+        "localityName": "Flaine"
+      },
+      "officialUrl": "https://www.flaine.com/en",
+      "liftNetwork": "Grand Massif",
+      "snowForecastMidM": 2050,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.flaine.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Flaine.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "flaine",
+                "name": "Flaine",
+                "aliases": []
+              },
+              "citation": "Official site for Flaine, the resort serving Flaine."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.flaine.com/en",
+              "citation": "Official website for Flaine."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "grand-massif",
+                "regionName": "Grand Massif",
+                "stateOrProvince": "Haute-Savoie",
+                "localityId": "flaine",
+                "localityName": "Flaine"
+              },
+              "citation": "Flaine is accessed from Flaine (Haute-Savoie, France), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.flaine.com/en/winter-openings-27/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Winter openings 26-27 - Flaine - French Alps ski resort ... 📅 Saturday 5 December 2026 ... Open from 5 to 18 December 2026 – subject to snow conditions.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Flaine: Winter openings 26-27 - Flaine - French Alps ski resort ... 📅 Saturday 5 December 2026 ... Open from 5 to 18 December 2026 – subject to snow conditions."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.0069&mlon=6.6904#map=15/46.0069/6.6904",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Flaine' (village, node/2081312463)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.0069,
+                "lng": 6.6904
+              },
+              "citation": "Map marker at 46.0069, 6.6904."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.0069,6.6904",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1645,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1645 m at 46.0069, 6.6904."
+            }
+          ]
+        },
+        {
+          "url": "https://www.flaine.com/en/faq/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1600 m, top 2500 m. Flaine official: resort 1,600 m, summit of the ski area 2,500 m (Grandes Platières).",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1600,
+              "citation": "Published base elevation 1600 m and top elevation 2500 m for Flaine."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-samoens",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "samoens",
+        "name": "Samoëns",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.0834,
+        "lng": 6.7269
+      },
+      "elevations": {
+        "baseM": 1600,
+        "topM": 2120,
+        "forecastM": 712
+      },
+      "locality": {
+        "regionId": "grand-massif",
+        "regionName": "Grand Massif",
+        "stateOrProvince": "Haute-Savoie",
+        "localityId": "samoens",
+        "localityName": "Samoëns"
+      },
+      "officialUrl": "https://www.samoens.com/en",
+      "liftNetwork": "Grand Massif",
+      "snowForecastMidM": 1860,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.samoens.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Samoëns.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "samoens",
+                "name": "Samoëns",
+                "aliases": []
+              },
+              "citation": "Official site for Samoëns, the resort serving Samoëns."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.samoens.com/en",
+              "citation": "Official website for Samoëns."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "grand-massif",
+                "regionName": "Grand Massif",
+                "stateOrProvince": "Haute-Savoie",
+                "localityId": "samoens",
+                "localityName": "Samoëns"
+              },
+              "citation": "Samoëns is accessed from Samoëns (Haute-Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Samoëns site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Grand Massif ski pass prices, find your offer Flaine is open from 5 December 2026 to 18 April 2027 – Samoëns and Les Carroz are open from 12 December 2026 to 11)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.grand-massif.com/en/ski-offers/package-rates/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Grand Massif ski pass prices, find your offer Flaine is open from 5 December 2026 to 18 April 2027 – Samoëns and Les Carroz are open from 12 December 2026 to 11 April 2027 – Morillon is",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.0834&mlon=6.7269#map=15/46.0834/6.7269",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Samoëns' (village, relation/104887)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.0834,
+                "lng": 6.7269
+              },
+              "citation": "Map marker at 46.0834, 6.7269."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.0834,6.7269",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 712,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 712 m at 46.0834, 6.7269."
+            }
+          ]
+        },
+        {
+          "url": "https://www.alpsaccommodation.com/samoens/samoens-ski-resort/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1600 m, top 2120 m. Samoëns sector skiing mostly between 1,600 m (Samoëns 1600) and 2,120 m; the 720 m village is linked by gondola.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1600,
+              "citation": "Published base elevation 1600 m and top elevation 2120 m for Samoëns."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-la-clusaz",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "la-clusaz",
+        "name": "La Clusaz",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.9044,
+        "lng": 6.4239
+      },
+      "elevations": {
+        "baseM": 1050,
+        "topM": 2485,
+        "forecastM": 1033
+      },
+      "locality": {
+        "regionId": "aravis",
+        "regionName": "Aravis",
+        "stateOrProvince": "Haute-Savoie",
+        "localityId": "la-clusaz",
+        "localityName": "La Clusaz"
+      },
+      "officialUrl": "https://www.laclusaz.com/en",
+      "liftNetwork": "Aravis",
+      "snowForecastMidM": 1768,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.laclusaz.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for La Clusaz.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "la-clusaz",
+                "name": "La Clusaz",
+                "aliases": []
+              },
+              "citation": "Official site for La Clusaz, the resort serving La Clusaz."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.laclusaz.com/en",
+              "citation": "Official website for La Clusaz."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "aravis",
+                "regionName": "Aravis",
+                "stateOrProvince": "Haute-Savoie",
+                "localityId": "la-clusaz",
+                "localityName": "La Clusaz"
+              },
+              "citation": "La Clusaz is accessed from La Clusaz (Haute-Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official La Clusaz site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (www.ledauphine.com › montagne › 2026/10/01Saison de ski 2026-2027 : les dates d'ouverture des stations ... - La Clusaz : ouverture le 12 décembre 2026)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.ledauphine.com/montagne/2026/10/01/saison-de-ski-2026-2027-les-dates-d-ouverture-des-stations-dans-les-alpes",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: www.ledauphine.com › montagne › 2026/10/01Saison de ski 2026-2027 : les dates d'ouverture des stations ... - La Clusaz : ouverture le 12 décembre 2026",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.9044&mlon=6.4239#map=15/45.9044/6.4239",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'La Clusaz' (village, relation/75233)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.9044,
+                "lng": 6.4239
+              },
+              "citation": "Map marker at 45.9044, 6.4239."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.9044,6.4239",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1033,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1033 m at 45.9044, 6.4239."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/la-clusaz-manigod/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1050 m, top 2485 m. skiresort.info / skiresort.com listing: La Clusaz 1050–2485 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1050,
+              "citation": "Published base elevation 1050 m and top elevation 2485 m for La Clusaz."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-le-grand-bornand",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "le-grand-bornand",
+        "name": "Le Grand-Bornand",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.9419,
+        "lng": 6.4271
+      },
+      "elevations": {
+        "baseM": 1000,
+        "topM": 2100,
+        "forecastM": 930
+      },
+      "locality": {
+        "regionId": "aravis",
+        "regionName": "Aravis",
+        "stateOrProvince": "Haute-Savoie",
+        "localityId": "le-grand-bornand",
+        "localityName": "Le Grand-Bornand"
+      },
+      "officialUrl": "https://www.legrandbornand.com/en",
+      "liftNetwork": "Aravis",
+      "snowForecastMidM": 1550,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.legrandbornand.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Le Grand-Bornand.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "le-grand-bornand",
+                "name": "Le Grand-Bornand",
+                "aliases": []
+              },
+              "citation": "Official site for Le Grand-Bornand, the resort serving Le Grand-Bornand."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.legrandbornand.com/en",
+              "citation": "Official website for Le Grand-Bornand."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "aravis",
+                "regionName": "Aravis",
+                "stateOrProvince": "Haute-Savoie",
+                "localityId": "le-grand-bornand",
+                "localityName": "Le Grand-Bornand"
+              },
+              "citation": "Le Grand-Bornand is accessed from Le Grand-Bornand (Haute-Savoie, France), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.legrandbornand.com/ouvertures-des-pistes-et-remontees-mecaniques/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: om · ouvertures-des-pistes-etOuvertures des pistes et remontées mécaniques Le Grand Bornand Le domaine skiable alpin pré-ouvre les 5 et 6 décembre 2026 ! Ouverture en continu à partir du 12 décembre jusqu’au 11 avril 2027.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Le Grand-Bornand: om · ouvertures-des-pistes-etOuvertures des pistes et remontées mécaniques Le Grand Bornand Le domaine skiable alpin pré-ouvre les 5 et 6 décembre 2026 ! Ouverture en continu à partir du 12 décembre j"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.9419&mlon=6.4271#map=15/45.9419/6.4271",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Le Grand-Bornand' (village, relation/75227)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.9419,
+                "lng": 6.4271
+              },
+              "citation": "Map marker at 45.9419, 6.4271."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.9419,6.4271",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 930,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 930 m at 45.9419, 6.4271."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.info/ski-resort/le-grand-bornand/test-result/size/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1000 m, top 2100 m. skiresort.info / skiresort.com listing: Le Grand-Bornand 1000–2100 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1000,
+              "citation": "Published base elevation 1000 m and top elevation 2100 m for Le Grand-Bornand."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-alpe-d-huez",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "alpe-d-huez",
+        "name": "Alpe d'Huez",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.0924,
+        "lng": 6.0699
+      },
+      "elevations": {
+        "baseM": 1120,
+        "topM": 3330,
+        "forecastM": 1825
+      },
+      "locality": {
+        "regionId": "oisans",
+        "regionName": "Oisans",
+        "stateOrProvince": "Isère",
+        "localityId": "l-alpe-d-huez",
+        "localityName": "L'Alpe d'Huez"
+      },
+      "officialUrl": "https://www.alpedhuez.com/en",
+      "liftNetwork": "Alpe d'Huez Grand Domaine",
+      "snowForecastMidM": 2225,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.alpedhuez.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Alpe d'Huez.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "alpe-d-huez",
+                "name": "Alpe d'Huez",
+                "aliases": []
+              },
+              "citation": "Official site for Alpe d'Huez, the resort serving L'Alpe d'Huez."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.alpedhuez.com/en",
+              "citation": "Official website for Alpe d'Huez."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "oisans",
+                "regionName": "Oisans",
+                "stateOrProvince": "Isère",
+                "localityId": "l-alpe-d-huez",
+                "localityName": "L'Alpe d'Huez"
+              },
+              "citation": "Alpe d'Huez is accessed from L'Alpe d'Huez (Isère, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Alpe d'Huez site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Season Dates in Alpe d'Huez Winter 2026 to 2027 5 December 2026 25 April 2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.seealpedhuez.com/lifts/dates",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Season Dates in Alpe d'Huez Winter 2026 to 2027 5 December 2026 25 April 2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.0924&mlon=6.0699#map=15/45.0924/6.0699",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Alpe d'Huez' (village, node/624027794)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.0924,
+                "lng": 6.0699
+              },
+              "citation": "Map marker at 45.0924, 6.0699."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.0924,6.0699",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1825,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1825 m at 45.0924, 6.0699."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Alpe_d%27Huez",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1120 m, top 3330 m. Wikipedia ski-area infobox: Alpe d'Huez 1120–3330 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1120,
+              "citation": "Published base elevation 1120 m and top elevation 3330 m for Alpe d'Huez."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-les-2-alpes",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "les-2-alpes",
+        "name": "Les 2 Alpes",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.01,
+        "lng": 6.1238
+      },
+      "elevations": {
+        "baseM": 1300,
+        "topM": 3600,
+        "forecastM": 1663
+      },
+      "locality": {
+        "regionId": "oisans",
+        "regionName": "Oisans",
+        "stateOrProvince": "Isère",
+        "localityId": "les-deux-alpes",
+        "localityName": "Les Deux Alpes"
+      },
+      "officialUrl": "https://www.les2alpes.com/en",
+      "liftNetwork": "Les 2 Alpes",
+      "snowForecastMidM": 2450,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.les2alpes.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Les 2 Alpes.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "les-2-alpes",
+                "name": "Les 2 Alpes",
+                "aliases": []
+              },
+              "citation": "Official site for Les 2 Alpes, the resort serving Les Deux Alpes."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.les2alpes.com/en",
+              "citation": "Official website for Les 2 Alpes."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "oisans",
+                "regionName": "Oisans",
+                "stateOrProvince": "Isère",
+                "localityId": "les-deux-alpes",
+                "localityName": "Les Deux Alpes"
+              },
+              "citation": "Les 2 Alpes is accessed from Les Deux Alpes (Isère, France), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.les2alpes.com/winter/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Les Deux Alpes ## SKI SEASON KICKS OFF 28 NOVEMBER 2026 - 2 MAY 2027",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Les 2 Alpes: Les Deux Alpes ## SKI SEASON KICKS OFF 28 NOVEMBER 2026 - 2 MAY 2027"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.01&mlon=6.1238#map=15/45.01/6.1238",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Les Deux Alpes' (village, relation/6837765)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.01,
+                "lng": 6.1238
+              },
+              "citation": "Map marker at 45.01, 6.1238."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.01,6.1238",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1663,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1663 m at 45.01, 6.1238."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Les_Deux_Alpes",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1300 m, top 3600 m. Wikipedia ski-area infobox: Les 2 Alpes 1300–3600 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1300,
+              "citation": "Published base elevation 1300 m and top elevation 3600 m for Les 2 Alpes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-la-grave",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "la-grave",
+        "name": "La Grave",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.0455,
+        "lng": 6.3067
+      },
+      "elevations": {
+        "baseM": 1470,
+        "topM": 3534,
+        "forecastM": 1486
+      },
+      "locality": {
+        "regionId": "oisans",
+        "regionName": "Oisans",
+        "stateOrProvince": "Isère",
+        "localityId": "la-grave",
+        "localityName": "La Grave"
+      },
+      "officialUrl": "https://www.la-grave.com/en",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 2502,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.la-grave.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for La Grave.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "la-grave",
+                "name": "La Grave",
+                "aliases": []
+              },
+              "citation": "Official site for La Grave, the resort serving La Grave."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.la-grave.com/en",
+              "citation": "Official website for La Grave."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "oisans",
+                "regionName": "Oisans",
+                "stateOrProvince": "Isère",
+                "localityId": "la-grave",
+                "localityName": "La Grave"
+              },
+              "citation": "La Grave is accessed from La Grave (Isère, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official La Grave site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Winter : Prices - Opening - La GraveLa Grave ##### Open from 19 December 2026 to 02 May 2027 from 8H30 (first ascent) to 16H00 (last descent of 3200m) / spring )."
+            }
+          ]
+        },
+        {
+          "url": "https://la-grave.com/en/hiver-tarifs-horaires/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Winter : Prices - Opening - La GraveLa Grave ##### Open from 19 December 2026 to 02 May 2027 from 8H30 (first ascent) to 16H00 (last descent of 3200m) / spring update",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.0455&mlon=6.3067#map=15/45.0455/6.3067",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'La Grave' (village, relation/114007)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.0455,
+                "lng": 6.3067
+              },
+              "citation": "Map marker at 45.0455, 6.3067."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.0455,6.3067",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1486,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1486 m at 45.0455, 6.3067."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/la-grave-la-meije/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1470 m, top 3534 m. skiresort.info / skiresort.com listing: La Grave 1470–3534 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1470,
+              "citation": "Published base elevation 1470 m and top elevation 3534 m for La Grave."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-serre-chevalier",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "serre-chevalier",
+        "name": "Serre Chevalier",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 44.8984,
+        "lng": 6.6436
+      },
+      "elevations": {
+        "baseM": 1200,
+        "topM": 2800,
+        "forecastM": 1312
+      },
+      "locality": {
+        "regionId": "serre-chevalier",
+        "regionName": "Serre Chevalier · Montgenèvre",
+        "stateOrProvince": "Hautes-Alpes",
+        "localityId": "briancon",
+        "localityName": "Briançon"
+      },
+      "officialUrl": "https://www.serre-chevalier.com/en",
+      "liftNetwork": "Serre Chevalier Vallée",
+      "snowForecastMidM": 2000,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.serre-chevalier.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Serre Chevalier.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "serre-chevalier",
+                "name": "Serre Chevalier",
+                "aliases": []
+              },
+              "citation": "Official site for Serre Chevalier, the resort serving Briançon."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.serre-chevalier.com/en",
+              "citation": "Official website for Serre Chevalier."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "serre-chevalier",
+                "regionName": "Serre Chevalier · Montgenèvre",
+                "stateOrProvince": "Hautes-Alpes",
+                "localityId": "briancon",
+                "localityName": "Briançon"
+              },
+              "citation": "Serre Chevalier is accessed from Briançon (Hautes-Alpes, France), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.serre-chevalier.com/en/ski-area/ski-area",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: The Serre Chevalier Ski Area: 250 km of Trails ### 2026–2027 Winter Season Opening Dates: Continuous operation from December 5, 2026, to April 18, 2027",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Serre Chevalier: The Serre Chevalier Ski Area: 250 km of Trails ### 2026–2027 Winter Season Opening Dates: Continuous operation from December 5, 2026, to April 18, 2027"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.8984&mlon=6.6436#map=15/44.8984/6.6436",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Briançon' (town, relation/85421)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.8984,
+                "lng": 6.6436
+              },
+              "citation": "Map marker at 44.8984, 6.6436."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=44.8984,6.6436",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1312,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1312 m at 44.8984, 6.6436."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Serre_Chevalier",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1200 m, top 2800 m. Wikipedia ski-area infobox: Serre Chevalier 1200–2800 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1200,
+              "citation": "Published base elevation 1200 m and top elevation 2800 m for Serre Chevalier."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-montgenevre",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "montgenevre",
+        "name": "Montgenèvre",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 44.9312,
+        "lng": 6.7218
+      },
+      "elevations": {
+        "baseM": 1860,
+        "topM": 2700,
+        "forecastM": 1859
+      },
+      "locality": {
+        "regionId": "serre-chevalier",
+        "regionName": "Serre Chevalier · Montgenèvre",
+        "stateOrProvince": "Hautes-Alpes",
+        "localityId": "montgenevre",
+        "localityName": "Montgenèvre"
+      },
+      "officialUrl": "https://www.montgenevre.com/en",
+      "liftNetwork": "Voie Lactée",
+      "snowForecastMidM": 2280,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.montgenevre.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Montgenèvre.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "montgenevre",
+                "name": "Montgenèvre",
+                "aliases": []
+              },
+              "citation": "Official site for Montgenèvre, the resort serving Montgenèvre."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.montgenevre.com/en",
+              "citation": "Official website for Montgenèvre."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "serre-chevalier",
+                "regionName": "Serre Chevalier · Montgenèvre",
+                "stateOrProvince": "Hautes-Alpes",
+                "localityId": "montgenevre",
+                "localityName": "Montgenèvre"
+              },
+              "citation": "Montgenèvre is accessed from Montgenèvre (Hautes-Alpes, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Montgenèvre site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (️ Domaine skiable de Montgenèvre – Ski en Hautes-Alpes L’ouverture en continu du domaine skiable pour l’hiver 2026-2027 s’étend du 28 novembre 2026 au 17 avril )."
+            }
+          ]
+        },
+        {
+          "url": "https://montgenevre.com/en/winter/ski/ski-area",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: ️ Domaine skiable de Montgenèvre – Ski en Hautes-Alpes L’ouverture en continu du domaine skiable pour l’hiver 2026-2027 s’étend du 28 novembre 2026 au 17 avril 2027 .",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.9312&mlon=6.7218#map=15/44.9312/6.7218",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Montgenèvre' (village, relation/971050)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.9312,
+                "lng": 6.7218
+              },
+              "citation": "Map marker at 44.9312, 6.7218."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=44.9312,6.7218",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1859,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1859 m at 44.9312, 6.7218."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiworld.co.uk/ski-holidays/france/montgenevre",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1860 m, top 2700 m. Montgenèvre resort height 1,860 m, highest lift 2,700 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1860,
+              "citation": "Published base elevation 1860 m and top elevation 2700 m for Montgenèvre."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-vars-risoul",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "vars-risoul",
+        "name": "Vars-Risoul (La Forêt Blanche)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 44.5942,
+        "lng": 6.6906
+      },
+      "elevations": {
+        "baseM": 1650,
+        "topM": 2750,
+        "forecastM": 1660
+      },
+      "locality": {
+        "regionId": "southern-alps",
+        "regionName": "Southern French Alps",
+        "stateOrProvince": "Hautes-Alpes",
+        "localityId": "vars",
+        "localityName": "Vars"
+      },
+      "officialUrl": "https://www.vars.com/en",
+      "liftNetwork": "La Forêt Blanche",
+      "snowForecastMidM": 2200,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.vars.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Vars-Risoul (La Forêt Blanche).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "vars-risoul",
+                "name": "Vars-Risoul (La Forêt Blanche)",
+                "aliases": []
+              },
+              "citation": "Official site for Vars-Risoul (La Forêt Blanche), the resort serving Vars."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.vars.com/en",
+              "citation": "Official website for Vars-Risoul (La Forêt Blanche)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "southern-alps",
+                "regionName": "Southern French Alps",
+                "stateOrProvince": "Hautes-Alpes",
+                "localityId": "vars",
+                "localityName": "Vars"
+              },
+              "citation": "Vars-Risoul (La Forêt Blanche) is accessed from Vars (Hautes-Alpes, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Vars-Risoul (La Forêt Blanche) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Vars/ Risoul – La Forêt Blanche Current season: 2026-12-05 - 2027-04-04)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/vars-risoul-la-foret-blanche/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Vars/ Risoul – La Forêt Blanche Current season: 2026-12-05 - 2027-04-04",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.5942&mlon=6.6906#map=15/44.5942/6.6906",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Vars-Sainte-Marie' (hamlet, node/223956422)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.5942,
+                "lng": 6.6906
+              },
+              "citation": "Map marker at 44.5942, 6.6906."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=44.5942,6.6906",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1660,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1660 m at 44.5942, 6.6906."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/vars-risoul-la-foret-blanche/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1650 m, top 2750 m. skiresort.info / skiresort.com listing: Vars-Risoul (La Forêt Blanche) 1650–2750 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1650,
+              "citation": "Published base elevation 1650 m and top elevation 2750 m for Vars-Risoul (La Forêt Blanche)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-isola-2000",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "isola-2000",
+        "name": "Isola 2000",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 44.1869,
+        "lng": 7.1454
+      },
+      "elevations": {
+        "baseM": 1840,
+        "topM": 2610,
+        "forecastM": 2132
+      },
+      "locality": {
+        "regionId": "southern-alps",
+        "regionName": "Southern French Alps",
+        "stateOrProvince": "Alpes-Maritimes",
+        "localityId": "isola-2000",
+        "localityName": "Isola 2000"
+      },
+      "officialUrl": "https://www.isola2000.com/en",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 2225,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.isola2000.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Isola 2000.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "isola-2000",
+                "name": "Isola 2000",
+                "aliases": []
+              },
+              "citation": "Official site for Isola 2000, the resort serving Isola 2000."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.isola2000.com/en",
+              "citation": "Official website for Isola 2000."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "southern-alps",
+                "regionName": "Southern French Alps",
+                "stateOrProvince": "Alpes-Maritimes",
+                "localityId": "isola-2000",
+                "localityName": "Isola 2000"
+              },
+              "citation": "Isola 2000 is accessed from Isola 2000 (Alpes-Maritimes, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Isola 2000 site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Snow report Isola 2000 Planned start of season: 5 Dec 2026 Planned end of season: 18 Apr 2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/isola-2000/snow-report/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Snow report Isola 2000 Planned start of season: 5 Dec 2026 Planned end of season: 18 Apr 2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.1869&mlon=7.1454#map=15/44.1869/7.1454",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Isola 2000' (winter_sports, way/23079840)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.1869,
+                "lng": 7.1454
+              },
+              "citation": "Map marker at 44.1869, 7.1454."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=44.1869,7.1454",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 2132,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 2132 m at 44.1869, 7.1454."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Isola_2000",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1840 m, top 2610 m. Wikipedia ski-area infobox: Isola 2000 1840–2610 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1840,
+              "citation": "Published base elevation 1840 m and top elevation 2610 m for Isola 2000."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-valloire-valmeinier",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "valloire-valmeinier",
+        "name": "Valloire-Valmeinier (Galibier-Thabor)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.165,
+        "lng": 6.4296
+      },
+      "elevations": {
+        "baseM": 1430,
+        "topM": 2750,
+        "forecastM": 1406
+      },
+      "locality": {
+        "regionId": "maurienne",
+        "regionName": "Maurienne",
+        "stateOrProvince": "Savoie",
+        "localityId": "valloire",
+        "localityName": "Valloire"
+      },
+      "officialUrl": "https://www.valloire.net/en",
+      "liftNetwork": "Galibier-Thabor",
+      "snowForecastMidM": 2090,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.valloire.net/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Valloire-Valmeinier (Galibier-Thabor).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "valloire-valmeinier",
+                "name": "Valloire-Valmeinier (Galibier-Thabor)",
+                "aliases": []
+              },
+              "citation": "Official site for Valloire-Valmeinier (Galibier-Thabor), the resort serving Valloire."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.valloire.net/en",
+              "citation": "Official website for Valloire-Valmeinier (Galibier-Thabor)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "maurienne",
+                "regionName": "Maurienne",
+                "stateOrProvince": "Savoie",
+                "localityId": "valloire",
+                "localityName": "Valloire"
+              },
+              "citation": "Valloire-Valmeinier (Galibier-Thabor) is accessed from Valloire (Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Valloire-Valmeinier (Galibier-Thabor) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Official: Galibier-Thabor ski area (Valloire + Valmeinier) open 19/12/2026 to 09/04/2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://valloire.net/en/profiter-de-valloire/le-ski/sur-les-pistes/ouverture",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Official: Galibier-Thabor ski area (Valloire + Valmeinier) open 19/12/2026 to 09/04/2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.165&mlon=6.4296#map=15/45.165/6.4296",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Valloire' (village, relation/114077)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.165,
+                "lng": 6.4296
+              },
+              "citation": "Map marker at 45.165, 6.4296."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.165,6.4296",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1406,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1406 m at 45.165, 6.4296."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/galibier-thabor-valmeinier-valloire/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1430 m, top 2750 m. skiresort.info / skiresort.com listing: Valloire-Valmeinier (Galibier-Thabor) 1430–2750 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1430,
+              "citation": "Published base elevation 1430 m and top elevation 2750 m for Valloire-Valmeinier (Galibier-Thabor)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-val-cenis",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "val-cenis",
+        "name": "Val Cenis",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.2856,
+        "lng": 6.8757
+      },
+      "elevations": {
+        "baseM": 1300,
+        "topM": 2730,
+        "forecastM": 1403
+      },
+      "locality": {
+        "regionId": "maurienne",
+        "regionName": "Maurienne",
+        "stateOrProvince": "Savoie",
+        "localityId": "lanslebourg-mont-cenis",
+        "localityName": "Lanslebourg-Mont-Cenis"
+      },
+      "officialUrl": "https://www.valcenis.com/",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 2015,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.valcenis.com/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Val Cenis.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "val-cenis",
+                "name": "Val Cenis",
+                "aliases": []
+              },
+              "citation": "Official site for Val Cenis, the resort serving Lanslebourg-Mont-Cenis."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.valcenis.com/",
+              "citation": "Official website for Val Cenis."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "maurienne",
+                "regionName": "Maurienne",
+                "stateOrProvince": "Savoie",
+                "localityId": "lanslebourg-mont-cenis",
+                "localityName": "Lanslebourg-Mont-Cenis"
+              },
+              "citation": "Val Cenis is accessed from Lanslebourg-Mont-Cenis (Savoie, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Val Cenis site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Val Cenis – Lanslevillard/Lanslebourg/Termignon Current season: 2026-12-13 - 2027-04-16)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/val-cenis-lanslevillard-lanslebourg-termignon/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Val Cenis – Lanslevillard/Lanslebourg/Termignon Current season: 2026-12-13 - 2027-04-16",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.2856&mlon=6.8757#map=15/45.2856/6.8757",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (GeoNames populated-place point via Open-Meteo geocoding).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.2856,
+                "lng": 6.8757
+              },
+              "citation": "Map marker at 45.2856, 6.8757."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=45.2856,6.8757",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1403,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1403 m at 45.2856, 6.8757."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Val_Cenis_Vanoise",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1300 m, top 2730 m. Wikipedia ski-area infobox: Val Cenis 1300–2730 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1300,
+              "citation": "Published base elevation 1300 m and top elevation 2730 m for Val Cenis."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-grand-tourmalet",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "grand-tourmalet",
+        "name": "Grand Tourmalet (Barèges-La Mongie)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 42.9119,
+        "lng": 0.1777
+      },
+      "elevations": {
+        "baseM": 1400,
+        "topM": 2500,
+        "forecastM": 1799
+      },
+      "locality": {
+        "regionId": "french-pyrenees",
+        "regionName": "French Pyrenees",
+        "stateOrProvince": "Hautes-Pyrénées",
+        "localityId": "la-mongie",
+        "localityName": "La Mongie"
+      },
+      "officialUrl": "https://www.grand-tourmalet.com/en",
+      "liftNetwork": "N'Py",
+      "snowForecastMidM": 1950,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.grand-tourmalet.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Grand Tourmalet (Barèges-La Mongie).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "grand-tourmalet",
+                "name": "Grand Tourmalet (Barèges-La Mongie)",
+                "aliases": []
+              },
+              "citation": "Official site for Grand Tourmalet (Barèges-La Mongie), the resort serving La Mongie."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.grand-tourmalet.com/en",
+              "citation": "Official website for Grand Tourmalet (Barèges-La Mongie)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "french-pyrenees",
+                "regionName": "French Pyrenees",
+                "stateOrProvince": "Hautes-Pyrénées",
+                "localityId": "la-mongie",
+                "localityName": "La Mongie"
+              },
+              "citation": "Grand Tourmalet (Barèges-La Mongie) is accessed from La Mongie (Hautes-Pyrénées, France), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Grand Tourmalet (Barèges-La Mongie) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (www.pyreneige.fr › station-ski › grand-tourmaletFiche technique de Grand Tourmalet - Pyreneige.fr Ouverture de la saison: Samedi 5 Décembre 2026)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.pyreneige.fr/station-ski/grand-tourmalet/donnees-techniques/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: www.pyreneige.fr › station-ski › grand-tourmaletFiche technique de Grand Tourmalet - Pyreneige.fr Ouverture de la saison: Samedi 5 Décembre 2026",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.9119&mlon=0.1777#map=15/42.9119/0.1777",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'La Mongie' (hamlet, node/5467656013)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.9119,
+                "lng": 0.1777
+              },
+              "citation": "Map marker at 42.9119, 0.1777."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=42.9119,0.1777",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1799,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1799 m at 42.9119, 0.1777."
+            }
+          ]
+        },
+        {
+          "url": "https://en.lespyrenees.net/downhill-ski-resorts/STATPYR000V50011U/detail",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1400 m, top 2500 m. Grand Tourmalet altitude min 1,400 m, max 2,500 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1400,
+              "citation": "Published base elevation 1400 m and top elevation 2500 m for Grand Tourmalet (Barèges-La Mongie)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fr-saint-lary-soulan",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "saint-lary-soulan",
+        "name": "Saint-Lary-Soulan",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 42.8169,
+        "lng": 0.322
+      },
+      "elevations": {
+        "baseM": 1597,
+        "topM": 2515,
+        "forecastM": 820
+      },
+      "locality": {
+        "regionId": "french-pyrenees",
+        "regionName": "French Pyrenees",
+        "stateOrProvince": "Hautes-Pyrénées",
+        "localityId": "saint-lary-soulan",
+        "localityName": "Saint-Lary-Soulan"
+      },
+      "officialUrl": "https://www.saintlary.com/en",
+      "liftNetwork": "N'Py",
+      "snowForecastMidM": 2056,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.saintlary.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Saint-Lary-Soulan.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "saint-lary-soulan",
+                "name": "Saint-Lary-Soulan",
+                "aliases": []
+              },
+              "citation": "Official site for Saint-Lary-Soulan, the resort serving Saint-Lary-Soulan."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.saintlary.com/en",
+              "citation": "Official website for Saint-Lary-Soulan."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "french-pyrenees",
+                "regionName": "French Pyrenees",
+                "stateOrProvince": "Hautes-Pyrénées",
+                "localityId": "saint-lary-soulan",
+                "localityName": "Saint-Lary-Soulan"
+              },
+              "citation": "Saint-Lary-Soulan is accessed from Saint-Lary-Soulan (Hautes-Pyrénées, France), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.saintlary.com/winter/to-do-on-site/glide/ski-area/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski area - Saint-Lary Tourisme Open from 4 December 2026 to 29 march 2027",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Saint-Lary-Soulan: Ski area - Saint-Lary Tourisme Open from 4 December 2026 to 29 march 2027"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.8169&mlon=0.322#map=15/42.8169/0.322",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Saint-Lary-Soulan' (village, relation/2303265)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.8169,
+                "lng": 0.322
+              },
+              "citation": "Map marker at 42.8169, 0.322."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=42.8169,0.322",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 820,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 820 m at 42.8169, 0.322."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/saint-lary-soulan/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1597 m, top 2515 m. skiresort.info / skiresort.com listing: Saint-Lary-Soulan 1597–2515 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1597,
+              "citation": "Published base elevation 1597 m and top elevation 2515 m for Saint-Lary-Soulan."
+            }
+          ]
+        }
+      ],
+      "reviewNote": "Village point is below the lift base (valley-gondola or glacier resort). Village weather stays at the town; snow forecast uses the base–top midpoint."
+    }
+  ]
+}

@@ -3,6 +3,11 @@
   "batches": [
     "catalogue",
     "us-east-south-central",
+    "europe-phase1-austria",
+    "europe-phase2-france",
+    "europe-phase3-switzerland",
+    "europe-phase4-italy",
+    "europe-phase6-germany",
     "us-mi-ny",
     "us-new-england",
     "nz-task-148",
@@ -176,6 +181,1012 @@
         {
           "localityId": "boone",
           "name": "Boone"
+        }
+      ]
+    },
+    {
+      "regionId": "warth-schroecken",
+      "name": "Warth-Schröcken",
+      "stateOrProvince": "Vorarlberg",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "warth",
+          "name": "Warth"
+        }
+      ]
+    },
+    {
+      "regionId": "paznaun",
+      "name": "Paznaun · Ischgl",
+      "stateOrProvince": "Tyrol",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "ischgl",
+          "name": "Ischgl"
+        },
+        {
+          "localityId": "galtur",
+          "name": "Galtür"
+        },
+        {
+          "localityId": "see",
+          "name": "See"
+        }
+      ]
+    },
+    {
+      "regionId": "oetztal",
+      "name": "Ötztal",
+      "stateOrProvince": "Tyrol",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "solden",
+          "name": "Sölden"
+        },
+        {
+          "localityId": "obergurgl",
+          "name": "Obergurgl"
+        }
+      ]
+    },
+    {
+      "regionId": "serfaus-fiss-ladis",
+      "name": "Serfaus-Fiss-Ladis",
+      "stateOrProvince": "Tyrol",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "serfaus",
+          "name": "Serfaus"
+        }
+      ]
+    },
+    {
+      "regionId": "pitztal",
+      "name": "Pitztal",
+      "stateOrProvince": "Tyrol",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "mandarfen",
+          "name": "Mandarfen"
+        }
+      ]
+    },
+    {
+      "regionId": "kaunertal",
+      "name": "Kaunertal",
+      "stateOrProvince": "Tyrol",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "feichten",
+          "name": "Feichten"
+        }
+      ]
+    },
+    {
+      "regionId": "innsbruck",
+      "name": "Innsbruck",
+      "stateOrProvince": "Tyrol",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "innsbruck",
+          "name": "Innsbruck"
+        },
+        {
+          "localityId": "axams",
+          "name": "Axams"
+        },
+        {
+          "localityId": "igls",
+          "name": "Igls"
+        }
+      ]
+    },
+    {
+      "regionId": "stubai",
+      "name": "Stubai Valley",
+      "stateOrProvince": "Tyrol",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "neustift-im-stubaital",
+          "name": "Neustift im Stubaital"
+        }
+      ]
+    },
+    {
+      "regionId": "kuehtai",
+      "name": "Kühtai",
+      "stateOrProvince": "Tyrol",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "kuhtai",
+          "name": "Kühtai"
+        }
+      ]
+    },
+    {
+      "regionId": "zillertal",
+      "name": "Zillertal",
+      "stateOrProvince": "Tyrol",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "mayrhofen",
+          "name": "Mayrhofen"
+        },
+        {
+          "localityId": "hintertux",
+          "name": "Hintertux"
+        },
+        {
+          "localityId": "zell-am-ziller",
+          "name": "Zell am Ziller"
+        },
+        {
+          "localityId": "kaltenbach",
+          "name": "Kaltenbach"
+        }
+      ]
+    },
+    {
+      "regionId": "kitzbuehel",
+      "name": "Kitzbühel Alps",
+      "stateOrProvince": "Tyrol",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "kitzbuhel",
+          "name": "Kitzbühel"
+        },
+        {
+          "localityId": "ellmau",
+          "name": "Ellmau"
+        },
+        {
+          "localityId": "st-johann-in-tirol",
+          "name": "St. Johann in Tirol"
+        }
+      ]
+    },
+    {
+      "regionId": "ski-juwel",
+      "name": "Alpbachtal",
+      "stateOrProvince": "Tyrol",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "alpbach",
+          "name": "Alpbach"
+        }
+      ]
+    },
+    {
+      "regionId": "saalbach",
+      "name": "Saalbach Hinterglemm Leogang Fieberbrunn",
+      "stateOrProvince": "Salzburg",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "saalbach",
+          "name": "Saalbach"
+        }
+      ]
+    },
+    {
+      "regionId": "zell-am-see-kaprun",
+      "name": "Zell am See-Kaprun",
+      "stateOrProvince": "Salzburg",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "zell-am-see",
+          "name": "Zell am See"
+        },
+        {
+          "localityId": "kaprun",
+          "name": "Kaprun"
+        }
+      ]
+    },
+    {
+      "regionId": "ski-amade",
+      "name": "Ski amadé",
+      "stateOrProvince": "Salzburg",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "flachau",
+          "name": "Flachau"
+        },
+        {
+          "localityId": "obertauern",
+          "name": "Obertauern"
+        },
+        {
+          "localityId": "bad-gastein",
+          "name": "Bad Gastein"
+        }
+      ]
+    },
+    {
+      "regionId": "schladming",
+      "name": "Schladming-Dachstein",
+      "stateOrProvince": "Styria",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "schladming",
+          "name": "Schladming"
+        }
+      ]
+    },
+    {
+      "regionId": "montafon",
+      "name": "Montafon",
+      "stateOrProvince": "Vorarlberg",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "schruns",
+          "name": "Schruns"
+        }
+      ]
+    },
+    {
+      "regionId": "carinthia",
+      "name": "Carinthia",
+      "stateOrProvince": "Carinthia",
+      "country": "Austria",
+      "countryCode": "AT",
+      "localities": [
+        {
+          "localityId": "hermagor",
+          "name": "Hermagor"
+        },
+        {
+          "localityId": "bad-kleinkirchheim",
+          "name": "Bad Kleinkirchheim"
+        }
+      ]
+    },
+    {
+      "regionId": "les-3-vallees",
+      "name": "Les 3 Vallées",
+      "stateOrProvince": "Savoie",
+      "country": "France",
+      "countryCode": "FR",
+      "localities": [
+        {
+          "localityId": "courchevel",
+          "name": "Courchevel"
+        },
+        {
+          "localityId": "meribel",
+          "name": "Méribel"
+        },
+        {
+          "localityId": "val-thorens",
+          "name": "Val Thorens"
+        },
+        {
+          "localityId": "les-menuires",
+          "name": "Les Menuires"
+        }
+      ]
+    },
+    {
+      "regionId": "espace-killy",
+      "name": "Val d'Isère · Tignes",
+      "stateOrProvince": "Savoie",
+      "country": "France",
+      "countryCode": "FR",
+      "localities": [
+        {
+          "localityId": "val-d-isere",
+          "name": "Val-d'Isère"
+        },
+        {
+          "localityId": "tignes",
+          "name": "Tignes"
+        }
+      ]
+    },
+    {
+      "regionId": "paradiski",
+      "name": "Paradiski",
+      "stateOrProvince": "Savoie",
+      "country": "France",
+      "countryCode": "FR",
+      "localities": [
+        {
+          "localityId": "bourg-saint-maurice",
+          "name": "Bourg-Saint-Maurice"
+        },
+        {
+          "localityId": "la-plagne",
+          "name": "La Plagne"
+        }
+      ]
+    },
+    {
+      "regionId": "haute-tarentaise",
+      "name": "Haute Tarentaise",
+      "stateOrProvince": "Savoie",
+      "country": "France",
+      "countryCode": "FR",
+      "localities": [
+        {
+          "localityId": "sainte-foy-tarentaise",
+          "name": "Sainte-Foy-Tarentaise"
+        },
+        {
+          "localityId": "montvalezan",
+          "name": "Montvalezan"
+        }
+      ]
+    },
+    {
+      "regionId": "chamonix",
+      "name": "Chamonix Mont-Blanc",
+      "stateOrProvince": "Haute-Savoie",
+      "country": "France",
+      "countryCode": "FR",
+      "localities": [
+        {
+          "localityId": "chamonix",
+          "name": "Chamonix"
+        },
+        {
+          "localityId": "argentiere",
+          "name": "Argentière"
+        },
+        {
+          "localityId": "les-houches",
+          "name": "Les Houches"
+        }
+      ]
+    },
+    {
+      "regionId": "evasion-mont-blanc",
+      "name": "Megève · Saint-Gervais",
+      "stateOrProvince": "Haute-Savoie",
+      "country": "France",
+      "countryCode": "FR",
+      "localities": [
+        {
+          "localityId": "megeve",
+          "name": "Megève"
+        },
+        {
+          "localityId": "saint-gervais-les-bains",
+          "name": "Saint-Gervais-les-Bains"
+        }
+      ]
+    },
+    {
+      "regionId": "portes-du-soleil",
+      "name": "Portes du Soleil",
+      "stateOrProvince": "Haute-Savoie",
+      "country": "France",
+      "countryCode": "FR",
+      "localities": [
+        {
+          "localityId": "avoriaz",
+          "name": "Avoriaz"
+        },
+        {
+          "localityId": "morzine",
+          "name": "Morzine"
+        },
+        {
+          "localityId": "les-gets",
+          "name": "Les Gets"
+        },
+        {
+          "localityId": "chatel",
+          "name": "Châtel"
+        }
+      ]
+    },
+    {
+      "regionId": "grand-massif",
+      "name": "Grand Massif",
+      "stateOrProvince": "Haute-Savoie",
+      "country": "France",
+      "countryCode": "FR",
+      "localities": [
+        {
+          "localityId": "flaine",
+          "name": "Flaine"
+        },
+        {
+          "localityId": "samoens",
+          "name": "Samoëns"
+        }
+      ]
+    },
+    {
+      "regionId": "aravis",
+      "name": "Aravis",
+      "stateOrProvince": "Haute-Savoie",
+      "country": "France",
+      "countryCode": "FR",
+      "localities": [
+        {
+          "localityId": "la-clusaz",
+          "name": "La Clusaz"
+        },
+        {
+          "localityId": "le-grand-bornand",
+          "name": "Le Grand-Bornand"
+        }
+      ]
+    },
+    {
+      "regionId": "oisans",
+      "name": "Oisans",
+      "stateOrProvince": "Isère",
+      "country": "France",
+      "countryCode": "FR",
+      "localities": [
+        {
+          "localityId": "l-alpe-d-huez",
+          "name": "L'Alpe d'Huez"
+        },
+        {
+          "localityId": "les-deux-alpes",
+          "name": "Les Deux Alpes"
+        },
+        {
+          "localityId": "la-grave",
+          "name": "La Grave"
+        }
+      ]
+    },
+    {
+      "regionId": "serre-chevalier",
+      "name": "Serre Chevalier · Montgenèvre",
+      "stateOrProvince": "Hautes-Alpes",
+      "country": "France",
+      "countryCode": "FR",
+      "localities": [
+        {
+          "localityId": "briancon",
+          "name": "Briançon"
+        },
+        {
+          "localityId": "montgenevre",
+          "name": "Montgenèvre"
+        }
+      ]
+    },
+    {
+      "regionId": "southern-alps",
+      "name": "Southern French Alps",
+      "stateOrProvince": "Hautes-Alpes",
+      "country": "France",
+      "countryCode": "FR",
+      "localities": [
+        {
+          "localityId": "vars",
+          "name": "Vars"
+        },
+        {
+          "localityId": "isola-2000",
+          "name": "Isola 2000"
+        }
+      ]
+    },
+    {
+      "regionId": "maurienne",
+      "name": "Maurienne",
+      "stateOrProvince": "Savoie",
+      "country": "France",
+      "countryCode": "FR",
+      "localities": [
+        {
+          "localityId": "valloire",
+          "name": "Valloire"
+        },
+        {
+          "localityId": "lanslebourg-mont-cenis",
+          "name": "Lanslebourg-Mont-Cenis"
+        }
+      ]
+    },
+    {
+      "regionId": "french-pyrenees",
+      "name": "French Pyrenees",
+      "stateOrProvince": "Hautes-Pyrénées",
+      "country": "France",
+      "countryCode": "FR",
+      "localities": [
+        {
+          "localityId": "la-mongie",
+          "name": "La Mongie"
+        },
+        {
+          "localityId": "saint-lary-soulan",
+          "name": "Saint-Lary-Soulan"
+        }
+      ]
+    },
+    {
+      "regionId": "zermatt",
+      "name": "Zermatt",
+      "stateOrProvince": "Valais",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "localities": [
+        {
+          "localityId": "zermatt",
+          "name": "Zermatt"
+        }
+      ]
+    },
+    {
+      "regionId": "saas-fee",
+      "name": "Saas-Fee",
+      "stateOrProvince": "Valais",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "localities": [
+        {
+          "localityId": "saas-fee",
+          "name": "Saas-Fee"
+        }
+      ]
+    },
+    {
+      "regionId": "4-vallees",
+      "name": "4 Vallées",
+      "stateOrProvince": "Valais",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "localities": [
+        {
+          "localityId": "verbier",
+          "name": "Verbier"
+        },
+        {
+          "localityId": "nendaz",
+          "name": "Nendaz"
+        }
+      ]
+    },
+    {
+      "regionId": "crans-montana",
+      "name": "Crans-Montana",
+      "stateOrProvince": "Valais",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "localities": [
+        {
+          "localityId": "crans-montana",
+          "name": "Crans-Montana"
+        }
+      ]
+    },
+    {
+      "regionId": "portes-du-soleil-ch",
+      "name": "Portes du Soleil (Switzerland)",
+      "stateOrProvince": "Valais",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "localities": [
+        {
+          "localityId": "champery",
+          "name": "Champéry"
+        }
+      ]
+    },
+    {
+      "regionId": "vaud-alps",
+      "name": "Vaud Alps · Gstaad",
+      "stateOrProvince": "Vaud",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "localities": [
+        {
+          "localityId": "villars-sur-ollon",
+          "name": "Villars-sur-Ollon"
+        },
+        {
+          "localityId": "gstaad",
+          "name": "Gstaad"
+        }
+      ]
+    },
+    {
+      "regionId": "jungfrau",
+      "name": "Jungfrau Region",
+      "stateOrProvince": "Bern",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "localities": [
+        {
+          "localityId": "wengen",
+          "name": "Wengen"
+        },
+        {
+          "localityId": "grindelwald",
+          "name": "Grindelwald"
+        },
+        {
+          "localityId": "murren",
+          "name": "Mürren"
+        }
+      ]
+    },
+    {
+      "regionId": "adelboden-lenk",
+      "name": "Adelboden-Lenk",
+      "stateOrProvince": "Bern",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "localities": [
+        {
+          "localityId": "adelboden",
+          "name": "Adelboden"
+        }
+      ]
+    },
+    {
+      "regionId": "engelberg",
+      "name": "Engelberg",
+      "stateOrProvince": "Obwalden",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "localities": [
+        {
+          "localityId": "engelberg",
+          "name": "Engelberg"
+        }
+      ]
+    },
+    {
+      "regionId": "andermatt",
+      "name": "Andermatt-Sedrun",
+      "stateOrProvince": "Uri",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "localities": [
+        {
+          "localityId": "andermatt",
+          "name": "Andermatt"
+        }
+      ]
+    },
+    {
+      "regionId": "laax",
+      "name": "Flims Laax Falera",
+      "stateOrProvince": "Graubünden",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "localities": [
+        {
+          "localityId": "laax",
+          "name": "Laax"
+        }
+      ]
+    },
+    {
+      "regionId": "arosa-lenzerheide",
+      "name": "Arosa Lenzerheide",
+      "stateOrProvince": "Graubünden",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "localities": [
+        {
+          "localityId": "lenzerheide",
+          "name": "Lenzerheide"
+        }
+      ]
+    },
+    {
+      "regionId": "davos-klosters",
+      "name": "Davos Klosters",
+      "stateOrProvince": "Graubünden",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "localities": [
+        {
+          "localityId": "davos",
+          "name": "Davos"
+        }
+      ]
+    },
+    {
+      "regionId": "st-moritz",
+      "name": "St. Moritz · Engadin",
+      "stateOrProvince": "Graubünden",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "localities": [
+        {
+          "localityId": "st-moritz",
+          "name": "St. Moritz"
+        },
+        {
+          "localityId": "silvaplana",
+          "name": "Silvaplana"
+        },
+        {
+          "localityId": "pontresina",
+          "name": "Pontresina"
+        }
+      ]
+    },
+    {
+      "regionId": "val-gardena",
+      "name": "Val Gardena · Alta Badia",
+      "stateOrProvince": "South Tyrol",
+      "country": "Italy",
+      "countryCode": "IT",
+      "localities": [
+        {
+          "localityId": "selva-di-val-gardena",
+          "name": "Selva di Val Gardena"
+        },
+        {
+          "localityId": "corvara-in-badia",
+          "name": "Corvara in Badia"
+        }
+      ]
+    },
+    {
+      "regionId": "kronplatz",
+      "name": "Kronplatz · Alta Pusteria",
+      "stateOrProvince": "South Tyrol",
+      "country": "Italy",
+      "countryCode": "IT",
+      "localities": [
+        {
+          "localityId": "brunico",
+          "name": "Brunico"
+        },
+        {
+          "localityId": "san-candido",
+          "name": "San Candido"
+        }
+      ]
+    },
+    {
+      "regionId": "cortina",
+      "name": "Cortina d'Ampezzo",
+      "stateOrProvince": "Veneto",
+      "country": "Italy",
+      "countryCode": "IT",
+      "localities": [
+        {
+          "localityId": "cortina-d-ampezzo",
+          "name": "Cortina d'Ampezzo"
+        },
+        {
+          "localityId": "arabba",
+          "name": "Arabba"
+        }
+      ]
+    },
+    {
+      "regionId": "val-di-fassa",
+      "name": "Val di Fassa",
+      "stateOrProvince": "Trentino",
+      "country": "Italy",
+      "countryCode": "IT",
+      "localities": [
+        {
+          "localityId": "canazei",
+          "name": "Canazei"
+        },
+        {
+          "localityId": "san-martino-di-castrozza",
+          "name": "San Martino di Castrozza"
+        }
+      ]
+    },
+    {
+      "regionId": "madonna-di-campiglio",
+      "name": "Madonna di Campiglio · Val di Sole",
+      "stateOrProvince": "Trentino",
+      "country": "Italy",
+      "countryCode": "IT",
+      "localities": [
+        {
+          "localityId": "madonna-di-campiglio",
+          "name": "Madonna di Campiglio"
+        },
+        {
+          "localityId": "marilleva",
+          "name": "Marilleva"
+        },
+        {
+          "localityId": "passo-del-tonale",
+          "name": "Passo del Tonale"
+        }
+      ]
+    },
+    {
+      "regionId": "alta-valtellina",
+      "name": "Livigno · Bormio",
+      "stateOrProvince": "Lombardy",
+      "country": "Italy",
+      "countryCode": "IT",
+      "localities": [
+        {
+          "localityId": "livigno",
+          "name": "Livigno"
+        },
+        {
+          "localityId": "bormio",
+          "name": "Bormio"
+        }
+      ]
+    },
+    {
+      "regionId": "cervinia",
+      "name": "Cervinia · Valtournenche",
+      "stateOrProvince": "Aosta Valley",
+      "country": "Italy",
+      "countryCode": "IT",
+      "localities": [
+        {
+          "localityId": "breuil-cervinia",
+          "name": "Breuil-Cervinia"
+        }
+      ]
+    },
+    {
+      "regionId": "courmayeur",
+      "name": "Courmayeur · La Thuile",
+      "stateOrProvince": "Aosta Valley",
+      "country": "Italy",
+      "countryCode": "IT",
+      "localities": [
+        {
+          "localityId": "courmayeur",
+          "name": "Courmayeur"
+        },
+        {
+          "localityId": "la-thuile",
+          "name": "La Thuile"
+        }
+      ]
+    },
+    {
+      "regionId": "monterosa",
+      "name": "Monterosa Ski",
+      "stateOrProvince": "Aosta Valley",
+      "country": "Italy",
+      "countryCode": "IT",
+      "localities": [
+        {
+          "localityId": "champoluc",
+          "name": "Champoluc"
+        },
+        {
+          "localityId": "alagna-valsesia",
+          "name": "Alagna Valsesia"
+        }
+      ]
+    },
+    {
+      "regionId": "pila",
+      "name": "Pila · Aosta",
+      "stateOrProvince": "Aosta Valley",
+      "country": "Italy",
+      "countryCode": "IT",
+      "localities": [
+        {
+          "localityId": "pila",
+          "name": "Pila"
+        }
+      ]
+    },
+    {
+      "regionId": "via-lattea",
+      "name": "Via Lattea",
+      "stateOrProvince": "Piedmont",
+      "country": "Italy",
+      "countryCode": "IT",
+      "localities": [
+        {
+          "localityId": "sestriere",
+          "name": "Sestriere"
+        },
+        {
+          "localityId": "sauze-d-oulx",
+          "name": "Sauze d'Oulx"
+        }
+      ]
+    },
+    {
+      "regionId": "garmisch",
+      "name": "Garmisch-Partenkirchen",
+      "stateOrProvince": "Bavaria",
+      "country": "Germany",
+      "countryCode": "DE",
+      "localities": [
+        {
+          "localityId": "garmisch-partenkirchen",
+          "name": "Garmisch-Partenkirchen"
+        }
+      ]
+    },
+    {
+      "regionId": "oberstdorf",
+      "name": "Oberstdorf · Allgäu",
+      "stateOrProvince": "Bavaria",
+      "country": "Germany",
+      "countryCode": "DE",
+      "localities": [
+        {
+          "localityId": "oberstdorf",
+          "name": "Oberstdorf"
+        }
+      ]
+    },
+    {
+      "regionId": "berchtesgaden",
+      "name": "Berchtesgaden",
+      "stateOrProvince": "Bavaria",
+      "country": "Germany",
+      "countryCode": "DE",
+      "localities": [
+        {
+          "localityId": "schonau-am-konigssee",
+          "name": "Schönau am Königssee"
+        }
+      ]
+    },
+    {
+      "regionId": "black-forest",
+      "name": "Black Forest",
+      "stateOrProvince": "Baden-Württemberg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "localities": [
+        {
+          "localityId": "feldberg",
+          "name": "Feldberg"
+        }
+      ]
+    },
+    {
+      "regionId": "sauerland",
+      "name": "Sauerland",
+      "stateOrProvince": "North Rhine-Westphalia",
+      "country": "Germany",
+      "countryCode": "DE",
+      "localities": [
+        {
+          "localityId": "winterberg",
+          "name": "Winterberg"
         }
       ]
     },
@@ -1419,6 +2430,3226 @@
       "facilityType": "alpine",
       "accessModel": "Public lift-served ski area.",
       "publicCopy": "Seven Oaks Recreation is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-warth-schroecken",
+      "publicId": "warth-schroecken",
+      "aliases": [],
+      "name": "Warth-Schröcken",
+      "coordinates": {
+        "lat": 47.2558,
+        "lng": 10.1826
+      },
+      "forecastElevationM": 1507,
+      "baseElevationM": 1260,
+      "summitElevationM": 2050,
+      "officialUrl": "https://www.warth-schroecken.at/en",
+      "regionId": "warth-schroecken",
+      "regionName": "Warth-Schröcken",
+      "stateOrProvince": "Vorarlberg",
+      "localityId": "warth",
+      "localityName": "Warth",
+      "route": "/warth-schroecken/mountain/warth-schroecken",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Warth-Schröcken is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-ischgl-silvretta-arena",
+      "publicId": "ischgl-silvretta-arena",
+      "aliases": [],
+      "name": "Ischgl (Silvretta Arena)",
+      "coordinates": {
+        "lat": 47.012,
+        "lng": 10.2913
+      },
+      "forecastElevationM": 1375,
+      "baseElevationM": 1360,
+      "summitElevationM": 2872,
+      "officialUrl": "https://www.ischgl.com/en",
+      "regionId": "paznaun",
+      "regionName": "Paznaun · Ischgl",
+      "stateOrProvince": "Tyrol",
+      "localityId": "ischgl",
+      "localityName": "Ischgl",
+      "route": "/paznaun/mountain/ischgl-silvretta-arena",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Ischgl (Silvretta Arena) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-galtur-silvapark",
+      "publicId": "galtur-silvapark",
+      "aliases": [],
+      "name": "Galtür Silvapark",
+      "coordinates": {
+        "lat": 46.9667,
+        "lng": 10.1833
+      },
+      "forecastElevationM": 1590,
+      "baseElevationM": 1600,
+      "summitElevationM": 2300,
+      "officialUrl": "https://www.galtuer.com/en",
+      "regionId": "paznaun",
+      "regionName": "Paznaun · Ischgl",
+      "stateOrProvince": "Tyrol",
+      "localityId": "galtur",
+      "localityName": "Galtür",
+      "route": "/paznaun/mountain/galtur-silvapark",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Galtür Silvapark is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-see-im-paznaun",
+      "publicId": "see-im-paznaun",
+      "aliases": [],
+      "name": "See im Paznaun",
+      "coordinates": {
+        "lat": 47.0833,
+        "lng": 10.4667
+      },
+      "forecastElevationM": 1033,
+      "baseElevationM": 1040,
+      "summitElevationM": 2570,
+      "officialUrl": "https://www.see.at/en",
+      "regionId": "paznaun",
+      "regionName": "Paznaun · Ischgl",
+      "stateOrProvince": "Tyrol",
+      "localityId": "see",
+      "localityName": "See",
+      "route": "/paznaun/mountain/see-im-paznaun",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "See im Paznaun is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-soelden",
+      "publicId": "soelden",
+      "aliases": [],
+      "name": "Sölden",
+      "coordinates": {
+        "lat": 46.9666,
+        "lng": 11.0073
+      },
+      "forecastElevationM": 1363,
+      "baseElevationM": 1350,
+      "summitElevationM": 3340,
+      "officialUrl": "https://www.soelden.com/en",
+      "regionId": "oetztal",
+      "regionName": "Ötztal",
+      "stateOrProvince": "Tyrol",
+      "localityId": "solden",
+      "localityName": "Sölden",
+      "route": "/oetztal/mountain/soelden",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Sölden is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-obergurgl-hochgurgl",
+      "publicId": "obergurgl-hochgurgl",
+      "aliases": [],
+      "name": "Obergurgl-Hochgurgl",
+      "coordinates": {
+        "lat": 46.8712,
+        "lng": 11.0282
+      },
+      "forecastElevationM": 1917,
+      "baseElevationM": 1793,
+      "summitElevationM": 3030,
+      "officialUrl": "https://www.obergurgl.com/en",
+      "regionId": "oetztal",
+      "regionName": "Ötztal",
+      "stateOrProvince": "Tyrol",
+      "localityId": "obergurgl",
+      "localityName": "Obergurgl",
+      "route": "/oetztal/mountain/obergurgl-hochgurgl",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Obergurgl-Hochgurgl is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-serfaus-fiss-ladis",
+      "publicId": "serfaus-fiss-ladis",
+      "aliases": [],
+      "name": "Serfaus-Fiss-Ladis",
+      "coordinates": {
+        "lat": 47.0375,
+        "lng": 10.6103
+      },
+      "forecastElevationM": 1434,
+      "baseElevationM": 1200,
+      "summitElevationM": 2828,
+      "officialUrl": "https://www.serfaus-fiss-ladis.at/en",
+      "regionId": "serfaus-fiss-ladis",
+      "regionName": "Serfaus-Fiss-Ladis",
+      "stateOrProvince": "Tyrol",
+      "localityId": "serfaus",
+      "localityName": "Serfaus",
+      "route": "/serfaus-fiss-ladis/mountain/serfaus-fiss-ladis",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Serfaus-Fiss-Ladis is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-pitztal-glacier-rifflsee",
+      "publicId": "pitztal-glacier-rifflsee",
+      "aliases": [],
+      "name": "Pitztal Glacier & Rifflsee",
+      "coordinates": {
+        "lat": 46.9686,
+        "lng": 10.8709
+      },
+      "forecastElevationM": 1678,
+      "baseElevationM": 2685,
+      "summitElevationM": 3440,
+      "officialUrl": "https://www.pitztal.com/en",
+      "regionId": "pitztal",
+      "regionName": "Pitztal",
+      "stateOrProvince": "Tyrol",
+      "localityId": "mandarfen",
+      "localityName": "Mandarfen",
+      "route": "/pitztal/mountain/pitztal-glacier-rifflsee",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Pitztal Glacier & Rifflsee is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-kaunertal-glacier",
+      "publicId": "kaunertal-glacier",
+      "aliases": [],
+      "name": "Kaunertal Glacier",
+      "coordinates": {
+        "lat": 47.029,
+        "lng": 10.746
+      },
+      "forecastElevationM": 1289,
+      "baseElevationM": 2150,
+      "summitElevationM": 3113,
+      "officialUrl": "https://www.kaunertaler-gletscher.at/en",
+      "regionId": "kaunertal",
+      "regionName": "Kaunertal",
+      "stateOrProvince": "Tyrol",
+      "localityId": "feichten",
+      "localityName": "Feichten",
+      "route": "/kaunertal/mountain/kaunertal-glacier",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Kaunertal Glacier is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-nordkette-innsbruck",
+      "publicId": "nordkette-innsbruck",
+      "aliases": [],
+      "name": "Nordkette Innsbruck",
+      "coordinates": {
+        "lat": 47.2654,
+        "lng": 11.3928
+      },
+      "forecastElevationM": 580,
+      "baseElevationM": 860,
+      "summitElevationM": 2256,
+      "officialUrl": "https://www.nordkette.com/en",
+      "regionId": "innsbruck",
+      "regionName": "Innsbruck",
+      "stateOrProvince": "Tyrol",
+      "localityId": "innsbruck",
+      "localityName": "Innsbruck",
+      "route": "/innsbruck/mountain/nordkette-innsbruck",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Nordkette Innsbruck is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-axamer-lizum",
+      "publicId": "axamer-lizum",
+      "aliases": [],
+      "name": "Axamer Lizum",
+      "coordinates": {
+        "lat": 47.2308,
+        "lng": 11.2793
+      },
+      "forecastElevationM": 875,
+      "baseElevationM": 1560,
+      "summitElevationM": 2340,
+      "officialUrl": "https://www.axamer-lizum.at/en",
+      "regionId": "innsbruck",
+      "regionName": "Innsbruck",
+      "stateOrProvince": "Tyrol",
+      "localityId": "axams",
+      "localityName": "Axams",
+      "route": "/innsbruck/mountain/axamer-lizum",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Axamer Lizum is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-patscherkofel",
+      "publicId": "patscherkofel",
+      "aliases": [],
+      "name": "Patscherkofel",
+      "coordinates": {
+        "lat": 47.231,
+        "lng": 11.4079
+      },
+      "forecastElevationM": 868,
+      "baseElevationM": 1009,
+      "summitElevationM": 1965,
+      "officialUrl": "https://www.patscherkofelbahn.at/en",
+      "regionId": "innsbruck",
+      "regionName": "Innsbruck",
+      "stateOrProvince": "Tyrol",
+      "localityId": "igls",
+      "localityName": "Igls",
+      "route": "/innsbruck/mountain/patscherkofel",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Patscherkofel is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-stubai-glacier",
+      "publicId": "stubai-glacier",
+      "aliases": [],
+      "name": "Stubai Glacier",
+      "coordinates": {
+        "lat": 47.1106,
+        "lng": 11.3076
+      },
+      "forecastElevationM": 987,
+      "baseElevationM": 1695,
+      "summitElevationM": 3210,
+      "officialUrl": "https://www.stubaier-gletscher.com/en",
+      "regionId": "stubai",
+      "regionName": "Stubai Valley",
+      "stateOrProvince": "Tyrol",
+      "localityId": "neustift-im-stubaital",
+      "localityName": "Neustift im Stubaital",
+      "route": "/stubai/mountain/stubai-glacier",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Stubai Glacier is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-kuhtai",
+      "publicId": "kuhtai",
+      "aliases": [],
+      "name": "Kühtai",
+      "coordinates": {
+        "lat": 47.2136,
+        "lng": 11.0234
+      },
+      "forecastElevationM": 2022,
+      "baseElevationM": 1938,
+      "summitElevationM": 2520,
+      "officialUrl": "https://www.kuehtai.info/en",
+      "regionId": "kuehtai",
+      "regionName": "Kühtai",
+      "stateOrProvince": "Tyrol",
+      "localityId": "kuhtai",
+      "localityName": "Kühtai",
+      "route": "/kuehtai/mountain/kuhtai",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Kühtai is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-mayrhofen",
+      "publicId": "mayrhofen",
+      "aliases": [],
+      "name": "Mayrhofen (Penken-Ahorn)",
+      "coordinates": {
+        "lat": 47.1671,
+        "lng": 11.8642
+      },
+      "forecastElevationM": 638,
+      "baseElevationM": 630,
+      "summitElevationM": 2500,
+      "officialUrl": "https://www.mayrhofner-bergbahnen.com/",
+      "regionId": "zillertal",
+      "regionName": "Zillertal",
+      "stateOrProvince": "Tyrol",
+      "localityId": "mayrhofen",
+      "localityName": "Mayrhofen",
+      "route": "/zillertal/mountain/mayrhofen",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mayrhofen (Penken-Ahorn) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-hintertux-glacier",
+      "publicId": "hintertux-glacier",
+      "aliases": [],
+      "name": "Hintertux Glacier",
+      "coordinates": {
+        "lat": 47.115,
+        "lng": 11.6825
+      },
+      "forecastElevationM": 1496,
+      "baseElevationM": 1500,
+      "summitElevationM": 3250,
+      "officialUrl": "https://www.hintertuxergletscher.at/en",
+      "regionId": "zillertal",
+      "regionName": "Zillertal",
+      "stateOrProvince": "Tyrol",
+      "localityId": "hintertux",
+      "localityName": "Hintertux",
+      "route": "/zillertal/mountain/hintertux-glacier",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Hintertux Glacier is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-zillertal-arena",
+      "publicId": "zillertal-arena",
+      "aliases": [],
+      "name": "Zillertal Arena",
+      "coordinates": {
+        "lat": 47.2336,
+        "lng": 11.882
+      },
+      "forecastElevationM": 578,
+      "baseElevationM": 580,
+      "summitElevationM": 2500,
+      "officialUrl": "https://www.zillertalarena.com/en",
+      "regionId": "zillertal",
+      "regionName": "Zillertal",
+      "stateOrProvince": "Tyrol",
+      "localityId": "zell-am-ziller",
+      "localityName": "Zell am Ziller",
+      "route": "/zillertal/mountain/zillertal-arena",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Zillertal Arena is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-hochzillertal-hochfugen",
+      "publicId": "hochzillertal-hochfugen",
+      "aliases": [],
+      "name": "Hochzillertal-Hochfügen",
+      "coordinates": {
+        "lat": 47.2908,
+        "lng": 11.8744
+      },
+      "forecastElevationM": 553,
+      "baseElevationM": 600,
+      "summitElevationM": 2378,
+      "officialUrl": "https://www.hochzillertal.com/en",
+      "regionId": "zillertal",
+      "regionName": "Zillertal",
+      "stateOrProvince": "Tyrol",
+      "localityId": "kaltenbach",
+      "localityName": "Kaltenbach",
+      "route": "/zillertal/mountain/hochzillertal-hochfugen",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Hochzillertal-Hochfügen is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-kitzbuehel-kitzski",
+      "publicId": "kitzbuehel-kitzski",
+      "aliases": [],
+      "name": "Kitzbühel (KitzSki)",
+      "coordinates": {
+        "lat": 47.4464,
+        "lng": 12.3911
+      },
+      "forecastElevationM": 764,
+      "baseElevationM": 800,
+      "summitElevationM": 2000,
+      "officialUrl": "https://www.kitzski.at/en",
+      "regionId": "kitzbuehel",
+      "regionName": "Kitzbühel Alps",
+      "stateOrProvince": "Tyrol",
+      "localityId": "kitzbuhel",
+      "localityName": "Kitzbühel",
+      "route": "/kitzbuehel/mountain/kitzbuehel-kitzski",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Kitzbühel (KitzSki) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-skiwelt-wilder-kaiser-brixental",
+      "publicId": "skiwelt-wilder-kaiser-brixental",
+      "aliases": [],
+      "name": "SkiWelt Wilder Kaiser-Brixental",
+      "coordinates": {
+        "lat": 47.5137,
+        "lng": 12.3025
+      },
+      "forecastElevationM": 799,
+      "baseElevationM": 620,
+      "summitElevationM": 1869,
+      "officialUrl": "https://www.skiwelt.at/en",
+      "regionId": "kitzbuehel",
+      "regionName": "Kitzbühel Alps",
+      "stateOrProvince": "Tyrol",
+      "localityId": "ellmau",
+      "localityName": "Ellmau",
+      "route": "/kitzbuehel/mountain/skiwelt-wilder-kaiser-brixental",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "SkiWelt Wilder Kaiser-Brixental is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-st-johann-in-tirol",
+      "publicId": "st-johann-in-tirol",
+      "aliases": [],
+      "name": "St. Johann in Tirol",
+      "coordinates": {
+        "lat": 47.5224,
+        "lng": 12.4287
+      },
+      "forecastElevationM": 660,
+      "baseElevationM": 659,
+      "summitElevationM": 1604,
+      "officialUrl": "https://www.bergbahnen-stjohann.at/en",
+      "regionId": "kitzbuehel",
+      "regionName": "Kitzbühel Alps",
+      "stateOrProvince": "Tyrol",
+      "localityId": "st-johann-in-tirol",
+      "localityName": "St. Johann in Tirol",
+      "route": "/kitzbuehel/mountain/st-johann-in-tirol",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "St. Johann in Tirol is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-ski-juwel-alpbachtal-wildschonau",
+      "publicId": "ski-juwel-alpbachtal-wildschonau",
+      "aliases": [],
+      "name": "Ski Juwel Alpbachtal Wildschönau",
+      "coordinates": {
+        "lat": 47.3988,
+        "lng": 11.9435
+      },
+      "forecastElevationM": 973,
+      "baseElevationM": 830,
+      "summitElevationM": 2030,
+      "officialUrl": "https://www.skijuwel.com/en",
+      "regionId": "ski-juwel",
+      "regionName": "Alpbachtal",
+      "stateOrProvince": "Tyrol",
+      "localityId": "alpbach",
+      "localityName": "Alpbach",
+      "route": "/ski-juwel/mountain/ski-juwel-alpbachtal-wildschonau",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Ski Juwel Alpbachtal Wildschönau is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-skicircus-saalbach-hinterglemm-leogang-fieberbrunn",
+      "publicId": "skicircus-saalbach-hinterglemm-leogang-fieberbrunn",
+      "aliases": [],
+      "name": "Skicircus Saalbach Hinterglemm Leogang Fieberbrunn",
+      "coordinates": {
+        "lat": 47.3915,
+        "lng": 12.6364
+      },
+      "forecastElevationM": 1008,
+      "baseElevationM": 830,
+      "summitElevationM": 2096,
+      "officialUrl": "https://www.saalbach.com/en",
+      "regionId": "saalbach",
+      "regionName": "Saalbach Hinterglemm Leogang Fieberbrunn",
+      "stateOrProvince": "Salzburg",
+      "localityId": "saalbach",
+      "localityName": "Saalbach",
+      "route": "/saalbach/mountain/skicircus-saalbach-hinterglemm-leogang-fieberbrunn",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Skicircus Saalbach Hinterglemm Leogang Fieberbrunn is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-schmittenhohe",
+      "publicId": "schmittenhohe",
+      "aliases": [],
+      "name": "Schmittenhöhe",
+      "coordinates": {
+        "lat": 47.324,
+        "lng": 12.7963
+      },
+      "forecastElevationM": 771,
+      "baseElevationM": 760,
+      "summitElevationM": 2000,
+      "officialUrl": "https://www.schmitten.at/en",
+      "regionId": "zell-am-see-kaprun",
+      "regionName": "Zell am See-Kaprun",
+      "stateOrProvince": "Salzburg",
+      "localityId": "zell-am-see",
+      "localityName": "Zell am See",
+      "route": "/zell-am-see-kaprun/mountain/schmittenhohe",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Schmittenhöhe is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-kitzsteinhorn",
+      "publicId": "kitzsteinhorn",
+      "aliases": [],
+      "name": "Kitzsteinhorn",
+      "coordinates": {
+        "lat": 47.2714,
+        "lng": 12.7574
+      },
+      "forecastElevationM": 773,
+      "baseElevationM": 768,
+      "summitElevationM": 3029,
+      "officialUrl": "https://www.kitzsteinhorn.at/en",
+      "regionId": "zell-am-see-kaprun",
+      "regionName": "Zell am See-Kaprun",
+      "stateOrProvince": "Salzburg",
+      "localityId": "kaprun",
+      "localityName": "Kaprun",
+      "route": "/zell-am-see-kaprun/mountain/kitzsteinhorn",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Kitzsteinhorn is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-snow-space-salzburg",
+      "publicId": "snow-space-salzburg",
+      "aliases": [],
+      "name": "Snow Space Salzburg (Flachau-Wagrain-St. Johann)",
+      "coordinates": {
+        "lat": 47.3441,
+        "lng": 13.3915
+      },
+      "forecastElevationM": 908,
+      "baseElevationM": 740,
+      "summitElevationM": 1980,
+      "officialUrl": "https://www.snow-space.com/en",
+      "regionId": "ski-amade",
+      "regionName": "Ski amadé",
+      "stateOrProvince": "Salzburg",
+      "localityId": "flachau",
+      "localityName": "Flachau",
+      "route": "/ski-amade/mountain/snow-space-salzburg",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Snow Space Salzburg (Flachau-Wagrain-St. Johann) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-obertauern",
+      "publicId": "obertauern",
+      "aliases": [],
+      "name": "Obertauern",
+      "coordinates": {
+        "lat": 47.2494,
+        "lng": 13.557
+      },
+      "forecastElevationM": 1758,
+      "baseElevationM": 1630,
+      "summitElevationM": 2313,
+      "officialUrl": "https://www.obertauern.com/en",
+      "regionId": "ski-amade",
+      "regionName": "Ski amadé",
+      "stateOrProvince": "Salzburg",
+      "localityId": "obertauern",
+      "localityName": "Obertauern",
+      "route": "/ski-amade/mountain/obertauern",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Obertauern is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-bad-gastein",
+      "publicId": "bad-gastein",
+      "aliases": [],
+      "name": "Bad Gastein (Ski amadé Gastein)",
+      "coordinates": {
+        "lat": 47.1155,
+        "lng": 13.1347
+      },
+      "forecastElevationM": 1014,
+      "baseElevationM": 1079,
+      "summitElevationM": 2246,
+      "officialUrl": "https://www.skigastein.com/en",
+      "regionId": "ski-amade",
+      "regionName": "Ski amadé",
+      "stateOrProvince": "Salzburg",
+      "localityId": "bad-gastein",
+      "localityName": "Bad Gastein",
+      "route": "/ski-amade/mountain/bad-gastein",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Bad Gastein (Ski amadé Gastein) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-planai-hochwurzen",
+      "publicId": "planai-hochwurzen",
+      "aliases": [],
+      "name": "Planai-Hochwurzen (Schladming)",
+      "coordinates": {
+        "lat": 47.394,
+        "lng": 13.6868
+      },
+      "forecastElevationM": 736,
+      "baseElevationM": 750,
+      "summitElevationM": 1894,
+      "officialUrl": "https://www.planai.at/en",
+      "regionId": "schladming",
+      "regionName": "Schladming-Dachstein",
+      "stateOrProvince": "Styria",
+      "localityId": "schladming",
+      "localityName": "Schladming",
+      "route": "/schladming/mountain/planai-hochwurzen",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Planai-Hochwurzen (Schladming) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-silvretta-montafon",
+      "publicId": "silvretta-montafon",
+      "aliases": [],
+      "name": "Silvretta Montafon",
+      "coordinates": {
+        "lat": 47.0802,
+        "lng": 9.9197
+      },
+      "forecastElevationM": 692,
+      "baseElevationM": 700,
+      "summitElevationM": 2430,
+      "officialUrl": "https://www.silvretta-montafon.at/en",
+      "regionId": "montafon",
+      "regionName": "Montafon",
+      "stateOrProvince": "Vorarlberg",
+      "localityId": "schruns",
+      "localityName": "Schruns",
+      "route": "/montafon/mountain/silvretta-montafon",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Silvretta Montafon is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-nassfeld",
+      "publicId": "nassfeld",
+      "aliases": [],
+      "name": "Nassfeld",
+      "coordinates": {
+        "lat": 46.6268,
+        "lng": 13.3702
+      },
+      "forecastElevationM": 600,
+      "baseElevationM": 600,
+      "summitElevationM": 2002,
+      "officialUrl": "https://www.nassfeld.at/en",
+      "regionId": "carinthia",
+      "regionName": "Carinthia",
+      "stateOrProvince": "Carinthia",
+      "localityId": "hermagor",
+      "localityName": "Hermagor",
+      "route": "/carinthia/mountain/nassfeld",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Nassfeld is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-at-bad-kleinkirchheim",
+      "publicId": "bad-kleinkirchheim",
+      "aliases": [],
+      "name": "Bad Kleinkirchheim",
+      "coordinates": {
+        "lat": 46.8144,
+        "lng": 13.7984
+      },
+      "forecastElevationM": 1083,
+      "baseElevationM": 1087,
+      "summitElevationM": 2055,
+      "officialUrl": "https://www.badkleinkirchheim.at/en",
+      "regionId": "carinthia",
+      "regionName": "Carinthia",
+      "stateOrProvince": "Carinthia",
+      "localityId": "bad-kleinkirchheim",
+      "localityName": "Bad Kleinkirchheim",
+      "route": "/carinthia/mountain/bad-kleinkirchheim",
+      "country": "Austria",
+      "countryCode": "AT",
+      "timezone": "Europe/Vienna",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Bad Kleinkirchheim is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-courchevel",
+      "publicId": "courchevel",
+      "aliases": [],
+      "name": "Courchevel",
+      "coordinates": {
+        "lat": 45.4141,
+        "lng": 6.635
+      },
+      "forecastElevationM": 1771,
+      "baseElevationM": 1100,
+      "summitElevationM": 2738,
+      "officialUrl": "https://www.courchevel.com/en",
+      "regionId": "les-3-vallees",
+      "regionName": "Les 3 Vallées",
+      "stateOrProvince": "Savoie",
+      "localityId": "courchevel",
+      "localityName": "Courchevel",
+      "route": "/les-3-vallees/mountain/courchevel",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Courchevel is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-meribel",
+      "publicId": "meribel",
+      "aliases": [],
+      "name": "Méribel",
+      "coordinates": {
+        "lat": 45.4165,
+        "lng": 6.5651
+      },
+      "forecastElevationM": 1418,
+      "baseElevationM": 1450,
+      "summitElevationM": 2952,
+      "officialUrl": "https://www.meribel.net/en",
+      "regionId": "les-3-vallees",
+      "regionName": "Les 3 Vallées",
+      "stateOrProvince": "Savoie",
+      "localityId": "meribel",
+      "localityName": "Méribel",
+      "route": "/les-3-vallees/mountain/meribel",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Méribel is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-val-thorens",
+      "publicId": "val-thorens",
+      "aliases": [],
+      "name": "Val Thorens",
+      "coordinates": {
+        "lat": 45.2979,
+        "lng": 6.5823
+      },
+      "forecastElevationM": 2315,
+      "baseElevationM": 1825,
+      "summitElevationM": 3230,
+      "officialUrl": "https://www.valthorens.com/",
+      "regionId": "les-3-vallees",
+      "regionName": "Les 3 Vallées",
+      "stateOrProvince": "Savoie",
+      "localityId": "val-thorens",
+      "localityName": "Val Thorens",
+      "route": "/les-3-vallees/mountain/val-thorens",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Val Thorens is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-les-menuires",
+      "publicId": "les-menuires",
+      "aliases": [],
+      "name": "Les Menuires",
+      "coordinates": {
+        "lat": 45.3243,
+        "lng": 6.5389
+      },
+      "forecastElevationM": 1820,
+      "baseElevationM": 1450,
+      "summitElevationM": 2850,
+      "officialUrl": "https://www.lesmenuires.com/en",
+      "regionId": "les-3-vallees",
+      "regionName": "Les 3 Vallées",
+      "stateOrProvince": "Savoie",
+      "localityId": "les-menuires",
+      "localityName": "Les Menuires",
+      "route": "/les-3-vallees/mountain/les-menuires",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Les Menuires is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-val-d-isere",
+      "publicId": "val-d-isere",
+      "aliases": [],
+      "name": "Val d'Isère",
+      "coordinates": {
+        "lat": 45.4496,
+        "lng": 6.9787
+      },
+      "forecastElevationM": 1830,
+      "baseElevationM": 1785,
+      "summitElevationM": 3197,
+      "officialUrl": "https://www.valdisere.com/en",
+      "regionId": "espace-killy",
+      "regionName": "Val d'Isère · Tignes",
+      "stateOrProvince": "Savoie",
+      "localityId": "val-d-isere",
+      "localityName": "Val-d'Isère",
+      "route": "/espace-killy/mountain/val-d-isere",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Val d'Isère is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-tignes",
+      "publicId": "tignes",
+      "aliases": [],
+      "name": "Tignes",
+      "coordinates": {
+        "lat": 45.4697,
+        "lng": 6.9076
+      },
+      "forecastElevationM": 2082,
+      "baseElevationM": 1550,
+      "summitElevationM": 3456,
+      "officialUrl": "https://en.tignes.net",
+      "regionId": "espace-killy",
+      "regionName": "Val d'Isère · Tignes",
+      "stateOrProvince": "Savoie",
+      "localityId": "tignes",
+      "localityName": "Tignes",
+      "route": "/espace-killy/mountain/tignes",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Tignes is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-les-arcs",
+      "publicId": "les-arcs",
+      "aliases": [],
+      "name": "Les Arcs",
+      "coordinates": {
+        "lat": 45.5734,
+        "lng": 6.7788
+      },
+      "forecastElevationM": 1708,
+      "baseElevationM": 1250,
+      "summitElevationM": 3250,
+      "officialUrl": "https://www.lesarcs.com/en",
+      "regionId": "paradiski",
+      "regionName": "Paradiski",
+      "stateOrProvince": "Savoie",
+      "localityId": "bourg-saint-maurice",
+      "localityName": "Bourg-Saint-Maurice",
+      "route": "/paradiski/mountain/les-arcs",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Les Arcs is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-la-plagne",
+      "publicId": "la-plagne",
+      "aliases": [],
+      "name": "La Plagne",
+      "coordinates": {
+        "lat": 45.5059,
+        "lng": 6.6744
+      },
+      "forecastElevationM": 1982,
+      "baseElevationM": 1250,
+      "summitElevationM": 3250,
+      "officialUrl": "https://www.la-plagne.com/",
+      "regionId": "paradiski",
+      "regionName": "Paradiski",
+      "stateOrProvince": "Savoie",
+      "localityId": "la-plagne",
+      "localityName": "La Plagne",
+      "route": "/paradiski/mountain/la-plagne",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "La Plagne is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-sainte-foy-tarentaise",
+      "publicId": "sainte-foy-tarentaise",
+      "aliases": [],
+      "name": "Sainte-Foy-Tarentaise",
+      "coordinates": {
+        "lat": 45.5904,
+        "lng": 6.8849
+      },
+      "forecastElevationM": 1066,
+      "baseElevationM": 1550,
+      "summitElevationM": 2622,
+      "officialUrl": "https://www.saintefoy-tarentaise.com/en",
+      "regionId": "haute-tarentaise",
+      "regionName": "Haute Tarentaise",
+      "stateOrProvince": "Savoie",
+      "localityId": "sainte-foy-tarentaise",
+      "localityName": "Sainte-Foy-Tarentaise",
+      "route": "/haute-tarentaise/mountain/sainte-foy-tarentaise",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Sainte-Foy-Tarentaise is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-la-rosiere",
+      "publicId": "la-rosiere",
+      "aliases": [],
+      "name": "La Rosière",
+      "coordinates": {
+        "lat": 45.6121,
+        "lng": 6.8458
+      },
+      "forecastElevationM": 1158,
+      "baseElevationM": 1176,
+      "summitElevationM": 2800,
+      "officialUrl": "https://www.larosiere.net/en",
+      "regionId": "haute-tarentaise",
+      "regionName": "Haute Tarentaise",
+      "stateOrProvince": "Savoie",
+      "localityId": "montvalezan",
+      "localityName": "Montvalezan",
+      "route": "/haute-tarentaise/mountain/la-rosiere",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "La Rosière is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-chamonix",
+      "publicId": "chamonix",
+      "aliases": [],
+      "name": "Chamonix (Brévent-Flégère)",
+      "coordinates": {
+        "lat": 45.9231,
+        "lng": 6.87
+      },
+      "forecastElevationM": 1039,
+      "baseElevationM": 1030,
+      "summitElevationM": 2525,
+      "officialUrl": "https://en.chamonix.com/",
+      "regionId": "chamonix",
+      "regionName": "Chamonix Mont-Blanc",
+      "stateOrProvince": "Haute-Savoie",
+      "localityId": "chamonix",
+      "localityName": "Chamonix",
+      "route": "/chamonix/mountain/chamonix",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Chamonix (Brévent-Flégère) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-grands-montets",
+      "publicId": "grands-montets",
+      "aliases": [],
+      "name": "Grands Montets (Argentière)",
+      "coordinates": {
+        "lat": 45.9838,
+        "lng": 6.9299
+      },
+      "forecastElevationM": 1260,
+      "baseElevationM": 1252,
+      "summitElevationM": 2765,
+      "officialUrl": "https://www.montblancnaturalresort.com/en",
+      "regionId": "chamonix",
+      "regionName": "Chamonix Mont-Blanc",
+      "stateOrProvince": "Haute-Savoie",
+      "localityId": "argentiere",
+      "localityName": "Argentière",
+      "route": "/chamonix/mountain/grands-montets",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Grands Montets (Argentière) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-les-houches",
+      "publicId": "les-houches",
+      "aliases": [],
+      "name": "Les Houches",
+      "coordinates": {
+        "lat": 45.8915,
+        "lng": 6.7991
+      },
+      "forecastElevationM": 1005,
+      "baseElevationM": 1000,
+      "summitElevationM": 1900,
+      "officialUrl": "https://www.leshouches.com/en",
+      "regionId": "chamonix",
+      "regionName": "Chamonix Mont-Blanc",
+      "stateOrProvince": "Haute-Savoie",
+      "localityId": "les-houches",
+      "localityName": "Les Houches",
+      "route": "/chamonix/mountain/les-houches",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Les Houches is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-megeve",
+      "publicId": "megeve",
+      "aliases": [],
+      "name": "Megève",
+      "coordinates": {
+        "lat": 45.8567,
+        "lng": 6.6179
+      },
+      "forecastElevationM": 1105,
+      "baseElevationM": 850,
+      "summitElevationM": 2353,
+      "officialUrl": "https://megeve.com/en",
+      "regionId": "evasion-mont-blanc",
+      "regionName": "Megève · Saint-Gervais",
+      "stateOrProvince": "Haute-Savoie",
+      "localityId": "megeve",
+      "localityName": "Megève",
+      "route": "/evasion-mont-blanc/mountain/megeve",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Megève is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-saint-gervais-mont-blanc",
+      "publicId": "saint-gervais-mont-blanc",
+      "aliases": [],
+      "name": "Saint-Gervais Mont-Blanc",
+      "coordinates": {
+        "lat": 45.8929,
+        "lng": 6.7113
+      },
+      "forecastElevationM": 807,
+      "baseElevationM": 1400,
+      "summitElevationM": 2353,
+      "officialUrl": "https://www.saintgervais.com/en",
+      "regionId": "evasion-mont-blanc",
+      "regionName": "Megève · Saint-Gervais",
+      "stateOrProvince": "Haute-Savoie",
+      "localityId": "saint-gervais-les-bains",
+      "localityName": "Saint-Gervais-les-Bains",
+      "route": "/evasion-mont-blanc/mountain/saint-gervais-mont-blanc",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Saint-Gervais Mont-Blanc is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-avoriaz",
+      "publicId": "avoriaz",
+      "aliases": [],
+      "name": "Avoriaz",
+      "coordinates": {
+        "lat": 46.1925,
+        "lng": 6.7703
+      },
+      "forecastElevationM": 1822,
+      "baseElevationM": 1100,
+      "summitElevationM": 2466,
+      "officialUrl": "https://www.avoriaz.com/en",
+      "regionId": "portes-du-soleil",
+      "regionName": "Portes du Soleil",
+      "stateOrProvince": "Haute-Savoie",
+      "localityId": "avoriaz",
+      "localityName": "Avoriaz",
+      "route": "/portes-du-soleil/mountain/avoriaz",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Avoriaz is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-morzine",
+      "publicId": "morzine",
+      "aliases": [],
+      "name": "Morzine",
+      "coordinates": {
+        "lat": 46.18,
+        "lng": 6.7091
+      },
+      "forecastElevationM": 973,
+      "baseElevationM": 1000,
+      "summitElevationM": 2019,
+      "officialUrl": "https://en.morzine-avoriaz.com",
+      "regionId": "portes-du-soleil",
+      "regionName": "Portes du Soleil",
+      "stateOrProvince": "Haute-Savoie",
+      "localityId": "morzine",
+      "localityName": "Morzine",
+      "route": "/portes-du-soleil/mountain/morzine",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Morzine is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-les-gets",
+      "publicId": "les-gets",
+      "aliases": [],
+      "name": "Les Gets",
+      "coordinates": {
+        "lat": 46.1551,
+        "lng": 6.6633
+      },
+      "forecastElevationM": 1160,
+      "baseElevationM": 1172,
+      "summitElevationM": 2002,
+      "officialUrl": "https://www.lesgets.com/en",
+      "regionId": "portes-du-soleil",
+      "regionName": "Portes du Soleil",
+      "stateOrProvince": "Haute-Savoie",
+      "localityId": "les-gets",
+      "localityName": "Les Gets",
+      "route": "/portes-du-soleil/mountain/les-gets",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Les Gets is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-chatel",
+      "publicId": "chatel",
+      "aliases": [],
+      "name": "Châtel",
+      "coordinates": {
+        "lat": 46.2672,
+        "lng": 6.8413
+      },
+      "forecastElevationM": 1191,
+      "baseElevationM": 1200,
+      "summitElevationM": 2200,
+      "officialUrl": "https://www.chatel.com/en",
+      "regionId": "portes-du-soleil",
+      "regionName": "Portes du Soleil",
+      "stateOrProvince": "Haute-Savoie",
+      "localityId": "chatel",
+      "localityName": "Châtel",
+      "route": "/portes-du-soleil/mountain/chatel",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Châtel is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-flaine",
+      "publicId": "flaine",
+      "aliases": [],
+      "name": "Flaine",
+      "coordinates": {
+        "lat": 46.0069,
+        "lng": 6.6904
+      },
+      "forecastElevationM": 1645,
+      "baseElevationM": 1600,
+      "summitElevationM": 2500,
+      "officialUrl": "https://www.flaine.com/en",
+      "regionId": "grand-massif",
+      "regionName": "Grand Massif",
+      "stateOrProvince": "Haute-Savoie",
+      "localityId": "flaine",
+      "localityName": "Flaine",
+      "route": "/grand-massif/mountain/flaine",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Flaine is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-samoens",
+      "publicId": "samoens",
+      "aliases": [],
+      "name": "Samoëns",
+      "coordinates": {
+        "lat": 46.0834,
+        "lng": 6.7269
+      },
+      "forecastElevationM": 712,
+      "baseElevationM": 1600,
+      "summitElevationM": 2120,
+      "officialUrl": "https://www.samoens.com/en",
+      "regionId": "grand-massif",
+      "regionName": "Grand Massif",
+      "stateOrProvince": "Haute-Savoie",
+      "localityId": "samoens",
+      "localityName": "Samoëns",
+      "route": "/grand-massif/mountain/samoens",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Samoëns is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-la-clusaz",
+      "publicId": "la-clusaz",
+      "aliases": [],
+      "name": "La Clusaz",
+      "coordinates": {
+        "lat": 45.9044,
+        "lng": 6.4239
+      },
+      "forecastElevationM": 1033,
+      "baseElevationM": 1050,
+      "summitElevationM": 2485,
+      "officialUrl": "https://www.laclusaz.com/en",
+      "regionId": "aravis",
+      "regionName": "Aravis",
+      "stateOrProvince": "Haute-Savoie",
+      "localityId": "la-clusaz",
+      "localityName": "La Clusaz",
+      "route": "/aravis/mountain/la-clusaz",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "La Clusaz is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-le-grand-bornand",
+      "publicId": "le-grand-bornand",
+      "aliases": [],
+      "name": "Le Grand-Bornand",
+      "coordinates": {
+        "lat": 45.9419,
+        "lng": 6.4271
+      },
+      "forecastElevationM": 930,
+      "baseElevationM": 1000,
+      "summitElevationM": 2100,
+      "officialUrl": "https://www.legrandbornand.com/en",
+      "regionId": "aravis",
+      "regionName": "Aravis",
+      "stateOrProvince": "Haute-Savoie",
+      "localityId": "le-grand-bornand",
+      "localityName": "Le Grand-Bornand",
+      "route": "/aravis/mountain/le-grand-bornand",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Le Grand-Bornand is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-alpe-d-huez",
+      "publicId": "alpe-d-huez",
+      "aliases": [],
+      "name": "Alpe d'Huez",
+      "coordinates": {
+        "lat": 45.0924,
+        "lng": 6.0699
+      },
+      "forecastElevationM": 1825,
+      "baseElevationM": 1120,
+      "summitElevationM": 3330,
+      "officialUrl": "https://www.alpedhuez.com/en",
+      "regionId": "oisans",
+      "regionName": "Oisans",
+      "stateOrProvince": "Isère",
+      "localityId": "l-alpe-d-huez",
+      "localityName": "L'Alpe d'Huez",
+      "route": "/oisans/mountain/alpe-d-huez",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Alpe d'Huez is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-les-2-alpes",
+      "publicId": "les-2-alpes",
+      "aliases": [],
+      "name": "Les 2 Alpes",
+      "coordinates": {
+        "lat": 45.01,
+        "lng": 6.1238
+      },
+      "forecastElevationM": 1663,
+      "baseElevationM": 1300,
+      "summitElevationM": 3600,
+      "officialUrl": "https://www.les2alpes.com/en",
+      "regionId": "oisans",
+      "regionName": "Oisans",
+      "stateOrProvince": "Isère",
+      "localityId": "les-deux-alpes",
+      "localityName": "Les Deux Alpes",
+      "route": "/oisans/mountain/les-2-alpes",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Les 2 Alpes is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-la-grave",
+      "publicId": "la-grave",
+      "aliases": [],
+      "name": "La Grave",
+      "coordinates": {
+        "lat": 45.0455,
+        "lng": 6.3067
+      },
+      "forecastElevationM": 1486,
+      "baseElevationM": 1470,
+      "summitElevationM": 3534,
+      "officialUrl": "https://www.la-grave.com/en",
+      "regionId": "oisans",
+      "regionName": "Oisans",
+      "stateOrProvince": "Isère",
+      "localityId": "la-grave",
+      "localityName": "La Grave",
+      "route": "/oisans/mountain/la-grave",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "La Grave is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-serre-chevalier",
+      "publicId": "serre-chevalier",
+      "aliases": [],
+      "name": "Serre Chevalier",
+      "coordinates": {
+        "lat": 44.8984,
+        "lng": 6.6436
+      },
+      "forecastElevationM": 1312,
+      "baseElevationM": 1200,
+      "summitElevationM": 2800,
+      "officialUrl": "https://www.serre-chevalier.com/en",
+      "regionId": "serre-chevalier",
+      "regionName": "Serre Chevalier · Montgenèvre",
+      "stateOrProvince": "Hautes-Alpes",
+      "localityId": "briancon",
+      "localityName": "Briançon",
+      "route": "/serre-chevalier/mountain/serre-chevalier",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Serre Chevalier is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-montgenevre",
+      "publicId": "montgenevre",
+      "aliases": [],
+      "name": "Montgenèvre",
+      "coordinates": {
+        "lat": 44.9312,
+        "lng": 6.7218
+      },
+      "forecastElevationM": 1859,
+      "baseElevationM": 1860,
+      "summitElevationM": 2700,
+      "officialUrl": "https://www.montgenevre.com/en",
+      "regionId": "serre-chevalier",
+      "regionName": "Serre Chevalier · Montgenèvre",
+      "stateOrProvince": "Hautes-Alpes",
+      "localityId": "montgenevre",
+      "localityName": "Montgenèvre",
+      "route": "/serre-chevalier/mountain/montgenevre",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Montgenèvre is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-vars-risoul",
+      "publicId": "vars-risoul",
+      "aliases": [],
+      "name": "Vars-Risoul (La Forêt Blanche)",
+      "coordinates": {
+        "lat": 44.5942,
+        "lng": 6.6906
+      },
+      "forecastElevationM": 1660,
+      "baseElevationM": 1650,
+      "summitElevationM": 2750,
+      "officialUrl": "https://www.vars.com/en",
+      "regionId": "southern-alps",
+      "regionName": "Southern French Alps",
+      "stateOrProvince": "Hautes-Alpes",
+      "localityId": "vars",
+      "localityName": "Vars",
+      "route": "/southern-alps/mountain/vars-risoul",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Vars-Risoul (La Forêt Blanche) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-isola-2000",
+      "publicId": "isola-2000",
+      "aliases": [],
+      "name": "Isola 2000",
+      "coordinates": {
+        "lat": 44.1869,
+        "lng": 7.1454
+      },
+      "forecastElevationM": 2132,
+      "baseElevationM": 1840,
+      "summitElevationM": 2610,
+      "officialUrl": "https://www.isola2000.com/en",
+      "regionId": "southern-alps",
+      "regionName": "Southern French Alps",
+      "stateOrProvince": "Alpes-Maritimes",
+      "localityId": "isola-2000",
+      "localityName": "Isola 2000",
+      "route": "/southern-alps/mountain/isola-2000",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Isola 2000 is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-valloire-valmeinier",
+      "publicId": "valloire-valmeinier",
+      "aliases": [],
+      "name": "Valloire-Valmeinier (Galibier-Thabor)",
+      "coordinates": {
+        "lat": 45.165,
+        "lng": 6.4296
+      },
+      "forecastElevationM": 1406,
+      "baseElevationM": 1430,
+      "summitElevationM": 2750,
+      "officialUrl": "https://www.valloire.net/en",
+      "regionId": "maurienne",
+      "regionName": "Maurienne",
+      "stateOrProvince": "Savoie",
+      "localityId": "valloire",
+      "localityName": "Valloire",
+      "route": "/maurienne/mountain/valloire-valmeinier",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Valloire-Valmeinier (Galibier-Thabor) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-val-cenis",
+      "publicId": "val-cenis",
+      "aliases": [],
+      "name": "Val Cenis",
+      "coordinates": {
+        "lat": 45.2856,
+        "lng": 6.8757
+      },
+      "forecastElevationM": 1403,
+      "baseElevationM": 1300,
+      "summitElevationM": 2730,
+      "officialUrl": "https://www.valcenis.com/",
+      "regionId": "maurienne",
+      "regionName": "Maurienne",
+      "stateOrProvince": "Savoie",
+      "localityId": "lanslebourg-mont-cenis",
+      "localityName": "Lanslebourg-Mont-Cenis",
+      "route": "/maurienne/mountain/val-cenis",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Val Cenis is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-grand-tourmalet",
+      "publicId": "grand-tourmalet",
+      "aliases": [],
+      "name": "Grand Tourmalet (Barèges-La Mongie)",
+      "coordinates": {
+        "lat": 42.9119,
+        "lng": 0.1777
+      },
+      "forecastElevationM": 1799,
+      "baseElevationM": 1400,
+      "summitElevationM": 2500,
+      "officialUrl": "https://www.grand-tourmalet.com/en",
+      "regionId": "french-pyrenees",
+      "regionName": "French Pyrenees",
+      "stateOrProvince": "Hautes-Pyrénées",
+      "localityId": "la-mongie",
+      "localityName": "La Mongie",
+      "route": "/french-pyrenees/mountain/grand-tourmalet",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Grand Tourmalet (Barèges-La Mongie) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fr-saint-lary-soulan",
+      "publicId": "saint-lary-soulan",
+      "aliases": [],
+      "name": "Saint-Lary-Soulan",
+      "coordinates": {
+        "lat": 42.8169,
+        "lng": 0.322
+      },
+      "forecastElevationM": 820,
+      "baseElevationM": 1597,
+      "summitElevationM": 2515,
+      "officialUrl": "https://www.saintlary.com/en",
+      "regionId": "french-pyrenees",
+      "regionName": "French Pyrenees",
+      "stateOrProvince": "Hautes-Pyrénées",
+      "localityId": "saint-lary-soulan",
+      "localityName": "Saint-Lary-Soulan",
+      "route": "/french-pyrenees/mountain/saint-lary-soulan",
+      "country": "France",
+      "countryCode": "FR",
+      "timezone": "Europe/Paris",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Saint-Lary-Soulan is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-zermatt",
+      "publicId": "zermatt",
+      "aliases": [],
+      "name": "Zermatt Matterhorn Ski Paradise",
+      "coordinates": {
+        "lat": 46.0212,
+        "lng": 7.7493
+      },
+      "forecastElevationM": 1608,
+      "baseElevationM": 1562,
+      "summitElevationM": 3899,
+      "officialUrl": "https://www.zermatt.ch/en",
+      "regionId": "zermatt",
+      "regionName": "Zermatt",
+      "stateOrProvince": "Valais",
+      "localityId": "zermatt",
+      "localityName": "Zermatt",
+      "route": "/zermatt/mountain/zermatt",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Zermatt Matterhorn Ski Paradise is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-saas-fee",
+      "publicId": "saas-fee",
+      "aliases": [],
+      "name": "Saas-Fee",
+      "coordinates": {
+        "lat": 46.1073,
+        "lng": 7.9247
+      },
+      "forecastElevationM": 1802,
+      "baseElevationM": 1800,
+      "summitElevationM": 3573,
+      "officialUrl": "https://www.saas-fee.ch/en",
+      "regionId": "saas-fee",
+      "regionName": "Saas-Fee",
+      "stateOrProvince": "Valais",
+      "localityId": "saas-fee",
+      "localityName": "Saas-Fee",
+      "route": "/saas-fee/mountain/saas-fee",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Saas-Fee is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-verbier",
+      "publicId": "verbier",
+      "aliases": [],
+      "name": "Verbier",
+      "coordinates": {
+        "lat": 46.0961,
+        "lng": 7.2287
+      },
+      "forecastElevationM": 1497,
+      "baseElevationM": 1500,
+      "summitElevationM": 3330,
+      "officialUrl": "https://www.verbier.ch/en",
+      "regionId": "4-vallees",
+      "regionName": "4 Vallées",
+      "stateOrProvince": "Valais",
+      "localityId": "verbier",
+      "localityName": "Verbier",
+      "route": "/4-vallees/mountain/verbier",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Verbier is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-nendaz-veysonnaz",
+      "publicId": "nendaz-veysonnaz",
+      "aliases": [],
+      "name": "Nendaz-Veysonnaz",
+      "coordinates": {
+        "lat": 46.1867,
+        "lng": 7.3051
+      },
+      "forecastElevationM": 1151,
+      "baseElevationM": 1400,
+      "summitElevationM": 3330,
+      "officialUrl": "https://www.nendaz.ch/en",
+      "regionId": "4-vallees",
+      "regionName": "4 Vallées",
+      "stateOrProvince": "Valais",
+      "localityId": "nendaz",
+      "localityName": "Nendaz",
+      "route": "/4-vallees/mountain/nendaz-veysonnaz",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Nendaz-Veysonnaz is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-crans-montana",
+      "publicId": "crans-montana",
+      "aliases": [],
+      "name": "Crans-Montana",
+      "coordinates": {
+        "lat": 46.3069,
+        "lng": 7.469
+      },
+      "forecastElevationM": 1480,
+      "baseElevationM": 1510,
+      "summitElevationM": 2927,
+      "officialUrl": "https://www.crans-montana.ch/en",
+      "regionId": "crans-montana",
+      "regionName": "Crans-Montana",
+      "stateOrProvince": "Valais",
+      "localityId": "crans-montana",
+      "localityName": "Crans-Montana",
+      "route": "/crans-montana/mountain/crans-montana",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Crans-Montana is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-champery",
+      "publicId": "champery",
+      "aliases": [],
+      "name": "Champéry",
+      "coordinates": {
+        "lat": 46.1757,
+        "lng": 6.8688
+      },
+      "forecastElevationM": 1048,
+      "baseElevationM": 1050,
+      "summitElevationM": 2277,
+      "officialUrl": "https://www.champery.ch/en",
+      "regionId": "portes-du-soleil-ch",
+      "regionName": "Portes du Soleil (Switzerland)",
+      "stateOrProvince": "Valais",
+      "localityId": "champery",
+      "localityName": "Champéry",
+      "route": "/portes-du-soleil-ch/mountain/champery",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Champéry is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-villars-gryon-les-diablerets",
+      "publicId": "villars-gryon-les-diablerets",
+      "aliases": [],
+      "name": "Villars-Gryon-Les Diablerets",
+      "coordinates": {
+        "lat": 46.2978,
+        "lng": 7.0553
+      },
+      "forecastElevationM": 1266,
+      "baseElevationM": 1224,
+      "summitElevationM": 2120,
+      "officialUrl": "https://www.alpesvaudoises.ch/villars",
+      "regionId": "vaud-alps",
+      "regionName": "Vaud Alps · Gstaad",
+      "stateOrProvince": "Vaud",
+      "localityId": "villars-sur-ollon",
+      "localityName": "Villars-sur-Ollon",
+      "route": "/vaud-alps/mountain/villars-gryon-les-diablerets",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Villars-Gryon-Les Diablerets is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-gstaad",
+      "publicId": "gstaad",
+      "aliases": [],
+      "name": "Gstaad (Gstaad Mountain Rides)",
+      "coordinates": {
+        "lat": 46.4722,
+        "lng": 7.2887
+      },
+      "forecastElevationM": 1072,
+      "baseElevationM": 1275,
+      "summitElevationM": 1940,
+      "officialUrl": "https://www.gstaad.ch/en",
+      "regionId": "vaud-alps",
+      "regionName": "Vaud Alps · Gstaad",
+      "stateOrProvince": "Bern",
+      "localityId": "gstaad",
+      "localityName": "Gstaad",
+      "route": "/vaud-alps/mountain/gstaad",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Gstaad (Gstaad Mountain Rides) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-grindelwald-wengen",
+      "publicId": "grindelwald-wengen",
+      "aliases": [],
+      "name": "Grindelwald-Wengen (Kleine Scheidegg-Männlichen)",
+      "coordinates": {
+        "lat": 46.6054,
+        "lng": 7.9217
+      },
+      "forecastElevationM": 1279,
+      "baseElevationM": 944,
+      "summitElevationM": 2400,
+      "officialUrl": "https://www.jungfrau.ch/en-gb",
+      "regionId": "jungfrau",
+      "regionName": "Jungfrau Region",
+      "stateOrProvince": "Bern",
+      "localityId": "wengen",
+      "localityName": "Wengen",
+      "route": "/jungfrau/mountain/grindelwald-wengen",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Grindelwald-Wengen (Kleine Scheidegg-Männlichen) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-grindelwald-first",
+      "publicId": "grindelwald-first",
+      "aliases": [],
+      "name": "Grindelwald-First",
+      "coordinates": {
+        "lat": 46.6243,
+        "lng": 8.0367
+      },
+      "forecastElevationM": 1055,
+      "baseElevationM": 1034,
+      "summitElevationM": 2500,
+      "officialUrl": "https://www.jungfrau.ch/en-gb",
+      "regionId": "jungfrau",
+      "regionName": "Jungfrau Region",
+      "stateOrProvince": "Bern",
+      "localityId": "grindelwald",
+      "localityName": "Grindelwald",
+      "route": "/jungfrau/mountain/grindelwald-first",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Grindelwald-First is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-murren-schilthorn",
+      "publicId": "murren-schilthorn",
+      "aliases": [],
+      "name": "Mürren-Schilthorn",
+      "coordinates": {
+        "lat": 46.5591,
+        "lng": 7.8929
+      },
+      "forecastElevationM": 1634,
+      "baseElevationM": 796,
+      "summitElevationM": 2970,
+      "officialUrl": "https://schilthorn.ch/",
+      "regionId": "jungfrau",
+      "regionName": "Jungfrau Region",
+      "stateOrProvince": "Bern",
+      "localityId": "murren",
+      "localityName": "Mürren",
+      "route": "/jungfrau/mountain/murren-schilthorn",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mürren-Schilthorn is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-adelboden-lenk",
+      "publicId": "adelboden-lenk",
+      "aliases": [],
+      "name": "Adelboden-Lenk",
+      "coordinates": {
+        "lat": 46.4927,
+        "lng": 7.5588
+      },
+      "forecastElevationM": 1358,
+      "baseElevationM": 1260,
+      "summitElevationM": 2200,
+      "officialUrl": "https://www.adelboden-lenk.ch/en",
+      "regionId": "adelboden-lenk",
+      "regionName": "Adelboden-Lenk",
+      "stateOrProvince": "Bern",
+      "localityId": "adelboden",
+      "localityName": "Adelboden",
+      "route": "/adelboden-lenk/mountain/adelboden-lenk",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Adelboden-Lenk is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-engelberg-titlis",
+      "publicId": "engelberg-titlis",
+      "aliases": [],
+      "name": "Engelberg-Titlis",
+      "coordinates": {
+        "lat": 46.8223,
+        "lng": 8.4044
+      },
+      "forecastElevationM": 1021,
+      "baseElevationM": 1003,
+      "summitElevationM": 3020,
+      "officialUrl": "https://www.engelberg.ch/en",
+      "regionId": "engelberg",
+      "regionName": "Engelberg",
+      "stateOrProvince": "Obwalden",
+      "localityId": "engelberg",
+      "localityName": "Engelberg",
+      "route": "/engelberg/mountain/engelberg-titlis",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Engelberg-Titlis is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-andermatt-sedrun-disentis",
+      "publicId": "andermatt-sedrun-disentis",
+      "aliases": [],
+      "name": "Andermatt-Sedrun-Disentis",
+      "coordinates": {
+        "lat": 46.634,
+        "lng": 8.5948
+      },
+      "forecastElevationM": 1442,
+      "baseElevationM": 1227,
+      "summitElevationM": 2833,
+      "officialUrl": "https://www.andermatt-sedrun-disentis.ch/en",
+      "regionId": "andermatt",
+      "regionName": "Andermatt-Sedrun",
+      "stateOrProvince": "Uri",
+      "localityId": "andermatt",
+      "localityName": "Andermatt",
+      "route": "/andermatt/mountain/andermatt-sedrun-disentis",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Andermatt-Sedrun-Disentis is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-laax",
+      "publicId": "laax",
+      "aliases": [],
+      "name": "Laax",
+      "coordinates": {
+        "lat": 46.8202,
+        "lng": 9.2633
+      },
+      "forecastElevationM": 1094,
+      "baseElevationM": 1100,
+      "summitElevationM": 3018,
+      "officialUrl": "https://www.laax.com/en",
+      "regionId": "laax",
+      "regionName": "Flims Laax Falera",
+      "stateOrProvince": "Graubünden",
+      "localityId": "laax",
+      "localityName": "Laax",
+      "route": "/laax/mountain/laax",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Laax is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-arosa-lenzerheide",
+      "publicId": "arosa-lenzerheide",
+      "aliases": [],
+      "name": "Arosa Lenzerheide",
+      "coordinates": {
+        "lat": 46.728,
+        "lng": 9.5584
+      },
+      "forecastElevationM": 1484,
+      "baseElevationM": 1229,
+      "summitElevationM": 2865,
+      "officialUrl": "https://arosalenzerheide.swiss/en",
+      "regionId": "arosa-lenzerheide",
+      "regionName": "Arosa Lenzerheide",
+      "stateOrProvince": "Graubünden",
+      "localityId": "lenzerheide",
+      "localityName": "Lenzerheide",
+      "route": "/arosa-lenzerheide/mountain/arosa-lenzerheide",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Arosa Lenzerheide is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-parsenn",
+      "publicId": "parsenn",
+      "aliases": [],
+      "name": "Parsenn (Davos Klosters)",
+      "coordinates": {
+        "lat": 46.7962,
+        "lng": 9.8237
+      },
+      "forecastElevationM": 1546,
+      "baseElevationM": 810,
+      "summitElevationM": 2844,
+      "officialUrl": "https://www.davos.ch/en",
+      "regionId": "davos-klosters",
+      "regionName": "Davos Klosters",
+      "stateOrProvince": "Graubünden",
+      "localityId": "davos",
+      "localityName": "Davos",
+      "route": "/davos-klosters/mountain/parsenn",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Parsenn (Davos Klosters) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-jakobshorn",
+      "publicId": "jakobshorn",
+      "aliases": [],
+      "name": "Jakobshorn",
+      "coordinates": {
+        "lat": 46.7962,
+        "lng": 9.8237
+      },
+      "forecastElevationM": 1546,
+      "baseElevationM": 1535,
+      "summitElevationM": 2568,
+      "officialUrl": "https://www.davos.ch/en",
+      "regionId": "davos-klosters",
+      "regionName": "Davos Klosters",
+      "stateOrProvince": "Graubünden",
+      "localityId": "davos",
+      "localityName": "Davos",
+      "route": "/davos-klosters/mountain/jakobshorn",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Jakobshorn is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-corviglia",
+      "publicId": "corviglia",
+      "aliases": [],
+      "name": "Corviglia (St. Moritz)",
+      "coordinates": {
+        "lat": 46.4979,
+        "lng": 9.8392
+      },
+      "forecastElevationM": 1844,
+      "baseElevationM": 1772,
+      "summitElevationM": 3057,
+      "officialUrl": "https://www.engadin.ch/en",
+      "regionId": "st-moritz",
+      "regionName": "St. Moritz · Engadin",
+      "stateOrProvince": "Graubünden",
+      "localityId": "st-moritz",
+      "localityName": "St. Moritz",
+      "route": "/st-moritz/mountain/corviglia",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Corviglia (St. Moritz) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-corvatsch",
+      "publicId": "corvatsch",
+      "aliases": [],
+      "name": "Corvatsch",
+      "coordinates": {
+        "lat": 46.4578,
+        "lng": 9.8118
+      },
+      "forecastElevationM": 1824,
+      "baseElevationM": 1797,
+      "summitElevationM": 3303,
+      "officialUrl": "https://www.corvatsch.ch/en",
+      "regionId": "st-moritz",
+      "regionName": "St. Moritz · Engadin",
+      "stateOrProvince": "Graubünden",
+      "localityId": "silvaplana",
+      "localityName": "Silvaplana",
+      "route": "/st-moritz/mountain/corvatsch",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Corvatsch is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ch-diavolezza-lagalb",
+      "publicId": "diavolezza-lagalb",
+      "aliases": [],
+      "name": "Diavolezza-Lagalb",
+      "coordinates": {
+        "lat": 46.49,
+        "lng": 9.9043
+      },
+      "forecastElevationM": 1819,
+      "baseElevationM": 2093,
+      "summitElevationM": 3006,
+      "officialUrl": "https://www.diavolezza.ch/en",
+      "regionId": "st-moritz",
+      "regionName": "St. Moritz · Engadin",
+      "stateOrProvince": "Graubünden",
+      "localityId": "pontresina",
+      "localityName": "Pontresina",
+      "route": "/st-moritz/mountain/diavolezza-lagalb",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Diavolezza-Lagalb is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-val-gardena",
+      "publicId": "val-gardena",
+      "aliases": [],
+      "name": "Val Gardena",
+      "coordinates": {
+        "lat": 46.5552,
+        "lng": 11.7601
+      },
+      "forecastElevationM": 1570,
+      "baseElevationM": 1236,
+      "summitElevationM": 2518,
+      "officialUrl": "https://www.valgardena.it/en",
+      "regionId": "val-gardena",
+      "regionName": "Val Gardena · Alta Badia",
+      "stateOrProvince": "South Tyrol",
+      "localityId": "selva-di-val-gardena",
+      "localityName": "Selva di Val Gardena",
+      "route": "/val-gardena/mountain/val-gardena",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Val Gardena is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-alta-badia",
+      "publicId": "alta-badia",
+      "aliases": [],
+      "name": "Alta Badia",
+      "coordinates": {
+        "lat": 46.5496,
+        "lng": 11.874
+      },
+      "forecastElevationM": 1534,
+      "baseElevationM": 1324,
+      "summitElevationM": 2778,
+      "officialUrl": "https://www.altabadia.org/en",
+      "regionId": "val-gardena",
+      "regionName": "Val Gardena · Alta Badia",
+      "stateOrProvince": "South Tyrol",
+      "localityId": "corvara-in-badia",
+      "localityName": "Corvara in Badia",
+      "route": "/val-gardena/mountain/alta-badia",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Alta Badia is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-kronplatz",
+      "publicId": "kronplatz",
+      "aliases": [],
+      "name": "Kronplatz (Plan de Corones)",
+      "coordinates": {
+        "lat": 46.7963,
+        "lng": 11.9355
+      },
+      "forecastElevationM": 834,
+      "baseElevationM": 973,
+      "summitElevationM": 2275,
+      "officialUrl": "https://www.kronplatz.com/en",
+      "regionId": "kronplatz",
+      "regionName": "Kronplatz · Alta Pusteria",
+      "stateOrProvince": "South Tyrol",
+      "localityId": "brunico",
+      "localityName": "Brunico",
+      "route": "/kronplatz/mountain/kronplatz",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Kronplatz (Plan de Corones) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-3-zinnen-dolomites",
+      "publicId": "3-zinnen-dolomites",
+      "aliases": [],
+      "name": "3 Zinnen Dolomites",
+      "coordinates": {
+        "lat": 46.7324,
+        "lng": 12.2785
+      },
+      "forecastElevationM": 1176,
+      "baseElevationM": 1130,
+      "summitElevationM": 2225,
+      "officialUrl": "https://www.dreizinnen.com/en",
+      "regionId": "kronplatz",
+      "regionName": "Kronplatz · Alta Pusteria",
+      "stateOrProvince": "South Tyrol",
+      "localityId": "san-candido",
+      "localityName": "San Candido",
+      "route": "/kronplatz/mountain/3-zinnen-dolomites",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "3 Zinnen Dolomites is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-cortina-d-ampezzo",
+      "publicId": "cortina-d-ampezzo",
+      "aliases": [],
+      "name": "Cortina d'Ampezzo",
+      "coordinates": {
+        "lat": 46.5685,
+        "lng": 12.1323
+      },
+      "forecastElevationM": 1543,
+      "baseElevationM": 1224,
+      "summitElevationM": 2930,
+      "officialUrl": "https://www.dolomiti.org/en/cortina",
+      "regionId": "cortina",
+      "regionName": "Cortina d'Ampezzo",
+      "stateOrProvince": "Veneto",
+      "localityId": "cortina-d-ampezzo",
+      "localityName": "Cortina d'Ampezzo",
+      "route": "/cortina/mountain/cortina-d-ampezzo",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Cortina d'Ampezzo is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-arabba-marmolada",
+      "publicId": "arabba-marmolada",
+      "aliases": [],
+      "name": "Arabba-Marmolada",
+      "coordinates": {
+        "lat": 46.4972,
+        "lng": 11.8741
+      },
+      "forecastElevationM": 1603,
+      "baseElevationM": 1446,
+      "summitElevationM": 3269,
+      "officialUrl": "https://www.arabba.it/en",
+      "regionId": "cortina",
+      "regionName": "Cortina d'Ampezzo",
+      "stateOrProvince": "Veneto",
+      "localityId": "arabba",
+      "localityName": "Arabba",
+      "route": "/cortina/mountain/arabba-marmolada",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Arabba-Marmolada is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-val-di-fassa",
+      "publicId": "val-di-fassa",
+      "aliases": [],
+      "name": "Val di Fassa (Canazei-Belvedere)",
+      "coordinates": {
+        "lat": 46.4769,
+        "lng": 11.7711
+      },
+      "forecastElevationM": 1462,
+      "baseElevationM": 1460,
+      "summitElevationM": 2485,
+      "officialUrl": "https://www.fassa.com/en",
+      "regionId": "val-di-fassa",
+      "regionName": "Val di Fassa",
+      "stateOrProvince": "Trentino",
+      "localityId": "canazei",
+      "localityName": "Canazei",
+      "route": "/val-di-fassa/mountain/val-di-fassa",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Val di Fassa (Canazei-Belvedere) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-san-martino-di-castrozza",
+      "publicId": "san-martino-di-castrozza",
+      "aliases": [],
+      "name": "San Martino di Castrozza",
+      "coordinates": {
+        "lat": 46.2623,
+        "lng": 11.8028
+      },
+      "forecastElevationM": 1473,
+      "baseElevationM": 1404,
+      "summitElevationM": 2357,
+      "officialUrl": "https://www.sanmartino.com/en",
+      "regionId": "val-di-fassa",
+      "regionName": "Val di Fassa",
+      "stateOrProvince": "Trentino",
+      "localityId": "san-martino-di-castrozza",
+      "localityName": "San Martino di Castrozza",
+      "route": "/val-di-fassa/mountain/san-martino-di-castrozza",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "San Martino di Castrozza is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-madonna-di-campiglio",
+      "publicId": "madonna-di-campiglio",
+      "aliases": [],
+      "name": "Madonna di Campiglio",
+      "coordinates": {
+        "lat": 46.227,
+        "lng": 10.827
+      },
+      "forecastElevationM": 1498,
+      "baseElevationM": 1550,
+      "summitElevationM": 2504,
+      "officialUrl": "https://www.campigliodolomiti.it/en",
+      "regionId": "madonna-di-campiglio",
+      "regionName": "Madonna di Campiglio · Val di Sole",
+      "stateOrProvince": "Trentino",
+      "localityId": "madonna-di-campiglio",
+      "localityName": "Madonna di Campiglio",
+      "route": "/madonna-di-campiglio/mountain/madonna-di-campiglio",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Madonna di Campiglio is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-folgarida-marilleva",
+      "publicId": "folgarida-marilleva",
+      "aliases": [],
+      "name": "Folgarida-Marilleva",
+      "coordinates": {
+        "lat": 46.3024,
+        "lng": 10.8101
+      },
+      "forecastElevationM": 1428,
+      "baseElevationM": 1300,
+      "summitElevationM": 2180,
+      "officialUrl": "https://www.valdisole.net/en",
+      "regionId": "madonna-di-campiglio",
+      "regionName": "Madonna di Campiglio · Val di Sole",
+      "stateOrProvince": "Trentino",
+      "localityId": "marilleva",
+      "localityName": "Marilleva",
+      "route": "/madonna-di-campiglio/mountain/folgarida-marilleva",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Folgarida-Marilleva is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-pontedilegno-tonale",
+      "publicId": "pontedilegno-tonale",
+      "aliases": [],
+      "name": "Pontedilegno-Tonale",
+      "coordinates": {
+        "lat": 46.2594,
+        "lng": 10.5849
+      },
+      "forecastElevationM": 1884,
+      "baseElevationM": 1121,
+      "summitElevationM": 3000,
+      "officialUrl": "https://www.pontedilegnotonale.com/en",
+      "regionId": "madonna-di-campiglio",
+      "regionName": "Madonna di Campiglio · Val di Sole",
+      "stateOrProvince": "Trentino",
+      "localityId": "passo-del-tonale",
+      "localityName": "Passo del Tonale",
+      "route": "/madonna-di-campiglio/mountain/pontedilegno-tonale",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Pontedilegno-Tonale is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-livigno",
+      "publicId": "livigno",
+      "aliases": [],
+      "name": "Livigno",
+      "coordinates": {
+        "lat": 46.5382,
+        "lng": 10.136
+      },
+      "forecastElevationM": 1821,
+      "baseElevationM": 1816,
+      "summitElevationM": 2798,
+      "officialUrl": "https://www.livigno.eu/en",
+      "regionId": "alta-valtellina",
+      "regionName": "Livigno · Bormio",
+      "stateOrProvince": "Lombardy",
+      "localityId": "livigno",
+      "localityName": "Livigno",
+      "route": "/alta-valtellina/mountain/livigno",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Livigno is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-bormio",
+      "publicId": "bormio",
+      "aliases": [],
+      "name": "Bormio",
+      "coordinates": {
+        "lat": 46.4677,
+        "lng": 10.3775
+      },
+      "forecastElevationM": 1225,
+      "baseElevationM": 1200,
+      "summitElevationM": 3017,
+      "officialUrl": "https://www.bormioski.eu/",
+      "regionId": "alta-valtellina",
+      "regionName": "Livigno · Bormio",
+      "stateOrProvince": "Lombardy",
+      "localityId": "bormio",
+      "localityName": "Bormio",
+      "route": "/alta-valtellina/mountain/bormio",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Bormio is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-breuil-cervinia",
+      "publicId": "breuil-cervinia",
+      "aliases": [],
+      "name": "Breuil-Cervinia",
+      "coordinates": {
+        "lat": 45.9356,
+        "lng": 7.6304
+      },
+      "forecastElevationM": 2005,
+      "baseElevationM": 2050,
+      "summitElevationM": 3480,
+      "officialUrl": "https://www.cervinia.it/en",
+      "regionId": "cervinia",
+      "regionName": "Cervinia · Valtournenche",
+      "stateOrProvince": "Aosta Valley",
+      "localityId": "breuil-cervinia",
+      "localityName": "Breuil-Cervinia",
+      "route": "/cervinia/mountain/breuil-cervinia",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Breuil-Cervinia is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-courmayeur",
+      "publicId": "courmayeur",
+      "aliases": [],
+      "name": "Courmayeur",
+      "coordinates": {
+        "lat": 45.7966,
+        "lng": 6.9689
+      },
+      "forecastElevationM": 1215,
+      "baseElevationM": 1370,
+      "summitElevationM": 3466,
+      "officialUrl": "https://www.courmayeur-montblanc.com/en",
+      "regionId": "courmayeur",
+      "regionName": "Courmayeur · La Thuile",
+      "stateOrProvince": "Aosta Valley",
+      "localityId": "courmayeur",
+      "localityName": "Courmayeur",
+      "route": "/courmayeur/mountain/courmayeur",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Courmayeur is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-la-thuile",
+      "publicId": "la-thuile",
+      "aliases": [],
+      "name": "La Thuile",
+      "coordinates": {
+        "lat": 45.7137,
+        "lng": 6.951
+      },
+      "forecastElevationM": 1464,
+      "baseElevationM": 1441,
+      "summitElevationM": 2641,
+      "officialUrl": "https://www.lathuile.it/en",
+      "regionId": "courmayeur",
+      "regionName": "Courmayeur · La Thuile",
+      "stateOrProvince": "Aosta Valley",
+      "localityId": "la-thuile",
+      "localityName": "La Thuile",
+      "route": "/courmayeur/mountain/la-thuile",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "La Thuile is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-champoluc",
+      "publicId": "champoluc",
+      "aliases": [],
+      "name": "Champoluc (Monterosa Ski)",
+      "coordinates": {
+        "lat": 45.8316,
+        "lng": 7.726
+      },
+      "forecastElevationM": 1561,
+      "baseElevationM": 1568,
+      "summitElevationM": 2727,
+      "officialUrl": "https://www.monterosaski.com/en",
+      "regionId": "monterosa",
+      "regionName": "Monterosa Ski",
+      "stateOrProvince": "Aosta Valley",
+      "localityId": "champoluc",
+      "localityName": "Champoluc",
+      "route": "/monterosa/mountain/champoluc",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Champoluc (Monterosa Ski) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-alagna-valsesia",
+      "publicId": "alagna-valsesia",
+      "aliases": [],
+      "name": "Alagna Valsesia (Monterosa Ski)",
+      "coordinates": {
+        "lat": 45.8512,
+        "lng": 7.9372
+      },
+      "forecastElevationM": 1173,
+      "baseElevationM": 1212,
+      "summitElevationM": 3275,
+      "officialUrl": "https://www.monterosaski.com/en",
+      "regionId": "monterosa",
+      "regionName": "Monterosa Ski",
+      "stateOrProvince": "Piedmont",
+      "localityId": "alagna-valsesia",
+      "localityName": "Alagna Valsesia",
+      "route": "/monterosa/mountain/alagna-valsesia",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Alagna Valsesia (Monterosa Ski) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-pila",
+      "publicId": "pila",
+      "aliases": [],
+      "name": "Pila",
+      "coordinates": {
+        "lat": 45.6873,
+        "lng": 7.3108
+      },
+      "forecastElevationM": 1789,
+      "baseElevationM": 1540,
+      "summitElevationM": 2740,
+      "officialUrl": "https://www.pila.it/en",
+      "regionId": "pila",
+      "regionName": "Pila · Aosta",
+      "stateOrProvince": "Aosta Valley",
+      "localityId": "pila",
+      "localityName": "Pila",
+      "route": "/pila/mountain/pila",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Pila is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-sestriere",
+      "publicId": "sestriere",
+      "aliases": [],
+      "name": "Sestriere",
+      "coordinates": {
+        "lat": 44.9585,
+        "lng": 6.8787
+      },
+      "forecastElevationM": 2039,
+      "baseElevationM": 2035,
+      "summitElevationM": 2823,
+      "officialUrl": "https://www.vialattea.it/en",
+      "regionId": "via-lattea",
+      "regionName": "Via Lattea",
+      "stateOrProvince": "Piedmont",
+      "localityId": "sestriere",
+      "localityName": "Sestriere",
+      "route": "/via-lattea/mountain/sestriere",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Sestriere is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-it-sauze-d-oulx",
+      "publicId": "sauze-d-oulx",
+      "aliases": [],
+      "name": "Sauze d'Oulx",
+      "coordinates": {
+        "lat": 45.027,
+        "lng": 6.8583
+      },
+      "forecastElevationM": 1512,
+      "baseElevationM": 1509,
+      "summitElevationM": 2507,
+      "officialUrl": "https://www.vialattea.it/en",
+      "regionId": "via-lattea",
+      "regionName": "Via Lattea",
+      "stateOrProvince": "Piedmont",
+      "localityId": "sauze-d-oulx",
+      "localityName": "Sauze d'Oulx",
+      "route": "/via-lattea/mountain/sauze-d-oulx",
+      "country": "Italy",
+      "countryCode": "IT",
+      "timezone": "Europe/Rome",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Sauze d'Oulx is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-de-garmisch-classic",
+      "publicId": "garmisch-classic",
+      "aliases": [],
+      "name": "Garmisch-Classic",
+      "coordinates": {
+        "lat": 47.4924,
+        "lng": 11.0963
+      },
+      "forecastElevationM": 705,
+      "baseElevationM": 740,
+      "summitElevationM": 2050,
+      "officialUrl": "https://zugspitze.de/en",
+      "regionId": "garmisch",
+      "regionName": "Garmisch-Partenkirchen",
+      "stateOrProvince": "Bavaria",
+      "localityId": "garmisch-partenkirchen",
+      "localityName": "Garmisch-Partenkirchen",
+      "route": "/garmisch/mountain/garmisch-classic",
+      "country": "Germany",
+      "countryCode": "DE",
+      "timezone": "Europe/Berlin",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Garmisch-Classic is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-de-zugspitze-glacier",
+      "publicId": "zugspitze-glacier",
+      "aliases": [],
+      "name": "Zugspitze Glacier",
+      "coordinates": {
+        "lat": 47.4061,
+        "lng": 10.9903
+      },
+      "forecastElevationM": 2327,
+      "baseElevationM": 2000,
+      "summitElevationM": 2650,
+      "officialUrl": "https://zugspitze.de/en",
+      "regionId": "garmisch",
+      "regionName": "Garmisch-Partenkirchen",
+      "stateOrProvince": "Bavaria",
+      "localityId": "garmisch-partenkirchen",
+      "localityName": "Garmisch-Partenkirchen",
+      "route": "/garmisch/mountain/zugspitze-glacier",
+      "country": "Germany",
+      "countryCode": "DE",
+      "timezone": "Europe/Berlin",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Zugspitze Glacier is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-de-fellhorn-kanzelwand",
+      "publicId": "fellhorn-kanzelwand",
+      "aliases": [],
+      "name": "Fellhorn-Kanzelwand",
+      "coordinates": {
+        "lat": 47.3709,
+        "lng": 10.3119
+      },
+      "forecastElevationM": 1149,
+      "baseElevationM": 920,
+      "summitElevationM": 1967,
+      "officialUrl": "https://www.ok-bergbahnen.com/en",
+      "regionId": "oberstdorf",
+      "regionName": "Oberstdorf · Allgäu",
+      "stateOrProvince": "Bavaria",
+      "localityId": "oberstdorf",
+      "localityName": "Oberstdorf",
+      "route": "/oberstdorf/mountain/fellhorn-kanzelwand",
+      "country": "Germany",
+      "countryCode": "DE",
+      "timezone": "Europe/Berlin",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Fellhorn-Kanzelwand is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-de-nebelhorn",
+      "publicId": "nebelhorn",
+      "aliases": [],
+      "name": "Nebelhorn",
+      "coordinates": {
+        "lat": 47.3709,
+        "lng": 10.3119
+      },
+      "forecastElevationM": 1149,
+      "baseElevationM": 828,
+      "summitElevationM": 2224,
+      "officialUrl": "https://www.ok-bergbahnen.com/en",
+      "regionId": "oberstdorf",
+      "regionName": "Oberstdorf · Allgäu",
+      "stateOrProvince": "Bavaria",
+      "localityId": "oberstdorf",
+      "localityName": "Oberstdorf",
+      "route": "/oberstdorf/mountain/nebelhorn",
+      "country": "Germany",
+      "countryCode": "DE",
+      "timezone": "Europe/Berlin",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Nebelhorn is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-de-jenner",
+      "publicId": "jenner",
+      "aliases": [],
+      "name": "Jenner",
+      "coordinates": {
+        "lat": 47.6055,
+        "lng": 12.9847
+      },
+      "forecastElevationM": 589,
+      "baseElevationM": 1530,
+      "summitElevationM": 1800,
+      "officialUrl": "https://www.jennerbahn.de/en",
+      "regionId": "berchtesgaden",
+      "regionName": "Berchtesgaden",
+      "stateOrProvince": "Bavaria",
+      "localityId": "schonau-am-konigssee",
+      "localityName": "Schönau am Königssee",
+      "route": "/berchtesgaden/mountain/jenner",
+      "country": "Germany",
+      "countryCode": "DE",
+      "timezone": "Europe/Berlin",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Jenner is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-de-feldberg",
+      "publicId": "feldberg",
+      "aliases": [],
+      "name": "Feldberg",
+      "coordinates": {
+        "lat": 47.8577,
+        "lng": 8.0379
+      },
+      "forecastElevationM": 1262,
+      "baseElevationM": 950,
+      "summitElevationM": 1450,
+      "officialUrl": "https://www.liftverbund-feldberg.de/en",
+      "regionId": "black-forest",
+      "regionName": "Black Forest",
+      "stateOrProvince": "Baden-Württemberg",
+      "localityId": "feldberg",
+      "localityName": "Feldberg",
+      "route": "/black-forest/mountain/feldberg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "timezone": "Europe/Berlin",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Feldberg is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-de-winterberg-skiliftkarussell",
+      "publicId": "winterberg-skiliftkarussell",
+      "aliases": [],
+      "name": "Winterberg Skiliftkarussell",
+      "coordinates": {
+        "lat": 51.1933,
+        "lng": 8.5334
+      },
+      "forecastElevationM": 672,
+      "baseElevationM": 630,
+      "summitElevationM": 820,
+      "officialUrl": "https://www.skiliftkarussell.de/en",
+      "regionId": "sauerland",
+      "regionName": "Sauerland",
+      "stateOrProvince": "North Rhine-Westphalia",
+      "localityId": "winterberg",
+      "localityName": "Winterberg",
+      "route": "/sauerland/mountain/winterberg-skiliftkarussell",
+      "country": "Germany",
+      "countryCode": "DE",
+      "timezone": "Europe/Berlin",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Winterberg Skiliftkarussell is an outdoor lift-served ski area.",
       "weatherEligible": true,
       "alertEligible": true
     },

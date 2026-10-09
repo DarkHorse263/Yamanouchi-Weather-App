@@ -38,7 +38,7 @@ export type SkiCountry = import("@workspace/ski-catalogue/countries").CountryCod
  *                            so this window is broadened vs. CA's on purpose
  *                            - kept in sync with `isUsSnowSeason` in the
  *                            api-server's routes/roads.ts)
- *   AT · Dec – Apr         (northern winter; local operation remains subject
+ *   Europe · 1 Nov – 15 May (northern winter; local operation remains subject
  *                            to the resort's official report)
  *
  * @param country - resort country code (matches `CountryCode` from `@/regions`)
@@ -47,7 +47,7 @@ export type SkiCountry = import("@workspace/ski-catalogue/countries").CountryCod
 export function isLiftSeasonOpen(country: SkiCountry, now: Date = new Date()): boolean {
   const m = now.getMonth(); // 0-indexed
   const d = now.getDate();
-  if (isEuropeCountry(country)) return m === 11 || m <= 3;
+  if (isEuropeCountry(country)) return m >= 10 || m <= 3 || (m === 4 && d <= 15);
   switch (country) {
     case "AU":
     case "NZ":

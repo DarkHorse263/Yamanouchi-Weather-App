@@ -34,10 +34,10 @@ test("every generated published record has its state-first mountain route", () =
     if (record.baseElevationM != null) realBaseCount += 1;
     assert.equal(record.route, `/${record.regionId}/mountain/${record.publicId}`);
   }
-  assert.equal(realBaseCount, 17);
+  assert.equal(realBaseCount, 132);
   assert.ok(publishedRecords
     .filter((record) => record.baseElevationM != null)
-    .every((record) => record.countryCode === "NZ"));
+    .every((record) => ["NZ", "AT", "FR", "CH", "IT", "DE"].includes(record.countryCode)));
   assert.equal(
     publishedRecords.find((record) => record.publicId === "craigieburn-valley")?.baseElevationM,
     1308,

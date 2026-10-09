@@ -28,3 +28,12 @@ import and required confirmation before republishing.
 
 **How to apply:** keep the wider country ledger/readiness documents intact;
 do not treat country support as published coverage or as permission to import.
+
+The owner subsequently authorised Wave 1 only. Wave 2 and republishing still
+require explicit confirmation. European lift-season eligibility is
+1 November through 15 May, inclusive.
+
+**Why:** these are the owner's explicit rollout boundary and seasonal dates.
+
+**How to apply:** do not import the remaining staged wave or deploy while
+completing or fixing Wave 1. Seasonal eligibility is not live lift status.

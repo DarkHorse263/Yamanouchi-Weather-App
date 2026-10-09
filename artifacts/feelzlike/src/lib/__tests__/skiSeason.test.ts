@@ -51,10 +51,11 @@ test("JP: shoulder boundaries - closed Nov 30, open Dec 1, open Apr 30, closed M
 });
 
 test("AT: northern season boundaries follow the Austria pilot policy", () => {
-  assert.equal(isLiftSeasonOpen("AT", d(2026, 11, 30)), false);
+  assert.equal(isLiftSeasonOpen("AT", d(2026, 10, 31)), false);
   assert.equal(isLiftSeasonOpen("AT", d(2026, 12, 1)), true);
   assert.equal(isLiftSeasonOpen("AT", d(2027, 4, 30)), true);
-  assert.equal(isLiftSeasonOpen("AT", d(2027, 5, 1)), false);
+  assert.equal(isLiftSeasonOpen("AT", d(2027, 5, 15)), true);
+  assert.equal(isLiftSeasonOpen("AT", d(2027, 5, 16)), false);
 });
 
 test("JP: closed mid-summer", () => {
