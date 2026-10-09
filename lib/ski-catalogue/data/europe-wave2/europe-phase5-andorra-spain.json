@@ -1,0 +1,994 @@
+{
+  "batchVersion": 1,
+  "batchId": "europe-phase5-andorra-spain",
+  "records": [
+    {
+      "recordId": "eu-ad-grandvalira-soldeu-el-tarter",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Andorra",
+      "countryCode": "AD",
+      "timezone": "Europe/Andorra",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "grandvalira-soldeu-el-tarter",
+        "name": "Grandvalira (Soldeu-El Tarter)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 42.5769,
+        "lng": 1.6683
+      },
+      "elevations": {
+        "baseM": 1710,
+        "topM": 2640,
+        "forecastM": 1847
+      },
+      "locality": {
+        "regionId": "grandvalira",
+        "regionName": "Grandvalira",
+        "stateOrProvince": "Encamp",
+        "localityId": "soldeu",
+        "localityName": "Soldeu"
+      },
+      "officialUrl": "https://www.grandvalira.com/en",
+      "liftNetwork": "Grandvalira Resorts",
+      "snowForecastMidM": 2175,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.grandvalira.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Grandvalira (Soldeu-El Tarter).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "grandvalira-soldeu-el-tarter",
+                "name": "Grandvalira (Soldeu-El Tarter)",
+                "aliases": []
+              },
+              "citation": "Official site for Grandvalira (Soldeu-El Tarter), the resort serving Soldeu."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.grandvalira.com/en",
+              "citation": "Official website for Grandvalira (Soldeu-El Tarter)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "grandvalira",
+                "regionName": "Grandvalira",
+                "stateOrProvince": "Encamp",
+                "localityId": "soldeu",
+                "localityName": "Soldeu"
+              },
+              "citation": "Grandvalira (Soldeu-El Tarter) is accessed from Soldeu (Encamp, Andorra), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.grandvalira.com/en/faqs/general-information/weather-snow-conditions-open-trails",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: www.grandvalira.com › en › faqsWeather/Snow Conditions/Open Trails Grandvalira The opening of the 2026/2027 season is scheduled for December 4, weather permitting.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Grandvalira (Soldeu-El Tarter): www.grandvalira.com › en › faqsWeather/Snow Conditions/Open Trails Grandvalira The opening of the 2026/2027 season is scheduled for December 4, weather permitting."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.5769&mlon=1.6683#map=15/42.5769/1.6683",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Soldeu' (village, node/64954538)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.5769,
+                "lng": 1.6683
+              },
+              "citation": "Map marker at 42.5769, 1.6683."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=42.5769,1.6683",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1847,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1847 m at 42.5769, 1.6683."
+            }
+          ]
+        },
+        {
+          "url": "https://www.soldeu.com/grandvalira/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1710 m, top 2640 m. Soldeu–El Tarter base 1,710 m; Grandvalira altitude 1,710–2,640 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1710,
+              "citation": "Published base elevation 1710 m and top elevation 2640 m for Grandvalira (Soldeu-El Tarter)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ad-grandvalira-pas-de-la-casa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Andorra",
+      "countryCode": "AD",
+      "timezone": "Europe/Andorra",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "grandvalira-pas-de-la-casa",
+        "name": "Grandvalira (Pas de la Casa)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 42.5447,
+        "lng": 1.7335
+      },
+      "elevations": {
+        "baseM": 2050,
+        "topM": 2640,
+        "forecastM": 2086
+      },
+      "locality": {
+        "regionId": "grandvalira",
+        "regionName": "Grandvalira",
+        "stateOrProvince": "Encamp",
+        "localityId": "pas-de-la-casa",
+        "localityName": "Pas de la Casa"
+      },
+      "officialUrl": "https://www.grandvalira.com/en",
+      "liftNetwork": "Grandvalira Resorts",
+      "snowForecastMidM": 2345,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.grandvalira.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Grandvalira (Pas de la Casa).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "grandvalira-pas-de-la-casa",
+                "name": "Grandvalira (Pas de la Casa)",
+                "aliases": []
+              },
+              "citation": "Official site for Grandvalira (Pas de la Casa), the resort serving Pas de la Casa."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.grandvalira.com/en",
+              "citation": "Official website for Grandvalira (Pas de la Casa)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "grandvalira",
+                "regionName": "Grandvalira",
+                "stateOrProvince": "Encamp",
+                "localityId": "pas-de-la-casa",
+                "localityName": "Pas de la Casa"
+              },
+              "citation": "Grandvalira (Pas de la Casa) is accessed from Pas de la Casa (Encamp, Andorra), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.grandvalira.com/en/faqs/general-information/weather-snow-conditions-open-trails",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: www.grandvalira.com › en › faqsWeather/Snow Conditions/Open Trails Grandvalira The opening of the 2026/2027 season is scheduled for December 4, weather permitting.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Grandvalira (Pas de la Casa): www.grandvalira.com › en › faqsWeather/Snow Conditions/Open Trails Grandvalira The opening of the 2026/2027 season is scheduled for December 4, weather permitting."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.5447&mlon=1.7335#map=15/42.5447/1.7335",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Pas de la Casa' (village, node/64954437)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.5447,
+                "lng": 1.7335
+              },
+              "citation": "Map marker at 42.5447, 1.7335."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=42.5447,1.7335",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 2086,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 2086 m at 42.5447, 1.7335."
+            }
+          ]
+        },
+        {
+          "url": "https://www.bestsnowhotels.com/en/destinations/pas-de-la-casa",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 2050 m, top 2640 m. Pas de la Casa village 2,050 m; lifts top out at 2,640 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 2050,
+              "citation": "Published base elevation 2050 m and top elevation 2640 m for Grandvalira (Pas de la Casa)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ad-pal-arinsal",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Andorra",
+      "countryCode": "AD",
+      "timezone": "Europe/Andorra",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "pal-arinsal",
+        "name": "Pal Arinsal",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 42.5721,
+        "lng": 1.4844
+      },
+      "elevations": {
+        "baseM": 1550,
+        "topM": 2537,
+        "forecastM": 1481
+      },
+      "locality": {
+        "regionId": "pal-arinsal",
+        "regionName": "Pal Arinsal · Ordino Arcalís",
+        "stateOrProvince": "La Massana",
+        "localityId": "arinsal",
+        "localityName": "Arinsal"
+      },
+      "officialUrl": "https://www.palarinsal.com/en",
+      "liftNetwork": "Grandvalira Resorts",
+      "snowForecastMidM": 2044,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.palarinsal.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Pal Arinsal.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "pal-arinsal",
+                "name": "Pal Arinsal",
+                "aliases": []
+              },
+              "citation": "Official site for Pal Arinsal, the resort serving Arinsal."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.palarinsal.com/en",
+              "citation": "Official website for Pal Arinsal."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "pal-arinsal",
+                "regionName": "Pal Arinsal · Ordino Arcalís",
+                "stateOrProvince": "La Massana",
+                "localityId": "arinsal",
+                "localityName": "Arinsal"
+              },
+              "citation": "Pal Arinsal is accessed from Arinsal (La Massana, Andorra), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.palarinsal.com/en/faqs/general-information/opening-closing-station/when-resort-expected-open-0",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: When is the resort expected to open? - Pal Arinsal The opening of the 2026/2027 season is scheduled for December 4, weather permitting.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Pal Arinsal: When is the resort expected to open? - Pal Arinsal The opening of the 2026/2027 season is scheduled for December 4, weather permitting."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.5721&mlon=1.4844#map=15/42.5721/1.4844",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Arinsal' (village, node/64954483)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.5721,
+                "lng": 1.4844
+              },
+              "citation": "Map marker at 42.5721, 1.4844."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=42.5721,1.4844",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1481,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1481 m at 42.5721, 1.4844."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/pal-arinsal-la-massana/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1550 m, top 2537 m. skiresort.info / skiresort.com listing: Pal Arinsal 1550–2537 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1550,
+              "citation": "Published base elevation 1550 m and top elevation 2537 m for Pal Arinsal."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ad-ordino-arcalis",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Andorra",
+      "countryCode": "AD",
+      "timezone": "Europe/Andorra",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "ordino-arcalis",
+        "name": "Ordino Arcalís",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 42.6272,
+        "lng": 1.4913
+      },
+      "elevations": {
+        "baseM": 1940,
+        "topM": 2625,
+        "forecastM": 2223
+      },
+      "locality": {
+        "regionId": "pal-arinsal",
+        "regionName": "Pal Arinsal · Ordino Arcalís",
+        "stateOrProvince": "Ordino",
+        "localityId": "ordino",
+        "localityName": "Ordino"
+      },
+      "officialUrl": "https://www.ordinoarcalis.com/en",
+      "liftNetwork": "Grandvalira Resorts",
+      "snowForecastMidM": 2282,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.ordinoarcalis.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Ordino Arcalís.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "ordino-arcalis",
+                "name": "Ordino Arcalís",
+                "aliases": []
+              },
+              "citation": "Official site for Ordino Arcalís, the resort serving Ordino."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.ordinoarcalis.com/en",
+              "citation": "Official website for Ordino Arcalís."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "pal-arinsal",
+                "regionName": "Pal Arinsal · Ordino Arcalís",
+                "stateOrProvince": "Ordino",
+                "localityId": "ordino",
+                "localityName": "Ordino"
+              },
+              "citation": "Ordino Arcalís is accessed from Ordino (Ordino, Andorra), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.ordinoarcalis.com/en/faqs/general-information/promotions-discounts",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Promotions/Discounts The opening of the 2026/2027 season is scheduled for December 4, weather permitting.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Ordino Arcalís: Promotions/Discounts The opening of the 2026/2027 season is scheduled for December 4, weather permitting."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.6272&mlon=1.4913#map=15/42.6272/1.4913",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Ordino-Arcalís' (winter_sports, way/987242424)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.6272,
+                "lng": 1.4913
+              },
+              "citation": "Map marker at 42.6272, 1.4913."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=42.6272,1.4913",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 2223,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 2223 m at 42.6272, 1.4913."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/ordino-arcalis/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1940 m, top 2625 m. skiresort.info / skiresort.com listing: Ordino Arcalís 1940–2625 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1940,
+              "citation": "Published base elevation 1940 m and top elevation 2625 m for Ordino Arcalís."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-es-baqueira-beret",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Spain",
+      "countryCode": "ES",
+      "timezone": "Europe/Madrid",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "baqueira-beret",
+        "name": "Baqueira Beret",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 42.6993,
+        "lng": 0.9316
+      },
+      "elevations": {
+        "baseM": 1500,
+        "topM": 2610,
+        "forecastM": 1481
+      },
+      "locality": {
+        "regionId": "val-d-aran",
+        "regionName": "Val d'Aran",
+        "stateOrProvince": "Catalonia",
+        "localityId": "baqueira",
+        "localityName": "Baqueira"
+      },
+      "officialUrl": "https://www.baqueira.es/",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 2055,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.baqueira.es/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Baqueira Beret.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "baqueira-beret",
+                "name": "Baqueira Beret",
+                "aliases": []
+              },
+              "citation": "Official site for Baqueira Beret, the resort serving Baqueira."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.baqueira.es/",
+              "citation": "Official website for Baqueira Beret."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "val-d-aran",
+                "regionName": "Val d'Aran",
+                "stateOrProvince": "Catalonia",
+                "localityId": "baqueira",
+                "localityName": "Baqueira"
+              },
+              "citation": "Baqueira Beret is accessed from Baqueira (Catalonia, Spain), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Baqueira Beret site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (baqueira.net › blog › baqueira-opening-datesWhen Does Baqueira Open? 2026–27 Season Dates & Lift Hours In July 2026, when it opened early sales of the season pa)."
+            }
+          ]
+        },
+        {
+          "url": "https://baqueira.net/blog/baqueira-opening-dates",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: baqueira.net › blog › baqueira-opening-datesWhen Does Baqueira Open? 2026–27 Season Dates & Lift Hours In July 2026, when it opened early sales of the season pass, Baqueira Beret announced",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.6993&mlon=0.9316#map=15/42.6993/0.9316",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Baqueira' (hamlet, node/256694894)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.6993,
+                "lng": 0.9316
+              },
+              "citation": "Map marker at 42.6993, 0.9316."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=42.6993,0.9316",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1481,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1481 m at 42.6993, 0.9316."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Baqueira-Beret",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1500 m, top 2610 m. Wikipedia ski-area infobox: Baqueira Beret 1500–2610 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1500,
+              "citation": "Published base elevation 1500 m and top elevation 2610 m for Baqueira Beret."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-es-la-molina",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Spain",
+      "countryCode": "ES",
+      "timezone": "Europe/Madrid",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "la-molina",
+        "name": "La Molina",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 42.3448,
+        "lng": 1.9563
+      },
+      "elevations": {
+        "baseM": 1616,
+        "topM": 2537,
+        "forecastM": 1423
+      },
+      "locality": {
+        "regionId": "cerdanya",
+        "regionName": "La Cerdanya",
+        "stateOrProvince": "Catalonia",
+        "localityId": "la-molina",
+        "localityName": "La Molina"
+      },
+      "officialUrl": "https://www.lamolina.cat/en",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 2076,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.lamolina.cat/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for La Molina.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "la-molina",
+                "name": "La Molina",
+                "aliases": []
+              },
+              "citation": "Official site for La Molina, the resort serving La Molina."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.lamolina.cat/en",
+              "citation": "Official website for La Molina."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "cerdanya",
+                "regionName": "La Cerdanya",
+                "stateOrProvince": "Catalonia",
+                "localityId": "la-molina",
+                "localityName": "La Molina"
+              },
+              "citation": "La Molina is accessed from La Molina (Catalonia, Spain), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official La Molina site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Current season 2026-11-28 to 2027-04-25)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/la-molina-masella-alp2500/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Current season 2026-11-28 to 2027-04-25",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.3448&mlon=1.9563#map=15/42.3448/1.9563",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (GeoNames populated-place point via Open-Meteo geocoding).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.3448,
+                "lng": 1.9563
+              },
+              "citation": "Map marker at 42.3448, 1.9563."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=42.3448,1.9563",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1423,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1423 m at 42.3448, 1.9563."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/la-molina-masella-alp2500/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1616 m, top 2537 m. skiresort.info / skiresort.com listing: La Molina 1616–2537 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1616,
+              "citation": "Published base elevation 1616 m and top elevation 2537 m for La Molina."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-es-formigal-panticosa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Spain",
+      "countryCode": "ES",
+      "timezone": "Europe/Madrid",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "formigal-panticosa",
+        "name": "Formigal-Panticosa",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 42.7741,
+        "lng": -0.3609
+      },
+      "elevations": {
+        "baseM": 1510,
+        "topM": 2250,
+        "forecastM": 1542
+      },
+      "locality": {
+        "regionId": "aragon-pyrenees",
+        "regionName": "Aragon Pyrenees",
+        "stateOrProvince": "Aragon",
+        "localityId": "sallent-de-gallego",
+        "localityName": "Sallent de Gállego"
+      },
+      "officialUrl": "https://www.formigal-panticosa.com/en",
+      "liftNetwork": "Aramón",
+      "snowForecastMidM": 1880,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.formigal-panticosa.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Formigal-Panticosa.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "formigal-panticosa",
+                "name": "Formigal-Panticosa",
+                "aliases": []
+              },
+              "citation": "Official site for Formigal-Panticosa, the resort serving Sallent de Gállego."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.formigal-panticosa.com/en",
+              "citation": "Official website for Formigal-Panticosa."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "aragon-pyrenees",
+                "regionName": "Aragon Pyrenees",
+                "stateOrProvince": "Aragon",
+                "localityId": "sallent-de-gallego",
+                "localityName": "Sallent de Gállego"
+              },
+              "citation": "Formigal-Panticosa is accessed from Sallent de Gállego (Aragon, Spain), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Formigal-Panticosa site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Planned opening 27/11/2026 (unconfirmed), closing 04/04/2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.infonieve.es/estacion-esqui/formigal-panticosa/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Planned opening 27/11/2026 (unconfirmed), closing 04/04/2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.7741&mlon=-0.3609#map=15/42.7741/-0.3609",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Formigal' (neighbourhood, node/454456009)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.7741,
+                "lng": -0.3609
+              },
+              "citation": "Map marker at 42.7741, -0.3609."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=42.7741,-0.3609",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1542,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1542 m at 42.7741, -0.3609."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Formigal_Ski_Resort",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1510 m, top 2250 m. Wikipedia ski-area infobox: Formigal-Panticosa 1510–2250 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1510,
+              "citation": "Published base elevation 1510 m and top elevation 2250 m for Formigal-Panticosa."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-es-sierra-nevada",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Spain",
+      "countryCode": "ES",
+      "timezone": "Europe/Madrid",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "sierra-nevada",
+        "name": "Sierra Nevada",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 37.0943,
+        "lng": -3.3991
+      },
+      "elevations": {
+        "baseM": 2100,
+        "topM": 3300,
+        "forecastM": 2150
+      },
+      "locality": {
+        "regionId": "sierra-nevada",
+        "regionName": "Sierra Nevada",
+        "stateOrProvince": "Andalusia",
+        "localityId": "pradollano",
+        "localityName": "Pradollano"
+      },
+      "officialUrl": "https://sierranevada.es/en",
+      "liftNetwork": "Cetursa",
+      "snowForecastMidM": 2700,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://sierranevada.es/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Sierra Nevada.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "sierra-nevada",
+                "name": "Sierra Nevada",
+                "aliases": []
+              },
+              "citation": "Official site for Sierra Nevada, the resort serving Pradollano."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://sierranevada.es/en",
+              "citation": "Official website for Sierra Nevada."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "sierra-nevada",
+                "regionName": "Sierra Nevada",
+                "stateOrProvince": "Andalusia",
+                "localityId": "pradollano",
+                "localityName": "Pradollano"
+              },
+              "citation": "Sierra Nevada is accessed from Pradollano (Andalusia, Spain), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Sierra Nevada site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (www.onthesnow.com › sierra-nevada › projected-openingsSierra Nevada Ski Resort Projected Opening Dates 2026/2027 ... The 2026/27 Sierra Nevada Ski season starts)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.onthesnow.com/sierra-nevada/projected-openings",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: www.onthesnow.com › sierra-nevada › projected-openingsSierra Nevada Ski Resort Projected Opening Dates 2026/2027 ... The 2026/27 Sierra Nevada Ski season starts from 2026/11/13.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=37.0943&mlon=-3.3991#map=15/37.0943/-3.3991",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Pradollano' (hamlet, node/2495264248)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 37.0943,
+                "lng": -3.3991
+              },
+              "citation": "Map marker at 37.0943, -3.3991."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=37.0943,-3.3991",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 2150,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 2150 m at 37.0943, -3.3991."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Sierra_Nevada_Ski_Station",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 2100 m, top 3300 m. Wikipedia ski-area infobox: Sierra Nevada 2100–3300 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 2100,
+              "citation": "Published base elevation 2100 m and top elevation 3300 m for Sierra Nevada."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

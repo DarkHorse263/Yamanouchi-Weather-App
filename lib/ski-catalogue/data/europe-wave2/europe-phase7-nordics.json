@@ -1,0 +1,1856 @@
+{
+  "batchVersion": 1,
+  "batchId": "europe-phase7-nordics",
+  "records": [
+    {
+      "recordId": "eu-no-hemsedal",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Norway",
+      "countryCode": "NO",
+      "timezone": "Europe/Oslo",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "hemsedal",
+        "name": "Hemsedal",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 60.8649,
+        "lng": 8.5593
+      },
+      "elevations": {
+        "baseM": 620,
+        "topM": 1450,
+        "forecastM": 637
+      },
+      "locality": {
+        "regionId": "hallingdal",
+        "regionName": "Hallingdal",
+        "stateOrProvince": "Viken",
+        "localityId": "hemsedal",
+        "localityName": "Hemsedal"
+      },
+      "officialUrl": "https://www.skistar.com/en/hemsedal",
+      "liftNetwork": "SkiStar",
+      "snowForecastMidM": 1035,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.skistar.com/en/hemsedal",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Hemsedal.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "hemsedal",
+                "name": "Hemsedal",
+                "aliases": []
+              },
+              "citation": "Official site for Hemsedal, the resort serving Hemsedal."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.skistar.com/en/hemsedal",
+              "citation": "Official website for Hemsedal."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "hallingdal",
+                "regionName": "Hallingdal",
+                "stateOrProvince": "Viken",
+                "localityId": "hemsedal",
+                "localityName": "Hemsedal"
+              },
+              "citation": "Hemsedal is accessed from Hemsedal (Viken, Norway), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Hemsedal site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Snow report Hemsedal - Skiresort.info Planned start of season: 5 Dec 2026 Planned end of season: 2 May 2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/hemsedal/snow-report/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Snow report Hemsedal - Skiresort.info Planned start of season: 5 Dec 2026 Planned end of season: 2 May 2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=60.8649&mlon=8.5593#map=15/60.8649/8.5593",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Trøim, Hemsedal' (hamlet, node/9620052366)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 60.8649,
+                "lng": 8.5593
+              },
+              "citation": "Map marker at 60.8649, 8.5593."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=60.8649,8.5593",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 637,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 637 m at 60.8649, 8.5593."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/hemsedal/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 620 m, top 1450 m. skiresort.info / skiresort.com listing: Hemsedal 620–1450 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 620,
+              "citation": "Published base elevation 620 m and top elevation 1450 m for Hemsedal."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-no-geilo",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Norway",
+      "countryCode": "NO",
+      "timezone": "Europe/Oslo",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "geilo",
+        "name": "Geilo",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 60.5337,
+        "lng": 8.209
+      },
+      "elevations": {
+        "baseM": 779,
+        "topM": 1178,
+        "forecastM": 777
+      },
+      "locality": {
+        "regionId": "hallingdal",
+        "regionName": "Hallingdal",
+        "stateOrProvince": "Viken",
+        "localityId": "geilo",
+        "localityName": "Geilo"
+      },
+      "officialUrl": "https://www.skigeilo.no/en",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 978,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.skigeilo.no/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Geilo.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "geilo",
+                "name": "Geilo",
+                "aliases": []
+              },
+              "citation": "Official site for Geilo, the resort serving Geilo."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.skigeilo.no/en",
+              "citation": "Official website for Geilo."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "hallingdal",
+                "regionName": "Hallingdal",
+                "stateOrProvince": "Viken",
+                "localityId": "geilo",
+                "localityName": "Geilo"
+              },
+              "citation": "Geilo is accessed from Geilo (Viken, Norway), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skigeilo.no/reiseinspirasjon/vinter-pa-geilo",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Bestill vintersesongen 2026/2027 på Geilo - SkiGeilo.no Sesongstart er som regel siste helgen i november og varer til midten av april, avhengig",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Geilo: Bestill vintersesongen 2026/2027 på Geilo - SkiGeilo.no Sesongstart er som regel siste helgen i november og varer til midten av april, avhengig"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=60.5337&mlon=8.209#map=15/60.5337/8.209",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Geilo' (village, node/305171806)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 60.5337,
+                "lng": 8.209
+              },
+              "citation": "Map marker at 60.5337, 8.209."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=60.5337,8.209",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 777,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 777 m at 60.5337, 8.209."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/geilo/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 779 m, top 1178 m. skiresort.info / skiresort.com listing: Geilo 779–1178 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 779,
+              "citation": "Published base elevation 779 m and top elevation 1178 m for Geilo."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-no-trysil",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Norway",
+      "countryCode": "NO",
+      "timezone": "Europe/Oslo",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "trysil",
+        "name": "Trysil",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 61.3148,
+        "lng": 12.2637
+      },
+      "elevations": {
+        "baseM": 395,
+        "topM": 1100,
+        "forecastM": 361
+      },
+      "locality": {
+        "regionId": "trysil",
+        "regionName": "Trysil",
+        "stateOrProvince": "Innlandet",
+        "localityId": "trysil",
+        "localityName": "Trysil"
+      },
+      "officialUrl": "https://www.skistar.com/en/trysil",
+      "liftNetwork": "SkiStar",
+      "snowForecastMidM": 748,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.skistar.com/en/trysil",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Trysil.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "trysil",
+                "name": "Trysil",
+                "aliases": []
+              },
+              "citation": "Official site for Trysil, the resort serving Trysil."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.skistar.com/en/trysil",
+              "citation": "Official website for Trysil."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "trysil",
+                "regionName": "Trysil",
+                "stateOrProvince": "Innlandet",
+                "localityId": "trysil",
+                "localityName": "Trysil"
+              },
+              "citation": "Trysil is accessed from Trysil (Innlandet, Norway), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Trysil site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski season opening 2026/27 – Sälen, Trysil & Åre The official opening is planned in connection with Ski Test Weekend from 4 December.)."
+            }
+          ]
+        },
+        {
+          "url": "http://www.skistar.com/en/inspiration/season-opening-at-our-ski-resorts/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski season opening 2026/27 – Sälen, Trysil & Åre The official opening is planned in connection with Ski Test Weekend from 4 December.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=61.3148&mlon=12.2637#map=15/61.3148/12.2637",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (GeoNames populated-place point via Open-Meteo geocoding).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 61.3148,
+                "lng": 12.2637
+              },
+              "citation": "Map marker at 61.3148, 12.2637."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=61.3148,12.2637",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 361,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 361 m at 61.3148, 12.2637."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/trysil/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 395 m, top 1100 m. skiresort.info / skiresort.com listing: Trysil 395–1100 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 395,
+              "citation": "Published base elevation 395 m and top elevation 1100 m for Trysil."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-no-hafjell",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Norway",
+      "countryCode": "NO",
+      "timezone": "Europe/Oslo",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "hafjell",
+        "name": "Hafjell",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 61.2423,
+        "lng": 10.439
+      },
+      "elevations": {
+        "baseM": 200,
+        "topM": 1030,
+        "forecastM": 190
+      },
+      "locality": {
+        "regionId": "lillehammer",
+        "regionName": "Lillehammer",
+        "stateOrProvince": "Innlandet",
+        "localityId": "yer",
+        "localityName": "Øyer"
+      },
+      "officialUrl": "https://www.hafjell.no/en",
+      "liftNetwork": "Alpinco",
+      "snowForecastMidM": 615,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.hafjell.no/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Hafjell.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "hafjell",
+                "name": "Hafjell",
+                "aliases": []
+              },
+              "citation": "Official site for Hafjell, the resort serving Øyer."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.hafjell.no/en",
+              "citation": "Official website for Hafjell."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "lillehammer",
+                "regionName": "Lillehammer",
+                "stateOrProvince": "Innlandet",
+                "localityId": "yer",
+                "localityName": "Øyer"
+              },
+              "citation": "Hafjell is accessed from Øyer (Innlandet, Norway), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Hafjell site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Skiinfo Norway 2026/27 opening list: Hafjell 28 Nov)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiinfo.no/norge/aapningsdato-for-skianlegg",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Skiinfo Norway 2026/27 opening list: Hafjell 28 Nov",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=61.2423&mlon=10.439#map=15/61.2423/10.439",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Hafjell' (village, node/2350260598)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 61.2423,
+                "lng": 10.439
+              },
+              "citation": "Map marker at 61.2423, 10.439."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=61.2423,10.439",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 190,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 190 m at 61.2423, 10.439."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Hafjell",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 200 m, top 1030 m. Wikipedia ski-area infobox: Hafjell 200–1030 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 200,
+              "citation": "Published base elevation 200 m and top elevation 1030 m for Hafjell."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-no-kvitfjell",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Norway",
+      "countryCode": "NO",
+      "timezone": "Europe/Oslo",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "kvitfjell",
+        "name": "Kvitfjell",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 61.4738,
+        "lng": 10.1299
+      },
+      "elevations": {
+        "baseM": 185,
+        "topM": 1039,
+        "forecastM": 759
+      },
+      "locality": {
+        "regionId": "lillehammer",
+        "regionName": "Lillehammer",
+        "stateOrProvince": "Innlandet",
+        "localityId": "ringebu",
+        "localityName": "Ringebu"
+      },
+      "officialUrl": "https://www.kvitfjell.no/en",
+      "liftNetwork": "Alpinco",
+      "snowForecastMidM": 612,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.kvitfjell.no/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Kvitfjell.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "kvitfjell",
+                "name": "Kvitfjell",
+                "aliases": []
+              },
+              "citation": "Official site for Kvitfjell, the resort serving Ringebu."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.kvitfjell.no/en",
+              "citation": "Official website for Kvitfjell."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "lillehammer",
+                "regionName": "Lillehammer",
+                "stateOrProvince": "Innlandet",
+                "localityId": "ringebu",
+                "localityName": "Ringebu"
+              },
+              "citation": "Kvitfjell is accessed from Ringebu (Innlandet, Norway), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Kvitfjell site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Kvitfjell Current season: 2026-11-28 - 2027-04-18)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/kvitfjell/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Kvitfjell Current season: 2026-11-28 - 2027-04-18",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=61.4738&mlon=10.1299#map=15/61.4738/10.1299",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Kvitfjell' (quarter, node/9634874540)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 61.4738,
+                "lng": 10.1299
+              },
+              "citation": "Map marker at 61.4738, 10.1299."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=61.4738,10.1299",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 759,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 759 m at 61.4738, 10.1299."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Kvitfjell",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 185 m, top 1039 m. Wikipedia ski-area infobox: Kvitfjell 185–1039 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 185,
+              "citation": "Published base elevation 185 m and top elevation 1039 m for Kvitfjell."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-no-myrkdalen",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Norway",
+      "countryCode": "NO",
+      "timezone": "Europe/Oslo",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "myrkdalen",
+        "name": "Myrkdalen",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 60.842,
+        "lng": 6.4666
+      },
+      "elevations": {
+        "baseM": 450,
+        "topM": 1060,
+        "forecastM": 381
+      },
+      "locality": {
+        "regionId": "western-norway",
+        "regionName": "Western Norway",
+        "stateOrProvince": "Vestland",
+        "localityId": "voss",
+        "localityName": "Voss"
+      },
+      "officialUrl": "https://www.myrkdalen.no/en",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 755,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.myrkdalen.no/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Myrkdalen.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "myrkdalen",
+                "name": "Myrkdalen",
+                "aliases": []
+              },
+              "citation": "Official site for Myrkdalen, the resort serving Voss."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.myrkdalen.no/en",
+              "citation": "Official website for Myrkdalen."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "western-norway",
+                "regionName": "Western Norway",
+                "stateOrProvince": "Vestland",
+                "localityId": "voss",
+                "localityName": "Voss"
+              },
+              "citation": "Myrkdalen is accessed from Voss (Vestland, Norway), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Myrkdalen site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Myrkdalen Ski Resort – Opening Hours and Trail Maps 27 November 2026 - 25 April 2027: Open every day)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.norwaysbest.com/en/myrkdalen/ski-resort/opening-hours-and-trail-map",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Myrkdalen Ski Resort – Opening Hours and Trail Maps 27 November 2026 - 25 April 2027: Open every day",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=60.842&mlon=6.4666#map=15/60.842/6.4666",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Myrkdalen' (hamlet, node/5627466714)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 60.842,
+                "lng": 6.4666
+              },
+              "citation": "Map marker at 60.842, 6.4666."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=60.842,6.4666",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 381,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 381 m at 60.842, 6.4666."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/myrkdalen/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 450 m, top 1060 m. skiresort.info / skiresort.com listing: Myrkdalen 450–1060 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 450,
+              "citation": "Published base elevation 450 m and top elevation 1060 m for Myrkdalen."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-no-voss-resort",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Norway",
+      "countryCode": "NO",
+      "timezone": "Europe/Oslo",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "voss-resort",
+        "name": "Voss Resort",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 60.6287,
+        "lng": 6.4147
+      },
+      "elevations": {
+        "baseM": 284,
+        "topM": 964,
+        "forecastM": 60
+      },
+      "locality": {
+        "regionId": "western-norway",
+        "regionName": "Western Norway",
+        "stateOrProvince": "Vestland",
+        "localityId": "voss",
+        "localityName": "Voss"
+      },
+      "officialUrl": "https://www.vossresort.no/en",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 624,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.vossresort.no/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Voss Resort.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "voss-resort",
+                "name": "Voss Resort",
+                "aliases": []
+              },
+              "citation": "Official site for Voss Resort, the resort serving Voss."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.vossresort.no/en",
+              "citation": "Official website for Voss Resort."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "western-norway",
+                "regionName": "Western Norway",
+                "stateOrProvince": "Vestland",
+                "localityId": "voss",
+                "localityName": "Voss"
+              },
+              "citation": "Voss Resort is accessed from Voss (Vestland, Norway), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.vossresort.no/en/information/opening-hours",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Opening Hours Summer season 2026 1 May - 4 June",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Voss Resort: Opening Hours Summer season 2026 1 May - 4 June"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=60.6287&mlon=6.4147#map=15/60.6287/6.4147",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Vossevangen' (town, node/32950991)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 60.6287,
+                "lng": 6.4147
+              },
+              "citation": "Map marker at 60.6287, 6.4147."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=60.6287,6.4147",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 60,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 60 m at 60.6287, 6.4147."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.info/ski-resort/voss-resort/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 284 m, top 964 m. skiresort.info / skiresort.com listing: Voss Resort 284–964 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 284,
+              "citation": "Published base elevation 284 m and top elevation 964 m for Voss Resort."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-se-are",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Sweden",
+      "countryCode": "SE",
+      "timezone": "Europe/Stockholm",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "are",
+        "name": "Åre",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 63.4011,
+        "lng": 13.0822
+      },
+      "elevations": {
+        "baseM": 380,
+        "topM": 1319,
+        "forecastM": 403
+      },
+      "locality": {
+        "regionId": "are",
+        "regionName": "Åre",
+        "stateOrProvince": "Jämtland",
+        "localityId": "are",
+        "localityName": "Åre"
+      },
+      "officialUrl": "https://www.skistar.com/en/are",
+      "liftNetwork": "SkiStar",
+      "snowForecastMidM": 850,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.skistar.com/en/are",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Åre.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "are",
+                "name": "Åre",
+                "aliases": []
+              },
+              "citation": "Official site for Åre, the resort serving Åre."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.skistar.com/en/are",
+              "citation": "Official website for Åre."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "are",
+                "regionName": "Åre",
+                "stateOrProvince": "Jämtland",
+                "localityId": "are",
+                "localityName": "Åre"
+              },
+              "citation": "Åre is accessed from Åre (Jämtland, Sweden), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skistar.com/en/inspiration/season-opening-at-our-ski-resorts/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: www.skistar.com · en · inspirationSki season opening 2026/27 – Sälen, Trysil & Åre The official opening is planned in connection with Ski Test Weekend from 11 December.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Åre: www.skistar.com · en · inspirationSki season opening 2026/27 – Sälen, Trysil & Åre The official opening is planned in connection with Ski Test Weekend from 11 December."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=63.4011&mlon=13.0822#map=15/63.4011/13.0822",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Åre' (village, node/246008181)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 63.4011,
+                "lng": 13.0822
+              },
+              "citation": "Map marker at 63.4011, 13.0822."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=63.4011,13.0822",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 403,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 403 m at 63.4011, 13.0822."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/aare/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 380 m, top 1319 m. skiresort.info / skiresort.com listing: Åre 380–1319 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 380,
+              "citation": "Published base elevation 380 m and top elevation 1319 m for Åre."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-se-vemdalen",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Sweden",
+      "countryCode": "SE",
+      "timezone": "Europe/Stockholm",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "vemdalen",
+        "name": "Vemdalen",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 62.4452,
+        "lng": 13.8628
+      },
+      "elevations": {
+        "baseM": 592,
+        "topM": 946,
+        "forecastM": 411
+      },
+      "locality": {
+        "regionId": "are",
+        "regionName": "Åre",
+        "stateOrProvince": "Jämtland",
+        "localityId": "vemdalen",
+        "localityName": "Vemdalen"
+      },
+      "officialUrl": "https://www.skistar.com/en/vemdalen",
+      "liftNetwork": "SkiStar",
+      "snowForecastMidM": 769,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.skistar.com/en/vemdalen",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Vemdalen.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "vemdalen",
+                "name": "Vemdalen",
+                "aliases": []
+              },
+              "citation": "Official site for Vemdalen, the resort serving Vemdalen."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.skistar.com/en/vemdalen",
+              "citation": "Official website for Vemdalen."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "are",
+                "regionName": "Åre",
+                "stateOrProvince": "Jämtland",
+                "localityId": "vemdalen",
+                "localityName": "Vemdalen"
+              },
+              "citation": "Vemdalen is accessed from Vemdalen (Jämtland, Sweden), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Vemdalen site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski season opening 2026/27 – Sälen, Trysil & Åre The official opening is planned in connection with Ski premiere, Ski Test & Christmas Mark)."
+            }
+          ]
+        },
+        {
+          "url": "http://www.skistar.com/en/inspiration/season-opening-at-our-ski-resorts/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski season opening 2026/27 – Sälen, Trysil & Åre The official opening is planned in connection with Ski premiere, Ski Test & Christmas Mark",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=62.4452&mlon=13.8628#map=15/62.4452/13.8628",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Vemdalen' (village, node/31170071)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 62.4452,
+                "lng": 13.8628
+              },
+              "citation": "Map marker at 62.4452, 13.8628."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=62.4452,13.8628",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 411,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 411 m at 62.4452, 13.8628."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.info/ski-resort/vemdalsskalet/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 592 m, top 946 m. skiresort.info / skiresort.com listing: Vemdalen 592–946 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 592,
+              "citation": "Published base elevation 592 m and top elevation 946 m for Vemdalen."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-se-salen",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Sweden",
+      "countryCode": "SE",
+      "timezone": "Europe/Stockholm",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "salen",
+        "name": "Sälen (Lindvallen-Högfjället-Tandådalen-Hundfjället)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 61.1545,
+        "lng": 13.1866
+      },
+      "elevations": {
+        "baseM": 579,
+        "topM": 887,
+        "forecastM": 723
+      },
+      "locality": {
+        "regionId": "salen",
+        "regionName": "Sälen",
+        "stateOrProvince": "Dalarna",
+        "localityId": "salen",
+        "localityName": "Sälen"
+      },
+      "officialUrl": "https://www.skistar.com/en/salen",
+      "liftNetwork": "SkiStar",
+      "snowForecastMidM": 733,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.skistar.com/en/salen",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Sälen (Lindvallen-Högfjället-Tandådalen-Hundfjället).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "salen",
+                "name": "Sälen (Lindvallen-Högfjället-Tandådalen-Hundfjället)",
+                "aliases": []
+              },
+              "citation": "Official site for Sälen (Lindvallen-Högfjället-Tandådalen-Hundfjället), the resort serving Sälen."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.skistar.com/en/salen",
+              "citation": "Official website for Sälen (Lindvallen-Högfjället-Tandådalen-Hundfjället)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "salen",
+                "regionName": "Sälen",
+                "stateOrProvince": "Dalarna",
+                "localityId": "salen",
+                "localityName": "Sälen"
+              },
+              "citation": "Sälen (Lindvallen-Högfjället-Tandådalen-Hundfjället) is accessed from Sälen (Dalarna, Sweden), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Sälen (Lindvallen-Högfjället-Tandådalen-Hundfjället) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Saisoneröffnung 2026/27 – Sälen, Trysil & Åre Die offizielle Eröffnung ist im Rahmen des Ski Test Weekend ab dem 4. Dezember geplant.)."
+            }
+          ]
+        },
+        {
+          "url": "http://www.skistar.com/de/inspiration/saisoneroffnung-an-unseren-skigebieten/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Saisoneröffnung 2026/27 – Sälen, Trysil & Åre Die offizielle Eröffnung ist im Rahmen des Ski Test Weekend ab dem 4. Dezember geplant.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=61.1545&mlon=13.1866#map=15/61.1545/13.1866",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Lindvallen' (winter_sports, relation/17961542)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 61.1545,
+                "lng": 13.1866
+              },
+              "citation": "Map marker at 61.1545, 13.1866."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=61.1545,13.1866",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 723,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 723 m at 61.1545, 13.1866."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/lindvallen-hoegfjaellet-saelen/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 579 m, top 887 m. Lindvallen–Högfjället (Sälen) 579 m base to 887 m mountain.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 579,
+              "citation": "Published base elevation 579 m and top elevation 887 m for Sälen (Lindvallen-Högfjället-Tandådalen-Hundfjället)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-se-riksgransen",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Sweden",
+      "countryCode": "SE",
+      "timezone": "Europe/Stockholm",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "riksgransen",
+        "name": "Riksgränsen",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 68.4149,
+        "lng": 18.1205
+      },
+      "elevations": {
+        "baseM": 520,
+        "topM": 909,
+        "forecastM": 729
+      },
+      "locality": {
+        "regionId": "riksgransen",
+        "regionName": "Riksgränsen",
+        "stateOrProvince": "Norrbotten",
+        "localityId": "riksgransen",
+        "localityName": "Riksgränsen"
+      },
+      "officialUrl": "https://riksgransen.se/en",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 714,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://riksgransen.se/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Riksgränsen.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "riksgransen",
+                "name": "Riksgränsen",
+                "aliases": []
+              },
+              "citation": "Official site for Riksgränsen, the resort serving Riksgränsen."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://riksgransen.se/en",
+              "citation": "Official website for Riksgränsen."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "riksgransen",
+                "regionName": "Riksgränsen",
+                "stateOrProvince": "Norrbotten",
+                "localityId": "riksgransen",
+                "localityName": "Riksgränsen"
+              },
+              "citation": "Riksgränsen is accessed from Riksgränsen (Norrbotten, Sweden), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://riksgransen.se/en/about-us/winter-opening-hours/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Opening hours winter season 2026 - Riksgränsen # Vintersäsongen 2027, 18 feb – 23 maj.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Riksgränsen: Opening hours winter season 2026 - Riksgränsen # Vintersäsongen 2027, 18 feb – 23 maj."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=68.4149&mlon=18.1205#map=15/68.4149/18.1205",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Riksgränsen' (winter_sports, way/1244144549)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 68.4149,
+                "lng": 18.1205
+              },
+              "citation": "Map marker at 68.4149, 18.1205."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=68.4149,18.1205",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 729,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 729 m at 68.4149, 18.1205."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Riksgr%C3%A4nsen",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 520 m, top 909 m. Wikipedia ski-area infobox: Riksgränsen 520–909 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 520,
+              "citation": "Published base elevation 520 m and top elevation 909 m for Riksgränsen."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fi-levi",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Finland",
+      "countryCode": "FI",
+      "timezone": "Europe/Helsinki",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "levi",
+        "name": "Levi",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 67.8051,
+        "lng": 24.7961
+      },
+      "elevations": {
+        "baseM": 206,
+        "topM": 531,
+        "forecastM": 200
+      },
+      "locality": {
+        "regionId": "finnish-lapland",
+        "regionName": "Finnish Lapland",
+        "stateOrProvince": "Lapland",
+        "localityId": "levi",
+        "localityName": "Levi"
+      },
+      "officialUrl": "https://www.levi.fi/en",
+      "liftNetwork": "Levi",
+      "snowForecastMidM": 368,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.levi.fi/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Levi.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "levi",
+                "name": "Levi",
+                "aliases": []
+              },
+              "citation": "Official site for Levi, the resort serving Levi."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.levi.fi/en",
+              "citation": "Official website for Levi."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "finnish-lapland",
+                "regionName": "Finnish Lapland",
+                "stateOrProvince": "Lapland",
+                "localityId": "levi",
+                "localityName": "Levi"
+              },
+              "citation": "Levi is accessed from Levi (Lapland, Finland), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.levi.fi/en/ski/slopes-and-lifts/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Slopes and lifts - Levi Levi's ski season 2026–2027 kicked off on 2 October 2026 at Front Slopes with preserved snow, and more slopes open as the winter pr",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Levi: Slopes and lifts - Levi Levi's ski season 2026–2027 kicked off on 2 October 2026 at Front Slopes with preserved snow, and more slopes open as the winter pr"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=67.8051&mlon=24.7961#map=15/67.8051/24.7961",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (GeoNames populated-place point via Open-Meteo geocoding).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 67.8051,
+                "lng": 24.7961
+              },
+              "citation": "Map marker at 67.8051, 24.7961."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=67.8051,24.7961",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 200,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 200 m at 67.8051, 24.7961."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Levi%2C_Finland",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 206 m, top 531 m. Wikipedia ski-area infobox: Levi 206–531 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 206,
+              "citation": "Published base elevation 206 m and top elevation 531 m for Levi."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fi-yllas",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Finland",
+      "countryCode": "FI",
+      "timezone": "Europe/Helsinki",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "yllas",
+        "name": "Ylläs",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 67.6029,
+        "lng": 24.1516
+      },
+      "elevations": {
+        "baseM": 255,
+        "topM": 719,
+        "forecastM": 221
+      },
+      "locality": {
+        "regionId": "finnish-lapland",
+        "regionName": "Finnish Lapland",
+        "stateOrProvince": "Lapland",
+        "localityId": "akaslompolo",
+        "localityName": "Äkäslompolo"
+      },
+      "officialUrl": "https://www.yllas.fi/en",
+      "liftNetwork": "Ylläs",
+      "snowForecastMidM": 487,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.yllas.fi/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Ylläs.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "yllas",
+                "name": "Ylläs",
+                "aliases": []
+              },
+              "citation": "Official site for Ylläs, the resort serving Äkäslompolo."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.yllas.fi/en",
+              "citation": "Official website for Ylläs."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "finnish-lapland",
+                "regionName": "Finnish Lapland",
+                "stateOrProvince": "Lapland",
+                "localityId": "akaslompolo",
+                "localityName": "Äkäslompolo"
+              },
+              "citation": "Ylläs is accessed from Äkäslompolo (Lapland, Finland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Ylläs site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Ylläs Current season: 2026-11-21 - 2027-05-02)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/yllaes/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Ylläs Current season: 2026-11-21 - 2027-05-02",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=67.6029&mlon=24.1516#map=15/67.6029/24.1516",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Äkäslompolo' (village, node/166716870)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 67.6029,
+                "lng": 24.1516
+              },
+              "citation": "Map marker at 67.6029, 24.1516."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=67.6029,24.1516",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 221,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 221 m at 67.6029, 24.1516."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/yllaes/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 255 m, top 719 m. skiresort.info / skiresort.com listing: Ylläs 255–719 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 255,
+              "citation": "Published base elevation 255 m and top elevation 719 m for Ylläs."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fi-pyha",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Finland",
+      "countryCode": "FI",
+      "timezone": "Europe/Helsinki",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "pyha",
+        "name": "Pyhä",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 67.019,
+        "lng": 27.2518
+      },
+      "elevations": {
+        "baseM": 203,
+        "topM": 500,
+        "forecastM": 193
+      },
+      "locality": {
+        "regionId": "finnish-lapland",
+        "regionName": "Finnish Lapland",
+        "stateOrProvince": "Lapland",
+        "localityId": "pyhatunturi",
+        "localityName": "Pyhätunturi"
+      },
+      "officialUrl": "https://pyha.fi/en",
+      "liftNetwork": "Pyhä",
+      "snowForecastMidM": 352,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://pyha.fi/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Pyhä.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "pyha",
+                "name": "Pyhä",
+                "aliases": []
+              },
+              "citation": "Official site for Pyhä, the resort serving Pyhätunturi."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://pyha.fi/en",
+              "citation": "Official website for Pyhä."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "finnish-lapland",
+                "regionName": "Finnish Lapland",
+                "stateOrProvince": "Lapland",
+                "localityId": "pyhatunturi",
+                "localityName": "Pyhätunturi"
+              },
+              "citation": "Pyhä is accessed from Pyhätunturi (Lapland, Finland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Pyhä site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Pyhä Ski Resort Pyhä.fi The opening goal for the winter season 2026-2027 is at the end of November.)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.pyha.fi/en/skiresort-winter",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Pyhä Ski Resort Pyhä.fi The opening goal for the winter season 2026-2027 is at the end of November.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=67.019&mlon=27.2518#map=15/67.019/27.2518",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Pyhätunturi, Pelkosenniemi' (village, node/282476778)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 67.019,
+                "lng": 27.2518
+              },
+              "citation": "Map marker at 67.019, 27.2518."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=67.019,27.2518",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 193,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 193 m at 67.019, 27.2518."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/pyhae/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 203 m, top 500 m. skiresort.info / skiresort.com listing: Pyhä 203–500 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 203,
+              "citation": "Published base elevation 203 m and top elevation 500 m for Pyhä."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-fi-ruka",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Finland",
+      "countryCode": "FI",
+      "timezone": "Europe/Helsinki",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "ruka",
+        "name": "Ruka",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 66.1707,
+        "lng": 29.1449
+      },
+      "elevations": {
+        "baseM": 291,
+        "topM": 492,
+        "forecastM": 359
+      },
+      "locality": {
+        "regionId": "ruka",
+        "regionName": "Ruka",
+        "stateOrProvince": "North Ostrobothnia",
+        "localityId": "ruka",
+        "localityName": "Ruka"
+      },
+      "officialUrl": "https://www.ruka.fi/en",
+      "liftNetwork": "Ruka",
+      "snowForecastMidM": 392,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.ruka.fi/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Ruka.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "ruka",
+                "name": "Ruka",
+                "aliases": []
+              },
+              "citation": "Official site for Ruka, the resort serving Ruka."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.ruka.fi/en",
+              "citation": "Official website for Ruka."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "ruka",
+                "regionName": "Ruka",
+                "stateOrProvince": "North Ostrobothnia",
+                "localityId": "ruka",
+                "localityName": "Ruka"
+              },
+              "citation": "Ruka is accessed from Ruka (North Ostrobothnia, Finland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Ruka site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ruka ski season open from 2 October 2026: lifts and prices Ruka in Kuusamo opened its 2026–2027 ski season on the Saarua slopes at 9:30 on Friday 2 October.)."
+            }
+          ]
+        },
+        {
+          "url": "https://laplandskiresorts.com/news/ruka-ski-season-opens-2026/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ruka ski season open from 2 October 2026: lifts and prices Ruka in Kuusamo opened its 2026–2027 ski season on the Saarua slopes at 9:30 on Friday 2 October.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=66.1707&mlon=29.1449#map=15/66.1707/29.1449",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Rukatunturi, Kuusamo' (leisure, way/193016004)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 66.1707,
+                "lng": 29.1449
+              },
+              "citation": "Map marker at 66.1707, 29.1449."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=66.1707,29.1449",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 359,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 359 m at 66.1707, 29.1449."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/ruka/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 291 m, top 492 m. skiresort.info / skiresort.com listing: Ruka 291–492 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 291,
+              "citation": "Published base elevation 291 m and top elevation 492 m for Ruka."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

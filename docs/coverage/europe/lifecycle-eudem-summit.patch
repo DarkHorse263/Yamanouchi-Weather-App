@@ -1,0 +1,30 @@
+--- a/lib/ski-catalogue/lifecycle.js
++++ b/lib/ski-catalogue/lifecycle.js
+@@ -305,8 +305,12 @@
+           } catch {
+             officialOperator = false;
+           }
+-          if (!epqs && !officialOperator) {
+-            fail("forecast elevation citation must be exact-point USGS EPQS or official operator data");
++          // Europe: EU-DEM 25 m via OpenTopoData at the exact stored point.
++          const euDem = evidenceUrl?.hostname === "api.opentopodata.org" &&
++            evidenceUrl.pathname === "/v1/eudem25m" &&
++            evidenceUrl.searchParams.get("locations") === `${record.coordinates.lat},${record.coordinates.lng}`;
++          if (!epqs && !officialOperator && !euDem) {
++            fail("forecast elevation citation must be exact-point USGS EPQS, EU-DEM (OpenTopoData eudem25m) or official operator data");
+             continue;
+           }
+         }
+@@ -359,6 +363,12 @@
+     ...(Number.isFinite(elevations.baseM) && hasValidBaseElevationEvidence(record)
+       ? { baseElevationM: elevations.baseM }
+       : {}),
++    // Summit is only exposed alongside a cited base, so snow forecasts can use
++    // the real base–top midpoint instead of the base/village height.
++    ...(Number.isFinite(elevations.baseM) && Number.isFinite(elevations.topM) &&
++      elevations.topM > elevations.baseM && hasValidBaseElevationEvidence(record)
++      ? { summitElevationM: elevations.topM }
++      : {}),
+     officialUrl: record.officialUrl,
+     regionId: locality.regionId,
+     regionName: locality.regionName,

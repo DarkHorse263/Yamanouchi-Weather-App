@@ -1,0 +1,2594 @@
+{
+  "batchVersion": 1,
+  "batchId": "europe-phase3-switzerland",
+  "records": [
+    {
+      "recordId": "eu-ch-zermatt",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "zermatt",
+        "name": "Zermatt Matterhorn Ski Paradise",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.0212,
+        "lng": 7.7493
+      },
+      "elevations": {
+        "baseM": 1562,
+        "topM": 3899,
+        "forecastM": 1608
+      },
+      "locality": {
+        "regionId": "zermatt",
+        "regionName": "Zermatt",
+        "stateOrProvince": "Valais",
+        "localityId": "zermatt",
+        "localityName": "Zermatt"
+      },
+      "officialUrl": "https://www.zermatt.ch/en",
+      "liftNetwork": "Matterhorn Ski Paradise",
+      "snowForecastMidM": 2730,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.zermatt.ch/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Zermatt Matterhorn Ski Paradise.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "zermatt",
+                "name": "Zermatt Matterhorn Ski Paradise",
+                "aliases": []
+              },
+              "citation": "Official site for Zermatt Matterhorn Ski Paradise, the resort serving Zermatt."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.zermatt.ch/en",
+              "citation": "Official website for Zermatt Matterhorn Ski Paradise."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "zermatt",
+                "regionName": "Zermatt",
+                "stateOrProvince": "Valais",
+                "localityId": "zermatt",
+                "localityName": "Zermatt"
+              },
+              "citation": "Zermatt Matterhorn Ski Paradise is accessed from Zermatt (Valais, Switzerland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Zermatt Matterhorn Ski Paradise site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Zermatt-Matterhorn: Holidays in Switzerland & the Alps 1 November – 6 December 2026 Winter Opening Weeks - Kick off the new ski season in Matterhorn Ski Paradis)."
+            }
+          ]
+        },
+        {
+          "url": "https://zermatt.swiss/en/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Zermatt-Matterhorn: Holidays in Switzerland & the Alps 1 November – 6 December 2026 Winter Opening Weeks - Kick off the new ski season in Matterhorn Ski Paradise",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.0212&mlon=7.7493#map=15/46.0212/7.7493",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Zermatt' (town, relation/1685406)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.0212,
+                "lng": 7.7493
+              },
+              "citation": "Map marker at 46.0212, 7.7493."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.0212,7.7493",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1608,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1608 m at 46.0212, 7.7493."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/zermatt-breuil-cervinia-valtournenche-matterhorn/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1562 m, top 3899 m. skiresort.info / skiresort.com listing: Zermatt Matterhorn Ski Paradise 1562–3899 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1562,
+              "citation": "Published base elevation 1562 m and top elevation 3899 m for Zermatt Matterhorn Ski Paradise."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-saas-fee",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "saas-fee",
+        "name": "Saas-Fee",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.1073,
+        "lng": 7.9247
+      },
+      "elevations": {
+        "baseM": 1800,
+        "topM": 3573,
+        "forecastM": 1802
+      },
+      "locality": {
+        "regionId": "saas-fee",
+        "regionName": "Saas-Fee",
+        "stateOrProvince": "Valais",
+        "localityId": "saas-fee",
+        "localityName": "Saas-Fee"
+      },
+      "officialUrl": "https://www.saas-fee.ch/en",
+      "liftNetwork": "Saastal",
+      "snowForecastMidM": 2686,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.saas-fee.ch/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Saas-Fee.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "saas-fee",
+                "name": "Saas-Fee",
+                "aliases": []
+              },
+              "citation": "Official site for Saas-Fee, the resort serving Saas-Fee."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.saas-fee.ch/en",
+              "citation": "Official website for Saas-Fee."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "saas-fee",
+                "regionName": "Saas-Fee",
+                "stateOrProvince": "Valais",
+                "localityId": "saas-fee",
+                "localityName": "Saas-Fee"
+              },
+              "citation": "Saas-Fee is accessed from Saas-Fee (Valais, Switzerland), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.saas-fee.ch/en/services-informationen/prices-timetables-cable-cars/timetables-cable-cars/timetables-cable-cars/summer/saas-fee-timetables-summer-autumn",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: in, Alpin Express & more We are pleased to inform you that the Saas-Fee summer ski resort will be able to reopen partially from Saturday, 3 October 2026.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Saas-Fee: in, Alpin Express & more We are pleased to inform you that the Saas-Fee summer ski resort will be able to reopen partially from Saturday, 3 October 2026."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.1073&mlon=7.9247#map=15/46.1073/7.9247",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Saas-Fee' (village, relation/1685362)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.1073,
+                "lng": 7.9247
+              },
+              "citation": "Map marker at 46.1073, 7.9247."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.1073,7.9247",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1802,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1802 m at 46.1073, 7.9247."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/saas-fee/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1800 m, top 3573 m. skiresort.info / skiresort.com listing: Saas-Fee 1800–3573 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1800,
+              "citation": "Published base elevation 1800 m and top elevation 3573 m for Saas-Fee."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-verbier",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "verbier",
+        "name": "Verbier",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.0961,
+        "lng": 7.2287
+      },
+      "elevations": {
+        "baseM": 1500,
+        "topM": 3330,
+        "forecastM": 1497
+      },
+      "locality": {
+        "regionId": "4-vallees",
+        "regionName": "4 Vallées",
+        "stateOrProvince": "Valais",
+        "localityId": "verbier",
+        "localityName": "Verbier"
+      },
+      "officialUrl": "https://www.verbier.ch/en",
+      "liftNetwork": "4 Vallées",
+      "snowForecastMidM": 2415,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.verbier.ch/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Verbier.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "verbier",
+                "name": "Verbier",
+                "aliases": []
+              },
+              "citation": "Official site for Verbier, the resort serving Verbier."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.verbier.ch/en",
+              "citation": "Official website for Verbier."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "4-vallees",
+                "regionName": "4 Vallées",
+                "stateOrProvince": "Valais",
+                "localityId": "verbier",
+                "localityName": "Verbier"
+              },
+              "citation": "Verbier is accessed from Verbier (Valais, Switzerland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Verbier site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Saison 2026/2027 à Verbier - esquiades.com Ouverture 14/11/2026 ... 25/04/2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.esquiades.com/fr/pistes/dates-ouverture-fermeture-verbier/239/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Saison 2026/2027 à Verbier - esquiades.com Ouverture 14/11/2026 ... 25/04/2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.0961&mlon=7.2287#map=15/46.0961/7.2287",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Verbier' (village, node/310532759)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.0961,
+                "lng": 7.2287
+              },
+              "citation": "Map marker at 46.0961, 7.2287."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.0961,7.2287",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1497,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1497 m at 46.0961, 7.2287."
+            }
+          ]
+        },
+        {
+          "url": "https://www.valais.ch/en/explore/activities/ski-snowboard/ski-areas/verbier",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1500 m, top 3330 m. Verbier village base 1,500 m; cable car to Mont Fort 3,330 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1500,
+              "citation": "Published base elevation 1500 m and top elevation 3330 m for Verbier."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-nendaz-veysonnaz",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "nendaz-veysonnaz",
+        "name": "Nendaz-Veysonnaz",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.1867,
+        "lng": 7.3051
+      },
+      "elevations": {
+        "baseM": 1400,
+        "topM": 3330,
+        "forecastM": 1151
+      },
+      "locality": {
+        "regionId": "4-vallees",
+        "regionName": "4 Vallées",
+        "stateOrProvince": "Valais",
+        "localityId": "nendaz",
+        "localityName": "Nendaz"
+      },
+      "officialUrl": "https://www.nendaz.ch/en",
+      "liftNetwork": "4 Vallées",
+      "snowForecastMidM": 2365,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.nendaz.ch/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Nendaz-Veysonnaz.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "nendaz-veysonnaz",
+                "name": "Nendaz-Veysonnaz",
+                "aliases": []
+              },
+              "citation": "Official site for Nendaz-Veysonnaz, the resort serving Nendaz."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.nendaz.ch/en",
+              "citation": "Official website for Nendaz-Veysonnaz."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "4-vallees",
+                "regionName": "4 Vallées",
+                "stateOrProvince": "Valais",
+                "localityId": "nendaz",
+                "localityName": "Nendaz"
+              },
+              "citation": "Nendaz-Veysonnaz is accessed from Nendaz (Valais, Switzerland), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.nendaz.ch/fr/Z13927/horaires-hiver-remontees-mecaniques",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Horaires hiver remontées mécaniques Nendaz Switzerland Les dates d'ouverture des remontées mécaniques pour l'hiver 2026-27 seront communiquées prochainement.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Nendaz-Veysonnaz: Horaires hiver remontées mécaniques Nendaz Switzerland Les dates d'ouverture des remontées mécaniques pour l'hiver 2026-27 seront communiquées prochainement."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.1867&mlon=7.3051#map=15/46.1867/7.3051",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Nendaz' (village, relation/1685346)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.1867,
+                "lng": 7.3051
+              },
+              "citation": "Map marker at 46.1867, 7.3051."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.1867,7.3051",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1151,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1151 m at 46.1867, 7.3051."
+            }
+          ]
+        },
+        {
+          "url": "https://www.tripadvisor.com/Attraction_Review-g658753-d6516162-Reviews",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1400 m, top 3330 m. Nendaz ski domain ranges from 1,400 m to 3,330 m (Mont Fort is reached from Siviez–Tortin).",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1400,
+              "citation": "Published base elevation 1400 m and top elevation 3330 m for Nendaz-Veysonnaz."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-crans-montana",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "crans-montana",
+        "name": "Crans-Montana",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.3069,
+        "lng": 7.469
+      },
+      "elevations": {
+        "baseM": 1510,
+        "topM": 2927,
+        "forecastM": 1480
+      },
+      "locality": {
+        "regionId": "crans-montana",
+        "regionName": "Crans-Montana",
+        "stateOrProvince": "Valais",
+        "localityId": "crans-montana",
+        "localityName": "Crans-Montana"
+      },
+      "officialUrl": "https://www.crans-montana.ch/en",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 2218,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.crans-montana.ch/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Crans-Montana.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "crans-montana",
+                "name": "Crans-Montana",
+                "aliases": []
+              },
+              "citation": "Official site for Crans-Montana, the resort serving Crans-Montana."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.crans-montana.ch/en",
+              "citation": "Official website for Crans-Montana."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "crans-montana",
+                "regionName": "Crans-Montana",
+                "stateOrProvince": "Valais",
+                "localityId": "crans-montana",
+                "localityName": "Crans-Montana"
+              },
+              "citation": "Crans-Montana is accessed from Crans-Montana (Valais, Switzerland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Crans-Montana site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Where to stay in Crans-Montana: two villages, one plateau Winter 2026/27 opens fully on 19 December, with only a partial opening possible from 28 November depen)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.staysinswitzerland.com/crans-montana",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Where to stay in Crans-Montana: two villages, one plateau Winter 2026/27 opens fully on 19 December, with only a partial opening possible from 28 November depending on snow, and",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.3069&mlon=7.469#map=15/46.3069/7.469",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Crans-Montana' (village, relation/6820012)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.3069,
+                "lng": 7.469
+              },
+              "citation": "Map marker at 46.3069, 7.469."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.3069,7.469",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1480,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1480 m at 46.3069, 7.469."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/crans-montana/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1510 m, top 2927 m. skiresort.info / skiresort.com listing: Crans-Montana 1510–2927 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1510,
+              "citation": "Published base elevation 1510 m and top elevation 2927 m for Crans-Montana."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-champery",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "champery",
+        "name": "Champéry",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.1757,
+        "lng": 6.8688
+      },
+      "elevations": {
+        "baseM": 1050,
+        "topM": 2277,
+        "forecastM": 1048
+      },
+      "locality": {
+        "regionId": "portes-du-soleil-ch",
+        "regionName": "Portes du Soleil (Switzerland)",
+        "stateOrProvince": "Valais",
+        "localityId": "champery",
+        "localityName": "Champéry"
+      },
+      "officialUrl": "https://www.champery.ch/en",
+      "liftNetwork": "Portes du Soleil",
+      "snowForecastMidM": 1664,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.champery.ch/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Champéry.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "champery",
+                "name": "Champéry",
+                "aliases": []
+              },
+              "citation": "Official site for Champéry, the resort serving Champéry."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.champery.ch/en",
+              "citation": "Official website for Champéry."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "portes-du-soleil-ch",
+                "regionName": "Portes du Soleil (Switzerland)",
+                "stateOrProvince": "Valais",
+                "localityId": "champery",
+                "localityName": "Champéry"
+              },
+              "citation": "Champéry is accessed from Champéry (Valais, Switzerland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Champéry site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Portes du Soleil Suisse lift company: opening of the Swiss area Friday 18 December 2026)."
+            }
+          ]
+        },
+        {
+          "url": "https://skipass-pds-ch.ch/fr/horaires",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Portes du Soleil Suisse lift company: opening of the Swiss area Friday 18 December 2026",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.1757&mlon=6.8688#map=15/46.1757/6.8688",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Champéry' (village, relation/1685287)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.1757,
+                "lng": 6.8688
+              },
+              "citation": "Map marker at 46.1757, 6.8688."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.1757,6.8688",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1048,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1048 m at 46.1757, 6.8688."
+            }
+          ]
+        },
+        {
+          "url": "https://www.weski.com/ski-resorts/switzerland/champery",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1050 m, top 2277 m. Champéry village base about 1,050 m (cable car to Croix de Culet 1,936 m); terrain climbs to 2,277 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1050,
+              "citation": "Published base elevation 1050 m and top elevation 2277 m for Champéry."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-villars-gryon-les-diablerets",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "villars-gryon-les-diablerets",
+        "name": "Villars-Gryon-Les Diablerets",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.2978,
+        "lng": 7.0553
+      },
+      "elevations": {
+        "baseM": 1224,
+        "topM": 2120,
+        "forecastM": 1266
+      },
+      "locality": {
+        "regionId": "vaud-alps",
+        "regionName": "Vaud Alps · Gstaad",
+        "stateOrProvince": "Vaud",
+        "localityId": "villars-sur-ollon",
+        "localityName": "Villars-sur-Ollon"
+      },
+      "officialUrl": "https://www.alpesvaudoises.ch/villars",
+      "liftNetwork": "Magic Pass",
+      "snowForecastMidM": 1672,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.alpesvaudoises.ch/villars",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Villars-Gryon-Les Diablerets.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "villars-gryon-les-diablerets",
+                "name": "Villars-Gryon-Les Diablerets",
+                "aliases": []
+              },
+              "citation": "Official site for Villars-Gryon-Les Diablerets, the resort serving Villars-sur-Ollon."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.alpesvaudoises.ch/villars",
+              "citation": "Official website for Villars-Gryon-Les Diablerets."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "vaud-alps",
+                "regionName": "Vaud Alps · Gstaad",
+                "stateOrProvince": "Vaud",
+                "localityId": "villars-sur-ollon",
+                "localityName": "Villars-sur-Ollon"
+              },
+              "citation": "Villars-Gryon-Les Diablerets is accessed from Villars-sur-Ollon (Vaud, Switzerland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Villars-Gryon-Les Diablerets site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Villars/Gryon/Les Diablerets Current season: 2026-11-28 - 2027-04-11)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/villars-gryon-les-diablerets/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Villars/Gryon/Les Diablerets Current season: 2026-11-28 - 2027-04-11",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.2978&mlon=7.0553#map=15/46.2978/7.0553",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Villars-sur-Ollon' (village, node/281289971)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.2978,
+                "lng": 7.0553
+              },
+              "citation": "Map marker at 46.2978, 7.0553."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.2978,7.0553",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1266,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1266 m at 46.2978, 7.0553."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/villars-gryon-les-diablerets/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1224 m, top 2120 m. skiresort.info / skiresort.com listing: Villars-Gryon-Les Diablerets 1224–2120 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1224,
+              "citation": "Published base elevation 1224 m and top elevation 2120 m for Villars-Gryon-Les Diablerets."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-gstaad",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "gstaad",
+        "name": "Gstaad (Gstaad Mountain Rides)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.4722,
+        "lng": 7.2887
+      },
+      "elevations": {
+        "baseM": 1275,
+        "topM": 1940,
+        "forecastM": 1072
+      },
+      "locality": {
+        "regionId": "vaud-alps",
+        "regionName": "Vaud Alps · Gstaad",
+        "stateOrProvince": "Bern",
+        "localityId": "gstaad",
+        "localityName": "Gstaad"
+      },
+      "officialUrl": "https://www.gstaad.ch/en",
+      "liftNetwork": "Gstaad Mountain Rides",
+      "snowForecastMidM": 1608,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.gstaad.ch/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Gstaad (Gstaad Mountain Rides).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "gstaad",
+                "name": "Gstaad (Gstaad Mountain Rides)",
+                "aliases": []
+              },
+              "citation": "Official site for Gstaad (Gstaad Mountain Rides), the resort serving Gstaad."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.gstaad.ch/en",
+              "citation": "Official website for Gstaad (Gstaad Mountain Rides)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "vaud-alps",
+                "regionName": "Vaud Alps · Gstaad",
+                "stateOrProvince": "Bern",
+                "localityId": "gstaad",
+                "localityName": "Gstaad"
+              },
+              "citation": "Gstaad (Gstaad Mountain Rides) is accessed from Gstaad (Bern, Switzerland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Gstaad (Gstaad Mountain Rides) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Bergbahnen Destination Gstaad: first lifts open 20 November 2026, snow permitting)."
+            }
+          ]
+        },
+        {
+          "url": "https://bergbahnen-gstaad.ch/faq",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Bergbahnen Destination Gstaad: first lifts open 20 November 2026, snow permitting",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.4722&mlon=7.2887#map=15/46.4722/7.2887",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Gstaad' (village, node/187228808)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.4722,
+                "lng": 7.2887
+              },
+              "citation": "Map marker at 46.4722, 7.2887."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.4722,7.2887",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1072,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1072 m at 46.4722, 7.2887."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.info/ski-resort/wasserngrat-gstaad/test-result/size/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1275 m, top 1940 m. skiresort.info / skiresort.com listing: Gstaad (Gstaad Mountain Rides) 1275–1940 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1275,
+              "citation": "Published base elevation 1275 m and top elevation 1940 m for Gstaad (Gstaad Mountain Rides)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-grindelwald-wengen",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "grindelwald-wengen",
+        "name": "Grindelwald-Wengen (Kleine Scheidegg-Männlichen)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.6054,
+        "lng": 7.9217
+      },
+      "elevations": {
+        "baseM": 944,
+        "topM": 2400,
+        "forecastM": 1279
+      },
+      "locality": {
+        "regionId": "jungfrau",
+        "regionName": "Jungfrau Region",
+        "stateOrProvince": "Bern",
+        "localityId": "wengen",
+        "localityName": "Wengen"
+      },
+      "officialUrl": "https://www.jungfrau.ch/en-gb",
+      "liftNetwork": "Jungfrau Ski Region",
+      "snowForecastMidM": 1672,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.jungfrau.ch/en-gb",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Grindelwald-Wengen (Kleine Scheidegg-Männlichen).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "grindelwald-wengen",
+                "name": "Grindelwald-Wengen (Kleine Scheidegg-Männlichen)",
+                "aliases": []
+              },
+              "citation": "Official site for Grindelwald-Wengen (Kleine Scheidegg-Männlichen), the resort serving Wengen."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.jungfrau.ch/en-gb",
+              "citation": "Official website for Grindelwald-Wengen (Kleine Scheidegg-Männlichen)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "jungfrau",
+                "regionName": "Jungfrau Region",
+                "stateOrProvince": "Bern",
+                "localityId": "wengen",
+                "localityName": "Wengen"
+              },
+              "citation": "Grindelwald-Wengen (Kleine Scheidegg-Männlichen) is accessed from Wengen (Bern, Switzerland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Grindelwald-Wengen (Kleine Scheidegg-Männlichen) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Skiing Grindelwald-Männlichen: open daily from 21 November 2026 to 25 April 2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://grindelwald.swiss/en/erlebnisse/winter-activities/skiing.html",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Skiing Grindelwald-Männlichen: open daily from 21 November 2026 to 25 April 2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.6054&mlon=7.9217#map=15/46.6054/7.9217",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Wengen' (village, node/240096898)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.6054,
+                "lng": 7.9217
+              },
+              "citation": "Map marker at 46.6054, 7.9217."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.6054,7.9217",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1279,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1279 m at 46.6054, 7.9217."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/kleine-scheidegg-maennlichen-grindelwald-wengen/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 944 m, top 2400 m. skiresort.info / skiresort.com listing: Grindelwald-Wengen (Kleine Scheidegg-Männlichen) 944–2400 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 944,
+              "citation": "Published base elevation 944 m and top elevation 2400 m for Grindelwald-Wengen (Kleine Scheidegg-Männlichen)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-grindelwald-first",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "grindelwald-first",
+        "name": "Grindelwald-First",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.6243,
+        "lng": 8.0367
+      },
+      "elevations": {
+        "baseM": 1034,
+        "topM": 2500,
+        "forecastM": 1055
+      },
+      "locality": {
+        "regionId": "jungfrau",
+        "regionName": "Jungfrau Region",
+        "stateOrProvince": "Bern",
+        "localityId": "grindelwald",
+        "localityName": "Grindelwald"
+      },
+      "officialUrl": "https://www.jungfrau.ch/en-gb",
+      "liftNetwork": "Jungfrau Ski Region",
+      "snowForecastMidM": 1767,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.jungfrau.ch/en-gb",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Grindelwald-First.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "grindelwald-first",
+                "name": "Grindelwald-First",
+                "aliases": []
+              },
+              "citation": "Official site for Grindelwald-First, the resort serving Grindelwald."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.jungfrau.ch/en-gb",
+              "citation": "Official website for Grindelwald-First."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "jungfrau",
+                "regionName": "Jungfrau Region",
+                "stateOrProvince": "Bern",
+                "localityId": "grindelwald",
+                "localityName": "Grindelwald"
+              },
+              "citation": "Grindelwald-First is accessed from Grindelwald (Bern, Switzerland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Grindelwald-First site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Bulletin des sports d'hiver - Grindelwald Tourismus Grindelwald-First: ouvert tous les jours du 19 décembre 2026 au 29 mars 2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://grindelwald.swiss/fr/service/etat-de-fonctionnement/bulletin-des-sports-d-hiver.html",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Bulletin des sports d'hiver - Grindelwald Tourismus Grindelwald-First: ouvert tous les jours du 19 décembre 2026 au 29 mars 2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.6243&mlon=8.0367#map=15/46.6243/8.0367",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Grindelwald' (village, relation/1682457)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.6243,
+                "lng": 8.0367
+              },
+              "citation": "Map marker at 46.6243, 8.0367."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.6243,8.0367",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1055,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1055 m at 46.6243, 8.0367."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/first-grindelwald/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1034 m, top 2500 m. skiresort.info / skiresort.com listing: Grindelwald-First 1034–2500 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1034,
+              "citation": "Published base elevation 1034 m and top elevation 2500 m for Grindelwald-First."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-murren-schilthorn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "murren-schilthorn",
+        "name": "Mürren-Schilthorn",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.5591,
+        "lng": 7.8929
+      },
+      "elevations": {
+        "baseM": 796,
+        "topM": 2970,
+        "forecastM": 1634
+      },
+      "locality": {
+        "regionId": "jungfrau",
+        "regionName": "Jungfrau Region",
+        "stateOrProvince": "Bern",
+        "localityId": "murren",
+        "localityName": "Mürren"
+      },
+      "officialUrl": "https://schilthorn.ch/",
+      "liftNetwork": "Jungfrau Ski Region",
+      "snowForecastMidM": 1883,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://schilthorn.ch/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Mürren-Schilthorn.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "murren-schilthorn",
+                "name": "Mürren-Schilthorn",
+                "aliases": []
+              },
+              "citation": "Official site for Mürren-Schilthorn, the resort serving Mürren."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://schilthorn.ch/",
+              "citation": "Official website for Mürren-Schilthorn."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "jungfrau",
+                "regionName": "Jungfrau Region",
+                "stateOrProvince": "Bern",
+                "localityId": "murren",
+                "localityName": "Mürren"
+              },
+              "citation": "Mürren-Schilthorn is accessed from Mürren (Bern, Switzerland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Mürren-Schilthorn site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Schilthorn – Mürren/Lauterbrunnen Current season: 2026-10-31 - 2027-05-02)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/schilthorn-muerren-lauterbrunnen/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Schilthorn – Mürren/Lauterbrunnen Current season: 2026-10-31 - 2027-05-02",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.5591&mlon=7.8929#map=15/46.5591/7.8929",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Mürren' (village, node/240056378)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.5591,
+                "lng": 7.8929
+              },
+              "citation": "Map marker at 46.5591, 7.8929."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.5591,7.8929",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1634,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1634 m at 46.5591, 7.8929."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.info/ski-resort/schilthorn-muerren-lauterbrunnen/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 796 m, top 2970 m. skiresort.info / skiresort.com listing: Mürren-Schilthorn 796–2970 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 796,
+              "citation": "Published base elevation 796 m and top elevation 2970 m for Mürren-Schilthorn."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-adelboden-lenk",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "adelboden-lenk",
+        "name": "Adelboden-Lenk",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.4927,
+        "lng": 7.5588
+      },
+      "elevations": {
+        "baseM": 1260,
+        "topM": 2200,
+        "forecastM": 1358
+      },
+      "locality": {
+        "regionId": "adelboden-lenk",
+        "regionName": "Adelboden-Lenk",
+        "stateOrProvince": "Bern",
+        "localityId": "adelboden",
+        "localityName": "Adelboden"
+      },
+      "officialUrl": "https://www.adelboden-lenk.ch/en",
+      "liftNetwork": "Adelboden-Lenk",
+      "snowForecastMidM": 1730,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.adelboden-lenk.ch/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Adelboden-Lenk.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "adelboden-lenk",
+                "name": "Adelboden-Lenk",
+                "aliases": []
+              },
+              "citation": "Official site for Adelboden-Lenk, the resort serving Adelboden."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.adelboden-lenk.ch/en",
+              "citation": "Official website for Adelboden-Lenk."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "adelboden-lenk",
+                "regionName": "Adelboden-Lenk",
+                "stateOrProvince": "Bern",
+                "localityId": "adelboden",
+                "localityName": "Adelboden"
+              },
+              "citation": "Adelboden-Lenk is accessed from Adelboden (Bern, Switzerland), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.adelboden-lenk.ch/en/Service/Lifts-and-pistes",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Open lifts and pistes - Adelboden-Lenk - Continuous daily operation from 5 December 2026 to 4 April 2027.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Adelboden-Lenk: Open lifts and pistes - Adelboden-Lenk - Continuous daily operation from 5 December 2026 to 4 April 2027."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.4927&mlon=7.5588#map=15/46.4927/7.5588",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Adelboden' (village, relation/1682357)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.4927,
+                "lng": 7.5588
+              },
+              "citation": "Map marker at 46.4927, 7.5588."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.4927,7.5588",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1358,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1358 m at 46.4927, 7.5588."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/adelboden-lenk-chuenisbaergli-silleren-hahnenmoos-metsch/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1260 m, top 2200 m. skiresort.info / skiresort.com listing: Adelboden-Lenk 1260–2200 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1260,
+              "citation": "Published base elevation 1260 m and top elevation 2200 m for Adelboden-Lenk."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-engelberg-titlis",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "engelberg-titlis",
+        "name": "Engelberg-Titlis",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.8223,
+        "lng": 8.4044
+      },
+      "elevations": {
+        "baseM": 1003,
+        "topM": 3020,
+        "forecastM": 1021
+      },
+      "locality": {
+        "regionId": "engelberg",
+        "regionName": "Engelberg",
+        "stateOrProvince": "Obwalden",
+        "localityId": "engelberg",
+        "localityName": "Engelberg"
+      },
+      "officialUrl": "https://www.engelberg.ch/en",
+      "liftNetwork": "Titlis",
+      "snowForecastMidM": 2012,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.engelberg.ch/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Engelberg-Titlis.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "engelberg-titlis",
+                "name": "Engelberg-Titlis",
+                "aliases": []
+              },
+              "citation": "Official site for Engelberg-Titlis, the resort serving Engelberg."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.engelberg.ch/en",
+              "citation": "Official website for Engelberg-Titlis."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "engelberg",
+                "regionName": "Engelberg",
+                "stateOrProvince": "Obwalden",
+                "localityId": "engelberg",
+                "localityName": "Engelberg"
+              },
+              "citation": "Engelberg-Titlis is accessed from Engelberg (Obwalden, Switzerland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Engelberg-Titlis site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (2026/2027 Ski Season in Engelberg - Titlis - esquiades.com Engelberg - Titlis The Swiss Alps Closed Opening 10/24/2026)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.esquiades.com/en/skiresort/opening-closing-dates-engelberg/156/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: 2026/2027 Ski Season in Engelberg - Titlis - esquiades.com Engelberg - Titlis The Swiss Alps Closed Opening 10/24/2026",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.8223&mlon=8.4044#map=15/46.8223/8.4044",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Engelberg' (village, relation/1683067)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.8223,
+                "lng": 8.4044
+              },
+              "citation": "Map marker at 46.8223, 8.4044."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.8223,8.4044",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1021,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1021 m at 46.8223, 8.4044."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/titlis-engelberg/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1003 m, top 3020 m. skiresort.info / skiresort.com listing: Engelberg-Titlis 1003–3020 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1003,
+              "citation": "Published base elevation 1003 m and top elevation 3020 m for Engelberg-Titlis."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-andermatt-sedrun-disentis",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "andermatt-sedrun-disentis",
+        "name": "Andermatt-Sedrun-Disentis",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.634,
+        "lng": 8.5948
+      },
+      "elevations": {
+        "baseM": 1227,
+        "topM": 2833,
+        "forecastM": 1442
+      },
+      "locality": {
+        "regionId": "andermatt",
+        "regionName": "Andermatt-Sedrun",
+        "stateOrProvince": "Uri",
+        "localityId": "andermatt",
+        "localityName": "Andermatt"
+      },
+      "officialUrl": "https://www.andermatt-sedrun-disentis.ch/en",
+      "liftNetwork": "SkiArena Andermatt-Sedrun",
+      "snowForecastMidM": 2030,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.andermatt-sedrun-disentis.ch/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Andermatt-Sedrun-Disentis.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "andermatt-sedrun-disentis",
+                "name": "Andermatt-Sedrun-Disentis",
+                "aliases": []
+              },
+              "citation": "Official site for Andermatt-Sedrun-Disentis, the resort serving Andermatt."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.andermatt-sedrun-disentis.ch/en",
+              "citation": "Official website for Andermatt-Sedrun-Disentis."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "andermatt",
+                "regionName": "Andermatt-Sedrun",
+                "stateOrProvince": "Uri",
+                "localityId": "andermatt",
+                "localityName": "Andermatt"
+              },
+              "citation": "Andermatt-Sedrun-Disentis is accessed from Andermatt (Uri, Switzerland), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.andermatt-sedrun-disentis.ch/en/pages/skipaesse",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Day and multi-day passes - Andermatt – Sedrun - Ski and sledging tickets for the 2026/27 winter season will be available soon.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Andermatt-Sedrun-Disentis: Day and multi-day passes - Andermatt – Sedrun - Ski and sledging tickets for the 2026/27 winter season will be available soon."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.634&mlon=8.5948#map=15/46.634/8.5948",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Andermatt' (village, relation/1683057)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.634,
+                "lng": 8.5948
+              },
+              "citation": "Map marker at 46.634, 8.5948."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.634,8.5948",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1442,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1442 m at 46.634, 8.5948."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/disentis/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1227 m, top 2833 m. skiresort.info / skiresort.com listing: Andermatt-Sedrun-Disentis 1227–2833 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1227,
+              "citation": "Published base elevation 1227 m and top elevation 2833 m for Andermatt-Sedrun-Disentis."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-laax",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "laax",
+        "name": "Laax",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.8202,
+        "lng": 9.2633
+      },
+      "elevations": {
+        "baseM": 1100,
+        "topM": 3018,
+        "forecastM": 1094
+      },
+      "locality": {
+        "regionId": "laax",
+        "regionName": "Flims Laax Falera",
+        "stateOrProvince": "Graubünden",
+        "localityId": "laax",
+        "localityName": "Laax"
+      },
+      "officialUrl": "https://www.laax.com/en",
+      "liftNetwork": "Weisse Arena",
+      "snowForecastMidM": 2059,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.laax.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Laax.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "laax",
+                "name": "Laax",
+                "aliases": []
+              },
+              "citation": "Official site for Laax, the resort serving Laax."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.laax.com/en",
+              "citation": "Official website for Laax."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "laax",
+                "regionName": "Flims Laax Falera",
+                "stateOrProvince": "Graubünden",
+                "localityId": "laax",
+                "localityName": "Laax"
+              },
+              "citation": "Laax is accessed from Laax (Graubünden, Switzerland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Laax site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (LAAX Trail Map Ski Runs & Piste Map - 2026 - 2027 Season 2026 - 2027 Opens 28 Nov 2026)."
+            }
+          ]
+        },
+        {
+          "url": "https://snowstash.com/europe/switzerland/laax/trail-map",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: LAAX Trail Map Ski Runs & Piste Map - 2026 - 2027 Season 2026 - 2027 Opens 28 Nov 2026",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.8202&mlon=9.2633#map=15/46.8202/9.2633",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Laax Murschetg' (aerialway, node/244501524)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.8202,
+                "lng": 9.2633
+              },
+              "citation": "Map marker at 46.8202, 9.2633."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.8202,9.2633",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1094,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1094 m at 46.8202, 9.2633."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/laax-flims-falera/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1100 m, top 3018 m. skiresort.info / skiresort.com listing: Laax 1100–3018 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1100,
+              "citation": "Published base elevation 1100 m and top elevation 3018 m for Laax."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-arosa-lenzerheide",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "arosa-lenzerheide",
+        "name": "Arosa Lenzerheide",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.728,
+        "lng": 9.5584
+      },
+      "elevations": {
+        "baseM": 1229,
+        "topM": 2865,
+        "forecastM": 1484
+      },
+      "locality": {
+        "regionId": "arosa-lenzerheide",
+        "regionName": "Arosa Lenzerheide",
+        "stateOrProvince": "Graubünden",
+        "localityId": "lenzerheide",
+        "localityName": "Lenzerheide"
+      },
+      "officialUrl": "https://arosalenzerheide.swiss/en",
+      "liftNetwork": "Arosa Lenzerheide",
+      "snowForecastMidM": 2047,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://arosalenzerheide.swiss/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Arosa Lenzerheide.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "arosa-lenzerheide",
+                "name": "Arosa Lenzerheide",
+                "aliases": []
+              },
+              "citation": "Official site for Arosa Lenzerheide, the resort serving Lenzerheide."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://arosalenzerheide.swiss/en",
+              "citation": "Official website for Arosa Lenzerheide."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "arosa-lenzerheide",
+                "regionName": "Arosa Lenzerheide",
+                "stateOrProvince": "Graubünden",
+                "localityId": "lenzerheide",
+                "localityName": "Lenzerheide"
+              },
+              "citation": "Arosa Lenzerheide is accessed from Lenzerheide (Graubünden, Switzerland), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://arosalenzerheide.swiss/de/Skigebiet/Bergbahnen/Betriebszeiten",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: arosalenzerheide.swiss · de · SkigebietBetriebs- & Öffnungszeiten Bergbahnen Arosa Lenzerheide ### Winter Hauptsaison 19. Dezember 2026 bis 11. März 2027",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Arosa Lenzerheide: arosalenzerheide.swiss · de · SkigebietBetriebs- & Öffnungszeiten Bergbahnen Arosa Lenzerheide ### Winter Hauptsaison 19. Dezember 2026 bis 11. März 2027"
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.728&mlon=9.5584#map=15/46.728/9.5584",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Lenzerheide' (village, node/252620155)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.728,
+                "lng": 9.5584
+              },
+              "citation": "Map marker at 46.728, 9.5584."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.728,9.5584",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1484,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1484 m at 46.728, 9.5584."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/arosa-lenzerheide/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1229 m, top 2865 m. skiresort.info / skiresort.com listing: Arosa Lenzerheide 1229–2865 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1229,
+              "citation": "Published base elevation 1229 m and top elevation 2865 m for Arosa Lenzerheide."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-parsenn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "parsenn",
+        "name": "Parsenn (Davos Klosters)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.7962,
+        "lng": 9.8237
+      },
+      "elevations": {
+        "baseM": 810,
+        "topM": 2844,
+        "forecastM": 1546
+      },
+      "locality": {
+        "regionId": "davos-klosters",
+        "regionName": "Davos Klosters",
+        "stateOrProvince": "Graubünden",
+        "localityId": "davos",
+        "localityName": "Davos"
+      },
+      "officialUrl": "https://www.davos.ch/en",
+      "liftNetwork": "Davos Klosters",
+      "snowForecastMidM": 1827,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.davos.ch/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Parsenn (Davos Klosters).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "parsenn",
+                "name": "Parsenn (Davos Klosters)",
+                "aliases": []
+              },
+              "citation": "Official site for Parsenn (Davos Klosters), the resort serving Davos."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.davos.ch/en",
+              "citation": "Official website for Parsenn (Davos Klosters)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "davos-klosters",
+                "regionName": "Davos Klosters",
+                "stateOrProvince": "Graubünden",
+                "localityId": "davos",
+                "localityName": "Davos"
+              },
+              "citation": "Parsenn (Davos Klosters) is accessed from Davos (Graubünden, Switzerland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Parsenn (Davos Klosters) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Parsenn (Davos Klosters) Current season: 2026-11-13 - 2027-04-04)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/parsenn-davos-klosters/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Parsenn (Davos Klosters) Current season: 2026-11-13 - 2027-04-04",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.7962&mlon=9.8237#map=15/46.7962/9.8237",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Davos' (town, relation/1684068)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.7962,
+                "lng": 9.8237
+              },
+              "citation": "Map marker at 46.7962, 9.8237."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.7962,9.8237",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1546,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1546 m at 46.7962, 9.8237."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/parsenn-davos-klosters/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 810 m, top 2844 m. skiresort.info / skiresort.com listing: Parsenn (Davos Klosters) 810–2844 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 810,
+              "citation": "Published base elevation 810 m and top elevation 2844 m for Parsenn (Davos Klosters)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-jakobshorn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "jakobshorn",
+        "name": "Jakobshorn",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.7962,
+        "lng": 9.8237
+      },
+      "elevations": {
+        "baseM": 1535,
+        "topM": 2568,
+        "forecastM": 1546
+      },
+      "locality": {
+        "regionId": "davos-klosters",
+        "regionName": "Davos Klosters",
+        "stateOrProvince": "Graubünden",
+        "localityId": "davos",
+        "localityName": "Davos"
+      },
+      "officialUrl": "https://www.davos.ch/en",
+      "liftNetwork": "Davos Klosters",
+      "snowForecastMidM": 2052,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.davos.ch/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Jakobshorn.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "jakobshorn",
+                "name": "Jakobshorn",
+                "aliases": []
+              },
+              "citation": "Official site for Jakobshorn, the resort serving Davos."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.davos.ch/en",
+              "citation": "Official website for Jakobshorn."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "davos-klosters",
+                "regionName": "Davos Klosters",
+                "stateOrProvince": "Graubünden",
+                "localityId": "davos",
+                "localityName": "Davos"
+              },
+              "citation": "Jakobshorn is accessed from Davos (Graubünden, Switzerland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Jakobshorn site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Jakobshorn (Davos Klosters) Current season: 2026-11-07 - 2027-04-11)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/jakobshorn-davos-klosters/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Jakobshorn (Davos Klosters) Current season: 2026-11-07 - 2027-04-11",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.7962&mlon=9.8237#map=15/46.7962/9.8237",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Davos' (town, relation/1684068)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.7962,
+                "lng": 9.8237
+              },
+              "citation": "Map marker at 46.7962, 9.8237."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.7962,9.8237",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1546,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1546 m at 46.7962, 9.8237."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/jakobshorn-davos-klosters/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1535 m, top 2568 m. skiresort.info / skiresort.com listing: Jakobshorn 1535–2568 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1535,
+              "citation": "Published base elevation 1535 m and top elevation 2568 m for Jakobshorn."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-corviglia",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "corviglia",
+        "name": "Corviglia (St. Moritz)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.4979,
+        "lng": 9.8392
+      },
+      "elevations": {
+        "baseM": 1772,
+        "topM": 3057,
+        "forecastM": 1844
+      },
+      "locality": {
+        "regionId": "st-moritz",
+        "regionName": "St. Moritz · Engadin",
+        "stateOrProvince": "Graubünden",
+        "localityId": "st-moritz",
+        "localityName": "St. Moritz"
+      },
+      "officialUrl": "https://www.engadin.ch/en",
+      "liftNetwork": "Engadin St. Moritz Mountains",
+      "snowForecastMidM": 2414,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.engadin.ch/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Corviglia (St. Moritz).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "corviglia",
+                "name": "Corviglia (St. Moritz)",
+                "aliases": []
+              },
+              "citation": "Official site for Corviglia (St. Moritz), the resort serving St. Moritz."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.engadin.ch/en",
+              "citation": "Official website for Corviglia (St. Moritz)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "st-moritz",
+                "regionName": "St. Moritz · Engadin",
+                "stateOrProvince": "Graubünden",
+                "localityId": "st-moritz",
+                "localityName": "St. Moritz"
+              },
+              "citation": "Corviglia (St. Moritz) is accessed from St. Moritz (Graubünden, Switzerland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Corviglia (St. Moritz) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Current season 2026-11-28 to 2027-04-04)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/st-moritz-corviglia/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Current season 2026-11-28 to 2027-04-04",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.4979&mlon=9.8392#map=15/46.4979/9.8392",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'St. Moritz' (town, relation/1684175)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.4979,
+                "lng": 9.8392
+              },
+              "citation": "Map marker at 46.4979, 9.8392."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.4979,9.8392",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1844,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1844 m at 46.4979, 9.8392."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/st-moritz-corviglia/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1772 m, top 3057 m. skiresort.info / skiresort.com listing: Corviglia (St. Moritz) 1772–3057 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1772,
+              "citation": "Published base elevation 1772 m and top elevation 3057 m for Corviglia (St. Moritz)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-corvatsch",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "corvatsch",
+        "name": "Corvatsch",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.4578,
+        "lng": 9.8118
+      },
+      "elevations": {
+        "baseM": 1797,
+        "topM": 3303,
+        "forecastM": 1824
+      },
+      "locality": {
+        "regionId": "st-moritz",
+        "regionName": "St. Moritz · Engadin",
+        "stateOrProvince": "Graubünden",
+        "localityId": "silvaplana",
+        "localityName": "Silvaplana"
+      },
+      "officialUrl": "https://www.corvatsch.ch/en",
+      "liftNetwork": "Engadin St. Moritz Mountains",
+      "snowForecastMidM": 2550,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.corvatsch.ch/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Corvatsch.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "corvatsch",
+                "name": "Corvatsch",
+                "aliases": []
+              },
+              "citation": "Official site for Corvatsch, the resort serving Silvaplana."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.corvatsch.ch/en",
+              "citation": "Official website for Corvatsch."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "st-moritz",
+                "regionName": "St. Moritz · Engadin",
+                "stateOrProvince": "Graubünden",
+                "localityId": "silvaplana",
+                "localityName": "Silvaplana"
+              },
+              "citation": "Corvatsch is accessed from Silvaplana (Graubünden, Switzerland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Corvatsch site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Corvatsch/Furtschellas Current season: 2026-11-21 - 2027-04-25)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/corvatsch-furtschellas/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Corvatsch/Furtschellas Current season: 2026-11-21 - 2027-04-25",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.4578&mlon=9.8118#map=15/46.4578/9.8118",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Surlej' (village, node/205227905)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.4578,
+                "lng": 9.8118
+              },
+              "citation": "Map marker at 46.4578, 9.8118."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.4578,9.8118",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1824,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1824 m at 46.4578, 9.8118."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.de/skigebiet/corvatsch-furtschellas/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1797 m, top 3303 m. Corvatsch–Furtschellas 1,797 m to 3,303 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1797,
+              "citation": "Published base elevation 1797 m and top elevation 3303 m for Corvatsch."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-ch-diavolezza-lagalb",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "timezone": "Europe/Zurich",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "diavolezza-lagalb",
+        "name": "Diavolezza-Lagalb",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.49,
+        "lng": 9.9043
+      },
+      "elevations": {
+        "baseM": 2093,
+        "topM": 3006,
+        "forecastM": 1819
+      },
+      "locality": {
+        "regionId": "st-moritz",
+        "regionName": "St. Moritz · Engadin",
+        "stateOrProvince": "Graubünden",
+        "localityId": "pontresina",
+        "localityName": "Pontresina"
+      },
+      "officialUrl": "https://www.diavolezza.ch/en",
+      "liftNetwork": "Engadin St. Moritz Mountains",
+      "snowForecastMidM": 2550,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.diavolezza.ch/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Diavolezza-Lagalb.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "diavolezza-lagalb",
+                "name": "Diavolezza-Lagalb",
+                "aliases": []
+              },
+              "citation": "Official site for Diavolezza-Lagalb, the resort serving Pontresina."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.diavolezza.ch/en",
+              "citation": "Official website for Diavolezza-Lagalb."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "st-moritz",
+                "regionName": "St. Moritz · Engadin",
+                "stateOrProvince": "Graubünden",
+                "localityId": "pontresina",
+                "localityName": "Pontresina"
+              },
+              "citation": "Diavolezza-Lagalb is accessed from Pontresina (Graubünden, Switzerland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Diavolezza-Lagalb site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Diavolezza/Lagalb Current season: 2026-10-17 - 2027-05-02)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/diavolezza-lagalb/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Diavolezza/Lagalb Current season: 2026-10-17 - 2027-05-02",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.49&mlon=9.9043#map=15/46.49/9.9043",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Pontresina' (village, relation/1684131)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.49,
+                "lng": 9.9043
+              },
+              "citation": "Map marker at 46.49, 9.9043."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.49,9.9043",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1819,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1819 m at 46.49, 9.9043."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/diavolezza-lagalb/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 2093 m, top 3006 m. skiresort.info / skiresort.com listing: Diavolezza-Lagalb 2093–3006 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 2093,
+              "citation": "Published base elevation 2093 m and top elevation 3006 m for Diavolezza-Lagalb."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
