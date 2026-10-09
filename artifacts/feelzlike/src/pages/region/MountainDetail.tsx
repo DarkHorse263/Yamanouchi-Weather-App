@@ -1,4 +1,5 @@
 import { useRoute, Link } from "wouter";
+import { OfficialAvalancheBulletin } from "@/components/OfficialAvalancheBulletin";
 import {
   ArrowDown,
   BarChart2,
@@ -1077,6 +1078,11 @@ export function MountainDetail() {
             for free users even when its child returns null. Mountains with
             no lift seeds skip the whole section rather than tease a feature
             that has no data. */}
+        <OfficialAvalancheBulletin
+          country={REGION_COUNTRY[region.id]}
+          province={catalogueRecord?.stateOrProvince ?? (region.id === "st-anton" ? "Tyrol" : "")}
+        />
+
         {/* FREE · one-tap official lift report · kept OUTSIDE the premium
             gate so free visitors don't lose the report link now that the
             old free "On the snow" card is gone (merged Aug 2026). */}

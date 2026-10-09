@@ -335,7 +335,8 @@ export function getRegion(id: string): RegionConfig | undefined {
 // (`/au`, `/jp`) and lets the landing decide which regions belong under
 // which flag without re-deriving from `subtitle` strings. Keep in sync
 // when a new region is added.
-export type CountryCode = "AU" | "JP" | "NZ" | "CA" | "US" | "AT";
+export type CountryCode = import("@workspace/ski-catalogue/countries").CountryCode;
+import { COUNTRY_CODES, EUROPE_COUNTRY_META } from "@workspace/ski-catalogue/countries";
 export const REGION_COUNTRY: Record<string, CountryCode> = {
   "lech-zuers": "AT",
   "st-anton": "AT",
@@ -466,7 +467,7 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   ...Object.fromEntries(
     Object.entries(SKI_CATALOGUE_REGION_COUNTRIES)
       .filter((entry): entry is [string, CountryCode] =>
-        ["AU", "JP", "NZ", "CA", "US", "AT"].includes(entry[1]),
+        (COUNTRY_CODES as readonly string[]).includes(entry[1]),
       ),
   ),
   ...Object.fromEntries(
@@ -606,6 +607,7 @@ const incomingWesternRegionCountryEntries: Record<string, CountryCode> = {
   ),
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
+  ...EUROPE_COUNTRY_META,
   AT: { name: "Austria", flag: "🇦🇹" },
   AU: { name: "Australia", flag: "🇦🇺" },
   JP: { name: "Japan", flag: "🇯🇵" },

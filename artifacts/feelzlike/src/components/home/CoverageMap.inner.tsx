@@ -5,6 +5,7 @@ import "leaflet/dist/leaflet.css";
 import { useLocation } from "wouter";
 import { track } from "@/lib/analytics";
 import { REGIONS, REGION_BY_ID, REGION_COUNTRY, type CountryCode } from "@/regions";
+import { EUROPE_COUNTRY_CODES, EUROPE_COUNTRIES } from "@workspace/ski-catalogue/countries";
 import { REGION_DEFAULTS } from "@/regions/region-pins";
 import {
   japanPrefectureOptions,
@@ -136,7 +137,8 @@ const COUNTRY_CHIPS: Array<{ code: CountryCode | "ALL"; label: string }> = [
   { code: "AU", label: "australia" },
   { code: "NZ", label: "new zealand" },
   { code: "JP", label: "japan" },
-  { code: "AT", label: "austria" },
+  ...EUROPE_COUNTRY_CODES.filter(code => REGIONS.some(r => REGION_COUNTRY[r.id] === code))
+    .map(code => ({ code, label: EUROPE_COUNTRIES[code].name.toLowerCase() })),
   { code: "CA", label: "canada" },
   { code: "US", label: "united states" },
 ];

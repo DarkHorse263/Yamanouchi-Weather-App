@@ -44,7 +44,7 @@ export interface LocationConfig {
   /** Open-Meteo timezone, defaults to "Australia/Sydney". AT uses Europe/Vienna; JP uses Asia/Tokyo, NZ Pacific/Auckland, CA America/Vancouver (BC) or America/Edmonton (AB), US America/Denver (CO). */
   timezone?: string;
   /** ISO region code; AU=Australia, AT=Austria, JP=Japan, NZ=New Zealand, CA=Canada, US=United States. Used for ensemble model selection + forecast horizon. */
-  region?: "AU" | "AT" | "JP" | "NZ" | "CA" | "US";
+  region?: import("@workspace/ski-catalogue/countries").CountryCode;
 }
 
 /** Supported daily horizon by country. Austria intentionally receives the
@@ -1692,9 +1692,10 @@ function catalogueMid(base: number | undefined, top: number | undefined): number
 for (const record of [...publishedCatalogueRecords, ...publishedCanadaCatalogueRecords, ...publishedWesternUsCatalogueRecords]) {
   allowSnowHeight(record.publicId, catalogueMid(record.baseElevationM, record.topElevationM));
 }
-// The general ski catalogue has no verified top; its forecast point is the
-// only server-published height. Do not infer a summit from a base or map pin.
+// Use a cited base/top midpoint when available; retain the exact terrain-point
+// fallback for records without both heights.
 for (const record of publishedSkiCatalogueRecords) {
+  allowSnowHeight(record.publicId, catalogueMid(record.baseElevationM, record.summitElevationM));
   allowSnowHeight(record.publicId, record.forecastElevationM);
 }
 // Authored forecast heights not present in the published catalogues. These
@@ -1955,9 +1956,7 @@ router.get("/forecast/:locationId", async (req, res) => {
       region:
         location.region === "JP"
           ? "JP"
-          : location.region === "AT" || location.region === "NZ" || location.region === "CA" || location.region === "US"
-            ? "OTHER"
-            : "AU",
+          : !location.region || location.region === "AU" ? "AU" : "OTHER",
       timezone: location.timezone ?? "Australia/Sydney",
       days: 7,
     });

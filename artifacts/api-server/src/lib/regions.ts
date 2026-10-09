@@ -162,6 +162,8 @@ type AlertCatalogueRecord = {
   name: string;
   coordinates: { lat: number; lng: number };
   forecastElevationM: number;
+  baseElevationM?: number;
+  summitElevationM?: number;
   timezone: string;
   route: string;
   regionId: string;
@@ -188,7 +190,9 @@ for (const record of ALERT_CATALOGUE_RECORDS) {
     name: record.name,
     latitude: record.coordinates.lat,
     longitude: record.coordinates.lng,
-    elevation: record.forecastElevationM,
+    elevation: record.baseElevationM != null && record.summitElevationM != null && record.summitElevationM > record.baseElevationM
+      ? Math.round((record.baseElevationM + record.summitElevationM) / 2)
+      : record.forecastElevationM,
     timezone: record.timezone,
     route: record.route,
     regionId: record.regionId,

@@ -971,7 +971,8 @@ const RADAR_WINDOW = 3;
 // Australian town + resort, and likewise within Japan. Kept local so the
 // map stays self-contained · keep in step with REGION_COUNTRY in
 // src/regions/index.ts.
-type MapCountry = "AU" | "AT" | "JP" | "NZ" | "CA" | "US";
+type MapCountry = import("@workspace/ski-catalogue/countries").CountryCode;
+import { EUROPE_COUNTRIES } from "@workspace/ski-catalogue/countries";
 const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "lech-zuers": "AT",
   "st-anton": "AT",
@@ -1095,7 +1096,7 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "windham": "US",
   "highmount": "US",
 };
-const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", AT: "austria", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" };
+const COUNTRY_LABEL = { ...Object.fromEntries(Object.entries(EUROPE_COUNTRIES).map(([code, { name }]) => [code, name.toLowerCase()])), AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" } as Record<MapCountry, string>;
 const REGION_LABEL: Record<RegionKey, string> = {
   "lech-zuers": "lech zürs",
   "st-anton": "st anton am arlberg",

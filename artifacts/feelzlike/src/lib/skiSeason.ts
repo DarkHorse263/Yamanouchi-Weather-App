@@ -18,7 +18,8 @@
 // straight in.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export type SkiCountry = "AU" | "JP" | "NZ" | "CA" | "US" | "AT";
+import { isEuropeCountry } from "@workspace/ski-catalogue/countries";
+export type SkiCountry = import("@workspace/ski-catalogue/countries").CountryCode;
 
 /**
  * Whether the country's ski-lift season is open on `now`.
@@ -46,6 +47,7 @@ export type SkiCountry = "AU" | "JP" | "NZ" | "CA" | "US" | "AT";
 export function isLiftSeasonOpen(country: SkiCountry, now: Date = new Date()): boolean {
   const m = now.getMonth(); // 0-indexed
   const d = now.getDate();
+  if (isEuropeCountry(country)) return m === 11 || m <= 3;
   switch (country) {
     case "AU":
     case "NZ":
@@ -55,7 +57,6 @@ export function isLiftSeasonOpen(country: SkiCountry, now: Date = new Date()): b
       if (m === 9) return d <= 10; // October
       return false;
     case "JP":
-    case "AT":
       return m === 11 || m <= 3; // Dec – Apr
     case "CA":
       // 15 Nov – 15 May inclusive

@@ -8,6 +8,10 @@
 
 /**
  * Canonical region identifier used across the FeelZlike platform.
+ * This enum lists authored regions, not country codes. Catalogue-owned
+ * regions are validated against the published runtime registry.
+ * Europe platform support includes AT, FR, CH, IT, DE, AD, ES, NO, SE,
+ * FI, SI, BG, PL, SK, CZ and GB; staged batches add no region IDs here.
  */
 export type RegionId = typeof RegionId[keyof typeof RegionId];
 

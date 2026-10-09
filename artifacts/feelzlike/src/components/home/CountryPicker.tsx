@@ -4,6 +4,7 @@ import { useEffect, useState, type CSSProperties } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { primaryPrefectureForJapanRegion } from "@/regions/japan-prefectures";
 import { COUNTRY_META, REGIONS, REGION_COUNTRY } from "@/regions";
+import { COUNTRY_CODES, isEuropeCountry, type CountryCode } from "@workspace/ski-catalogue/countries";
 
 // ─── types ─────────────────────────────────────────
 import { publishedCatalogueRecords, regions as westernRegions, states as westernStates } from "@workspace/western-us-ski-catalogue/public-runtime";
@@ -37,7 +38,7 @@ interface Region {
   id: string;
   name: string;
   country: string;
-  countryCode: "AU" | "AT" | "JP" | "NZ" | "CA" | "US";
+  countryCode: CountryCode;
   region: string;
   status: RegionStatus;
   href: string;
@@ -315,7 +316,7 @@ const PRIMARY_TOWN: Record<string, string> = {
 };
 
 // AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA + US = northern (snow Dec-Mar).
-export function seasonForCountry(code: "AU" | "AT" | "JP" | "NZ" | "CA" | "US"): "winter" | "green" {
+export function seasonForCountry(code: CountryCode): "winter" | "green" {
   const month = new Date().getMonth() + 1;
   if (code === "AU" || code === "NZ") return month >= 6 && month <= 9 ? "winter" : "green";
   return month >= 12 || month <= 3 ? "winter" : "green";
@@ -374,17 +375,10 @@ function CountryPickerEasternFallback() {
   const regions = data?.regions ?? (offlineRegions.length > 0 ? offlineRegions : FALLBACK_REGIONS);
   const liveCount = regions.filter((r) => r.status === "live").length;
 
-  type Country = { code: "AU" | "AT" | "JP" | "NZ" | "CA" | "US"; name: string; flag: string; regions: Region[] };
-  const COUNTRIES: Country[] = ([
-    // Season-first ordering: Australia + New Zealand (jun-oct season) before
-    // Japan, Canada and the United States (dec-mar).
-    { code: "AU" as const, name: "Australia",   flag: "\u{1F1E6}\u{1F1FA}", regions: regions.filter((r) => r.countryCode === "AU") },
-    { code: "NZ" as const, name: "New Zealand", flag: "\u{1F1F3}\u{1F1FF}", regions: regions.filter((r) => r.countryCode === "NZ") },
-    { code: "JP" as const, name: "Japan",       flag: "\u{1F1EF}\u{1F1F5}", regions: regions.filter((r) => r.countryCode === "JP") },
-    { code: "AT" as const, name: "Austria",     flag: "\u{1F1E6}\u{1F1F9}", regions: regions.filter((r) => r.countryCode === "AT") },
-    { code: "CA" as const, name: "Canada",      flag: "\u{1F1E8}\u{1F1E6}", regions: regions.filter((r) => r.countryCode === "CA") },
-    { code: "US" as const, name: "United States", flag: "\u{1F1FA}\u{1F1F8}", regions: regions.filter((r) => r.countryCode === "US") },
-  ] satisfies Country[]).filter((c) => c.regions.length > 0);
+  type Country = { code: CountryCode; name: string; flag: string; regions: Region[] };
+  const COUNTRIES: Country[] = COUNTRY_CODES.map(code => ({
+    code, ...COUNTRY_META[code], regions: regions.filter(r => r.countryCode === code),
+  })).filter(c => c.regions.length > 0);
 
   return (
     <>
@@ -582,17 +576,10 @@ export function CountryPicker() {
   const regions = data?.regions ?? SAFE_FALLBACK_REGIONS;
   const liveCount = regions.filter((r) => r.status === "live").length;
 
-  type Country = { code: "AU" | "AT" | "JP" | "NZ" | "CA" | "US"; name: string; flag: string; regions: Region[] };
-  const COUNTRIES: Country[] = ([
-    // Season-first ordering: Australia + New Zealand (jun-oct season) before
-    // Japan, Canada and the United States (dec-mar).
-    { code: "AU" as const, name: "Australia",   flag: "\u{1F1E6}\u{1F1FA}", regions: regions.filter((r) => r.countryCode === "AU") },
-    { code: "NZ" as const, name: "New Zealand", flag: "\u{1F1F3}\u{1F1FF}", regions: regions.filter((r) => r.countryCode === "NZ") },
-    { code: "JP" as const, name: "Japan",       flag: "\u{1F1EF}\u{1F1F5}", regions: regions.filter((r) => r.countryCode === "JP") },
-    { code: "AT" as const, name: "Austria",     flag: "\u{1F1E6}\u{1F1F9}", regions: regions.filter((r) => r.countryCode === "AT") },
-    { code: "CA" as const, name: "Canada",      flag: "\u{1F1E8}\u{1F1E6}", regions: regions.filter((r) => r.countryCode === "CA") },
-    { code: "US" as const, name: "United States", flag: "\u{1F1FA}\u{1F1F8}", regions: regions.filter((r) => r.countryCode === "US") },
-  ] satisfies Country[]).filter((c) => c.regions.length > 0);
+  type Country = { code: CountryCode; name: string; flag: string; regions: Region[] };
+  const COUNTRIES: Country[] = COUNTRY_CODES.map(code => ({
+    code, ...COUNTRY_META[code], regions: regions.filter(r => r.countryCode === code),
+  })).filter(c => c.regions.length > 0);
 
   return (
     <>
@@ -643,6 +630,10 @@ export function CountryPicker() {
             : [{ id: country.code, label: null, regions: country.regions }];
 
           return (
+            <div key={country.code} className="contents">
+            {isEuropeCountry(country.code) && !COUNTRIES.slice(0, idx).some(c => isEuropeCountry(c.code)) && (
+              <h2 className="mt-4 text-xl font-bold text-white md:col-span-2">europe</h2>
+            )}
             <motion.div
               key={country.code}
               initial={{ opacity: 0, y: 8 }}
@@ -740,6 +731,7 @@ export function CountryPicker() {
                 </div>
               )}
             </motion.div>
+            </div>
           );
         })}
       </div>

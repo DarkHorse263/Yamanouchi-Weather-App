@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { useLanguage } from "@workspace/feelzlike-shell";
 import { Check, ChevronDown } from "lucide-react";
 import { ALERT_REGIONS, COUNTRY_REGION_TOTALS } from "@/lib/alertRegions";
+import { EUROPE_COUNTRIES } from "@workspace/ski-catalogue/countries";
 
 /**
  * Region multi-select grouped into collapsible country sections.
@@ -12,6 +13,7 @@ import { ALERT_REGIONS, COUNTRY_REGION_TOTALS } from "@/lib/alertRegions";
  */
 
 const COUNTRY_LABELS: Record<string, { en: string; ja: string }> = {
+  ...Object.fromEntries(Object.entries(EUROPE_COUNTRIES).map(([code, { name }]) => [code, { en: name.toLowerCase(), ja: name }])),
   AU: { en: "australia", ja: "オーストラリア" },
   AT: { en: "austria", ja: "オーストリア" },
   JP: { en: "japan", ja: "日本" },

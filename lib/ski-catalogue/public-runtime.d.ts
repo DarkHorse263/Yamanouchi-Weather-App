@@ -14,6 +14,7 @@ export interface PublicCatalogueRecord {
   coordinates: { lat: number; lng: number };
   forecastElevationM: number;
   baseElevationM?: number;
+  summitElevationM?: number;
   officialUrl: string;
   regionId: string;
   regionName: string;

@@ -16,3 +16,15 @@ small areas and mountain destinations, rather than calling flagship coverage
 complete. Research candidates are not verified runtime coverage. Keep gaps,
 geographic boundary cases and permission blockers explicit. Do not revive
 the previous Austria-first restriction or silently narrow the scope to pilots.
+
+The supplied Europe wave1/wave2 batches (154 resorts) come before the wider
+country inventory. Do not re-research their supplied season, coordinate or
+terrain-height evidence. Platform preparation (Task A) is separate from their
+publication (Task B); importing batches and republishing require the owner's
+next instruction.
+
+**Why:** the owner explicitly separated platform preparation from resort
+import and required confirmation before republishing.
+
+**How to apply:** keep the wider country ledger/readiness documents intact;
+do not treat country support as published coverage or as permission to import.

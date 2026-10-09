@@ -4,6 +4,10 @@
   "private": true,
   "type": "module",
   "exports": {
+    "./countries": {
+      "types": "./countries.d.ts",
+      "default": "./countries.js"
+    },
     ".": {
       "types": "./index.d.ts",
       "default": "./index.js"

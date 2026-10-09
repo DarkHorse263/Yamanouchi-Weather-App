@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import test, { mock } from "node:test";
+import { OpenWeatherGuard } from "../owm-guard.js";
 import { GetWeatherResponse } from "@workspace/api-zod";
 import {
   buildDailyForecast,
@@ -145,25 +146,20 @@ test("OpenWeatherMap fallback leaves daily feels-like extrema null for sparse 3-
       clouds: { all: 30 },
     },
   ];
-  globalThis.fetch = (async (input: string | URL | Request) => {
+  // Reshaping is isolated from the separately tested provider quota guard.
+  const requestMock = mock.method(OpenWeatherGuard.prototype, "request", async (input: URL) => {
     const url = String(input);
     if (url.includes("/weather?")) {
-      return {
-        ok: true,
-        json: async () => ({
+      return Buffer.from(JSON.stringify({
           timezone: 32_400,
           main: { temp: 1, feels_like: -2, humidity: 80 },
           weather: [{ id: 800, icon: "01d" }],
           wind: { speed: 2, deg: 180 },
           clouds: { all: 20 },
-        }),
-      } as Response;
+        }));
     }
-    return {
-      ok: true,
-      json: async () => ({ city: { timezone: 32_400 }, list: entries }),
-    } as Response;
-  }) as typeof fetch;
+    return Buffer.from(JSON.stringify({ city: { timezone: 32_400 }, list: entries }));
+  });
 
   try {
     const reshaped = await fetchOpenWeatherMapAsOpenMeteo(location);
@@ -178,7 +174,7 @@ test("OpenWeatherMap fallback leaves daily feels-like extrema null for sparse 3-
     // no actual temperature is skipped instead of becoming a false 0°C row.
     assert.equal(reshaped.hourly.temperature_2m.length, 9);
   } finally {
-    globalThis.fetch = originalFetch;
+    requestMock.mock.restore();
     if (originalKey === undefined) delete process.env.OWM_API_KEY;
     else process.env.OWM_API_KEY = originalKey;
   }

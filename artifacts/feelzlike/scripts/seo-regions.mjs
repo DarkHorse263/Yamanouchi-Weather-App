@@ -39,7 +39,10 @@ import {
 export const staticRoutePaths = [
   "/", "/countries", "/at", "/au", "/jp", "/nz", "/ca", "/ca/all-ski-areas", "/us",
   "/compare", "/alerts", "/premium", "/near-you", "/legal/privacy", "/legal/terms",
+  ...EUROPE_COUNTRY_CODES.filter(code => code !== "AT" && publishedSkiCatalogueRegions.some(r => r.countryCode === code))
+    .map(code => `/${code.toLowerCase()}`),
 ];
+import { EUROPE_COUNTRY_CODES } from "@workspace/ski-catalogue/countries";
 
 export const REGIONS = [
   // ── Austria authored regions · Lech Zürs and St Anton ───────────────────

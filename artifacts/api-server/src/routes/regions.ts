@@ -32,7 +32,7 @@ export interface RegionConfig {
   id: string;
   name: string;
   country: string;
-  countryCode: "AU" | "AT" | "JP" | "NZ" | "CA" | "US";
+  countryCode: import("@workspace/ski-catalogue/countries").CountryCode;
   region: string;
   status: RegionStatus;
   href: string;

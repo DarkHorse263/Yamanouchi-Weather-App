@@ -63,8 +63,9 @@ export const POWDER_THRESHOLDS_AT: Required<PowderThresholds> = {
  * "undefined region = AU" convention.
  */
 export function powderThresholdsForCountry(
-  country: "AU" | "JP" | "NZ" | "CA" | "US" | "AT" | undefined,
+  country: import("@workspace/ski-catalogue/countries").CountryCode | undefined,
 ): Required<PowderThresholds> {
+  if (isEuropeCountry(country)) return EUROPE_POWDER_THRESHOLDS[country];
   switch (country) {
     case "JP":
       return POWDER_THRESHOLDS_JP;
@@ -72,14 +73,13 @@ export function powderThresholdsForCountry(
     case "CA":
     case "US":
       return POWDER_THRESHOLDS_NZ_CA;
-    case "AT":
-      return POWDER_THRESHOLDS_AT;
     default:
       return POWDER_THRESHOLDS_AU;
   }
 }
 
 export type PowderGrade = "gold" | "silver" | "bronze";
+import { isEuropeCountry, EUROPE_POWDER_THRESHOLDS } from "@workspace/ski-catalogue/countries";
 
 export interface PowderWindow {
   /** Inclusive start index into the input hourly array. */

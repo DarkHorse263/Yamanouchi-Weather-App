@@ -17,7 +17,7 @@ import { pingPartnerEvent } from "@/lib/engagement";
  * list rather than the generic homepage (all four paths curl-verified
  * Aug 2026).
  */
-const GOWITHGUIDE_URL_BY_COUNTRY: Record<CountryCode, string> = {
+const GOWITHGUIDE_URL_BY_COUNTRY: Partial<Record<CountryCode, string>> = {
   AU: "https://gowithguide.com/australia",
   NZ: "https://gowithguide.com/new-zealand",
   JP: "https://gowithguide.com/japan",

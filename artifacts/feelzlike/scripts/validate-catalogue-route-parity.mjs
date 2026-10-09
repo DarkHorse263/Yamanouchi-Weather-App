@@ -113,21 +113,16 @@ const checkedInSitemapPaths = [...checkedInSitemap.matchAll(/<loc>([^<]+)<\/loc>
   .map((path) => (path === "/" ? path : path.replace(/\/$/, "")));
 assertExactManifest("checked-in sitemap", checkedInSitemapPaths, expectedBuild);
 
-const checkedInArtifact = readFileSync(
-  join(here, "..", ".replit-artifact", "artifact.toml"),
-  "utf8",
-);
-const checkedInRewritePaths = [...checkedInArtifact.matchAll(/^from = "([^"]+)"$/gm)]
-  .map(([, path]) => path)
-  .filter((path) => path !== "/*")
-  .map((path) => path.slice(0, -1))
-  .filter((path) => !legacyPaths.has(path));
-assertExactManifest(
-  "checked-in production rewrites",
-  checkedInRewritePaths,
-  expectedBuild.filter((path) => path !== "/"),
-);
+// Production now serves protected HTML through the page server, not edge
+// rewrites. Validate its actual source manifest rather than obsolete config.
+const { pageRoutes } = await import("./build-page-routes.mjs");
+assertParity("production page-server routes", pageRoutes.routes);
+// The page server also owns account/admin and non-indexable compatibility
+// routes. Every indexable route must exist, but those extras are legitimate.
+for (const path of expectedBuild) {
+  if (!pageRoutes.routes.includes(path)) fail(`production page-server route missing: ${path}`);
+}
 
 if (!process.exitCode) {
-  console.log(`[catalogue-route-parity] ${expected.length} published mountain routes match generated and checked-in sitemap, prerender, and rewrites`);
+  console.log(`[catalogue-route-parity] ${expected.length} published mountain routes match sitemap, prerender, and production page-server routes`);
 }

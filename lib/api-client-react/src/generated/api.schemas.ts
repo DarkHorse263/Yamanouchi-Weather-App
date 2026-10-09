@@ -103,6 +103,10 @@ export interface ErrorEnvelope {
 
 /**
  * Canonical region identifier used across the FeelZlike platform.
+ * This enum lists authored regions, not country codes. Catalogue-owned
+ * regions are validated against the published runtime registry.
+ * Europe platform support includes AT, FR, CH, IT, DE, AD, ES, NO, SE,
+ * FI, SI, BG, PL, SK, CZ and GB; staged batches add no region IDs here.
  */
 export type RegionId = typeof RegionId[keyof typeof RegionId];
 
@@ -2093,6 +2097,10 @@ export type ReceiveResendWebhook200 = { [key: string]: unknown };
 export type GetPowderAlertsParams = {
 /**
  * Canonical region identifier used across the FeelZlike platform.
+ * This enum lists authored regions, not country codes. Catalogue-owned
+ * regions are validated against the published runtime registry.
+ * Europe platform support includes AT, FR, CH, IT, DE, AD, ES, NO, SE,
+ * FI, SI, BG, PL, SK, CZ and GB; staged batches add no region IDs here.
  */
 region?: RegionFilterParameter;
 };
@@ -2207,6 +2215,10 @@ export const GetAttractionsCategory = {
 export type GetWeatherParams = {
 /**
  * Canonical region identifier used across the FeelZlike platform.
+ * This enum lists authored regions, not country codes. Catalogue-owned
+ * regions are validated against the published runtime registry.
+ * Europe platform support includes AT, FR, CH, IT, DE, AD, ES, NO, SE,
+ * FI, SI, BG, PL, SK, CZ and GB; staged batches add no region IDs here.
  */
 region?: RegionFilterParameter;
 };
@@ -2227,6 +2239,10 @@ snowElevationM?: number;
 export type GetWebcamsParams = {
 /**
  * Canonical region identifier used across the FeelZlike platform.
+ * This enum lists authored regions, not country codes. Catalogue-owned
+ * regions are validated against the published runtime registry.
+ * Europe platform support includes AT, FR, CH, IT, DE, AD, ES, NO, SE,
+ * FI, SI, BG, PL, SK, CZ and GB; staged batches add no region IDs here.
  */
 region?: RegionFilterParameter;
 };
@@ -2234,6 +2250,10 @@ region?: RegionFilterParameter;
 export type GetRoadConditionsParams = {
 /**
  * Canonical region identifier used across the FeelZlike platform.
+ * This enum lists authored regions, not country codes. Catalogue-owned
+ * regions are validated against the published runtime registry.
+ * Europe platform support includes AT, FR, CH, IT, DE, AD, ES, NO, SE,
+ * FI, SI, BG, PL, SK, CZ and GB; staged batches add no region IDs here.
  */
 region?: RegionFilterParameter;
 };
@@ -2248,6 +2268,10 @@ town?: string;
 export type GetLiftStatusParams = {
 /**
  * Canonical region identifier used across the FeelZlike platform.
+ * This enum lists authored regions, not country codes. Catalogue-owned
+ * regions are validated against the published runtime registry.
+ * Europe platform support includes AT, FR, CH, IT, DE, AD, ES, NO, SE,
+ * FI, SI, BG, PL, SK, CZ and GB; staged batches add no region IDs here.
  */
 region?: RegionFilterParameter;
 };

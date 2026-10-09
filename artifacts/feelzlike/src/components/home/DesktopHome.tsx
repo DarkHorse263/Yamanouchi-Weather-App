@@ -20,7 +20,8 @@ import { track } from "@/lib/analytics";
 
 // Season-first ordering: southern-hemisphere countries (in season jun-oct)
 // come before Japan (dec-mar).
-const COUNTRIES: CountryCode[] = ["AU", "NZ", "JP", "AT", "CA", "US"];
+import { COUNTRY_CODES } from "@workspace/ski-catalogue/countries";
+const COUNTRIES: CountryCode[] = COUNTRY_CODES.filter(code => regionsForCountry(code).length > 0);
 
 // A card can only fit so many region names before it swamps the grid (the
 // united states alone has 80+). Show the first few, then a count.

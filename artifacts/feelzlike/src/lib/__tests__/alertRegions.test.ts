@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { projectAlertRegions } from "../alertRegionProjection";
+import { EUROPE_COUNTRY_CODES } from "@workspace/ski-catalogue/countries";
 
 test("country totals include all canonical regions while alert choices remain eligible-only", () => {
   const regions = [
@@ -21,7 +22,7 @@ test("country totals include all canonical regions while alert choices remain el
   } as const;
   const projection = projectAlertRegions(regions, countries, (id) => id !== "nz-directory");
 
-  assert.deepEqual(projection.countryRegionTotals, { AU: 1, AT: 1, JP: 0, NZ: 2, CA: 1, US: 1 });
+  assert.deepEqual(projection.countryRegionTotals, { ...Object.fromEntries(EUROPE_COUNTRY_CODES.map(code => [code, 0])), AU: 1, AT: 1, JP: 0, NZ: 2, CA: 1, US: 1 });
   assert.deepEqual(projection.alertRegions.map((region) => region.id), [
     "au-live", "at-live", "nz-live", "ca-live", "us-live",
   ]);

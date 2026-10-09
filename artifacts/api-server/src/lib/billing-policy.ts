@@ -19,6 +19,8 @@ export function isBillingCountry(value: unknown): value is string {
 }
 
 export function currencyForCountry(country: string): BillingCurrency {
+  // TODO(owner): confirm CHF, GBP and NOK price points before purchases reopen.
+  // Destination expansion must not change billing-country currency selection.
   if (country === "US") return "USD";
   if (EURO_COUNTRIES.has(country)) return "EUR";
   return "AUD";

@@ -25,6 +25,7 @@ const router: IRouter = Router();
  * Caching, source-failure handling, and confidence classification live in
  * `getEnsembleForecast` itself - we don't repeat the logic here.
  */
+import { countryTimezone } from "@workspace/ski-catalogue/countries";
 router.get("/town-ensemble", async (req, res): Promise<void> => {
   res.setHeader("Cache-Control", "private, no-store");
   let extended: boolean;
@@ -66,14 +67,7 @@ router.get("/town-ensemble", async (req, res): Promise<void> => {
   // Pick a sensible IANA timezone per region so per-day buckets line up with
   // local midnight. Open-Meteo also accepts "auto" but being explicit keeps
   // cache keys stable when called from different replicas.
-  const timezone =
-    region === "JP"
-      ? "Asia/Tokyo"
-      : region === "AU"
-        ? "Australia/Sydney"
-        : regionRaw === "AT"
-          ? "Europe/Vienna"
-        : "UTC";
+  const timezone = countryTimezone(regionRaw);
 
   try {
     const ensemble = await getEnsembleForecast({

@@ -58,6 +58,7 @@ const withTrailingSlash = (p) => (p === "/" ? "/" : p.endsWith("/") ? p : `${p}/
 // content. /cams is intentionally omitted — server-side 301 to /roads.
 
 const BY_COUNTRY = (code) => REGIONS.filter((r) => r.country === code);
+import { EUROPE_COUNTRIES } from "@workspace/ski-catalogue/countries";
 
 // ── HTML utilities ────────────────────────────────────────────────────────
 
@@ -194,11 +195,13 @@ const countryLine = (code, label) =>
 add(
   "/countries",
   "browse resort regions by country · feelzlike",
-  "Choose a country to explore resort town weather and conditions — Austria, Australia, Japan, New Zealand, Canada, and the United States.",
+  "Choose a supported country to explore resort town weather and mountain conditions.",
   `<main>
     <h1>browse resort regions by country</h1>
     <ul>
        ${countryLine("AT", "Austria")}
+       ${Object.entries(EUROPE_COUNTRIES).filter(([code]) => code !== "AT" && BY_COUNTRY(code).length > 0)
+         .map(([code, { name }]) => countryLine(code, name)).join("\n")}
        ${countryLine("AU", "Australia")}
       ${countryLine("JP", "Japan")}
       ${countryLine("NZ", "New Zealand")}
@@ -224,6 +227,16 @@ add(
     </section>`).join("\n")}
   </main>`,
 );
+
+for (const [code, { name }] of Object.entries(EUROPE_COUNTRIES)) {
+  const regions = BY_COUNTRY(code);
+  if (code === "AT" || regions.length === 0) continue;
+  add(`/${code.toLowerCase()}`, `${name} · mountain weather · feelzlike`,
+    `Forecasts and official destination links for supported mountains in ${name}.`,
+    `<main><h1>${esc(name)} · mountain weather</h1>${regions.map(r => `
+      <section><h2><a href="/${r.slug}">${esc(r.name)}</a></h2>
+      <ul>${regionTownList(r)}</ul></section>`).join("")}</main>`);
+}
 
 add(
   "/au",

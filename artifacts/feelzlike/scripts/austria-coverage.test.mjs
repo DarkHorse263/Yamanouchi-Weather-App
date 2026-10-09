@@ -46,7 +46,7 @@ test("Austria weather locations are Europe/Vienna and do not inherit Australia",
       `${id} needs an explicit Austria weather configuration`,
     );
   }
-  assert.match(weather, /location\.region === "AT".+?\? "OTHER"/s);
+  assert.match(weather, /!location\.region \|\| location\.region === "AU" \? "AU" : "OTHER"/);
 });
 
 test("St Anton live resort data remains official-link only", () => {

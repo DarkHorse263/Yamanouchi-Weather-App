@@ -5,13 +5,12 @@ import { fileURLToPath } from "node:url";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import helmetAsync from "react-helmet-async";
+import { HelmetProvider } from "react-helmet-async";
 import { Router } from "wouter";
 import react from "@vitejs/plugin-react";
 import { createServer, type Plugin } from "vite";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
-const { HelmetProvider } = helmetAsync;
 
 const clerkStub: Plugin = {
   name: "clerk-test-stub",

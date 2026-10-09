@@ -77,11 +77,12 @@ export const RIDESHARE_AVAILABLE_TOWNS: ReadonlySet<string> = new Set<string>([
  *
  * AU, JP and NZ retain the previous allowlist behaviour.
  */
+import { isEuropeCountry } from "@workspace/ski-catalogue/countries";
 export function townHasRideshare(
   townId: string | undefined,
   countryCode?: string,
 ): boolean {
   if (!townId) return false;
-  if (countryCode === "US" || countryCode === "CA" || countryCode === "AT") return true;
+  if (countryCode === "US" || countryCode === "CA" || isEuropeCountry(countryCode)) return true;
   return RIDESHARE_AVAILABLE_TOWNS.has(townId);
 }

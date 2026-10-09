@@ -13,6 +13,7 @@ function mountainFor(record: PublicCatalogueRecord): CatalogueMountainLink {
     name: record.name,
     elevationM: record.forecastElevationM,
     baseElevationM: record.baseElevationM,
+    summitElevationM: record.summitElevationM,
     lat: record.coordinates.lat,
     lng: record.coordinates.lng,
     websiteUrl: record.officialUrl,

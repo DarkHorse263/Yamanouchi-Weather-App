@@ -8,6 +8,7 @@ import type { PlannerForecastData } from "../../src/lib/tripForecastData";
 // Keep the actual page, cards, day cells, forecast hook and React Query cache.
 // Only unrelated chrome, preferences and the large asset-backed catalogue are stubbed.
 vi.mock("@/lib/seo/PageMeta", () => ({ PageMeta: () => null }));
+vi.mock("@clerk/react", () => ({ useUser: () => ({ user: null, isLoaded: true }) }));
 vi.mock("@/components/PremiumFeaturePrompt", () => ({ PremiumFeaturePrompt: () => null }));
 vi.mock("@/components/auth/UserPrefsProvider", () => ({
   useUnits: () => ({
@@ -34,7 +35,7 @@ vi.mock("@/lib/tripPlanner", () => {
   };
 });
 
-const QUERY_KEY = ["trip-forecast", "feelzlike-v2", "clock-mountain", null];
+const QUERY_KEY = ["trip-forecast", "feelzlike-v2", "signed-out", "clock-mountain", null];
 // Sydney midnight is 14:00 UTC in July: the viewer's UTC date does NOT change.
 const BEFORE_MIDNIGHT = "2026-07-01T13:59:30.000Z";
 const AFTER_MIDNIGHT = "2026-07-01T14:00:00.000Z";

@@ -17,6 +17,7 @@
  * lose their picks. No login required · matches the app's anonymous-first model.
  */
 import { REGIONS, REGION_COUNTRY, type CountryCode } from "@/regions";
+import { COUNTRY_CODES } from "@workspace/ski-catalogue/countries";
 import type { MountainLink } from "@workspace/feelzlike-shell";
 
 // Re-export the pure day scorer so existing imports from this module keep
@@ -79,7 +80,7 @@ export function tripPlannerCatalog(country: CountryCode): CatalogMountain[] {
  */
 export function plannerCountries(): CountryCode[] {
   // Season-first ordering: AU + NZ (jun-oct season) before Japan (dec-mar).
-  const order: CountryCode[] = ["AU", "NZ", "JP", "AT", "CA", "US"];
+  const order: CountryCode[] = [...COUNTRY_CODES];
   return order.filter((c) => tripPlannerCatalog(c).length > 0);
 }
 

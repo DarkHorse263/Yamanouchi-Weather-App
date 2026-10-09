@@ -85,7 +85,7 @@ test("authored Australian mountain pages label their alert as regional", () => {
   );
   assert.match(
     mountainDetail,
-    /defaultMountain=\{mountainAlertsAvailable \? locationId : undefined\}/,
+    /mountainAlertsAvailable\s*\?\s*"we'll email when powder hits the forecast for this mountain\."/,
   );
-  assert.match(mountainDetail, /key=\{`\$\{region\.id\}\/\$\{locationId\}`\}/);
+  assert.match(mountainDetail, /href="\/premium"/);
 });

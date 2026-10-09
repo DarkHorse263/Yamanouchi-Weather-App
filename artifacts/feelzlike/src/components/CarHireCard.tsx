@@ -10,7 +10,7 @@ import { pingPartnerEvent } from "@/lib/engagement";
 // region at its local Europcar site (AU -> .com.au, NZ -> .co.nz) so the
 // MasterTag can track the click. Any other country falls back to the global
 // site, which simply stays an untracked (but still working) link.
-const EUROPCAR_URL_BY_COUNTRY: Record<CountryCode, string> = {
+const EUROPCAR_URL_BY_COUNTRY: Partial<Record<CountryCode, string>> = {
   AU: "https://www.europcar.com.au/",
   NZ: "https://www.europcar.co.nz/",
   JP: "https://www.europcar.com/",

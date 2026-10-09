@@ -2,6 +2,8 @@ import { Switch, Route, Redirect, Router as WouterRouter, useLocation } from "wo
 import { QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Welcome from "@/pages/Welcome";
+import { EUROPE_COUNTRY_CODES } from "@workspace/ski-catalogue/countries";
+import { regionsForCountry } from "@/regions";
 import Countries from "@/pages/Countries";
 import NotFound from "@/pages/not-found";
 import { RegionLayout } from "@/layouts/RegionLayout";
@@ -271,8 +273,11 @@ function Router() {
       <Route path="/plan"><Redirect to="/compare" replace /></Route>
       <Route path="/plan/"><Redirect to="/compare" replace /></Route>
       <Route path="/admin" component={AdminStats} />
-      <Route path="/at"><CountryHome code="AT" /></Route>
-      <Route path="/at/"><CountryHome code="AT" /></Route>
+      {EUROPE_COUNTRY_CODES.filter(code => regionsForCountry(code).length > 0).flatMap(code =>
+        [`/${code.toLowerCase()}`, `/${code.toLowerCase()}/`].map(path =>
+          <Route key={path} path={path}><CountryHome code={code} /></Route>
+        )
+      )}
       <Route path="/au"><CountryHome code="AU" /></Route>
       <Route path="/au/"><CountryHome code="AU" /></Route>
       <Route path="/jp"><CountryHome code="JP" /></Route>
