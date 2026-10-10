@@ -1,0 +1,1976 @@
+{
+  "batchVersion": 1,
+  "batchId": "europe-phase8-central-eastern-europe-scotland",
+  "records": [
+    {
+      "recordId": "eu-si-kranjska-gora",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Slovenia",
+      "countryCode": "SI",
+      "timezone": "Europe/Ljubljana",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "kranjska-gora",
+        "name": "Kranjska Gora",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.4569,
+        "lng": 13.7782
+      },
+      "elevations": {
+        "baseM": 807,
+        "topM": 1282,
+        "forecastM": 1050
+      },
+      "locality": {
+        "regionId": "julian-alps",
+        "regionName": "Julian Alps",
+        "stateOrProvince": "Upper Carniola",
+        "localityId": "kranjska-gora",
+        "localityName": "Kranjska Gora"
+      },
+      "officialUrl": "https://www.kranjska-gora.si/en",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 1044,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.kranjska-gora.si/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Kranjska Gora.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "kranjska-gora",
+                "name": "Kranjska Gora",
+                "aliases": []
+              },
+              "citation": "Official site for Kranjska Gora, the resort serving Kranjska Gora."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.kranjska-gora.si/en",
+              "citation": "Official website for Kranjska Gora."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "julian-alps",
+                "regionName": "Julian Alps",
+                "stateOrProvince": "Upper Carniola",
+                "localityId": "kranjska-gora",
+                "localityName": "Kranjska Gora"
+              },
+              "citation": "Kranjska Gora is accessed from Kranjska Gora (Upper Carniola, Slovenia), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Kranjska Gora site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Summer SKI Kranjska Gora Poletna sezona 2026 je zaključena. ... The summer season 2026 is over.)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.ski-kranjska-gora.com/en/summer",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Summer SKI Kranjska Gora Poletna sezona 2026 je zaključena. ... The summer season 2026 is over.",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.4569&mlon=13.7782#map=15/46.4569/13.7782",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (GeoNames populated-place point via Open-Meteo geocoding).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.4569,
+                "lng": 13.7782
+              },
+              "citation": "Map marker at 46.4569, 13.7782."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.4569,13.7782",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1050,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1050 m at 46.4569, 13.7782."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/kranjska-gora/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 807 m, top 1282 m. skiresort.info / skiresort.com listing: Kranjska Gora 807–1282 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 807,
+              "citation": "Published base elevation 807 m and top elevation 1282 m for Kranjska Gora."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-si-vogel",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Slovenia",
+      "countryCode": "SI",
+      "timezone": "Europe/Ljubljana",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "vogel",
+        "name": "Vogel",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.2793,
+        "lng": 13.83
+      },
+      "elevations": {
+        "baseM": 569,
+        "topM": 1800,
+        "forecastM": 539
+      },
+      "locality": {
+        "regionId": "julian-alps",
+        "regionName": "Julian Alps",
+        "stateOrProvince": "Upper Carniola",
+        "localityId": "bohinj",
+        "localityName": "Bohinj"
+      },
+      "officialUrl": "https://www.vogel.si/en",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 1184,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.vogel.si/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Vogel.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "vogel",
+                "name": "Vogel",
+                "aliases": []
+              },
+              "citation": "Official site for Vogel, the resort serving Bohinj."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.vogel.si/en",
+              "citation": "Official website for Vogel."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "julian-alps",
+                "regionName": "Julian Alps",
+                "stateOrProvince": "Upper Carniola",
+                "localityId": "bohinj",
+                "localityName": "Bohinj"
+              },
+              "citation": "Vogel is accessed from Bohinj (Upper Carniola, Slovenia), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Vogel site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Snow report Vogel – Bohinj Planned start of season: 19 Dec 2026 Planned end of season: 4 Apr 2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/vogel-bohinj/snow-report/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Snow report Vogel – Bohinj Planned start of season: 19 Dec 2026 Planned end of season: 4 Apr 2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.2793&mlon=13.83#map=15/46.2793/13.83",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Ukanc' (village, node/208843100)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.2793,
+                "lng": 13.83
+              },
+              "citation": "Map marker at 46.2793, 13.83."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.2793,13.83",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 539,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 539 m at 46.2793, 13.83."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/vogel-bohinj/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 569 m, top 1800 m. skiresort.info / skiresort.com listing: Vogel 569–1800 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 569,
+              "citation": "Published base elevation 569 m and top elevation 1800 m for Vogel."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-si-krvavec",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Slovenia",
+      "countryCode": "SI",
+      "timezone": "Europe/Ljubljana",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "krvavec",
+        "name": "Krvavec",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 46.2997,
+        "lng": 14.5367
+      },
+      "elevations": {
+        "baseM": 1450,
+        "topM": 1971,
+        "forecastM": 1832
+      },
+      "locality": {
+        "regionId": "julian-alps",
+        "regionName": "Julian Alps",
+        "stateOrProvince": "Upper Carniola",
+        "localityId": "cerklje-na-gorenjskem",
+        "localityName": "Cerklje na Gorenjskem"
+      },
+      "officialUrl": "https://www.rtc-krvavec.si/",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 1710,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.rtc-krvavec.si/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Krvavec.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "krvavec",
+                "name": "Krvavec",
+                "aliases": []
+              },
+              "citation": "Official site for Krvavec, the resort serving Cerklje na Gorenjskem."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.rtc-krvavec.si/",
+              "citation": "Official website for Krvavec."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "julian-alps",
+                "regionName": "Julian Alps",
+                "stateOrProvince": "Upper Carniola",
+                "localityId": "cerklje-na-gorenjskem",
+                "localityName": "Cerklje na Gorenjskem"
+              },
+              "citation": "Krvavec is accessed from Cerklje na Gorenjskem (Upper Carniola, Slovenia), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Krvavec site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Krvavec Current season: 2026-11-28 - 2027-04-18)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/krvavec/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Krvavec Current season: 2026-11-28 - 2027-04-18",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.2997&mlon=14.5367#map=15/46.2997/14.5367",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Krvavec, Cerklje' (peak, node/252493392)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.2997,
+                "lng": 14.5367
+              },
+              "citation": "Map marker at 46.2997, 14.5367."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=46.2997,14.5367",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1832,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1832 m at 46.2997, 14.5367."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/krvavec/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1450 m, top 1971 m. skiresort.info / skiresort.com listing: Krvavec 1450–1971 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1450,
+              "citation": "Published base elevation 1450 m and top elevation 1971 m for Krvavec."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-bg-bansko",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Bulgaria",
+      "countryCode": "BG",
+      "timezone": "Europe/Sofia",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "bansko",
+        "name": "Bansko",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 41.8344,
+        "lng": 23.4842
+      },
+      "elevations": {
+        "baseM": 990,
+        "topM": 2530,
+        "forecastM": 946
+      },
+      "locality": {
+        "regionId": "bansko",
+        "regionName": "Bansko",
+        "stateOrProvince": "Blagoevgrad",
+        "localityId": "bansko",
+        "localityName": "Bansko"
+      },
+      "officialUrl": "https://www.banskoski.com/en",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 1760,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.banskoski.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Bansko.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "bansko",
+                "name": "Bansko",
+                "aliases": []
+              },
+              "citation": "Official site for Bansko, the resort serving Bansko."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.banskoski.com/en",
+              "citation": "Official website for Bansko."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "bansko",
+                "regionName": "Bansko",
+                "stateOrProvince": "Blagoevgrad",
+                "localityId": "bansko",
+                "localityName": "Bansko"
+              },
+              "citation": "Bansko is accessed from Bansko (Blagoevgrad, Bulgaria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Bansko site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Bansko Ski Season 2026/27: Dates, Lift Pass Prices and When to Go Official 2026/27 dates: not yet published. The resort operato)."
+            }
+          ]
+        },
+        {
+          "url": "https://banskoskimania.com/bansko-ski-season-dates-lift-prices/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Bansko Ski Season 2026/27: Dates, Lift Pass Prices and When to Go Official 2026/27 dates: not yet published. The resort operato",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=41.8344&mlon=23.4842#map=15/41.8344/23.4842",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Bansko' (town, relation/21387786)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 41.8344,
+                "lng": 23.4842
+              },
+              "citation": "Map marker at 41.8344, 23.4842."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=41.8344,23.4842",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 946,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 946 m at 41.8344, 23.4842."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/bansko/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 990 m, top 2530 m. skiresort.info / skiresort.com listing: Bansko 990–2530 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 990,
+              "citation": "Published base elevation 990 m and top elevation 2530 m for Bansko."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-bg-borovets",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Bulgaria",
+      "countryCode": "BG",
+      "timezone": "Europe/Sofia",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "borovets",
+        "name": "Borovets",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 42.2668,
+        "lng": 23.6074
+      },
+      "elevations": {
+        "baseM": 1315,
+        "topM": 2550,
+        "forecastM": 1332
+      },
+      "locality": {
+        "regionId": "borovets",
+        "regionName": "Borovets",
+        "stateOrProvince": "Sofia",
+        "localityId": "borovets",
+        "localityName": "Borovets"
+      },
+      "officialUrl": "https://www.borovets-bg.com/en",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 1932,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.borovets-bg.com/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Borovets.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "borovets",
+                "name": "Borovets",
+                "aliases": []
+              },
+              "citation": "Official site for Borovets, the resort serving Borovets."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.borovets-bg.com/en",
+              "citation": "Official website for Borovets."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "borovets",
+                "regionName": "Borovets",
+                "stateOrProvince": "Sofia",
+                "localityId": "borovets",
+                "localityName": "Borovets"
+              },
+              "citation": "Borovets is accessed from Borovets (Sofia, Bulgaria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Borovets site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Borovets - Skiresort.info Current season: 2026-12-19 - 2027-04-11)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/borovets/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Borovets - Skiresort.info Current season: 2026-12-19 - 2027-04-11",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.2668&mlon=23.6074#map=15/42.2668/23.6074",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Borovets' (village, node/5669133628)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.2668,
+                "lng": 23.6074
+              },
+              "citation": "Map marker at 42.2668, 23.6074."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=42.2668,23.6074",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1332,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1332 m at 42.2668, 23.6074."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/borovets/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1315 m, top 2550 m. skiresort.info / skiresort.com listing: Borovets 1315–2550 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1315,
+              "citation": "Published base elevation 1315 m and top elevation 2550 m for Borovets."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-bg-pamporovo",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Bulgaria",
+      "countryCode": "BG",
+      "timezone": "Europe/Sofia",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "pamporovo",
+        "name": "Pamporovo",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 41.6462,
+        "lng": 24.6736
+      },
+      "elevations": {
+        "baseM": 1420,
+        "topM": 1928,
+        "forecastM": 1643
+      },
+      "locality": {
+        "regionId": "pamporovo",
+        "regionName": "Pamporovo",
+        "stateOrProvince": "Smolyan",
+        "localityId": "pamporovo",
+        "localityName": "Pamporovo"
+      },
+      "officialUrl": "https://pamporovo.me/",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 1674,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://pamporovo.me/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Pamporovo.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "pamporovo",
+                "name": "Pamporovo",
+                "aliases": []
+              },
+              "citation": "Official site for Pamporovo, the resort serving Pamporovo."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://pamporovo.me/",
+              "citation": "Official website for Pamporovo."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "pamporovo",
+                "regionName": "Pamporovo",
+                "stateOrProvince": "Smolyan",
+                "localityId": "pamporovo",
+                "localityName": "Pamporovo"
+              },
+              "citation": "Pamporovo is accessed from Pamporovo (Smolyan, Bulgaria), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Pamporovo site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Snow report Pamporovo Planned start of season: 19 Dec 2026 Planned end of season: 11 Apr 2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/pamporovo/snow-report/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Snow report Pamporovo Planned start of season: 19 Dec 2026 Planned end of season: 11 Apr 2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=41.6462&mlon=24.6736#map=15/41.6462/24.6736",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Pamporovo' (winter_sports, way/98508528)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 41.6462,
+                "lng": 24.6736
+              },
+              "citation": "Map marker at 41.6462, 24.6736."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=41.6462,24.6736",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1643,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1643 m at 41.6462, 24.6736."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Pamporovo",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1420 m, top 1928 m. Wikipedia ski-area infobox: Pamporovo 1420–1928 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1420,
+              "citation": "Published base elevation 1420 m and top elevation 1928 m for Pamporovo."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-pl-kasprowy-wierch",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Poland",
+      "countryCode": "PL",
+      "timezone": "Europe/Warsaw",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "kasprowy-wierch",
+        "name": "Kasprowy Wierch (Zakopane)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 49.2703,
+        "lng": 19.9809
+      },
+      "elevations": {
+        "baseM": 1014,
+        "topM": 1987,
+        "forecastM": 1012
+      },
+      "locality": {
+        "regionId": "tatras-pl",
+        "regionName": "Polish Tatras",
+        "stateOrProvince": "Lesser Poland",
+        "localityId": "zakopane",
+        "localityName": "Zakopane"
+      },
+      "officialUrl": "https://www.pkl.pl/",
+      "liftNetwork": "PKL",
+      "snowForecastMidM": 1500,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.pkl.pl/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Kasprowy Wierch (Zakopane).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "kasprowy-wierch",
+                "name": "Kasprowy Wierch (Zakopane)",
+                "aliases": []
+              },
+              "citation": "Official site for Kasprowy Wierch (Zakopane), the resort serving Zakopane."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.pkl.pl/",
+              "citation": "Official website for Kasprowy Wierch (Zakopane)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "tatras-pl",
+                "regionName": "Polish Tatras",
+                "stateOrProvince": "Lesser Poland",
+                "localityId": "zakopane",
+                "localityName": "Zakopane"
+              },
+              "citation": "Kasprowy Wierch (Zakopane) is accessed from Zakopane (Lesser Poland, Poland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Kasprowy Wierch (Zakopane) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Kasprowy Wierch – Zakopane Current season: 2026-12-12 - 2027-04-18)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/kasprowy-wierch-zakopane/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Kasprowy Wierch – Zakopane Current season: 2026-12-12 - 2027-04-18",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=49.2703&mlon=19.9809#map=15/49.2703/19.9809",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Kuźnice' (quarter, relation/5200912)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 49.2703,
+                "lng": 19.9809
+              },
+              "citation": "Map marker at 49.2703, 19.9809."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=49.2703,19.9809",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1012,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1012 m at 49.2703, 19.9809."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/kasprowy-wierch-zakopane/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 1014 m, top 1987 m. skiresort.info / skiresort.com listing: Kasprowy Wierch (Zakopane) 1014–1987 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 1014,
+              "citation": "Published base elevation 1014 m and top elevation 1987 m for Kasprowy Wierch (Zakopane)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-pl-biaka-tatrzanska",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Poland",
+      "countryCode": "PL",
+      "timezone": "Europe/Warsaw",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "biaka-tatrzanska",
+        "name": "Białka Tatrzańska (Kotelnica)",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 49.3946,
+        "lng": 20.1051
+      },
+      "elevations": {
+        "baseM": 680,
+        "topM": 910,
+        "forecastM": 682
+      },
+      "locality": {
+        "regionId": "tatras-pl",
+        "regionName": "Polish Tatras",
+        "stateOrProvince": "Lesser Poland",
+        "localityId": "biaka-tatrzanska",
+        "localityName": "Białka Tatrzańska"
+      },
+      "officialUrl": "https://www.kotelnica.pl/en",
+      "liftNetwork": "Tatry Super Ski",
+      "snowForecastMidM": 795,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.kotelnica.pl/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Białka Tatrzańska (Kotelnica).",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "biaka-tatrzanska",
+                "name": "Białka Tatrzańska (Kotelnica)",
+                "aliases": []
+              },
+              "citation": "Official site for Białka Tatrzańska (Kotelnica), the resort serving Białka Tatrzańska."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.kotelnica.pl/en",
+              "citation": "Official website for Białka Tatrzańska (Kotelnica)."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "tatras-pl",
+                "regionName": "Polish Tatras",
+                "stateOrProvince": "Lesser Poland",
+                "localityId": "biaka-tatrzanska",
+                "localityName": "Białka Tatrzańska"
+              },
+              "citation": "Białka Tatrzańska (Kotelnica) is accessed from Białka Tatrzańska (Lesser Poland, Poland), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Białka Tatrzańska (Kotelnica) site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Białka Tatrzańska – Kotelnica/Kaniówka/Bania Current season: 2026-11-28 - 2027-04-11)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/bialka-tatrzanska-kotelnica-kaniowka-bania/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Białka Tatrzańska – Kotelnica/Kaniówka/Bania Current season: 2026-11-28 - 2027-04-11",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=49.3946&mlon=20.1051#map=15/49.3946/20.1051",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Białka Tatrzańska' (village, relation/4579488)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 49.3946,
+                "lng": 20.1051
+              },
+              "citation": "Map marker at 49.3946, 20.1051."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=49.3946,20.1051",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 682,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 682 m at 49.3946, 20.1051."
+            }
+          ]
+        },
+        {
+          "url": "https://www.onthesnow.co.uk/lesser-poland/bialka-tatrzanska/ski-resort",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 680 m, top 910 m. Białka Tatrzańska base 680 m, summit 910 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 680,
+              "citation": "Published base elevation 680 m and top elevation 910 m for Białka Tatrzańska (Kotelnica)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-sk-jasna-nizke-tatry",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Slovakia",
+      "countryCode": "SK",
+      "timezone": "Europe/Bratislava",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "jasna-nizke-tatry",
+        "name": "Jasná Nízke Tatry",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 48.9682,
+        "lng": 19.5821
+      },
+      "elevations": {
+        "baseM": 943,
+        "topM": 2024,
+        "forecastM": 1159
+      },
+      "locality": {
+        "regionId": "tatras-sk",
+        "regionName": "Slovak Tatras",
+        "stateOrProvince": "Žilina",
+        "localityId": "liptovsky-mikulas",
+        "localityName": "Liptovský Mikuláš"
+      },
+      "officialUrl": "https://www.jasna.sk/en",
+      "liftNetwork": "Gopass",
+      "snowForecastMidM": 1484,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.jasna.sk/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Jasná Nízke Tatry.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "jasna-nizke-tatry",
+                "name": "Jasná Nízke Tatry",
+                "aliases": []
+              },
+              "citation": "Official site for Jasná Nízke Tatry, the resort serving Liptovský Mikuláš."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.jasna.sk/en",
+              "citation": "Official website for Jasná Nízke Tatry."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "tatras-sk",
+                "regionName": "Slovak Tatras",
+                "stateOrProvince": "Žilina",
+                "localityId": "liptovsky-mikulas",
+                "localityName": "Liptovský Mikuláš"
+              },
+              "citation": "Jasná Nízke Tatry is accessed from Liptovský Mikuláš (Žilina, Slovakia), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Jasná Nízke Tatry site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Jasná Nízke Tatry – Chopok - Skiresort.info Current season: 2026-11-28 - 2027-05-02)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/jasna-nizke-tatry-chopok/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Jasná Nízke Tatry – Chopok - Skiresort.info Current season: 2026-11-28 - 2027-05-02",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=48.9682&mlon=19.5821#map=15/48.9682/19.5821",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Jasná, Demänovská Dolina' (hamlet, node/5175700320)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 48.9682,
+                "lng": 19.5821
+              },
+              "citation": "Map marker at 48.9682, 19.5821."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=48.9682,19.5821",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 1159,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 1159 m at 48.9682, 19.5821."
+            }
+          ]
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Jasn%C3%A1",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 943 m, top 2024 m. Wikipedia ski-area infobox: Jasná Nízke Tatry 943–2024 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 943,
+              "citation": "Published base elevation 943 m and top elevation 2024 m for Jasná Nízke Tatry."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-sk-tatranska-lomnica",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Slovakia",
+      "countryCode": "SK",
+      "timezone": "Europe/Bratislava",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "tatranska-lomnica",
+        "name": "Tatranská Lomnica",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 49.1646,
+        "lng": 20.2806
+      },
+      "elevations": {
+        "baseM": 888,
+        "topM": 2190,
+        "forecastM": 849
+      },
+      "locality": {
+        "regionId": "tatras-sk",
+        "regionName": "Slovak Tatras",
+        "stateOrProvince": "Prešov",
+        "localityId": "tatranska-lomnica",
+        "localityName": "Tatranská Lomnica"
+      },
+      "officialUrl": "https://www.vt.sk/en",
+      "liftNetwork": "Gopass",
+      "snowForecastMidM": 1539,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.vt.sk/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Tatranská Lomnica.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "tatranska-lomnica",
+                "name": "Tatranská Lomnica",
+                "aliases": []
+              },
+              "citation": "Official site for Tatranská Lomnica, the resort serving Tatranská Lomnica."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.vt.sk/en",
+              "citation": "Official website for Tatranská Lomnica."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "tatras-sk",
+                "regionName": "Slovak Tatras",
+                "stateOrProvince": "Prešov",
+                "localityId": "tatranska-lomnica",
+                "localityName": "Tatranská Lomnica"
+              },
+              "citation": "Tatranská Lomnica is accessed from Tatranská Lomnica (Prešov, Slovakia), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Tatranská Lomnica site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Tatranská Lomnica Current season: 2026-12-19 - 2027-04-11)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/tatranska-lomnica/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Tatranská Lomnica Current season: 2026-12-19 - 2027-04-11",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=49.1646&mlon=20.2806#map=15/49.1646/20.2806",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Tatranská Lomnica' (suburb, node/29442360)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 49.1646,
+                "lng": 20.2806
+              },
+              "citation": "Map marker at 49.1646, 20.2806."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=49.1646,20.2806",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 849,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 849 m at 49.1646, 20.2806."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/tatranska-lomnica/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 888 m, top 2190 m. skiresort.info / skiresort.com listing: Tatranská Lomnica 888–2190 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 888,
+              "citation": "Published base elevation 888 m and top elevation 2190 m for Tatranská Lomnica."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-cz-spindleruv-mlyn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "Czechia",
+      "countryCode": "CZ",
+      "timezone": "Europe/Prague",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "spindleruv-mlyn",
+        "name": "Špindlerův Mlýn",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 50.7256,
+        "lng": 15.6068
+      },
+      "elevations": {
+        "baseM": 702,
+        "topM": 1235,
+        "forecastM": 721
+      },
+      "locality": {
+        "regionId": "krkonose",
+        "regionName": "Krkonoše",
+        "stateOrProvince": "Hradec Králové",
+        "localityId": "spindleruv-mlyn",
+        "localityName": "Špindlerův Mlýn"
+      },
+      "officialUrl": "https://www.skiareal.cz/en",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 968,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.skiareal.cz/en",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Špindlerův Mlýn.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "spindleruv-mlyn",
+                "name": "Špindlerův Mlýn",
+                "aliases": []
+              },
+              "citation": "Official site for Špindlerův Mlýn, the resort serving Špindlerův Mlýn."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.skiareal.cz/en",
+              "citation": "Official website for Špindlerův Mlýn."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "krkonose",
+                "regionName": "Krkonoše",
+                "stateOrProvince": "Hradec Králové",
+                "localityId": "spindleruv-mlyn",
+                "localityName": "Špindlerův Mlýn"
+              },
+              "citation": "Špindlerův Mlýn is accessed from Špindlerův Mlýn (Hradec Králové, Czechia), the base village used as its feelzlike locality."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiareal.cz/fileadmin/user_upload/2026/8_9_2026_Spindleruv_Mlyn_se_propojuje_a_meni_svou_tvar__2_.pdf",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: opojuje a mění svou tvář. Do prodeje ... A pak je tu už tradiční Špindl SkiOpening, kterým celý skiareál slavnostně odstartuje zimní sezónu 2026/27.",
+          "fields": [
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Official 2026/27 season information for Špindlerův Mlýn: opojuje a mění svou tvář. Do prodeje ... A pak je tu už tradiční Špindl SkiOpening, kterým celý skiareál slavnostně odstartuje zimní sezónu 2026/27."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=50.7256&mlon=15.6068#map=15/50.7256/15.6068",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Špindlerův Mlýn' (town, relation/440105)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 50.7256,
+                "lng": 15.6068
+              },
+              "citation": "Map marker at 50.7256, 15.6068."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=50.7256,15.6068",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 721,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 721 m at 50.7256, 15.6068."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/spindleruv-mlyn/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 702 m, top 1235 m. skiresort.info / skiresort.com listing: Špindlerův Mlýn 702–1235 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 702,
+              "citation": "Published base elevation 702 m and top elevation 1235 m for Špindlerův Mlýn."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-gb-cairngorm-mountain",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "cairngorm-mountain",
+        "name": "Cairngorm Mountain",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 57.1287,
+        "lng": -3.6562
+      },
+      "elevations": {
+        "baseM": 640,
+        "topM": 1230,
+        "forecastM": 852
+      },
+      "locality": {
+        "regionId": "cairngorms",
+        "regionName": "Cairngorms",
+        "stateOrProvince": "Scotland",
+        "localityId": "aviemore",
+        "localityName": "Aviemore"
+      },
+      "officialUrl": "https://cairngormmountain.co.uk",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 935,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://cairngormmountain.co.uk",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Cairngorm Mountain.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "cairngorm-mountain",
+                "name": "Cairngorm Mountain",
+                "aliases": []
+              },
+              "citation": "Official site for Cairngorm Mountain, the resort serving Aviemore."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://cairngormmountain.co.uk",
+              "citation": "Official website for Cairngorm Mountain."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "cairngorms",
+                "regionName": "Cairngorms",
+                "stateOrProvince": "Scotland",
+                "localityId": "aviemore",
+                "localityName": "Aviemore"
+              },
+              "citation": "Cairngorm Mountain is accessed from Aviemore (Scotland, United Kingdom), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Cairngorm Mountain site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Snow report Cairngorm Mountain - Skiresort.info Planned start of season: 5 Dec 2026 Planned end of season: 4 Apr 2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/cairngorm-mountain/snow-report/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Snow report Cairngorm Mountain - Skiresort.info Planned start of season: 5 Dec 2026 Planned end of season: 4 Apr 2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=57.1287&mlon=-3.6562#map=15/57.1287/-3.6562",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Cairngorm Mountain' (winter_sports, way/1547698360)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 57.1287,
+                "lng": -3.6562
+              },
+              "citation": "Map marker at 57.1287, -3.6562."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=57.1287,-3.6562",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 852,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 852 m at 57.1287, -3.6562."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/cairngorm-mountain/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 640 m, top 1230 m. skiresort.info / skiresort.com listing: Cairngorm Mountain 640–1230 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 640,
+              "citation": "Published base elevation 640 m and top elevation 1230 m for Cairngorm Mountain."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-gb-glenshee",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "glenshee",
+        "name": "Glenshee",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 56.8868,
+        "lng": -3.4148
+      },
+      "elevations": {
+        "baseM": 650,
+        "topM": 900,
+        "forecastM": 650
+      },
+      "locality": {
+        "regionId": "cairngorms",
+        "regionName": "Cairngorms",
+        "stateOrProvince": "Scotland",
+        "localityId": "braemar",
+        "localityName": "Braemar"
+      },
+      "officialUrl": "https://www.ski-glenshee.co.uk",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 775,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.ski-glenshee.co.uk",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Glenshee.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "glenshee",
+                "name": "Glenshee",
+                "aliases": []
+              },
+              "citation": "Official site for Glenshee, the resort serving Braemar."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.ski-glenshee.co.uk",
+              "citation": "Official website for Glenshee."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "cairngorms",
+                "regionName": "Cairngorms",
+                "stateOrProvince": "Scotland",
+                "localityId": "braemar",
+                "localityName": "Braemar"
+              },
+              "citation": "Glenshee is accessed from Braemar (Scotland, United Kingdom), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Glenshee site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Glenshee - Skiresort.info Current season: 2026-12-19 - 2027-03-14)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/glenshee/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Glenshee - Skiresort.info Current season: 2026-12-19 - 2027-03-14",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=56.8868&mlon=-3.4148#map=15/56.8868/-3.4148",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Glenshee Ski Centre' (leisure, node/6184632377)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 56.8868,
+                "lng": -3.4148
+              },
+              "citation": "Map marker at 56.8868, -3.4148."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=56.8868,-3.4148",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 650,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 650 m at 56.8868, -3.4148."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/glenshee/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 650 m, top 900 m. skiresort.info / skiresort.com listing: Glenshee 650–900 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 650,
+              "citation": "Published base elevation 650 m and top elevation 900 m for Glenshee."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-gb-the-lecht",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "the-lecht",
+        "name": "The Lecht",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 57.2009,
+        "lng": -3.248
+      },
+      "elevations": {
+        "baseM": 637,
+        "topM": 775,
+        "forecastM": 638
+      },
+      "locality": {
+        "regionId": "cairngorms",
+        "regionName": "Cairngorms",
+        "stateOrProvince": "Scotland",
+        "localityId": "tomintoul",
+        "localityName": "Tomintoul"
+      },
+      "officialUrl": "https://www.lecht.co.uk",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 706,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.lecht.co.uk",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for The Lecht.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "the-lecht",
+                "name": "The Lecht",
+                "aliases": []
+              },
+              "citation": "Official site for The Lecht, the resort serving Tomintoul."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.lecht.co.uk",
+              "citation": "Official website for The Lecht."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "cairngorms",
+                "regionName": "Cairngorms",
+                "stateOrProvince": "Scotland",
+                "localityId": "tomintoul",
+                "localityName": "Tomintoul"
+              },
+              "citation": "The Lecht is accessed from Tomintoul (Scotland, United Kingdom), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official The Lecht site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort The Lecht Current season: 2026-12-19 - 2027-03-14)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/the-lecht/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort The Lecht Current season: 2026-12-19 - 2027-03-14",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=57.2009&mlon=-3.248#map=15/57.2009/-3.248",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Lecht Ski Centre' (leisure, node/1582946495)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 57.2009,
+                "lng": -3.248
+              },
+              "citation": "Map marker at 57.2009, -3.248."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=57.2009,-3.248",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 638,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 638 m at 57.2009, -3.248."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/the-lecht/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 637 m, top 775 m. skiresort.info / skiresort.com listing: The Lecht 637–775 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 637,
+              "citation": "Published base elevation 637 m and top elevation 775 m for The Lecht."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "recordId": "eu-gb-nevis-range",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "nevis-range",
+        "name": "Nevis Range",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 56.8517,
+        "lng": -5.0004
+      },
+      "elevations": {
+        "baseM": 655,
+        "topM": 1221,
+        "forecastM": 102
+      },
+      "locality": {
+        "regionId": "lochaber",
+        "regionName": "Lochaber · Glencoe",
+        "stateOrProvince": "Scotland",
+        "localityId": "fort-william",
+        "localityName": "Fort William"
+      },
+      "officialUrl": "https://www.nevisrange.co.uk",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 938,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.nevisrange.co.uk",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Nevis Range.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "nevis-range",
+                "name": "Nevis Range",
+                "aliases": []
+              },
+              "citation": "Official site for Nevis Range, the resort serving Fort William."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.nevisrange.co.uk",
+              "citation": "Official website for Nevis Range."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "lochaber",
+                "regionName": "Lochaber · Glencoe",
+                "stateOrProvince": "Scotland",
+                "localityId": "fort-william",
+                "localityName": "Fort William"
+              },
+              "citation": "Nevis Range is accessed from Fort William (Scotland, United Kingdom), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Nevis Range site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Snow report Nevis Range - Skiresort.info Planned start of season: 19 Dec 2026 Planned end of season: 21 Mar 2027)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/nevis-range/snow-report/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Snow report Nevis Range - Skiresort.info Planned start of season: 19 Dec 2026 Planned end of season: 21 Mar 2027",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=56.8517&mlon=-5.0004#map=15/56.8517/-5.0004",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nevis Range Car Park (way/37732671), gondola base).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 56.8517,
+                "lng": -5.0004
+              },
+              "citation": "Map marker at 56.8517, -5.0004."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=56.8517,-5.0004",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 102,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 102 m at 56.8517, -5.0004."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/nevis-range/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 655 m, top 1221 m. skiresort.info / skiresort.com listing: Nevis Range 655–1221 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 655,
+              "citation": "Published base elevation 655 m and top elevation 1221 m for Nevis Range."
+            }
+          ]
+        }
+      ],
+      "reviewNote": "Village point is below the lift base (valley-gondola or glacier resort). Village weather stays at the town; snow forecast uses the base–top midpoint."
+    },
+    {
+      "recordId": "eu-gb-glencoe-mountain",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "facilityType": "alpine",
+      "identity": {
+        "publicId": "glencoe-mountain",
+        "name": "Glencoe Mountain",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 56.6202,
+        "lng": -4.8395
+      },
+      "elevations": {
+        "baseM": 360,
+        "topM": 1070,
+        "forecastM": 735
+      },
+      "locality": {
+        "regionId": "lochaber",
+        "regionName": "Lochaber · Glencoe",
+        "stateOrProvince": "Scotland",
+        "localityId": "glencoe",
+        "localityName": "Glencoe"
+      },
+      "officialUrl": "https://www.glencoemountain.co.uk",
+      "liftNetwork": "Independent",
+      "snowForecastMidM": 715,
+      "evidenceSchemaVersion": 2,
+      "evidence": [
+        {
+          "url": "https://www.glencoemountain.co.uk",
+          "retrievedAt": "2026-10-09",
+          "claim": "Official site for Glencoe Mountain.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "glencoe-mountain",
+                "name": "Glencoe Mountain",
+                "aliases": []
+              },
+              "citation": "Official site for Glencoe Mountain, the resort serving Glencoe."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.glencoemountain.co.uk",
+              "citation": "Official website for Glencoe Mountain."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "lochaber",
+                "regionName": "Lochaber · Glencoe",
+                "stateOrProvince": "Scotland",
+                "localityId": "glencoe",
+                "localityName": "Glencoe"
+              },
+              "citation": "Glencoe Mountain is accessed from Glencoe (Scotland, United Kingdom), the base village used as its feelzlike locality."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Glencoe Mountain site publishes current winter operation; 2026/27 season dates are confirmed by the linked season source (Ski resort Glencoe Mountain Current season: 2026-12-19 - 2027-04-11)."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/glencoe-mountain/",
+          "retrievedAt": "2026-10-09",
+          "claim": "2026/27 season evidence: Ski resort Glencoe Mountain Current season: 2026-12-19 - 2027-04-11",
+          "fields": []
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=56.6202&mlon=-4.8395#map=15/56.6202/-4.8395",
+          "retrievedAt": "2026-10-09",
+          "claim": "OpenStreetMap marker at the stored forecast point (OpenStreetMap Nominatim result for 'Glencoe Mountain Resort' (leisure, way/258880201)).",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 56.6202,
+                "lng": -4.8395
+              },
+              "citation": "Map marker at 56.6202, -4.8395."
+            }
+          ]
+        },
+        {
+          "url": "https://api.opentopodata.org/v1/eudem25m?locations=56.6202,-4.8395",
+          "retrievedAt": "2026-10-09",
+          "claim": "EU-DEM 25 m terrain height at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 735,
+              "citation": "EU-DEM 25 m returned an elevation rounding to 735 m at 56.6202, -4.8395."
+            }
+          ]
+        },
+        {
+          "url": "https://www.skiresort.com/en/ski-resort/glencoe-mountain/",
+          "retrievedAt": "2026-10-09",
+          "claim": "Resort lift-served range: base 360 m, top 1070 m. skiresort.info / skiresort.com listing: Glencoe Mountain 360–1070 m.",
+          "fields": [
+            {
+              "field": "baseElevation",
+              "value": 360,
+              "citation": "Published base elevation 360 m and top elevation 1070 m for Glencoe Mountain."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

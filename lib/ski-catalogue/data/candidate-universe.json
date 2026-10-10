@@ -2,13 +2,13 @@
   "ledgerVersion": 1,
   "description": "Complete candidate universe transcribed from the task 140 review batches and the independently classified New Zealand task 148 candidate set. Each candidate maps to exactly one record or an explicit split.",
   "expectedCounts": {
-    "candidates": 289,
-    "records": 291,
-    "oneToOne": 287,
+    "candidates": 328,
+    "records": 330,
+    "oneToOne": 326,
     "splits": 2,
     "byLifecycle": {
       "draft": 12,
-      "published": 274,
+      "published": 313,
       "verified": 5
     },
     "byClassification": {
@@ -19,7 +19,7 @@
       "no_lift_field": 1,
       "private_restricted": 4,
       "uncertain": 3,
-      "verified_operating": 274
+      "verified_operating": 313
     }
   },
   "candidates": [
@@ -3203,6 +3203,435 @@
       "sourceCandidateId": "Winterberg Skiliftkarussell",
       "recordIds": [
         "eu-de-winterberg-skiliftkarussell"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:grandvalira-soldeu-el-tarter",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Grandvalira (Soldeu-El Tarter)",
+      "recordIds": [
+        "eu-ad-grandvalira-soldeu-el-tarter"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:grandvalira-pas-de-la-casa",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Grandvalira (Pas de la Casa)",
+      "recordIds": [
+        "eu-ad-grandvalira-pas-de-la-casa"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:pal-arinsal",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Pal Arinsal",
+      "recordIds": [
+        "eu-ad-pal-arinsal"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:ordino-arcalis",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Ordino Arcalís",
+      "recordIds": [
+        "eu-ad-ordino-arcalis"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:baqueira-beret",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Baqueira Beret",
+      "recordIds": [
+        "eu-es-baqueira-beret"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:la-molina",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "La Molina",
+      "recordIds": [
+        "eu-es-la-molina"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:formigal-panticosa",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Formigal-Panticosa",
+      "recordIds": [
+        "eu-es-formigal-panticosa"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:sierra-nevada",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Sierra Nevada",
+      "recordIds": [
+        "eu-es-sierra-nevada"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:hemsedal",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Hemsedal",
+      "recordIds": [
+        "eu-no-hemsedal"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:geilo",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Geilo",
+      "recordIds": [
+        "eu-no-geilo"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:trysil",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Trysil",
+      "recordIds": [
+        "eu-no-trysil"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:hafjell",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Hafjell",
+      "recordIds": [
+        "eu-no-hafjell"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:kvitfjell",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Kvitfjell",
+      "recordIds": [
+        "eu-no-kvitfjell"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:myrkdalen",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Myrkdalen",
+      "recordIds": [
+        "eu-no-myrkdalen"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:voss-resort",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Voss Resort",
+      "recordIds": [
+        "eu-no-voss-resort"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:are",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Åre",
+      "recordIds": [
+        "eu-se-are"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:vemdalen",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Vemdalen",
+      "recordIds": [
+        "eu-se-vemdalen"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:salen",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Sälen (Lindvallen-Högfjället-Tandådalen-Hundfjället)",
+      "recordIds": [
+        "eu-se-salen"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:riksgransen",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Riksgränsen",
+      "recordIds": [
+        "eu-se-riksgransen"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:levi",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Levi",
+      "recordIds": [
+        "eu-fi-levi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:yllas",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Ylläs",
+      "recordIds": [
+        "eu-fi-yllas"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:pyha",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Pyhä",
+      "recordIds": [
+        "eu-fi-pyha"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:ruka",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Ruka",
+      "recordIds": [
+        "eu-fi-ruka"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:kranjska-gora",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Kranjska Gora",
+      "recordIds": [
+        "eu-si-kranjska-gora"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:vogel",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Vogel",
+      "recordIds": [
+        "eu-si-vogel"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:krvavec",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Krvavec",
+      "recordIds": [
+        "eu-si-krvavec"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:bansko",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Bansko",
+      "recordIds": [
+        "eu-bg-bansko"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:borovets",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Borovets",
+      "recordIds": [
+        "eu-bg-borovets"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:pamporovo",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Pamporovo",
+      "recordIds": [
+        "eu-bg-pamporovo"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:kasprowy-wierch",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Kasprowy Wierch (Zakopane)",
+      "recordIds": [
+        "eu-pl-kasprowy-wierch"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:biaka-tatrzanska",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Białka Tatrzańska (Kotelnica)",
+      "recordIds": [
+        "eu-pl-biaka-tatrzanska"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:jasna-nizke-tatry",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Jasná Nízke Tatry",
+      "recordIds": [
+        "eu-sk-jasna-nizke-tatry"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:tatranska-lomnica",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Tatranská Lomnica",
+      "recordIds": [
+        "eu-sk-tatranska-lomnica"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:spindleruv-mlyn",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Špindlerův Mlýn",
+      "recordIds": [
+        "eu-cz-spindleruv-mlyn"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:cairngorm-mountain",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Cairngorm Mountain",
+      "recordIds": [
+        "eu-gb-cairngorm-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:glenshee",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Glenshee",
+      "recordIds": [
+        "eu-gb-glenshee"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:the-lecht",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "The Lecht",
+      "recordIds": [
+        "eu-gb-the-lecht"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:nevis-range",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Nevis Range",
+      "recordIds": [
+        "eu-gb-nevis-range"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "europe-2026-10:glencoe-mountain",
+      "sourceBatch": "europe-2026-10",
+      "sourceCandidateId": "Glencoe Mountain",
+      "recordIds": [
+        "eu-gb-glencoe-mountain"
       ],
       "handling": "one_to_one",
       "classification": "verified_operating",

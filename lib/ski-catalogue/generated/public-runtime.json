@@ -7,7 +7,10 @@
     "europe-phase2-france",
     "europe-phase3-switzerland",
     "europe-phase4-italy",
+    "europe-phase5-andorra-spain",
     "europe-phase6-germany",
+    "europe-phase7-nordics",
+    "europe-phase8-central-eastern-europe-scotland",
     "us-mi-ny",
     "us-new-england",
     "nz-task-148",
@@ -1126,6 +1129,92 @@
       ]
     },
     {
+      "regionId": "grandvalira",
+      "name": "Grandvalira",
+      "stateOrProvince": "Encamp",
+      "country": "Andorra",
+      "countryCode": "AD",
+      "localities": [
+        {
+          "localityId": "soldeu",
+          "name": "Soldeu"
+        },
+        {
+          "localityId": "pas-de-la-casa",
+          "name": "Pas de la Casa"
+        }
+      ]
+    },
+    {
+      "regionId": "pal-arinsal",
+      "name": "Pal Arinsal · Ordino Arcalís",
+      "stateOrProvince": "La Massana",
+      "country": "Andorra",
+      "countryCode": "AD",
+      "localities": [
+        {
+          "localityId": "arinsal",
+          "name": "Arinsal"
+        },
+        {
+          "localityId": "ordino",
+          "name": "Ordino"
+        }
+      ]
+    },
+    {
+      "regionId": "val-d-aran",
+      "name": "Val d'Aran",
+      "stateOrProvince": "Catalonia",
+      "country": "Spain",
+      "countryCode": "ES",
+      "localities": [
+        {
+          "localityId": "baqueira",
+          "name": "Baqueira"
+        }
+      ]
+    },
+    {
+      "regionId": "cerdanya",
+      "name": "La Cerdanya",
+      "stateOrProvince": "Catalonia",
+      "country": "Spain",
+      "countryCode": "ES",
+      "localities": [
+        {
+          "localityId": "la-molina",
+          "name": "La Molina"
+        }
+      ]
+    },
+    {
+      "regionId": "aragon-pyrenees",
+      "name": "Aragon Pyrenees",
+      "stateOrProvince": "Aragon",
+      "country": "Spain",
+      "countryCode": "ES",
+      "localities": [
+        {
+          "localityId": "sallent-de-gallego",
+          "name": "Sallent de Gállego"
+        }
+      ]
+    },
+    {
+      "regionId": "sierra-nevada",
+      "name": "Sierra Nevada",
+      "stateOrProvince": "Andalusia",
+      "country": "Spain",
+      "countryCode": "ES",
+      "localities": [
+        {
+          "localityId": "pradollano",
+          "name": "Pradollano"
+        }
+      ]
+    },
+    {
       "regionId": "garmisch",
       "name": "Garmisch-Partenkirchen",
       "stateOrProvince": "Bavaria",
@@ -1187,6 +1276,288 @@
         {
           "localityId": "winterberg",
           "name": "Winterberg"
+        }
+      ]
+    },
+    {
+      "regionId": "hallingdal",
+      "name": "Hallingdal",
+      "stateOrProvince": "Viken",
+      "country": "Norway",
+      "countryCode": "NO",
+      "localities": [
+        {
+          "localityId": "hemsedal",
+          "name": "Hemsedal"
+        },
+        {
+          "localityId": "geilo",
+          "name": "Geilo"
+        }
+      ]
+    },
+    {
+      "regionId": "trysil",
+      "name": "Trysil",
+      "stateOrProvince": "Innlandet",
+      "country": "Norway",
+      "countryCode": "NO",
+      "localities": [
+        {
+          "localityId": "trysil",
+          "name": "Trysil"
+        }
+      ]
+    },
+    {
+      "regionId": "lillehammer",
+      "name": "Lillehammer",
+      "stateOrProvince": "Innlandet",
+      "country": "Norway",
+      "countryCode": "NO",
+      "localities": [
+        {
+          "localityId": "yer",
+          "name": "Øyer"
+        },
+        {
+          "localityId": "ringebu",
+          "name": "Ringebu"
+        }
+      ]
+    },
+    {
+      "regionId": "western-norway",
+      "name": "Western Norway",
+      "stateOrProvince": "Vestland",
+      "country": "Norway",
+      "countryCode": "NO",
+      "localities": [
+        {
+          "localityId": "voss",
+          "name": "Voss"
+        }
+      ]
+    },
+    {
+      "regionId": "are",
+      "name": "Åre",
+      "stateOrProvince": "Jämtland",
+      "country": "Sweden",
+      "countryCode": "SE",
+      "localities": [
+        {
+          "localityId": "are",
+          "name": "Åre"
+        },
+        {
+          "localityId": "vemdalen",
+          "name": "Vemdalen"
+        }
+      ]
+    },
+    {
+      "regionId": "salen",
+      "name": "Sälen",
+      "stateOrProvince": "Dalarna",
+      "country": "Sweden",
+      "countryCode": "SE",
+      "localities": [
+        {
+          "localityId": "salen",
+          "name": "Sälen"
+        }
+      ]
+    },
+    {
+      "regionId": "riksgransen",
+      "name": "Riksgränsen",
+      "stateOrProvince": "Norrbotten",
+      "country": "Sweden",
+      "countryCode": "SE",
+      "localities": [
+        {
+          "localityId": "riksgransen",
+          "name": "Riksgränsen"
+        }
+      ]
+    },
+    {
+      "regionId": "finnish-lapland",
+      "name": "Finnish Lapland",
+      "stateOrProvince": "Lapland",
+      "country": "Finland",
+      "countryCode": "FI",
+      "localities": [
+        {
+          "localityId": "levi",
+          "name": "Levi"
+        },
+        {
+          "localityId": "akaslompolo",
+          "name": "Äkäslompolo"
+        },
+        {
+          "localityId": "pyhatunturi",
+          "name": "Pyhätunturi"
+        }
+      ]
+    },
+    {
+      "regionId": "ruka",
+      "name": "Ruka",
+      "stateOrProvince": "North Ostrobothnia",
+      "country": "Finland",
+      "countryCode": "FI",
+      "localities": [
+        {
+          "localityId": "ruka",
+          "name": "Ruka"
+        }
+      ]
+    },
+    {
+      "regionId": "julian-alps",
+      "name": "Julian Alps",
+      "stateOrProvince": "Upper Carniola",
+      "country": "Slovenia",
+      "countryCode": "SI",
+      "localities": [
+        {
+          "localityId": "kranjska-gora",
+          "name": "Kranjska Gora"
+        },
+        {
+          "localityId": "bohinj",
+          "name": "Bohinj"
+        },
+        {
+          "localityId": "cerklje-na-gorenjskem",
+          "name": "Cerklje na Gorenjskem"
+        }
+      ]
+    },
+    {
+      "regionId": "bansko",
+      "name": "Bansko",
+      "stateOrProvince": "Blagoevgrad",
+      "country": "Bulgaria",
+      "countryCode": "BG",
+      "localities": [
+        {
+          "localityId": "bansko",
+          "name": "Bansko"
+        }
+      ]
+    },
+    {
+      "regionId": "borovets",
+      "name": "Borovets",
+      "stateOrProvince": "Sofia",
+      "country": "Bulgaria",
+      "countryCode": "BG",
+      "localities": [
+        {
+          "localityId": "borovets",
+          "name": "Borovets"
+        }
+      ]
+    },
+    {
+      "regionId": "pamporovo",
+      "name": "Pamporovo",
+      "stateOrProvince": "Smolyan",
+      "country": "Bulgaria",
+      "countryCode": "BG",
+      "localities": [
+        {
+          "localityId": "pamporovo",
+          "name": "Pamporovo"
+        }
+      ]
+    },
+    {
+      "regionId": "tatras-pl",
+      "name": "Polish Tatras",
+      "stateOrProvince": "Lesser Poland",
+      "country": "Poland",
+      "countryCode": "PL",
+      "localities": [
+        {
+          "localityId": "zakopane",
+          "name": "Zakopane"
+        },
+        {
+          "localityId": "biaka-tatrzanska",
+          "name": "Białka Tatrzańska"
+        }
+      ]
+    },
+    {
+      "regionId": "tatras-sk",
+      "name": "Slovak Tatras",
+      "stateOrProvince": "Žilina",
+      "country": "Slovakia",
+      "countryCode": "SK",
+      "localities": [
+        {
+          "localityId": "liptovsky-mikulas",
+          "name": "Liptovský Mikuláš"
+        },
+        {
+          "localityId": "tatranska-lomnica",
+          "name": "Tatranská Lomnica"
+        }
+      ]
+    },
+    {
+      "regionId": "krkonose",
+      "name": "Krkonoše",
+      "stateOrProvince": "Hradec Králové",
+      "country": "Czechia",
+      "countryCode": "CZ",
+      "localities": [
+        {
+          "localityId": "spindleruv-mlyn",
+          "name": "Špindlerův Mlýn"
+        }
+      ]
+    },
+    {
+      "regionId": "cairngorms",
+      "name": "Cairngorms",
+      "stateOrProvince": "Scotland",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "localities": [
+        {
+          "localityId": "aviemore",
+          "name": "Aviemore"
+        },
+        {
+          "localityId": "braemar",
+          "name": "Braemar"
+        },
+        {
+          "localityId": "tomintoul",
+          "name": "Tomintoul"
+        }
+      ]
+    },
+    {
+      "regionId": "lochaber",
+      "name": "Lochaber · Glencoe",
+      "stateOrProvince": "Scotland",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "localities": [
+        {
+          "localityId": "fort-william",
+          "name": "Fort William"
+        },
+        {
+          "localityId": "glencoe",
+          "name": "Glencoe"
         }
       ]
     },
@@ -5458,6 +5829,230 @@
       "alertEligible": true
     },
     {
+      "recordId": "eu-ad-grandvalira-soldeu-el-tarter",
+      "publicId": "grandvalira-soldeu-el-tarter",
+      "aliases": [],
+      "name": "Grandvalira (Soldeu-El Tarter)",
+      "coordinates": {
+        "lat": 42.5769,
+        "lng": 1.6683
+      },
+      "forecastElevationM": 1847,
+      "baseElevationM": 1710,
+      "summitElevationM": 2640,
+      "officialUrl": "https://www.grandvalira.com/en",
+      "regionId": "grandvalira",
+      "regionName": "Grandvalira",
+      "stateOrProvince": "Encamp",
+      "localityId": "soldeu",
+      "localityName": "Soldeu",
+      "route": "/grandvalira/mountain/grandvalira-soldeu-el-tarter",
+      "country": "Andorra",
+      "countryCode": "AD",
+      "timezone": "Europe/Andorra",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Grandvalira (Soldeu-El Tarter) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ad-grandvalira-pas-de-la-casa",
+      "publicId": "grandvalira-pas-de-la-casa",
+      "aliases": [],
+      "name": "Grandvalira (Pas de la Casa)",
+      "coordinates": {
+        "lat": 42.5447,
+        "lng": 1.7335
+      },
+      "forecastElevationM": 2086,
+      "baseElevationM": 2050,
+      "summitElevationM": 2640,
+      "officialUrl": "https://www.grandvalira.com/en",
+      "regionId": "grandvalira",
+      "regionName": "Grandvalira",
+      "stateOrProvince": "Encamp",
+      "localityId": "pas-de-la-casa",
+      "localityName": "Pas de la Casa",
+      "route": "/grandvalira/mountain/grandvalira-pas-de-la-casa",
+      "country": "Andorra",
+      "countryCode": "AD",
+      "timezone": "Europe/Andorra",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Grandvalira (Pas de la Casa) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ad-pal-arinsal",
+      "publicId": "pal-arinsal",
+      "aliases": [],
+      "name": "Pal Arinsal",
+      "coordinates": {
+        "lat": 42.5721,
+        "lng": 1.4844
+      },
+      "forecastElevationM": 1481,
+      "baseElevationM": 1550,
+      "summitElevationM": 2537,
+      "officialUrl": "https://www.palarinsal.com/en",
+      "regionId": "pal-arinsal",
+      "regionName": "Pal Arinsal · Ordino Arcalís",
+      "stateOrProvince": "La Massana",
+      "localityId": "arinsal",
+      "localityName": "Arinsal",
+      "route": "/pal-arinsal/mountain/pal-arinsal",
+      "country": "Andorra",
+      "countryCode": "AD",
+      "timezone": "Europe/Andorra",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Pal Arinsal is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-ad-ordino-arcalis",
+      "publicId": "ordino-arcalis",
+      "aliases": [],
+      "name": "Ordino Arcalís",
+      "coordinates": {
+        "lat": 42.6272,
+        "lng": 1.4913
+      },
+      "forecastElevationM": 2223,
+      "baseElevationM": 1940,
+      "summitElevationM": 2625,
+      "officialUrl": "https://www.ordinoarcalis.com/en",
+      "regionId": "pal-arinsal",
+      "regionName": "Pal Arinsal · Ordino Arcalís",
+      "stateOrProvince": "Ordino",
+      "localityId": "ordino",
+      "localityName": "Ordino",
+      "route": "/pal-arinsal/mountain/ordino-arcalis",
+      "country": "Andorra",
+      "countryCode": "AD",
+      "timezone": "Europe/Andorra",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Ordino Arcalís is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-es-baqueira-beret",
+      "publicId": "baqueira-beret",
+      "aliases": [],
+      "name": "Baqueira Beret",
+      "coordinates": {
+        "lat": 42.6993,
+        "lng": 0.9316
+      },
+      "forecastElevationM": 1481,
+      "baseElevationM": 1500,
+      "summitElevationM": 2610,
+      "officialUrl": "https://www.baqueira.es/",
+      "regionId": "val-d-aran",
+      "regionName": "Val d'Aran",
+      "stateOrProvince": "Catalonia",
+      "localityId": "baqueira",
+      "localityName": "Baqueira",
+      "route": "/val-d-aran/mountain/baqueira-beret",
+      "country": "Spain",
+      "countryCode": "ES",
+      "timezone": "Europe/Madrid",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Baqueira Beret is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-es-la-molina",
+      "publicId": "la-molina",
+      "aliases": [],
+      "name": "La Molina",
+      "coordinates": {
+        "lat": 42.3448,
+        "lng": 1.9563
+      },
+      "forecastElevationM": 1423,
+      "baseElevationM": 1616,
+      "summitElevationM": 2537,
+      "officialUrl": "https://www.lamolina.cat/en",
+      "regionId": "cerdanya",
+      "regionName": "La Cerdanya",
+      "stateOrProvince": "Catalonia",
+      "localityId": "la-molina",
+      "localityName": "La Molina",
+      "route": "/cerdanya/mountain/la-molina",
+      "country": "Spain",
+      "countryCode": "ES",
+      "timezone": "Europe/Madrid",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "La Molina is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-es-formigal-panticosa",
+      "publicId": "formigal-panticosa",
+      "aliases": [],
+      "name": "Formigal-Panticosa",
+      "coordinates": {
+        "lat": 42.7741,
+        "lng": -0.3609
+      },
+      "forecastElevationM": 1542,
+      "baseElevationM": 1510,
+      "summitElevationM": 2250,
+      "officialUrl": "https://www.formigal-panticosa.com/en",
+      "regionId": "aragon-pyrenees",
+      "regionName": "Aragon Pyrenees",
+      "stateOrProvince": "Aragon",
+      "localityId": "sallent-de-gallego",
+      "localityName": "Sallent de Gállego",
+      "route": "/aragon-pyrenees/mountain/formigal-panticosa",
+      "country": "Spain",
+      "countryCode": "ES",
+      "timezone": "Europe/Madrid",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Formigal-Panticosa is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-es-sierra-nevada",
+      "publicId": "sierra-nevada",
+      "aliases": [],
+      "name": "Sierra Nevada",
+      "coordinates": {
+        "lat": 37.0943,
+        "lng": -3.3991
+      },
+      "forecastElevationM": 2150,
+      "baseElevationM": 2100,
+      "summitElevationM": 3300,
+      "officialUrl": "https://sierranevada.es/en",
+      "regionId": "sierra-nevada",
+      "regionName": "Sierra Nevada",
+      "stateOrProvince": "Andalusia",
+      "localityId": "pradollano",
+      "localityName": "Pradollano",
+      "route": "/sierra-nevada/mountain/sierra-nevada",
+      "country": "Spain",
+      "countryCode": "ES",
+      "timezone": "Europe/Madrid",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Sierra Nevada is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
       "recordId": "eu-de-garmisch-classic",
       "publicId": "garmisch-classic",
       "aliases": [],
@@ -5650,6 +6245,874 @@
       "facilityType": "alpine",
       "accessModel": "Public lift-served ski area.",
       "publicCopy": "Winterberg Skiliftkarussell is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-no-hemsedal",
+      "publicId": "hemsedal",
+      "aliases": [],
+      "name": "Hemsedal",
+      "coordinates": {
+        "lat": 60.8649,
+        "lng": 8.5593
+      },
+      "forecastElevationM": 637,
+      "baseElevationM": 620,
+      "summitElevationM": 1450,
+      "officialUrl": "https://www.skistar.com/en/hemsedal",
+      "regionId": "hallingdal",
+      "regionName": "Hallingdal",
+      "stateOrProvince": "Viken",
+      "localityId": "hemsedal",
+      "localityName": "Hemsedal",
+      "route": "/hallingdal/mountain/hemsedal",
+      "country": "Norway",
+      "countryCode": "NO",
+      "timezone": "Europe/Oslo",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Hemsedal is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-no-geilo",
+      "publicId": "geilo",
+      "aliases": [],
+      "name": "Geilo",
+      "coordinates": {
+        "lat": 60.5337,
+        "lng": 8.209
+      },
+      "forecastElevationM": 777,
+      "baseElevationM": 779,
+      "summitElevationM": 1178,
+      "officialUrl": "https://www.skigeilo.no/en",
+      "regionId": "hallingdal",
+      "regionName": "Hallingdal",
+      "stateOrProvince": "Viken",
+      "localityId": "geilo",
+      "localityName": "Geilo",
+      "route": "/hallingdal/mountain/geilo",
+      "country": "Norway",
+      "countryCode": "NO",
+      "timezone": "Europe/Oslo",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Geilo is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-no-trysil",
+      "publicId": "trysil",
+      "aliases": [],
+      "name": "Trysil",
+      "coordinates": {
+        "lat": 61.3148,
+        "lng": 12.2637
+      },
+      "forecastElevationM": 361,
+      "baseElevationM": 395,
+      "summitElevationM": 1100,
+      "officialUrl": "https://www.skistar.com/en/trysil",
+      "regionId": "trysil",
+      "regionName": "Trysil",
+      "stateOrProvince": "Innlandet",
+      "localityId": "trysil",
+      "localityName": "Trysil",
+      "route": "/trysil/mountain/trysil",
+      "country": "Norway",
+      "countryCode": "NO",
+      "timezone": "Europe/Oslo",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Trysil is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-no-hafjell",
+      "publicId": "hafjell",
+      "aliases": [],
+      "name": "Hafjell",
+      "coordinates": {
+        "lat": 61.2423,
+        "lng": 10.439
+      },
+      "forecastElevationM": 190,
+      "baseElevationM": 200,
+      "summitElevationM": 1030,
+      "officialUrl": "https://www.hafjell.no/en",
+      "regionId": "lillehammer",
+      "regionName": "Lillehammer",
+      "stateOrProvince": "Innlandet",
+      "localityId": "yer",
+      "localityName": "Øyer",
+      "route": "/lillehammer/mountain/hafjell",
+      "country": "Norway",
+      "countryCode": "NO",
+      "timezone": "Europe/Oslo",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Hafjell is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-no-kvitfjell",
+      "publicId": "kvitfjell",
+      "aliases": [],
+      "name": "Kvitfjell",
+      "coordinates": {
+        "lat": 61.4738,
+        "lng": 10.1299
+      },
+      "forecastElevationM": 759,
+      "baseElevationM": 185,
+      "summitElevationM": 1039,
+      "officialUrl": "https://www.kvitfjell.no/en",
+      "regionId": "lillehammer",
+      "regionName": "Lillehammer",
+      "stateOrProvince": "Innlandet",
+      "localityId": "ringebu",
+      "localityName": "Ringebu",
+      "route": "/lillehammer/mountain/kvitfjell",
+      "country": "Norway",
+      "countryCode": "NO",
+      "timezone": "Europe/Oslo",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Kvitfjell is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-no-myrkdalen",
+      "publicId": "myrkdalen",
+      "aliases": [],
+      "name": "Myrkdalen",
+      "coordinates": {
+        "lat": 60.842,
+        "lng": 6.4666
+      },
+      "forecastElevationM": 381,
+      "baseElevationM": 450,
+      "summitElevationM": 1060,
+      "officialUrl": "https://www.myrkdalen.no/en",
+      "regionId": "western-norway",
+      "regionName": "Western Norway",
+      "stateOrProvince": "Vestland",
+      "localityId": "voss",
+      "localityName": "Voss",
+      "route": "/western-norway/mountain/myrkdalen",
+      "country": "Norway",
+      "countryCode": "NO",
+      "timezone": "Europe/Oslo",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Myrkdalen is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-no-voss-resort",
+      "publicId": "voss-resort",
+      "aliases": [],
+      "name": "Voss Resort",
+      "coordinates": {
+        "lat": 60.6287,
+        "lng": 6.4147
+      },
+      "forecastElevationM": 60,
+      "baseElevationM": 284,
+      "summitElevationM": 964,
+      "officialUrl": "https://www.vossresort.no/en",
+      "regionId": "western-norway",
+      "regionName": "Western Norway",
+      "stateOrProvince": "Vestland",
+      "localityId": "voss",
+      "localityName": "Voss",
+      "route": "/western-norway/mountain/voss-resort",
+      "country": "Norway",
+      "countryCode": "NO",
+      "timezone": "Europe/Oslo",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Voss Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-se-are",
+      "publicId": "are",
+      "aliases": [],
+      "name": "Åre",
+      "coordinates": {
+        "lat": 63.4011,
+        "lng": 13.0822
+      },
+      "forecastElevationM": 403,
+      "baseElevationM": 380,
+      "summitElevationM": 1319,
+      "officialUrl": "https://www.skistar.com/en/are",
+      "regionId": "are",
+      "regionName": "Åre",
+      "stateOrProvince": "Jämtland",
+      "localityId": "are",
+      "localityName": "Åre",
+      "route": "/are/mountain/are",
+      "country": "Sweden",
+      "countryCode": "SE",
+      "timezone": "Europe/Stockholm",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Åre is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-se-vemdalen",
+      "publicId": "vemdalen",
+      "aliases": [],
+      "name": "Vemdalen",
+      "coordinates": {
+        "lat": 62.4452,
+        "lng": 13.8628
+      },
+      "forecastElevationM": 411,
+      "baseElevationM": 592,
+      "summitElevationM": 946,
+      "officialUrl": "https://www.skistar.com/en/vemdalen",
+      "regionId": "are",
+      "regionName": "Åre",
+      "stateOrProvince": "Jämtland",
+      "localityId": "vemdalen",
+      "localityName": "Vemdalen",
+      "route": "/are/mountain/vemdalen",
+      "country": "Sweden",
+      "countryCode": "SE",
+      "timezone": "Europe/Stockholm",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Vemdalen is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-se-salen",
+      "publicId": "salen",
+      "aliases": [],
+      "name": "Sälen (Lindvallen-Högfjället-Tandådalen-Hundfjället)",
+      "coordinates": {
+        "lat": 61.1545,
+        "lng": 13.1866
+      },
+      "forecastElevationM": 723,
+      "baseElevationM": 579,
+      "summitElevationM": 887,
+      "officialUrl": "https://www.skistar.com/en/salen",
+      "regionId": "salen",
+      "regionName": "Sälen",
+      "stateOrProvince": "Dalarna",
+      "localityId": "salen",
+      "localityName": "Sälen",
+      "route": "/salen/mountain/salen",
+      "country": "Sweden",
+      "countryCode": "SE",
+      "timezone": "Europe/Stockholm",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Sälen (Lindvallen-Högfjället-Tandådalen-Hundfjället) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-se-riksgransen",
+      "publicId": "riksgransen",
+      "aliases": [],
+      "name": "Riksgränsen",
+      "coordinates": {
+        "lat": 68.4149,
+        "lng": 18.1205
+      },
+      "forecastElevationM": 729,
+      "baseElevationM": 520,
+      "summitElevationM": 909,
+      "officialUrl": "https://riksgransen.se/en",
+      "regionId": "riksgransen",
+      "regionName": "Riksgränsen",
+      "stateOrProvince": "Norrbotten",
+      "localityId": "riksgransen",
+      "localityName": "Riksgränsen",
+      "route": "/riksgransen/mountain/riksgransen",
+      "country": "Sweden",
+      "countryCode": "SE",
+      "timezone": "Europe/Stockholm",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Riksgränsen is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fi-levi",
+      "publicId": "levi",
+      "aliases": [],
+      "name": "Levi",
+      "coordinates": {
+        "lat": 67.8051,
+        "lng": 24.7961
+      },
+      "forecastElevationM": 200,
+      "baseElevationM": 206,
+      "summitElevationM": 531,
+      "officialUrl": "https://www.levi.fi/en",
+      "regionId": "finnish-lapland",
+      "regionName": "Finnish Lapland",
+      "stateOrProvince": "Lapland",
+      "localityId": "levi",
+      "localityName": "Levi",
+      "route": "/finnish-lapland/mountain/levi",
+      "country": "Finland",
+      "countryCode": "FI",
+      "timezone": "Europe/Helsinki",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Levi is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fi-yllas",
+      "publicId": "yllas",
+      "aliases": [],
+      "name": "Ylläs",
+      "coordinates": {
+        "lat": 67.6029,
+        "lng": 24.1516
+      },
+      "forecastElevationM": 221,
+      "baseElevationM": 255,
+      "summitElevationM": 719,
+      "officialUrl": "https://www.yllas.fi/en",
+      "regionId": "finnish-lapland",
+      "regionName": "Finnish Lapland",
+      "stateOrProvince": "Lapland",
+      "localityId": "akaslompolo",
+      "localityName": "Äkäslompolo",
+      "route": "/finnish-lapland/mountain/yllas",
+      "country": "Finland",
+      "countryCode": "FI",
+      "timezone": "Europe/Helsinki",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Ylläs is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fi-pyha",
+      "publicId": "pyha",
+      "aliases": [],
+      "name": "Pyhä",
+      "coordinates": {
+        "lat": 67.019,
+        "lng": 27.2518
+      },
+      "forecastElevationM": 193,
+      "baseElevationM": 203,
+      "summitElevationM": 500,
+      "officialUrl": "https://pyha.fi/en",
+      "regionId": "finnish-lapland",
+      "regionName": "Finnish Lapland",
+      "stateOrProvince": "Lapland",
+      "localityId": "pyhatunturi",
+      "localityName": "Pyhätunturi",
+      "route": "/finnish-lapland/mountain/pyha",
+      "country": "Finland",
+      "countryCode": "FI",
+      "timezone": "Europe/Helsinki",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Pyhä is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-fi-ruka",
+      "publicId": "ruka",
+      "aliases": [],
+      "name": "Ruka",
+      "coordinates": {
+        "lat": 66.1707,
+        "lng": 29.1449
+      },
+      "forecastElevationM": 359,
+      "baseElevationM": 291,
+      "summitElevationM": 492,
+      "officialUrl": "https://www.ruka.fi/en",
+      "regionId": "ruka",
+      "regionName": "Ruka",
+      "stateOrProvince": "North Ostrobothnia",
+      "localityId": "ruka",
+      "localityName": "Ruka",
+      "route": "/ruka/mountain/ruka",
+      "country": "Finland",
+      "countryCode": "FI",
+      "timezone": "Europe/Helsinki",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Ruka is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-si-kranjska-gora",
+      "publicId": "kranjska-gora",
+      "aliases": [],
+      "name": "Kranjska Gora",
+      "coordinates": {
+        "lat": 46.4569,
+        "lng": 13.7782
+      },
+      "forecastElevationM": 1050,
+      "baseElevationM": 807,
+      "summitElevationM": 1282,
+      "officialUrl": "https://www.kranjska-gora.si/en",
+      "regionId": "julian-alps",
+      "regionName": "Julian Alps",
+      "stateOrProvince": "Upper Carniola",
+      "localityId": "kranjska-gora",
+      "localityName": "Kranjska Gora",
+      "route": "/julian-alps/mountain/kranjska-gora",
+      "country": "Slovenia",
+      "countryCode": "SI",
+      "timezone": "Europe/Ljubljana",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Kranjska Gora is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-si-vogel",
+      "publicId": "vogel",
+      "aliases": [],
+      "name": "Vogel",
+      "coordinates": {
+        "lat": 46.2793,
+        "lng": 13.83
+      },
+      "forecastElevationM": 539,
+      "baseElevationM": 569,
+      "summitElevationM": 1800,
+      "officialUrl": "https://www.vogel.si/en",
+      "regionId": "julian-alps",
+      "regionName": "Julian Alps",
+      "stateOrProvince": "Upper Carniola",
+      "localityId": "bohinj",
+      "localityName": "Bohinj",
+      "route": "/julian-alps/mountain/vogel",
+      "country": "Slovenia",
+      "countryCode": "SI",
+      "timezone": "Europe/Ljubljana",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Vogel is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-si-krvavec",
+      "publicId": "krvavec",
+      "aliases": [],
+      "name": "Krvavec",
+      "coordinates": {
+        "lat": 46.2997,
+        "lng": 14.5367
+      },
+      "forecastElevationM": 1832,
+      "baseElevationM": 1450,
+      "summitElevationM": 1971,
+      "officialUrl": "https://www.rtc-krvavec.si/",
+      "regionId": "julian-alps",
+      "regionName": "Julian Alps",
+      "stateOrProvince": "Upper Carniola",
+      "localityId": "cerklje-na-gorenjskem",
+      "localityName": "Cerklje na Gorenjskem",
+      "route": "/julian-alps/mountain/krvavec",
+      "country": "Slovenia",
+      "countryCode": "SI",
+      "timezone": "Europe/Ljubljana",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Krvavec is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-bg-bansko",
+      "publicId": "bansko",
+      "aliases": [],
+      "name": "Bansko",
+      "coordinates": {
+        "lat": 41.8344,
+        "lng": 23.4842
+      },
+      "forecastElevationM": 946,
+      "baseElevationM": 990,
+      "summitElevationM": 2530,
+      "officialUrl": "https://www.banskoski.com/en",
+      "regionId": "bansko",
+      "regionName": "Bansko",
+      "stateOrProvince": "Blagoevgrad",
+      "localityId": "bansko",
+      "localityName": "Bansko",
+      "route": "/bansko/mountain/bansko",
+      "country": "Bulgaria",
+      "countryCode": "BG",
+      "timezone": "Europe/Sofia",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Bansko is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-bg-borovets",
+      "publicId": "borovets",
+      "aliases": [],
+      "name": "Borovets",
+      "coordinates": {
+        "lat": 42.2668,
+        "lng": 23.6074
+      },
+      "forecastElevationM": 1332,
+      "baseElevationM": 1315,
+      "summitElevationM": 2550,
+      "officialUrl": "https://www.borovets-bg.com/en",
+      "regionId": "borovets",
+      "regionName": "Borovets",
+      "stateOrProvince": "Sofia",
+      "localityId": "borovets",
+      "localityName": "Borovets",
+      "route": "/borovets/mountain/borovets",
+      "country": "Bulgaria",
+      "countryCode": "BG",
+      "timezone": "Europe/Sofia",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Borovets is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-bg-pamporovo",
+      "publicId": "pamporovo",
+      "aliases": [],
+      "name": "Pamporovo",
+      "coordinates": {
+        "lat": 41.6462,
+        "lng": 24.6736
+      },
+      "forecastElevationM": 1643,
+      "baseElevationM": 1420,
+      "summitElevationM": 1928,
+      "officialUrl": "https://pamporovo.me/",
+      "regionId": "pamporovo",
+      "regionName": "Pamporovo",
+      "stateOrProvince": "Smolyan",
+      "localityId": "pamporovo",
+      "localityName": "Pamporovo",
+      "route": "/pamporovo/mountain/pamporovo",
+      "country": "Bulgaria",
+      "countryCode": "BG",
+      "timezone": "Europe/Sofia",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Pamporovo is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-pl-kasprowy-wierch",
+      "publicId": "kasprowy-wierch",
+      "aliases": [],
+      "name": "Kasprowy Wierch (Zakopane)",
+      "coordinates": {
+        "lat": 49.2703,
+        "lng": 19.9809
+      },
+      "forecastElevationM": 1012,
+      "baseElevationM": 1014,
+      "summitElevationM": 1987,
+      "officialUrl": "https://www.pkl.pl/",
+      "regionId": "tatras-pl",
+      "regionName": "Polish Tatras",
+      "stateOrProvince": "Lesser Poland",
+      "localityId": "zakopane",
+      "localityName": "Zakopane",
+      "route": "/tatras-pl/mountain/kasprowy-wierch",
+      "country": "Poland",
+      "countryCode": "PL",
+      "timezone": "Europe/Warsaw",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Kasprowy Wierch (Zakopane) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-pl-biaka-tatrzanska",
+      "publicId": "biaka-tatrzanska",
+      "aliases": [],
+      "name": "Białka Tatrzańska (Kotelnica)",
+      "coordinates": {
+        "lat": 49.3946,
+        "lng": 20.1051
+      },
+      "forecastElevationM": 682,
+      "baseElevationM": 680,
+      "summitElevationM": 910,
+      "officialUrl": "https://www.kotelnica.pl/en",
+      "regionId": "tatras-pl",
+      "regionName": "Polish Tatras",
+      "stateOrProvince": "Lesser Poland",
+      "localityId": "biaka-tatrzanska",
+      "localityName": "Białka Tatrzańska",
+      "route": "/tatras-pl/mountain/biaka-tatrzanska",
+      "country": "Poland",
+      "countryCode": "PL",
+      "timezone": "Europe/Warsaw",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Białka Tatrzańska (Kotelnica) is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-sk-jasna-nizke-tatry",
+      "publicId": "jasna-nizke-tatry",
+      "aliases": [],
+      "name": "Jasná Nízke Tatry",
+      "coordinates": {
+        "lat": 48.9682,
+        "lng": 19.5821
+      },
+      "forecastElevationM": 1159,
+      "baseElevationM": 943,
+      "summitElevationM": 2024,
+      "officialUrl": "https://www.jasna.sk/en",
+      "regionId": "tatras-sk",
+      "regionName": "Slovak Tatras",
+      "stateOrProvince": "Žilina",
+      "localityId": "liptovsky-mikulas",
+      "localityName": "Liptovský Mikuláš",
+      "route": "/tatras-sk/mountain/jasna-nizke-tatry",
+      "country": "Slovakia",
+      "countryCode": "SK",
+      "timezone": "Europe/Bratislava",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Jasná Nízke Tatry is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-sk-tatranska-lomnica",
+      "publicId": "tatranska-lomnica",
+      "aliases": [],
+      "name": "Tatranská Lomnica",
+      "coordinates": {
+        "lat": 49.1646,
+        "lng": 20.2806
+      },
+      "forecastElevationM": 849,
+      "baseElevationM": 888,
+      "summitElevationM": 2190,
+      "officialUrl": "https://www.vt.sk/en",
+      "regionId": "tatras-sk",
+      "regionName": "Slovak Tatras",
+      "stateOrProvince": "Prešov",
+      "localityId": "tatranska-lomnica",
+      "localityName": "Tatranská Lomnica",
+      "route": "/tatras-sk/mountain/tatranska-lomnica",
+      "country": "Slovakia",
+      "countryCode": "SK",
+      "timezone": "Europe/Bratislava",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Tatranská Lomnica is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-cz-spindleruv-mlyn",
+      "publicId": "spindleruv-mlyn",
+      "aliases": [],
+      "name": "Špindlerův Mlýn",
+      "coordinates": {
+        "lat": 50.7256,
+        "lng": 15.6068
+      },
+      "forecastElevationM": 721,
+      "baseElevationM": 702,
+      "summitElevationM": 1235,
+      "officialUrl": "https://www.skiareal.cz/en",
+      "regionId": "krkonose",
+      "regionName": "Krkonoše",
+      "stateOrProvince": "Hradec Králové",
+      "localityId": "spindleruv-mlyn",
+      "localityName": "Špindlerův Mlýn",
+      "route": "/krkonose/mountain/spindleruv-mlyn",
+      "country": "Czechia",
+      "countryCode": "CZ",
+      "timezone": "Europe/Prague",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Špindlerův Mlýn is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-gb-cairngorm-mountain",
+      "publicId": "cairngorm-mountain",
+      "aliases": [],
+      "name": "Cairngorm Mountain",
+      "coordinates": {
+        "lat": 57.1287,
+        "lng": -3.6562
+      },
+      "forecastElevationM": 852,
+      "baseElevationM": 640,
+      "summitElevationM": 1230,
+      "officialUrl": "https://cairngormmountain.co.uk",
+      "regionId": "cairngorms",
+      "regionName": "Cairngorms",
+      "stateOrProvince": "Scotland",
+      "localityId": "aviemore",
+      "localityName": "Aviemore",
+      "route": "/cairngorms/mountain/cairngorm-mountain",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Cairngorm Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-gb-glenshee",
+      "publicId": "glenshee",
+      "aliases": [],
+      "name": "Glenshee",
+      "coordinates": {
+        "lat": 56.8868,
+        "lng": -3.4148
+      },
+      "forecastElevationM": 650,
+      "baseElevationM": 650,
+      "summitElevationM": 900,
+      "officialUrl": "https://www.ski-glenshee.co.uk",
+      "regionId": "cairngorms",
+      "regionName": "Cairngorms",
+      "stateOrProvince": "Scotland",
+      "localityId": "braemar",
+      "localityName": "Braemar",
+      "route": "/cairngorms/mountain/glenshee",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Glenshee is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-gb-the-lecht",
+      "publicId": "the-lecht",
+      "aliases": [],
+      "name": "The Lecht",
+      "coordinates": {
+        "lat": 57.2009,
+        "lng": -3.248
+      },
+      "forecastElevationM": 638,
+      "baseElevationM": 637,
+      "summitElevationM": 775,
+      "officialUrl": "https://www.lecht.co.uk",
+      "regionId": "cairngorms",
+      "regionName": "Cairngorms",
+      "stateOrProvince": "Scotland",
+      "localityId": "tomintoul",
+      "localityName": "Tomintoul",
+      "route": "/cairngorms/mountain/the-lecht",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "The Lecht is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-gb-nevis-range",
+      "publicId": "nevis-range",
+      "aliases": [],
+      "name": "Nevis Range",
+      "coordinates": {
+        "lat": 56.8517,
+        "lng": -5.0004
+      },
+      "forecastElevationM": 102,
+      "baseElevationM": 655,
+      "summitElevationM": 1221,
+      "officialUrl": "https://www.nevisrange.co.uk",
+      "regionId": "lochaber",
+      "regionName": "Lochaber · Glencoe",
+      "stateOrProvince": "Scotland",
+      "localityId": "fort-william",
+      "localityName": "Fort William",
+      "route": "/lochaber/mountain/nevis-range",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Nevis Range is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "eu-gb-glencoe-mountain",
+      "publicId": "glencoe-mountain",
+      "aliases": [],
+      "name": "Glencoe Mountain",
+      "coordinates": {
+        "lat": 56.6202,
+        "lng": -4.8395
+      },
+      "forecastElevationM": 735,
+      "baseElevationM": 360,
+      "summitElevationM": 1070,
+      "officialUrl": "https://www.glencoemountain.co.uk",
+      "regionId": "lochaber",
+      "regionName": "Lochaber · Glencoe",
+      "stateOrProvince": "Scotland",
+      "localityId": "glencoe",
+      "localityName": "Glencoe",
+      "route": "/lochaber/mountain/glencoe-mountain",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Glencoe Mountain is an outdoor lift-served ski area.",
       "weatherEligible": true,
       "alertEligible": true
     },

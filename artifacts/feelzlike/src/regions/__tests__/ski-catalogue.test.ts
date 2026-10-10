@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { publishedRecords } from "@workspace/ski-catalogue/public-runtime";
+import { EUROPE_COUNTRY_CODES } from "@workspace/ski-catalogue/countries";
 import {
   getPublishedMountainCapabilities,
   getPublishedRegionCapabilities,
@@ -34,10 +35,10 @@ test("every generated published record has its state-first mountain route", () =
     if (record.baseElevationM != null) realBaseCount += 1;
     assert.equal(record.route, `/${record.regionId}/mountain/${record.publicId}`);
   }
-  assert.equal(realBaseCount, 132);
+  assert.equal(realBaseCount, 171);
   assert.ok(publishedRecords
     .filter((record) => record.baseElevationM != null)
-    .every((record) => ["NZ", "AT", "FR", "CH", "IT", "DE"].includes(record.countryCode)));
+    .every((record) => ["NZ", ...EUROPE_COUNTRY_CODES].includes(record.countryCode)));
   assert.equal(
     publishedRecords.find((record) => record.publicId === "craigieburn-valley")?.baseElevationM,
     1308,

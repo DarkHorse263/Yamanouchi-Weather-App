@@ -39,7 +39,7 @@ test("low-base European mountains use actual heights rather than an Alpine floor
   assert.equal(snowForecastElevation(600, 900, 650), 750);
 });
 
-test("Wave 1 publishes exactly 115 untouched source projections; Wave 2 remains staged", () => {
+test("Wave 1 preserves exactly 115 untouched source projections", () => {
   const root = "../../../../../lib/ski-catalogue/data/";
   let count = 0;
   for (const name of ["europe-phase1-austria", "europe-phase2-france", "europe-phase3-switzerland", "europe-phase4-italy", "europe-phase6-germany"]) {
@@ -52,9 +52,30 @@ test("Wave 1 publishes exactly 115 untouched source projections; Wave 2 remains 
     }
   }
   assert.equal(count, 115);
-  assert.equal(publishedRecords.some(r => ["AD", "ES", "NO", "SE", "FI", "SI", "BG", "PL", "SK", "CZ", "GB"].includes(r.countryCode)), false);
   const valThorens = publishedRecords.find(r => r.publicId === "val-thorens")!;
   assert.equal(snowForecastElevation(valThorens.baseElevationM, valThorens.summitElevationM, valThorens.forecastElevationM), 2528);
+});
+
+test("Wave 2 publishes exactly 39 untouched source projections across eleven countries", () => {
+  const root = "../../../../../lib/ski-catalogue/data/";
+  const countries = new Set<string>();
+  let count = 0;
+  for (const name of ["europe-phase5-andorra-spain", "europe-phase7-nordics", "europe-phase8-central-eastern-europe-scotland"]) {
+    const source = readFileSync(new URL(`${root}europe-wave2/${name}.json`, import.meta.url), "utf8");
+    assert.equal(readFileSync(new URL(`${root}batches/${name}.json`, import.meta.url), "utf8"), source);
+    for (const record of JSON.parse(source).records) {
+      assert.deepEqual(validateRecord(record), []);
+      const projected = publicProjection(record)!;
+      assert.deepEqual(publishedRecords.find(r => r.publicId === projected.publicId), projected);
+      assert.equal(snowForecastElevation(projected.baseElevationM, projected.summitElevationM, projected.forecastElevationM),
+        Math.round((record.elevations.baseM + record.elevations.topM) / 2));
+      assert.doesNotThrow(() => new Intl.DateTimeFormat("en", { timeZone: projected.timezone }));
+      countries.add(projected.countryCode);
+      count++;
+    }
+  }
+  assert.equal(count, 39);
+  assert.deepEqual([...countries].sort(), ["AD", "BG", "CZ", "ES", "FI", "GB", "NO", "PL", "SE", "SI", "SK"]);
 });
 
 test("avalanche link coverage never treats all Britain as Scotland", () => {
