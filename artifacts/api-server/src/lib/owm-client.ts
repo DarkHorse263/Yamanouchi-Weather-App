@@ -15,11 +15,7 @@ const guard = new OpenWeatherGuard(postgresQuotaStore(async () => {
   };
 }));
 function url(path: string, params: Record<string, string | number>, tile = false): URL {
-  // Migration path: the existing provider secret is currently named
-  // VITE_OWM_API_KEY. Reading it in Node does NOT expose it to the browser;
-  // only a frontend import.meta.env reference would embed it in a bundle.
-  // Prefer the server-only name after the owner migrates/rotates the secret.
-  const key = process.env.OWM_API_KEY || process.env.VITE_OWM_API_KEY;
+  const key = process.env.OWM_API_KEY;
   if (!key) throw new Error("OpenWeather unavailable");
   const target = new URL(path, tile ? "https://tile.openweathermap.org" : "https://api.openweathermap.org");
   for (const [name, value] of Object.entries(params)) target.searchParams.set(name, String(value));

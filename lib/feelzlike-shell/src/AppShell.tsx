@@ -469,7 +469,7 @@ export function AppShell({
             {children}
           </motion.div>
         </AnimatePresence>
-        <div className="px-4 py-3"><OpenWeatherAttribution /></div>
+        <div className="px-4 py-2"><OpenWeatherAttribution /></div>
       </main>
 
       {/* Mobile bottom nav: grouped Plan + Travel menu + top/bottom items */}

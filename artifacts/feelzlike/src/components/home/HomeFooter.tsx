@@ -131,7 +131,7 @@ export function HomeFooter() {
           </a>
         </p>
       </div>
-      <div className="px-4 py-3"><OpenWeatherAttribution /></div>
+      <div className="px-4 py-2"><OpenWeatherAttribution /></div>
     </footer>
   );
 }

@@ -1,15 +1,14 @@
 const logo = new URL("./openweather-logo.png", import.meta.url).href;
 
-/** Shown on weather surfaces, including when OpenWeather is the fallback. */
+/** Required OpenWeather attribution: text, link and logo. Keep all three. */
 export function OpenWeatherAttribution() {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-2 rounded-lg bg-white px-3 py-2 text-xs text-slate-700">
+    <div className="flex justify-center">
       <a href="https://openweathermap.org/" target="_blank" rel="noopener noreferrer"
-        className="flex flex-wrap items-center justify-center gap-2 underline underline-offset-2">
-        <img src={logo} alt="OpenWeather" width={88} className="h-auto w-[88px]" />
+        className="inline-flex items-center gap-1.5 rounded-md bg-white/90 px-2 py-1 text-[10px] leading-none text-slate-600 hover:text-slate-900">
+        <img src={logo} alt="OpenWeather" width={44} className="h-auto w-[44px]" />
         <span>Weather data provided by OpenWeather</span>
       </a>
-      <span>(weather fallback and selected map layers)</span>
     </div>
   );
 }
